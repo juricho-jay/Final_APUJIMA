@@ -44,6 +44,7 @@ public class Main {
   }
 
 
+
   //메인메뉴 메서드
   static int doMainMenu() {
     System.out.println("[APUJIMA]에 오신 것을 환영합니다.");
