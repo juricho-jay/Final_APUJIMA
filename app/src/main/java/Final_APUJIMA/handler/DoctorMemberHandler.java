@@ -11,6 +11,7 @@ public class DoctorMemberHandler {
     this.doctormemberList = doctormemberList; // => ?? 생성자 초기화
   }
   DoctorMember doctormember = new DoctorMember();
+  
 
 
   public void add() {

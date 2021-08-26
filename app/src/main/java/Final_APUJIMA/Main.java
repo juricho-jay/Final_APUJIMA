@@ -18,14 +18,8 @@ public class Main {
     DoctorMemberHandler docmemberHandler = new DoctorMemberHandler(doctormemberList);
     while(true) {
       System.out.println("[APUJIMA]에 오신 것을 환영합니다.");
-<<<<<<< HEAD
-      System.out.println("0) 종료");
-=======
       System.out.println("원하시는 메뉴를 선택해 주세요.");
-      System.out.println();
-      System.out.println();
-
->>>>>>> 8f93c01de8880c30e7b20e419da20ac34f349ee8
+      System.out.println("0) 종료");
       System.out.println("1) 로그인");
       System.out.println("2) 회원가입");
       System.out.println("3) ID 찾기");
@@ -33,7 +27,7 @@ public class Main {
       System.out.println("5) 관리자 기능: 아이디 목록 보기");
       int no = (Prompt.inputInt("번호? >"));
       System.out.println();
-
+    
 
       switch(no) {
         case 0: System.out.println("종료");
