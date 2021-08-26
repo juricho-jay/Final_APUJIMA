@@ -5,6 +5,7 @@ import java.sql.Date;
 public class DoctorMember {
 
   private String name;
+  private String id;
   private String password;
   private String birthDay;
   private String email;
@@ -18,6 +19,25 @@ public class DoctorMember {
   }
   public void setName(String name) {
     this.name = name;
+  }
+  
+  public String getId() {
+    return id;
+  }
+  public void setId(String id) {
+    this.id = id;
+  }
+  public String getSex() {
+    return sex;
+  }
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
   }
   public String getPassword() {
     return password;

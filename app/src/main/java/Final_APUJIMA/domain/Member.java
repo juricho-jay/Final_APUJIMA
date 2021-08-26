@@ -4,21 +4,28 @@ import java.sql.Date;
 
 public class Member {
 
+
   private String name;
+  private String id;
   private String password;
   private String birthDay;
   private String email;
   private String phoneNum;
+  private String photo;
   private String sex;
   private Date registeredDate;
-
   public String getName() {
     return name;
   }
   public void setName(String name) {
     this.name = name;
   }
-
+  public String getId() {
+    return id;
+  }
+  public void setId(String id) {
+    this.id = id;
+  }
   public String getPassword() {
     return password;
   }
@@ -43,6 +50,12 @@ public class Member {
   public void setPhoneNum(String phoneNum) {
     this.phoneNum = phoneNum;
   }
+  public String getPhoto() {
+    return photo;
+  }
+  public void setPhoto(String photo) {
+    this.photo = photo;
+  }
   public String getSex() {
     return sex;
   }
@@ -55,5 +68,8 @@ public class Member {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-
+  
+  
+  
 }
+ 

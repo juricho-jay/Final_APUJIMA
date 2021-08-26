@@ -16,12 +16,16 @@ public class DoctorMemberHandler {
   public void add() {
     System.out.println("[의사 회원 등록]");
 
-    doctormember.setName(Prompt.inputString("아이디> "));
+    doctormember.setName(Prompt.inputString("이름> "));
+    doctormember.setId(Prompt.inputString("아이디> "));
     doctormember.setPassword(Prompt.inputString("비밀번호> "));
-    doctormember.setEmail(Prompt.inputString("전화번호> "));
-    doctormember.setEmail(Prompt.inputString("이메일> "));
     doctormember.setBirthDay(Prompt.inputString("생년월일> "));
+    doctormember.setEmail(Prompt.inputString("이메일> "));
+    doctormember.setPhoneNum(Prompt.inputString("전화번호> "));
     doctormember.setPhoto(Prompt.inputString("의사 증명서> "));
+    doctormember.setSex(Prompt.inputString("성별> "));
+    doctormember.getRegisteredDate();
+    
 
     doctormemberList.add(doctormember);
 
@@ -35,8 +39,9 @@ public class DoctorMemberHandler {
     DoctorMember[] list = doctormemberList.toArray(new DoctorMember[0]);
 
     for (DoctorMember doctormember : list) {
-      System.out.printf("%s, %s,\n", 
+      System.out.printf("%s, %s, %s ,\n", 
           doctormember.getName(),
+          doctormember.getId(),
           doctormember.getPassword()
           );
     }
@@ -58,7 +63,7 @@ public class DoctorMemberHandler {
   public DoctorMember vaildLogin(String id, String password) {
     DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
     for (DoctorMember doctormember : arr) {
-      if (doctormember.getName().equals(id) && doctormember.getPassword().equals(password)) {
+      if (doctormember.getId().equals(id) && doctormember.getPassword().equals(password)) {
         System.out.println("로그인 성공!");
         System.out.println();
         return doctormember;
@@ -67,4 +72,14 @@ public class DoctorMemberHandler {
     return null;
   }
 }
-
+//  public void FindId() {
+//    
+//  }
+//  
+//  public DoctorMember vaildFindID(String PhoneNo,String ) {
+//    DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
+//    for (DoctorMember doctormember : arr) {
+//      if (doctormember.getName().equals(id))) {
+//  }
+//    }
+//  }
