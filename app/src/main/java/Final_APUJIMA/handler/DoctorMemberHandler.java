@@ -50,8 +50,8 @@ public class DoctorMemberHandler {
   public void login() {
 
     System.out.println("로그인 해주세요 ");
-    String id = Prompt.inputString("아이디?");
-    String password = Prompt.inputString("비밀번호");
+    String id = Prompt.inputString("아이디> ");
+    String password = Prompt.inputString("비밀번호> ");
     DoctorMember Doctormember = vaildLogin(id,password);
     if (Doctormember ==null) {
       System.out.println("회원가입이 되어있지 않습니다.");
@@ -71,15 +71,58 @@ public class DoctorMemberHandler {
     }
     return null;
   }
+
+  public void FindId() {
+    System.out.println("아이디 찾기 페이지입니다.");
+    System.out.println("이름을 입력하세요");
+    String Name = Prompt.inputString("이름> ");
+    System.out.println("휴대폰 번호를 입력해주세요");
+    String PhoneNo = Prompt.inputString("휴대폰> ");
+    DoctorMember Doctormember = vaildFindID(Name,PhoneNo);
+    if(Doctormember == null) {
+      System.out.println("아이디를 찾을 수 없습니다.");
+      System.out.println();
+    }else {
+      System.out.printf ("회원님의 아이디 입니다. %s",doctormember.getPassword());
+      System.out.println();
+
+    }
+  }
+  
+  public void FindPassword() {
+    System.out.println("비밀번호 찾기 페이지입니다.");
+    System.out.println("아이디를 입력하세요");
+    String id = Prompt.inputString("아이디> ");
+    System.out.println("휴대폰 번호를 입력해주세요");
+    String PhoneNo = Prompt.inputString("휴대폰> ");
+    DoctorMember Doctormember = vaildFindPassword(id,PhoneNo);
+    if(Doctormember == null) {
+      System.out.println("아이디를 찾을 수 없습니다.");
+      System.out.println();
+    }else {
+      System.out.printf ("회원님의 비밀번호 입니다. %s",doctormember.getPassword());
+      System.out.println();
+
+    }
+  }
+  
+  public DoctorMember vaildFindID(String Name,String PhoneNo)   {
+    DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
+    for (DoctorMember doctormember : arr) {
+      if (doctormember.getName().equals(Name) && (doctormember.getPhoneNum().equals(PhoneNo))) {
+        return doctormember;
+  }
+    }
+    return null;
+  }
+  
+  public DoctorMember vaildFindPassword(String id,String PhoneNo)   {
+    DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
+    for (DoctorMember doctormember : arr) {
+      if (doctormember.getId().equals(id) && (doctormember.getPhoneNum().equals(PhoneNo))) {
+        return doctormember;
+  }
+    }
+    return null;
+  }
 }
-//  public void FindId() {
-//    
-//  }
-//  
-//  public DoctorMember vaildFindID(String PhoneNo,String ) {
-//    DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
-//    for (DoctorMember doctormember : arr) {
-//      if (doctormember.getName().equals(id))) {
-//  }
-//    }
-//  }
