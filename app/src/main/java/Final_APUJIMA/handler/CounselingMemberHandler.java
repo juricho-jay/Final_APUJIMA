@@ -32,45 +32,47 @@ public class CounselingMemberHandler {
     System.out.println("5. 인간관계");
     System.out.println("6. 기타");
     int counselingStatus = (Prompt.inputInt("> "));
-    //    String stateLabel = null;
-    //    switch (counselingStatus) {
-    //      case 1:
-    //        stateLabel = "우울증";
-    //        break;
-    //      case 2:
-    //        stateLabel = "진로";
-    //        break;
-    //      case 3:
-    //        stateLabel = "일상생활";
-    //        break;
-    //      case 4:
-    //        stateLabel = "연애";
-    //        break;
-    //      case 5:
-    //        stateLabel = "인간관계";
-    //        break;
-    //      case 6:
-    //        stateLabel = "기타";
-    //        break;
-    //    }
+
+    String stateLabel = null;
+    switch (counselingStatus) {
+      case 1:
+        stateLabel = "우울증";
+        break;
+      case 2:
+        stateLabel = "진로";
+        break;
+      case 3:
+        stateLabel = "일상생활";
+        break;
+      case 4:
+        stateLabel = "연애";
+        break;
+      case 5:
+        stateLabel = "인간관계";
+        break;
+      case 6:
+        stateLabel = "기타";
+        break;
+    }
 
     System.out.println("상담사 성별> ");
     System.out.println("1. 여성 상담사");
     System.out.println("2. 남성 상담사");
     System.out.println("3. 상관없음");
     int counselorStatus = (Prompt.inputInt("> "));
-    //    String stateLabel2 = null;
-    //    switch (counselorStatus) {
-    //      case 1:
-    //        stateLabel2 = "우울증";
-    //        break;
-    //      case 2:
-    //        stateLabel2 = "진로";
-    //        break;
-    //      case 3:
-    //        stateLabel2 = "일상생활";
-    //        break;
-    //    }
+
+    String stateLabel2 = null;
+    switch (counselorStatus) {
+      case 1:
+        stateLabel2 = "우울증";
+        break;
+      case 2:
+        stateLabel2 = "진로";
+        break;
+      case 3:
+        stateLabel2 = "일상생활";
+        break;
+    }
 
     counselingMember.getRegisteredDate();
 

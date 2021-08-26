@@ -27,7 +27,7 @@ public class LoginPage {
       } else if (menuNo == 2) {
         //   doSignupMenu();
       } else if (menuNo == 3) {
-        doFindIdMenu();
+        doHealerMenu();
       } else if (menuNo == 4) {
         //doFindPassWordMenu();
       } else if (menuNo == 5) {
@@ -85,6 +85,12 @@ public class LoginPage {
     System.out.println("1)의사 리스트");
     System.out.println("2)의사 정보보기");
     System.out.println("3)상담 신청하기");
+    int b = Prompt.inputInt("번호 >");
+    if(b == 1) {
+
+
+    }
+
 
   }
 
