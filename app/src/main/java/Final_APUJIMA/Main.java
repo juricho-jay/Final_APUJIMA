@@ -25,6 +25,8 @@ public class Main {
       System.out.println("원하시는 메뉴를 선택해 주세요.");
       System.out.println();
 
+      System.out.println("원하시는 메뉴를 선택해 주세요.");
+      System.out.println("0) 종료");
       System.out.println("1) 로그인");
       System.out.println("2) 회원가입");
       System.out.println("3) ID 찾기");
@@ -110,7 +112,9 @@ public class Main {
           break;
         case 5: 
           System.out.println("1)의사 회원정보");
+          System.out.println("1) 의사 정보 조회  , 2) 상담 신청하기");
           int memno = (Prompt.inputInt("번호?"));
+
           System.out.println();
           switch(memno){
             case 1:
