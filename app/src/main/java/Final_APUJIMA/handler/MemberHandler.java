@@ -131,4 +131,22 @@ public class MemberHandler {
     }
     return null;
   }
+//  
+//  public void LoginInfo() {
+//    String Id = member.getId();
+//    Member member = validLoginInfo(Id);
+//    if( member.getId() != null ) {
+//      System.out.println(member.getId() + "님 ");
+//    }
+//  }
+//  
+//  public Member validLoginInfo(String ID) {
+//    Member [] arr = memberList.toArray(new Member[0]);
+//    for (Member member : arr) {
+//      if (member.getId().equals(ID)) {
+//        return member;
+//      }
+//  }
+//    return null;
+//}
 }

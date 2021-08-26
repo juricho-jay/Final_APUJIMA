@@ -50,7 +50,7 @@ public class DoctorMemberHandler {
     }
   }
 
-  public void login() {
+  public boolean login() {
 
     System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
     String id = Prompt.inputString("아이디> ");
@@ -61,7 +61,11 @@ public class DoctorMemberHandler {
       System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다.\n"
           + "아이디와 비밀번호를 정확히 입력해 주세요.");
       System.out.println();
-
+      return false;
+    }else {
+      System.out.println("로그인 성공!");
+      System.out.println();
+      return false;
     }
 
   }
