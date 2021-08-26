@@ -164,9 +164,9 @@ public class Main {
       System.out.println();
 
       if (menuNo == 0) {
-        System.out.println("APUJIMA에 방문해주셔서 감사합니다!\n다음에 또 만나요!");
+        System.out.println("정상적으로 로그아웃 되었습니다.");
         System.out.println();
-        break;
+        return;
       } else if (menuNo == 1) { 
         doIntroMenu();
       } else if (menuNo == 2) {
@@ -180,9 +180,9 @@ public class Main {
         System.out.println("메뉴 번호가 유효하지 않습니다.");
       }
       System.out.println();
+      Prompt.close();
     }
 
-    Prompt.close();
   }
 
 
@@ -199,7 +199,7 @@ public class Main {
     System.out.println("2) 약국");
     System.out.println("3) HEALER");
     System.out.println("4) 커뮤니티");
-    System.out.println("0) 종료");
+    System.out.println("0) 로그아웃");
     return Prompt.inputInt("메뉴 번호> ");
   }
 
