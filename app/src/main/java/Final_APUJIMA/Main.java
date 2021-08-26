@@ -33,7 +33,7 @@ public class Main {
       } else if (menuNo == 4) {
         doFindPassWordMenu();
       } else if (menuNo == 5) {
-        memberHandler.list();
+        docmemberHandler.doctorList();
       } else {
         System.out.println("메뉴 번호가 유효하지 않습니다.");
       }
@@ -147,5 +147,4 @@ public class Main {
   //관리자 메뉴는 바로 memberHandler.list() 호출
 
 }
-
 
