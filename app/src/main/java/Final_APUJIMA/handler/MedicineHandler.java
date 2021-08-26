@@ -1,7 +1,7 @@
 package Final_APUJIMA.handler;
 import Final_APUJIMA.util.Prompt;
 
-public class Medicine {
+public class MedicineHandler {
   String [] medicineArr = {"브린텔릭스", "아빌리파이", "로라반" , "프로작", "알프람"};
 
   public void Mlist() {
@@ -14,7 +14,7 @@ public class Medicine {
 
   }
 
-  public void MSearch() {
+  public void SearchM() {
     while(true) {
       System.out.println("1) 의약품 검색");
       System.out.println("0) 종료");
