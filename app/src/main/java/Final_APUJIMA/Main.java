@@ -224,7 +224,7 @@ public class Main {
     if (select == 1) {
       medicine.Mlist();
     } else if (select == 2) {
-      medicine.MSearch();
+      medicine.SearchM();
     } else {
       System.out.println("잘못 선택하셨습니다 ");
     }
