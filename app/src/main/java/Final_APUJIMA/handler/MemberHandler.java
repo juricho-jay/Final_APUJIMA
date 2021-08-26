@@ -28,6 +28,7 @@ public class MemberHandler {
     member.getRegisteredDate();
 
     memberList.add(member);
+    System.out.println();
     System.out.println("회원가입 완료!");
     System.out.println();
   }
@@ -48,14 +49,16 @@ public class MemberHandler {
   }
 
   public void login() {
-    System.out.println("로그인 해주세요 ");
-    String id = Prompt.inputString("아이디?");
-    String password = Prompt.inputString("비밀번호");
+    System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
+    String id = Prompt.inputString("아이디> ");
+    String password = Prompt.inputString("비밀번호> ");
     Member member = vaildLogin(id,password);
-    if (member ==null) {
-      System.out.println("회원가입이 되어있지 않습니다.");
 
+    if (member ==null) {
+      System.out.println();
+      System.out.println("회원가입이 되어있지 않습니다.");
     }
+
     System.out.println();
   }
 
@@ -63,6 +66,7 @@ public class MemberHandler {
     Member [] arr = memberList.toArray(new Member[0]);
     for (Member member : arr) {
       if (member.getId().equals(id) && member.getPassword().equals(password)){
+        System.out.println();
         System.out.println("로그인 성공!");
         System.out.println();
         return member;

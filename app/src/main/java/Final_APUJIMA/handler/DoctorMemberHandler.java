@@ -25,11 +25,12 @@ public class DoctorMemberHandler {
     doctormember.setPhoto(Prompt.inputString("의사 증명서> "));
     doctormember.setSex(Prompt.inputString("성별> "));
     doctormember.getRegisteredDate();
-    
+
 
     doctormemberList.add(doctormember);
 
     System.out.println("회원가입 완료!");
+    System.out.println("[APUJIMA]의 회원이 되신 것을 환영합니다!");
     System.out.println();
   }
 
@@ -49,12 +50,14 @@ public class DoctorMemberHandler {
 
   public void login() {
 
-    System.out.println("로그인 해주세요 ");
+    System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
     String id = Prompt.inputString("아이디> ");
     String password = Prompt.inputString("비밀번호> ");
     DoctorMember Doctormember = vaildLogin(id,password);
     if (Doctormember ==null) {
-      System.out.println("회원가입이 되어있지 않습니다.");
+      System.out.println();
+      System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다.\n"
+          + "아이디와 비밀번호를 정확히 입력해 주세요.");
       System.out.println();
 
     }
@@ -64,6 +67,7 @@ public class DoctorMemberHandler {
     DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
     for (DoctorMember doctormember : arr) {
       if (doctormember.getId().equals(id) && doctormember.getPassword().equals(password)) {
+        System.out.println();
         System.out.println("로그인 성공!");
         System.out.println();
         return doctormember;
@@ -73,55 +77,57 @@ public class DoctorMemberHandler {
   }
 
   public void FindId() {
-    System.out.println("아이디 찾기 페이지입니다.");
-    System.out.println("이름을 입력하세요");
+    System.out.println("[아이디 찾기] 페이지입니다.");
+    System.out.println("이름을 입력하세요.");
     String Name = Prompt.inputString("이름> ");
-    System.out.println("휴대폰 번호를 입력해주세요");
+    System.out.println("휴대폰 번호를 입력해주세요.");
     String PhoneNo = Prompt.inputString("휴대폰> ");
     DoctorMember Doctormember = vaildFindID(Name,PhoneNo);
     if(Doctormember == null) {
+      System.out.println();
       System.out.println("아이디를 찾을 수 없습니다.");
       System.out.println();
     }else {
-      System.out.printf ("회원님의 아이디 입니다. %s",doctormember.getPassword());
+      System.out.println();
+      System.out.printf ("회원님의 아이디입니다. %s",doctormember.getId());
       System.out.println();
 
     }
   }
-  
+
   public void FindPassword() {
-    System.out.println("비밀번호 찾기 페이지입니다.");
-    System.out.println("아이디를 입력하세요");
+    System.out.println("[비밀번호 찾기] 페이지입니다.");
+    System.out.println("아이디를 입력하세요.");
     String id = Prompt.inputString("아이디> ");
-    System.out.println("휴대폰 번호를 입력해주세요");
+    System.out.println("휴대폰 번호를 입력해주세요.");
     String PhoneNo = Prompt.inputString("휴대폰> ");
     DoctorMember Doctormember = vaildFindPassword(id,PhoneNo);
     if(Doctormember == null) {
       System.out.println("아이디를 찾을 수 없습니다.");
       System.out.println();
     }else {
-      System.out.printf ("회원님의 비밀번호 입니다. %s",doctormember.getPassword());
+      System.out.printf ("회원님의 비밀번호입니다. %s",doctormember.getPassword());
       System.out.println();
 
     }
   }
-  
+
   public DoctorMember vaildFindID(String Name,String PhoneNo)   {
     DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
     for (DoctorMember doctormember : arr) {
       if (doctormember.getName().equals(Name) && (doctormember.getPhoneNum().equals(PhoneNo))) {
         return doctormember;
-  }
+      }
     }
     return null;
   }
-  
+
   public DoctorMember vaildFindPassword(String id,String PhoneNo)   {
     DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
     for (DoctorMember doctormember : arr) {
       if (doctormember.getId().equals(id) && (doctormember.getPhoneNum().equals(PhoneNo))) {
         return doctormember;
-  }
+      }
     }
     return null;
   }
