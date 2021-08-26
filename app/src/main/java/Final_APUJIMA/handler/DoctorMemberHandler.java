@@ -145,6 +145,7 @@ public class DoctorMemberHandler {
     DoctorMember doc2 = new DoctorMember();
     DoctorMember doc3 = new DoctorMember();
     DoctorMember doc4 = new DoctorMember();
+    System.out.println();
 
     doc1.setName("조주리");  
     doc1.setInterest("프로그래머 멘탈케어");

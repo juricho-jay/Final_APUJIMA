@@ -49,7 +49,7 @@ public class MemberHandler {
   }
 
   public boolean login() {
-    System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
+    System.out.println("[로그인] 페이지입니다.\n아이디와 비밀번호를 입력하세요.");
     String id = Prompt.inputString("아이디> ");
     String password = Prompt.inputString("비밀번호> ");
     Member member = vaildLogin(id,password);
@@ -57,7 +57,7 @@ public class MemberHandler {
     if (member ==null) {
       System.out.println();
       System.out.println("회원가입이 되어있지 않습니다.");
-    return false;
+      return false;
     }else {
       System.out.println();
       return true;
@@ -77,7 +77,7 @@ public class MemberHandler {
     }
     return null;
   }
- 
+
   public void FindId() {
     System.out.println("아이디 찾기 페이지입니다.");
     System.out.println("이름을 입력하세요");
@@ -89,6 +89,7 @@ public class MemberHandler {
       System.out.println("아이디를 찾을 수 없습니다.");
       System.out.println();
     }else {
+      System.out.println();
       System.out.printf ("회원님의 아이디 입니다. %s",member.getId());
       System.out.println();
 
@@ -131,22 +132,22 @@ public class MemberHandler {
     }
     return null;
   }
-//  
-//  public void LoginInfo() {
-//    String Id = member.getId();
-//    Member member = validLoginInfo(Id);
-//    if( member.getId() != null ) {
-//      System.out.println(member.getId() + "님 ");
-//    }
-//  }
-//  
-//  public Member validLoginInfo(String ID) {
-//    Member [] arr = memberList.toArray(new Member[0]);
-//    for (Member member : arr) {
-//      if (member.getId().equals(ID)) {
-//        return member;
-//      }
-//  }
-//    return null;
-//}
+  //  
+  //  public void LoginInfo() {
+  //    String Id = member.getId();
+  //    Member member = validLoginInfo(Id);
+  //    if( member.getId() != null ) {
+  //      System.out.println(member.getId() + "님 ");
+  //    }
+  //  }
+  //  
+  //  public Member validLoginInfo(String ID) {
+  //    Member [] arr = memberList.toArray(new Member[0]);
+  //    for (Member member : arr) {
+  //      if (member.getId().equals(ID)) {
+  //        return member;
+  //      }
+  //  }
+  //    return null;
+  //}
 }

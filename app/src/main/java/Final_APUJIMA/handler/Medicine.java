@@ -3,10 +3,6 @@ import Final_APUJIMA.util.Prompt;
 
 public class Medicine {
   String [] medicineArr = {"브린텔릭스", "아빌리파이", "로라반" , "프로작", "알프람"};
- 
-  
-
-
 
   public void Mlist() {
     System.out.println("[약 리스트]");
@@ -20,20 +16,22 @@ public class Medicine {
 
   public void MSearch() {
     while(true) {
-    int input0 = Prompt.inputInt("0)종료 1) 약 찾기 > "  );
-    if (input0 == 0) {
-      return;
-    }else {
-    String input = Prompt.inputString("찾을 약의 이름을 입력해주세요 > ");
-    String medicine = FindM(input);
-    if(medicine == null) {
-      System.out.println("찾는 약이 없습니다.");
-    }
-    else {
-      System.out.println("약의 이름 : " + medicine);
-    }
-
-  }
+      System.out.println("1) 의약품 검색");
+      System.out.println("0) 종료");
+      int input0 = Prompt.inputInt("선택> ");
+      if (input0 == 0) {
+        return;
+      }else {
+        String input = Prompt.inputString("찾을 약의 이름을 입력해주세요 > ");
+        System.out.println();
+        String medicine = FindM(input);
+        if(medicine == null) {
+          System.out.println("찾는 약이 없습니다.");
+        }
+        else {
+          System.out.println("약의 이름 : " + medicine + "이며 안정제 역할을 합니다.");
+        }
+      }
     }
   }
   public String FindM(String input) {
@@ -43,11 +41,9 @@ public class Medicine {
       if (s.equals(input)) {
         return s;
       }
-
-
     }
     return null;
   }
-  
+
 }
 
