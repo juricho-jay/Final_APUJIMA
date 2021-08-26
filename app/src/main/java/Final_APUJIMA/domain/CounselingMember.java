@@ -10,7 +10,8 @@ public class CounselingMember {
   private String content;
   private String title;
   private String sex;
-  private int status;
+  private int counselingStatus;
+  private int counselorStatus;
   private Date registeredDate;
 
   public String getName() {
@@ -50,11 +51,19 @@ public class CounselingMember {
   public void setSex(String sex) {
     this.sex = sex;
   }
-  public int getStatus() {
-    return status;
+
+  public int getCounselingStatus() {
+    return counselingStatus;
   }
-  public void setStatus(int status) {
-    this.status = status;
+  public void setCounselingStatus(int counselingStatus) {
+    this.counselingStatus = counselingStatus;
+  }
+
+  public int getCounselorStatus() {
+    return counselorStatus;
+  }
+  public void setCounselorStatus(int counselorStatus) {
+    this.counselorStatus = counselorStatus;
   }
   public Date getRegisteredDate() {
     return registeredDate;
