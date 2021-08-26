@@ -24,8 +24,9 @@ public class DoctorMemberHandler {
     doctormember.setPhoneNum(Prompt.inputString("전화번호> "));
     doctormember.setPhoto(Prompt.inputString("의사 증명서> "));
     doctormember.setSex(Prompt.inputString("성별> "));
+    doctormember.setInterest(Prompt.inputString("관심분야> "));
     doctormember.getRegisteredDate();
-    
+
 
     doctormemberList.add(doctormember);
 
@@ -88,7 +89,7 @@ public class DoctorMemberHandler {
 
     }
   }
-  
+
   public void FindPassword() {
     System.out.println("비밀번호 찾기 페이지입니다.");
     System.out.println("아이디를 입력하세요");
@@ -105,24 +106,51 @@ public class DoctorMemberHandler {
 
     }
   }
-  
+
   public DoctorMember vaildFindID(String Name,String PhoneNo)   {
     DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
     for (DoctorMember doctormember : arr) {
       if (doctormember.getName().equals(Name) && (doctormember.getPhoneNum().equals(PhoneNo))) {
         return doctormember;
-  }
+      }
     }
     return null;
   }
-  
+
   public DoctorMember vaildFindPassword(String id,String PhoneNo)   {
     DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
     for (DoctorMember doctormember : arr) {
       if (doctormember.getId().equals(id) && (doctormember.getPhoneNum().equals(PhoneNo))) {
         return doctormember;
-  }
+      }
     }
     return null;
   }
+
+
+  public void doctorList() {
+    DoctorMember[] doctorMember = new DoctorMember[3];
+    DoctorMember doc1 = new DoctorMember();
+    DoctorMember doc2 = new DoctorMember();
+    DoctorMember doc3 = new DoctorMember();
+
+    doc1.setName("조주리");  
+    doc1.setInterest("멘탈케어");
+    doctorMember[0] = doc1;
+
+    doc1.setName("조주리");  
+    doc1.setInterest("멘탈케어");
+    doctorMember[1] = doc2;
+
+    doc1.setName("조주리");  
+    doc1.setInterest("멘탈케어");
+    doctorMember[2] = doc3;
+
+    for(int i = 0 ; i < doctorMember.length ; i++) {
+      System.out.println((i + 1)+". " + doctorMember[i].getName() + "전문분야 : " +
+          doctorMember[i].getInterest());
+    }
+
+  }
+
 }
