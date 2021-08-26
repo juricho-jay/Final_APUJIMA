@@ -16,13 +16,19 @@ public class MemberHandler {
 
   public void add() {
     System.out.println("[회원 등록]");
+    
+    member.setName(Prompt.inputString("이름> "));
+    member.setId(Prompt.inputString("아이디> "));
 
     System.out.println();
     member.setName(Prompt.inputString("아이디> "));
     member.setPassword(Prompt.inputString("비밀번호> "));
-    member.setEmail(Prompt.inputString("전화번호> "));
-    member.setPhoneNum(Prompt.inputString("이메일> "));
     member.setBirthDay(Prompt.inputString("생년월일> "));
+    member.setEmail(Prompt.inputString("이메일> "));
+    member.setPhoneNum(Prompt.inputString("전화번호> "));
+    member.setPhoto(Prompt.inputString("의사 증명서> "));
+    member.setSex(Prompt.inputString("성별> "));
+    member.getRegisteredDate();
 
     memberList.add(member);
     System.out.println("회원가입 완료!");
@@ -35,8 +41,9 @@ public class MemberHandler {
     Member[] list = memberList.toArray(new Member[0]);
 
     for (Member member : list) {
-      System.out.printf("%s, %s,\n", 
+      System.out.printf("%s, %s, %s,\n", 
           member.getName(),
+          member.getId(),
           member.getPassword()
           );
     }
@@ -58,7 +65,7 @@ public class MemberHandler {
   public Member vaildLogin(String id, String password) {
     Member [] arr = memberList.toArray(new Member[0]);
     for (Member member : arr) {
-      if (member.getName().equals(id) && member.getPassword().equals(password)){
+      if (member.getId().equals(id) && member.getPassword().equals(password)){
         System.out.println("로그인 성공!");
         System.out.println();
         return member;
