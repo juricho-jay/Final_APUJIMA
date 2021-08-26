@@ -22,6 +22,11 @@ public class Medicine {
   }
   
   public void MSearch() {
+    while(true) {
+    int input0 = Prompt.inputInt("0)종료 1) 약 찾기 > "  );
+    if (input0 == 0) {
+      return;
+    }else {
     String input = Prompt.inputString("찾을 약의 이름을 입력해주세요 > ");
     String medicine = FindM(input);
     if(medicine == null) {
@@ -32,7 +37,8 @@ public class Medicine {
     }
     
   }
-    
+  }
+}
    public String FindM(String input) {
      
      String [] arr = medicineArr.clone();

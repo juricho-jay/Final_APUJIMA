@@ -3,8 +3,6 @@ package Final_APUJIMA.domain;
 import java.sql.Date;
 
 public class Member {
-
-
   private String name;
   private String id;
   private String password;
@@ -14,6 +12,7 @@ public class Member {
   private String photo;
   private String sex;
   private Date registeredDate;
+
   public String getName() {
     return name;
   }
@@ -68,6 +67,7 @@ public class Member {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+
   
   
   

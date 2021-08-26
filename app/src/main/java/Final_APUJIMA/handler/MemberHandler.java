@@ -1,5 +1,6 @@
 package Final_APUJIMA.handler;
 import java.util.List;
+import Final_APUJIMA.domain.LoginPage;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.util.Prompt;
 
@@ -57,6 +58,8 @@ public class MemberHandler {
     if (member ==null) {
       System.out.println();
       System.out.println("회원가입이 되어있지 않습니다.");
+    }else {
+      LoginPage.();
     }
 
     System.out.println();
@@ -74,7 +77,7 @@ public class MemberHandler {
     }
     return null;
   }
-
+ 
   public void FindId() {
     System.out.println("아이디 찾기 페이지입니다.");
     System.out.println("이름을 입력하세요");
