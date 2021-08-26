@@ -20,13 +20,12 @@ public class Main {
       System.out.println("[APUJIMA]에 오신 것을 환영합니다.");
       System.out.println("원하시는 메뉴를 선택해 주세요.");
       System.out.println();
-      System.out.println();
 
       System.out.println("1) 로그인");
       System.out.println("2) 회원가입");
-      System.out.println("3) 종료");
-      System.out.println("4) 관리자 기능: 아이디 목록 보기");
-      int no = (Prompt.inputInt("번호? >"));
+      System.out.println("3) 관리자 기능: 아이디 목록 보기");
+      System.out.println("0) 종료");
+      int no = (Prompt.inputInt("메뉴 선택> "));
       System.out.println();
 
 
@@ -37,9 +36,9 @@ public class Main {
         System.out.println("1) 의사 로그인");
         System.out.println("2) 일반회원 로그인");
         System.out.println("3) 메인 페이지");
+        System.out.println("0) 종료");
 
-
-        int LoginNo = (Prompt.inputInt("번호? "));
+        int LoginNo = (Prompt.inputInt("번호> "));
         System.out.println();
 
         switch(LoginNo) {
@@ -48,9 +47,11 @@ public class Main {
             break;
           case 2:
             memberHandler.login();
+            break;
           case 3:
             break;
-
+          default: System.out.println("다시 입력해주세요");
+          return;
         }
 
         //조회했을때 id와 비밀번호가 일치한다면, 로그인 성공
