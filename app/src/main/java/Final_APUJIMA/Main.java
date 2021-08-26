@@ -21,13 +21,18 @@ public class Main {
     while(true) {
 
       System.out.println("[APUJIMA]에 오신 것을 환영합니다.");
+<<<<<<< HEAD
+      System.out.println("0) 종료");
+=======
       System.out.println("원하시는 메뉴를 선택해 주세요.");
       System.out.println();
 
+>>>>>>> 8f93c01de8880c30e7b20e419da20ac34f349ee8
       System.out.println("1) 로그인");
       System.out.println("2) 회원가입");
-      System.out.println("3) 종료");
-      System.out.println("4) 관리자 기능: 아이디 목록 보기");
+      System.out.println("3) ID 찾기");
+      System.out.println("4) PW 찾기");
+      System.out.println("5) 관리자 기능: 아이디 목록 보기");
       int no = (Prompt.inputInt("번호? >"));
       System.out.println();
 
@@ -35,6 +40,9 @@ public class Main {
 
 
       switch(no) {
+        case 0: System.out.println("종료");
+        return;
+        
         case 1: System.out.println("[로그인] 페이지입니다.");
         System.out.println("원하시는 메뉴를 선택해주세요.");
         System.out.println();
@@ -83,10 +91,26 @@ public class Main {
         }
         break;
 
-        case 3: System.out.println("그만두기");
-        return;
-
-        case 0: 
+        case 3: 
+          System.out.println("[ID] 찾기 > ");
+          int select = Prompt.inputInt("1) 의사 , 2) 일반회원 중 골라주세요 > ");
+        
+                if (select == 1) {
+                  docmemberHandler.FindId();
+                }else {
+                  memberHandler.FindId();
+                }
+          break;
+        case 4: 
+          System.out.println("[비밀번호] 찾기");
+          int select1 = Prompt.inputInt("1) 의사 , 2) 일반회원 중 골라주세요 > ");
+          if (select1 == 1) {
+            docmemberHandler.FindPassword();
+          }else {
+            memberHandler.FindPassword();
+          }
+          break;
+        case 5: 
           System.out.println("1)의사 회원정보");
           System.out.println("2)회원 회원정보");
           int memno = (Prompt.inputInt("번호?"));

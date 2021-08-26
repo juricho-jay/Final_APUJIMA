@@ -19,14 +19,11 @@ public class MemberHandler {
     
     member.setName(Prompt.inputString("이름> "));
     member.setId(Prompt.inputString("아이디> "));
-
-    System.out.println();
-    member.setName(Prompt.inputString("아이디> "));
     member.setPassword(Prompt.inputString("비밀번호> "));
     member.setBirthDay(Prompt.inputString("생년월일> "));
     member.setEmail(Prompt.inputString("이메일> "));
     member.setPhoneNum(Prompt.inputString("전화번호> "));
-    member.setPhoto(Prompt.inputString("의사 증명서> "));
+    member.setPhoto(Prompt.inputString("회원 사진> "));
     member.setSex(Prompt.inputString("성별> "));
     member.getRegisteredDate();
 
@@ -70,6 +67,60 @@ public class MemberHandler {
         System.out.println();
         return member;
       }
+    }
+    return null;
+  }
+  
+  public void FindId() {
+    System.out.println("아이디 찾기 페이지입니다.");
+    System.out.println("이름을 입력하세요");
+    String Name = Prompt.inputString("이름> ");
+    System.out.println("휴대폰 번호를 입력해주세요");
+    String PhoneNo = Prompt.inputString("휴대폰> ");
+    Member member = vaildFindID(Name,PhoneNo);
+    if(member == null) {
+      System.out.println("아이디를 찾을 수 없습니다.");
+      System.out.println();
+    }else {
+      System.out.printf ("회원님의 아이디 입니다. %s",member.getId());
+      System.out.println();
+
+    }
+  }
+  
+  public void FindPassword() {
+    System.out.println("비밀번호 찾기 페이지입니다.");
+    System.out.println("아이디를 입력하세요");
+    String id = Prompt.inputString("아이디> ");
+    System.out.println("휴대폰 번호를 입력해주세요");
+    String PhoneNo = Prompt.inputString("휴대폰> ");
+    Member member = vaildFindPassword(id,PhoneNo);
+    if(member == null) {
+      System.out.println("입력이 잘못되었습니다. 정보를 찾을 수 없습니다.");
+      System.out.println();
+    }else {
+      System.out.printf ("회원님의 비밀번호 입니다. %s",member.getPassword());
+      System.out.println();
+
+    }
+  }
+  
+  public Member vaildFindID(String Name,String PhoneNo)   {
+    Member [] arr = memberList.toArray(new Member[0]);
+    for (Member member : arr) {
+      if (member.getName().equals(Name) && (member.getPhoneNum().equals(PhoneNo))) {
+        return member;
+  }
+    }
+    return null;
+  }
+  
+  public Member vaildFindPassword(String id,String PhoneNo)   {
+    Member [] arr = memberList.toArray(new Member[0]);
+    for (Member member : arr) {
+      if (member.getId().equals(id) && (member.getPhoneNum().equals(PhoneNo))) {
+        return member;
+  }
     }
     return null;
   }
