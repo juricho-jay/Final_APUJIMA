@@ -88,7 +88,7 @@ public class DoctorMemberHandler {
     String Name = Prompt.inputString("이름> ");
     System.out.println("휴대폰 번호를 입력해주세요.");
     String PhoneNo = Prompt.inputString("휴대폰> ");
-    DoctorMember Doctormember = vaildFindID(Name,PhoneNo);
+    DoctorMember Doctormember = validFindId(Name,PhoneNo);
     if(Doctormember == null) {
       System.out.println();
       System.out.println("아이디를 찾을 수 없습니다.");
@@ -107,7 +107,7 @@ public class DoctorMemberHandler {
     String id = Prompt.inputString("아이디> ");
     System.out.println("휴대폰 번호를 입력해주세요.");
     String PhoneNo = Prompt.inputString("휴대폰> ");
-    DoctorMember Doctormember = vaildFindPassword(id,PhoneNo);
+    DoctorMember Doctormember = validFindPassword(id,PhoneNo);
     if(Doctormember == null) {
       System.out.println("아이디를 찾을 수 없습니다.");
       System.out.println();
@@ -118,7 +118,7 @@ public class DoctorMemberHandler {
     }
   }
 
-  public DoctorMember vaildFindID(String Name,String PhoneNo)   {
+  public DoctorMember validFindId(String Name,String PhoneNo)   {
     DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
     for (DoctorMember doctormember : arr) {
       if (doctormember.getName().equals(Name) && (doctormember.getPhoneNum().equals(PhoneNo))) {
@@ -128,7 +128,7 @@ public class DoctorMemberHandler {
     return null;
   }
 
-  public DoctorMember vaildFindPassword(String id,String PhoneNo)   {
+  public DoctorMember validFindPassword(String id,String PhoneNo)   {
     DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
     for (DoctorMember doctormember : arr) {
       if (doctormember.getId().equals(id) && (doctormember.getPhoneNum().equals(PhoneNo))) {
