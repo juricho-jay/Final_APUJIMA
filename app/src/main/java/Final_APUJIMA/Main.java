@@ -2,6 +2,7 @@ package Final_APUJIMA;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 import Final_APUJIMA.domain.DoctorMember;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.handler.DoctorMemberHandler;
@@ -16,13 +17,11 @@ public class Main {
     List<DoctorMember> doctormemberList = new LinkedList<>();
     MemberHandler memberHandler = new MemberHandler(memberList);
     DoctorMemberHandler docmemberHandler = new DoctorMemberHandler(doctormemberList);
+    Scanner sc = new Scanner(System.in);
     while(true) {
-      System.out.println("[APUJIMA]에 오신 것을 환영합니다.");
-      System.out.println("원하시는 메뉴를 선택해 주세요.");
-      System.out.println();
-      System.out.println();
+      System.out.println(" 첫 인사 작성하기 ");
 
-      System.out.println("1) 로그인");
+      System.out.println("1) 로그인");;
       System.out.println("2) 회원가입");
       System.out.println("3) 종료");
       System.out.println("4) 관리자 기능: 아이디 목록 보기");
@@ -31,9 +30,7 @@ public class Main {
 
 
       switch(no) {
-        case 1: System.out.println("[로그인] 페이지입니다.");
-        System.out.println("원하시는 메뉴를 선택해주세요.");
-        System.out.println();
+        case 1: System.out.println("로그인 페이지입니다 .선택해주세요");
         System.out.println("1) 의사 로그인");
         System.out.println("2) 일반회원 로그인");
         System.out.println("3) 메인 페이지");
