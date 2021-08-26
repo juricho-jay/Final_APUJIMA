@@ -19,6 +19,9 @@ public class MemberHandler {
     
     member.setName(Prompt.inputString("이름> "));
     member.setId(Prompt.inputString("아이디> "));
+
+    System.out.println();
+    member.setName(Prompt.inputString("아이디> "));
     member.setPassword(Prompt.inputString("비밀번호> "));
     member.setBirthDay(Prompt.inputString("생년월일> "));
     member.setEmail(Prompt.inputString("이메일> "));
