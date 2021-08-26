@@ -1,6 +1,5 @@
 package Final_APUJIMA.handler;
 import java.util.List;
-import Final_APUJIMA.domain.LoginPage;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.util.Prompt;
 
@@ -49,7 +48,7 @@ public class MemberHandler {
     System.out.println();
   }
 
-  public void login() {
+  public boolean login() {
     System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
     String id = Prompt.inputString("아이디> ");
     String password = Prompt.inputString("비밀번호> ");
@@ -58,11 +57,12 @@ public class MemberHandler {
     if (member ==null) {
       System.out.println();
       System.out.println("회원가입이 되어있지 않습니다.");
+    return false;
     }else {
-      LoginPage.();
+      System.out.println();
+      return true;
     }
 
-    System.out.println();
   }
 
   public Member vaildLogin(String id, String password) {

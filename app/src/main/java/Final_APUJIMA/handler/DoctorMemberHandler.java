@@ -11,7 +11,7 @@ public class DoctorMemberHandler {
     this.doctormemberList = doctormemberList; // => ?? 생성자 초기화
   }
   DoctorMember doctormember = new DoctorMember();
-  
+
 
 
   public void add() {
@@ -25,6 +25,7 @@ public class DoctorMemberHandler {
     doctormember.setPhoneNum(Prompt.inputString("전화번호> "));
     doctormember.setPhoto(Prompt.inputString("의사 증명서> "));
     doctormember.setSex(Prompt.inputString("성별> "));
+    doctormember.setInterest(Prompt.inputString("관심분야> "));
     doctormember.getRegisteredDate();
 
 
@@ -132,4 +133,37 @@ public class DoctorMemberHandler {
     }
     return null;
   }
+
+
+  public void doctorList() {
+    DoctorMember[] doctorMember = new DoctorMember[4];
+    DoctorMember doc1 = new DoctorMember();
+    DoctorMember doc2 = new DoctorMember();
+    DoctorMember doc3 = new DoctorMember();
+    DoctorMember doc4 = new DoctorMember();
+
+    doc1.setName("조주리");  
+    doc1.setInterest("프로그래머 멘탈케어");
+    doctorMember[0] = doc1;
+
+    doc2.setName("신현지");  
+    doc2.setInterest("조원 멘탈케어");
+    doctorMember[1] = doc2;
+
+    doc3.setName("김진현");  
+    doc3.setInterest("프로그래밍");
+    doctorMember[2] = doc3;
+
+    doc4.setName("김태호");  
+    doc4.setInterest("조원들 간식 담당");
+    doctorMember[3] = doc4;
+
+    for(int i = 0 ; i < doctorMember.length ; i++) {
+      System.out.println((i + 1)+". " + "Dr." + doctorMember[i].getName() + " 전문분야 : " +
+          doctorMember[i].getInterest());
+    }
+    System.out.println();
+
+  }
+
 }

@@ -12,6 +12,8 @@ public class DoctorMember {
   private String phoneNum;
   private String photo;
   private String sex;
+
+  private String interest;
   private Date registeredDate;
 
   public String getName() {
@@ -20,7 +22,7 @@ public class DoctorMember {
   public void setName(String name) {
     this.name = name;
   }
-  
+
   public String getId() {
     return id;
   }
@@ -69,6 +71,12 @@ public class DoctorMember {
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+  }
+  public String getInterest() {
+    return interest;
+  }
+  public void setInterest(String interest) {
+    this.interest = interest;
   }
 
 }
