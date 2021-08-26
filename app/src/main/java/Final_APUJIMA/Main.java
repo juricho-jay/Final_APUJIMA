@@ -136,10 +136,10 @@ public class Main {
     System.out.println();
     switch(memNo){
       case 1:
-        docmemberHandler.list();
+        docmemberHandler.FindPassword();
         break;
       case 2:
-        memberHandler.list();
+        memberHandler.FindPassword();
         break;
     }
   }
