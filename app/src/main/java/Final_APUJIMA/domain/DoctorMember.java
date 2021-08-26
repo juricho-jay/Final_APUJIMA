@@ -1,13 +1,17 @@
 package Final_APUJIMA.domain;
 
+import java.sql.Date;
+
 public class DoctorMember {
- 
+
   private String name;
   private String password;
   private String birthDay;
   private String email;
   private String phoneNum;
   private String photo;
+  private String sex;
+  private Date registeredDate;
 
   public String getName() {
     return name;
@@ -45,5 +49,5 @@ public class DoctorMember {
   public void setPhoto(String photo) {
     this.photo = photo;
   }
-  
+
 }
