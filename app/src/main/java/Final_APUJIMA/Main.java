@@ -6,7 +6,7 @@ import Final_APUJIMA.domain.DoctorMember;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.handler.CounselingMemberHandler;
 import Final_APUJIMA.handler.DoctorMemberHandler;
-import Final_APUJIMA.handler.Medicine;
+import Final_APUJIMA.handler.MedicineHandler;
 import Final_APUJIMA.handler.MemberHandler;
 import Final_APUJIMA.util.Prompt;
 
@@ -214,14 +214,14 @@ public class Main {
   //회원가입메뉴 메서드
   static void doMedicineMenu() {
     System.out.println("[약국] 페이지입니다. 선택해주세요");
-    Medicine medicine = new Medicine();
+    MedicineHandler medicine = new MedicineHandler();
     System.out.println("1) 약 목록");
     System.out.println("2) 약 찾기");
     int select = Prompt.inputInt("선택> ");
     if (select == 1) {
       medicine.Mlist();
     } else if (select == 2) {
-      medicine.MSearch();
+      medicine.SearchM();
     } else {
       System.out.println("잘못 선택하셨습니다 ");
     }
