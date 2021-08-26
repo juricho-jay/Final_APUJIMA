@@ -17,6 +17,7 @@ public class MemberHandler {
   public void add() {
     System.out.println("[회원 등록]");
 
+    System.out.println();
     member.setName(Prompt.inputString("아이디> "));
     member.setPassword(Prompt.inputString("비밀번호> "));
     member.setEmail(Prompt.inputString("전화번호> "));

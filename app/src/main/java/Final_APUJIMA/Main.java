@@ -30,7 +30,9 @@ public class Main {
 
 
       switch(no) {
-        case 1: System.out.println("로그인 페이지입니다 .선택해주세요");
+        case 1: System.out.println("[로그인] 페이지입니다.");
+        System.out.println("원하시는 메뉴를 선택해주세요.");
+        System.out.println();
         System.out.println("1) 의사 로그인");
         System.out.println("2) 일반회원 로그인");
         System.out.println("3) 메인 페이지");

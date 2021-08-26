@@ -49,5 +49,17 @@ public class DoctorMember {
   public void setPhoto(String photo) {
     this.photo = photo;
   }
+  public String getSex() {
+    return sex;
+  }
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
+  }
 
 }
