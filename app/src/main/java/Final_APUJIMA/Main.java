@@ -16,10 +16,12 @@ public class Main {
     List<DoctorMember> doctormemberList = new LinkedList<>();
     MemberHandler memberHandler = new MemberHandler(memberList);
     DoctorMemberHandler docmemberHandler = new DoctorMemberHandler(doctormemberList);
+
+
     while(true) {
+
       System.out.println("[APUJIMA]에 오신 것을 환영합니다.");
       System.out.println("원하시는 메뉴를 선택해 주세요.");
-      System.out.println();
       System.out.println();
 
       System.out.println("1) 로그인");
@@ -30,6 +32,8 @@ public class Main {
       System.out.println();
 
 
+
+
       switch(no) {
         case 1: System.out.println("[로그인] 페이지입니다.");
         System.out.println("원하시는 메뉴를 선택해주세요.");
@@ -37,7 +41,6 @@ public class Main {
         System.out.println("1) 의사 로그인");
         System.out.println("2) 일반회원 로그인");
         System.out.println("3) 메인 페이지");
-
 
         int LoginNo = (Prompt.inputInt("번호? "));
         System.out.println();
@@ -98,6 +101,7 @@ public class Main {
           }
       }
     }
+
   }
 }
 
