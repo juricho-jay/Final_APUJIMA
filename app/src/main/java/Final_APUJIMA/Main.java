@@ -9,124 +9,142 @@ import Final_APUJIMA.handler.MemberHandler;
 import Final_APUJIMA.util.Prompt;
 
 public class Main {
+  static List<Member> memberList = new LinkedList<>();
+  static List<DoctorMember> doctormemberList = new LinkedList<>();
+  static MemberHandler memberHandler = new MemberHandler(memberList);
+  static DoctorMemberHandler docmemberHandler = new DoctorMemberHandler(doctormemberList);
 
   public static void main(String[] args) {
 
-    List<Member> memberList = new LinkedList<>();
-    List<DoctorMember> doctormemberList = new LinkedList<>();
-    MemberHandler memberHandler = new MemberHandler(memberList);
-    DoctorMemberHandler docmemberHandler = new DoctorMemberHandler(doctormemberList);
-
-
     while(true) {
-
-      System.out.println("[APUJIMA]에 오신 것을 환영합니다.");
-      System.out.println("0) 종료");
-      System.out.println("원하시는 메뉴를 선택해 주세요.");
+      int menuNo = doMainMenu();
       System.out.println();
 
-      System.out.println("원하시는 메뉴를 선택해 주세요.");
-      System.out.println("0) 종료");
-      System.out.println("1) 로그인");
-      System.out.println("2) 회원가입");
-      System.out.println("3) ID 찾기");
-      System.out.println("4) PW 찾기");
-      System.out.println("5) 관리자 기능: 아이디 목록 보기");
-      int no = (Prompt.inputInt("번호? >"));
-      System.out.println();
-
-
-
-
-      switch(no) {
-        case 0: System.out.println("종료");
-        return;
-
-        case 1: System.out.println("[로그인] 페이지입니다.");
-        System.out.println("원하시는 메뉴를 선택해주세요.");
+      if (menuNo == 0) {
+        System.out.println("APUJIMA에 방문해주셔서 감사합니다!\n다음에 또 만나요!");
         System.out.println();
-        System.out.println("1) 의사 로그인");
-        System.out.println("2) 일반회원 로그인");
-        System.out.println("3) 메인 페이지");
-
-        int LoginNo = (Prompt.inputInt("번호? "));
-        System.out.println();
-
-        switch(LoginNo) {
-          case 1: 
-            docmemberHandler.login();
-            break;
-          case 2:
-            memberHandler.login();
-          case 3:
-            break;
-
-        }
-
-        //조회했을때 id와 비밀번호가 일치한다면, 로그인 성공
-
         break;
-
-        case 2: System.out.println("[회원가입] 페이지입니다. 선택해주세요");
-        System.out.println();
-
-        System.out.println("1) 의사 회원가입");
-        System.out.println("2) 일반 회원가입");
-        System.out.println("3) 뒤로가기");
-        System.out.println("0) 종료");
-        int signupNo = (Prompt.inputInt("번호? "));
-        System.out.println();
-
-        switch(signupNo) {
-          case 1: 
-            docmemberHandler.add();
-            break;
-          case 2:
-            memberHandler.add();
-            break;
-          case 3:
-            break;
-          case 0:
-            return;
-        }
-        break;
-
-        case 3: 
-          System.out.println("[ID] 찾기 > ");
-          int select = Prompt.inputInt("1) 의사 , 2) 일반회원 중 골라주세요 > ");
-
-          if (select == 1) {
-            docmemberHandler.FindId();
-          }else {
-            memberHandler.FindId();
-          }
-          break;
-        case 4: 
-          System.out.println("[비밀번호] 찾기");
-          int select1 = Prompt.inputInt("1) 의사 , 2) 일반회원 중 골라주세요 > ");
-          if (select1 == 1) {
-            docmemberHandler.FindPassword();
-          }else {
-            memberHandler.FindPassword();
-          }
-          break;
-        case 5: 
-          System.out.println("1)의사 회원정보");
-          System.out.println("1) 의사 정보 조회  , 2) 상담 신청하기");
-          int memno = (Prompt.inputInt("번호?"));
-
-          System.out.println();
-          switch(memno){
-            case 1:
-              docmemberHandler.doctorList();
-              break;
-            case 2:
-              memberHandler.list();
-              break;
-          }
+      } else if (menuNo == 1) { 
+        doLoginMenu();
+      } else if (menuNo == 2) {
+        doSignupMenu();
+      } else if (menuNo == 3) {
+        doFindIdMenu();
+      } else if (menuNo == 4) {
+        doFindPassWordMenu();
+      } else if (menuNo == 5) {
+        docmemberHandler.doctorList();
+      } else {
+        System.out.println("메뉴 번호가 유효하지 않습니다.");
       }
+      System.out.println();
+    }
+
+    Prompt.close();
+  }
+
+
+  //메인메뉴 메서드
+  static int doMainMenu() {
+    System.out.println("[APUJIMA]에 오신 것을 환영합니다.");
+    System.out.println("원하시는 메뉴를 선택해 주세요.");
+    System.out.println();
+
+    System.out.println("1) 로그인");
+    System.out.println("2) 회원가입");
+    System.out.println("3) ID 찾기");
+    System.out.println("4) PW 찾기");
+    System.out.println("5) 관리자 기능: 아이디 목록 보기");
+    System.out.println("0) 종료");
+    return Prompt.inputInt("메뉴 번호> ");
+  }
+
+
+  //로그인메뉴 메서드
+  static void doLoginMenu() {
+    System.out.println("[로그인] 페이지입니다.");
+    System.out.println("원하시는 메뉴를 선택해주세요.");
+    System.out.println();
+    System.out.println("1) 의사 로그인");
+    System.out.println("2) 일반회원 로그인");
+    System.out.println("3) 메인 페이지");
+
+    int LoginNo = (Prompt.inputInt("번호> "));
+    System.out.println();
+
+    switch(LoginNo) {
+      case 1: 
+        docmemberHandler.login();
+        break;
+      case 2:
+        memberHandler.login();
+        break;
+      case 3:
+        return;
+      default: 
+        System.out.println("잘못된 번호입니다. 다시 입력해주세요.");
+    }
+  }
+
+  //회원가입메뉴 메서드
+  static void doSignupMenu() {
+    System.out.println("[회원가입] 페이지입니다. 선택해주세요");
+    System.out.println();
+
+    System.out.println("1) 의사 회원가입");
+    System.out.println("2) 일반 회원가입");
+    System.out.println("3) 뒤로가기");
+    int signupNo = (Prompt.inputInt("번호> "));
+    System.out.println();
+
+    switch(signupNo) {
+      case 1: 
+        docmemberHandler.add();
+        break;
+      case 2:
+        memberHandler.add();
+        break;
+      case 3:
+        return;
+      default:
+        System.out.println("잘못된 번호입니다. 다시 입력해주세요.");
+
+    }
+  }
+
+  //ID찾기메뉴 메서드
+  private static void doFindIdMenu() {
+    System.out.println("[ID 찾기] 페이지입니다. 선택해주세요.");
+    System.out.println("1) 의사");
+    System.out.println("2) 일반");
+    int select = Prompt.inputInt("ID 찾기> ");
+
+    if (select == 1) {
+      docmemberHandler.FindId();
+    }else {
+      memberHandler.FindId();
     }
 
   }
+
+  //PW찾기메뉴 메서드
+  private static void doFindPassWordMenu() {
+    System.out.println("[PW 찾기] 페이지입니다. 선택해주세요.");
+    System.out.println("1) 의사 회원정보");
+    System.out.println("2) 일반 회원정보");
+    int memNo = (Prompt.inputInt("PW 찾기> "));
+    System.out.println();
+    switch(memNo){
+      case 1:
+        docmemberHandler.list();
+        break;
+      case 2:
+        memberHandler.list();
+        break;
+    }
+  }
+
+  //관리자 메뉴는 바로 memberHandler.list() 호출
+
 }
 

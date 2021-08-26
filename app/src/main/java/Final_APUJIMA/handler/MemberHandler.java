@@ -16,7 +16,7 @@ public class MemberHandler {
 
   public void add() {
     System.out.println("[회원 등록]");
-    
+
     member.setName(Prompt.inputString("이름> "));
     member.setId(Prompt.inputString("아이디> "));
     member.setPassword(Prompt.inputString("비밀번호> "));
@@ -28,6 +28,7 @@ public class MemberHandler {
     member.getRegisteredDate();
 
     memberList.add(member);
+    System.out.println();
     System.out.println("회원가입 완료!");
     System.out.println();
   }
@@ -48,14 +49,16 @@ public class MemberHandler {
   }
 
   public void login() {
-    System.out.println("로그인 해주세요 ");
-    String id = Prompt.inputString("아이디?");
-    String password = Prompt.inputString("비밀번호");
+    System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
+    String id = Prompt.inputString("아이디> ");
+    String password = Prompt.inputString("비밀번호> ");
     Member member = vaildLogin(id,password);
-    if (member ==null) {
-      System.out.println("회원가입이 되어있지 않습니다.");
 
+    if (member ==null) {
+      System.out.println();
+      System.out.println("회원가입이 되어있지 않습니다.");
     }
+
     System.out.println();
   }
 
@@ -63,6 +66,7 @@ public class MemberHandler {
     Member [] arr = memberList.toArray(new Member[0]);
     for (Member member : arr) {
       if (member.getId().equals(id) && member.getPassword().equals(password)){
+        System.out.println();
         System.out.println("로그인 성공!");
         System.out.println();
         return member;
@@ -70,14 +74,14 @@ public class MemberHandler {
     }
     return null;
   }
-  
+
   public void FindId() {
     System.out.println("아이디 찾기 페이지입니다.");
     System.out.println("이름을 입력하세요");
     String Name = Prompt.inputString("이름> ");
     System.out.println("휴대폰 번호를 입력해주세요");
     String PhoneNo = Prompt.inputString("휴대폰> ");
-    Member member = vaildFindID(Name,PhoneNo);
+    Member member = vaildFindID(Name, PhoneNo);
     if(member == null) {
       System.out.println("아이디를 찾을 수 없습니다.");
       System.out.println();
@@ -87,14 +91,14 @@ public class MemberHandler {
 
     }
   }
-  
+
   public void FindPassword() {
     System.out.println("비밀번호 찾기 페이지입니다.");
     System.out.println("아이디를 입력하세요");
     String id = Prompt.inputString("아이디> ");
     System.out.println("휴대폰 번호를 입력해주세요");
     String PhoneNo = Prompt.inputString("휴대폰> ");
-    Member member = vaildFindPassword(id,PhoneNo);
+    Member member = vaildFindPassword(id, PhoneNo);
     if(member == null) {
       System.out.println("입력이 잘못되었습니다. 정보를 찾을 수 없습니다.");
       System.out.println();
@@ -104,23 +108,23 @@ public class MemberHandler {
 
     }
   }
-  
+
   public Member vaildFindID(String Name,String PhoneNo)   {
     Member [] arr = memberList.toArray(new Member[0]);
     for (Member member : arr) {
       if (member.getName().equals(Name) && (member.getPhoneNum().equals(PhoneNo))) {
         return member;
-  }
+      }
     }
     return null;
   }
-  
+
   public Member vaildFindPassword(String id,String PhoneNo)   {
     Member [] arr = memberList.toArray(new Member[0]);
     for (Member member : arr) {
       if (member.getId().equals(id) && (member.getPhoneNum().equals(PhoneNo))) {
         return member;
-  }
+      }
     }
     return null;
   }
