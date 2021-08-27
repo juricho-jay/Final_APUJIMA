@@ -126,6 +126,7 @@ public class Main {
     System.out.println("1) 의사");
     System.out.println("2) 일반");
     int select = Prompt.inputInt("ID 찾기> ");
+    System.out.println();
 
     if (select == 1) {
       doctorMemberHandler.FindId();
@@ -140,8 +141,8 @@ public class Main {
   //PW찾기메뉴 메서드
   private static void doFindPassWordMenu() {
     System.out.println("[PW 찾기] 페이지입니다. 선택해주세요.");
-    System.out.println("1) 의사 회원정보");
-    System.out.println("2) 일반 회원정보");
+    System.out.println("1) 의사");
+    System.out.println("2) 일반");
     int memNo = (Prompt.inputInt("PW 찾기> "));
     System.out.println();
     switch(memNo){

@@ -56,7 +56,8 @@ public class MemberHandler {
 
     if (member ==null) {
       System.out.println();
-      System.out.println("회원가입이 되어있지 않습니다.");
+      System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다.\n"
+          + "아이디와 비밀번호를 정확히 입력해 주세요.");
       return false;
     }else {
       System.out.println();
@@ -79,10 +80,10 @@ public class MemberHandler {
   }
 
   public void FindId() {
-    System.out.println("아이디 찾기 페이지입니다.");
-    System.out.println("이름을 입력하세요");
+    System.out.println("[ID 찾기] 페이지입니다.");
+    System.out.println("이름을 입력해 주세요.");
     String Name = Prompt.inputString("이름> ");
-    System.out.println("휴대폰 번호를 입력해주세요");
+    System.out.println("휴대폰 번호를 입력해 주세요.");
     String PhoneNo = Prompt.inputString("휴대폰> ");
     Member member = vaildFindID(Name, PhoneNo);
     if(member == null) {
@@ -90,24 +91,24 @@ public class MemberHandler {
       System.out.println();
     }else {
       System.out.println();
-      System.out.printf ("회원님의 아이디 입니다. %s",member.getId());
+      System.out.printf ("회원님의 아이디 입니다. [ %s ]",member.getId());
       System.out.println();
 
     }
   }
 
   public void FindPassword() {
-    System.out.println("비밀번호 찾기 페이지입니다.");
-    System.out.println("아이디를 입력하세요");
+    System.out.println("[PW 찾기] 페이지입니다.");
+    System.out.println("아이디를 입력해 주세요.");
     String id = Prompt.inputString("아이디> ");
-    System.out.println("휴대폰 번호를 입력해주세요");
+    System.out.println("휴대폰 번호를 입력해 주세요.");
     String PhoneNo = Prompt.inputString("휴대폰> ");
     Member member = vaildFindPassword(id, PhoneNo);
     if(member == null) {
       System.out.println("입력이 잘못되었습니다. 정보를 찾을 수 없습니다.");
       System.out.println();
     }else {
-      System.out.printf ("회원님의 비밀번호 입니다. %s",member.getPassword());
+      System.out.printf ("회원님의 비밀번호입니다. [ %s ]",member.getPassword());
       System.out.println();
 
     }
