@@ -42,8 +42,8 @@ public class Main {
       }
       System.out.println();
     }
+    //    Prompt.close();
 
-    Prompt.close();
   }
 
   //메인메뉴 메서드
@@ -167,7 +167,7 @@ public class Main {
       if (menuNo == 0) {
         System.out.println("정상적으로 로그아웃 되었습니다.");
         System.out.println();
-        return;
+        break;
       } else if (menuNo == 1) { 
         doIntroMenu();
       } else if (menuNo == 2) {
@@ -181,9 +181,9 @@ public class Main {
         System.out.println("메뉴 번호가 유효하지 않습니다.");
       }
       System.out.println();
-      Prompt.close();
     }
 
+    //    Prompt.close();2
   }
 
 
