@@ -49,17 +49,20 @@ public class MemberHandler {
   }
 
   public boolean login() {
+    //MemberHandler memberHandler = new MemberHandler(memberList);
     System.out.println("[로그인] 페이지입니다.\n아이디와 비밀번호를 입력하세요.");
     String id = Prompt.inputString("아이디> ");
     String password = Prompt.inputString("비밀번호> ");
     Member member = vaildLogin(id,password);
 
-    if (member ==null) {
+    if (member == null) {
       System.out.println();
       System.out.println("회원가입이 되어있지 않습니다.");
+      System.out.println("다시 로그인 해주세요");
+      System.out.println();
+     
       return false;
     }else {
-      System.out.println();
       return true;
     }
 

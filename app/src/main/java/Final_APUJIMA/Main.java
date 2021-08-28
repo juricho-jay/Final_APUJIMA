@@ -77,6 +77,8 @@ public class Main {
     System.out.println();
 
     switch(LoginNo) {
+      
+      
       case 1: 
         boolean status = doctorMemberHandler.login();
         if (status == true) {
@@ -87,8 +89,11 @@ public class Main {
         boolean status1 = memberHandler.login();
         if(status1 == true) {
           LoginPage();
+        } else {
+          while(status1 == true) {
+            memberHandler.login();
+          }
         }
-
         break;
       case 3:
         return;
@@ -169,7 +174,8 @@ public class Main {
       if (menuNo == 0) {
         System.out.println("APUJIMA에 방문해주셔서 감사합니다!\n다음에 또 만나요!");
         System.out.println();
-        break;
+       
+        return;
       } else if (menuNo == 1) { 
         doIntroMenu();
       } else if (menuNo == 2) {
@@ -185,7 +191,7 @@ public class Main {
       System.out.println();
     }
 
-    Prompt.close();
+    
   }
 
 
