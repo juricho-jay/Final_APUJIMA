@@ -80,21 +80,23 @@ public class Main {
       
       
       case 1: 
+        while(true) {
         boolean status = doctorMemberHandler.login();
         if (status == true) {
           LoginPage();
+          return;
         }
-        break;
+        }
+        
       case 2:
+        while(true) {
         boolean status1 = memberHandler.login();
         if(status1 == true) {
           LoginPage();
-        } else {
-          while(status1 == true) {
-            memberHandler.login();
-          }
+          return;
+        } 
         }
-        break;
+        
       case 3:
         return;
       default: 
@@ -215,10 +217,17 @@ public class Main {
 
   //로그인메뉴 메서드
   static void doIntroMenu() {
-    System.out.println("[소개] 페이지입니다.");
-    System.out.println("We always with you, 모든 사람들이 아프지 않길 바라는 커뮤니티, "
-        + "APUJIMA입니다.");
+    while(true) {
+      System.out.println("[소개] 페이지입니다.");
+      System.out.println("We always with you, 모든 사람들이 아프지 않길 바라는 커뮤니티, "
+          + "APUJIMA입니다.");
+      System.out.println();
 
+      System.out.println("0) 뒤로가기");
+      int num = Prompt.inputInt("번호> ");
+      if(num == 0)
+        return;
+    }
   }
   //회원가입메뉴 메서드
   static void doMedicineMenu() {

@@ -50,7 +50,10 @@ public class MemberHandler {
 
   public boolean login() {
     //MemberHandler memberHandler = new MemberHandler(memberList);
-    System.out.println("[로그인] 페이지입니다.\n아이디와 비밀번호를 입력하세요.");
+    System.out.println("[로그인] 페이지입니다.\n "
+        + "아이디와 비밀번호를 입력하세요.");
+    
+    
     String id = Prompt.inputString("아이디> ");
     String password = Prompt.inputString("비밀번호> ");
     Member member = vaildLogin(id,password);
