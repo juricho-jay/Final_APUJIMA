@@ -84,18 +84,18 @@ public class DoctorMemberHandler {
 
   public void FindId() {
     System.out.println("[아이디 찾기] 페이지입니다.");
-    System.out.println("이름을 입력하세요.");
+    System.out.println("이름을 입력해 주세요.");
     String Name = Prompt.inputString("이름> ");
-    System.out.println("휴대폰 번호를 입력해주세요.");
+    System.out.println("휴대폰 번호를 입력해 주세요.");
     String PhoneNo = Prompt.inputString("휴대폰> ");
-    DoctorMember Doctormember = vaildFindID(Name,PhoneNo);
+    DoctorMember Doctormember = validFindId(Name,PhoneNo);
     if(Doctormember == null) {
       System.out.println();
       System.out.println("아이디를 찾을 수 없습니다.");
       System.out.println();
     }else {
       System.out.println();
-      System.out.printf ("회원님의 아이디입니다. %s",doctormember.getId());
+      System.out.printf ("회원님의 아이디입니다. [ %s ]",doctormember.getId());
       System.out.println();
 
     }
@@ -103,22 +103,22 @@ public class DoctorMemberHandler {
 
   public void FindPassword() {
     System.out.println("[비밀번호 찾기] 페이지입니다.");
-    System.out.println("아이디를 입력하세요.");
+    System.out.println("아이디를 입력해 주세요.");
     String id = Prompt.inputString("아이디> ");
-    System.out.println("휴대폰 번호를 입력해주세요.");
+    System.out.println("휴대폰 번호를 입력해 주세요.");
     String PhoneNo = Prompt.inputString("휴대폰> ");
-    DoctorMember Doctormember = vaildFindPassword(id,PhoneNo);
+    DoctorMember Doctormember = validFindPassword(id,PhoneNo);
     if(Doctormember == null) {
-      System.out.println("아이디를 찾을 수 없습니다.");
+      System.out.println("입력이 잘못되었습니다. 정보를 찾을 수 없습니다.");
       System.out.println();
     }else {
-      System.out.printf ("회원님의 비밀번호입니다. %s",doctormember.getPassword());
+      System.out.printf ("회원님의 비밀번호입니다. [ %s ]",doctormember.getPassword());
       System.out.println();
 
     }
   }
 
-  public DoctorMember vaildFindID(String Name,String PhoneNo)   {
+  public DoctorMember validFindId(String Name,String PhoneNo)   {
     DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
     for (DoctorMember doctormember : arr) {
       if (doctormember.getName().equals(Name) && (doctormember.getPhoneNum().equals(PhoneNo))) {
@@ -128,7 +128,7 @@ public class DoctorMemberHandler {
     return null;
   }
 
-  public DoctorMember vaildFindPassword(String id,String PhoneNo)   {
+  public DoctorMember validFindPassword(String id,String PhoneNo)   {
     DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
     for (DoctorMember doctormember : arr) {
       if (doctormember.getId().equals(id) && (doctormember.getPhoneNum().equals(PhoneNo))) {

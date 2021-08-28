@@ -6,7 +6,7 @@ import Final_APUJIMA.domain.DoctorMember;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.handler.CounselingMemberHandler;
 import Final_APUJIMA.handler.DoctorMemberHandler;
-import Final_APUJIMA.handler.Medicine;
+import Final_APUJIMA.handler.MedicineHandler;
 import Final_APUJIMA.handler.MemberHandler;
 import Final_APUJIMA.util.Prompt;
 
@@ -42,11 +42,9 @@ public class Main {
       }
       System.out.println();
     }
+    //    Prompt.close();
 
-    Prompt.close();
   }
-
-
 
   //메인메뉴 메서드
   static int doMainMenu() {
@@ -62,7 +60,6 @@ public class Main {
     System.out.println("0) 종료");
     return Prompt.inputInt("메뉴 번호> ");
   }
-
 
   //로그인메뉴 메서드
   static void doLoginMenu() {
@@ -136,6 +133,7 @@ public class Main {
     System.out.println("1) 의사");
     System.out.println("2) 일반");
     int select = Prompt.inputInt("ID 찾기> ");
+    System.out.println();
 
     if (select == 1) {
       doctorMemberHandler.FindId();
@@ -150,8 +148,8 @@ public class Main {
   //PW찾기메뉴 메서드
   private static void doFindPassWordMenu() {
     System.out.println("[PW 찾기] 페이지입니다. 선택해주세요.");
-    System.out.println("1) 의사 회원정보");
-    System.out.println("2) 일반 회원정보");
+    System.out.println("1) 의사");
+    System.out.println("2) 일반");
     int memNo = (Prompt.inputInt("PW 찾기> "));
     System.out.println();
     switch(memNo){
@@ -174,7 +172,7 @@ public class Main {
       System.out.println();
 
       if (menuNo == 0) {
-        System.out.println("APUJIMA에 방문해주셔서 감사합니다!\n다음에 또 만나요!");
+        System.out.println("정상적으로 로그아웃 되었습니다.");
         System.out.println();
        
         return;
@@ -192,8 +190,9 @@ public class Main {
       }
       System.out.println();
     }
-
+  
     
+    //    Prompt.close();2
   }
 
 
@@ -210,7 +209,7 @@ public class Main {
     System.out.println("2) 약국");
     System.out.println("3) HEALER");
     System.out.println("4) 커뮤니티");
-    System.out.println("0) 종료");
+    System.out.println("0) 로그아웃");
     return Prompt.inputInt("메뉴 번호> ");
   }
 
@@ -232,14 +231,14 @@ public class Main {
   //회원가입메뉴 메서드
   static void doMedicineMenu() {
     System.out.println("[약국] 페이지입니다. 선택해주세요");
-    Medicine medicine = new Medicine();
+    MedicineHandler medicine = new MedicineHandler();
     System.out.println("1) 약 목록");
     System.out.println("2) 약 찾기");
     int select = Prompt.inputInt("선택> ");
     if (select == 1) {
       medicine.Mlist();
     } else if (select == 2) {
-      medicine.MSearch();
+      medicine.SearchM();
     } else {
       System.out.println("잘못 선택하셨습니다 ");
     }
