@@ -76,19 +76,26 @@ public class Main {
     System.out.println();
 
     switch(LoginNo) {
+      
+      
       case 1: 
+        while(true) {
         boolean status = doctorMemberHandler.login();
         if (status == true) {
           LoginPage();
+          return;
         }
-        break;
+        }
+        
       case 2:
+        while(true) {
         boolean status1 = memberHandler.login();
         if(status1 == true) {
           LoginPage();
+          return;
+        } 
         }
-
-        break;
+        
       case 3:
         return;
       default: 
@@ -169,7 +176,8 @@ public class Main {
       if (menuNo == 0) {
         System.out.println("정상적으로 로그아웃 되었습니다.");
         System.out.println();
-        break;
+       
+        return;
       } else if (menuNo == 1) { 
         doIntroMenu();
       } else if (menuNo == 2) {
@@ -184,7 +192,8 @@ public class Main {
       }
       System.out.println();
     }
-
+  
+    
     //    Prompt.close();2
   }
 
