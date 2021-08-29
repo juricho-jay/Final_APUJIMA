@@ -6,8 +6,6 @@ import Final_APUJIMA.util.Prompt;
 public class FreeboardManuHandler {
   static final int MAX_LENGTH = 5;
 
-  // 게시판 마다 따로 관리해야 하기 때문에 인스턴스 필드로 전환한다.
-  // => static 옵션을 뺀다.
   Freeboard[] freeboards = new Freeboard[MAX_LENGTH];
   int size = 0;
 
