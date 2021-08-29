@@ -76,26 +76,26 @@ public class Main {
     System.out.println();
 
     switch(LoginNo) {
-      
-      
+
+
       case 1: 
         while(true) {
-        boolean status = doctorMemberHandler.login();
-        if (status == true) {
-          LoginPage();
-          return;
+          boolean status = doctorMemberHandler.login();
+          if (status == true) {
+            LoginPage();
+            return;
+          }
         }
-        }
-        
+
       case 2:
         while(true) {
-        boolean status1 = memberHandler.login();
-        if(status1 == true) {
-          LoginPage();
-          return;
-        } 
+          boolean status1 = memberHandler.login();
+          if(status1 == true) {
+            LoginPage();
+            return;
+          } 
         }
-        
+
       case 3:
         return;
       default: 
@@ -176,7 +176,7 @@ public class Main {
       if (menuNo == 0) {
         System.out.println("정상적으로 로그아웃 되었습니다.");
         System.out.println();
-       
+
         return;
       } else if (menuNo == 1) { 
         doIntroMenu();
@@ -192,8 +192,8 @@ public class Main {
       }
       System.out.println();
     }
-  
-    
+
+
     //    Prompt.close();2
   }
 
@@ -292,8 +292,8 @@ public class Main {
     System.out.println("[APUs 자유게시판] 페이지입니다.");
     System.out.println();
     System.out.println("1) 글쓰기");
-    System.out.println("1) 글목록");
-    System.out.println("1) 글상세");
+    System.out.println("2) 글목록");
+    System.out.println("3) 글상세");
     System.out.println("0) 뒤로가기");
     int select = Prompt.inputInt("선택> ");
 
