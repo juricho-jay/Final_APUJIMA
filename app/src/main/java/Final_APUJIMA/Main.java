@@ -6,6 +6,7 @@ import Final_APUJIMA.domain.DoctorMember;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.handler.CounselingMemberHandler;
 import Final_APUJIMA.handler.DoctorMemberHandler;
+import Final_APUJIMA.handler.FreeboardManuHandler;
 import Final_APUJIMA.handler.MedicineHandler;
 import Final_APUJIMA.handler.MemberHandler;
 import Final_APUJIMA.util.Prompt;
@@ -16,6 +17,7 @@ public class Main {
   static MemberHandler memberHandler = new MemberHandler(memberList);
   static DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctormemberList);
   static CounselingMemberHandler counselingMemberHandler = new CounselingMemberHandler();
+  static FreeboardManuHandler freeboardHandler = new FreeboardManuHandler();
 
   public static void main(String[] args) {
 
@@ -245,7 +247,6 @@ public class Main {
     int select = Prompt.inputInt("선택> ");
     if (select == 1) {
       doctorHandler.doctorList();  
-
     } else if (select == 2) {
       counselingMemberHandler.counselingadd();
     }
@@ -262,19 +263,49 @@ public class Main {
     int select = Prompt.inputInt("메뉴를 선택해주세요>  ");
 
     if (select == 1) {
-      // 구현예정
-    }else if(select == 2){
-      // 구현예정
-    }
-    else if(select == 3) {
-      // 구현예정
+      NoticeMenu();
+    } else if(select == 2){
+      FreeboardMenu();
+    } else if(select == 3) {
+      knowledgeMenu();
     } else if(select == 0) {
       doMainMenu2();
     }
 
   }
 
+  static void NoticeMenu() {
+    System.out.println("[공지사항] 페이지입니다.");
+  }
 
+  private static void FreeboardMenu() {
+    FreeboardManuHandler freeboardHandler = new FreeboardManuHandler();
+    System.out.println("[APUs 자유게시판] 페이지입니다.");
+    System.out.println();
+    System.out.println("1) 글쓰기");
+    System.out.println("1) 글목록");
+    System.out.println("1) 글상세");
+    System.out.println("0) 뒤로가기");
+    int select = Prompt.inputInt("선택> ");
+
+    if (select == 1) {
+      freeboardHandler.add();
+    } else if(select == 2){
+      freeboardHandler.list();
+    } else if(select == 3) {
+      freeboardHandler.delete();
+    } else if(select == 0) {
+      doCommunityMenu();
+    }
+
+  }
+
+  static void knowledgeMenu() {
+    System.out.println("[Healer 지식in] 페이지입니다.");
+    System.out.println();
+    System.out.println("1) 의사");
+    System.out.println("2) 일반");
+  }
 
   //관리자 메뉴는 바로 memberHandler.list() 호출
 
