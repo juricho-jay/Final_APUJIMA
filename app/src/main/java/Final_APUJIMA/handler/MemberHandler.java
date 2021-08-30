@@ -1,5 +1,7 @@
 package Final_APUJIMA.handler;
+import java.util.LinkedList;
 import java.util.List;
+import Final_APUJIMA.domain.CounselingMember;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.util.Prompt;
 
@@ -13,6 +15,9 @@ public class MemberHandler {
   }
 
   Member member = new Member();
+
+  static List<CounselingMember> counselingmemberList = new LinkedList<>();
+  static CounselingMemberHandler counselingMemberHandler = new CounselingMemberHandler(counselingmemberList);
 
 
   public void add() {
@@ -53,8 +58,8 @@ public class MemberHandler {
     //MemberHandler memberHandler = new MemberHandler(memberList);
     System.out.println("[로그인] 페이지입니다.\n "
         + "아이디와 비밀번호를 입력하세요.");
-    
-    
+
+
     String id = Prompt.inputString("아이디> ");
     String password = Prompt.inputString("비밀번호> ");
     Member member = validLogin(id,password);
@@ -64,10 +69,10 @@ public class MemberHandler {
       System.out.println("회원가입이 되어있지 않습니다.");
       System.out.println("다시 로그인 해주세요");
       System.out.println();
-     
+
       System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다.\n"
           + "아이디와 비밀번호를 정확히 입력해 주세요.");
-     System.out.println();
+      System.out.println();
       return false;
     }else {
       System.out.println( member.getName()+"  회원님, [APUJIMA]에 오신 것을 환영합니다.");
@@ -143,22 +148,25 @@ public class MemberHandler {
     }
     return null;
   }
-  
+
   public void displayLoginUser() {
     //MemberHandler memberHandler = new MemberHandler(memberList);
+
+
     System.out.println("[내 정보] 페이지입니다.\n ");
     System.out.println(member.getName() + "님 환영합니다!");
-    
+
     System.out.println("아이디 : "+ member.getId());
     System.out.println("이메일 : "+ member.getEmail());
     System.out.println("생년월일 : "+ member.getBirthDay());
     System.out.println("사진 : "+ member.getPhoto());
     System.out.println("전화번호 : " + member.getPhoneNum());
     System.out.println("성별" + member.getSex());
-    
-    
-    }
+    counselingMemberHandler.counselingDetail();
 
-  
+
+  }
+
+
 
 }

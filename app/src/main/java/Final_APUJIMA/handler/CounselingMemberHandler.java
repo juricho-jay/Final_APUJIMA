@@ -1,15 +1,16 @@
 package Final_APUJIMA.handler;
+import java.util.List;
 import Final_APUJIMA.domain.CounselingMember;
 import Final_APUJIMA.util.Prompt;
 
 public class CounselingMemberHandler {
 
+  List<CounselingMember> counselingmemberList;
   //  List memberAppList; //멤버타입의 리스트를 선언.
   //
-  //  public CounselingMemberHandler(List memberAppList) {
-  //    this.memberAppList = memberAppList; // => ?? 생성자 초기화
-  //  }
-
+  public CounselingMemberHandler(List<CounselingMember> counselingmemberList) {
+    this.counselingmemberList = counselingmemberList; // => ?? 생성자 초기화
+  }
   CounselingMember counselingMember = new CounselingMember();
 
   public void counselingadd() {
@@ -20,6 +21,7 @@ public class CounselingMemberHandler {
     counselingMember.setTel(Prompt.inputString("연락처> "));
     counselingMember.setDisease(Prompt.inputString("지병 여부> "));
     counselingMember.setContent(Prompt.inputString("상담 내용> "));
+
     System.out.println();
     System.out.println("[상담 주제]");
     System.out.println("1. 우울증");
@@ -52,6 +54,8 @@ public class CounselingMemberHandler {
         stateLabel = "기타";
         break;
     }
+    counselingMember.setStateLabel(stateLabel);
+
     System.out.println();
     System.out.println("상담사 성별> ");
     System.out.println("1. 여성 상담사");
@@ -62,23 +66,48 @@ public class CounselingMemberHandler {
     String stateLabel2 = null;
     switch (counselorStatus) {
       case 1:
-        stateLabel2 = "우울증";
+        stateLabel2 = "여성 상담사";
         break;
       case 2:
-        stateLabel2 = "진로";
+        stateLabel2 = "남성 상담사";
         break;
       case 3:
-        stateLabel2 = "일상생활";
+        stateLabel2 = "상관없음";
         break;
     }
+    counselingMember.setStateLabel2(stateLabel2);
 
-    counselingMember.getRegisteredDate();
+
+    counselingmemberList.add(counselingMember);
+
+    //    for (CounselingMember c : counselingmemberList) {
+    //      System.out.println(c);
+    //    }
+
     System.out.println();
     //    memberAppList.add(counselingMember);
-    
+
     System.out.println("신청이 완료되었습니다.");
     System.out.println();
   }
+  public void counselingDetail() {
+    System.out.println(counselingMember.getName());
+    //    CounselingMember[] list = counselingmemberList.toArray(new CounselingMember[0]);
 
+    //    for (CounselingMember c : list) {
+    for (CounselingMember c : counselingmemberList) {
+      System.out.printf("%s,%s,%s,%s, "
+          + "환자가 상담할 분야 : %s"
+          + "의사성별 : %s",
+          c.getName(),
+          c.getTel(),
+          c.getDisease(),
+          c.getContent(),
+          c.getStateLabel(),
+          c.getStateLabel2()
+
+          );      
+    }
+  }
 
 }
