@@ -6,6 +6,7 @@ import Final_APUJIMA.util.Prompt;
 public class MemberHandler {
 
   List<Member> memberList; //멤버타입의 리스트를 선언.
+  Member LoginUser;
 
   public MemberHandler(List<Member> memberList) {
     this.memberList = memberList; // => ?? 생성자 초기화
@@ -66,8 +67,10 @@ public class MemberHandler {
      
       System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다.\n"
           + "아이디와 비밀번호를 정확히 입력해 주세요.");
+     System.out.println();
       return false;
     }else {
+      System.out.println( member.getName()+"  회원님, [APUJIMA]에 오신 것을 환영합니다.");
       return true;
     }
 
@@ -140,22 +143,22 @@ public class MemberHandler {
     }
     return null;
   }
-  //  
-  //  public void LoginInfo() {
-  //    String Id = member.getId();
-  //    Member member = validLoginInfo(Id);
-  //    if( member.getId() != null ) {
-  //      System.out.println(member.getId() + "님 ");
-  //    }
-  //  }
-  //  
-  //  public Member validLoginInfo(String ID) {
-  //    Member [] arr = memberList.toArray(new Member[0]);
-  //    for (Member member : arr) {
-  //      if (member.getId().equals(ID)) {
-  //        return member;
-  //      }
-  //  }
-  //    return null;
-  //}
+  
+  public void displayLoginUser() {
+    //MemberHandler memberHandler = new MemberHandler(memberList);
+    System.out.println("[내 정보] 페이지입니다.\n ");
+    System.out.println(member.getName() + "님 환영합니다!");
+    
+    System.out.println("아이디 : "+ member.getId());
+    System.out.println("이메일 : "+ member.getEmail());
+    System.out.println("생년월일 : "+ member.getBirthDay());
+    System.out.println("사진 : "+ member.getPhoto());
+    System.out.println("전화번호 : " + member.getPhoneNum());
+    System.out.println("성별" + member.getSex());
+    
+    
+    }
+
+  
+
 }

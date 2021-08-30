@@ -75,6 +75,7 @@ public class CounselingMemberHandler {
     counselingMember.getRegisteredDate();
     System.out.println();
     //    memberAppList.add(counselingMember);
+    
     System.out.println("신청이 완료되었습니다.");
     System.out.println();
   }

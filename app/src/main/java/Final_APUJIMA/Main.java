@@ -6,7 +6,7 @@ import Final_APUJIMA.domain.DoctorMember;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.handler.CounselingMemberHandler;
 import Final_APUJIMA.handler.DoctorMemberHandler;
-import Final_APUJIMA.handler.FreeboardManuHandler;
+import Final_APUJIMA.handler.FreeBoardMenuHandler;
 import Final_APUJIMA.handler.MedicineHandler;
 import Final_APUJIMA.handler.MemberHandler;
 import Final_APUJIMA.util.Prompt;
@@ -17,14 +17,15 @@ public class Main {
   static MemberHandler memberHandler = new MemberHandler(memberList);
   static DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctormemberList);
   static CounselingMemberHandler counselingMemberHandler = new CounselingMemberHandler();
-  static FreeboardManuHandler freeboardHandler = new FreeboardManuHandler();
+  static FreeBoardMenuHandler freeboardHandler = new FreeBoardMenuHandler();
 
   public static void main(String[] args) {
 
     while(true) {
+     try {
       int menuNo = doMainMenu();
       System.out.println();
-
+    
       if (menuNo == 0) {
         System.out.println("APUJIMA에 방문해주셔서 감사합니다!\n다음에 또 만나요!");
         System.out.println();
@@ -44,9 +45,15 @@ public class Main {
       }
       System.out.println();
     }
-    //    Prompt.close();
+    
+     catch(NumberFormatException e) {
+      System.out.println();
+      System.out.println("번호를 잘못 입력하셨습니다. 번호를 다시 입력해 주세요. \n" + e.getMessage());
+      System.out.println();
+    }
+   }
+}
 
-  }
 
   //메인메뉴 메서드
   static int doMainMenu() {
@@ -61,6 +68,9 @@ public class Main {
     System.out.println("5) 관리자 기능: 아이디 목록 보기");
     System.out.println("0) 종료");
     return Prompt.inputInt("메뉴 번호> ");
+     
+      
+     
   }
 
   //로그인메뉴 메서드
@@ -170,6 +180,7 @@ public class Main {
   //로그인 페이지 메서드
   public static void LoginPage() {
     while(true) {
+      try {
       int menuNo = doMainMenu2();
       System.out.println();
 
@@ -186,11 +197,19 @@ public class Main {
         doHealerMenu();
       } else if (menuNo == 4) {
         doCommunityMenu();
+      } else if (menuNo == 5) {
+        memberHandler.displayLoginUser();
       }
       else {
         System.out.println("메뉴 번호가 유효하지 않습니다.");
       }
       System.out.println();
+    }catch(NumberFormatException e) {
+      
+      System.out.println();
+      System.out.println("번호를 잘못 입력하셨습니다. 번호를 다시 입력해 주세요." + e.getMessage());
+      System.out.println();
+    }
     }
 
 
@@ -203,7 +222,7 @@ public class Main {
     //    MemberHandler m = new MemberHandler(memberList);
     //    m.LoginInfo();
 
-    System.out.println("회원님, [APUJIMA]에 오신 것을 환영합니다.");
+   
     System.out.println("원하시는 메뉴를 선택해 주세요.");
     System.out.println();
 
@@ -211,6 +230,7 @@ public class Main {
     System.out.println("2) 약국");
     System.out.println("3) HEALER");
     System.out.println("4) 커뮤니티");
+    System.out.println("5) 내 정보");
     System.out.println("0) 로그아웃");
     return Prompt.inputInt("메뉴 번호> ");
   }
@@ -282,33 +302,41 @@ public class Main {
     }
 
   }
-
+  //공지사항 method
   static void NoticeMenu() {
     System.out.println("[공지사항] 페이지입니다.");
   }
-
+  //자유게시판 관련 method.
   private static void FreeboardMenu() {
-    FreeboardManuHandler freeboardHandler = new FreeboardManuHandler();
     System.out.println("[APUs 자유게시판] 페이지입니다.");
     System.out.println();
     System.out.println("1) 글쓰기");
     System.out.println("2) 글목록");
     System.out.println("3) 글상세");
+    System.out.println("4) 글수정");
+    System.out.println("5) 글삭제");
     System.out.println("0) 뒤로가기");
     int select = Prompt.inputInt("선택> ");
-
+    try {
     if (select == 1) {
       freeboardHandler.add();
-    } else if(select == 2){
+    } else if (select == 2){
       freeboardHandler.list();
-    } else if(select == 3) {
+    } else if (select == 3) {
+      freeboardHandler.detail();
+    } else if (select == 4) {
+      freeboardHandler.update();
+    } else if (select == 5) {
       freeboardHandler.delete();
-    } else if(select == 0) {
+    } else if (select == 0) {
       doCommunityMenu();
+    }
+    }catch(Exception e) {
+     
     }
 
   }
-
+  //Healer 지식in method.
   static void knowledgeMenu() {
     System.out.println("[Healer 지식in] 페이지입니다.");
     System.out.println();
