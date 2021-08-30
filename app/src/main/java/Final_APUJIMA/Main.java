@@ -22,37 +22,37 @@ public class Main {
   public static void main(String[] args) {
 
     while(true) {
-     try {
-      int menuNo = doMainMenu();
-      System.out.println();
-    
-      if (menuNo == 0) {
-        System.out.println("APUJIMA에 방문해주셔서 감사합니다!\n다음에 또 만나요!");
+      try {
+        int menuNo = doMainMenu();
         System.out.println();
-        break;
-      } else if (menuNo == 1) { 
-        doLoginMenu();
-      } else if (menuNo == 2) {
-        doSignupMenu();
-      } else if (menuNo == 3) {
-        doFindIdMenu();
-      } else if (menuNo == 4) {
-        doFindPassWordMenu();
-      } else if (menuNo == 5) {
-        doctorMemberHandler.doctorList();
-      } else {
-        System.out.println("메뉴 번호가 유효하지 않습니다.");
+
+        if (menuNo == 0) {
+          System.out.println("APUJIMA에 방문해주셔서 감사합니다!\n다음에 또 만나요!");
+          System.out.println();
+          break;
+        } else if (menuNo == 1) { 
+          doLoginMenu(); // 로그인 메뉴
+        } else if (menuNo == 2) {
+          doSignupMenu(); // 회원가입 메뉴
+        } else if (menuNo == 3) {
+          doFindIdMenu(); // ID찾기 메뉴
+        } else if (menuNo == 4) {
+          doFindPassWordMenu(); // PW찾기 메뉴
+        } else if (menuNo == 5) {
+          doctorMemberHandler.doctorList();
+        } else {
+          System.out.println("메뉴 번호가 유효하지 않습니다.");
+        }
+        System.out.println();
       }
-      System.out.println();
+
+      catch(NumberFormatException e) {
+        System.out.println();
+        System.out.println("번호를 잘못 입력하셨습니다. 번호를 다시 입력해 주세요. \n" + e.getMessage());
+        System.out.println();
+      }
     }
-    
-     catch(NumberFormatException e) {
-      System.out.println();
-      System.out.println("번호를 잘못 입력하셨습니다. 번호를 다시 입력해 주세요. \n" + e.getMessage());
-      System.out.println();
-    }
-   }
-}
+  }
 
 
   //메인메뉴 메서드
@@ -68,9 +68,9 @@ public class Main {
     System.out.println("5) 관리자 기능: 아이디 목록 보기");
     System.out.println("0) 종료");
     return Prompt.inputInt("메뉴 번호> ");
-     
-      
-     
+
+
+
   }
 
   //로그인메뉴 메서드
@@ -90,20 +90,24 @@ public class Main {
 
       case 1: 
         while(true) {
-          boolean status = doctorMemberHandler.login();
-          if (status == true) {
+          int status = doctorMemberHandler.login();
+          if (status == 1) {
             LoginPage();
+            return;
+          } else if (status == 0) {
             return;
           }
         }
 
       case 2:
         while(true) {
-          boolean status1 = memberHandler.login();
-          if(status1 == true) {
+          int status1 = memberHandler.login();
+          if(status1 == 1) {
             LoginPage();
             return;
-          } 
+          } else if (status1 == 0) {
+            return;
+          }
         }
 
       case 3:
@@ -162,15 +166,22 @@ public class Main {
     System.out.println("[PW 찾기] 페이지입니다. 선택해주세요.");
     System.out.println("1) 의사");
     System.out.println("2) 일반");
-    int memNo = (Prompt.inputInt("PW 찾기> "));
-    System.out.println();
-    switch(memNo){
-      case 1:
-        doctorMemberHandler.FindPassword();
-        break;
-      case 2:
-        memberHandler.FindPassword();
-        break;
+    try{
+      int memNo = (Prompt.inputInt("PW 찾기> "));
+      System.out.println();
+      switch(memNo){
+        case 1:
+          doctorMemberHandler.FindPassword();
+          break;
+        case 2:
+          memberHandler.FindPassword();
+          break;
+      }
+    }
+    catch(Exception e) {
+      System.out.println();
+      System.out.println("번호를 잘못 입력하셨습니다. 번호를 다시 입력해 주세요. \n" + e.getMessage());
+      System.out.println();
     }
   }
 
@@ -181,35 +192,35 @@ public class Main {
   public static void LoginPage() {
     while(true) {
       try {
-      int menuNo = doMainMenu2();
-      System.out.println();
-
-      if (menuNo == 0) {
-        System.out.println("정상적으로 로그아웃 되었습니다.");
+        int menuNo = doMainMenu2();
         System.out.println();
 
-        return;
-      } else if (menuNo == 1) { 
-        doIntroMenu();
-      } else if (menuNo == 2) {
-        doMedicineMenu();
-      } else if (menuNo == 3) {
-        doHealerMenu();
-      } else if (menuNo == 4) {
-        doCommunityMenu();
-      } else if (menuNo == 5) {
-        memberHandler.displayLoginUser();
+        if (menuNo == 0) {
+          System.out.println("정상적으로 로그아웃 되었습니다.");
+          System.out.println();
+
+          return;
+        } else if (menuNo == 1) { 
+          doIntroMenu();
+        } else if (menuNo == 2) {
+          doMedicineMenu();
+        } else if (menuNo == 3) {
+          doHealerMenu();
+        } else if (menuNo == 4) {
+          doCommunityMenu();
+        } else if (menuNo == 5) {
+          memberHandler.displayLoginUser();
+        }
+        else {
+          System.out.println("메뉴 번호가 유효하지 않습니다.");
+        }
+        System.out.println();
+      }catch(NumberFormatException e) {
+
+        System.out.println();
+        System.out.println("번호를 잘못 입력하셨습니다. 번호를 다시 입력해 주세요." + e.getMessage());
+        System.out.println();
       }
-      else {
-        System.out.println("메뉴 번호가 유효하지 않습니다.");
-      }
-      System.out.println();
-    }catch(NumberFormatException e) {
-      
-      System.out.println();
-      System.out.println("번호를 잘못 입력하셨습니다. 번호를 다시 입력해 주세요." + e.getMessage());
-      System.out.println();
-    }
     }
 
 
@@ -222,7 +233,7 @@ public class Main {
     //    MemberHandler m = new MemberHandler(memberList);
     //    m.LoginInfo();
 
-   
+
     System.out.println("원하시는 메뉴를 선택해 주세요.");
     System.out.println();
 
@@ -318,21 +329,21 @@ public class Main {
     System.out.println("0) 뒤로가기");
     int select = Prompt.inputInt("선택> ");
     try {
-    if (select == 1) {
-      freeboardHandler.add();
-    } else if (select == 2){
-      freeboardHandler.list();
-    } else if (select == 3) {
-      freeboardHandler.detail();
-    } else if (select == 4) {
-      freeboardHandler.update();
-    } else if (select == 5) {
-      freeboardHandler.delete();
-    } else if (select == 0) {
-      doCommunityMenu();
-    }
+      if (select == 1) {
+        freeboardHandler.add();
+      } else if (select == 2){
+        freeboardHandler.list();
+      } else if (select == 3) {
+        freeboardHandler.detail();
+      } else if (select == 4) {
+        freeboardHandler.update();
+      } else if (select == 5) {
+        freeboardHandler.delete();
+      } else if (select == 0) {
+        doCommunityMenu();
+      }
     }catch(Exception e) {
-     
+
     }
 
   }
