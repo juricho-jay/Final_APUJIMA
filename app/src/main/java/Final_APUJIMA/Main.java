@@ -12,12 +12,12 @@ import Final_APUJIMA.handler.MemberHandler;
 import Final_APUJIMA.util.Prompt;
 
 public class Main {
-  static List<Member> memberList = new LinkedList<>();
-  static List<DoctorMember> doctormemberList = new LinkedList<>();
-  static MemberHandler memberHandler = new MemberHandler(memberList);
-  static DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctormemberList);
-  static CounselingMemberHandler counselingMemberHandler = new CounselingMemberHandler();
-  static FreeboardManuHandler freeboardHandler = new FreeboardManuHandler();
+  List<Member> memberList = new LinkedList<>();
+  List<DoctorMember> doctormemberList = new LinkedList<>();
+  MemberHandler memberHandler = new MemberHandler(memberList);
+  DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctormemberList);
+  CounselingMemberHandler counselingMemberHandler = new CounselingMemberHandler();
+  FreeboardManuHandler freeboardHandler = new FreeboardManuHandler();
 
   public static void main(String[] args) {
 
