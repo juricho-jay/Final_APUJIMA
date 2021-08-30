@@ -33,6 +33,7 @@ public class Main {
           System.out.println();
           break;
         } else if (menuNo == 1) { 
+<<<<<<< HEAD
           doLoginMenu();
         } else if (menuNo == 2) {
           doSignupMenu();
@@ -40,6 +41,15 @@ public class Main {
           doFindIdMenu();
         } else if (menuNo == 4) {
           doFindPassWordMenu();
+=======
+          doLoginMenu(); // 로그인 메뉴
+        } else if (menuNo == 2) {
+          doSignupMenu(); // 회원가입 메뉴
+        } else if (menuNo == 3) {
+          doFindIdMenu(); // ID찾기 메뉴
+        } else if (menuNo == 4) {
+          doFindPassWordMenu(); // PW찾기 메뉴
+>>>>>>> a9698d211bec57004b524ded88d5b3697b9af279
         } else if (menuNo == 5) {
           doctorMemberHandler.doctorList();
         } else {
@@ -92,20 +102,24 @@ public class Main {
 
       case 1: 
         while(true) {
-          boolean status = doctorMemberHandler.login();
-          if (status == true) {
+          int status = doctorMemberHandler.login();
+          if (status == 1) {
             LoginPage();
+            return;
+          } else if (status == 0) {
             return;
           }
         }
 
       case 2:
         while(true) {
-          boolean status1 = memberHandler.login();
-          if(status1 == true) {
+          int status1 = memberHandler.login();
+          if(status1 == 1) {
             LoginPage();
             return;
-          } 
+          } else if (status1 == 0) {
+            return;
+          }
         }
 
       case 3:
@@ -164,15 +178,22 @@ public class Main {
     System.out.println("[PW 찾기] 페이지입니다. 선택해주세요.");
     System.out.println("1) 의사");
     System.out.println("2) 일반");
-    int memNo = (Prompt.inputInt("PW 찾기> "));
-    System.out.println();
-    switch(memNo){
-      case 1:
-        doctorMemberHandler.FindPassword();
-        break;
-      case 2:
-        memberHandler.FindPassword();
-        break;
+    try{
+      int memNo = (Prompt.inputInt("PW 찾기> "));
+      System.out.println();
+      switch(memNo){
+        case 1:
+          doctorMemberHandler.FindPassword();
+          break;
+        case 2:
+          memberHandler.FindPassword();
+          break;
+      }
+    }
+    catch(Exception e) {
+      System.out.println();
+      System.out.println("번호를 잘못 입력하셨습니다. 번호를 다시 입력해 주세요. \n" + e.getMessage());
+      System.out.println();
     }
   }
 

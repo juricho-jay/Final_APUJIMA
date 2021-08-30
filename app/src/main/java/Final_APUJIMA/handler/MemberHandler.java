@@ -22,9 +22,22 @@ public class MemberHandler {
 
   public void add() {
     System.out.println("[회원 등록]");
-
-    member.setName(Prompt.inputString("이름> "));
-    member.setId(Prompt.inputString("아이디> "));
+    while(true) {
+      member.setName(Prompt.inputString("이름> "));
+      if (member.getName().contains("#")) {
+        System.out.println("이름에는 #을 사용할 수 없습니다.");
+      } else {
+        break;
+      }
+    }
+    while(true) {
+      member.setId(Prompt.inputString("아이디> "));
+      if (member.getId().contains("#")) {
+        System.out.println("아이디에는 #을 사용할 수 없습니다.");
+      } else {
+        break;
+      }
+    }
     member.setPassword(Prompt.inputString("비밀번호> "));
     member.setBirthDay(Prompt.inputString("생년월일> "));
     member.setEmail(Prompt.inputString("이메일> "));
@@ -54,8 +67,9 @@ public class MemberHandler {
     System.out.println();
   }
 
-  public boolean login() {
+  public int login() {
     //MemberHandler memberHandler = new MemberHandler(memberList);
+<<<<<<< HEAD
     System.out.println("[로그인] 페이지입니다.\n "
         + "아이디와 비밀번호를 입력하세요.");
 
@@ -78,7 +92,35 @@ public class MemberHandler {
       System.out.println( member.getName()+"  회원님, [APUJIMA]에 오신 것을 환영합니다.");
       return true;
     }
+=======
+    while (true) {
+      System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
+      System.out.println("(취소: #)");
 
+      String id = Prompt.inputString("아이디> ");
+      if (id.contains("#")) {
+        return 0;
+      }
+      String password = Prompt.inputString("비밀번호> ");
+      Member member = validLogin(id,password);
+>>>>>>> a9698d211bec57004b524ded88d5b3697b9af279
+
+      if (member == null) {
+        System.out.println();
+        System.out.println("회원가입이 되어있지 않습니다.");
+        System.out.println("다시 로그인 해주세요");
+        System.out.println();
+
+        System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다.\n"
+            + "아이디와 비밀번호를 정확히 입력해 주세요.");
+        System.out.println();
+        continue;
+      }else {
+        System.out.println(member.getName()+" 회원님, [APUJIMA]에 오신 것을 환영합니다.");
+        System.out.println();
+        return 1;
+      }
+    }
   }
 
   public Member validLogin(String id, String password) {
@@ -95,37 +137,46 @@ public class MemberHandler {
   }
 
   public void FindId() {
-    System.out.println("[ID 찾기] 페이지입니다.");
-    System.out.println("이름을 입력해 주세요.");
-    String Name = Prompt.inputString("이름> ");
-    System.out.println("휴대폰 번호를 입력해 주세요.");
-    String PhoneNo = Prompt.inputString("휴대폰> ");
-    Member member = validFindID(Name, PhoneNo);
-    if(member == null) {
-      System.out.println("아이디를 찾을 수 없습니다.");
-      System.out.println();
-    }else {
-      System.out.println();
-      System.out.printf ("회원님의 아이디 입니다. [ %s ]",member.getId());
-      System.out.println();
-
+    while (true) {
+      System.out.println("[ID 찾기] 페이지입니다.");
+      System.out.println("(취소: #)");
+      String Name = Prompt.inputString("이름> ");
+      if (Name.contains("#")) {
+        return;
+      }
+      String PhoneNo = Prompt.inputString("휴대폰> ");
+      Member member = validFindID(Name, PhoneNo);
+      if(member == null) {
+        System.out.println("아이디를 찾을 수 없습니다.");
+        System.out.println();
+        continue;
+      }else {
+        System.out.println();
+        System.out.printf ("회원님의 아이디 입니다. [ %s ]",member.getId());
+        System.out.println();
+        return;
+      }
     }
   }
 
   public void FindPassword() {
-    System.out.println("[PW 찾기] 페이지입니다.");
-    System.out.println("아이디를 입력해 주세요.");
+    while (true) {System.out.println("[PW 찾기] 페이지입니다.");
+    System.out.println("(취소: #)");
     String id = Prompt.inputString("아이디> ");
-    System.out.println("휴대폰 번호를 입력해 주세요.");
+    if (id.contains("#")) {
+      return;
+    }
     String PhoneNo = Prompt.inputString("휴대폰> ");
     Member member = validFindPassword(id, PhoneNo);
     if(member == null) {
       System.out.println("입력이 잘못되었습니다. 정보를 찾을 수 없습니다.");
       System.out.println();
+      continue;
     }else {
       System.out.printf ("회원님의 비밀번호입니다. [ %s ]",member.getPassword());
       System.out.println();
-
+      return;
+    }
     }
   }
 
@@ -162,11 +213,19 @@ public class MemberHandler {
     System.out.println("사진 : "+ member.getPhoto());
     System.out.println("전화번호 : " + member.getPhoneNum());
     System.out.println("성별" + member.getSex());
+<<<<<<< HEAD
     counselingMemberHandler.counselingDetail();
 
 
   }
 
 
+=======
+
+
+  }
+
+
+>>>>>>> a9698d211bec57004b524ded88d5b3697b9af279
 
 }
