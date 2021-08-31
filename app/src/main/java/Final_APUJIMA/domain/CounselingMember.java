@@ -13,6 +13,8 @@ public class CounselingMember {
   private int counselingStatus;
   private int counselorStatus;
   private Date registeredDate;
+  private String stateLabel;
+  private String stateLabel2;
 
   public String getName() {
     return name;
@@ -71,5 +73,19 @@ public class CounselingMember {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+  public String getStateLabel() {
+    return stateLabel;
+  }
+  public void setStateLabel(String stateLabel) {
+    this.stateLabel = stateLabel;
+  }
+  public String getStateLabel2() {
+    return stateLabel2;
+  }
+  public void setStateLabel2(String stateLabel2) {
+    this.stateLabel2 = stateLabel2;
+  }
+
+
 
 }
