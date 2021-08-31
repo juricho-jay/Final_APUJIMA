@@ -69,30 +69,6 @@ public class MemberHandler {
 
   public int login() {
     //MemberHandler memberHandler = new MemberHandler(memberList);
-<<<<<<< HEAD
-    System.out.println("[로그인] 페이지입니다.\n "
-        + "아이디와 비밀번호를 입력하세요.");
-
-
-    String id = Prompt.inputString("아이디> ");
-    String password = Prompt.inputString("비밀번호> ");
-    Member member = validLogin(id,password);
-
-    if (member == null) {
-      System.out.println();
-      System.out.println("회원가입이 되어있지 않습니다.");
-      System.out.println("다시 로그인 해주세요");
-      System.out.println();
-
-      System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다.\n"
-          + "아이디와 비밀번호를 정확히 입력해 주세요.");
-      System.out.println();
-      return false;
-    }else {
-      System.out.println( member.getName()+"  회원님, [APUJIMA]에 오신 것을 환영합니다.");
-      return true;
-    }
-=======
     while (true) {
       System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
       System.out.println("(취소: #)");
@@ -103,7 +79,6 @@ public class MemberHandler {
       }
       String password = Prompt.inputString("비밀번호> ");
       Member member = validLogin(id,password);
->>>>>>> a9698d211bec57004b524ded88d5b3697b9af279
 
       if (member == null) {
         System.out.println();
@@ -213,19 +188,14 @@ public class MemberHandler {
     System.out.println("사진 : "+ member.getPhoto());
     System.out.println("전화번호 : " + member.getPhoneNum());
     System.out.println("성별" + member.getSex());
-<<<<<<< HEAD
     counselingMemberHandler.counselingDetail();
 
 
   }
 
 
-=======
 
-
-  }
-
-
->>>>>>> a9698d211bec57004b524ded88d5b3697b9af279
 
 }
+
+
