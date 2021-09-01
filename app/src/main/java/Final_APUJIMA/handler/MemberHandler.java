@@ -109,10 +109,6 @@ public class MemberHandler {
 
   public int login() {
     //MemberHandler memberHandler = new MemberHandler(memberList);
-<<<<<<< HEAD
-
-=======
->>>>>>> a04a310d2dbc027560922b0c6cc21ac3cf6da215
     while (true) {
       System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
       System.out.println("(취소: #)");
@@ -221,8 +217,6 @@ public class MemberHandler {
 
   public void displayLoginUser() {
     //MemberHandler memberHandler = new MemberHandler(memberList);
-
-
     System.out.println("[내 정보] 페이지입니다.\n ");
     System.out.println(member.getName() + "님 환영합니다!");
 
@@ -233,18 +227,5 @@ public class MemberHandler {
     System.out.println("전화번호 : " + member.getPhoneNum());
     System.out.println("성별" + member.getSex());
     counselingMemberHandler.counselingDetail();
-<<<<<<< HEAD
   }
 }
-=======
-
-
-  }
-
-
-
-
-}
-
-
->>>>>>> a04a310d2dbc027560922b0c6cc21ac3cf6da215
