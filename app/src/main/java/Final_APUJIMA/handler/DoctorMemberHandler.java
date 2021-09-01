@@ -5,20 +5,37 @@ import Final_APUJIMA.domain.DoctorMember;
 import Final_APUJIMA.util.Prompt;
 
 public class DoctorMemberHandler {
-  List<DoctorMember> doctormemberList; 
+
+  List<DoctorMember> doctormemberList; //멤버타입의 리스트를 선언.
 
   public DoctorMemberHandler(List<DoctorMember> doctormemberList) {
     this.doctormemberList = doctormemberList; // => ?? 생성자 초기화
   }
-  DoctorMember doctormember = new DoctorMember();
 
 
 
   public void add() {
     System.out.println("[의사 회원 등록]");
+    DoctorMember doctormember = new DoctorMember();
 
-    doctormember.setName(Prompt.inputString("이름> "));
-    doctormember.setId(Prompt.inputString("아이디> "));
+    while(true) {
+      doctormember.setName(Prompt.inputString("이름> "));
+      if (doctormember.getName().contains("#")) {       
+        System.out.println("이름에는 #을 사용할 수 없습니다.");
+      } else {
+        break;
+      }
+    }
+
+    while(true) {
+      doctormember.setId(Prompt.inputString("아이디> "));
+      if (doctormember.getId().contains("#")) {
+        System.out.println("아이디에는 #을 사용할 수 없습니다.");
+      } else {
+        break;
+      }
+    }
+
     doctormember.setPassword(Prompt.inputString("비밀번호> "));
     doctormember.setBirthDay(Prompt.inputString("생년월일> "));
     doctormember.setEmail(Prompt.inputString("이메일> "));
@@ -48,94 +65,6 @@ public class DoctorMemberHandler {
           doctormember.getPassword()
           );
     }
-  }
-
-  public boolean login() {
-
-    System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
-    String id = Prompt.inputString("아이디> ");
-    String password = Prompt.inputString("비밀번호> ");
-    DoctorMember Doctormember = vaildLogin(id,password);
-    if (Doctormember ==null) {
-      System.out.println();
-      System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다.\n"
-          + "아이디와 비밀번호를 정확히 입력해 주세요.");
-      System.out.println();
-      return false;
-    }else {
-      System.out.println("로그인 성공!");
-      System.out.println();
-      return true;
-    }
-
-  }
-  public DoctorMember vaildLogin(String id, String password) {
-    DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
-    for (DoctorMember doctormember : arr) {
-      if (doctormember.getId().equals(id) && doctormember.getPassword().equals(password)) {
-        System.out.println();
-        System.out.println("로그인 성공!");
-        System.out.println();
-        return doctormember;
-      }
-    }
-    return null;
-  }
-
-  public void FindId() {
-    System.out.println("[아이디 찾기] 페이지입니다.");
-    System.out.println("이름을 입력해 주세요.");
-    String Name = Prompt.inputString("이름> ");
-    System.out.println("휴대폰 번호를 입력해 주세요.");
-    String PhoneNo = Prompt.inputString("휴대폰> ");
-    DoctorMember Doctormember = validFindId(Name,PhoneNo);
-    if(Doctormember == null) {
-      System.out.println();
-      System.out.println("아이디를 찾을 수 없습니다.");
-      System.out.println();
-    }else {
-      System.out.println();
-      System.out.printf ("회원님의 아이디입니다. [ %s ]",doctormember.getId());
-      System.out.println();
-
-    }
-  }
-
-  public void FindPassword() {
-    System.out.println("[비밀번호 찾기] 페이지입니다.");
-    System.out.println("아이디를 입력해 주세요.");
-    String id = Prompt.inputString("아이디> ");
-    System.out.println("휴대폰 번호를 입력해 주세요.");
-    String PhoneNo = Prompt.inputString("휴대폰> ");
-    DoctorMember Doctormember = validFindPassword(id,PhoneNo);
-    if(Doctormember == null) {
-      System.out.println("입력이 잘못되었습니다. 정보를 찾을 수 없습니다.");
-      System.out.println();
-    }else {
-      System.out.printf ("회원님의 비밀번호입니다. [ %s ]",doctormember.getPassword());
-      System.out.println();
-
-    }
-  }
-
-  public DoctorMember validFindId(String Name,String PhoneNo)   {
-    DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
-    for (DoctorMember doctormember : arr) {
-      if (doctormember.getName().equals(Name) && (doctormember.getPhoneNum().equals(PhoneNo))) {
-        return doctormember;
-      }
-    }
-    return null;
-  }
-
-  public DoctorMember validFindPassword(String id,String PhoneNo)   {
-    DoctorMember [] arr = doctormemberList.toArray(new DoctorMember[0]);
-    for (DoctorMember doctormember : arr) {
-      if (doctormember.getId().equals(id) && (doctormember.getPhoneNum().equals(PhoneNo))) {
-        return doctormember;
-      }
-    }
-    return null;
   }
 
 

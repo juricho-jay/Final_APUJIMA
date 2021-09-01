@@ -3,11 +3,12 @@ package Final_APUJIMA.handler;
 import Final_APUJIMA.domain.Freeboard;
 import Final_APUJIMA.util.Prompt;
 
-public class GeneralUserBoardManuHandler {
+public class FreeBoardHandler {
   static final int MAX_LENGTH = 5;
 
   Freeboard[] freeboards = new Freeboard[MAX_LENGTH];
   int size = 0;
+  
 
   public void add() {
     System.out.println("[새 게시글]");
@@ -24,7 +25,7 @@ public class GeneralUserBoardManuHandler {
   public void list() {
     System.out.println("[게시글 목록]");
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+      System.out.printf("%d, %s, %s \n", 
           this.freeboards[i].no, 
           this.freeboards[i].title, 
           this.freeboards[i].content);

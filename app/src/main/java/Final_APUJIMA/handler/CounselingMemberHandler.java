@@ -13,6 +13,7 @@ public class CounselingMemberHandler {
   }
   CounselingMember counselingMember = new CounselingMember();   
 
+
   public void counselingadd() {
     System.out.println("[상담 신청]");
 
@@ -21,6 +22,7 @@ public class CounselingMemberHandler {
     counselingMember.setTel(Prompt.inputString("연락처> "));
     counselingMember.setDisease(Prompt.inputString("지병 여부> "));
     counselingMember.setContent(Prompt.inputString("상담 내용> "));
+
     System.out.println();
     System.out.println("[상담 주제]");
     System.out.println("1. 우울증");
@@ -81,6 +83,11 @@ public class CounselingMemberHandler {
       System.out.println(c);
     }
 
+
+    //    for (CounselingMember c : counselingmemberList) {
+    //      System.out.println(c);
+    //    }
+
     System.out.println();
     //    memberAppList.add(counselingMember);
 
@@ -107,9 +114,5 @@ public class CounselingMemberHandler {
   }
 
 
-
-
-
-
-
 }
+
