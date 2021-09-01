@@ -33,7 +33,6 @@ public class Main {
           System.out.println();
           break;
         } else if (menuNo == 1) { 
-<<<<<<< HEAD
           doLoginMenu();
         } else if (menuNo == 2) {
           doSignupMenu();
@@ -41,15 +40,6 @@ public class Main {
           doFindIdMenu();
         } else if (menuNo == 4) {
           doFindPassWordMenu();
-=======
-          doLoginMenu(); // 로그인 메뉴
-        } else if (menuNo == 2) {
-          doSignupMenu(); // 회원가입 메뉴
-        } else if (menuNo == 3) {
-          doFindIdMenu(); // ID찾기 메뉴
-        } else if (menuNo == 4) {
-          doFindPassWordMenu(); // PW찾기 메뉴
->>>>>>> a9698d211bec57004b524ded88d5b3697b9af279
         } else if (menuNo == 5) {
           doctorMemberHandler.doctorList();
         } else {
