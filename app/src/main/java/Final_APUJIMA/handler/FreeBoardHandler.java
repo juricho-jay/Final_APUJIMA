@@ -3,12 +3,11 @@ package Final_APUJIMA.handler;
 import Final_APUJIMA.domain.Freeboard;
 import Final_APUJIMA.util.Prompt;
 
-public class FreeBoardMenuHandler {
+public class FreeBoardHandler {
   static final int MAX_LENGTH = 5;
 
   Freeboard[] freeboards = new Freeboard[MAX_LENGTH];
   int size = 0;
-  
   
 
   public void add() {

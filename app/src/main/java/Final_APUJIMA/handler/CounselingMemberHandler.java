@@ -11,7 +11,8 @@ public class CounselingMemberHandler {
   public CounselingMemberHandler(List<CounselingMember> counselingmemberList) {
     this.counselingmemberList = counselingmemberList; // => ?? 생성자 초기화
   }
-  CounselingMember counselingMember = new CounselingMember();
+  CounselingMember counselingMember = new CounselingMember();   
+
 
   public void counselingadd() {
     System.out.println("[상담 신청]");
@@ -77,8 +78,11 @@ public class CounselingMemberHandler {
     }
     counselingMember.setStateLabel2(stateLabel2);
 
-
     counselingmemberList.add(counselingMember);
+    for (CounselingMember c : counselingmemberList) {
+      System.out.println(c);
+    }
+
 
     //    for (CounselingMember c : counselingmemberList) {
     //      System.out.println(c);
@@ -91,14 +95,13 @@ public class CounselingMemberHandler {
     System.out.println();
   }
   public void counselingDetail() {
-    System.out.println(counselingMember.getName());
-    //    CounselingMember[] list = counselingmemberList.toArray(new CounselingMember[0]);
 
-    //    for (CounselingMember c : list) {
-    for (CounselingMember c : counselingmemberList) {
-      System.out.printf("%s,%s,%s,%s, "
-          + "환자가 상담할 분야 : %s"
-          + "의사성별 : %s",
+    CounselingMember[] list = counselingmemberList.toArray(new CounselingMember[0]);
+
+    for (CounselingMember c : list) {
+      System.out.printf("이름 : %s\n, 연락처 : %s\n, 지병여부 : %s\n, 상담내용 : %s\n, "
+          + "환자가 상담할 분야 : %s\n"
+          + "의사성별 : %s\n",
           c.getName(),
           c.getTel(),
           c.getDisease(),
@@ -110,4 +113,6 @@ public class CounselingMemberHandler {
     }
   }
 
+
 }
+
