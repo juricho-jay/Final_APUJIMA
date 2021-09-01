@@ -1,4 +1,9 @@
 package Final_APUJIMA.handler;
+<<<<<<< HEAD
+=======
+import java.sql.Date;
+import java.util.LinkedList;
+>>>>>>> 0c18602ab709ed4e94ebe2d332617e5a36d14ddd
 import java.util.List;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.util.Prompt;
@@ -13,6 +18,45 @@ public class MemberHandler {
 
   public MemberHandler(List<Member> memberList) {
     this.memberList = memberList; // => ?? 생성자 초기화
+
+    Member member = new Member();
+    member.setName("shin");
+    member.setId("aaa");
+    member.setPassword("1111");
+    member.setEmail("aaa@test.com");
+    member.setPhoneNum("010-1111-1111");
+    member.setBirthDay("2000-09-01");
+    member.setPhoto("a.png");
+    member.setSex("여");
+    member.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(member);
+
+    member = new Member();
+    member.setName("cho");
+    member.setId("bbb");
+    member.setPassword("2222");
+    member.setEmail("bbb@test.com");
+    member.setPhoneNum("010-2222-2222");
+    member.setBirthDay("2000-10-01");
+    member.setPhoto("b.png");
+    member.setSex("여");
+    member.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(member);
+
+    member = new Member();
+    member.setName("kim");
+    member.setId("ccc");
+    member.setPassword("3333");
+    member.setEmail("ccc@test.com");
+    member.setPhoneNum("010-3333-3333");
+    member.setBirthDay("2000-11-01");
+    member.setPhoto("c.png");
+    member.setSex("남");
+    member.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(member);
   }
 
 
@@ -70,6 +114,18 @@ public class MemberHandler {
     System.out.println();
   }
 
+<<<<<<< HEAD
+=======
+  public int login() {
+    //MemberHandler memberHandler = new MemberHandler(memberList);
+<<<<<<< HEAD
+
+=======
+>>>>>>> a04a310d2dbc027560922b0c6cc21ac3cf6da215
+    while (true) {
+      System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
+      System.out.println("(취소: #)");
+>>>>>>> 0c18602ab709ed4e94ebe2d332617e5a36d14ddd
 
 
   public Member validLogin(String id, String password) {
@@ -109,9 +165,42 @@ public class MemberHandler {
       System.out.println( member.getName()+"  회원님, [APUJIMA]에 오신 것을 환영합니다.");
       return 1;
     }
+<<<<<<< HEAD
+=======
+    return null;
+  }
+
+  public void displayLoginUser() {
+    //MemberHandler memberHandler = new MemberHandler(memberList);
+
+
+    System.out.println("[내 정보] 페이지입니다.\n ");
+    System.out.println(member.getName() + "님 환영합니다!");
+
+    System.out.println("아이디 : "+ member.getId());
+    System.out.println("이메일 : "+ member.getEmail());
+    System.out.println("생년월일 : "+ member.getBirthDay());
+    System.out.println("사진 : "+ member.getPhoto());
+    System.out.println("전화번호 : " + member.getPhoneNum());
+    System.out.println("성별" + member.getSex());
+    counselingMemberHandler.counselingDetail();
+<<<<<<< HEAD
+  }
+}
+=======
+
+>>>>>>> 0c18602ab709ed4e94ebe2d332617e5a36d14ddd
 
   }
 
 
 
+<<<<<<< HEAD
 }
+=======
+
+}
+
+
+>>>>>>> a04a310d2dbc027560922b0c6cc21ac3cf6da215
+>>>>>>> 0c18602ab709ed4e94ebe2d332617e5a36d14ddd
