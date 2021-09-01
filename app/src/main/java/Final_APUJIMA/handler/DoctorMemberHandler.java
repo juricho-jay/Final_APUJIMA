@@ -1,5 +1,6 @@
 package Final_APUJIMA.handler;
 
+import java.sql.Date;
 import java.util.List;
 import Final_APUJIMA.domain.DoctorMember;
 import Final_APUJIMA.util.Prompt;
@@ -9,10 +10,48 @@ public class DoctorMemberHandler {
 
   public DoctorMemberHandler(List<DoctorMember> doctormemberList) {
     this.doctormemberList = doctormemberList; // => ?? 생성자 초기화
+
+    DoctorMember testUser = new DoctorMember();
+    testUser.setName("aaa");
+    testUser.setId("aaaaaa");
+    testUser.setPassword("1111");
+    testUser.setBirthDay("0101");
+    testUser.setEmail("ggg@test.com");
+    testUser.setPhoneNum("010-1111-1111");
+    testUser.setPhoto("aaa.gif");
+    testUser.setSex("female");
+    testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    doctormemberList.add(testUser);
+
+    testUser = new DoctorMember();
+    testUser.setName("bbb");
+    testUser.setId("bbbbbb");
+    testUser.setPassword("2222");
+    testUser.setBirthDay("0202");
+    testUser.setEmail("hhh@test.com");
+    testUser.setPhoneNum("010-2222-2222");
+    testUser.setPhoto("bbb.gif");
+    testUser.setSex("male");
+    testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    doctormemberList.add(testUser);
+
+    testUser = new DoctorMember();
+    testUser.setName("ccc");
+    testUser.setId("cccccc");
+    testUser.setPassword("3333");
+    testUser.setBirthDay("0303");
+    testUser.setEmail("iii@test.com");
+    testUser.setPhoneNum("010-3333-3333");
+    testUser.setPhoto("ccc.gif");
+    testUser.setSex("female");
+    testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    doctormemberList.add(testUser);
   }
+
   DoctorMember doctormember = new DoctorMember();
-
-
 
   public void add() {
     System.out.println("[의사 회원 등록]");
