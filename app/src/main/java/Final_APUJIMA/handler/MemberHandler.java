@@ -11,9 +11,8 @@ public class MemberHandler {
 
   public MemberHandler(List<Member> memberList) {
     this.memberList = memberList; // => ?? 생성자 초기화
+
   }
-
-
 
   public void add() {
     System.out.println("[회원 가입]");

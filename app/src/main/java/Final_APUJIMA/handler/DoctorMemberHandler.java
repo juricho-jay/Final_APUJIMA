@@ -52,11 +52,8 @@ public class DoctorMemberHandler {
     doctormemberList.add(testUser);
   }
 
-<<<<<<< HEAD
-=======
 
   DoctorMember doctormember = new DoctorMember();
->>>>>>> fdc45a396f50f72a59ead22b7b019022b277a748
 
   public void add() {
     System.out.println("[의사 회원 등록]");
