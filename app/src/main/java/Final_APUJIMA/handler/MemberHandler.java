@@ -5,9 +5,6 @@ import java.util.List;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.util.Prompt;
 
-
-
-
 public class MemberHandler {
 
   List<Member> memberList; //멤버타입의 리스트를 선언.
