@@ -11,14 +11,10 @@ public class DoctorMemberHandler {
 
   public DoctorMemberHandler(List<DoctorMember> doctormemberList) {
     this.doctormemberList = doctormemberList; // => ?? 생성자 초기화
-<<<<<<< HEAD
-  }
-=======
->>>>>>> 0c18602ab709ed4e94ebe2d332617e5a36d14ddd
 
     DoctorMember testUser = new DoctorMember();
-    testUser.setName("aaa");
-    testUser.setId("aaaaaa");
+    testUser.setName("a");
+    testUser.setId("aaa");
     testUser.setPassword("1111");
     testUser.setBirthDay("0101");
     testUser.setEmail("ggg@test.com");
@@ -30,8 +26,8 @@ public class DoctorMemberHandler {
     doctormemberList.add(testUser);
 
     testUser = new DoctorMember();
-    testUser.setName("bbb");
-    testUser.setId("bbbbbb");
+    testUser.setName("b");
+    testUser.setId("bbb");
     testUser.setPassword("2222");
     testUser.setBirthDay("0202");
     testUser.setEmail("hhh@test.com");
@@ -43,8 +39,8 @@ public class DoctorMemberHandler {
     doctormemberList.add(testUser);
 
     testUser = new DoctorMember();
-    testUser.setName("ccc");
-    testUser.setId("cccccc");
+    testUser.setName("c");
+    testUser.setId("ccc");
     testUser.setPassword("3333");
     testUser.setBirthDay("0303");
     testUser.setEmail("iii@test.com");
@@ -55,6 +51,7 @@ public class DoctorMemberHandler {
 
     doctormemberList.add(testUser);
   }
+
 
   DoctorMember doctormember = new DoctorMember();
 
