@@ -13,8 +13,8 @@ public class DoctorMemberHandler {
     this.doctormemberList = doctormemberList; // => ?? 생성자 초기화
 
     DoctorMember testUser = new DoctorMember();
-    testUser.setName("aaa");
-    testUser.setId("aaaaaa");
+    testUser.setName("a");
+    testUser.setId("aaa");
     testUser.setPassword("1111");
     testUser.setBirthDay("0101");
     testUser.setEmail("ggg@test.com");
@@ -26,8 +26,8 @@ public class DoctorMemberHandler {
     doctormemberList.add(testUser);
 
     testUser = new DoctorMember();
-    testUser.setName("bbb");
-    testUser.setId("bbbbbb");
+    testUser.setName("b");
+    testUser.setId("bbb");
     testUser.setPassword("2222");
     testUser.setBirthDay("0202");
     testUser.setEmail("hhh@test.com");
@@ -39,8 +39,8 @@ public class DoctorMemberHandler {
     doctormemberList.add(testUser);
 
     testUser = new DoctorMember();
-    testUser.setName("ccc");
-    testUser.setId("cccccc");
+    testUser.setName("c");
+    testUser.setId("ccc");
     testUser.setPassword("3333");
     testUser.setBirthDay("0303");
     testUser.setEmail("iii@test.com");
@@ -52,6 +52,11 @@ public class DoctorMemberHandler {
     doctormemberList.add(testUser);
   }
 
+<<<<<<< HEAD
+=======
+
+  DoctorMember doctormember = new DoctorMember();
+>>>>>>> fdc45a396f50f72a59ead22b7b019022b277a748
 
   public void add() {
     System.out.println("[의사 회원 등록]");

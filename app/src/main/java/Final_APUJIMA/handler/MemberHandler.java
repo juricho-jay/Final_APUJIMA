@@ -1,4 +1,5 @@
 package Final_APUJIMA.handler;
+
 import java.util.List;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.util.Prompt;
@@ -65,8 +66,6 @@ public class MemberHandler {
     System.out.println();
   }
 
-
-
   public Member validLogin(String id, String password) {
     Member [] arr = memberList.toArray(new Member[0]);
     for (Member member : arr) {
@@ -81,3 +80,7 @@ public class MemberHandler {
   }
 
 }
+
+
+
+
