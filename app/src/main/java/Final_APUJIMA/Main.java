@@ -15,12 +15,12 @@ import Final_APUJIMA.handler.SignUp;
 import Final_APUJIMA.util.Prompt;
 
 public class Main {
-  List<Member> memberList = new LinkedList<>();
   List<CounselingMember> counselingmemberList = new LinkedList<>();
   List<DoctorMember> doctormemberList = new LinkedList<>();
+  List<Member> memberList = new LinkedList<>();
+  MemberHandler memberHandler = new MemberHandler(memberList);
   DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctormemberList);
   CounselingMemberHandler counselingMemberHandler = new CounselingMemberHandler(counselingmemberList);
-  MemberHandler memberHandler = new MemberHandler(memberList);
   FreeBoardHandler freeboardHandler = new FreeBoardHandler();
   AuthLoginHandler authLoginHandler = new AuthLoginHandler(memberList);
   SignUp signUp = new SignUp();

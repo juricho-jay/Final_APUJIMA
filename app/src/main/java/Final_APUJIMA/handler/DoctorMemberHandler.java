@@ -11,10 +11,6 @@ public class DoctorMemberHandler {
 
   public DoctorMemberHandler(List<DoctorMember> doctormemberList) {
     this.doctormemberList = doctormemberList; // => ?? 생성자 초기화
-<<<<<<< HEAD
-  }
-=======
->>>>>>> 0c18602ab709ed4e94ebe2d332617e5a36d14ddd
 
     DoctorMember testUser = new DoctorMember();
     testUser.setName("aaa");
@@ -56,7 +52,6 @@ public class DoctorMemberHandler {
     doctormemberList.add(testUser);
   }
 
-  DoctorMember doctormember = new DoctorMember();
 
   public void add() {
     System.out.println("[의사 회원 등록]");
@@ -113,7 +108,7 @@ public class DoctorMemberHandler {
 
 
   public void doctorList() {
-    DoctorMember[] doctorMember = new DoctorMember[4];
+    DoctorMember[] doctorMember = new DoctorMember[10];
     DoctorMember doc1 = new DoctorMember();
     DoctorMember doc2 = new DoctorMember();
     DoctorMember doc3 = new DoctorMember();

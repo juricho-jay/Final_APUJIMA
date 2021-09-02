@@ -1,11 +1,17 @@
 package Final_APUJIMA.handler;
 
+import java.util.LinkedList;
+import java.util.List;
+import Final_APUJIMA.domain.DoctorMember;
+import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.util.Prompt;
 
 public class SignUp {
 
-  DoctorMemberHandler doctorMemberHandler;
-  MemberHandler memberHandler;
+  List<Member> memberList = new LinkedList<>();
+  List<DoctorMember> doctorMemberList = new LinkedList<>();
+  DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctorMemberList);
+  MemberHandler memberHandler = new MemberHandler(memberList);
 
   //회원가입메뉴 메서드
   public void doSignup() {

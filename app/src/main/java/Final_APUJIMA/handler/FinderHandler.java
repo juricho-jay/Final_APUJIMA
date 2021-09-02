@@ -24,16 +24,16 @@ public class FinderHandler {
       if (Name.contains("#")) {
         return;
       }
-      String PhoneNo = Prompt.inputString("휴대폰> ");
-      Human member = validFindID(Name,PhoneNo);
-      if(member == null) {
+      String PhoneNum = Prompt.inputString("휴대폰> ");
+      human = validFindID(Name,PhoneNum);
+      if(human == null) {
         System.out.println();
         System.out.println("아이디를 찾을 수 없습니다.");
         System.out.println();
         continue;
       } else {
         System.out.println();
-        System.out.printf ("회원님의 아이디입니다. [ %s ]", member.getId());
+        System.out.printf ("회원님의 아이디입니다. [ %s ]", human.getId());
         System.out.println();
         return;
       }
@@ -50,13 +50,13 @@ public class FinderHandler {
         return;
       }
       String PhoneNo = Prompt.inputString("휴대폰> ");
-      Human member = validFindPassword(id,PhoneNo);
-      if(member == null) {
+      human = validFindPassword(id,PhoneNo);
+      if(human == null) {
         System.out.println("입력이 잘못되었습니다. 정보를 찾을 수 없습니다.");
         System.out.println();
         continue;
       }else {
-        System.out.printf ("회원님의 비밀번호입니다. [ %s ]",member.getPassword());
+        System.out.printf ("회원님의 비밀번호입니다. [ %s ]",human.getPassword());
         System.out.println();
         return;
       }

@@ -10,6 +10,7 @@ import Final_APUJIMA.util.Prompt;
 public class AuthLoginHandler {
 
   List<Member> memberList;
+  List<DoctorMember> doctorMemberList;
 
   static Member loginUser;
   public static Member getLoginUser() {
@@ -19,6 +20,8 @@ public class AuthLoginHandler {
   public AuthLoginHandler(List<Member> memberList) {
     this.memberList = memberList;
   }
+
+  Human human;
 
   public int login() {
 
@@ -32,7 +35,7 @@ public class AuthLoginHandler {
 
       String password = Prompt.inputString("비밀번호> ");
 
-      Human human = loginTest(id, password);
+      human = loginTest(id, password);
 
       if (human == null) {
         System.out.println();
@@ -55,10 +58,19 @@ public class AuthLoginHandler {
 
   // 로그인 여부 검사
   private Human loginTest(String id, String password) {
-    for (Member member : memberList) {
-      if (member.getId().equalsIgnoreCase(id) &&
-          member.getPassword().equals(password)) {
-        return member;
+    if(human instanceof Member) {
+      for (Member member : memberList) {
+        if (member.getId().equalsIgnoreCase(id) &&
+            member.getPassword().equals(password)) {
+          return member;
+        }
+      }
+    } else if(human instanceof DoctorMember) {
+      for (DoctorMember member : doctorMemberList) {
+        if (member.getId().equalsIgnoreCase(id) &&
+            member.getPassword().equals(password)) {
+          return member;
+        }
       }
     }
     return null;
