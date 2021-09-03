@@ -20,7 +20,6 @@ public class Main {
   MemberHandler memberHandler = new MemberHandler(memberList, counselingMemberHandler);
   DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctormemberList);
   FreeBoardHandler freeboardHandler = new FreeBoardHandler();
-  Member LoginUser;
 
   public static void main(String[] args) {
     Main main = new Main();
@@ -205,7 +204,7 @@ public class Main {
 
         if (menuNo == 0) {
           System.out.println("정상적으로 로그아웃 되었습니다.");
-          LoginUser = null;
+          MemberHandler.LoginUser = null;
           System.out.println();
 
           return;

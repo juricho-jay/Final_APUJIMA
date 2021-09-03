@@ -11,7 +11,7 @@ public class MemberHandler {
   List<Member> memberList; //멤버타입의 리스트를 선언.
   List<CounselingMember> counselingMemberList; //멤버타입의 리스트를 선언.
   CounselingMemberHandler counselingMemberHandler;
-  static Member LoginUser;
+  public static Member LoginUser;
 
   public MemberHandler(List<Member> memberList, CounselingMemberHandler counselingMemberHandler) {
     this.memberList = memberList; // => ?? 생성자 초기화
