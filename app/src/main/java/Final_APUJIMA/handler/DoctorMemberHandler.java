@@ -51,10 +51,10 @@ public class DoctorMemberHandler {
     doctormemberList.add(testUser);
   }
 
-  DoctorMember doctormember = new DoctorMember();
 
   public void add() {
     System.out.println("[의사 회원 등록]");
+    DoctorMember doctormember = new DoctorMember();
 
     while(true) {
       doctormember.setName(Prompt.inputString("이름> "));
@@ -67,10 +67,20 @@ public class DoctorMemberHandler {
     while(true) {
       doctormember.setId(Prompt.inputString("아이디> "));
       if (doctormember.getId().contains("#")) {
-        System.out.println("아이디에는 #을 사용할 수 없습니다.");
-      } else {
-        break;
+        System.out.println("아이디에는 특수문자를 사용할 수 없습니다.");
+        System.out.println();
+        continue;
+      } 
+
+      for(int i = 0 ; i < doctormemberList.size() ; i++) {
+        if(doctormember.getId().equals(doctormemberList.get(i).getId())) {
+          System.out.println("중복되는 아이디 입니다. 다른 아이디를 사용해 주세요.");
+          doctormember.setId("");
+          continue;
+        }
       }
+      if(doctormember.getId() != "")
+        break;
     }
     doctormember.setPassword(Prompt.inputString("비밀번호> "));
     doctormember.setBirthDay(Prompt.inputString("생년월일> "));
@@ -148,8 +158,8 @@ public class DoctorMemberHandler {
         return;
       }
       String PhoneNo = Prompt.inputString("휴대폰> ");
-      DoctorMember Doctormember = validFindId(Name,PhoneNo);
-      if(Doctormember == null) {
+      DoctorMember doctormember = validFindId(Name,PhoneNo);
+      if(doctormember == null) {
         System.out.println();
         System.out.println("아이디를 찾을 수 없습니다.");
         System.out.println();
@@ -171,13 +181,16 @@ public class DoctorMemberHandler {
         return;
       }
       String PhoneNo = Prompt.inputString("휴대폰> ");
-      DoctorMember Doctormember = validFindPassword(id,PhoneNo);
-      if(Doctormember == null) {
+      DoctorMember doctormember = validFindPassword(id,PhoneNo);
+      if(doctormember == null) {
         System.out.println("입력이 잘못되었습니다. 정보를 찾을 수 없습니다.");
         System.out.println();
         continue;
       }else {
-        System.out.printf ("회원님의 비밀번호입니다. [ %s ]",doctormember.getPassword());
+        int num = (int)(Math.random() * 1000000);
+        System.out.println("임시 비밀번호를 발급해 드리겠습니다.");
+        System.out.printf("임시 비밀번호는 %d 입니다. 임시 비밀번호로 로그인 해주세요.", num);
+        doctormember.setPassword(Integer.toString(num));
         System.out.println();
         return;
       }
