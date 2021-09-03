@@ -349,8 +349,8 @@ public class Main {
       System.out.println("1) 글쓰기");
       System.out.println("2) 글목록");
       System.out.println("3) 글상세");
-      System.out.println("4) 글수정");
-      System.out.println("5) 글삭제");
+      //      System.out.println("4) 글수정");
+      //      System.out.println("5) 글삭제");
       System.out.println("0) 뒤로가기");
       int select = Prompt.inputInt("선택> ");
       try {
@@ -360,11 +360,11 @@ public class Main {
           freeboardHandler.list();
         } else if (select == 3) {
           freeboardHandler.detail();
-        } else if (select == 4) {
+        } /*else if (select == 4) {
           freeboardHandler.update();
         } else if (select == 5) {
           freeboardHandler.delete();
-        } else if (select == 0) {
+        }*/ else if (select == 0) {
           return;
         }
       }catch(Exception e) {

@@ -12,6 +12,7 @@ public class FreeBoardHandler {
 
 
   public void add() {
+    System.out.println();
     System.out.println("[새 게시글]");
 
     Freeboard freeboard = new Freeboard();
@@ -34,6 +35,7 @@ public class FreeBoardHandler {
   }
 
   public void detail() {
+    System.out.println();
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
@@ -47,10 +49,10 @@ public class FreeBoardHandler {
       System.out.printf("제목: %s\n", freeboard.title);
       System.out.printf("내용: %s\n", freeboard.content);
       System.out.println();
-      System.out.printf("[1.좋아요: %s]\n", freeboard.like);
-      System.out.println("[2.수정] ");
-      System.out.println("[3.삭제] ");
-      System.out.println("[0.뒤로가지]");
+      System.out.printf("[1.좋아요:%s] ", freeboard.like);
+      System.out.print("[2.수정] ");
+      System.out.print("[3.삭제] ");
+      System.out.println("[0.뒤로가기]");
       int select = Prompt.inputInt("선택> ");
       System.out.println();
       if (select == 1) {
@@ -69,7 +71,8 @@ public class FreeBoardHandler {
 
   }
 
-  public void update() {
+  private void update() {
+    System.out.println();
     System.out.println("[게시글 변경]");
     int no = Prompt.inputInt("번호? ");
 
@@ -96,7 +99,8 @@ public class FreeBoardHandler {
 
   }
 
-  public void delete() {
+  private void delete() {
+    System.out.println();
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 
