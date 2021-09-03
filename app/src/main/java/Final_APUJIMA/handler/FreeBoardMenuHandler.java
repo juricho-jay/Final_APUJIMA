@@ -8,8 +8,8 @@ public class FreeBoardMenuHandler {
 
   Freeboard[] freeboards = new Freeboard[MAX_LENGTH];
   int size = 0;
-  
-  
+
+
 
   public void add() {
     System.out.println("[새 게시글]");

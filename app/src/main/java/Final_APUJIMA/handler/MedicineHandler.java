@@ -5,6 +5,7 @@ public class MedicineHandler {
   String [] medicineArr = {"브린텔릭스", "아빌리파이", "로라반" , "프로작", "알프람"};
 
   public void Mlist() {
+    System.out.println();
     System.out.println("[약 리스트]");
     System.out.println();
     for(int i = 0; i< medicineArr.length; i++) {
@@ -12,12 +13,14 @@ public class MedicineHandler {
     }
     System.out.println();
 
+    SearchM();
+
   }
 
   public void SearchM() {
     while(true) {
       System.out.println("1) 의약품 검색");
-      System.out.println("0) 종료");
+      System.out.println("0) 뒤로가기");
       int input0 = Prompt.inputInt("선택> ");
       if (input0 == 0) {
         return;
@@ -30,6 +33,7 @@ public class MedicineHandler {
         }
         else {
           System.out.println("약의 이름 : " + medicine + "이며 안정제 역할을 합니다.");
+          System.out.println();
         }
       }
     }

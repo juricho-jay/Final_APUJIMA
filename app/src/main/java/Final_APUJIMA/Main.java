@@ -13,16 +13,22 @@ import Final_APUJIMA.handler.MemberHandler;
 import Final_APUJIMA.util.Prompt;
 
 public class Main {
-  static List<Member> memberList = new LinkedList<>();
-  static List<CounselingMember> counselingmemberList = new LinkedList<>();
-  static List<DoctorMember> doctormemberList = new LinkedList<>();
-  static MemberHandler memberHandler = new MemberHandler(memberList);
-  static DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctormemberList);
-  static CounselingMemberHandler counselingMemberHandler = new CounselingMemberHandler(counselingmemberList);
-  static FreeBoardMenuHandler freeboardHandler = new FreeBoardMenuHandler();
+  List<Member> memberList = new LinkedList<>();
+  List<CounselingMember> counselingmemberList = new LinkedList<>();
+  List<DoctorMember> doctormemberList = new LinkedList<>();
+  CounselingMemberHandler counselingMemberHandler = new CounselingMemberHandler(counselingmemberList);
+  MemberHandler memberHandler = new MemberHandler(memberList, counselingMemberHandler);
+  DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctormemberList);
+  FreeBoardMenuHandler freeboardHandler = new FreeBoardMenuHandler();
+  Member LoginUser;
 
   public static void main(String[] args) {
+    Main main = new Main();
+    main.startMenu();
 
+  }
+
+  void startMenu() {
     while(true) {
       try {
         int menuNo = doMainMenu();
@@ -58,7 +64,7 @@ public class Main {
 
 
   //메인메뉴 메서드
-  static int doMainMenu() {
+  int doMainMenu() {
     System.out.println("[APUJIMA]에 오신 것을 환영합니다.");
     System.out.println("원하시는 메뉴를 선택해 주세요.");
     System.out.println();
@@ -76,7 +82,7 @@ public class Main {
   }
 
   //로그인메뉴 메서드
-  static void doLoginMenu() {
+  void doLoginMenu() {
     System.out.println("[로그인] 페이지입니다.");
     System.out.println("원하시는 메뉴를 선택해주세요.");
     System.out.println();
@@ -120,7 +126,7 @@ public class Main {
   }
 
   //회원가입메뉴 메서드
-  static void doSignupMenu() {
+  void doSignupMenu() {
     System.out.println("[회원가입] 페이지입니다. 선택해주세요");
     System.out.println();
 
@@ -146,7 +152,7 @@ public class Main {
   }
 
   //ID찾기메뉴 메서드
-  private static void doFindIdMenu() {
+  void doFindIdMenu() {
     System.out.println("[ID 찾기] 페이지입니다. 선택해주세요.");
     System.out.println("1) 의사");
     System.out.println("2) 일반");
@@ -164,7 +170,7 @@ public class Main {
   }
 
   //PW찾기메뉴 메서드
-  private static void doFindPassWordMenu() {
+  void doFindPassWordMenu() {
     System.out.println("[PW 찾기] 페이지입니다. 선택해주세요.");
     System.out.println("1) 의사");
     System.out.println("2) 일반");
@@ -191,7 +197,7 @@ public class Main {
 
 
   //로그인 페이지 메서드
-  public static void LoginPage() {
+  public  void LoginPage() {
     while(true) {
       try {
         int menuNo = doMainMenu2();
@@ -199,6 +205,7 @@ public class Main {
 
         if (menuNo == 0) {
           System.out.println("정상적으로 로그아웃 되었습니다.");
+          LoginUser = null;
           System.out.println();
 
           return;
@@ -231,7 +238,7 @@ public class Main {
 
 
   //메인메뉴 메서드
-  static int doMainMenu2() {
+  int doMainMenu2() {
     //    MemberHandler m = new MemberHandler(memberList);
     //    m.LoginInfo();
 
@@ -250,7 +257,7 @@ public class Main {
 
 
   //로그인메뉴 메서드
-  static void doIntroMenu() {
+  void doIntroMenu() {
     while(true) {
       System.out.println("[소개] 페이지입니다.");
       System.out.println("We always with you, 모든 사람들이 아프지 않길 바라는 커뮤니티, "
@@ -264,22 +271,26 @@ public class Main {
     }
   }
   //회원가입메뉴 메서드
-  static void doMedicineMenu() {
+  void doMedicineMenu() {
+    System.out.println();
     System.out.println("[약국] 페이지입니다. 선택해주세요");
     MedicineHandler medicine = new MedicineHandler();
     System.out.println("1) 약 목록");
-    System.out.println("2) 약 찾기");
+    System.out.println("0) 뒤로가기");
+
     int select = Prompt.inputInt("선택> ");
     if (select == 1) {
       medicine.Mlist();
-    } else if (select == 2) {
-      medicine.SearchM();
-    } else {
+    } else if(select == 0) {
+      return;
+    }
+    else {
       System.out.println("잘못 선택하셨습니다 ");
     }
+    System.out.println();
   }
 
-  private static void doHealerMenu() {
+  void doHealerMenu() {
     DoctorMemberHandler doctorHandler = new DoctorMemberHandler(doctormemberList);
     System.out.println("[HEALER] 페이지입니다. 선택해주세요");
     System.out.println();
@@ -295,7 +306,8 @@ public class Main {
   }
 
   //ID찾기메뉴 메서드
-  private static void doCommunityMenu() {
+  void doCommunityMenu() {
+    System.out.println();
     System.out.println("[커뮤니티] 페이지입니다. 선택해주세요.");
     System.out.println();
     System.out.println("1) 공지사항");
@@ -316,11 +328,13 @@ public class Main {
 
   }
   //공지사항 method
-  static void NoticeMenu() {
+  void NoticeMenu() {
     System.out.println("[공지사항] 페이지입니다.");
   }
   //자유게시판 관련 method.
-  private static void FreeboardMenu() {
+  private  void FreeboardMenu() {
+
+    System.out.println();
     System.out.println("[APUs 자유게시판] 페이지입니다.");
     System.out.println();
     System.out.println("1) 글쓰기");
@@ -349,8 +363,9 @@ public class Main {
     }
 
   }
+
   //Healer 지식in method.
-  static void knowledgeMenu() {
+  void knowledgeMenu() {
     System.out.println("[Healer 지식in] 페이지입니다.");
     System.out.println();
     System.out.println("1) 의사");

@@ -1,22 +1,25 @@
 package Final_APUJIMA.handler;
 import java.util.List;
 import Final_APUJIMA.domain.CounselingMember;
+import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.util.Prompt;
 
 public class CounselingMemberHandler {
 
   List<CounselingMember> counselingmemberList;
   //  List memberAppList; //멤버타입의 리스트를 선언.
+  static Member LoginUser;
   //
   public CounselingMemberHandler(List<CounselingMember> counselingmemberList) {
     this.counselingmemberList = counselingmemberList; // => ?? 생성자 초기화
   }
-  CounselingMember counselingMember = new CounselingMember();
 
   public void counselingadd() {
     System.out.println("[상담 신청]");
 
     System.out.println();
+    CounselingMember counselingMember = new CounselingMember();
+
     counselingMember.setName(Prompt.inputString("성함> "));
     counselingMember.setTel(Prompt.inputString("연락처> "));
     counselingMember.setDisease(Prompt.inputString("지병 여부> "));
@@ -91,20 +94,29 @@ public class CounselingMemberHandler {
     System.out.println();
   }
   public void counselingDetail() {
-    System.out.println(counselingMember.getName());
     //    CounselingMember[] list = counselingmemberList.toArray(new CounselingMember[0]);
 
     //    for (CounselingMember c : list) {
-    for (CounselingMember c : counselingmemberList) {
-      System.out.printf("%s,%s,%s,%s, "
-          + "환자가 상담할 분야 : %s"
-          + "의사성별 : %s",
-          c.getName(),
-          c.getTel(),
-          c.getDisease(),
-          c.getContent(),
-          c.getStateLabel(),
-          c.getStateLabel2()
+    System.out.println();
+    System.out.println("상담신청 이력");
+    if(counselingmemberList.size() == 0) {
+      System.out.println("상담신청 내역이 없습니다.");
+      return;
+    }
+
+    for (int i = 0; i < counselingmemberList.size() ; i++) {
+      System.out.printf("성함 : %s\n"
+          + "연락처 : %s\n"
+          + "질병여부 : %s\n"
+          + "상담내용 : %s\n"
+          + "환자가 상담할 분야 : %s\n"
+          + "의사성별 : %s\n",
+          counselingmemberList.get(i).getName(),
+          counselingmemberList.get(i).getTel(),
+          counselingmemberList.get(i).getDisease(),
+          counselingmemberList.get(i).getContent(),
+          counselingmemberList.get(i).getStateLabel(),
+          counselingmemberList.get(i).getStateLabel2()
 
           );      
     }

@@ -1,6 +1,5 @@
 package Final_APUJIMA.handler;
 import java.sql.Date;
-import java.util.LinkedList;
 import java.util.List;
 import Final_APUJIMA.domain.CounselingMember;
 import Final_APUJIMA.domain.Member;
@@ -8,11 +7,15 @@ import Final_APUJIMA.util.Prompt;
 
 public class MemberHandler {
 
-  List<Member> memberList; //멤버타입의 리스트를 선언.
-  Member LoginUser;
 
-  public MemberHandler(List<Member> memberList) {
+  List<Member> memberList; //멤버타입의 리스트를 선언.
+  List<CounselingMember> counselingMemberList; //멤버타입의 리스트를 선언.
+  CounselingMemberHandler counselingMemberHandler;
+  static Member LoginUser;
+
+  public MemberHandler(List<Member> memberList, CounselingMemberHandler counselingMemberHandler) {
     this.memberList = memberList; // => ?? 생성자 초기화
+    this.counselingMemberHandler = counselingMemberHandler;
 
     Member member = new Member();
     member.setName("shin");
@@ -54,18 +57,15 @@ public class MemberHandler {
     memberList.add(member);
   }
 
-  Member member = new Member();
-
-  static List<CounselingMember> counselingmemberList = new LinkedList<>();
-  static CounselingMemberHandler counselingMemberHandler = new CounselingMemberHandler(counselingmemberList);
-
 
   public void add() {
     System.out.println("[회원 등록]");
+    Member member = new Member();
     while(true) {
       member.setName(Prompt.inputString("이름> "));
       if (member.getName().contains("#")) {
-        System.out.println("이름에는 #을 사용할 수 없습니다.");
+        System.out.println("이름에는 특수문자를 사용할 수 없습니다.");
+        System.out.println();
       } else {
         break;
       }
@@ -73,17 +73,33 @@ public class MemberHandler {
     while(true) {
       member.setId(Prompt.inputString("아이디> "));
       if (member.getId().contains("#")) {
-        System.out.println("아이디에는 #을 사용할 수 없습니다.");
+        System.out.println("아이디에는 특수문자를 사용할 수 없습니다.");
+        System.out.println();
       } else {
         break;
       }
     }
     member.setPassword(Prompt.inputString("비밀번호> "));
     member.setBirthDay(Prompt.inputString("생년월일> "));
-    member.setEmail(Prompt.inputString("이메일> "));
+    while(true) {
+      member.setEmail(Prompt.inputString("이메일> "));
+      if(member.getEmail().contains("@") && member.getEmail().length() > 2) {
+        break;
+      } else {
+        System.out.println("올바른 양식으로 이메일을 작성해주세요.(@만 입력하실 수 없습니다.)");
+      }
+    }
     member.setPhoneNum(Prompt.inputString("전화번호> "));
     member.setPhoto(Prompt.inputString("회원 사진> "));
-    member.setSex(Prompt.inputString("성별> "));
+    while(true) {
+      member.setSex(Prompt.inputString("성별(남/여)> "));
+      if(member.getSex().equalsIgnoreCase("남") || member.getSex().equalsIgnoreCase("여")) {
+        break;
+      } else {
+        System.out.println("남 or 여 중에 하나로 다시 입력해주세요");
+      }
+    }
+
     member.getRegisteredDate();
 
     memberList.add(member);
@@ -91,6 +107,7 @@ public class MemberHandler {
     System.out.println("회원가입 완료!");
     System.out.println();
   }
+
 
   public void list() {
     System.out.println("[회원 목록]");
@@ -109,10 +126,7 @@ public class MemberHandler {
 
   public int login() {
     //MemberHandler memberHandler = new MemberHandler(memberList);
-<<<<<<< HEAD
 
-=======
->>>>>>> a04a310d2dbc027560922b0c6cc21ac3cf6da215
     while (true) {
       System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
       System.out.println("(취소: #)");
@@ -126,16 +140,13 @@ public class MemberHandler {
 
       if (member == null) {
         System.out.println();
-        System.out.println("회원가입이 되어있지 않습니다.");
-        System.out.println("다시 로그인 해주세요");
-        System.out.println();
-
         System.out.println("아이디 또는 비밀번호가 잘못 입력되었습니다.\n"
             + "아이디와 비밀번호를 정확히 입력해 주세요.");
         System.out.println();
         continue;
       }else {
         System.out.println(member.getName()+" 회원님, [APUJIMA]에 오신 것을 환영합니다.");
+        LoginUser = member;
         System.out.println();
         return 1;
       }
@@ -143,8 +154,7 @@ public class MemberHandler {
   }
 
   public Member validLogin(String id, String password) {
-    Member [] arr = memberList.toArray(new Member[0]);
-    for (Member member : arr) {
+    for (Member member : memberList) {
       if (member.getId().equals(id) && member.getPassword().equals(password)){
         System.out.println();
         System.out.println("로그인 성공!");
@@ -224,27 +234,19 @@ public class MemberHandler {
 
 
     System.out.println("[내 정보] 페이지입니다.\n ");
-    System.out.println(member.getName() + "님 환영합니다!");
+    System.out.println(LoginUser.getName() + "님 환영합니다!");
 
-    System.out.println("아이디 : "+ member.getId());
-    System.out.println("이메일 : "+ member.getEmail());
-    System.out.println("생년월일 : "+ member.getBirthDay());
-    System.out.println("사진 : "+ member.getPhoto());
-    System.out.println("전화번호 : " + member.getPhoneNum());
-    System.out.println("성별" + member.getSex());
+    System.out.println("아이디 : "+ LoginUser.getId());
+    System.out.println("이메일 : "+ LoginUser.getEmail());
+    System.out.println("생년월일 : "+ LoginUser.getBirthDay());
+    System.out.println("사진 : "+ LoginUser.getPhoto());
+    System.out.println("전화번호 : " + LoginUser.getPhoneNum());
+    System.out.println("성별 : " + LoginUser.getSex());
+
     counselingMemberHandler.counselingDetail();
-<<<<<<< HEAD
-  }
-}
-=======
-
 
   }
 
 
 
-
 }
-
-
->>>>>>> a04a310d2dbc027560922b0c6cc21ac3cf6da215
