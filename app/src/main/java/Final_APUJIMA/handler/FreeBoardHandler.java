@@ -43,9 +43,30 @@ public class FreeBoardHandler {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
+    while(true) {
+      System.out.printf("제목: %s\n", freeboard.title);
+      System.out.printf("내용: %s\n", freeboard.content);
+      System.out.println();
+      System.out.printf("[1.좋아요: %s]\n", freeboard.like);
+      System.out.println("[2.수정] ");
+      System.out.println("[3.삭제] ");
+      System.out.println("[0.뒤로가지]");
+      int select = Prompt.inputInt("선택> ");
+      System.out.println();
+      if (select == 1) {
+        freeboard.like++;
+        continue;
+        //      System.out.println("❤");
+      } else if (select == 2) {
+        update();
+      } else if (select == 3) {
+        delete();
+      } else if (select == 0) {
+        System.out.println();
+        return;
+      }
+    }
 
-    System.out.printf("제목: %s\n", freeboard.title);
-    System.out.printf("내용: %s\n", freeboard.content);
   }
 
   public void update() {
@@ -71,6 +92,8 @@ public class FreeBoardHandler {
     freeboard.title = title;
     freeboard.content = content;
     System.out.println("게시글을 변경하였습니다.");
+    System.out.println();
+
   }
 
   public void delete() {
