@@ -51,13 +51,21 @@ public class DoctorMemberHandler {
     doctormemberList.add(testUser);
   }
 
-  DoctorMember doctormember = new DoctorMember();
 
   public void add() {
     System.out.println("[의사 회원 등록]");
+    DoctorMember doctormember = new DoctorMember();
 
     while(true) {
+      while(true())
       doctormember.setName(Prompt.inputString("이름> "));
+      for(int i = 0; i < doctormember.getName().length(); i++) {
+        char a = doctormember.getName().charAt(i);
+        if(a>='0' && a <= '9') {
+          System.out.println("이름에는 숫자가 들어갈 수 없습니다.");
+          continue;
+        }
+      }
       if (doctormember.getName().contains("#")) {
         System.out.println("이름에는 #을 사용할 수 없습니다.");
       } else {
