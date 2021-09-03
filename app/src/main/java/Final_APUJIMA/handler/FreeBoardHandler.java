@@ -47,7 +47,11 @@ public class FreeBoardHandler {
       System.out.printf("제목: %s\n", freeboard.title);
       System.out.printf("내용: %s\n", freeboard.content);
       System.out.println();
-      System.out.printf("[1.좋아요:%s] ", freeboard.like);
+      if(freeboard.like == 0) {
+        System.out.printf("[1.♡ : %s )] ", freeboard.like);
+      } else {
+        System.out.printf("[1.❤ : %s )] ", freeboard.like);
+      }
       System.out.print("[2.수정] ");
       System.out.print("[3.삭제] ");
       System.out.println("[0.뒤로가기]");
@@ -57,6 +61,7 @@ public class FreeBoardHandler {
         freeboard.like++;
         continue;
         //      System.out.println("❤");
+        //      System.out.println("♡");
       } else if (select == 2) {
         update();
       } else if (select == 3) {
