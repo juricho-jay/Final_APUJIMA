@@ -3,13 +3,14 @@ package Final_APUJIMA.handler;
 import Final_APUJIMA.domain.Freeboard;
 import Final_APUJIMA.util.Prompt;
 
-public class DoctorUserBoardMenuHandler {
+public class NoticeBoardHandler {
   static final int MAX_LENGTH = 5;
 
   Freeboard[] freeboards = new Freeboard[MAX_LENGTH];
   int size = 0;
 
   public void add() {
+    System.out.println();
     System.out.println("[새 게시글]");
 
     Freeboard freeboard = new Freeboard();
@@ -24,7 +25,7 @@ public class DoctorUserBoardMenuHandler {
   public void list() {
     System.out.println("[게시글 목록]");
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+      System.out.printf("%d, %s, %s \n", 
           this.freeboards[i].no, 
           this.freeboards[i].title, 
           this.freeboards[i].content);
@@ -32,6 +33,7 @@ public class DoctorUserBoardMenuHandler {
   }
 
   public void detail() {
+    System.out.println();
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
@@ -41,12 +43,40 @@ public class DoctorUserBoardMenuHandler {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
+    while(true) {
+      System.out.printf("제목: %s\n", freeboard.title);
+      System.out.printf("내용: %s\n", freeboard.content);
+      System.out.println();
+      if(freeboard.like == 0) {
+        System.out.printf("[1.♡ : %s )] ", freeboard.like);
+      } else {
+        System.out.printf("[1.❤ : %s )] ", freeboard.like);
+      }
+      System.out.print("[2.수정] ");
+      System.out.print("[3.삭제] ");
+      System.out.println("[0.뒤로가기]");
+      int select = Prompt.inputInt("선택> ");
+      System.out.println();
+      if (select == 1) {
+        freeboard.like++;
+        continue;
+        //      System.out.println("❤");
+        //      System.out.println("♡");
+      } else if (select == 2) {
+        update();
+      } else if (select == 3) {
+        delete();
+        return;
+      } else if (select == 0) {
+        System.out.println();
+        return;
+      }
+    }
 
-    System.out.printf("제목: %s\n", freeboard.title);
-    System.out.printf("내용: %s\n", freeboard.content);
   }
 
-  public void update() {
+  private void update() {
+    System.out.println();
     System.out.println("[게시글 변경]");
     int no = Prompt.inputInt("번호? ");
 
@@ -69,9 +99,12 @@ public class DoctorUserBoardMenuHandler {
     freeboard.title = title;
     freeboard.content = content;
     System.out.println("게시글을 변경하였습니다.");
+    System.out.println();
+
   }
 
-  public void delete() {
+  private void delete() {
+    System.out.println();
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 

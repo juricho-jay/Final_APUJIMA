@@ -11,6 +11,7 @@ import Final_APUJIMA.handler.FreeBoardHandler;
 import Final_APUJIMA.handler.GeneralUserBoardMenuHandler;
 import Final_APUJIMA.handler.MedicineHandler;
 import Final_APUJIMA.handler.MemberHandler;
+import Final_APUJIMA.handler.NoticeBoardHandler;
 import Final_APUJIMA.util.Prompt;
 
 public class Main {
@@ -22,6 +23,7 @@ public class Main {
   DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctormemberList);
   FreeBoardHandler freeboardHandler = new FreeBoardHandler();
   GeneralUserBoardMenuHandler generalUserBoardMenuHandler = new GeneralUserBoardMenuHandler();
+  NoticeBoardHandler noticeBoardHandler = new NoticeBoardHandler();
 
   public static void main(String[] args) {
     Main main = new Main();
@@ -340,6 +342,25 @@ public class Main {
   //공지사항 method
   void NoticeMenu() {
     System.out.println("[공지사항] 페이지입니다.");
+    System.out.println();
+    System.out.println("1) 글쓰기");
+    System.out.println("2) 글목록");
+    System.out.println("3) 글상세");
+    System.out.println("0) 뒤로가기");
+    int select = Prompt.inputInt("선택> ");
+    try {
+      if (select == 1) {
+        noticeBoardHandler.add();
+      } else if (select == 2){
+        noticeBoardHandler.list();
+      } else if (select == 3) {
+        noticeBoardHandler.detail();
+      } else if (select == 0) {
+        return;
+      }
+    }catch(Exception e) {
+
+    }
   }
   //자유게시판 관련 method.
   public void FreeboardMenu() {
