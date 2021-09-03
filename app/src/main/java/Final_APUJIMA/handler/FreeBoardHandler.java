@@ -61,6 +61,7 @@ public class FreeBoardHandler {
         update();
       } else if (select == 3) {
         delete();
+        return;
       } else if (select == 0) {
         System.out.println();
         return;
