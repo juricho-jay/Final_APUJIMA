@@ -8,6 +8,7 @@ import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.handler.CounselingMemberHandler;
 import Final_APUJIMA.handler.DoctorMemberHandler;
 import Final_APUJIMA.handler.FreeBoardHandler;
+import Final_APUJIMA.handler.GeneralUserBoardMenuHandler;
 import Final_APUJIMA.handler.MedicineHandler;
 import Final_APUJIMA.handler.MemberHandler;
 import Final_APUJIMA.util.Prompt;
@@ -20,6 +21,7 @@ public class Main {
   MemberHandler memberHandler = new MemberHandler(memberList, counselingMemberHandler);
   DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctormemberList);
   FreeBoardHandler freeboardHandler = new FreeBoardHandler();
+  GeneralUserBoardMenuHandler generalUserBoardMenuHandler = new GeneralUserBoardMenuHandler();
 
   public static void main(String[] args) {
     Main main = new Main();
@@ -376,10 +378,34 @@ public class Main {
 
   //Healer 지식in method.
   void knowledgeMenu() {
-    System.out.println("[Healer 지식in] 페이지입니다.");
-    System.out.println();
-    System.out.println("1) 의사");
-    System.out.println("2) 일반");
+    while(true) {
+      System.out.println();
+      System.out.println("[Healer 지식in] 페이지입니다.");
+      System.out.println();
+      System.out.println("1) 글쓰기");
+      System.out.println("2) 글목록");
+      System.out.println("3) 글상세");
+      System.out.println("0) 뒤로가기");
+      int select = Prompt.inputInt("선택> ");
+      try {
+        if (select == 1) {
+          generalUserBoardMenuHandler.add();
+        } else if (select == 2){
+          generalUserBoardMenuHandler.list();
+        } else if (select == 3) {
+          generalUserBoardMenuHandler.detail();
+        } /*else if (select == 4) {
+        freeboardHandler.update();
+      } else if (select == 5) {
+        freeboardHandler.delete();
+      }*/ else if (select == 0) {
+        return;
+      }
+      }catch(Exception e) {
+
+      }
+
+    }
   }
 
   //관리자 메뉴는 바로 memberHandler.list() 호출

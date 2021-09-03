@@ -10,6 +10,7 @@ public class GeneralUserBoardMenuHandler {
   int size = 0;
 
   public void add() {
+    System.out.println();
     System.out.println("[새 게시글]");
 
     Freeboard freeboard = new Freeboard();
@@ -17,22 +18,27 @@ public class GeneralUserBoardMenuHandler {
     freeboard.no = Prompt.inputInt("번호? ");
     freeboard.title = Prompt.inputString("제목? ");
     freeboard.content = Prompt.inputString("내용? ");
-
+    System.out.println();
     this.freeboards[this.size++] = freeboard;
   }
 
   public void list() {
+    System.out.println();
     System.out.println("[게시글 목록]");
+    System.out.println();
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+      System.out.printf("%d, %s, %s\n", 
           this.freeboards[i].no, 
           this.freeboards[i].title, 
           this.freeboards[i].content);
     }
+    System.out.println();
   }
 
   public void detail() {
+    System.out.println();
     System.out.println("[게시글 상세보기]");
+    System.out.println();
     int no = Prompt.inputInt("번호? ");
 
     Freeboard freeboard = findByNo(no);
@@ -44,10 +50,13 @@ public class GeneralUserBoardMenuHandler {
 
     System.out.printf("제목: %s\n", freeboard.title);
     System.out.printf("내용: %s\n", freeboard.content);
+    System.out.println();
   }
 
   public void update() {
+    System.out.println();
     System.out.println("[게시글 변경]");
+    System.out.println();
     int no = Prompt.inputInt("번호? ");
 
     Freeboard freeboard = findByNo(no);
@@ -69,10 +78,13 @@ public class GeneralUserBoardMenuHandler {
     freeboard.title = title;
     freeboard.content = content;
     System.out.println("게시글을 변경하였습니다.");
+    System.out.println();
   }
 
   public void delete() {
+    System.out.println();
     System.out.println("[게시글 삭제]");
+    System.out.println();
     int no = Prompt.inputInt("번호? ");
 
     int index = indexOf(no);
@@ -94,6 +106,7 @@ public class GeneralUserBoardMenuHandler {
     this.freeboards[--this.size] = null;
 
     System.out.println("게시글을 삭제하였습니다.");
+    System.out.println();
   }
 
   private Freeboard findByNo(int no) {
