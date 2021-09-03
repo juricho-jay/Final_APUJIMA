@@ -296,6 +296,9 @@ public class Main {
       System.out.println();
       System.out.println("1) 의사 리스트");
       System.out.println("2) 상담 신청하기");
+      if(counselingmemberList.size() > 0) {
+        System.out.println("3) 상담신청서 확인하기");
+      }
       System.out.println("0) 뒤로가기");
       int select = Prompt.inputInt("선택> ");
       if (select == 1) {
@@ -304,6 +307,8 @@ public class Main {
         counselingMemberHandler.counselingadd();
       } else if (select == 0) {
         return;
+      } else if (select == 3) {
+        counselingMemberHandler.counselingDetail();
       }
     }
   }

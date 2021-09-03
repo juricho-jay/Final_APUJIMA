@@ -93,12 +93,15 @@ public class CounselingMemberHandler {
     System.out.println("신청이 완료되었습니다.");
     System.out.println();
   }
+
+
+
   public void counselingDetail() {
     //    CounselingMember[] list = counselingmemberList.toArray(new CounselingMember[0]);
 
     //    for (CounselingMember c : list) {
     System.out.println();
-    System.out.println("상담신청 이력");
+    System.out.println("[상담신청 이력]");
     if(counselingmemberList.size() == 0) {
       System.out.println("상담신청 내역이 없습니다.");
       return;
