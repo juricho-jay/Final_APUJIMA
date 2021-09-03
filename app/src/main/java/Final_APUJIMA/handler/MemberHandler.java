@@ -75,9 +75,18 @@ public class MemberHandler {
       if (member.getId().contains("#")) {
         System.out.println("아이디에는 특수문자를 사용할 수 없습니다.");
         System.out.println();
-      } else {
-        break;
+        continue;
+      } 
+
+      for(int i = 0 ; i < memberList.size() ; i++) {
+        if(member.getId().equals(memberList.get(i).getId())) {
+          System.out.println("중복되는 아이디 입니다. 다른 아이디를 사용해 주세요.");
+          member.setId("");
+          continue;
+        }
       }
+      if(member.getId() != "")
+        break;
     }
     member.setPassword(Prompt.inputString("비밀번호> "));
     member.setBirthDay(Prompt.inputString("생년월일> "));
@@ -202,7 +211,10 @@ public class MemberHandler {
       System.out.println();
       continue;
     }else {
-      System.out.printf ("회원님의 비밀번호입니다. [ %s ]",member.getPassword());
+      int num = (int)(Math.random() * 1000000);
+      System.out.println("임시 비밀번호를 발급해 드리겠습니다.");
+      System.out.printf("임시 비밀번호는 %d 입니다. 임시 비밀번호로 로그인 해주세요.", num);
+      member.setPassword(Integer.toString(num));
       System.out.println();
       return;
     }
