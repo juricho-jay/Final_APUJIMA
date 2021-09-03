@@ -7,7 +7,7 @@ import Final_APUJIMA.domain.DoctorMember;
 import Final_APUJIMA.domain.Member;
 import Final_APUJIMA.handler.CounselingMemberHandler;
 import Final_APUJIMA.handler.DoctorMemberHandler;
-import Final_APUJIMA.handler.FreeBoardMenuHandler;
+import Final_APUJIMA.handler.FreeBoardHandler;
 import Final_APUJIMA.handler.MedicineHandler;
 import Final_APUJIMA.handler.MemberHandler;
 import Final_APUJIMA.util.Prompt;
@@ -19,7 +19,7 @@ public class Main {
   CounselingMemberHandler counselingMemberHandler = new CounselingMemberHandler(counselingmemberList);
   MemberHandler memberHandler = new MemberHandler(memberList, counselingMemberHandler);
   DoctorMemberHandler doctorMemberHandler = new DoctorMemberHandler(doctormemberList);
-  FreeBoardMenuHandler freeboardHandler = new FreeBoardMenuHandler();
+  FreeBoardHandler freeboardHandler = new FreeBoardHandler();
   Member LoginUser;
 
   public static void main(String[] args) {
