@@ -1,8 +1,9 @@
 package pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Member {
+public class Member implements Serializable{
   private String name;
   private String id;
   private String password;

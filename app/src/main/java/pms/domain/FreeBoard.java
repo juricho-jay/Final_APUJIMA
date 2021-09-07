@@ -1,8 +1,9 @@
 package pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class FreeBoard {
+public class FreeBoard implements Serializable{
   private int no;
   private String title;
   private String content;

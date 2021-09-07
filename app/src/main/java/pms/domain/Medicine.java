@@ -1,6 +1,8 @@
 package pms.domain;
 
-public class Medicine {
+import java.io.Serializable;
+
+public class Medicine implements Serializable{
 
   private String name;
   private int ageLimit;

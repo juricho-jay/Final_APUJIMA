@@ -1,8 +1,9 @@
 package pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class DoctorBoard {
+public class DoctorBoard implements Serializable{
   private int no;
   private String title;
   private String content;

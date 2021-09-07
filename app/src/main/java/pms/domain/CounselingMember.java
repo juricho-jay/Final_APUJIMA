@@ -1,6 +1,8 @@
 package pms.domain;
 
-public class CounselingMember {
+import java.io.Serializable;
+
+public class CounselingMember implements Serializable {
 
   private String disease;
   private String content;
