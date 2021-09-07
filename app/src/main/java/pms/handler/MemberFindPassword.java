@@ -4,13 +4,13 @@ import java.util.List;
 import pms.domain.Member;
 import util.Prompt;
 
-public class MemberFindPassword extends AbstractMember{
+public class MemberFindPassword extends AbstractMemberHandler{
 
   public MemberFindPassword(List<Member> memberList) {
     super(memberList);
   }
 
-  public void FindPassword() {
+  public void execute() {
     while (true) {
       System.out.println("[PW 찾기] 페이지입니다.");
       System.out.println("(취소: #)");

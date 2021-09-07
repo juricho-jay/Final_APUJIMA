@@ -1,15 +1,15 @@
 package pms.page;
 
-import pms.handler.CounselingAdd;
-import pms.handler.CounselingDetail;
+import pms.handler.CounselingMemberAddHandler;
+import pms.handler.CounselingMemberDoctorListHandler;
 import pms.handler.DoctorList;
 import util.Prompt;
 
 public class DoHealerMenu {
 
   DoctorList doctorList;
-  CounselingAdd counselingAdd;
-  CounselingDetail counselingDetail;
+  CounselingMemberAddHandler counselingAdd;
+  CounselingMemberDoctorListHandler counselingDetail;
 
   void doHealerMenu() {
     while(true) {

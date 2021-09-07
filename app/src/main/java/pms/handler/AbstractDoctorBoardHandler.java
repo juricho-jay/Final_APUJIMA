@@ -3,11 +3,11 @@ package pms.handler;
 import java.util.List;
 import pms.domain.DoctorBoard;
 
-public class AbstractDoctorBoard {
+public abstract class AbstractDoctorBoardHandler implements Command{
 
   List<DoctorBoard> doctorBoardList; 
 
-  public AbstractDoctorBoard(List<DoctorBoard> doctorBoardList) {
+  public AbstractDoctorBoardHandler(List<DoctorBoard> doctorBoardList) {
     this.doctorBoardList = doctorBoardList; // => ?? 생성자 초기화
   }
 

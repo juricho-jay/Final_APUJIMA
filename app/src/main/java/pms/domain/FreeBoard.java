@@ -1,12 +1,41 @@
 package pms.domain;
 
+import java.sql.Date;
+
 public class FreeBoard {
   private int no;
   private String title;
   private String content;
-  private String writer;
+  private Member writer;
+  private Date registeredDate;
+  private int viewCount;
   private int like;
 
+
+  public Member getWriter() {
+    return writer;
+  }
+  public void setWriter(Member writer) {
+    this.writer = writer;
+  }
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
+  }
+  public int getViewCount() {
+    return viewCount;
+  }
+  public void setViewCount(int viewCount) {
+    this.viewCount = viewCount;
+  }
+  public int getLike() {
+    return like;
+  }
+  public void setLike(int like) {
+    this.like = like;
+  }
   public int getNo() {
     return no;
   }
@@ -25,20 +54,6 @@ public class FreeBoard {
   public void setContent(String content) {
     this.content = content;
   }
-  public String getWriter() {
-    return writer;
-  }
-  public void setWriter(String writer) {
-    this.writer = writer;
-  }
-  public int getLike() {
-    return like;
-  }
-  public void setLike(int like) {
-    this.like = like;
-  }
-
 
 }
-
 

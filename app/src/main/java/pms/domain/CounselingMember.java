@@ -1,33 +1,16 @@
 package pms.domain;
 
-import java.sql.Date;
-
 public class CounselingMember {
 
-  private String name;
-  private String tel;
   private String disease;
   private String content;
   private String title;
-  private String sex;
   private int counselingStatus;
   private int counselorStatus;
-  private Date registeredDate;
   private String stateLabel;
   private String stateLabel2;
 
-  public String getName() {
-    return name;
-  }
-  public void setName(String name) {
-    this.name = name;
-  }
-  public String getTel() {
-    return tel;
-  }
-  public void setTel(String tel) {
-    this.tel = tel;
-  }
+
 
   public String getDisease() {
     return disease;
@@ -47,12 +30,6 @@ public class CounselingMember {
   public void setTitle(String title) {
     this.title = title;
   }
-  public String getSex() {
-    return sex;
-  }
-  public void setSex(String sex) {
-    this.sex = sex;
-  }
 
   public int getCounselingStatus() {
     return counselingStatus;
@@ -66,12 +43,6 @@ public class CounselingMember {
   }
   public void setCounselorStatus(int counselorStatus) {
     this.counselorStatus = counselorStatus;
-  }
-  public Date getRegisteredDate() {
-    return registeredDate;
-  }
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
   }
   public String getStateLabel() {
     return stateLabel;

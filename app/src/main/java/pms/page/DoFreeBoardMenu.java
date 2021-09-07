@@ -1,15 +1,15 @@
 package pms.page;
 
-import pms.handler.FreeBoardAdd;
-import pms.handler.FreeBoardDetail;
-import pms.handler.FreeBoardList;
+import pms.handler.FreeBoardAddHandler;
+import pms.handler.FreeBoardDetailHandler;
+import pms.handler.FreeBoardListHandler;
 import util.Prompt;
 
 public class DoFreeBoardMenu {
 
-  FreeBoardAdd freeBoardAdd;
-  FreeBoardList freeBoradList;
-  FreeBoardDetail freeBoradDetail;
+  FreeBoardAddHandler freeBoardAdd;
+  FreeBoardListHandler freeBoradList;
+  FreeBoardDetailHandler freeBoradDetail;
 
   public void FreeboardMenu() {
 

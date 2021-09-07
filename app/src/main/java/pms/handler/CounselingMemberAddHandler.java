@@ -2,23 +2,27 @@ package pms.handler;
 
 import java.util.List;
 import pms.domain.CounselingMember;
+import pms.domain.Member;
 import util.Prompt;
 
-public class CounselingAdd extends AbstractCounselingMember{
+public class CounselingMemberAddHandler extends AbstractCounselingMemberHandler{
 
-  public CounselingAdd(List<CounselingMember> counselingmemberList) {
-    super(counselingmemberList);
+  public CounselingMemberAddHandler(List<CounselingMember> counselingMemberList) {
+    super(counselingMemberList);
     // TODO Auto-generated constructor stub
   }
 
-  public void counselingadd() {
-    System.out.println("[상담 신청]");
-
+  @Override
+  public void execute() {
+    System.out.println("[상담 신청]페이지입니다.");
     System.out.println();
+    Member loginUser = AuthLoginHandler.getLoginUser();
     CounselingMember counselingMember = new CounselingMember();
 
-    counselingMember.setName(Prompt.inputString("성함> "));
-    counselingMember.setTel(Prompt.inputString("연락처> "));
+    System.out.printf("이름: %s\n", loginUser.getName());
+    System.out.printf("연락처: %s\n", loginUser.getPhoneNum());
+
+
     counselingMember.setDisease(Prompt.inputString("지병 여부> "));
     counselingMember.setContent(Prompt.inputString("상담 내용> "));
 
@@ -61,7 +65,7 @@ public class CounselingAdd extends AbstractCounselingMember{
     System.out.println("1. 여성 상담사");
     System.out.println("2. 남성 상담사");
     System.out.println("3. 상관없음");
-    int counselorStatus = (Prompt.inputInt("선택> "));
+    int counselorStatus = Prompt.inputInt("선택> ");
 
     String stateLabel2 = null;
     switch (counselorStatus) {
@@ -78,14 +82,18 @@ public class CounselingAdd extends AbstractCounselingMember{
     counselingMember.setStateLabel2(stateLabel2);
 
 
-    counselingmemberList.add(counselingMember);
+    counselingMemberList.add(counselingMember);
 
-
+    //    for (CounselingMember c : counselingmemberList) {
+    //      System.out.println(c);
+    //    }
 
     System.out.println();
+    //    memberAppList.add(counselingMember);
 
     System.out.println("신청이 완료되었습니다.");
     System.out.println();
   }
 
 }
+

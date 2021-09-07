@@ -1,18 +1,76 @@
 package pms.handler;
 
+import java.sql.Date;
 import java.util.List;
 import pms.domain.Member;
 import util.Prompt;
 
-public class MemberAdd extends AbstractMember{
+public class MemberAddHandler extends AbstractMemberHandler{
 
-  public MemberAdd(List<Member> memberList) {
-    super(memberList); // => ?? 생성자 초기화
+  public MemberAddHandler(List<Member> memberList) {
+    super(memberList); 
+
+    Member testUser = new Member();
+    testUser.setName("shin");
+    testUser.setDoctor(2);
+    testUser.setId("aaa");
+    testUser.setPassword("1111");
+    testUser.setEmail("aaa@test.com");
+    testUser.setPhoneNum("010-1111-1111");
+    testUser.setBirthDay("2000-09-01");
+    testUser.setPhoto("a.png");
+    testUser.setSex("여");
+    testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(testUser);
+
+    testUser = new Member();
+    testUser.setName("cho");
+    testUser.setId("bbb");
+    testUser.setPassword("2222");
+    testUser.setEmail("bbb@test.com");
+    testUser.setPhoneNum("010-2222-2222");
+    testUser.setBirthDay("2000-10-01");
+    testUser.setPhoto("b.png");
+    testUser.setSex("여");
+    testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(testUser);
+
+    testUser = new Member();
+    testUser.setName("kim");
+    testUser.setId("ccc");
+    testUser.setPassword("3333");
+    testUser.setEmail("ccc@test.com");
+    testUser.setPhoneNum("010-3333-3333");
+    testUser.setBirthDay("2000-11-01");
+    testUser.setPhoto("c.png");
+    testUser.setSex("남");
+    testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(testUser);
+
+
   }
 
-  public void add() {
-    System.out.println("[회원 등록]");
+  public void execute() {
+    System.out.println();
+    System.out.println("[회원가입] 페이지입니다.");
     Member member = new Member();
+
+    while (true) {
+      member.setDoctor(Prompt.inputInt("1.일반 2.의사 선택> "));
+      if (member.getDoctor() == 1) {
+        break;
+      } else if (member.getDoctor() == 2) {
+        member.setDoctorLicense(Prompt.inputString("의료인 면허 증명서> "));
+        break;
+      } else {
+        System.out.println("1 or 2 중에 하나로 입력해 주세요.");
+        continue;
+      }
+    }
+
     while(true) {
       member.setName(Prompt.inputString("이름> "));
       if (member.getName().contains("#")) {
@@ -40,6 +98,7 @@ public class MemberAdd extends AbstractMember{
       if(member.getId() != "")
         break;
     }
+
     member.setPassword(Prompt.inputString("비밀번호> "));
     member.setBirthDay(Prompt.inputString("생년월일> "));
     while(true) {
@@ -52,6 +111,7 @@ public class MemberAdd extends AbstractMember{
     }
     member.setPhoneNum(Prompt.inputString("전화번호> "));
     member.setPhoto(Prompt.inputString("회원 사진> "));
+
     while(true) {
       member.setSex(Prompt.inputString("성별(남/여)> "));
       if(member.getSex().equalsIgnoreCase("남") || member.getSex().equalsIgnoreCase("여")) {

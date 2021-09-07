@@ -4,14 +4,14 @@ import java.util.List;
 import pms.domain.Member;
 import util.Prompt;
 
-public class MemberLogin extends AbstractMember{
+public class MemberLogin extends AbstractMemberHandler{
 
   public MemberLogin(List<Member> memberList) {
     super(memberList);
   }
 
 
-  public void login() {
+  public void execute() {
 
     while (true) {
       System.out.println();
@@ -32,10 +32,16 @@ public class MemberLogin extends AbstractMember{
         System.out.println();
         continue;
       }else {
-        System.out.println(member.getName()+" 회원님, [APUJIMA]에 오신 것을 환영합니다.");
-        loginUser = member;
-        System.out.println();
-        return;
+        if(member.getDoctor() == 2) {
+          System.out.println(member.getName()+" 힐러님, [APUJIMA]에 오신 것을 환영합니다.");
+          loginUser = member;
+          System.out.println();
+          return;
+        } else {
+          System.out.println(member.getName()+" 회원님, [APUJIMA]에 오신 것을 환영합니다.");
+          loginUser = member;
+          System.out.println();
+        }
       }
     }
   }

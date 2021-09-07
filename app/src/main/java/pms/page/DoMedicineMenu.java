@@ -1,11 +1,11 @@
 package pms.page;
 
-import pms.handler.MedicineList;
+import pms.handler.MedicineListHandler;
 import util.Prompt;
 
 public class DoMedicineMenu {
 
-  MedicineList medicineList;
+  MedicineListHandler medicineList;
 
   void doMedicineMenu() {
     System.out.println();

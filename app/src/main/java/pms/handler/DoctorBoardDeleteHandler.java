@@ -4,16 +4,16 @@ import java.util.List;
 import pms.domain.DoctorBoard;
 import util.Prompt;
 
-public class DoctorBoardDelete  extends AbstractDoctorBoard{
+public class DoctorBoardDeleteHandler  extends AbstractDoctorBoardHandler{
 
-  public DoctorBoardDelete(List<DoctorBoard> doctorBoardList) {
+  public DoctorBoardDeleteHandler(List<DoctorBoard> doctorBoardList) {
     super(doctorBoardList);
   }
 
-  public void delete() {
+  public void execute() {
+    System.out.println("[삭제] 페이지입니다.");
     System.out.println();
-    System.out.println("[게시글 삭제]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("게시글 번호> ");
 
     DoctorBoard doctorBoard = findByNo(no);
 
@@ -22,14 +22,13 @@ public class DoctorBoardDelete  extends AbstractDoctorBoard{
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    String input = Prompt.inputString(" ❗ 정말 삭제하시겠습니까? (y/N)> ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("게시글 삭제를 취소하였습니다.");
       return;
     }
 
     doctorBoardList.remove(doctorBoard);
-
     System.out.println("게시글을 삭제하였습니다.");
   }
 

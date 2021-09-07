@@ -1,5 +1,6 @@
 package pms;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import Menu.Menu;
@@ -9,16 +10,17 @@ import pms.domain.DoctorMember;
 import pms.domain.FreeBoard;
 import pms.domain.Medicine;
 import pms.domain.Member;
+import pms.handler.Command;
 import pms.handler.DoctorAdd;
 import pms.handler.DoctorFindId;
 import pms.handler.DoctorFindPassword;
 import pms.handler.DoctorLogin;
-import pms.handler.FreeBoardList;
+import pms.handler.FreeBoardListHandler;
 import pms.handler.IntroMenu;
-import pms.handler.MedicineAdd;
-import pms.handler.MedicineList;
-import pms.handler.MedicineSearch;
-import pms.handler.MemberAdd;
+import pms.handler.MedicineAddHandler;
+import pms.handler.MedicineListHandler;
+import pms.handler.MedicineSearchHandler;
+import pms.handler.MemberAddHandler;
 import pms.handler.MemberFindId;
 import pms.handler.MemberFindPassword;
 import pms.handler.MemberLogin;
@@ -39,20 +41,42 @@ public class Main {
 
 
   MemberLogin memberLogin = new MemberLogin(memberList);
-  MemberAdd memberAdd = new MemberAdd(memberList);
+  MemberAddHandler memberAdd = new MemberAddHandler(memberList);
   MemberFindId memberFindId = new MemberFindId(memberList);
   MemberFindPassword memberFindPassword = new MemberFindPassword(memberList);
 
 
-  FreeBoardList FreeboardList = new FreeBoardList(freeBoardList);
+  FreeBoardListHandler FreeboardList = new FreeBoardListHandler(freeBoardList);
 
 
-  MedicineAdd medicineAdd = new MedicineAdd(medicineList);
-  MedicineList medicinelist = new MedicineList(medicineList);
-  MedicineSearch medicineSearch = new MedicineSearch(medicineList);
+  MedicineAddHandler medicineAdd = new MedicineAddHandler(medicineList);
+  MedicineListHandler medicinelist = new MedicineListHandler(medicineList);
+  MedicineSearchHandler medicineSearch = new MedicineSearchHandler(medicineList);
 
 
   IntroMenu intro = new IntroMenu();
+  HashMap<String,Command> commandMap = new HashMap<>();
+
+  class MenuItem extends Menu {
+    String menuId;
+
+    public MenuItem(String title, String menuId) {
+      super(title);
+      this.menuId = menuId;
+    }
+
+    public MenuItem(String title, int accessScope, String menuId) {
+      super(title, accessScope);
+      this.menuId = menuId;
+    }
+
+    @Override
+    public void execute() {
+      Command command = commandMap.get(menuId);
+      command.execute();
+    }
+
+  }
 
 
   public static void main(String[] args) {
@@ -61,17 +85,21 @@ public class Main {
   }
 
   void service() {
-    createMenu().execute();
+    createMainMenu().execute();
     Prompt.close();
   }
 
-  Menu createMenu() {
-    MenuGroup mainMenuGroup = new MenuGroup("메인");
+  Menu createMainMenu() {
+    System.out.println("\r\n"
+        + "|￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣ |\r\n"
+        + "|[APUJIMA]에 오신 것을 환영합니다.|\r\n"
+        + "|＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ |\r\n"
+        + "(\\__/) ||\r\n"
+        + "(•ㅅ•).||\r\n"
+        + "/ . . . .づ\r\n"
+        + "");
+    MenuGroup mainMenuGroup = new MenuGroup("WELCOME TO APUJIMA!");
     mainMenuGroup.setPrevMenuTitle("종료");
-
-    System.out.println("[APUJIMA]에 오신 것을 환영합니다.");
-    System.out.println("원하시는 메뉴를 선택해 주세요.");
-    System.out.println();
 
     MenuGroup nologin = new MenuGroup("비회원");
     mainMenuGroup.add(nologin);
@@ -89,14 +117,14 @@ public class Main {
     nologinMedicine.add(new Menu("의약품 소개") {
       @Override
       public void execute() {
-        medicinelist.medicineList();;
+        medicinelist.execute();;
       }
     });
 
     nologinMedicine.add(new Menu("의약품 검색") {
       @Override
       public void execute() {
-        medicineSearch.medicineSearch();
+        medicineSearch.execute();
       }
     });
 
@@ -116,7 +144,7 @@ public class Main {
     nologinCommunity.add(new Menu("게시판 조회") {
       @Override
       public void execute() {
-        FreeboardList.list();
+        FreeboardList.execute();
       }
     });
 
@@ -126,64 +154,57 @@ public class Main {
     MenuGroup login = new MenuGroup("로그인");
     mainMenuGroup.add(login);
 
-    login.add(new Menu("의사 로그인") {
+
+    login.add(new Menu("로그인") {
       @Override
       public void execute() {
-        doctorLogin.login();
+        memberLogin.execute();
       }
     });
 
-    login.add(new Menu("일반 로그인") {
+
+    login.add(new Menu("ID 찾기") {
       @Override
       public void execute() {
-        memberLogin.login();
+        memberFindId.execute();;
       }
     });
 
-    login.add(new Menu("의사회원 ID 찾기") {
+    login.add(new Menu("PW 찾기") {
       @Override
       public void execute() {
-        doctorFindId.FindId();;
+        memberFindPassword.execute();;
       }
     });
 
-    login.add(new Menu("의사회원 PW 찾기") {
+    MenuGroup afterlogin = new MenuGroup("메인메뉴");
+    login.add(afterlogin);
+
+    afterlogin.add(new Menu("소개", Menu.ACCESS_GENERAL) {
       @Override
       public void execute() {
-        doctorFindPassword.FindPassword();;
+        intro.doIntroMenu();
       }
     });
 
-    login.add(new Menu("일반회원 ID 찾기") {
+    afterlogin.add(new Menu("커뮤니티", Menu.ACCESS_GENERAL) {
       @Override
       public void execute() {
-        memberFindId.FindId();;
+        intro.doIntroMenu();
       }
     });
 
-    login.add(new Menu("일반회원 PW 찾기") {
-      @Override
-      public void execute() {
-        memberFindPassword.FindPassword();;
-      }
-    });
 
 
 
     MenuGroup singUp = new MenuGroup("회원가입");
     mainMenuGroup.add(singUp);
 
-    singUp.add(new Menu("의사 회원가입") {
-      @Override
-      public void execute() {
-        doctorAdd.add();
-      }
-    });
 
-    singUp.add(new Menu("일반 회원가입") {
+    singUp.add(new Menu("회원가입") {
       @Override
       public void execute() {
-        memberLogin.login();
+        memberAdd.execute();
       }
     });
 

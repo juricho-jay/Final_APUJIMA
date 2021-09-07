@@ -13,6 +13,30 @@ public class Member {
   private String sex;
   private Date registeredDate;
 
+  private int doctorOrNot;
+  private String interest;
+  private String doctorLicense;
+
+
+  public int getDoctor() {
+    return doctorOrNot;
+  }
+  public void setDoctor(int doctor) {
+    this.doctorOrNot = doctor;
+  }
+  public String getDoctorLicense() {
+    return doctorLicense;
+  }
+  public void setDoctorLicense(String doctorLicense) {
+    this.doctorLicense = doctorLicense;
+  }
+  public String getInterest() {
+    return interest;
+  }
+  public void setInterest(String interest) {
+    this.interest = interest;
+  }
+
   public String getName() {
     return name;
   }

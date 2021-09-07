@@ -3,11 +3,11 @@ package pms.handler;
 import java.util.List;
 import pms.domain.FreeBoard;
 
-public class AbstractFreeBoard {
+public abstract class AbstractFreeBoardHandler implements Command{
 
   List<FreeBoard> freeBoardList; 
 
-  public AbstractFreeBoard(List<FreeBoard> freeBoardList) {
+  public AbstractFreeBoardHandler(List<FreeBoard> freeBoardList) {
     this.freeBoardList = freeBoardList; // => ?? 생성자 초기화
   }
 

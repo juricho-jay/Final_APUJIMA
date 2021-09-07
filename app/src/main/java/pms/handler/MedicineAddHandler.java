@@ -2,13 +2,12 @@ package pms.handler;
 
 import java.util.List;
 import pms.domain.Medicine;
+import util.Prompt;
 
-public class AbstractMedicine {
+public class MedicineAddHandler extends AbstractMedicineHandler{
 
-  List<Medicine> medicineList; 
-
-  public AbstractMedicine(List<Medicine> medicineList) {
-    this.medicineList = medicineList; 
+  public MedicineAddHandler(List<Medicine> medicineList) {
+    super(medicineList);
 
 
     Medicine testMedicine = new Medicine();
@@ -20,53 +19,60 @@ public class AbstractMedicine {
 
     medicineList.add(testMedicine);
 
-    Medicine testMedicine2 = new Medicine();
+    testMedicine = new Medicine();
     testMedicine.setName("아빌리파이");
     testMedicine.setAgeLimit(7);
     testMedicine.setShape("네모");
     testMedicine.setColor("붉은색");
     testMedicine.setEffect("신경 안정제");
 
-    medicineList.add(testMedicine2);
+    medicineList.add(testMedicine);
 
-    Medicine testMedicine3 = new Medicine();
+    testMedicine = new Medicine();
     testMedicine.setName("로라반");
     testMedicine.setAgeLimit(19);
     testMedicine.setShape("초록색 동그란 알약");
     testMedicine.setColor("붉은색");
     testMedicine.setEffect("소화제");
 
-    medicineList.add(testMedicine3);
+    medicineList.add(testMedicine);
 
-    Medicine testMedicine4 = new Medicine();
+    testMedicine = new Medicine();
     testMedicine.setName("프로작");
     testMedicine.setAgeLimit(12);
     testMedicine.setShape("네모난 알약");
     testMedicine.setColor("붉은색");
     testMedicine.setEffect("수면제");
 
-    medicineList.add(testMedicine4);
+    medicineList.add(testMedicine);
 
-    Medicine testMedicine5 = new Medicine();
+    testMedicine = new Medicine();
     testMedicine.setName("알프람");
     testMedicine.setAgeLimit(5);
     testMedicine.setShape("네모");
     testMedicine.setColor("세모");
     testMedicine.setEffect("엔돌핀");
 
-    medicineList.add(testMedicine5);
+    medicineList.add(testMedicine);
 
 
   }
 
-  protected Medicine validMedicine(String input) {
+  @Override
+  public void execute() {
+    System.out.println("[약품 등록]");
+    Medicine medicine = new Medicine();
+    medicine.setName(Prompt.inputString("이름> "));
+    medicine.setAgeLimit(Prompt.inputInt("권장 나이> "));
+    medicine.setShape(Prompt.inputString("모양> "));
+    medicine.setShape(Prompt.inputString("색상> "));
+    medicine.setShape(Prompt.inputString("효능> "));
+    medicineList.add(medicine);
 
-    for (Medicine medicine : medicineList) {
-      if (medicine.equals(input)) {
-        return medicine;
-      }
-    }
-    return null;
+    System.out.println();
+    System.out.println("약품 등록 완료!");
+    System.out.println();
   }
+
 
 }

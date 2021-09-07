@@ -2,7 +2,7 @@ package pms.domain;
 
 import java.sql.Date;
 
-public class DoctorBoard {
+public class Notice {
   private int no;
   private String title;
   private String content;

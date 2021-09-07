@@ -4,13 +4,13 @@ import java.util.List;
 import pms.domain.Medicine;
 import util.Prompt;
 
-public class MedicineSearch extends AbstractMedicine{
+public class MedicineSearchHandler extends AbstractMedicineHandler{
 
-  public MedicineSearch(List<Medicine> medicineList) {
+  public MedicineSearchHandler(List<Medicine> medicineList) {
     super(medicineList);
   }
 
-  public void medicineSearch() {
+  public void execute() {
 
 
     String input = Prompt.inputString("찾을 약의 이름을 입력해주세요 > ");

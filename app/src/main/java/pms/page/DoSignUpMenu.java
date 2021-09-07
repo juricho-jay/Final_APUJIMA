@@ -1,13 +1,13 @@
 package pms.page;
 
 import pms.handler.DoctorAdd;
-import pms.handler.MemberAdd;
+import pms.handler.MemberAddHandler;
 import util.Prompt;
 
 public class DoSignUpMenu {
 
   DoctorAdd doctorAdd;
-  MemberAdd memberAdd;
+  MemberAddHandler memberAdd;
 
   void doSignupMenu() {
     System.out.println("[회원가입] 페이지입니다. 선택해주세요");
