@@ -168,7 +168,7 @@ public class Main {
     commandMap.put("/auth/logout", new AuthLogoutHandler());
     commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberList));
 
-
+    commandMap.put("/intro", new IntroMenu());
     //    commandMap.put("/community/freeBoard", new FreeBoardHashMap(freeBoardList));
   }
 
@@ -233,6 +233,7 @@ public class Main {
     mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL, "/auth/userInfo"));
     mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL, "/auth/logout"));
 
+    mainMenuGroup.add(new MenuItem("소개", Menu.ACCESS_LOGOUT, "/intro"));
     mainMenuGroup.add(createMedicineMenu());
     mainMenuGroup.add(createCounselingMenu());
     mainMenuGroup.add(createMemberMenu());
@@ -247,6 +248,7 @@ public class Main {
 
     return mainMenuGroup;
   }
+
 
   private Menu createFreeBoardMenu() {
     MenuGroup freeBoardMenu = new MenuGroup("APUs 자유게시판");
