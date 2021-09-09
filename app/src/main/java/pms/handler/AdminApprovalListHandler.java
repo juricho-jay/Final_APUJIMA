@@ -4,13 +4,13 @@ import java.util.List;
 import pms.domain.Medicine;
 import util.Prompt;
 
-public class AdminApprovalHandler implements Command {
+public class AdminApprovalListHandler implements Command {
 
   List<Medicine> requestList;
   List<Medicine> medicineList;
 
 
-  public AdminApprovalHandler(List<Medicine> requestList, List<Medicine> medicineList) {
+  public AdminApprovalListHandler(List<Medicine> requestList, List<Medicine> medicineList) {
     this.requestList = requestList;
     this.medicineList = medicineList;
   }
@@ -18,7 +18,7 @@ public class AdminApprovalHandler implements Command {
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[약품 등록 허가]");
+    System.out.println("[승인 허가 / 신고 글 삭제 내역]");
 
     for(int i = 0; i< requestList.size(); i++) {
       System.out.printf("약품명 : %s\n 효과 : %s\n" ,requestList.get(i).getName(), requestList.get(i).getEffect());

@@ -17,6 +17,7 @@ import pms.domain.Medicine;
 import pms.domain.Member;
 import pms.domain.NoticeBoard;
 import pms.handler.AdminApprovalHandler;
+import pms.handler.AdminUpdateHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
 import pms.handler.AuthUserInfoHandler;
@@ -98,6 +99,7 @@ public class Main {
 
   public Main() {
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestList, medicineList));
+    commandMap.put("/admin/update", new AdminUpdateHandler(requestList, medicineList));
     // commandMap.put("/admin/list", new 구현예정);
 
     commandMap.put("/intro", new IntroMenu());
@@ -138,6 +140,15 @@ public class Main {
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+>>>>>>> e577638eaaa76b3ca3bfa50f2fc537f2536d1677
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList));
 
@@ -396,6 +407,7 @@ public class Main {
     MenuGroup approvalMenu = new MenuGroup("승인 관리", Menu.ACCESS_ADMIN);
 
     approvalMenu.add(new MenuItem("승인 허가", Menu.ACCESS_ADMIN, "/admin/approval")); // AdminApprovalHandler
+    approvalMenu.add(new MenuItem("약품 수정", Menu.ACCESS_ADMIN, "/admin/update"));
     approvalMenu.add(new MenuItem("승인 내역", Menu.ACCESS_ADMIN,"/admin/list")); // AdminListHandler
     return approvalMenu;
   }
