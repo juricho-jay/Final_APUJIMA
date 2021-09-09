@@ -12,12 +12,6 @@ public class MedicineSearchHandler extends AbstractMedicineHandler{
 
   public void execute() {
 
-    //    for (MedicineList medicineList : medicineList) {
-    //      if (!doctorBoard.getTitle().contains(input) &&
-    //          !doctorBoard.getContent().contains(input) &&
-    //          !doctorBoard.getWriter().getId().contains(input)) {
-    //        continue;
-    //      }
     String input = Prompt.inputString("찾을 약의 이름을 입력해주세요 > ");
     System.out.println();
 
