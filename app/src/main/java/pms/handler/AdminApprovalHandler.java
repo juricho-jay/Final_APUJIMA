@@ -4,7 +4,7 @@ import java.util.List;
 import pms.domain.Medicine;
 import util.Prompt;
 
-public class AdminApprovalHandler {
+public class AdminApprovalHandler implements Command{
 
   List<Medicine> requestList;
   List<Medicine> medicineList;
@@ -15,7 +15,6 @@ public class AdminApprovalHandler {
     this.medicineList = medicineList;
     // TODO Auto-generated constructor stub
   }
-
 
   public void execute() {
     System.out.println();
@@ -31,8 +30,7 @@ public class AdminApprovalHandler {
 
     for(int i = 0; i< requestList.size(); i++) {
       if(input.equals(requestList.get(i).getName()) ) {
-        Medicine medicine = requestList.get(i);
-        medicineList.add(medicine);
+        medicineList.add(requestList.get(i));
         System.out.println("약품이 등록되었습니다.");
 
         System.out.println();

@@ -14,10 +14,6 @@ public class DoctorBoard implements Serializable{
 
 
 
-
-
-
-
   public Member getWriter() {
     return writer;
   }

@@ -1,28 +1,27 @@
 package pms.handler;
 
-import java.util.LinkedList;
 import java.util.List;
 import pms.domain.Medicine;
 import util.Prompt;
 
-public class MedicineRequestHandler extends AbstractMedicineHandler{
+public class MedicineRequestHandler implements Command{
+  List<Medicine> requestList;
 
-  public MedicineRequestHandler(List<Medicine> medicineList) {
-    super(medicineList);
+  public MedicineRequestHandler(List<Medicine> requestList) {
+    this.requestList = requestList;
     // TODO Auto-generated constructor stub
   }
 
-  List<Medicine> requestList = new LinkedList<>();
 
   public void execute() {
     System.out.println();
-    System.out.println("[약품 등록 허가]");
+    System.out.println("[약품 등록 요청]");
     Medicine medicine = new Medicine();
     medicine.setName(Prompt.inputString("약품명> "));
     medicine.setAgeLimit(Prompt.inputInt("권장 나이> "));
     medicine.setShape(Prompt.inputString("모양> "));
-    medicine.setShape(Prompt.inputString("색상> "));
-    medicine.setShape(Prompt.inputString("효능> "));
+    medicine.setColor(Prompt.inputString("색상> "));
+    medicine.setEffect(Prompt.inputString("효능> "));
 
     while(true) {
       String input = Prompt.inputString("작성한 약품을 등록요청 하시겠습니까?(y/N)");
