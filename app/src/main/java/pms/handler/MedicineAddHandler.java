@@ -48,18 +48,10 @@ public class MedicineAddHandler extends AbstractMedicineHandler{
     testMedicine = new Medicine();
     testMedicine.setName("알프람");
     testMedicine.setAgeLimit(5);
-    testMedicine.setShape("네모");
-    testMedicine.setColor("세모");
+    testMedicine.setShape("가루약");
+    testMedicine.setColor("흰색");
     testMedicine.setEffect("엔돌핀");
 
-    medicineList.add(testMedicine);
-
-    testMedicine = new Medicine();
-    testMedicine.setName("알프람2");
-    testMedicine.setAgeLimit(5);
-    testMedicine.setShape("네모");
-    testMedicine.setColor("세모");
-    testMedicine.setEffect("엔돌핀");
     medicineList.add(testMedicine);
 
   }
@@ -68,11 +60,11 @@ public class MedicineAddHandler extends AbstractMedicineHandler{
   public void execute() {
     System.out.println("[약품 등록]");
     Medicine medicine = new Medicine();
-    medicine.setName(Prompt.inputString("이름> "));
+    medicine.setName(Prompt.inputString("약품명> "));
     medicine.setAgeLimit(Prompt.inputInt("권장 나이> "));
-    medicine.setShape(Prompt.inputString("모양> "));
-    medicine.setShape(Prompt.inputString("색상> "));
-    medicine.setShape(Prompt.inputString("효능> "));
+    medicine.setShape(Prompt.inputString("모  양> "));
+    medicine.setShape(Prompt.inputString("색  상> "));
+    medicine.setShape(Prompt.inputString("효  능> "));
     medicineList.add(medicine);
 
     System.out.println();

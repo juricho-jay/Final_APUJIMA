@@ -12,7 +12,8 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
   }
 
   public void execute() {
-    System.out.println("[글쓰기] 페이지입니다.");
+    System.out.println();
+    System.out.println("[자유게시판 글쓰기] 페이지입니다.");
     System.out.println();
     FreeBoard freeBoard = new FreeBoard();
 
@@ -25,6 +26,7 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
     freeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     freeBoardList.add(freeBoard);
+    System.out.println("게시판 등록이 완료되었습니다.");
   }
 
 }

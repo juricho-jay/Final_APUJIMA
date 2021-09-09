@@ -18,6 +18,7 @@ import pms.domain.Member;
 import pms.domain.NoticeBoard;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
+import pms.handler.AdminReportDeleteHandler;
 import pms.handler.AdminUpdateHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
@@ -102,6 +103,8 @@ public class Main {
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestList, medicineList));
     commandMap.put("/admin/update", new AdminUpdateHandler(requestList, medicineList));
     commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, freeBoardList));
+    commandMap.put("/admin/delete", new AdminReportDeleteHandler(freeBoardList , reportList));
+
 
     commandMap.put("/intro", new IntroMenu());
 
@@ -161,6 +164,7 @@ public class Main {
     Prompt.close();
 
     saveMembers();
+    System.out.println("[APUJIMA]에 방문해 주셔서 감사합니다. 좋은하루 되시기 바랍니다!");
   }
 
   private void loadMembers() {
@@ -182,7 +186,7 @@ public class Main {
         new FileOutputStream("member.data"))) {
 
       out.writeObject(memberList);
-
+      System.out.println();
       System.out.println("멤버 데이터 저장 완료!");
 
     } catch (Exception e) {
@@ -354,8 +358,8 @@ public class Main {
     mainMenuGroup.add(createCommunityMenu());
 
     mainMenuGroup.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
-    mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL, "/auth/userInfo"));
-    mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL, "/auth/logout"));
+    mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/auth/userInfo"));
+    mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/auth/logout"));
 
     mainMenuGroup.add(createMemberMenu());
 
@@ -376,7 +380,7 @@ public class Main {
 
     approvalManagement.add(new MenuItem("약품 승인", Menu.ACCESS_ADMIN, "/admin/approval")); // 여기서 3지선다 승인, 삭제, 뒤로가기
     approvalManagement.add(new MenuItem("약품 변경", Menu.ACCESS_ADMIN, "/admin/update")); // 변경 or not
-    approvalManagement.add(new MenuItem("게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/*")); // 신고하시겠습니까? yes => 삭제
+    approvalManagement.add(new MenuItem("게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/delete")); // 신고하시겠습니까? yes => 삭제
 
 
     approvalMenu.add(approvalManagement);
@@ -404,7 +408,7 @@ public class Main {
 
   private Menu createCounselingMenu() {
     MenuGroup memberMenu = new MenuGroup("HEALER");
-    memberMenu.add(new MenuItem("의사 리스트", Menu.ACCESS_LOGOUT, "/counselingMember/list"));
+    memberMenu.add(new MenuItem("의사 리스트", Menu.ACCESS_LOGOUT | Menu.ACCESS_GENERAL, "/counselingMember/list"));
     memberMenu.add(new MenuItem("상담신청", Menu.ACCESS_GENERAL, "/counselingMember/add"));
     memberMenu.add(new MenuItem("My 상담 목록", Menu.ACCESS_GENERAL, "/counselingMember/myList"));
     memberMenu.add(new MenuItem("Healer 상담 목록", Menu.ACCESS_DOCTOR, "/counselingMember/doctorList"));

@@ -14,6 +14,7 @@ public class CounselingMemberAddHandler extends AbstractCounselingMemberHandler{
 
   @Override
   public void execute() {
+    System.out.println();
     System.out.println("[상담 신청]페이지입니다.");
     System.out.println();
     Member loginUser = AuthLoginHandler.getLoginUser();
@@ -23,11 +24,11 @@ public class CounselingMemberAddHandler extends AbstractCounselingMemberHandler{
     System.out.printf("연락처: %s\n", loginUser.getPhoneNum());
 
 
-    counselingMember.setDisease(Prompt.inputString("지병 여부> "));
-    counselingMember.setContent(Prompt.inputString("상담 내용> "));
+    counselingMember.setDisease(Prompt.inputString("지병여부> "));
+    counselingMember.setContent(Prompt.inputString("현재증상> "));
 
     System.out.println();
-    System.out.println("[상담 주제]");
+    System.out.println("[상담 내용]");
     System.out.println("1. 우울증");
     System.out.println("2. 진로");
     System.out.println("3. 일상생활");
@@ -38,25 +39,29 @@ public class CounselingMemberAddHandler extends AbstractCounselingMemberHandler{
     System.out.println();
 
     String stateLabel = null;
-    switch (counselingStatus) {
-      case 1:
-        stateLabel = "우울증";
-        break;
-      case 2:
-        stateLabel = "진로";
-        break;
-      case 3:
-        stateLabel = "일상생활";
-        break;
-      case 4:
-        stateLabel = "연애";
-        break;
-      case 5:
-        stateLabel = "인간관계";
-        break;
-      case 6:
-        stateLabel = "기타";
-        break;
+    if(counselingStatus == 6) {
+      stateLabel = Prompt.inputString("상담 내용를 작성해 주세요> ");
+    } else {
+      switch (counselingStatus) {
+        case 1:
+          stateLabel = "우울증";
+          break;
+        case 2:
+          stateLabel = "진로";
+          break;
+        case 3:
+          stateLabel = "일상생활";
+          break;
+        case 4:
+          stateLabel = "연애";
+          break;
+        case 5:
+          stateLabel = "인간관계";
+          break;
+        case 6:
+          stateLabel = "기타";
+          break;
+      }
     }
     counselingMember.setStateLabel(stateLabel);
 
@@ -92,7 +97,6 @@ public class CounselingMemberAddHandler extends AbstractCounselingMemberHandler{
     //    memberAppList.add(counselingMember);
 
     System.out.println("신청이 완료되었습니다.");
-    System.out.println();
   }
 
 }

@@ -31,9 +31,16 @@ public class AuthLoginHandler implements Command {
 
   @Override
   public void execute() {
-    System.out.println("[로그인] 페이지입니다.");
-    String Id = Prompt.inputString("ID> ");
-    String password = Prompt.inputString("암호> ");
+    System.out.println();
+    System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
+    System.out.println("(취소: #)");
+
+    String Id = Prompt.inputString("아이디> ");
+    if (Id.contains("#")) {
+      return;
+    }
+    String password = Prompt.inputString("비밀번호> ");
+    System.out.println();
 
     Member member = loginTest(Id, password);
 
@@ -52,6 +59,7 @@ public class AuthLoginHandler implements Command {
       loginUser = root;
       memberList.add(loginUser);
       userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL;
+      System.out.println("관리자님, [APUJIMA]에 오신 것을 환영합니다.");
       return;
     } 
 
@@ -60,10 +68,15 @@ public class AuthLoginHandler implements Command {
       System.out.println();
       System.out.println("ID와 암호가 일치하지 않습니다.");
     } else {
-      System.out.println();
-      System.out.printf("%s님 환영합니다!\n", member.getName());
-      loginUser = member;
-      userAccessLevel = Menu.ACCESS_GENERAL;
+      if(member.getDoctor() == 2) {
+        System.out.println(member.getName()+" 힐러님, [APUJIMA]에 오신 것을 환영합니다.");
+        loginUser = member;
+        userAccessLevel = Menu.ACCESS_DOCTOR;
+      } else if(member.getDoctor() == 1) {
+        System.out.println(member.getName()+" 회원님, [APUJIMA]에 오신 것을 환영합니다.");
+        loginUser = member;
+        userAccessLevel = Menu.ACCESS_GENERAL;
+      } 
     }
   }
 

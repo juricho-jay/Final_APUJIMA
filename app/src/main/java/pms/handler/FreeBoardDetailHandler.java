@@ -16,6 +16,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
 
   @Override
   public void execute() {
+    System.out.println();
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();
     int no = Prompt.inputInt("게시글 번호> ");
@@ -40,7 +41,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
       freeBoard.setLike(freeBoard.getLike() + 1);
     } else if (likeNum.equals("!")) {
       reportList.add(freeBoard);
-      System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도와주셔서 감사합니다!");
+      System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
     }
     else {
       return;
