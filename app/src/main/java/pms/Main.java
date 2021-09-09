@@ -135,14 +135,6 @@ public class Main {
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardList));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
 
-    commandMap.put("/medicine/add", new MedicineAddHandler(medicineList));
-    commandMap.put("/medicine/list", new MedicineListHandler(medicineList));
-    commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineList));
-    commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineList));
-    commandMap.put("/medicine/search", new MedicineSearchHandler(medicineList));
-
-
-
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList));
 
