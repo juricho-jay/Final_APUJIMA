@@ -60,6 +60,8 @@ public class Main {
   List<FreeBoard> freeBoardList = new LinkedList<>();
   List<NoticeBoard> noticeBoardList = new LinkedList<>();
   List<DoctorBoard> doctorBoardList = new LinkedList<>();
+  List<Medicine> requestList = new LinkedList<>();
+  List<FreeBoard> reportList = new LinkedList<>(); 
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
