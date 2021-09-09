@@ -23,16 +23,12 @@ import pms.handler.Command;
 import pms.handler.CounselingMemberAddHandler;
 import pms.handler.CounselingMemberDoctorListHandler;
 import pms.handler.CounselingMemberMyListHandler;
-import pms.handler.DoctorAdd;
 import pms.handler.DoctorBoardAddHandler;
 import pms.handler.DoctorBoardDeleteHandler;
 import pms.handler.DoctorBoardDetailHandler;
 import pms.handler.DoctorBoardListHandler;
 import pms.handler.DoctorBoardSearchHandler;
 import pms.handler.DoctorBoardUpdateHandler;
-import pms.handler.DoctorFindId;
-import pms.handler.DoctorFindPassword;
-import pms.handler.DoctorLogin;
 import pms.handler.DoctorMemberListHandler;
 import pms.handler.FreeBoardAddHandler;
 import pms.handler.FreeBoardDeleteHandler;
@@ -47,10 +43,7 @@ import pms.handler.MedicineListHandler;
 import pms.handler.MedicineSearchHandler;
 import pms.handler.MedicineUpdateHandler;
 import pms.handler.MemberAddHandler;
-import pms.handler.MemberFindId;
-import pms.handler.MemberFindPassword;
 import pms.handler.MemberListHandler;
-import pms.handler.MemberLogin;
 import pms.handler.NoticeBoardAddHandler;
 import pms.handler.NoticeBoardDeleteHandler;
 import pms.handler.NoticeBoardDetailHandler;
@@ -69,25 +62,6 @@ public class Main {
   List<DoctorBoard> doctorBoardList = new LinkedList<>();
   List<Medicine> requestList = new LinkedList<>();
   List<FreeBoard> reportList = new LinkedList<>(); 
-
-  <<<<<<< HEAD
-  DoctorLogin doctorLogin = new DoctorLogin(doctormemberList);
-  DoctorAdd doctorAdd = new DoctorAdd(doctormemberList);
-  DoctorFindId doctorFindId = new DoctorFindId(doctormemberList);
-  DoctorFindPassword doctorFindPassword = new DoctorFindPassword(doctormemberList);
-
-
-
-  MemberLogin memberLogin = new MemberLogin(memberList);
-  MemberAddHandler memberAdd = new MemberAddHandler(memberList);
-  MemberFindId memberFindId = new MemberFindId(memberList);
-  MemberFindPassword memberFindPassword = new MemberFindPassword(memberList);
-
-
-  FreeBoardListHandler FreeboardList = new FreeBoardListHandler(freeBoardList);
-
-
-
 
 
   IntroMenu intro = new IntroMenu();
