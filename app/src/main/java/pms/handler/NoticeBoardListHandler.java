@@ -17,7 +17,7 @@ public class NoticeBoardListHandler extends AbstractNoticeBoardHandler{
       System.out.printf("%d, %s, %s, %s, %d, %d\n",
           noticeBoard.getNo(),
           noticeBoard.getTitle(),
-          noticeBoard.getWriter().getId(), //우리는 name이 아니라 id를 가져옴
+          noticeBoard.getWriter(), //우리는 name이 아니라 id를 가져옴
           noticeBoard.getRegisteredDate(),
           noticeBoard.getViewCount(),
           noticeBoard.getLike());

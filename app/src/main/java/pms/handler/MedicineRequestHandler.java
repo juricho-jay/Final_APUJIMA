@@ -27,6 +27,7 @@ public class MedicineRequestHandler implements Command{
     testRequest.setEffect("간질, 공황 장애");
 
     requestList.add(testRequest);
+
   }
 
 
@@ -65,4 +66,6 @@ public class MedicineRequestHandler implements Command{
     System.out.println("약품 등록 완료!");
     System.out.println();
   }
+
+
 }
