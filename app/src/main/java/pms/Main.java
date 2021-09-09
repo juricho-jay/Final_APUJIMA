@@ -127,7 +127,7 @@ public class Main {
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList));
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList));
     commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardList));
@@ -140,15 +140,6 @@ public class Main {
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
 
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
->>>>>>> e577638eaaa76b3ca3bfa50f2fc537f2536d1677
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList));
 
