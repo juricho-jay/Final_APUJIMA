@@ -271,33 +271,6 @@ public class Main {
     }
   }
 
-  private void loadDoctorMember() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("doctorMember.data"))) {
-
-      doctormemberList.addAll((List<DoctorMember>) in.readObject());
-
-      System.out.println("의사멤버 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 의사멤버 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveDoctorMember() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("doctorMember.data"))) {
-
-      out.writeObject(doctormemberList);
-
-      System.out.println("의사멤버 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("의사멤버 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
 
   private void loadDoctorBoard() {
     try (ObjectInputStream in = new ObjectInputStream(

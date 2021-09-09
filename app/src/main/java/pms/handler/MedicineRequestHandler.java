@@ -9,7 +9,24 @@ public class MedicineRequestHandler implements Command{
 
   public MedicineRequestHandler(List<Medicine> requestList) {
     this.requestList = requestList;
-    // TODO Auto-generated constructor stub
+
+    Medicine testRequest = new Medicine();
+    testRequest.setName("자낙스");
+    testRequest.setAgeLimit(15);
+    testRequest.setShape("타원형");
+    testRequest.setColor("주황");
+    testRequest.setEffect("불안 장애 치료 및 완화");
+
+    requestList.add(testRequest);
+
+    testRequest = new Medicine();
+    testRequest.setName("리보트릴");
+    testRequest.setAgeLimit(15);
+    testRequest.setShape("원형");
+    testRequest.setColor("주황");
+    testRequest.setEffect("간질, 공황 장애");
+
+    requestList.add(testRequest);
   }
 
 
