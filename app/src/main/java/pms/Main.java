@@ -16,6 +16,7 @@ import pms.domain.FreeBoard;
 import pms.domain.Medicine;
 import pms.domain.Member;
 import pms.domain.NoticeBoard;
+import pms.handler.AdminApprovalHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
 import pms.handler.AuthUserInfoHandler;
@@ -40,6 +41,7 @@ import pms.handler.IntroMenu;
 import pms.handler.MedicineAddHandler;
 import pms.handler.MedicineDeleteHandler;
 import pms.handler.MedicineListHandler;
+import pms.handler.MedicineRequestHandler;
 import pms.handler.MedicineSearchHandler;
 import pms.handler.MedicineUpdateHandler;
 import pms.handler.MemberAddHandler;
@@ -57,10 +59,10 @@ public class Main {
   List<CounselingMember> counselingMemberList = new LinkedList<>();
   List<DoctorMember> doctormemberList = new LinkedList<>();
   List<Medicine> medicineList = new LinkedList<>();
+  List<Medicine> requestList = new LinkedList<>();
   List<FreeBoard> freeBoardList = new LinkedList<>();
   List<NoticeBoard> noticeBoardList = new LinkedList<>();
   List<DoctorBoard> doctorBoardList = new LinkedList<>();
-  List<Medicine> requestList = new LinkedList<>();
   List<FreeBoard> reportList = new LinkedList<>(); 
 
 
@@ -95,13 +97,13 @@ public class Main {
   }
 
   public Main() {
-    //    commandMap.put("/admin/permission", new 구현예정);
-    //    commandMap.put("/admin/list", new 구현예정);
+    commandMap.put("/admin/approval", new AdminApprovalHandler(requestList, medicineList));
+    // commandMap.put("/admin/list", new 구현예정);
 
     commandMap.put("/intro", new IntroMenu());
 
     commandMap.put("/medicine/add", new MedicineAddHandler(medicineList));
-    //    commandMap.put("/medicine/request", new MedicineRequestHandler(requestList));
+    commandMap.put("/medicine/request", new MedicineRequestHandler(requestList));
     commandMap.put("/medicine/list", new MedicineListHandler(medicineList));
     commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineList));
     commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineList));
