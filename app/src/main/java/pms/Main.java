@@ -202,7 +202,7 @@ public class Main {
     try (ObjectOutputStream out = new ObjectOutputStream(
         new FileOutputStream("member.data"))) {
 
-      out.writeObject(memberList);
+         out.writeObject(memberList);
 
       System.out.println("멤버 데이터 저장 완료!");
 
