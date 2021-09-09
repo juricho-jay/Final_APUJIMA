@@ -58,6 +58,7 @@ public class Main {
   List<CounselingMember> counselingMemberList = new LinkedList<>();
   List<DoctorMember> doctormemberList = new LinkedList<>();
   List<Medicine> medicineList = new LinkedList<>();
+  List<Medicine> requestList = new LinkedList<>();
   List<FreeBoard> freeBoardList = new LinkedList<>();
   List<NoticeBoard> noticeBoardList = new LinkedList<>();
   List<DoctorBoard> doctorBoardList = new LinkedList<>();
