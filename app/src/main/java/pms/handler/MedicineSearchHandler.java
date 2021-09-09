@@ -12,19 +12,35 @@ public class MedicineSearchHandler extends AbstractMedicineHandler{
 
   public void execute() {
 
-
     String input = Prompt.inputString("찾을 약의 이름을 입력해주세요 > ");
     System.out.println();
-    Medicine medicine = validMedicine(input);
-    if(medicine == null) {
-      System.out.println("찾는 약이 없습니다.");
-    }
-    else {
-      System.out.printf("약의 이름 : %s 이며 %s 역할을 합니다.", medicine.getName(), medicine.getEffect());
+
+
+    int count = 0;
+    for (Medicine medicineList : medicineList) {
+      if (!medicineList.getName().contains(input))
+      {
+        continue;
+      }
+      count++;
+      System.out.printf("이름: %s\n", medicineList.getName());
+      System.out.printf("권장연령: %d\n", medicineList.getAgeLimit());
+      System.out.printf("모양: %s\n", medicineList.getShape()); // 우리는 익명이기 때문에 Id로
+      System.out.printf("색상: %s\n", medicineList.getColor());
+      System.out.printf("효과: %s\n", medicineList.getEffect());
       System.out.println();
+
+    }
+    if (count == 0 ) {
+      System.out.println("찾는 약품이 없습니다.");
     }
   }
+
+
 }
+
+
+
 
 
 

@@ -7,6 +7,7 @@ public abstract class Menu {
   public static final int ACCESS_DOCTOR = 0x06;      // 0110
   public static final int ACCESS_ADMIN = 0x14;     // 1110
 
+
   String title;
 
   int accessScope;
