@@ -4,13 +4,13 @@ import java.util.List;
 import pms.domain.Medicine;
 import util.Prompt;
 
-public class AdminApprovalHandler implements Command {
+public class AdminDeleteHandler implements Command {
 
   List<Medicine> requestList;
   List<Medicine> medicineList;
 
 
-  public AdminApprovalHandler(List<Medicine> requestList, List<Medicine> medicineList) {
+  public AdminDeleteHandler(List<Medicine> requestList, List<Medicine> medicineList) {
     this.requestList = requestList;
     this.medicineList = medicineList;
   }
