@@ -17,6 +17,7 @@ import pms.domain.Medicine;
 import pms.domain.Member;
 import pms.domain.NoticeBoard;
 import pms.handler.AdminApprovalHandler;
+import pms.handler.AdminListHandler;
 import pms.handler.AdminUpdateHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
@@ -100,7 +101,7 @@ public class Main {
   public Main() {
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestList, medicineList));
     commandMap.put("/admin/update", new AdminUpdateHandler(requestList, medicineList));
-    // commandMap.put("/admin/list", new 구현예정);
+    commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, freeBoardList));
 
     commandMap.put("/intro", new IntroMenu());
 
@@ -367,11 +368,21 @@ public class Main {
 
 
   private Menu createApprovalMenu() {
-    MenuGroup approvalMenu = new MenuGroup("승인 관리", Menu.ACCESS_ADMIN);
+    MenuGroup approvalMenu = new MenuGroup("관리자 알림", Menu.ACCESS_ADMIN);
 
-    approvalMenu.add(new MenuItem("승인 허가", Menu.ACCESS_ADMIN, "/admin/approval")); // AdminApprovalHandler
-    approvalMenu.add(new MenuItem("약품 수정", Menu.ACCESS_ADMIN, "/admin/update"));
-    approvalMenu.add(new MenuItem("승인 내역", Menu.ACCESS_ADMIN,"/admin/list")); // AdminListHandler
+    approvalMenu.add(new MenuItem("승인 요청 / 신고 목록", Menu.ACCESS_ADMIN,"/admin/list")); // AdminListHandler
+    //   approvalMenu.add(new MenuItem("승인 내역", Menu.ACCESS_ADMIN,"/admin/*")); // AdminListHandler
+    MenuGroup approvalManagement = new MenuGroup("승인 관리", Menu.ACCESS_ADMIN);
+
+    approvalManagement.add(new MenuItem("약품 승인", Menu.ACCESS_ADMIN, "/admin/approval")); // 여기서 3지선다 승인, 삭제, 뒤로가기
+    approvalManagement.add(new MenuItem("약품 변경", Menu.ACCESS_ADMIN, "/admin/update")); // 변경 or not
+    approvalManagement.add(new MenuItem("게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/*")); // 신고하시겠습니까? yes => 삭제
+
+
+    approvalMenu.add(approvalManagement);
+
+
+
     return approvalMenu;
   }
 
