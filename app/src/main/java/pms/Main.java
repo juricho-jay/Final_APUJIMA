@@ -23,16 +23,12 @@ import pms.handler.Command;
 import pms.handler.CounselingMemberAddHandler;
 import pms.handler.CounselingMemberDoctorListHandler;
 import pms.handler.CounselingMemberMyListHandler;
-import pms.handler.DoctorAdd;
 import pms.handler.DoctorBoardAddHandler;
 import pms.handler.DoctorBoardDeleteHandler;
 import pms.handler.DoctorBoardDetailHandler;
 import pms.handler.DoctorBoardListHandler;
 import pms.handler.DoctorBoardSearchHandler;
 import pms.handler.DoctorBoardUpdateHandler;
-import pms.handler.DoctorFindId;
-import pms.handler.DoctorFindPassword;
-import pms.handler.DoctorLogin;
 import pms.handler.DoctorMemberListHandler;
 import pms.handler.FreeBoardAddHandler;
 import pms.handler.FreeBoardDeleteHandler;
@@ -48,10 +44,7 @@ import pms.handler.MedicineListHandler;
 import pms.handler.MedicineSearchHandler;
 import pms.handler.MedicineUpdateHandler;
 import pms.handler.MemberAddHandler;
-import pms.handler.MemberFindId;
-import pms.handler.MemberFindPassword;
 import pms.handler.MemberListHandler;
-import pms.handler.MemberLogin;
 import pms.handler.NoticeBoardAddHandler;
 import pms.handler.NoticeBoardDeleteHandler;
 import pms.handler.NoticeBoardDetailHandler;
@@ -68,26 +61,6 @@ public class Main {
   List<FreeBoard> freeBoardList = new LinkedList<>();
   List<NoticeBoard> noticeBoardList = new LinkedList<>();
   List<DoctorBoard> doctorBoardList = new LinkedList<>();
-
-  DoctorLogin doctorLogin = new DoctorLogin(doctormemberList);
-  DoctorAdd doctorAdd = new DoctorAdd(doctormemberList);
-  DoctorFindId doctorFindId = new DoctorFindId(doctormemberList);
-  DoctorFindPassword doctorFindPassword = new DoctorFindPassword(doctormemberList);
-
-
-
-  MemberLogin memberLogin = new MemberLogin(memberList);
-  MemberAddHandler memberAdd = new MemberAddHandler(memberList);
-  MemberFindId memberFindId = new MemberFindId(memberList);
-  MemberFindPassword memberFindPassword = new MemberFindPassword(memberList);
-
-
-  FreeBoardListHandler FreeboardList = new FreeBoardListHandler(freeBoardList);
-
-
-  MedicineAddHandler medicineAdd = new MedicineAddHandler(medicineList);
-  MedicineListHandler medicinelist = new MedicineListHandler(medicineList);
-  MedicineSearchHandler medicineSearch = new MedicineSearchHandler(medicineList);
 
 
   IntroMenu intro = new IntroMenu();
@@ -154,12 +127,12 @@ public class Main {
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardList));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
 
-    commandMap.put("/medecine/add", new MedicineAddHandler(medicineList));
-    commandMap.put("/medecine/list", new MedicineListHandler(medicineList));
-    commandMap.put("/medecine/detail", new MedicineDetailHandler(medicineList));
-    commandMap.put("/medecine/update", new MedicineUpdateHandler(medicineList));
-    commandMap.put("/medecine/delete", new MedicineDeleteHandler(medicineList));
-    commandMap.put("/medecine/search", new MedicineSearchHandler(medicineList));
+    commandMap.put("/medicine/add", new MedicineAddHandler(medicineList));
+    commandMap.put("/medicine/list", new MedicineListHandler(medicineList));
+    commandMap.put("/medicine/detail", new MedicineDetailHandler(medicineList));
+    commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineList));
+    commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineList));
+    commandMap.put("/medicine/search", new MedicineSearchHandler(medicineList));
 
 
 
@@ -233,7 +206,7 @@ public class Main {
     mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL, "/auth/userInfo"));
     mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL, "/auth/logout"));
 
-    mainMenuGroup.add(new MenuItem("소개", Menu.ACCESS_LOGOUT, "/intro"));
+    mainMenuGroup.add(new MenuItem("소개", "/intro"));
     mainMenuGroup.add(createMedicineMenu());
     mainMenuGroup.add(createCounselingMenu());
     mainMenuGroup.add(createMemberMenu());
@@ -286,10 +259,6 @@ public class Main {
     return doctorBoardMenu;
   }
 
-
-
-
-
   private Menu createMemberMenu() {
     MenuGroup memberMenu = new MenuGroup("회원", Menu.ACCESS_LOGOUT);
 
@@ -310,14 +279,14 @@ public class Main {
   }
 
   private Menu createMedicineMenu() {
-    MenuGroup medicineMenu = new MenuGroup("약국", Menu.ACCESS_LOGOUT);
+    MenuGroup medicineMenu = new MenuGroup("약국");
 
     medicineMenu.add(new MenuItem("약품 목록", "/medicine/list"));
     medicineMenu.add(new MenuItem("약품 추가", Menu.ACCESS_ADMIN, "/medicine/add"));
     medicineMenu.add(new MenuItem("약품 수정", Menu.ACCESS_ADMIN, "/medicine/update"));
     medicineMenu.add(new MenuItem("약품 삭제", Menu.ACCESS_ADMIN, "/medicine/delete"));
-    medicineMenu.add(new MenuItem("약품 검색", Menu.ACCESS_GENERAL | Menu.ACCESS_LOGOUT, "/medicine/search"));
-    medicineMenu.add(new MenuItem("약품 상세보기", Menu.ACCESS_GENERAL | Menu.ACCESS_LOGOUT, "/medicine/detail"));
+    medicineMenu.add(new MenuItem("약품 검색", "/medicine/search"));
+    medicineMenu.add(new MenuItem("약품 상세보기", "/medicine/detail"));
 
     return medicineMenu;
   }

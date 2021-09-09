@@ -20,6 +20,8 @@ public class MemberAddHandler extends AbstractMemberHandler{
     testUser.setBirthDay("2000-09-01");
     testUser.setPhoto("a.png");
     testUser.setSex("여");
+    testUser.setInterest("심리학");
+    testUser.setDoctorLicense("심리치료사 1급");
     testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     memberList.add(testUser);
@@ -49,10 +51,9 @@ public class MemberAddHandler extends AbstractMemberHandler{
     testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     memberList.add(testUser);
-
-
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("[회원가입] 페이지입니다.");
