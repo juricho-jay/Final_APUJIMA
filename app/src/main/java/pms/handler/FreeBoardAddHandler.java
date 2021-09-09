@@ -8,9 +8,9 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
 
   public FreeBoardAddHandler(List<FreeBoard> freeBoardList) {
     super(freeBoardList);
-    // TODO Auto-generated constructor stub
   }
 
+  @Override
   public void execute() {
     System.out.println("[글쓰기] 페이지입니다.");
     System.out.println();

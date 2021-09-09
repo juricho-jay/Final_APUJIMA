@@ -6,10 +6,18 @@ import pms.domain.NoticeBoard;
 import util.Prompt;
 
 public class NoticeBoardAddHandler extends AbstractNoticeBoardHandler{
-  List<NoticeBoard> noticeBoardList;
+
 
   public NoticeBoardAddHandler(List<NoticeBoard> noticeBoardList) {
     super(noticeBoardList);
+
+    NoticeBoard testNoticeBoard = new NoticeBoard();
+    testNoticeBoard.setNo(1);
+    testNoticeBoard.setTitle("9월 공지사항입니다.");
+    testNoticeBoard.setWriter(AuthLoginHandler.loginUser);
+    testNoticeBoard.setContent("욕설, 비방은 자제해주세요.");
+
+    noticeBoardList.add(testNoticeBoard);
   }
 
   @Override
