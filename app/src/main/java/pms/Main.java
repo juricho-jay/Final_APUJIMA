@@ -43,7 +43,6 @@ import pms.handler.FreeBoardUpdateHandler;
 import pms.handler.IntroMenu;
 import pms.handler.MedicineAddHandler;
 import pms.handler.MedicineDeleteHandler;
-import pms.handler.MedicineDetailHandler;
 import pms.handler.MedicineListHandler;
 import pms.handler.MedicineSearchHandler;
 import pms.handler.MedicineUpdateHandler;
@@ -85,9 +84,7 @@ public class Main {
   FreeBoardListHandler FreeboardList = new FreeBoardListHandler(freeBoardList);
 
 
-  //MedicineAddHandler medicineAdd = new MedicineAddHandler(medicineList);
-  //MedicineListHandler medicinelist = new MedicineListHandler(medicineList);
-  //MedicineSearchHandler medicineSearch = new MedicineSearchHandler(medicineList);
+
 
 
   IntroMenu intro = new IntroMenu();
@@ -156,7 +153,6 @@ public class Main {
 
     commandMap.put("/medicine/add", new MedicineAddHandler(medicineList));
     commandMap.put("/medicine/list", new MedicineListHandler(medicineList));
-    commandMap.put("/medicine/detail", new MedicineDetailHandler(medicineList));
     commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineList));
     commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineList));
     commandMap.put("/medicine/search", new MedicineSearchHandler(medicineList));
@@ -202,7 +198,7 @@ public class Main {
     try (ObjectOutputStream out = new ObjectOutputStream(
         new FileOutputStream("member.data"))) {
 
-         out.writeObject(memberList);
+      out.writeObject(memberList);
 
       System.out.println("멤버 데이터 저장 완료!");
 
@@ -212,6 +208,19 @@ public class Main {
     }
   }
 
+  private void saveMedicine() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("medicine.data"))) {
+
+      out.writeObject(medicineList);
+
+      System.out.println("약품 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("약품 데이터를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
 
 
 
@@ -265,12 +274,12 @@ public class Main {
   private Menu createNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항");
 
-    noticeMenu.add(new MenuItem("글쓰기", Menu.ACCESS_ADMIN, "/notice/add"));
-    noticeMenu.add(new MenuItem("목록", "/notice/list"));
-    noticeMenu.add(new MenuItem("상세보기", "/notice/detail"));
-    noticeMenu.add(new MenuItem("변경", Menu.ACCESS_ADMIN, "/notice/update"));
-    noticeMenu.add(new MenuItem("삭제", Menu.ACCESS_ADMIN, "/notice/delete"));
-    noticeMenu.add(new MenuItem("검색", "/notice/search"));
+    noticeMenu.add(new MenuItem("글쓰기", Menu.ACCESS_ADMIN, "/noticeBoard/add"));
+    noticeMenu.add(new MenuItem("목록", "/noticeBoard/list"));
+    noticeMenu.add(new MenuItem("상세보기", "/noticeBoard/detail"));
+    noticeMenu.add(new MenuItem("변경", Menu.ACCESS_ADMIN, "/noticeBoard/update"));
+    noticeMenu.add(new MenuItem("삭제", Menu.ACCESS_ADMIN, "/noticeBoard/delete"));
+    noticeMenu.add(new MenuItem("검색", "/noticeBoard/search"));
     return noticeMenu;
   }
 
@@ -313,11 +322,10 @@ public class Main {
     MenuGroup medicineMenu = new MenuGroup("약국");
 
     medicineMenu.add(new MenuItem("약품 목록", "/medicine/list"));
-    medicineMenu.add(new MenuItem("약품 추가", Menu.ACCESS_ADMIN, "/medicine/add"));
+    medicineMenu.add(new MenuItem("약품 추가", Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN, "/medicine/add"));
     medicineMenu.add(new MenuItem("약품 수정", Menu.ACCESS_ADMIN, "/medicine/update"));
     medicineMenu.add(new MenuItem("약품 삭제", Menu.ACCESS_ADMIN, "/medicine/delete"));
     medicineMenu.add(new MenuItem("약품 검색",  "/medicine/search"));
-    medicineMenu.add(new MenuItem("약품 상세보기", "/medicine/detail"));
 
     return medicineMenu;
   }

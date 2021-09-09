@@ -9,8 +9,8 @@ public class MedicineAddHandler extends AbstractMedicineHandler{
   public MedicineAddHandler(List<Medicine> medicineList) {
     super(medicineList);
 
-  
-  
+
+
     Medicine testMedicine = new Medicine();
     testMedicine.setName("브린텔릭스");
     testMedicine.setAgeLimit(19);
@@ -56,7 +56,14 @@ public class MedicineAddHandler extends AbstractMedicineHandler{
 
     medicineList.add(testMedicine);
 
-   
+    testMedicine = new Medicine();
+    testMedicine.setName("알프람2");
+    testMedicine.setAgeLimit(5);
+    testMedicine.setShape("네모");
+    testMedicine.setColor("세모");
+    testMedicine.setEffect("엔돌핀");
+    medicineList.add(testMedicine);
+
   }
 
   @Override
