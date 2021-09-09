@@ -85,9 +85,9 @@ public class Main {
   FreeBoardListHandler FreeboardList = new FreeBoardListHandler(freeBoardList);
 
 
-  MedicineAddHandler medicineAdd = new MedicineAddHandler(medicineList);
-  MedicineListHandler medicinelist = new MedicineListHandler(medicineList);
-  MedicineSearchHandler medicineSearch = new MedicineSearchHandler(medicineList);
+  //MedicineAddHandler medicineAdd = new MedicineAddHandler(medicineList);
+  //MedicineListHandler medicinelist = new MedicineListHandler(medicineList);
+  //MedicineSearchHandler medicineSearch = new MedicineSearchHandler(medicineList);
 
 
   IntroMenu intro = new IntroMenu();
@@ -154,12 +154,12 @@ public class Main {
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardList));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
 
-    commandMap.put("/medecine/add", new MedicineAddHandler(medicineList));
-    commandMap.put("/medecine/list", new MedicineListHandler(medicineList));
-    commandMap.put("/medecine/detail", new MedicineDetailHandler(medicineList));
-    commandMap.put("/medecine/update", new MedicineUpdateHandler(medicineList));
-    commandMap.put("/medecine/delete", new MedicineDeleteHandler(medicineList));
-    commandMap.put("/medecine/search", new MedicineSearchHandler(medicineList));
+    commandMap.put("/medicine/add", new MedicineAddHandler(medicineList));
+    commandMap.put("/medicine/list", new MedicineListHandler(medicineList));
+    commandMap.put("/medicine/detail", new MedicineDetailHandler(medicineList));
+    commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineList));
+    commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineList));
+    commandMap.put("/medicine/search", new MedicineSearchHandler(medicineList));
 
 
 
@@ -310,14 +310,14 @@ public class Main {
   }
 
   private Menu createMedicineMenu() {
-    MenuGroup medicineMenu = new MenuGroup("약국", Menu.ACCESS_LOGOUT);
+    MenuGroup medicineMenu = new MenuGroup("약국");
 
     medicineMenu.add(new MenuItem("약품 목록", "/medicine/list"));
     medicineMenu.add(new MenuItem("약품 추가", Menu.ACCESS_ADMIN, "/medicine/add"));
     medicineMenu.add(new MenuItem("약품 수정", Menu.ACCESS_ADMIN, "/medicine/update"));
     medicineMenu.add(new MenuItem("약품 삭제", Menu.ACCESS_ADMIN, "/medicine/delete"));
-    medicineMenu.add(new MenuItem("약품 검색", Menu.ACCESS_GENERAL | Menu.ACCESS_LOGOUT, "/medicine/search"));
-    medicineMenu.add(new MenuItem("약품 상세보기", Menu.ACCESS_GENERAL | Menu.ACCESS_LOGOUT, "/medicine/detail"));
+    medicineMenu.add(new MenuItem("약품 검색",  "/medicine/search"));
+    medicineMenu.add(new MenuItem("약품 상세보기", "/medicine/detail"));
 
     return medicineMenu;
   }

@@ -18,7 +18,6 @@ public class MedicineListHandler extends AbstractMedicineHandler{
     for(int i = 0; i< medicineList.size(); i++) {
       System.out.println(medicineList.get(i).getName());
     }
-
     //serachM();
 
   }

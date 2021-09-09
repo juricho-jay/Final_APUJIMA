@@ -14,6 +14,7 @@ public class AuthUserInfoHandler extends AbstractMemberHandler implements Comman
 
   @Override
   public void execute() {
+    System.out.println();
     System.out.println("[내정보] 페이지입니다.");
 
     Member loginUser = AuthLoginHandler.getLoginUser();
@@ -23,14 +24,12 @@ public class AuthUserInfoHandler extends AbstractMemberHandler implements Comman
       return;
     }
 
-    for (Member member : memberList) {
-      if (member.getDoctor() == 2) {
-        System.out.printf("%s 힐러님 환영합니다!", loginUser.getName());
-        System.out.printf("전문 분야: %s\n", loginUser.getInterest());
-        System.out.printf("의료인 면허 증명서: %s\n", loginUser.getDoctorLicense());
-      } else {
-        System.out.printf("%s님 환영합니다!\n", loginUser.getName());
-      }
+    if (loginUser.getDoctor() == 2) {
+      System.out.printf("%s 힐러님 환영합니다!\n", loginUser.getName());
+      System.out.printf("전문 분야: %s\n", loginUser.getInterest());
+      System.out.printf("의료인 면허 증명서: %s\n", loginUser.getDoctorLicense());
+    } else {
+      System.out.printf("%s님 환영합니다!\n", loginUser.getName());
     }
     System.out.printf("아이디: %s\n", loginUser.getId());
     System.out.printf("이메일: %s\n", loginUser.getEmail());
