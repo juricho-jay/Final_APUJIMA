@@ -9,8 +9,6 @@ public class MedicineAddHandler extends AbstractMedicineHandler{
   public MedicineAddHandler(List<Medicine> medicineList) {
     super(medicineList);
 
-
-
     Medicine testMedicine = new Medicine();
     testMedicine.setName("브린텔릭스");
     testMedicine.setAgeLimit(19);
