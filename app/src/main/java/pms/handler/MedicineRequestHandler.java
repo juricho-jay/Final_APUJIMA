@@ -27,10 +27,6 @@ public class MedicineRequestHandler implements Command{
     testRequest.setEffect("간질, 공황 장애");
 
     requestList.add(testRequest);
-<<<<<<< HEAD
-=======
-
->>>>>>> e577638eaaa76b3ca3bfa50f2fc537f2536d1677
   }
 
 
