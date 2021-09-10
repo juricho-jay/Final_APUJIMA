@@ -24,9 +24,9 @@ public class CounselingMemberMyListHandler extends AbstractCounselingMemberHandl
     System.out.printf("이름: %s\n", loginUser.getName());
     System.out.printf("연락처: %s\n", loginUser.getPhoneNum());
     for (int i = 0; i < counselingMemberList.size() ; i++) {
-      System.out.printf("질병여부 : %s\n"
+      System.out.printf("지병여부 : %s\n"
+          + "현재증상 : %s\n"
           + "상담내용 : %s\n"
-          + "환자가 상담할 분야 : %s\n"
           + "의사성별 : %s\n",
           counselingMemberList.get(i).getDisease(),
           counselingMemberList.get(i).getContent(),

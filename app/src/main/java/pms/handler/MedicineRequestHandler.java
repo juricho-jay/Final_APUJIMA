@@ -27,7 +27,6 @@ public class MedicineRequestHandler implements Command{
     testRequest.setEffect("간질, 공황 장애");
 
     requestList.add(testRequest);
-
   }
 
 
@@ -47,8 +46,6 @@ public class MedicineRequestHandler implements Command{
       if(input.equalsIgnoreCase("y")) {
         System.out.println("관리자에게 약품등록을 요청하였습니다.");
         requestList.add(medicine);
-        // 관리자에게 요청하기
-
         break;
       } else if(input.equalsIgnoreCase("n") || input.equals("")) {
         System.out.println("등록요청이 취소되었습니다.");
@@ -59,8 +56,6 @@ public class MedicineRequestHandler implements Command{
       }
     }
 
-
-    // medicineList.add(medicine);
 
     System.out.println();
     System.out.println("약품 등록 완료!");

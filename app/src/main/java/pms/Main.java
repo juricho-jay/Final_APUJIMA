@@ -17,6 +17,8 @@ import pms.domain.Medicine;
 import pms.domain.Member;
 import pms.domain.NoticeBoard;
 import pms.handler.AdminApprovalHandler;
+import pms.handler.AdminListHandler;
+import pms.handler.AdminReportDeleteHandler;
 import pms.handler.AdminUpdateHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
@@ -100,7 +102,9 @@ public class Main {
   public Main() {
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestList, medicineList));
     commandMap.put("/admin/update", new AdminUpdateHandler(requestList, medicineList));
-    // commandMap.put("/admin/list", new 구현예정);
+    commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, freeBoardList));
+    commandMap.put("/admin/delete", new AdminReportDeleteHandler(freeBoardList , reportList));
+
 
     commandMap.put("/intro", new IntroMenu());
 
@@ -127,7 +131,7 @@ public class Main {
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList));
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList));
     commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardList));
@@ -139,6 +143,7 @@ public class Main {
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardList));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
 
+<<<<<<< HEAD
 
 
 
@@ -146,6 +151,8 @@ public class Main {
 
 
 
+=======
+>>>>>>> 7daba302f3d227726afabbf7e3b4ac34a5b52069
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList));
 
@@ -167,6 +174,7 @@ public class Main {
     Prompt.close();
 
     saveMembers();
+    System.out.println("[APUJIMA]에 방문해 주셔서 감사합니다. 좋은하루 되시기 바랍니다!");
   }
 
   private void loadMembers() {
@@ -188,7 +196,7 @@ public class Main {
         new FileOutputStream("member.data"))) {
 
       out.writeObject(memberList);
-
+      System.out.println();
       System.out.println("멤버 데이터 저장 완료!");
 
     } catch (Exception e) {
@@ -280,33 +288,6 @@ public class Main {
     }
   }
 
-  private void loadDoctorMember() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("doctorMember.data"))) {
-
-      doctormemberList.addAll((List<DoctorMember>) in.readObject());
-
-      System.out.println("의사멤버 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 의사멤버 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveDoctorMember() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("doctorMember.data"))) {
-
-      out.writeObject(doctormemberList);
-
-      System.out.println("의사멤버 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("의사멤버 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
 
   private void loadDoctorBoard() {
     try (ObjectInputStream in = new ObjectInputStream(
@@ -387,8 +368,8 @@ public class Main {
     mainMenuGroup.add(createCommunityMenu());
 
     mainMenuGroup.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
-    mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL, "/auth/userInfo"));
-    mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL, "/auth/logout"));
+    mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/auth/userInfo"));
+    mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/auth/logout"));
 
     mainMenuGroup.add(createMemberMenu());
 
@@ -401,11 +382,21 @@ public class Main {
 
 
   private Menu createApprovalMenu() {
-    MenuGroup approvalMenu = new MenuGroup("승인 관리", Menu.ACCESS_ADMIN);
+    MenuGroup approvalMenu = new MenuGroup("관리자 알림", Menu.ACCESS_ADMIN);
 
-    approvalMenu.add(new MenuItem("승인 허가", Menu.ACCESS_ADMIN, "/admin/approval")); // AdminApprovalHandler
-    approvalMenu.add(new MenuItem("약품 수정", Menu.ACCESS_ADMIN, "/admin/update"));
-    approvalMenu.add(new MenuItem("승인 내역", Menu.ACCESS_ADMIN,"/admin/list")); // AdminListHandler
+    approvalMenu.add(new MenuItem("승인 요청 / 신고 목록", Menu.ACCESS_ADMIN,"/admin/list")); // AdminListHandler
+    //   approvalMenu.add(new MenuItem("승인 내역", Menu.ACCESS_ADMIN,"/admin/*")); // AdminListHandler
+    MenuGroup approvalManagement = new MenuGroup("승인 관리", Menu.ACCESS_ADMIN);
+
+    approvalManagement.add(new MenuItem("약품 승인", Menu.ACCESS_ADMIN, "/admin/approval")); // 여기서 3지선다 승인, 삭제, 뒤로가기
+    approvalManagement.add(new MenuItem("약품 변경", Menu.ACCESS_ADMIN, "/admin/update")); // 변경 or not
+    approvalManagement.add(new MenuItem("게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/delete")); // 신고하시겠습니까? yes => 삭제
+
+
+    approvalMenu.add(approvalManagement);
+
+
+
     return approvalMenu;
   }
 
@@ -427,7 +418,7 @@ public class Main {
 
   private Menu createCounselingMenu() {
     MenuGroup memberMenu = new MenuGroup("HEALER");
-    memberMenu.add(new MenuItem("의사 리스트", Menu.ACCESS_LOGOUT, "/counselingMember/list"));
+    memberMenu.add(new MenuItem("의사 리스트", Menu.ACCESS_LOGOUT | Menu.ACCESS_GENERAL, "/counselingMember/list"));
     memberMenu.add(new MenuItem("상담신청", Menu.ACCESS_GENERAL, "/counselingMember/add"));
     memberMenu.add(new MenuItem("My 상담 목록", Menu.ACCESS_GENERAL, "/counselingMember/myList"));
     memberMenu.add(new MenuItem("Healer 상담 목록", Menu.ACCESS_DOCTOR, "/counselingMember/doctorList"));

@@ -18,7 +18,7 @@ public class MemberLogin extends AbstractMemberHandler{
       System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
       System.out.println("(취소: #)");
 
-      String id = Prompt.inputString("아이디> ");
+      String id = Prompt.inputString("아이디(뒤로가기 #)> ");
       if (id.contains("#")) {
         return;
       }

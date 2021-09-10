@@ -21,7 +21,7 @@ public class AdminApprovalListHandler implements Command {
     System.out.println("[승인 허가 / 신고 글 삭제 내역]");
 
     for(int i = 0; i< requestList.size(); i++) {
-      System.out.printf("약품명 : %s\n 효과 : %s\n" ,requestList.get(i).getName(), requestList.get(i).getEffect());
+      System.out.printf("약품명 : %s\n 효  능 : %s\n" ,requestList.get(i).getName(), requestList.get(i).getEffect());
     }
 
     System.out.println("승인 허가할 약품의 이름을 입력하세요.");
