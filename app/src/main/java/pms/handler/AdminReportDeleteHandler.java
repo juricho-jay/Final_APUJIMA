@@ -27,9 +27,12 @@ public class AdminReportDeleteHandler implements Command{
       System.out.printf("게시글 번호 : %d\n"
           + "게시글 제목 : %s\n"
           + "게시글 내용 : %s\n"
-          + " 👍 개수 : %d\n",
+          + "게시글 작성자 : %s\n"
+          + " 👍 개수 : %d\n\n"
+          + "신고 사유 : %s\n"
+          + "신고요청 유저 : %s\n",
           reportList.get(i).getNo(), reportList.get(i).getTitle(), reportList.get(i).getContent(),
-          reportList.get(i).getLike() );
+          reportList.get(i).getWriter().getId(),reportList.get(i).getLike(), reportList.get(i).getReason(),reportList.get(i).getRequester() );
       System.out.println();
     }
 

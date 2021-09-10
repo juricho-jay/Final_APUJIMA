@@ -21,7 +21,9 @@ public class CounselingMemberAddHandler extends AbstractCounselingMemberHandler{
     CounselingMember counselingMember = new CounselingMember();
 
     System.out.printf("이름: %s\n", loginUser.getName());
+    counselingMember.setName(loginUser.getName());
     System.out.printf("연락처: %s\n", loginUser.getPhoneNum());
+    counselingMember.setPhoneNum(loginUser.getPhoneNum());
 
 
     counselingMember.setDisease(Prompt.inputString("지병여부> "));

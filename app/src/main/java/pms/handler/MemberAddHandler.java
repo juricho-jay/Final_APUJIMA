@@ -60,7 +60,11 @@ public class MemberAddHandler extends AbstractMemberHandler{
     Member member = new Member();
 
     while (true) {
-      member.setDoctor(Prompt.inputInt("1.일반 2.의사 선택> "));
+      String input = Prompt.inputString("1.일반 2.의사 선택 (뒤로가기 #)> ");
+      if(input.equals("#")) 
+        return;
+
+      member.setDoctor(Integer.parseInt(input));
       if (member.getDoctor() == 1) {
         break;
       } else if (member.getDoctor() == 2) {
@@ -99,6 +103,10 @@ public class MemberAddHandler extends AbstractMemberHandler{
       }
       if(member.getId() != "")
         break;
+    }
+
+    if(member.getName().equals("관리자") && member.getId().equals("admin")) {
+      member.setDoctor(3);
     }
 
     member.setPassword(Prompt.inputString("비밀번호> "));
