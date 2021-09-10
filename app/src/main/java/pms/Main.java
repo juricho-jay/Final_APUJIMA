@@ -140,15 +140,12 @@ public class Main {
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
 
 
-<<<<<<< HEAD
-=======
 
 
 
 
 
 
->>>>>>> e577638eaaa76b3ca3bfa50f2fc537f2536d1677
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList));
 
