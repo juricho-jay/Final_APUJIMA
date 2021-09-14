@@ -16,12 +16,12 @@ public class MailBoxDetailHandler extends AbstractMailBoxHandler {
 
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();
-    int no = Prompt.inputInt("게시글 번호> ");
+    int no = Prompt.inputInt("쪽지 번호> ");
 
     MailBox mailBox = findByNo(no);
 
     if (mailBox == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("해당 번호의 쪽지가 없습니다.");
       return;
     }
 
