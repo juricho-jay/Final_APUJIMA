@@ -143,7 +143,6 @@ public class Main {
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardList));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
 
-<<<<<<< HEAD
 
 
 
@@ -151,8 +150,6 @@ public class Main {
 
 
 
-=======
->>>>>>> 7daba302f3d227726afabbf7e3b4ac34a5b52069
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList));
 
