@@ -13,6 +13,7 @@ import pms.domain.CounselingMember;
 import pms.domain.DoctorBoard;
 import pms.domain.DoctorMember;
 import pms.domain.FreeBoard;
+import pms.domain.MailBox;
 import pms.domain.Medicine;
 import pms.domain.Member;
 import pms.domain.NoticeBoard;
@@ -66,7 +67,8 @@ public class Main {
   List<FreeBoard> freeBoardList = new LinkedList<>();
   List<NoticeBoard> noticeBoardList = new LinkedList<>();
   List<DoctorBoard> doctorBoardList = new LinkedList<>();
-  List<FreeBoard> reportList = new LinkedList<>(); 
+  List<FreeBoard> reportList = new LinkedList<>();
+  List<MailBox> mailBoxList = new LinkedList<>();
 
 
   IntroMenu intro = new IntroMenu();
