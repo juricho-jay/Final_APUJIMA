@@ -11,5 +11,13 @@ public abstract class AbstractMailBoxHandler implements Command{
   }
 
 
+  protected MailBox findByNo(int no) {
+    for (MailBox mailBox : mailBoxList) {
+      if (mailBox.getMailNo() == no) {
+        return mailBox;
+      }
+    }
+    return null;
+  }
 
 }

@@ -4,17 +4,24 @@ import java.sql.Date;
 
 public class MailBox {
 
-  private String sender;
+  private int mailNo;
+  private Member sender;
   private String title;
   private String content;
-  private String receiver;
+  private Member receiver;
   private Date sendingTime;
 
 
-  public String getSender() {
+  public int getMailNo() {
+    return mailNo;
+  }
+  public void setMailNo(int mailNo) {
+    this.mailNo = mailNo;
+  }
+  public Member getSender() {
     return sender;
   }
-  public void setSender(String sender) {
+  public void setSender(Member sender) {
     this.sender = sender;
   }
   public String getTitle() {
@@ -29,10 +36,10 @@ public class MailBox {
   public void setContent(String content) {
     this.content = content;
   }
-  public String getReceiver() {
+  public Member getReceiver() {
     return receiver;
   }
-  public void setReceiver(String receiver) {
+  public void setReceiver(Member receiver) {
     this.receiver = receiver;
   }
   public Date getSendingTime() {
