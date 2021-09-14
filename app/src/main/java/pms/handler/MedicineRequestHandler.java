@@ -10,23 +10,6 @@ public class MedicineRequestHandler implements Command{
   public MedicineRequestHandler(List<Medicine> requestList) {
     this.requestList = requestList;
 
-    Medicine testRequest = new Medicine();
-    testRequest.setName("자낙스");
-    testRequest.setAgeLimit(15);
-    testRequest.setShape("타원형");
-    testRequest.setColor("주황");
-    testRequest.setEffect("불안 장애 치료 및 완화");
-
-    requestList.add(testRequest);
-
-    testRequest = new Medicine();
-    testRequest.setName("리보트릴");
-    testRequest.setAgeLimit(15);
-    testRequest.setShape("원형");
-    testRequest.setColor("주황");
-    testRequest.setEffect("간질, 공황 장애");
-
-    requestList.add(testRequest);
   }
 
 
@@ -36,10 +19,10 @@ public class MedicineRequestHandler implements Command{
     System.out.println("[약품 등록 요청]");
     Medicine medicine = new Medicine();
     medicine.setName(Prompt.inputString("약품명> "));
-    medicine.setAgeLimit(Prompt.inputInt("권장 나이> "));
-    medicine.setShape(Prompt.inputString("모양> "));
-    medicine.setColor(Prompt.inputString("색상> "));
-    medicine.setEffect(Prompt.inputString("효능> "));
+    medicine.setAgeLimit(Prompt.inputInt("권장연령> "));
+    medicine.setShape(Prompt.inputString("모  양> "));
+    medicine.setColor(Prompt.inputString("색  상> "));
+    medicine.setEffect(Prompt.inputString("효  능> "));
 
     while(true) {
       String input = Prompt.inputString("작성한 약품을 등록요청 하시겠습니까?(y/N)");
@@ -56,10 +39,6 @@ public class MedicineRequestHandler implements Command{
       }
     }
 
-
-    System.out.println();
-    System.out.println("약품 등록 완료!");
-    System.out.println();
   }
 
 

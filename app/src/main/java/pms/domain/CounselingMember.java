@@ -6,7 +6,8 @@ public class CounselingMember implements Serializable {
 
   private String disease;
   private String content;
-  private String title;
+  private String name;
+  private String phoneNum;
   private int counselingStatus;
   private int counselorStatus;
   private String stateLabel;
@@ -14,6 +15,12 @@ public class CounselingMember implements Serializable {
 
 
 
+  public String getPhoneNum() {
+    return phoneNum;
+  }
+  public void setPhoneNum(String phoneNum) {
+    this.phoneNum = phoneNum;
+  }
   public String getDisease() {
     return disease;
   }
@@ -26,11 +33,11 @@ public class CounselingMember implements Serializable {
   public void setContent(String content) {
     this.content = content;
   }
-  public String getTitle() {
-    return title;
+  public String getName() {
+    return name;
   }
-  public void setTitle(String title) {
-    this.title = title;
+  public void setName(String name) {
+    this.name = name;
   }
 
   public int getCounselingStatus() {

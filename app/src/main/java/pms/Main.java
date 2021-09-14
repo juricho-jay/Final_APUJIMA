@@ -180,7 +180,7 @@ public class Main {
 
       memberList.addAll((List<Member>) in.readObject());
 
-      System.out.println("멤버 데이터 로딩 완료!");
+      System.out.println("데이터가 정상적으로 로딩 되었습니다.");
 
     } catch (Exception e) {
       System.out.println("파일에서 멤버 데이터를 읽어 오는 중 오류 발생!");
@@ -194,7 +194,7 @@ public class Main {
 
       out.writeObject(memberList);
       System.out.println();
-      System.out.println("멤버 데이터 저장 완료!");
+      System.out.println("데이터가 정상적으로 저장 되었습니다.");
 
     } catch (Exception e) {
       System.out.println("멤버 데이터를 파일에 저장 중 오류 발생!");
@@ -365,10 +365,10 @@ public class Main {
     mainMenuGroup.add(createCommunityMenu());
 
     mainMenuGroup.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
+    mainMenuGroup.add(new MenuItem("회원가입", Menu.ACCESS_LOGOUT, "/member/add"));
     mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/auth/userInfo"));
     mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/auth/logout"));
 
-    mainMenuGroup.add(createMemberMenu());
 
 
     //    mainMenuGroup.add(createCommunityMenu());
@@ -379,7 +379,7 @@ public class Main {
 
 
   private Menu createApprovalMenu() {
-    MenuGroup approvalMenu = new MenuGroup("관리자 알림", Menu.ACCESS_ADMIN);
+    MenuGroup approvalMenu = new MenuGroup("관리자 메뉴", Menu.ACCESS_ADMIN);
 
     approvalMenu.add(new MenuItem("승인 요청 / 신고 목록", Menu.ACCESS_ADMIN,"/admin/list")); // AdminListHandler
     //   approvalMenu.add(new MenuItem("승인 내역", Menu.ACCESS_ADMIN,"/admin/*")); // AdminListHandler
@@ -390,7 +390,9 @@ public class Main {
     approvalManagement.add(new MenuItem("게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/delete")); // 신고하시겠습니까? yes => 삭제
 
 
+
     approvalMenu.add(approvalManagement);
+    approvalMenu.add(new MenuItem("회원 목록", Menu.ACCESS_ADMIN, "/member/list"));
 
 
 
@@ -415,7 +417,7 @@ public class Main {
 
   private Menu createCounselingMenu() {
     MenuGroup memberMenu = new MenuGroup("HEALER");
-    memberMenu.add(new MenuItem("의사 리스트", Menu.ACCESS_LOGOUT | Menu.ACCESS_GENERAL, "/counselingMember/list"));
+    memberMenu.add(new MenuItem("의사 리스트", Menu.ACCESS_LOGOUT | Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/counselingMember/list"));
     memberMenu.add(new MenuItem("상담신청", Menu.ACCESS_GENERAL, "/counselingMember/add"));
     memberMenu.add(new MenuItem("My 상담 목록", Menu.ACCESS_GENERAL, "/counselingMember/myList"));
     memberMenu.add(new MenuItem("Healer 상담 목록", Menu.ACCESS_DOCTOR, "/counselingMember/doctorList"));
@@ -448,11 +450,11 @@ public class Main {
   private Menu createFreeBoardMenu() {
     MenuGroup freeBoardMenu = new MenuGroup("APUs 자유게시판");
 
-    freeBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL, "/freeBoard/add"));
+    freeBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/add"));
     freeBoardMenu.add(new MenuItem("목록", "/freeBoard/list"));
     freeBoardMenu.add(new MenuItem("상세보기", "/freeBoard/detail"));
-    freeBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL, "/freeBoard/update"));
-    freeBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL, "/freeBoard/delete"));
+    freeBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/update"));
+    freeBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/delete"));
     freeBoardMenu.add(new MenuItem("검색", "/freeBoard/search"));
     return freeBoardMenu;
   }
@@ -469,14 +471,6 @@ public class Main {
     return doctorBoardMenu;
   }
 
-  private Menu createMemberMenu() {
-    MenuGroup memberMenu = new MenuGroup("회원", Menu.ACCESS_LOGOUT);
-
-    memberMenu.add(new MenuItem("회원가입", Menu.ACCESS_LOGOUT, "/member/add"));
-    memberMenu.add(new MenuItem("회원 목록", Menu.ACCESS_ADMIN, "/member/list"));
-
-    return memberMenu;
-  }
 
 
 
