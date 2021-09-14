@@ -21,11 +21,11 @@ public class MailBoxSendHandler extends AbstractMailBoxHandler{
     MailBox mailBox = new MailBox();
 
     mailBox.setMailNo(Prompt.inputInt("쪽지 번호> "));
-    mailBox.setReceiver(Prompt.inputString("받은 사람> "));
+    mailBox.setReceiver(Prompt.inputString("수신인> "));
 
     if (mailBox.getReceiver() != (member.getId())) {
       System.out.println();
-      System.out.printf("-%s- 이라는 ID는 찾을 수 없습니다.", mailBox.getReceiver());
+      System.out.printf("-%s- (이)라는 ID는 찾을 수 없습니다.", mailBox.getReceiver());
     } else return;
 
     mailBox.setTitle(Prompt.inputString("제목> "));
