@@ -8,7 +8,7 @@ public class MailBox {
   private Member sender;
   private String title;
   private String content;
-  private Member receiver;
+  private String receiver;
   private Date sendingTime;
 
 
@@ -36,17 +36,18 @@ public class MailBox {
   public void setContent(String content) {
     this.content = content;
   }
-  public Member getReceiver() {
-    return receiver;
-  }
-  public void setReceiver(Member receiver) {
-    this.receiver = receiver;
-  }
+
   public Date getSendingTime() {
     return sendingTime;
   }
   public void setSendingTime(Date sendingTime) {
     this.sendingTime = sendingTime;
+  }
+  public String getReceiver() {
+    return receiver;
+  }
+  public void setReceiver(String receiver) {
+    this.receiver = receiver;
   }
 
 
