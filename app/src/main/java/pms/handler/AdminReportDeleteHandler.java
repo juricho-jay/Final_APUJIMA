@@ -2,18 +2,21 @@ package pms.handler;
 
 import java.util.List;
 import pms.domain.FreeBoard;
+import pms.domain.MailBox;
 import util.Prompt;
 
 public class AdminReportDeleteHandler implements Command{
 
   List<FreeBoard> freeBoardList;
   List<FreeBoard> reportList;
+  List<MailBox> mailBoxList;
 
   public AdminReportDeleteHandler(List<FreeBoard> freeBoardList, List<FreeBoard> reportList) {
     this.freeBoardList = freeBoardList;
     this.reportList = reportList;
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("[신고 게시판 삭제 허가]");
