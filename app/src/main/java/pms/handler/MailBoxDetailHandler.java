@@ -2,12 +2,14 @@ package pms.handler;
 
 import java.util.List;
 import pms.domain.MailBox;
+import pms.domain.Member;
 import util.Prompt;
 
 public class MailBoxDetailHandler extends AbstractMailBoxHandler {
-
-  public MailBoxDetailHandler(List<MailBox> mailBoxList) {
+  List<Member> memberList;
+  public MailBoxDetailHandler(List<MailBox> mailBoxList , List<Member> memberList) {
     super(mailBoxList);
+    this.memberList = memberList;
     // TODO Auto-generated constructor stub
   }
 

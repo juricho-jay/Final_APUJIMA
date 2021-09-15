@@ -2,12 +2,15 @@ package pms.handler;
 
 import java.util.List;
 import pms.domain.MailBox;
+import pms.domain.Member;
 import util.Prompt;
 
 public class MailBoxDeleteHandler extends AbstractMailBoxHandler{
-
-  public MailBoxDeleteHandler(List<MailBox> mailBoxList) {
+  List<Member> memberList;
+  public MailBoxDeleteHandler(List<MailBox> mailBoxList, List<Member> memberList) {
     super(mailBoxList);
+    this.memberList = memberList;
+
   }
 
   @Override

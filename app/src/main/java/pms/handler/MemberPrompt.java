@@ -12,7 +12,11 @@ public class MemberPrompt {
     this.memberList = memberList;
   }
 
+<<<<<<< HEAD
   protected Member findById(String id) {
+=======
+  public Member findById(String id) {
+>>>>>>> ff4e645331d9326a45df86ab7f0722fcbdbdfb85
     for (Member member : memberList) {
       if (member.getId().equalsIgnoreCase(id)) {
         return member;
@@ -21,7 +25,11 @@ public class MemberPrompt {
     return null;
   }
 
+<<<<<<< HEAD
   protected static Member findById(String id, List<Member> memberList) {
+=======
+  public static Member findById(String id, List<Member> memberList) {
+>>>>>>> ff4e645331d9326a45df86ab7f0722fcbdbdfb85
     for (Member member : memberList) {
       if (member.getId().equalsIgnoreCase(id)) {
         return member;
@@ -48,12 +56,21 @@ public class MemberPrompt {
 
   public static Member promptMember(String label, List<Member> memberList) {
     while (true) {
+<<<<<<< HEAD
       String memberId = Prompt.inputString(label);
       if (memberId.length() == 0) {
         return null;
       }
 
       Member member = findById(memberId, memberList);
+=======
+      String memberName = Prompt.inputString(label);
+      if (memberName.length() == 0) {
+        return null;
+      }
+
+      Member member = findById(memberName, memberList);
+>>>>>>> ff4e645331d9326a45df86ab7f0722fcbdbdfb85
       if (member != null) {
         return member;
       }
@@ -78,5 +95,9 @@ public class MemberPrompt {
     }
     return members;
   }
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> ff4e645331d9326a45df86ab7f0722fcbdbdfb85
