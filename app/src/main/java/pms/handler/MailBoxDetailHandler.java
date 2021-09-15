@@ -29,7 +29,8 @@ public class MailBoxDetailHandler extends AbstractMailBoxHandler {
     System.out.printf("내용 : %s\n", mailBox.getContent());
     System.out.printf("보낸이 : %s\n", mailBox.getSender()); // 우리는 익명이기 때문에 Id로
     System.out.printf("수신자 : %s\n", AuthLoginHandler.getLoginUser().getId());
-    System.out.printf("보낸 시간 : %s\n",mailBox.getSendingTime());
+    System.out.printf("보낸 날짜 : %s\n",mailBox.getSendingTime());
+    System.out.println();
 
   }
 }

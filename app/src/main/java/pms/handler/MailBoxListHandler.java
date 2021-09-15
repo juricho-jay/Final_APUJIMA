@@ -18,6 +18,7 @@ public class MailBoxListHandler extends AbstractMailBoxHandler {
       System.out.println("쪽지 번호 :"  + mailBoxList.get(i).getMailNo());
       System.out.println("보낸 사람 :"  + mailBoxList.get(i).getSender());
       System.out.println("쪽지 제목 :"  + mailBoxList.get(i).getTitle());
+      System.out.println();
     }
 
   }
