@@ -159,15 +159,12 @@ public class Main {
 
 
     commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxList, memberList));
-<<<<<<< HEAD
     commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxList, memberList));
     commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxList, memberList));
     commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList, memberList));
-=======
-    commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxList));
-    commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxList));
-    commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList));
->>>>>>> ca788885b7b606093eb32fc4621700eec49f018b
+    commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxList, memberList));
+    commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxList, memberList));
+    commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList, memberList));
 
 
     commandMap.put("/wiseSaying/saying", new WiseSaying());
