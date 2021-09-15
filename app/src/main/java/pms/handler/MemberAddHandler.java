@@ -69,7 +69,7 @@ public class MemberAddHandler extends AbstractMemberHandler{
     }
 
     member.setPassword(Prompt.inputString("비밀번호> "));
-    member.setBirthDay(Prompt.inputString("생년월일> "));
+    member.setBirthDay(Prompt.inputDate("생년월일> "));
     while(true) {
       member.setEmail(Prompt.inputString("이메일> "));
       if(member.getEmail().contains("@") && member.getEmail().length() > 2) {
