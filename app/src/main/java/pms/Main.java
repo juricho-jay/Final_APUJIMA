@@ -160,9 +160,9 @@ public class Main {
 
   void service() {
 
-    //    loadObjects("freeboard.data", freeBoardList);
-    //    loadObjects("member.data", memberList);
-    //    loadObjects("medicine.data", medicineList);
+    loadObjects("freeboard.data", freeBoardList);
+    loadObjects("member.data", memberList);
+    loadObjects("medicine.data", medicineList);
 
     createMainMenu().execute();
     Prompt.close();
