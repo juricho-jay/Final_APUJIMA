@@ -4,10 +4,8 @@ import java.util.List;
 import pms.domain.MailBox;
 
 public class MailBoxListHandler extends AbstractMailBoxHandler {
-
   public MailBoxListHandler(List<MailBox> mailBoxList) {
     super(mailBoxList);
-    // TODO Auto-generated constructor stub
   }
 
   @Override

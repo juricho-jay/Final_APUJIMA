@@ -5,7 +5,6 @@ import pms.domain.MailBox;
 import util.Prompt;
 
 public class MailBoxDeleteHandler extends AbstractMailBoxHandler{
-
   public MailBoxDeleteHandler(List<MailBox> mailBoxList) {
     super(mailBoxList);
   }

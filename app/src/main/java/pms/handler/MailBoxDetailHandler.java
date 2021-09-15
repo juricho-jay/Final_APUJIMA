@@ -5,10 +5,8 @@ import pms.domain.MailBox;
 import util.Prompt;
 
 public class MailBoxDetailHandler extends AbstractMailBoxHandler {
-
   public MailBoxDetailHandler(List<MailBox> mailBoxList) {
     super(mailBoxList);
-    // TODO Auto-generated constructor stub
   }
 
   @Override
