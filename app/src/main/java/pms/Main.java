@@ -152,15 +152,12 @@ public class Main {
     commandMap.put("/auth/logout", new AuthLogoutHandler());
     commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberList));
 
-
-
   }
-
-
 
   void service() {
 
     loadObjects("freeboard.data", freeBoardList);
+    loadObjects("report.data", reportList);
     loadObjects("member.data", memberList);
     loadObjects("medicine.data", medicineList);
 
@@ -168,6 +165,7 @@ public class Main {
     Prompt.close();
 
     saveObjects("freeboard.data", freeBoardList);
+    saveObjects("report.data", reportList);
     saveObjects("member.data", memberList);
     saveObjects("medicine.data", medicineList);
     System.out.println("[APUJIMA]에 방문해 주셔서 감사합니다. 좋은하루 되시기 바랍니다!");
