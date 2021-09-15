@@ -29,14 +29,13 @@ public class MailBoxSendHandler extends AbstractMailBoxHandler {
       System.out.printf("-%s- (이)라는 ID는 찾을 수 없습니다.",id);
       System.out.println();
     } else {
-
-
       mailBox.setReceiver(id);
       mailBox.setTitle(Prompt.inputString("제목> "));
       mailBox.setContent(Prompt.inputString("내용> "));
 
       mailBox.setSender(AuthLoginHandler.getLoginUser().getId());
       mailBox.setSendingTime(new Date(System.currentTimeMillis()));
+
 
       String input = Prompt.inputString("쪽지를 전송하시겠습니까? (y/N)> ");
       if(input.equalsIgnoreCase("n") || input.length() == 0) {
