@@ -26,8 +26,8 @@ public class MailBoxSendHandler extends AbstractMailBoxHandler {
     Member member = memberPrompt.findById(id);
 
     if (member == null) {
-      System.out.println();
       System.out.printf("-%s- (이)라는 ID는 찾을 수 없습니다.",id);
+      System.out.println();
     } else {
 
 
