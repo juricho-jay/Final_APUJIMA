@@ -14,6 +14,7 @@ public class AdminReportDeleteHandler implements Command{
     this.reportList = reportList;
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("[신고 게시판 삭제 허가]");
