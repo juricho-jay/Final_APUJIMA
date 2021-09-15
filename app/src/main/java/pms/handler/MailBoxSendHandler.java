@@ -8,7 +8,7 @@ import util.Prompt;
 
 public class MailBoxSendHandler extends AbstractMailBoxHandler{
 
-  Member member;
+  List<Member> memberList;
   public MailBoxSendHandler(List<MailBox> mailBoxList) {
     super(mailBoxList);
   }
@@ -16,27 +16,29 @@ public class MailBoxSendHandler extends AbstractMailBoxHandler{
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("[쪽지 보내기] 페이지입니다.");
+    System.out.println("[쪽지 전송] 페이지입니다.");
     System.out.println();
     MailBox mailBox = new MailBox();
 
-    mailBox.setMailNo(Prompt.inputInt("쪽지 번호> "));
+    //    mailBox.setMailNo(Prompt.inputInt("쪽지 번호> "));
     mailBox.setReceiver(Prompt.inputString("수신인> "));
 
-    if (mailBox.getReceiver() != (member.getId())) {
-      System.out.println();
-      System.out.printf("-%s- (이)라는 ID는 찾을 수 없습니다.", mailBox.getReceiver());
-    } else return;
+    for (int i = 0; i < memberList.size(); i++) {
+      if (mailBox.getReceiver() != memberList.get(i).getId()) {
+        System.out.println();
+        System.out.printf("-%s- (이)라는 ID는 찾을 수 없습니다.", mailBox.getReceiver());
+      } else {
 
-    mailBox.setTitle(Prompt.inputString("제목> "));
-    mailBox.setContent(Prompt.inputString("내용> "));
+        mailBox.setTitle(Prompt.inputString("제목> "));
+        mailBox.setContent(Prompt.inputString("내용> "));
 
 
-    mailBox.setSender(AuthLoginHandler.getLoginUser());
-    mailBox.setSendingTime(new Date(System.currentTimeMillis()));
+        mailBox.setSender(AuthLoginHandler.getLoginUser());
+        mailBox.setSendingTime(new Date(System.currentTimeMillis()));
 
-    mailBoxList.add(mailBox);
-    System.out.println("쪽지를 보냈습니다.");
+        mailBoxList.add(mailBox);
+        System.out.println("쪽지를 보냈습니다.");
+      }
+    }
   }
-
 }

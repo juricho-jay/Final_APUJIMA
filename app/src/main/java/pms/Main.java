@@ -160,9 +160,9 @@ public class Main {
 
   void service() {
 
-    //    loadObjects("freeboard.data", freeBoardList);
-    //    loadObjects("member.data", memberList);
-    //    loadObjects("medicine.data", medicineList);
+    loadObjects("freeboard.data", freeBoardList);
+    loadObjects("member.data", memberList);
+    loadObjects("medicine.data", medicineList);
 
     createMainMenu().execute();
     Prompt.close();
@@ -398,7 +398,7 @@ public class Main {
     mainMenuGroup.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
     mainMenuGroup.add(new MenuItem("회원가입", Menu.ACCESS_LOGOUT, "/member/add"));
     mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/auth/userInfo"));
-    mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/auth/logout"));
+    mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN ,"/auth/logout"));
 
 
 
