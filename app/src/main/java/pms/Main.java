@@ -61,6 +61,7 @@ import pms.handler.NoticeBoardDetailHandler;
 import pms.handler.NoticeBoardListHandler;
 import pms.handler.NoticeBoardSearchHandler;
 import pms.handler.NoticeBoardUpdateHandler;
+import pms.handler.WiseSaying;
 import util.Prompt;
 
 public class Main {
@@ -157,11 +158,13 @@ public class Main {
     commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberList));
 
 
-    commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxList));
+    commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxList, memberList));
     commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxList));
     commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxList));
     commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList));
 
+
+    commandMap.put("/wiseSaying/saying", new WiseSaying());
 
   }
 
@@ -230,6 +233,8 @@ public class Main {
     MenuGroup mainMenuGroup = new MenuGroup("WELCOME TO APUJIMA!");
     mainMenuGroup.setPrevMenuTitle("종료");
 
+
+    //   mainMenuGroup.add(new MenuItem("명언", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/wiseSaying/saying"));
     mainMenuGroup.add(createApprovalMenu());
     mainMenuGroup.add(new MenuItem("소개", "/intro"));
     mainMenuGroup.add(createMedicineMenu());
