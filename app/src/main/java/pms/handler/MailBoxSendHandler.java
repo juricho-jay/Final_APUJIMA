@@ -39,6 +39,7 @@ public class MailBoxSendHandler extends AbstractMailBoxHandler{
         mailBoxList.add(mailBox);
         System.out.println("쪽지를 보냈습니다.");
       }
+
     }
   }
 }

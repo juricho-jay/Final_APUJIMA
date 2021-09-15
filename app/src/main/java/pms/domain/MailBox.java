@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class MailBox {
 
-  //  private int mailNo;
+  private int mailNo;
   private Member sender;
   private String title;
   private String content;
@@ -13,12 +13,12 @@ public class MailBox {
   private Date sendingTime;
 
 
-  //  public int getMailNo() {
-  //    return mailNo;
-  //  }
-  //  public void setMailNo(int mailNo) {
-  //    this.mailNo = mailNo;
-  //  }
+  public int getMailNo() {
+    return mailNo;
+  }
+  public void setMailNo(int mailNo) {
+    this.mailNo = mailNo;
+  }
   public Member getSender() {
     return sender;
   }

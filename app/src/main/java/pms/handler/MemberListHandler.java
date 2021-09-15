@@ -9,12 +9,13 @@ public class MemberListHandler extends AbstractMemberHandler{
     super(memberList);
   }
 
+  @Override
   public void execute() {
     System.out.println("[회원 목록]");
     for (Member member : memberList) {
       if (member.getDoctor() == 2) {
         System.out.print("[힐러 회원] ");
-        System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s\n",
+        System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",
             member.getName(),
             member.getId(),
             member.getBirthDay(),
@@ -27,7 +28,7 @@ public class MemberListHandler extends AbstractMemberHandler{
             member.getRegisteredDate());
       } else if(member.getDoctor() == 1) {
         System.out.print("[일반 회원] ");
-        System.out.printf("%s, %s, %s, %s, %s, %s\n",
+        System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s\n",
 
             member.getName(),
             member.getId(),
@@ -39,7 +40,7 @@ public class MemberListHandler extends AbstractMemberHandler{
             member.getRegisteredDate());
       } else if(member.getDoctor() == 3) {
         System.out.print("[관  리  자] ");
-        System.out.printf("%s, %s, %s, %s, %s, %s\n",
+        System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s\n",
 
             member.getName(),
             member.getId(),
