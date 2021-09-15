@@ -21,14 +21,14 @@ public class MemberPrompt {
     return null;
   }
 
-  public static Member findById(String id, List<Member> memberList) {
-    for (Member member : memberList) {
-      if (member.getId().equalsIgnoreCase(id)) {
-        return member;
-      }
-    }
-    return null;
-  }
+  //  public static Member findById(String id, List<Member> memberList) {
+  //    for (Member member : memberList) {
+  //      if (member.getId().equalsIgnoreCase(id)) {
+  //        return member;
+  //      }
+  //    }
+  //    return null;
+  //  }
 
   public Member promptMember(String label) {
     while (true) {
@@ -46,21 +46,21 @@ public class MemberPrompt {
     }
   }
 
-  public static Member promptMember(String label, List<Member> memberList) {
-    while (true) {
-      String memberName = Prompt.inputString(label);
-      if (memberName.length() == 0) {
-        return null;
-      }
-
-      Member member = findById(memberName, memberList);
-      if (member != null) {
-        return member;
-      }
-
-      System.out.println("등록된 회원이 아닙니다.");
-    }
-  }
+  //  public static Member promptMember(String label, List<Member> memberList) {
+  //    while (true) {
+  //      String memberName = Prompt.inputString(label);
+  //      if (memberName.length() == 0) {
+  //        return null;
+  //      }
+  //
+  //      Member member = findById(memberName, memberList);
+  //      if (member != null) {
+  //        return member;
+  //      }
+  //
+  //      System.out.println("등록된 회원이 아닙니다.");
+  //    }
+  //  }
 
   public List<Member> promptMembers(String label) {
     ArrayList<Member> members = new ArrayList<>();

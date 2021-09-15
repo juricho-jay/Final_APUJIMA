@@ -5,15 +5,13 @@ import java.util.List;
 import pms.domain.MailBox;
 import pms.domain.Member;
 import util.Prompt;
-import pms.handler.MemberPrompt;
 
 public class MailBoxSendHandler extends AbstractMailBoxHandler {
-  List<Member> memberList;
   MemberPrompt memberPrompt;
 
-  public MailBoxSendHandler(List<MailBox> mailBoxList, List<Member> memberList) {
+  public MailBoxSendHandler(List<MailBox> mailBoxList, MemberPrompt memberPrompt) {
     super(mailBoxList);
-    this.memberList = memberList;
+    this.memberPrompt = memberPrompt;
   }
 
   @Override
@@ -31,7 +29,6 @@ public class MailBoxSendHandler extends AbstractMailBoxHandler {
       System.out.println();
       System.out.printf("-%s- (이)라는 ID는 찾을 수 없습니다.",id);
     } else {
-
 
       mailBox.setReceiver(id);
       mailBox.setTitle(Prompt.inputString("제목> "));

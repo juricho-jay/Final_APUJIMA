@@ -55,6 +55,7 @@ import pms.handler.MedicineSearchHandler;
 import pms.handler.MedicineUpdateHandler;
 import pms.handler.MemberAddHandler;
 import pms.handler.MemberListHandler;
+import pms.handler.MemberPrompt;
 import pms.handler.NoticeBoardAddHandler;
 import pms.handler.NoticeBoardDeleteHandler;
 import pms.handler.NoticeBoardDetailHandler;
@@ -78,6 +79,8 @@ public class Main {
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
+
+  MemberPrompt memberPrompt = new MemberPrompt(memberList);
 
   class MenuItem extends Menu {
     String menuId;
@@ -158,7 +161,7 @@ public class Main {
     commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberList));
 
 
-    commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxList, memberList));
+    commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxList, memberPrompt));
     commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxList));
     commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxList));
     commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList));
