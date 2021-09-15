@@ -8,17 +8,14 @@ import util.Prompt;
 
 public class MailBoxSendHandler extends AbstractMailBoxHandler {
   MemberPrompt memberPrompt;
-  List<Member> memberList;
 
   public MailBoxSendHandler(List<MailBox> mailBoxList, MemberPrompt memberPrompt) {
     super(mailBoxList);
     this.memberPrompt = memberPrompt;
-
   }
 
   @Override
   public void execute() {
-    Member loginUser = AuthLoginHandler.getLoginUser();
     System.out.println();
     System.out.println("[쪽지 전송] 페이지입니다.");
     System.out.println();
