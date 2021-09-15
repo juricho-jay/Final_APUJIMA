@@ -39,7 +39,7 @@ public class MemberListHandler extends AbstractMemberHandler{
             member.getRegisteredDate());
       } else if(member.getDoctor() == 3) {
         System.out.print("[관  리  자] ");
-        System.out.printf("%s, %s, %s, %s, %s, %s\n",
+        System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s\n",
 
             member.getName(),
             member.getId(),
