@@ -157,10 +157,10 @@ public class Main {
     commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberList));
 
 
-    commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxList));
-    commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxList));
-    commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxList));
-    commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList));
+    commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxList, memberList));
+    commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxList, memberList));
+    commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxList, memberList));
+    commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList, memberList));
 
 
   }
