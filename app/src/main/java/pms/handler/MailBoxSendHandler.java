@@ -30,6 +30,7 @@ public class MailBoxSendHandler extends AbstractMailBoxHandler {
       System.out.printf("-%s- (이)라는 ID는 찾을 수 없습니다.",id);
     } else {
 
+
       mailBox.setReceiver(id);
       mailBox.setTitle(Prompt.inputString("제목> "));
       mailBox.setContent(Prompt.inputString("내용> "));

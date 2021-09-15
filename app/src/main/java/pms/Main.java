@@ -352,7 +352,7 @@ public class Main {
   }
 
   private Menu createMailBoxMenu() {
-    MenuGroup mailBoxMenu = new MenuGroup("쪽지함", Menu.ACCESS_GENERAL | Menu.ACCESS_ADMIN);
+    MenuGroup mailBoxMenu = new MenuGroup("쪽지함", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN);
 
     mailBoxMenu.add(new MenuItem("쪽지 전송", "/mailBox/send"));
     mailBoxMenu.add(new MenuItem("목록", "/mailBox/list"));
