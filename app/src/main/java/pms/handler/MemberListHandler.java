@@ -14,7 +14,7 @@ public class MemberListHandler extends AbstractMemberHandler{
     for (Member member : memberList) {
       if (member.getDoctor() == 2) {
         System.out.print("[힐러 회원] ");
-        System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s\n",
+        System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",
             member.getName(),
             member.getId(),
             member.getBirthDay(),
@@ -27,7 +27,7 @@ public class MemberListHandler extends AbstractMemberHandler{
             member.getRegisteredDate());
       } else if(member.getDoctor() == 1) {
         System.out.print("[일반 회원] ");
-        System.out.printf("%s, %s, %s, %s, %s, %s\n",
+        System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s\n",
 
             member.getName(),
             member.getId(),
