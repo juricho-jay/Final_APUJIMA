@@ -42,6 +42,10 @@ import pms.handler.FreeBoardListHandler;
 import pms.handler.FreeBoardSearchHandler;
 import pms.handler.FreeBoardUpdateHandler;
 import pms.handler.IntroMenu;
+import pms.handler.MailBoxDeleteHandler;
+import pms.handler.MailBoxDetailHandler;
+import pms.handler.MailBoxListHandler;
+import pms.handler.MailBoxSendHandler;
 import pms.handler.MedicineAddHandler;
 import pms.handler.MedicineDeleteHandler;
 import pms.handler.MedicineListHandler;
@@ -145,13 +149,6 @@ public class Main {
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardList));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
 
-
-
-
-
-
-
-
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList));
 
@@ -159,6 +156,11 @@ public class Main {
     commandMap.put("/auth/logout", new AuthLogoutHandler());
     commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberList));
 
+
+    commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxList));
+    commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxList));
+    commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxList));
+    commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList));
 
 
   }
@@ -369,7 +371,8 @@ public class Main {
     mainMenuGroup.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
     mainMenuGroup.add(new MenuItem("회원가입", Menu.ACCESS_LOGOUT, "/member/add"));
     mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/auth/userInfo"));
-    mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/auth/logout"));
+    mainMenuGroup.add(createMailBoxMenu());
+    mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN, "/auth/logout"));
 
 
 
@@ -473,7 +476,17 @@ public class Main {
     return doctorBoardMenu;
   }
 
+  private Menu createMailBoxMenu() {
+    MenuGroup mailBoxMenu = new MenuGroup("쪽지함", Menu.ACCESS_GENERAL);
 
+    mailBoxMenu.add(new MenuItem("쪽지 전송", "/mailBox/send"));
+    mailBoxMenu.add(new MenuItem("목록", "/mailBox/list"));
+    mailBoxMenu.add(new MenuItem("상세보기", "/mailBox/detail"));
+    mailBoxMenu.add(new MenuItem("삭제", "/mailBox/delete"));
+
+
+    return mailBoxMenu;
+  }
 
 
 
