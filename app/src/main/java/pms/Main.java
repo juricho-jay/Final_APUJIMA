@@ -1,5 +1,7 @@
 package pms;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -11,7 +13,6 @@ import Menu.Menu;
 import Menu.MenuGroup;
 import pms.domain.CounselingMember;
 import pms.domain.DoctorBoard;
-import pms.domain.DoctorMember;
 import pms.domain.FreeBoard;
 import pms.domain.MailBox;
 import pms.domain.Medicine;
@@ -61,7 +62,6 @@ import util.Prompt;
 public class Main {
   List<Member> memberList = new LinkedList<>();
   List<CounselingMember> counselingMemberList = new LinkedList<>();
-  List<DoctorMember> doctormemberList = new LinkedList<>();
   List<Medicine> medicineList = new LinkedList<>();
   List<Medicine> requestList = new LinkedList<>();
   List<FreeBoard> freeBoardList = new LinkedList<>();
@@ -145,13 +145,6 @@ public class Main {
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardList));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
 
-
-
-
-
-
-
-
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList));
 
@@ -167,182 +160,218 @@ public class Main {
 
   void service() {
 
-    loadMembers();
+    //    loadObjects("freeboard.data", freeBoardList);
+    //    loadObjects("member.data", memberList);
+    //    loadObjects("medicine.data", medicineList);
 
     createMainMenu().execute();
     Prompt.close();
 
-    saveMembers();
+    saveObjects("freeboard.data", freeBoardList);
+    saveObjects("member.data", memberList);
+    saveObjects("medicine.data", medicineList);
     System.out.println("[APUJIMA]에 방문해 주셔서 감사합니다. 좋은하루 되시기 바랍니다!");
   }
 
-  private void loadMembers() {
+  //  private void loadMembers() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("member.data"))) {
+  //
+  //      memberList.addAll((List<Member>) in.readObject());
+  //
+  //      System.out.println("데이터가 정상적으로 로딩 되었습니다.");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 멤버 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveMembers() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("member.data"))) {
+  //
+  //      out.writeObject(memberList);
+  //      System.out.println();
+  //      System.out.println("데이터가 정상적으로 저장 되었습니다.");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("멤버 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+
+  private <E> void loadObjects(String filepath, List<E> list) {
     try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("member.data"))) {
+        new BufferedInputStream(
+            new FileInputStream(filepath)))) {
 
-      memberList.addAll((List<Member>) in.readObject());
+      list.addAll((List<E>) in.readObject());
 
-      System.out.println("데이터가 정상적으로 로딩 되었습니다.");
+      System.out.printf("%s 파일 로딩 완료!\n", filepath);
 
     } catch (Exception e) {
-      System.out.println("파일에서 멤버 데이터를 읽어 오는 중 오류 발생!");
+      System.out.printf("%s 파일에서 데이터를 읽어 오는 중 오류 발생!\n", filepath);
       e.printStackTrace();
     }
   }
 
-  private void saveMembers() {
+
+  private <E> void saveObjects(String filepath, List<E> list) {
     try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("member.data"))) {
+        new BufferedOutputStream(
+            new FileOutputStream(filepath)))) {
 
-      out.writeObject(memberList);
-      System.out.println();
-      System.out.println("데이터가 정상적으로 저장 되었습니다.");
+      out.writeObject(list);
 
-    } catch (Exception e) {
-      System.out.println("멤버 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void loadMedicine() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("medicine.data"))) {
-
-      medicineList.addAll((List<Medicine>) in.readObject());
-
-      System.out.println("약품 데이터 로딩 완료!");
+      System.out.printf("%s 파일 저장 완료!\n", filepath);
 
     } catch (Exception e) {
-      System.out.println("파일에서 약품 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveMedicine() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("medicine.data"))) {
-
-      out.writeObject(medicineList);
-
-      System.out.println("약품 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("약품 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-  private void loadNoticeBoard() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("noticeBoard.data"))) {
-
-      noticeBoardList.addAll((List<NoticeBoard>) in.readObject());
-
-      System.out.println("공지사항 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 공지사항 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveNoticeBoard() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("noticeBoard.data"))) {
-
-      out.writeObject(noticeBoardList);
-
-      System.out.println("공지사항 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("공지사항 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void loadFreeBoard() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("freeBoard.data"))) {
-
-      freeBoardList.addAll((List<FreeBoard>) in.readObject());
-
-      System.out.println("자유게시판 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 자유게시판 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveFreeBoard() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("freeBoard.data"))) {
-
-      out.writeObject(freeBoardList);
-
-      System.out.println("자유게시판 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("자유게시판 데이터를 파일에 저장 중 오류 발생!");
+      System.out.printf("%s 파일에 데이터를 저장 중 오류 발생!\n", filepath);
       e.printStackTrace();
     }
   }
 
 
-  private void loadDoctorBoard() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("doctorBoard.data"))) {
-
-      doctorBoardList.addAll((List<DoctorBoard>) in.readObject());
-
-      System.out.println("HEALER지식in 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 HEALER지식in 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveDoctorBoard() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("doctorBoard.data"))) {
-
-      out.writeObject(doctorBoardList);
-
-      System.out.println("HEALER지식in 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("HEALER지식in 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void loadCounselingMember() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("counselingMember.data"))) {
-
-      counselingMemberList.addAll((List<CounselingMember>) in.readObject());
-
-      System.out.println("상담신청 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 상담신청 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCounselingMember() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("counselingMember.data"))) {
-
-      out.writeObject(counselingMemberList);
-
-      System.out.println("상담신청 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("상담신청 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
+  //  private void loadMedicine() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("medicine.data"))) {
+  //
+  //      medicineList.addAll((List<Medicine>) in.readObject());
+  //
+  //      System.out.println("약품 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 약품 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveMedicine() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("medicine.data"))) {
+  //
+  //      out.writeObject(medicineList);
+  //
+  //      System.out.println("약품 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("약품 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //  private void loadNoticeBoard() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("noticeBoard.data"))) {
+  //
+  //      noticeBoardList.addAll((List<NoticeBoard>) in.readObject());
+  //
+  //      System.out.println("공지사항 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 공지사항 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveNoticeBoard() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("noticeBoard.data"))) {
+  //
+  //      out.writeObject(noticeBoardList);
+  //
+  //      System.out.println("공지사항 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("공지사항 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void loadFreeBoard() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("freeBoard.data"))) {
+  //
+  //      freeBoardList.addAll((List<FreeBoard>) in.readObject());
+  //
+  //      System.out.println("자유게시판 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 자유게시판 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveFreeBoard() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("freeBoard.data"))) {
+  //
+  //      out.writeObject(freeBoardList);
+  //
+  //      System.out.println("자유게시판 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("자유게시판 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //
+  //  private void loadDoctorBoard() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("doctorBoard.data"))) {
+  //
+  //      doctorBoardList.addAll((List<DoctorBoard>) in.readObject());
+  //
+  //      System.out.println("HEALER지식in 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 HEALER지식in 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveDoctorBoard() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("doctorBoard.data"))) {
+  //
+  //      out.writeObject(doctorBoardList);
+  //
+  //      System.out.println("HEALER지식in 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("HEALER지식in 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void loadCounselingMember() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("counselingMember.data"))) {
+  //
+  //      counselingMemberList.addAll((List<CounselingMember>) in.readObject());
+  //
+  //      System.out.println("상담신청 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 상담신청 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveCounselingMember() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("counselingMember.data"))) {
+  //
+  //      out.writeObject(counselingMemberList);
+  //
+  //      System.out.println("상담신청 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("상담신청 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
 
 
 

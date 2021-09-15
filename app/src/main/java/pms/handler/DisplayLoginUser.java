@@ -1,5 +1,5 @@
 package pms.handler;
-import static pms.handler.AbstractDoctor.loginUser;
+import static pms.handler.AuthLoginHandler.loginUser;
 
 public class DisplayLoginUser {
 
