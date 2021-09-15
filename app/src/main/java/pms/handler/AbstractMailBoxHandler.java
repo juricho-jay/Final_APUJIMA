@@ -10,7 +10,6 @@ public abstract class AbstractMailBoxHandler implements Command{
     this.mailBoxList = mailBoxList; // => ?? 생성자 초기화
   }
 
-
   protected MailBox findByNo(int no) {
     for (MailBox mailBox : mailBoxList) {
       if (mailBox.getMailNo() == no) {

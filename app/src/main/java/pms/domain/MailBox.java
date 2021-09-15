@@ -5,10 +5,9 @@ import java.sql.Date;
 public class MailBox {
 
   private int mailNo;
-  private Member sender;
+  private String sender;
   private String title;
   private String content;
-  //  private Member memberreceiver;
   private String receiver;
   private Date sendingTime;
 
@@ -19,10 +18,10 @@ public class MailBox {
   public void setMailNo(int mailNo) {
     this.mailNo = mailNo;
   }
-  public Member getSender() {
+  public String getSender() {
     return sender;
   }
-  public void setSender(Member sender) {
+  public void setSender(String sender) {
     this.sender = sender;
   }
   public String getTitle() {
@@ -44,12 +43,6 @@ public class MailBox {
   public void setSendingTime(Date sendingTime) {
     this.sendingTime = sendingTime;
   }
-  //  public Member getMemberreceiver() {
-  //    return memberreceiver;
-  //  }
-  //  public void setMemberreceiver(Member memberreceiver) {
-  //    this.memberreceiver = memberreceiver;
-  //  }
   public String getReceiver() {
     return receiver;
   }
