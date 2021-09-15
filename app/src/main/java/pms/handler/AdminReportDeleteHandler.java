@@ -2,18 +2,18 @@ package pms.handler;
 
 import java.util.List;
 import pms.domain.FreeBoard;
-import pms.domain.MailBox;
 import util.Prompt;
 
 public class AdminReportDeleteHandler implements Command{
 
   List<FreeBoard> freeBoardList;
   List<FreeBoard> reportList;
-  List<MailBox> mailBoxList;
+  MailBoxAutoSendHandler mailBoxAutoSendHandler;
 
-  public AdminReportDeleteHandler(List<FreeBoard> freeBoardList, List<FreeBoard> reportList) {
+  public AdminReportDeleteHandler(List<FreeBoard> freeBoardList, List<FreeBoard> reportList, MailBoxAutoSendHandler mailBoxAutoSendHandler) {
     this.freeBoardList = freeBoardList;
     this.reportList = reportList;
+    this.mailBoxAutoSendHandler = mailBoxAutoSendHandler;
   }
 
   @Override
@@ -60,7 +60,7 @@ public class AdminReportDeleteHandler implements Command{
           //          mailBox.setTitle("신고하신 게시물이 삭제되었습니다.");
           //          mailBox.setContent("요청하신 게시물은 삭제되었습니다. 많은 관심부탁드립니다.");
           //          mailBoxList.add(mailBox);
-
+          mailBoxAutoSendHandler.execute();
           break;
         } else {
           System.out.println("삭제가 취소되었습니다.");

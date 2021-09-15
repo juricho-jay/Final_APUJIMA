@@ -43,6 +43,7 @@ import pms.handler.FreeBoardListHandler;
 import pms.handler.FreeBoardSearchHandler;
 import pms.handler.FreeBoardUpdateHandler;
 import pms.handler.IntroMenu;
+import pms.handler.MailBoxAutoSendHandler;
 import pms.handler.MailBoxDeleteHandler;
 import pms.handler.MailBoxDetailHandler;
 import pms.handler.MailBoxListHandler;
@@ -80,6 +81,7 @@ public class Main {
   HashMap<String,Command> commandMap = new HashMap<>();
 
   MemberPrompt memberPrompt = new MemberPrompt(memberList);
+  MailBoxAutoSendHandler mailBoxAutoSendHandler = new MailBoxAutoSendHandler(mailBoxList, freeBoardList);
 
   class MenuItem extends Menu {
     String menuId;
@@ -112,7 +114,8 @@ public class Main {
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestList, medicineList));
     commandMap.put("/admin/update", new AdminUpdateHandler(requestList, medicineList));
     commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, freeBoardList));
-    commandMap.put("/admin/delete", new AdminReportDeleteHandler(freeBoardList , reportList));
+
+    commandMap.put("/admin/delete", new AdminReportDeleteHandler(freeBoardList , reportList, mailBoxAutoSendHandler));
 
 
     commandMap.put("/intro", new IntroMenu());
