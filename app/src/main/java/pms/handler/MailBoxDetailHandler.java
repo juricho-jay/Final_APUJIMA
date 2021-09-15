@@ -16,6 +16,8 @@ public class MailBoxDetailHandler extends AbstractMailBoxHandler {
 
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();
+
+
     int no = Prompt.inputInt("쪽지 번호> ");
 
     MailBox mailBox = findByNo(no);

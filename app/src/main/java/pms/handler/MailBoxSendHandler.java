@@ -20,7 +20,6 @@ public class MailBoxSendHandler extends AbstractMailBoxHandler{
     System.out.println();
     MailBox mailBox = new MailBox();
 
-    mailBox.setMailNo(Prompt.inputInt("쪽지 번호> "));
     mailBox.setReceiver(Prompt.inputString("수신인> "));
 
     if (mailBox.getReceiver() != (member.getId())) {
