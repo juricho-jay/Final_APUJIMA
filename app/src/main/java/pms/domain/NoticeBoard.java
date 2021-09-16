@@ -12,6 +12,7 @@ public class NoticeBoard implements Serializable{
   private int viewCount;
   private int like;
 
+
   public Member getWriter() {
     return writer;
   }
