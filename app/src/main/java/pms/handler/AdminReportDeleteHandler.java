@@ -83,7 +83,6 @@ public class AdminReportDeleteHandler implements Command{
           mailBox2.setSendingTime(new Date(System.currentTimeMillis()));
           mailBoxList.add(mailBox2);
 
-          freeBoardList.remove(i);
           reportList.remove(i);
           break;
         } else {
