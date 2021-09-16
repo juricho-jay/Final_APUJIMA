@@ -51,7 +51,11 @@ public class AdminReportDeleteHandler implements Command{
       if(inputNum == reportList.get(i).getNo()) {// 삭제할 번호(100)를 0번부터 돌린다.
         String input2 = Prompt.inputString("❗ 정말 삭제하시겠습니까? (y/N)> ");
         if(input2.equalsIgnoreCase("y")) {
-          freeBoardList.remove(i);
+          for(int j = 0; j < freeBoardList.size(); j++) {
+            if(freeBoardList.get(j).getNo() == inputNum) {
+              freeBoardList.remove(j);
+            }
+          }
           System.out.println("해당 게시글이 삭제되었습니다.");
           reportList.remove(i);
           //메일 자동 전송하기
@@ -73,8 +77,5 @@ public class AdminReportDeleteHandler implements Command{
       }
     }
   }
-
-
-
 
 }
