@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.util.List;
 import pms.domain.FreeBoard;
 import pms.domain.MailBox;
-import pms.domain.Member;
 import util.Prompt;
 
 public class AdminReportDeleteHandler implements Command{
@@ -12,14 +11,12 @@ public class AdminReportDeleteHandler implements Command{
   List<FreeBoard> freeBoardList;
   List<FreeBoard> reportList;
   List<MailBox> mailBoxList;
-  List<Member> memberList;
 
   public AdminReportDeleteHandler(List<FreeBoard> freeBoardList, List<FreeBoard> reportList,
-      List<MailBox> mailBoxList, List<Member> memberList) {
+      List<MailBox> mailBoxList) {
     this.freeBoardList = freeBoardList;
     this.reportList = reportList;
     this.mailBoxList = mailBoxList;
-    this.memberList = memberList;
   }
 
   @Override
