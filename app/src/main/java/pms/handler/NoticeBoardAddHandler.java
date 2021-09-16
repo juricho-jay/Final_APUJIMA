@@ -18,11 +18,8 @@ public class NoticeBoardAddHandler extends AbstractNoticeBoardHandler{
     System.out.println("[글쓰기] 페이지입니다.");
     System.out.println();
     NoticeBoard noticeBoard = new NoticeBoard();
-
-    noticeBoard.setNo(Prompt.inputInt("번호> "));
     noticeBoard.setTitle(Prompt.inputString("제목> "));
     noticeBoard.setContent(Prompt.inputString("내용> "));
-
 
     noticeBoard.setWriter(AuthLoginHandler.getLoginUser());
     noticeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));

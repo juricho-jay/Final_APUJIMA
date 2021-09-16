@@ -79,6 +79,7 @@ public class Main {
   List<DoctorBoard> doctorBoardList = new LinkedList<>();
   List<FreeBoard> reportList = new LinkedList<>();
   List<MailBox> mailBoxList = new LinkedList<>();
+  List<DoctorBoard> doctorReportList = new LinkedList<>();
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
@@ -116,7 +117,7 @@ public class Main {
   public Main() {
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestList, medicineList));
     commandMap.put("/admin/update", new AdminUpdateHandler(requestList, medicineList));
-    commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, freeBoardList));
+    commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, freeBoardList, doctorReportList));
 
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(freeBoardList , reportList, mailBoxAutoSendHandler));
 
@@ -153,7 +154,7 @@ public class Main {
 
     commandMap.put("/doctorBoard/add", new DoctorBoardAddHandler(doctorBoardList));
     commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(doctorBoardList));
-    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(doctorBoardList));
+    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(doctorBoardList, doctorReportList));
     commandMap.put("/doctorBoard/update", new DoctorBoardUpdateHandler(doctorBoardList));
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardList));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
@@ -261,7 +262,7 @@ public class Main {
 
     mainMenuGroup.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
     mainMenuGroup.add(new MenuItem("회원가입", Menu.ACCESS_LOGOUT, "/member/add"));
-    mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/auth/userInfo"));
+    mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN, "/auth/userInfo"));
     mainMenuGroup.add(createMailBoxMenu());
     mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN, "/auth/logout"));
 
@@ -332,7 +333,7 @@ public class Main {
   private Menu createNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항");
 
-    noticeMenu.add(new MenuItem("글쓰기", Menu.ACCESS_ADMIN, "/noticeBoard/add"));
+    noticeMenu.add(new MenuItem("글쓰기", "/noticeBoard/add"));
     noticeMenu.add(new MenuItem("목록", "/noticeBoard/list"));
     noticeMenu.add(new MenuItem("상세보기", "/noticeBoard/detail"));
     noticeMenu.add(new MenuItem("변경", Menu.ACCESS_ADMIN, "/noticeBoard/update"));

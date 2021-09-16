@@ -57,14 +57,8 @@ public class AdminReportDeleteHandler implements Command{
             }
           }
           System.out.println("해당 게시글이 삭제되었습니다.");
-          reportList.remove(i);
-          //메일 자동 전송하기
-          //          MailBox mailBox = new MailBox();
-          //          reportList.get(i).getWriter().getId();
-          //          mailBox.setTitle("신고하신 게시물이 삭제되었습니다.");
-          //          mailBox.setContent("요청하신 게시물은 삭제되었습니다. 많은 관심부탁드립니다.");
-          //          mailBoxList.add(mailBox);
           mailBoxAutoSendHandler.execute();
+          reportList.remove(i);
           break;
         } else {
           System.out.println("삭제가 취소되었습니다.");
