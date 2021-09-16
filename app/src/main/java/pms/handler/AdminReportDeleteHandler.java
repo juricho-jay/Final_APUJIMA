@@ -59,6 +59,11 @@ public class AdminReportDeleteHandler implements Command{
       if(inputNum == reportList.get(i).getNo()) {// 삭제할 번호(100)를 0번부터 돌린다.
         String input2 = Prompt.inputString("❗ 정말 삭제하시겠습니까? (y/N)> ");
         if(input2.equalsIgnoreCase("y")) {
+          for(int j = 0; j < freeBoardList.size(); j++) {
+            if(freeBoardList.get(j).getNo() == inputNum) {
+              freeBoardList.remove(j);
+            }
+          }
           System.out.println("해당 게시글이 삭제되었습니다.");
 
           //메일 자동 전송하기
@@ -83,6 +88,14 @@ public class AdminReportDeleteHandler implements Command{
           break;
         } else {
           System.out.println("삭제가 취소되었습니다.");
+
+          MailBox mailBox3 = new MailBox();
+          mailBox3.setReceiver(reportList.get(i).getRequester());
+          mailBox3.setSender(AuthLoginHandler.getLoginUser().getId());//현재 로그인된 admin
+          mailBox3.setTitle("신고 요청이 거부되었습니다.");
+          mailBox3.setContent("신고 사유가 정당하지 않아 요청이 거부되었습니다.");
+          mailBox3.setSendingTime(new Date(System.currentTimeMillis()));
+          mailBoxList.add(mailBox3);
           reportList.remove(i);
           return;
         }
@@ -92,8 +105,5 @@ public class AdminReportDeleteHandler implements Command{
       }
     }
   }
-
-
-
 
 }

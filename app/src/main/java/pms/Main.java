@@ -1,14 +1,17 @@
 package pms;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.domain.CounselingMember;
@@ -173,54 +176,63 @@ public class Main {
 
   void service() {
 
-    loadObjects("freeboard.data", freeBoardList);
-    loadObjects("report.data", reportList);
-    loadObjects("member.data", memberList);
-    loadObjects("medicine.data", medicineList);
+    loadObjects("freeboard.json", freeBoardList, FreeBoard.class);
+    loadObjects("report.json", reportList, FreeBoard.class);
+    loadObjects("member.json", memberList, Member.class);
+    loadObjects("medicine.json", medicineList, Medicine.class);
+    loadObjects("notice.json", noticeBoardList, NoticeBoard.class);
+
 
     createMainMenu().execute();
     Prompt.close();
 
-    saveObjects("freeboard.data", freeBoardList);
-    saveObjects("report.data", reportList);
-    saveObjects("member.data", memberList);
-    saveObjects("medicine.data", medicineList);
+    saveObjects("freeboard.json", freeBoardList);
+    saveObjects("report.json", reportList);
+    saveObjects("member.json", memberList);
+    saveObjects("medicine.json", medicineList);
+    saveObjects("notice.json", noticeBoardList);
     System.out.println("[APUJIMA]에 방문해 주셔서 감사합니다. 좋은하루 되시기 바랍니다!");
   }
 
-  private <E> void loadObjects(String filepath, List<E> list) {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new BufferedInputStream(
-            new FileInputStream(filepath)))) {
+  private <E> void loadObjects(
+      String filepath,
+      List<E> list,
+      Class<E> domainType
+      ) {
+    try (BufferedReader in = new BufferedReader(
+        new FileReader(filepath))){
 
-      list.addAll((List<E>) in.readObject());
+      StringBuilder strBuilder = new StringBuilder();
+      String str;
+      while((str = in.readLine()) != null) { 
+        strBuilder.append(str);
+      }
 
-      System.out.printf("%s 파일 로딩 완료!\n", filepath);
+      Type type = TypeToken.getParameterized(Collection.class, domainType).getType();
+      Collection<E> collection =  new Gson().fromJson(strBuilder.toString(), type);
 
+      list.addAll(collection);
+
+      System.out.printf("%s 데이터 로딩 완료!\n", filepath);
     } catch (Exception e) {
-      System.out.printf("%s 파일에서 데이터를 읽어 오는 중 오류 발생!\n", filepath);
-      e.printStackTrace();
+      System.out.printf("%s 데이터 로딩 오류!\n", filepath);
     }
+
   }
 
 
-  private <E> void saveObjects(String filepath, List<E> list) {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new BufferedOutputStream(
-            new FileOutputStream(filepath)))) {
+  private void saveObjects(String filepath, List<?> list) {
+    try (PrintWriter out = new PrintWriter(
+        new BufferedWriter(
+            new FileWriter(filepath)))){
 
-      out.writeObject(list);
-
-      System.out.printf("%s 파일 저장 완료!\n", filepath);
+      out.println(new Gson().toJson(list));
+      System.out.printf("%s 데이터 출력 완료!\n",filepath);
 
     } catch (Exception e) {
-      System.out.printf("%s 파일에 데이터를 저장 중 오류 발생!\n", filepath);
-      e.printStackTrace();
+      System.out.printf("%s 데이터 출력 오류!\n",filepath);
     }
   }
-
-
-
 
 
 
