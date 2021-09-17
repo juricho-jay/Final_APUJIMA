@@ -60,14 +60,14 @@ public class AuthLoginHandler implements Command {
         loginUser = member;
         userAccessLevel = Menu.ACCESS_DOCTOR;
         WiseSaying wise = new WiseSaying();
-        wise.execute();
+        wise.execute(request);
         return;
       } else if(member.getDoctorOrNot() == 1) {
         System.out.println(member.getName()+"님, [APUJIMA]에 오신 것을 환영합니다.");
         loginUser = member;
         userAccessLevel = Menu.ACCESS_GENERAL;
         WiseSaying wise = new WiseSaying();
-        wise.execute();
+        wise.execute(request);
         return;
       } 
     }
