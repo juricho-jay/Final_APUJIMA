@@ -8,11 +8,10 @@ public class MedicineUpdateHandler extends AbstractMedicineHandler {
 
   public MedicineUpdateHandler(List<Medicine> medicineList) {
     super(medicineList);
-    // TODO Auto-generated constructor stub
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[약품 변경] 페이지입니다.");
     System.out.println();
     String input = Prompt.inputString("약품 이름> ");

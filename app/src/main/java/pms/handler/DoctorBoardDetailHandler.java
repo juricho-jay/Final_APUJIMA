@@ -15,7 +15,7 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler{
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();
     int no = Prompt.inputInt("게시글 번호> ");

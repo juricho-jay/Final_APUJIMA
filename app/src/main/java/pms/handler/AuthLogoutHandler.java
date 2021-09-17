@@ -4,7 +4,7 @@ import Menu.Menu;
 
 public class AuthLogoutHandler implements Command {
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[로그아웃]");
 
     AuthLoginHandler.loginUser = null;

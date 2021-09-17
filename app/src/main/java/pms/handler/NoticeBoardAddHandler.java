@@ -1,31 +1,36 @@
 package pms.handler;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import pms.domain.NoticeBoard;
 import util.Prompt;
 
 public class NoticeBoardAddHandler extends AbstractNoticeBoardHandler{
 
+  int num;
   public NoticeBoardAddHandler(List<NoticeBoard> noticeBoardList) {
     super(noticeBoardList);
-
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
+
+    List<?> list = new ArrayList<>(); // 리스트
+
     System.out.println("[글쓰기] 페이지입니다.");
     System.out.println();
     NoticeBoard noticeBoard = new NoticeBoard();
+    //    noticeBoard.setNo(Prompt.inputInt("번호> "));
     noticeBoard.setTitle(Prompt.inputString("제목> "));
     noticeBoard.setContent(Prompt.inputString("내용> "));
 
     noticeBoard.setWriter(AuthLoginHandler.getLoginUser());
 
-
     noticeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     noticeBoardList.add(noticeBoard);
+
     System.out.println("공지사항 게시판에 등록되었습니다.");
   }
 

@@ -9,7 +9,8 @@ public class CounselingMemberDoctorListHandler extends AbstractCounselingMemberH
     super(counselingMemberList);
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
 
     System.out.println();
     System.out.println("[상담신청 이력]");

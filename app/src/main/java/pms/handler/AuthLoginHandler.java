@@ -30,7 +30,7 @@ public class AuthLoginHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
     System.out.println("(취소: #)");
@@ -60,14 +60,14 @@ public class AuthLoginHandler implements Command {
         loginUser = member;
         userAccessLevel = Menu.ACCESS_DOCTOR;
         WiseSaying wise = new WiseSaying();
-        wise.execute();
+        wise.execute(request);
         return;
       } else if(member.getDoctorOrNot() == 1) {
         System.out.println(member.getName()+"님, [APUJIMA]에 오신 것을 환영합니다.");
         loginUser = member;
         userAccessLevel = Menu.ACCESS_GENERAL;
         WiseSaying wise = new WiseSaying();
-        wise.execute();
+        wise.execute(request);
         return;
       } 
     }

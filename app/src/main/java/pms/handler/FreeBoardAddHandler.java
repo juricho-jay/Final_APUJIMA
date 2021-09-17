@@ -11,13 +11,14 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
     super(freeBoardList);
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[자유게시판 글쓰기] 페이지입니다.");
     System.out.println();
     FreeBoard freeBoard = new FreeBoard();
 
-    freeBoard.setNo(Prompt.inputInt("번호> "));
+    //    freeBoard.setNo(Prompt.inputInt("번호> "));
     freeBoard.setTitle(Prompt.inputString("제목> "));
     freeBoard.setContent(Prompt.inputString("내용> "));
 

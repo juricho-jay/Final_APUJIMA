@@ -8,10 +8,10 @@ public class MedicineDeleteHandler extends AbstractMedicineHandler {
 
   public MedicineDeleteHandler(List<Medicine> medicineList) {
     super(medicineList);
-    // TODO Auto-generated constructor stub
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println("[약품 삭제] 페이지입니다.");
     System.out.println();
     String input = Prompt.inputString("약품 이름> ");

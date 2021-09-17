@@ -9,7 +9,8 @@ public class DoctorMemberListHandler extends AbstractMemberHandler{
     super(memberList);
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println();
     for (Member member : memberList) {
       if (member.getDoctorOrNot() == 2) {

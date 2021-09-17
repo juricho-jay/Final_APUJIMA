@@ -10,7 +10,8 @@ public class MemberFindId extends AbstractMemberHandler{
     super(memberList); // => ?? 생성자 초기화
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     while (true) {
       System.out.println("[ID 찾기] 페이지입니다.");
       System.out.println("(취소: #)");

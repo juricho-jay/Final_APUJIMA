@@ -10,7 +10,7 @@ public class MailBoxListHandler extends AbstractMailBoxHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[쪽지 목록]");
     System.out.println();

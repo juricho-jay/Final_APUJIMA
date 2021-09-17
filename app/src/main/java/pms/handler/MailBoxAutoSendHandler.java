@@ -14,13 +14,13 @@ public class MailBoxAutoSendHandler extends AbstractMailBoxHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     MailBox mailBox = new MailBox();
 
     mailBox.setTitle("신고하신 게시물이 삭제되었습니다.");
     mailBox.setContent("요청하신 게시물은 삭제되었습니다. 이용해 주셔서 감사합니다.");
-    
+
     mailBoxList.add(mailBox);
   }
 
