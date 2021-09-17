@@ -182,6 +182,7 @@ public class Main {
     loadObjects("member.json", memberList, Member.class);
     loadObjects("medicine.json", medicineList, Medicine.class);
     loadObjects("notice.json", noticeBoardList, NoticeBoard.class);
+    loadObjects("mailbox.json", mailBoxList, MailBox.class);
 
 
     createMainMenu().execute();
@@ -192,6 +193,7 @@ public class Main {
     saveObjects("member.json", memberList);
     saveObjects("medicine.json", medicineList);
     saveObjects("notice.json", noticeBoardList);
+    saveObjects("mailbox.json", mailBoxList);
     System.out.println("[APUJIMA]에 방문해 주셔서 감사합니다. 좋은하루 되시기 바랍니다!");
   }
 
