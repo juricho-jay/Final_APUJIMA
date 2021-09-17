@@ -1,19 +1,22 @@
 package pms.handler;
 
+import java.sql.Date;
 import java.util.List;
 import pms.domain.FreeBoard;
+import pms.domain.MailBox;
 import util.Prompt;
 
 public class AdminReportDeleteHandler implements Command{
 
   List<FreeBoard> freeBoardList;
   List<FreeBoard> reportList;
-  MailBoxAutoSendHandler mailBoxAutoSendHandler;
+  List<MailBox> mailBoxList;
 
-  public AdminReportDeleteHandler(List<FreeBoard> freeBoardList, List<FreeBoard> reportList, MailBoxAutoSendHandler mailBoxAutoSendHandler) {
+  public AdminReportDeleteHandler(List<FreeBoard> freeBoardList, List<FreeBoard> reportList,
+      List<MailBox> mailBoxList) {
     this.freeBoardList = freeBoardList;
     this.reportList = reportList;
-    this.mailBoxAutoSendHandler = mailBoxAutoSendHandler;
+    this.mailBoxList = mailBoxList;
   }
 
   @Override
@@ -35,7 +38,8 @@ public class AdminReportDeleteHandler implements Command{
           + "신고 사유 : %s\n"
           + "신고요청 유저 : %s\n",
           reportList.get(i).getNo(), reportList.get(i).getTitle(), reportList.get(i).getContent(),
-          reportList.get(i).getWriter().getId(),reportList.get(i).getLike(), reportList.get(i).getReason(),reportList.get(i).getRequester() );
+          reportList.get(i).getWriter().getId(),reportList.get(i).getLike(),
+          reportList.get(i).getReason(),reportList.get(i).getRequester());
       System.out.println();
     }
 
@@ -45,6 +49,7 @@ public class AdminReportDeleteHandler implements Command{
       return;
 
     int inputNum = Integer.parseInt(input);
+
 
     //reportList에서 0번부터 반복한다.
     for(int i = 0; i < reportList.size(); i++) {
@@ -57,17 +62,38 @@ public class AdminReportDeleteHandler implements Command{
             }
           }
           System.out.println("해당 게시글이 삭제되었습니다.");
-          reportList.remove(i);
+
+
           //메일 자동 전송하기
-          //          MailBox mailBox = new MailBox();
-          //          reportList.get(i).getWriter().getId();
-          //          mailBox.setTitle("신고하신 게시물이 삭제되었습니다.");
-          //          mailBox.setContent("요청하신 게시물은 삭제되었습니다. 많은 관심부탁드립니다.");
-          //          mailBoxList.add(mailBox);
-          mailBoxAutoSendHandler.execute();
+          MailBox mailBox1 = new MailBox();
+          mailBox1.setReceiver(reportList.get(i).getRequester());
+          mailBox1.setSender(AuthLoginHandler.getLoginUser().getId());//현재 로그인된 admin
+          mailBox1.setTitle("신고하신 게시물이 삭제되었습니다.");
+          mailBox1.setContent("요청하신 게시물은 삭제되었습니다. 다른 문의사항이 필요하신가요?");
+          mailBox1.setSendingTime(new Date(System.currentTimeMillis()));
+          mailBoxList.add(mailBox1);
+
+          MailBox mailBox2 = new MailBox();
+          mailBox2.setReceiver(reportList.get(i).getWriter().getId());
+          mailBox2.setSender(AuthLoginHandler.getLoginUser().getId());//현재 로그인된 admin
+          mailBox2.setTitle("회원님의 게시물이 신고되어 삭제되었습니다.");
+          mailBox2.setContent("신고되어 게시물은 삭제되었습니다. ㅃ2 다른 문의사항이 필요하신가요?");
+          mailBox2.setSendingTime(new Date(System.currentTimeMillis()));
+          mailBoxList.add(mailBox2);
+
+
+          reportList.remove(i);
           break;
         } else {
           System.out.println("삭제가 취소되었습니다.");
+
+          MailBox mailBox3 = new MailBox();
+          mailBox3.setReceiver(reportList.get(i).getRequester());
+          mailBox3.setSender(AuthLoginHandler.getLoginUser().getId());//현재 로그인된 admin
+          mailBox3.setTitle("신고 요청이 거부되었습니다.");
+          mailBox3.setContent("신고 사유가 정당하지 않아 요청이 거부되었습니다.");
+          mailBox3.setSendingTime(new Date(System.currentTimeMillis()));
+          mailBoxList.add(mailBox3);
           reportList.remove(i);
           return;
         }

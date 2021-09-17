@@ -46,7 +46,6 @@ import pms.handler.FreeBoardListHandler;
 import pms.handler.FreeBoardSearchHandler;
 import pms.handler.FreeBoardUpdateHandler;
 import pms.handler.IntroMenu;
-import pms.handler.MailBoxAutoSendHandler;
 import pms.handler.MailBoxDeleteHandler;
 import pms.handler.MailBoxDetailHandler;
 import pms.handler.MailBoxListHandler;
@@ -79,12 +78,12 @@ public class Main {
   List<DoctorBoard> doctorBoardList = new LinkedList<>();
   List<FreeBoard> reportList = new LinkedList<>();
   List<MailBox> mailBoxList = new LinkedList<>();
+  List<DoctorBoard> doctorReportList = new LinkedList<>();
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
 
   MemberPrompt memberPrompt = new MemberPrompt(memberList);
-  MailBoxAutoSendHandler mailBoxAutoSendHandler = new MailBoxAutoSendHandler(mailBoxList, freeBoardList);
 
   class MenuItem extends Menu {
     String menuId;
@@ -116,9 +115,9 @@ public class Main {
   public Main() {
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestList, medicineList));
     commandMap.put("/admin/update", new AdminUpdateHandler(requestList, medicineList));
-    commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, freeBoardList));
+    commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, freeBoardList, doctorReportList));
 
-    commandMap.put("/admin/delete", new AdminReportDeleteHandler(freeBoardList , reportList, mailBoxAutoSendHandler));
+    commandMap.put("/admin/delete", new AdminReportDeleteHandler(freeBoardList , reportList, mailBoxList));
 
 
     commandMap.put("/intro", new IntroMenu());
@@ -153,7 +152,7 @@ public class Main {
 
     commandMap.put("/doctorBoard/add", new DoctorBoardAddHandler(doctorBoardList));
     commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(doctorBoardList));
-    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(doctorBoardList));
+    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(doctorBoardList, doctorReportList));
     commandMap.put("/doctorBoard/update", new DoctorBoardUpdateHandler(doctorBoardList));
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardList));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
@@ -332,7 +331,7 @@ public class Main {
   private Menu createNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항");
 
-    noticeMenu.add(new MenuItem("글쓰기", Menu.ACCESS_ADMIN, "/noticeBoard/add"));
+    noticeMenu.add(new MenuItem("글쓰기", "/noticeBoard/add"));
     noticeMenu.add(new MenuItem("목록", "/noticeBoard/list"));
     noticeMenu.add(new MenuItem("상세보기", "/noticeBoard/detail"));
     noticeMenu.add(new MenuItem("변경", Menu.ACCESS_ADMIN, "/noticeBoard/update"));

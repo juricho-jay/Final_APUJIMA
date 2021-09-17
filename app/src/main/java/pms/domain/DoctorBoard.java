@@ -11,9 +11,23 @@ public class DoctorBoard implements Serializable{
   private Date registeredDate;
   private int viewCount;
   private int like;
+  private String reason;
+  private String requester;
 
 
 
+  public String getReason() {
+    return reason;
+  }
+  public void setReason(String reason) {
+    this.reason = reason;
+  }
+  public String getRequester() {
+    return requester;
+  }
+  public void setRequester(String requester) {
+    this.requester = requester;
+  }
   public Member getWriter() {
     return writer;
   }

@@ -28,6 +28,11 @@ public class MailBoxSendHandler extends AbstractMailBoxHandler {
     if (member == null) {
       System.out.printf("-%s- (이)라는 ID는 찾을 수 없습니다.",id);
       System.out.println();
+    } else if (member.getId().equalsIgnoreCase(AuthLoginHandler.getLoginUser().getId())){
+      System.out.println("쪽지를 보내는 아이디가 같습니다. 다시 입력해주세요.");
+      System.out.println();
+    } else if(member.getId().equalsIgnoreCase("admin")) {
+      System.out.println("관리자에게는 쪽지를 보낼수 없습니다!");
     } else {
       mailBox.setReceiver(id);
       mailBox.setTitle(Prompt.inputString("제목> "));
