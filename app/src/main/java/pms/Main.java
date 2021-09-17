@@ -333,7 +333,7 @@ public class Main {
   private Menu createNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항");
 
-    noticeMenu.add(new MenuItem("글쓰기", "/noticeBoard/add"));
+    noticeMenu.add(new MenuItem("글쓰기", Menu.ACCESS_ADMIN,"/noticeBoard/add"));
     noticeMenu.add(new MenuItem("목록", "/noticeBoard/list"));
     noticeMenu.add(new MenuItem("상세보기", "/noticeBoard/detail"));
     noticeMenu.add(new MenuItem("변경", Menu.ACCESS_ADMIN, "/noticeBoard/update"));

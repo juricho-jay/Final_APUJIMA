@@ -24,7 +24,7 @@ public class AuthUserInfoHandler extends AbstractMemberHandler implements Comman
       return;
     }
 
-    if (loginUser.getDoctor() == 2) {
+    if (loginUser.getDoctorOrNot() == 2) {
       System.out.printf("%s 힐러님 환영합니다!\n", loginUser.getName());
       System.out.printf("전문 분야: %s\n", loginUser.getInterest());
       System.out.printf("의료인 면허 증명서: %s\n", loginUser.getDoctorLicense());

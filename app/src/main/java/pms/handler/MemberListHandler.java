@@ -13,7 +13,7 @@ public class MemberListHandler extends AbstractMemberHandler{
   public void execute() {
     System.out.println("[회원 목록]");
     for (Member member : memberList) {
-      if (member.getDoctor() == 2) {
+      if (member.getDoctorOrNot() == 2) {
         System.out.print("[힐러 회원] ");
         System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",
             member.getName(),
@@ -26,7 +26,7 @@ public class MemberListHandler extends AbstractMemberHandler{
             member.getInterest(),
             member.getDoctorLicense(),
             member.getRegisteredDate());
-      } else if(member.getDoctor() == 1) {
+      } else if(member.getDoctorOrNot() == 1) {
         System.out.print("[일반 회원] ");
         System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s\n",
 
@@ -38,7 +38,7 @@ public class MemberListHandler extends AbstractMemberHandler{
             member.getPhoto(),
             member.getSex(),
             member.getRegisteredDate());
-      } else if(member.getDoctor() == 3) {
+      } else if(member.getDoctorOrNot() == 3) {
         System.out.print("[관  리  자] ");
         System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s\n",
 

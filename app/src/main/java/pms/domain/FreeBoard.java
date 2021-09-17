@@ -13,6 +13,7 @@ public class FreeBoard implements Serializable{
   private int like;
   private String reason;
   private String requester;
+  // private int lastIndex;
 
 
   public String getRequester() {

@@ -12,7 +12,7 @@ public class DoctorMemberListHandler extends AbstractMemberHandler{
   public void execute() {
     System.out.println();
     for (Member member : memberList) {
-      if (member.getDoctor() == 2) {
+      if (member.getDoctorOrNot() == 2) {
         System.out.println("[APUJIMA 의사]");
         System.out.printf("이름 : %s\n"
             + "전문 분야 : %s\n"
@@ -24,6 +24,7 @@ public class DoctorMemberListHandler extends AbstractMemberHandler{
             member.getEmail(),
             member.getPhoneNum(),
             member.getSex());
+        System.out.println();
       }
     }
   }

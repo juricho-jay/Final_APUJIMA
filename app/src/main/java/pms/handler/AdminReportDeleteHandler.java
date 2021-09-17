@@ -62,6 +62,7 @@ public class AdminReportDeleteHandler implements Command{
             }
           }
           System.out.println("해당 게시글이 삭제되었습니다.");
+          System.out.println("자동쪽지가 발송되었습니다.");
 
 
           //메일 자동 전송하기

@@ -14,6 +14,9 @@ public class Member implements Serializable{
   private String photo;
   private String sex;
   private Date registeredDate;
+  private String interest;
+  private String doctorLicense;
+  private int doctorOrNot;
   private List<MailBox> mailBox;
 
 
@@ -28,17 +31,6 @@ public class Member implements Serializable{
   }
   public void setDoctorOrNot(int doctorOrNot) {
     this.doctorOrNot = doctorOrNot;
-  }
-  private int doctorOrNot;
-  private String interest;
-  private String doctorLicense;
-
-
-  public int getDoctor() {
-    return doctorOrNot;
-  }
-  public void setDoctor(int doctor) {
-    this.doctorOrNot = doctor;
   }
   public String getDoctorLicense() {
     return doctorLicense;

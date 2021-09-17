@@ -21,9 +21,10 @@ public class CounselingMemberMyListHandler extends AbstractCounselingMemberHandl
       System.out.println("상담신청 내역이 없습니다.");
       return;
     }
-    System.out.printf("이름: %s\n", loginUser.getName());
-    System.out.printf("연락처: %s\n", loginUser.getPhoneNum());
+
     for (int i = 0; i < counselingMemberList.size() ; i++) {
+      System.out.printf("이름: %s\n", loginUser.getName());
+      System.out.printf("연락처: %s\n", loginUser.getPhoneNum());
       System.out.printf("지병여부 : %s\n"
           + "현재증상 : %s\n"
           + "상담내용 : %s\n"
@@ -33,6 +34,7 @@ public class CounselingMemberMyListHandler extends AbstractCounselingMemberHandl
           counselingMemberList.get(i).getStateLabel(),
           counselingMemberList.get(i).getStateLabel2()
           );      
+      System.out.println();
     }
   }
 }

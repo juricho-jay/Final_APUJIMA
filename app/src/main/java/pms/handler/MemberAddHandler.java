@@ -19,22 +19,30 @@ public class MemberAddHandler extends AbstractMemberHandler{
     Member member = new Member();
 
     while (true) {
-      String input = Prompt.inputString("1.일반 2.의사 선택 (뒤로가기 #)> ");
-      if(input.equals("#")) 
-        return;
+      try {
+        String input = Prompt.inputString("1.일반 2.의사 선택 (뒤로가기 #)> ");
 
-      member.setDoctor(Integer.parseInt(input));
-      if (member.getDoctor() == 1) {
-        break;
-      } else if (member.getDoctor() == 2) {
-        member.setDoctorLicense(Prompt.inputString("의료인 면허 증명서> "));
-        member.setInterest(Prompt.inputString("전문 분야> "));
-        break;
-      } else {
+        if(input.equals("#")) {
+          return;
+        }
+        member.setDoctorOrNot(Integer.parseInt(input));
+
+        if (member.getDoctorOrNot() == 1) {
+          break;
+        } else if (member.getDoctorOrNot() == 2) {
+          member.setDoctorLicense(Prompt.inputString("의료인 면허 증명서> "));
+          member.setInterest(Prompt.inputString("전문 분야> "));
+          break;
+        } else {
+          System.out.println("1 or 2 중에 하나로 입력해 주세요.");
+          continue;
+        }
+      } catch (Exception e) {
         System.out.println("1 or 2 중에 하나로 입력해 주세요.");
-        continue;
       }
     }
+
+
 
     while(true) {
       member.setName(Prompt.inputString("이름> "));
@@ -65,7 +73,7 @@ public class MemberAddHandler extends AbstractMemberHandler{
     }
 
     if(member.getName().equals("관리자") && member.getId().equals("admin")) {
-      member.setDoctor(3);
+      member.setDoctorOrNot(3);
     }
 
     member.setPassword(Prompt.inputString("비밀번호> "));
