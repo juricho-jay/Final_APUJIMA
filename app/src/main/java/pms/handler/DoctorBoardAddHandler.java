@@ -21,7 +21,6 @@ public class DoctorBoardAddHandler extends AbstractDoctorBoardHandler{
     doctorBoard.setTitle(Prompt.inputString("제목> "));
     doctorBoard.setContent(Prompt.inputString("내용> "));
 
-
     doctorBoard.setWriter(AuthLoginHandler.getLoginUser());
     doctorBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
 

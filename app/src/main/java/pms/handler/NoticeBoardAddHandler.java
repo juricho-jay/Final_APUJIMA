@@ -7,7 +7,6 @@ import util.Prompt;
 
 public class NoticeBoardAddHandler extends AbstractNoticeBoardHandler{
 
-
   public NoticeBoardAddHandler(List<NoticeBoard> noticeBoardList) {
     super(noticeBoardList);
 
@@ -23,8 +22,9 @@ public class NoticeBoardAddHandler extends AbstractNoticeBoardHandler{
     noticeBoard.setTitle(Prompt.inputString("제목> "));
     noticeBoard.setContent(Prompt.inputString("내용> "));
 
-
     noticeBoard.setWriter(AuthLoginHandler.getLoginUser());
+
+
     noticeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     noticeBoardList.add(noticeBoard);

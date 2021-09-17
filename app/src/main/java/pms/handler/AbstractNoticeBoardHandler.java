@@ -5,7 +5,7 @@ import pms.domain.NoticeBoard;
 
 public abstract class AbstractNoticeBoardHandler implements Command {
 
-  protected List<NoticeBoard> noticeBoardList;
+  List<NoticeBoard> noticeBoardList;
 
   public AbstractNoticeBoardHandler(List<NoticeBoard> noticeBoardList) {
     this.noticeBoardList = noticeBoardList;

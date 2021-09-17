@@ -27,22 +27,6 @@ public class AuthLoginHandler implements Command {
   public AuthLoginHandler(List<Member> memberList) {
     this.memberList = memberList;
 
-
-    //    Member root = new Member();
-    //    root.setName("관리자");
-    //    root.setEmail("admin@test.com");
-    //    root.setId("admin");
-    //    root.setPassword("0000");
-    //    root.setEmail("admin@test.com");
-    //    root.setBirthDay("0000-000--00");
-    //    root.setPhoneNum("010-0000-0000");
-    //    root.setPhoto("1.jpg");
-    //    root.setSex("여");
-    //    root.setRegisteredDate(new Date(System.currentTimeMillis()));
-    //    memberList.add(root);
-    //    userAccessLevel = Menu.ACCESS_ADMIN;
-
-
   }
 
   @Override
@@ -59,7 +43,6 @@ public class AuthLoginHandler implements Command {
     System.out.println();
 
     Member member = loginTest(Id, password);
-
 
 
     if (member == null) {

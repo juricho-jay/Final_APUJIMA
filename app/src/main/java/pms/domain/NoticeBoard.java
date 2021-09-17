@@ -11,13 +11,12 @@ public class NoticeBoard implements Serializable{
   private Date registeredDate;
   private int viewCount;
   private int like;
-  private Member id;
 
   public Member getWriter() {
     return writer;
   }
-  public void setWriter(Member id) {
-    this.id = id;
+  public void setWriter(Member writer) {
+    this.writer = writer;
   }
   public Date getRegisteredDate() {
     return registeredDate;

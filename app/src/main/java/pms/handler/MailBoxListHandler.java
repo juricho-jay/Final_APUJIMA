@@ -23,5 +23,4 @@ public class MailBoxListHandler extends AbstractMailBoxHandler {
 
   }
 
-
 }

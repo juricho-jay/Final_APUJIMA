@@ -8,7 +8,7 @@ public abstract class AbstractFreeBoardHandler implements Command{
   List<FreeBoard> freeBoardList; 
 
   public AbstractFreeBoardHandler(List<FreeBoard> freeBoardList) {
-    this.freeBoardList = freeBoardList; // => ?? 생성자 초기화
+    this.freeBoardList = freeBoardList; 
   }
 
   protected FreeBoard findByNo(int no) {
