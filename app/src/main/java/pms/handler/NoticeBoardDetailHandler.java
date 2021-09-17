@@ -11,7 +11,7 @@ public class NoticeBoardDetailHandler extends AbstractNoticeBoardHandler{
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();
     int no = Prompt.inputInt("게시글 번호> ");
@@ -35,8 +35,27 @@ public class NoticeBoardDetailHandler extends AbstractNoticeBoardHandler{
     String likeNum = Prompt.inputString("[ 좋아요 (#: 👍🏻) / 넘어가기: Enter ]> ");
     if (likeNum.equals("#")) {
       noticeBoard.setLike(noticeBoard.getLike() + 1);
-    } else {
-      return;
+    } 
+
+    if (noticeBoard.getWriter().getId().equals(AuthLoginHandler.loginUser.getId())) {
+      request.setAttribute("no", no);
+      while (true) {
+        String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+        switch (input) {
+          case "U":
+          case "u":
+            request.getRequestDispatcher("/noticeBoard/update").forward(request);
+            return;
+          case "D":
+          case "d":
+            request.getRequestDispatcher("/noticeBoard/delete").forward(request);
+            return;
+          case "0":
+            return;
+          default:
+            System.out.println("명령어가 올바르지 않습니다!");
+        }
+      }
     }
   }
 }

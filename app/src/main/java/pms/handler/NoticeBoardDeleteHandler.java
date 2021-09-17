@@ -24,9 +24,11 @@ public class NoticeBoardDeleteHandler extends AbstractNoticeBoardHandler {
       return;
     }
 
-    if (noticeBoard.getWriter().getId() != AuthLoginHandler.getLoginUser().getId()) {
-      System.out.println("삭제 권한이 없습니다.");
-    }
+    //    if (!noticeBoard.getWriter().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+    //      System.out.println("삭제 권한이 없습니다.");
+    //    }
+    // 애초에 자신의 글이 아니면 삭제 기능이 뜨지 않음
+
 
 
     String input = Prompt.inputString(" ❗ 정말 삭제하시겠습니까? (y/N)> ");
