@@ -29,6 +29,7 @@ import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
 import pms.handler.AuthUserInfoHandler;
 import pms.handler.Command;
+import pms.handler.CommandRequest;
 import pms.handler.CounselingMemberAddHandler;
 import pms.handler.CounselingMemberDoctorListHandler;
 import pms.handler.CounselingMemberMyListHandler;
@@ -101,7 +102,12 @@ public class Main {
     @Override
     public void execute() {
       Command command = commandMap.get(menuId);
-      command.execute();
+      try {
+        command.execute(new CommandRequest(commandMap));
+      } catch (Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
+        e.printStackTrace();
+      }
     }
 
   }

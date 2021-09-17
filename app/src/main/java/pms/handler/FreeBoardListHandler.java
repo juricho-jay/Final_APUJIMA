@@ -9,7 +9,8 @@ public class FreeBoardListHandler extends AbstractFreeBoardHandler{
     super(freeBoardList);
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println("[게시글 목록] 페이지입니다.");
     System.out.println();
 

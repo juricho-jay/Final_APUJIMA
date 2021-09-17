@@ -9,11 +9,10 @@ public class CounselingMemberAddHandler extends AbstractCounselingMemberHandler{
 
   public CounselingMemberAddHandler(List<CounselingMember> counselingMemberList) {
     super(counselingMemberList);
-    // TODO Auto-generated constructor stub
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[상담 신청]페이지입니다.");
     System.out.println();

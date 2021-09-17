@@ -10,7 +10,8 @@ public class DoctorBoardListHandler extends AbstractDoctorBoardHandler{
     // TODO Auto-generated constructor stub
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println("[게시글 목록] 페이지입니다.");
     System.out.println();
 

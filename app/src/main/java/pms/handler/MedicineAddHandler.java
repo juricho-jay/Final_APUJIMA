@@ -12,7 +12,7 @@ public class MedicineAddHandler extends AbstractMedicineHandler{
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[약품 등록]");
     Medicine medicine = new Medicine();
     medicine.setName(Prompt.inputString("약품명> "));

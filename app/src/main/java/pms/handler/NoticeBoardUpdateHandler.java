@@ -12,7 +12,7 @@ public class NoticeBoardUpdateHandler extends AbstractNoticeBoardHandler {
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[공지사항 게시글 변경] 페이지입니다.");
     System.out.println();
     int no = Prompt.inputInt("게시글 번호> ");

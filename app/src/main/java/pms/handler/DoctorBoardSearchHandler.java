@@ -12,7 +12,7 @@ public class DoctorBoardSearchHandler extends AbstractDoctorBoardHandler {
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     int count = 0;
     System.out.println("[지식인 게시글 검색] 페이지입니다.");
     System.out.println();

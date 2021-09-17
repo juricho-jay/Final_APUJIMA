@@ -12,7 +12,7 @@ public class CounselingMemberMyListHandler extends AbstractCounselingMemberHandl
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     Member loginUser = AuthLoginHandler.getLoginUser();
     int cnt = 0;
     System.out.println();

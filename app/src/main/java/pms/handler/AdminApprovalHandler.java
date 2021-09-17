@@ -16,7 +16,7 @@ public class AdminApprovalHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[약품 등록 허가]");
 

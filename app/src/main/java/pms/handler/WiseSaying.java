@@ -6,7 +6,7 @@ import java.util.List;
 public class WiseSaying implements Command{
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
 
     List<String> list = new ArrayList<>();
     list.add("[힘이들땐 하늘을 봐~ 나는 항상 혼자가 아니야~]");

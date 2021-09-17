@@ -10,7 +10,8 @@ public class FreeBoardUpdateHandler extends AbstractFreeBoardHandler{
     super(freeBoardList);
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println("[게시글 변경] 페이지입니다.");
     System.out.println();
     int no = Prompt.inputInt("게시글 번호> ");
