@@ -33,8 +33,8 @@ public class CounselingMemberDoctorListHandler extends AbstractCounselingMemberH
           counselingMemberList.get(i).getContent(),
           counselingMemberList.get(i).getStateLabel(),
           counselingMemberList.get(i).getStateLabel2()
-
           );      
+      System.out.println();
     }
   }
 
