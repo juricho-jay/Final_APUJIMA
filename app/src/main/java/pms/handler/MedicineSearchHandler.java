@@ -10,7 +10,8 @@ public class MedicineSearchHandler extends AbstractMedicineHandler{
     super(medicineList);
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
 
     System.out.println();
     String input = Prompt.inputString("검색할 약품명을 입력해주세요 > ");

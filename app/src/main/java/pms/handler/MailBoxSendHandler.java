@@ -15,7 +15,7 @@ public class MailBoxSendHandler extends AbstractMailBoxHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[쪽지 전송] 페이지입니다.");
     System.out.println();

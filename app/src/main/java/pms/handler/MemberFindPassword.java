@@ -10,7 +10,8 @@ public class MemberFindPassword extends AbstractMemberHandler{
     super(memberList);
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     while (true) {
       System.out.println("[PW 찾기] 페이지입니다.");
       System.out.println("(취소: #)");

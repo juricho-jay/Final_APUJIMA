@@ -10,7 +10,7 @@ public class MailBoxDeleteHandler extends AbstractMailBoxHandler{
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[삭제] 페이지입니다.");
     System.out.println();
     int no = Prompt.inputInt("쪽지 번호> ");

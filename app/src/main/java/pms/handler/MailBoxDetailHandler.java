@@ -10,7 +10,7 @@ public class MailBoxDetailHandler extends AbstractMailBoxHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
 
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();

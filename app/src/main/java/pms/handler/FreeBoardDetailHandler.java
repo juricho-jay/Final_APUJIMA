@@ -15,7 +15,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();

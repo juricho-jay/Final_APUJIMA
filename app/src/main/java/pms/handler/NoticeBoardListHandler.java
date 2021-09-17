@@ -10,7 +10,7 @@ public class NoticeBoardListHandler extends AbstractNoticeBoardHandler{
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[게시글 목록] 페이지입니다.");
     System.out.println();
 

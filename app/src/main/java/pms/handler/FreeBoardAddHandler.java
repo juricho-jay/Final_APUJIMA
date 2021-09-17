@@ -11,7 +11,8 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
     super(freeBoardList);
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[자유게시판 글쓰기] 페이지입니다.");
     System.out.println();

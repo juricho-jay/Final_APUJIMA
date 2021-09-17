@@ -11,7 +11,7 @@ public class MedicineListHandler extends AbstractMedicineHandler{
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[약 리스트]");
     System.out.println();

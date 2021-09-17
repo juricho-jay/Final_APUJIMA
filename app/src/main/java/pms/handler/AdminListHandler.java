@@ -28,7 +28,7 @@ public class AdminListHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[승인 요청/신고 목록]");
     System.out.println();

@@ -16,7 +16,7 @@ public class AdminApprovalListHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[승인 허가 / 신고 글 삭제 내역]");
 

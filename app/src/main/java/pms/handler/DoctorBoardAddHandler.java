@@ -9,10 +9,10 @@ public class DoctorBoardAddHandler extends AbstractDoctorBoardHandler{
 
   public DoctorBoardAddHandler(List<DoctorBoard> doctorBoardList) {
     super(doctorBoardList);
-    // TODO Auto-generated constructor stub
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println("[글쓰기] 페이지입니다.");
     System.out.println();
     DoctorBoard doctorBoard = new DoctorBoard();

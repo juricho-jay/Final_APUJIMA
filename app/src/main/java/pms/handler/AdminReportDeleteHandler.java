@@ -20,7 +20,7 @@ public class AdminReportDeleteHandler implements Command{
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[신고 게시판 삭제 허가]");
 

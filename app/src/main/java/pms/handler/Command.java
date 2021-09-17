@@ -1,7 +1,7 @@
 package pms.handler;
 
 public interface Command {
-  void execute(); //모든 메서드 > execute 통일
+  void execute(CommandRequest request) throws Exception;
   // 구현 클래스에서 implements Command 써야함
 
 }

@@ -13,7 +13,7 @@ public class AuthUserInfoHandler extends AbstractMemberHandler implements Comman
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[내정보] 페이지입니다.");
 

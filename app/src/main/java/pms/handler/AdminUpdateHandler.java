@@ -13,10 +13,10 @@ public class AdminUpdateHandler implements Command{
   public AdminUpdateHandler(List<Medicine> requestList, List<Medicine> medicineList) {
     this.requestList = requestList;
     this.medicineList = medicineList;
-    // TODO Auto-generated constructor stub
   }
 
-  public void execute() {
+  @Override
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("[약품 정보 수정]");
     System.out.println();
