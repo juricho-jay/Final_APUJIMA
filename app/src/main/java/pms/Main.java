@@ -83,7 +83,6 @@ public class Main {
   List<MailBox> mailBoxList = new LinkedList<>();
   List<DoctorBoard> doctorReportList = new LinkedList<>();
   List<Comment> commentList = new LinkedList<>();
-  List<NoticeBoard> noticeNumBoardList = new LinkedList<>();
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();

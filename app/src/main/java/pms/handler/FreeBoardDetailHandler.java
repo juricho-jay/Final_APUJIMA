@@ -65,12 +65,13 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
 
         comment.setCommentBoardNo(freeBoard.getNo());
         comment.setCommentWriter(AuthLoginHandler.getLoginUser().getId());
+        System.out.printf("-%s-", AuthLoginHandler.getLoginUser().getId());
 
 
 
 
-        request.setAttribute("no", no);
-        request.getRequestDispatcher("/comment/add").forward(request);
+        //        request.setAttribute("no", no);
+        //        request.getRequestDispatcher("/comment/add").forward(request);
 
 
 
