@@ -1,16 +1,20 @@
 package pms.handler;
 
 import java.util.List;
+import pms.domain.Comment;
 import pms.domain.FreeBoard;
 import util.Prompt;
 
 public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
 
   List<FreeBoard> reportList;
+  List<Comment> commentList;
 
-  public FreeBoardDetailHandler(List<FreeBoard> freeBoardList, List<FreeBoard> reportList) {
+  public FreeBoardDetailHandler(List<FreeBoard> freeBoardList,
+      List<FreeBoard> reportList, List<Comment> commentList) {
     super(freeBoardList);
     this.reportList = reportList;
+    this.commentList = commentList;
   }
 
 
@@ -19,9 +23,9 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     System.out.println();
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();
-    int no = Prompt.inputInt("게시글 번호> ");
+    int num = Prompt.inputInt("게시글 번호> ");
 
-    FreeBoard freeBoard = findByNo(no);
+    FreeBoard freeBoard = findByNo(num);
 
     if (freeBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -43,6 +47,31 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
         System.out.println("게시글 좋아요를 눌렀습니다.");
         break;
       } else if (status.equals("@")) {
+        System.out.println("[댓글 달기]");
+        Comment comment = new Comment(); 
+        int commentTotal = Comment.getCommentTotal();
+        int no = comment.getNo();
+
+        if (commentTotal == 0 && no == 0) {
+          comment.setNo(1);
+          commentTotal++;
+          comment.setCommentNo(commentTotal);
+        } else {
+          comment.setNo(no + 1);
+          commentTotal++;
+          comment.setCommentNo(commentTotal);
+        } 
+
+
+        comment.setCommentBoardNo(freeBoard.getNo());
+        comment.setCommentWriter(AuthLoginHandler.getLoginUser().getId());
+
+
+
+
+        request.setAttribute("no", no);
+        request.getRequestDispatcher("/comment/add").forward(request);
+
 
 
 
@@ -64,7 +93,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     }
 
     if (freeBoard.getWriter().getId().equals(AuthLoginHandler.loginUser.getId())) {
-      request.setAttribute("no", no);
+      request.setAttribute("no", num);
       while (true) {
         String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
         switch (input) {

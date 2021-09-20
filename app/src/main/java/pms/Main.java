@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import Menu.Menu;
 import Menu.MenuGroup;
+import pms.domain.Comment;
 import pms.domain.CounselingMember;
 import pms.domain.DoctorBoard;
 import pms.domain.FreeBoard;
@@ -30,6 +31,7 @@ import pms.handler.AuthLogoutHandler;
 import pms.handler.AuthUserInfoHandler;
 import pms.handler.Command;
 import pms.handler.CommandRequest;
+import pms.handler.CommentAddHandler;
 import pms.handler.CounselingMemberAddHandler;
 import pms.handler.CounselingMemberDoctorListHandler;
 import pms.handler.CounselingMemberMyListHandler;
@@ -80,6 +82,7 @@ public class Main {
   List<FreeBoard> reportList = new LinkedList<>();
   List<MailBox> mailBoxList = new LinkedList<>();
   List<DoctorBoard> doctorReportList = new LinkedList<>();
+  List<Comment> commentList = new LinkedList<>();
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
@@ -176,6 +179,7 @@ public class Main {
     commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxList));
     commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList));
 
+    commandMap.put("/comment/add", new CommentAddHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
 
     commandMap.put("/wiseSaying/saying", new WiseSaying());
 
