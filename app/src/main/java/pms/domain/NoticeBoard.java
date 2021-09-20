@@ -13,8 +13,16 @@ public class NoticeBoard implements Serializable{
   private int like;
   public NoticeBoard index;
   //  public NoticeBoard listIndex;
+  public static int lastIndex;
 
 
+
+  public static int getLastIndex() {
+    return lastIndex;
+  }
+  public static void setLastIndex(int lastIndex) {
+    NoticeBoard.lastIndex = lastIndex;
+  }
   public Member getWriter() {
     return writer;
   }

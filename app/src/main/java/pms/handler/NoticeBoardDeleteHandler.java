@@ -36,12 +36,9 @@ public class NoticeBoardDeleteHandler extends AbstractNoticeBoardHandler {
       System.out.println("게시글 삭제를 취소하였습니다.");
       return;
     }
-
-    for (int i = 0; i < noticeBoardList.size(); i++) {
-      //      if (noticeBoardList.get(i) == (noticeBoardList.size() - 1)) {
-      noticeBoardList.remove(noticeBoard);
-      System.out.println("게시글을 삭제하였습니다.");
-      //    }
-    }
+    noticeBoardList.remove(noticeBoard);
+    System.out.println("게시글을 삭제하였습니다.");
+    //    }
+    //  }
   }
 }
