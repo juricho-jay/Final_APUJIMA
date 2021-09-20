@@ -36,11 +36,18 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     System.out.printf("조회수: %d\n", freeBoard.getViewCount());
     System.out.printf("좋아요: %d\n", freeBoard.getLike());
     while(true) {
-      String status = Prompt.inputString("[ 좋아요 (#: 👍🏻) / 신고하기(!: 🚨) / 넘어가기: Enter ]> ");
+      String status = Prompt.inputString("[ 좋아요 (#: 👍🏻) / 신고하기(!: 🚨) /\n"
+          + "댓글달기(@: 💬) / 넘어가기: Enter ]> ");
       if (status.equals("#")) {
         freeBoard.setLike(freeBoard.getLike() + 1);
         System.out.println("게시글 좋아요를 눌렀습니다.");
         break;
+      } else if (status.equals("@")) {
+
+
+
+
+
       } else if (status.equals("!")) {
         freeBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
         reportList.add(freeBoard);
