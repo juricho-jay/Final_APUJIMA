@@ -27,6 +27,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
 
     FreeBoard freeBoard = findByNo(num);
 
+
     if (freeBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
@@ -39,45 +40,70 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     freeBoard.setViewCount(freeBoard.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeBoard.getViewCount());
     System.out.printf("좋아요: %d\n", freeBoard.getLike());
+
+    System.out.println();
+    System.out.println("[댓글]");
+    for (Comment comment : commentList) {
+      if (comment.getCommentBoardNo() != 0) {
+        if (comment.getCommentBoardNo() == freeBoard.getNo()) {
+          System.out.printf("%d, %s, %s\n",
+              comment.getNo(),
+              comment.getCommenter(),
+              comment.getCommentContent());
+        }
+      } 
+    }   
+    System.out.println();
     while(true) {
-      String status = Prompt.inputString("[ 좋아요 (#: 👍🏻) / 신고하기(!: 🚨) /\n"
-          + "댓글달기(@: 💬) / 넘어가기: Enter ]> ");
+      String status = Prompt.inputString("[좋아요 (#: 👍🏻) / 신고하기(!: 🚨) /\n"
+          + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
       if (status.equals("#")) {
         freeBoard.setLike(freeBoard.getLike() + 1);
         System.out.println("게시글 좋아요를 눌렀습니다.");
         break;
       } else if (status.equals("@")) {
         System.out.println("[댓글 달기]");
-        Comment comment = new Comment(); 
+        System.out.println();
         int commentTotal = Comment.getCommentTotal();
-        int no = comment.getNo();
+        Comment comment = new Comment(); 
 
-        if (commentTotal == 0 && no == 0) {
+        if (commentTotal == 0) {
           comment.setNo(1);
           commentTotal++;
-          comment.setCommentNo(commentTotal);
+          Comment.setCommentTotal(commentTotal);
+          //          comment.setCommentNo(commentTotal);
+          comment.setCommentBoardNo(freeBoard.getNo());
+          comment.setCommentWriter(freeBoard.getWriter().getId());
+          comment.setCommenter(AuthLoginHandler.getLoginUser().getId());
+          System.out.printf("-%s-\n", AuthLoginHandler.getLoginUser().getId());
+          comment.setCommentContent(Prompt.inputString("댓글 내용> "));
+
+          commentList.add(comment);
+          break;
         } else {
-          comment.setNo(no + 1);
-          commentTotal++;
-          comment.setCommentNo(commentTotal);
-        } 
+          int lastIndex = 0;
+          for (int i = 0; i < commentList.size(); i++) {
+            if (commentList.get(i).getCommentBoardNo() == freeBoard.getNo()) {
+              lastIndex++;
+            }
+          }
+
+          Comment.setCommentTotal(commentTotal++);
+          comment.setNo(++lastIndex);
+          comment.setCommentBoardNo(freeBoard.getNo());
+          comment.setCommentWriter(freeBoard.getWriter().getId());
+          comment.setCommenter(AuthLoginHandler.getLoginUser().getId());
+          System.out.printf("-%s-\n", AuthLoginHandler.getLoginUser().getId());
+          comment.setCommentContent(Prompt.inputString("댓글 내용> "));
+
+          commentList.add(comment);
+          break;
 
 
-        comment.setCommentBoardNo(freeBoard.getNo());
-        comment.setCommentWriter(AuthLoginHandler.getLoginUser().getId());
-        System.out.printf("-%s-", AuthLoginHandler.getLoginUser().getId());
+          //        request.setAttribute("no", no);
+          //        request.getRequestDispatcher("/comment/add").forward(request);
 
-
-
-
-        //        request.setAttribute("no", no);
-        //        request.getRequestDispatcher("/comment/add").forward(request);
-
-
-
-
-
-
+        }
       } else if (status.equals("!")) {
         freeBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
         reportList.add(freeBoard);
@@ -96,7 +122,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     if (freeBoard.getWriter().getId().equals(AuthLoginHandler.loginUser.getId())) {
       request.setAttribute("no", num);
       while (true) {
-        String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+        String input = Prompt.inputString("내 글 관리: 변경(U), 삭제(D), 이전(0)>");
         switch (input) {
           case "U":
           case "u":

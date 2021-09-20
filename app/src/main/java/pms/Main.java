@@ -154,7 +154,7 @@ public class Main {
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList, commentList));
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList));
     commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardList));
