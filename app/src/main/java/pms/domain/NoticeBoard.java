@@ -13,7 +13,7 @@ public class NoticeBoard implements Serializable{
   private int like;
   public NoticeBoard index;
   //  public NoticeBoard listIndex;
-  public static int lastIndex;
+  public static int lastIndex = 1;
 
 
 

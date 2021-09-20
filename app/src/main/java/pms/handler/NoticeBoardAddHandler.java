@@ -7,13 +7,9 @@ import util.Prompt;
 
 public class NoticeBoardAddHandler extends AbstractNoticeBoardHandler{
 
-  NoticeBoardListHandler noticeBoardListHandler;
 
-
-  public NoticeBoardAddHandler(List<NoticeBoard> noticeBoardList
-      ,NoticeBoardListHandler noticeBoardListHandler) {
+  public NoticeBoardAddHandler(List<NoticeBoard> noticeBoardList) {
     super(noticeBoardList);
-    this.noticeBoardListHandler = noticeBoardListHandler;
   }
 
   @Override
