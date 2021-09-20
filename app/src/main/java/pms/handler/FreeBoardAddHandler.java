@@ -18,7 +18,7 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
     System.out.println();
     FreeBoard freeBoard = new FreeBoard();
 
-    freeBoard.setNo(Prompt.inputInt("번호> "));
+    //    freeBoard.setNo(Prompt.inputInt("번호> "));
     freeBoard.setTitle(Prompt.inputString("제목> "));
     freeBoard.setContent(Prompt.inputString("내용> "));
 

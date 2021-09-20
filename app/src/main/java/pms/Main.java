@@ -83,6 +83,7 @@ public class Main {
   List<MailBox> mailBoxList = new LinkedList<>();
   List<DoctorBoard> doctorReportList = new LinkedList<>();
   List<Comment> commentList = new LinkedList<>();
+  List<NoticeBoard> noticeNumBoardList = new LinkedList<>();
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
@@ -144,8 +145,8 @@ public class Main {
     commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(counselingMemberList));
     // 바로 위에꺼 상담신청 이력
 
-
-    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardList));
+    NoticeBoardListHandler noticeBoardListHandler = new NoticeBoardListHandler(noticeBoardList);
+    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardList, noticeBoardListHandler));
     commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardList));
     commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardList));
     commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(noticeBoardList));
