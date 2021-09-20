@@ -15,7 +15,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
 
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();
@@ -40,18 +40,40 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
       if (status.equals("#")) {
         freeBoard.setLike(freeBoard.getLike() + 1);
         System.out.println("게시글 좋아요를 눌렀습니다.");
-        return;
+        break;
       } else if (status.equals("!")) {
         freeBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
         reportList.add(freeBoard);
         freeBoard.setRequester(AuthLoginHandler.loginUser.getId());
         System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
-        return;
+        break;
       }
       else if (status.equals("")){
-        return;
+        break;
       } else {
         System.out.println("메뉴에 맞는 명령어를 입력해 주세요.");
+        continue;
+      }
+    }
+
+    if (freeBoard.getWriter().getId().equals(AuthLoginHandler.loginUser.getId())) {
+      request.setAttribute("no", no);
+      while (true) {
+        String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+        switch (input) {
+          case "U":
+          case "u":
+            request.getRequestDispatcher("/freeBoard/update").forward(request);
+            return;
+          case "D":
+          case "d":
+            request.getRequestDispatcher("/freeBoard/delete").forward(request);
+            return;
+          case "0":
+            return;
+          default:
+            System.out.println("명령어가 올바르지 않습니다!");
+        }
       }
     }
   }

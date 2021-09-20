@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class NoticeBoard implements Serializable{
-  private int no;
+  public int no;
   private String title;
   private String content;
   private Member writer;
   private Date registeredDate;
   private int viewCount;
   private int like;
+  public NoticeBoard index;
+  //  public NoticeBoard listIndex;
+
 
   public Member getWriter() {
     return writer;
@@ -42,6 +45,7 @@ public class NoticeBoard implements Serializable{
   public void setNo(int no) {
     this.no = no;
   }
+
   public String getTitle() {
     return title;
   }
@@ -54,6 +58,15 @@ public class NoticeBoard implements Serializable{
   public void setContent(String content) {
     this.content = content;
   }
+  public NoticeBoard getIndex() {
+    return index;
+  }
+  public void setIndex(NoticeBoard index) {
+    this.index = index;
+  }
+
+
+
 
 }
 

@@ -80,6 +80,7 @@ public class Main {
   List<FreeBoard> reportList = new LinkedList<>();
   List<MailBox> mailBoxList = new LinkedList<>();
   List<DoctorBoard> doctorReportList = new LinkedList<>();
+  List<NoticeBoard> noticeNumBoardList = new LinkedList<>();
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
@@ -141,8 +142,8 @@ public class Main {
     commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(counselingMemberList));
     // 바로 위에꺼 상담신청 이력
 
-
-    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardList));
+    NoticeBoardListHandler noticeBoardListHandler = new NoticeBoardListHandler(noticeBoardList);
+    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardList, noticeBoardListHandler));
     commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardList));
     commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardList));
     commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(noticeBoardList));
@@ -189,6 +190,7 @@ public class Main {
     loadObjects("medicine.json", medicineList, Medicine.class);
     loadObjects("notice.json", noticeBoardList, NoticeBoard.class);
     loadObjects("mailbox.json", mailBoxList, MailBox.class);
+    loadObjects("counselingmember.json", counselingMemberList,CounselingMember.class);
 
 
     createMainMenu().execute();
@@ -200,6 +202,7 @@ public class Main {
     saveObjects("medicine.json", medicineList);
     saveObjects("notice.json", noticeBoardList);
     saveObjects("mailbox.json", mailBoxList);
+    saveObjects("counselingmember.json",counselingMemberList);
     System.out.println("[APUJIMA]에 방문해 주셔서 감사합니다. 좋은하루 되시기 바랍니다!");
   }
 
@@ -342,8 +345,8 @@ public class Main {
     noticeMenu.add(new MenuItem("글쓰기", Menu.ACCESS_ADMIN,"/noticeBoard/add"));
     noticeMenu.add(new MenuItem("목록", "/noticeBoard/list"));
     noticeMenu.add(new MenuItem("상세보기", "/noticeBoard/detail"));
-    noticeMenu.add(new MenuItem("변경", Menu.ACCESS_ADMIN, "/noticeBoard/update"));
-    noticeMenu.add(new MenuItem("삭제", Menu.ACCESS_ADMIN, "/noticeBoard/delete"));
+    //    noticeMenu.add(new MenuItem("변경", Menu.ACCESS_ADMIN, "/noticeBoard/update"));
+    //    noticeMenu.add(new MenuItem("삭제", Menu.ACCESS_ADMIN, "/noticeBoard/delete"));
     noticeMenu.add(new MenuItem("검색", "/noticeBoard/search"));
     return noticeMenu;
   }
@@ -354,8 +357,8 @@ public class Main {
     freeBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/add"));
     freeBoardMenu.add(new MenuItem("목록", "/freeBoard/list"));
     freeBoardMenu.add(new MenuItem("상세보기", "/freeBoard/detail"));
-    freeBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/update"));
-    freeBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/delete"));
+    //    freeBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/update"));
+    //    freeBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/delete"));
     freeBoardMenu.add(new MenuItem("검색", "/freeBoard/search"));
     return freeBoardMenu;
   }
@@ -366,8 +369,8 @@ public class Main {
     doctorBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL, "/doctorBoard/add"));
     doctorBoardMenu.add(new MenuItem("목록", "/doctorBoard/list"));
     doctorBoardMenu.add(new MenuItem("상세보기", "/doctorBoard/detail"));
-    doctorBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL, "/doctorBoard/update"));
-    doctorBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL, "/doctorBoard/delete"));
+    //    doctorBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL, "/doctorBoard/update"));
+    //    doctorBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL, "/doctorBoard/delete"));
     doctorBoardMenu.add(new MenuItem("검색", "/doctorBoard/search"));
     return doctorBoardMenu;
   }
