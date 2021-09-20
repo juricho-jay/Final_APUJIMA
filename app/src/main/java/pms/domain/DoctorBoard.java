@@ -13,9 +13,14 @@ public class DoctorBoard implements Serializable{
   private int like;
   private String reason;
   private String requester;
+  public static int lastIndex = 1;
 
-
-
+  public static int getLastIndex() {
+    return lastIndex;
+  }
+  public static void setLastIndex(int lastIndex) {
+    DoctorBoard.lastIndex = lastIndex;
+  }
   public String getReason() {
     return reason;
   }
