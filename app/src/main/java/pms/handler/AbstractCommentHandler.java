@@ -18,7 +18,7 @@ public abstract class AbstractCommentHandler implements Command {
     this.doctorBoardList = doctorBoardList;
     this.noticeBoardList = noticeBoardList;
   }
-  protected Comment findByCommentNo(int No) {
+  protected Comment findByNo(int No) {
     for (Comment comment : commentList) {
       if (comment.getNo() == No) {
         return comment;
@@ -27,6 +27,31 @@ public abstract class AbstractCommentHandler implements Command {
     return null;
   }
 
+  protected FreeBoard findByFreeBoardNo(int freeBoardNo) {
+    for (FreeBoard freeBoard : freeBoardList) {
+      if (freeBoard.getNo() == freeBoardNo) {
+        return freeBoard;
+      }
+    }
+    return null;
+  }
 
+  protected DoctorBoard findByDoctorBoardNo(int doctorBoardNo) {
+    for (DoctorBoard doctorBoard : doctorBoardList) {
+      if (doctorBoard.getNo() == doctorBoardNo) {
+        return doctorBoard;
+      }
+    }
+    return null;
+  }
+
+  protected NoticeBoard findByNoticeBoardNo(int noticeBoardNo) {
+    for (NoticeBoard noticeBoard : noticeBoardList) {
+      if (noticeBoard.getNo() == noticeBoardNo) {
+        return noticeBoard;
+      }
+    }
+    return null;
+  }
 
 }
