@@ -7,6 +7,7 @@ import util.Prompt;
 
 public class NoticeBoardAddHandler extends AbstractNoticeBoardHandler{
 
+
   public NoticeBoardAddHandler(List<NoticeBoard> noticeBoardList) {
     super(noticeBoardList);
 
@@ -14,6 +15,7 @@ public class NoticeBoardAddHandler extends AbstractNoticeBoardHandler{
 
   @Override
   public void execute(CommandRequest request) {
+
     System.out.println("[글쓰기] 페이지입니다.");
     System.out.println();
     NoticeBoard noticeBoard = new NoticeBoard();
@@ -21,8 +23,6 @@ public class NoticeBoardAddHandler extends AbstractNoticeBoardHandler{
     noticeBoard.setContent(Prompt.inputString("내용> "));
 
     noticeBoard.setWriter(AuthLoginHandler.getLoginUser());
-
-
     noticeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     noticeBoardList.add(noticeBoard);

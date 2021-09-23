@@ -21,7 +21,7 @@ public class NoticeBoardUpdateHandler extends AbstractNoticeBoardHandler {
 
     if (noticeBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
-    } else if (noticeBoard.getWriter().getId() == AuthLoginHandler.getLoginUser().getId()) {
+    } else if (noticeBoard.getWriter().getId().equals(AuthLoginHandler.getLoginUser().getId()) ) {
       String title = Prompt.inputString(String.format("제목(%s)> ", noticeBoard.getTitle()));
       String content = Prompt.inputString(String.format("내용(%s)> ", noticeBoard.getContent()));
 
