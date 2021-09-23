@@ -71,7 +71,6 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
           comment.setNo(1);
           commentTotal++;
           Comment.setCommentTotal(commentTotal);
-          //          comment.setCommentNo(commentTotal);
           comment.setCommentBoardNo(freeBoard.getNo());
           comment.setCommentWriter(freeBoard.getWriter().getId());
           comment.setCommenter(AuthLoginHandler.getLoginUser().getId());

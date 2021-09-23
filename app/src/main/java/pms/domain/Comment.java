@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Comment implements Serializable {
   static int commentTotal; // 댓글 총 갯수
-  //  private int commentNo; // 댓글 고유 번호
   private int commentBoardNo; // 댓글이 달린 게시판 번호
   private String commenter;
   private String commentWriter;
@@ -21,12 +20,6 @@ public class Comment implements Serializable {
   public static void setCommentTotal(int commentTotal) {
     Comment.commentTotal = commentTotal;
   }
-  //  public int getCommentNo() {
-  //    return commentNo;
-  //  }
-  //  public void setCommentNo(int commentNo) {
-  //    this.commentNo = commentNo;
-  //  }
   public int getCommentBoardNo() {
     return commentBoardNo;
   }
