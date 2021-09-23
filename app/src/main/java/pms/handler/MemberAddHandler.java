@@ -97,7 +97,7 @@ public class MemberAddHandler extends AbstractMemberHandler{
         System.out.println("남 or 여 중에 하나로 다시 입력해주세요");
       }
     }
-
+    member.setCount(1000);
     member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     memberList.add(member);

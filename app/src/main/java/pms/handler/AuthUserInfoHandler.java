@@ -38,6 +38,7 @@ public class AuthUserInfoHandler extends AbstractMemberHandler implements Comman
     System.out.printf("전화: %s\n", loginUser.getPhoneNum());
     System.out.printf("성별: %s\n", loginUser.getSex());
     System.out.printf("가입일: %s\n", loginUser.getRegisteredDate());
+    System.out.println("남은 포인트: " + loginUser.getCount());
   }
 }
 
