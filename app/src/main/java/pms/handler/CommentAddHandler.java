@@ -59,10 +59,6 @@ public class CommentAddHandler extends AbstractCommentHandler {
       commentList.add(comment);
       break;
 
-
-      //        request.setAttribute("no", no);
-      //        request.getRequestDispatcher("/comment/add").forward(request);
-
     }
 
 

@@ -15,7 +15,6 @@ public class NoticeBoardAddHandler extends AbstractNoticeBoardHandler{
   @Override
   public void execute(CommandRequest request) {
 
-
     System.out.println("[글쓰기] 페이지입니다.");
     System.out.println();
     NoticeBoard noticeBoard = new NoticeBoard();
