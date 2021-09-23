@@ -12,7 +12,7 @@ public class BucketDetailHandler extends AbstractBucketListHandler {
 
 
   @Override
-  public void execute(CommandRequest request){
+  public void execute(CommandRequest request) throws Exception{
 
     System.out.println();
     System.out.println("[나만의 버킷리스트 상세보기] 페이지입니다.");
@@ -32,6 +32,21 @@ public class BucketDetailHandler extends AbstractBucketListHandler {
     System.out.printf("내용: %s\n", bucket.getContent());
     System.out.printf("등록일: %s\n", bucket.getRegisteredDate());
 
+    request.setAttribute("num", num);
+    while(true) {
+      String input = Prompt.inputString("달성체크(C), 이전(0)> ");
+      switch(input) {
+        case "C":
+        case "c": 
+          request.getRequestDispatcher("/bucket/complete").forward(request);
+          return;
+
+        case "0":
+          return;
+        default:
+          System.out.println("명령어가 올바르지 않습니다!");
+      }
+    }
 
 
   }

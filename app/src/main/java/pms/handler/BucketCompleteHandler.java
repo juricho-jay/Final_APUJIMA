@@ -19,16 +19,16 @@ public class BucketCompleteHandler extends AbstractBucketListHandler {
     System.out.println();
 
 
-    int num = Prompt.inputInt("버킷리스트 번호> ");
+    int no = (int)request.getAttribute("no");
 
-    Bucket bucket = findByNo(num);
+    Bucket bucket = findByNo(no);
 
     if (bucketList == null) {
       System.out.println("해당 번호의 버킷리스트가 없습니다.");
       return;
     }
 
-    if(bucket.getNo() == num) {
+    if(bucket.getNo() == no) {
       if(bucket.isComplete() == false) {
         bucket.setCheck("🗹");
         bucket.setComplete(true);

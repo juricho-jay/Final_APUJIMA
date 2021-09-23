@@ -34,6 +34,7 @@ import pms.handler.BucketAddHandler;
 import pms.handler.BucketCompleteHandler;
 import pms.handler.BucketDetailHandler;
 import pms.handler.BucketListHandler;
+import pms.handler.BucketSearchHandler;
 import pms.handler.Command;
 import pms.handler.CommandRequest;
 import pms.handler.CommentAddHandler;
@@ -192,6 +193,7 @@ public class Main {
     commandMap.put("/bucket/list", new BucketListHandler(bucketList));
     commandMap.put("/bucket/detail", new BucketDetailHandler(bucketList));
     commandMap.put("/bucket/complete", new BucketCompleteHandler(bucketList));
+    commandMap.put("/bucket/search", new BucketSearchHandler(bucketList));
 
 
     commandMap.put("/wiseSaying/saying", new WiseSaying());
@@ -409,8 +411,8 @@ public class Main {
 
     bucketMenu.add(new MenuItem("버킷리스트 추가", "/bucket/add"));
     bucketMenu.add(new MenuItem("버킷리스트 목록", "/bucket/list"));
-    bucketMenu.add(new MenuItem("버킷리스트 상세", "/bucket/detail"));
-    bucketMenu.add(new MenuItem("버킷리스트 달성체크", "/bucket/complete"));
+    //bucketMenu.add(new MenuItem("버킷리스트 상세", "/bucket/detail"));
+    //  bucketMenu.add(new MenuItem("버킷리스트 달성체크", "/bucket/complete"));
 
 
     return bucketMenu;
