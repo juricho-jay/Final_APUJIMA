@@ -5,6 +5,7 @@ import pms.domain.NoticeBoard;
 
 public class NoticeBoardListHandler extends AbstractNoticeBoardHandler{
 
+
   public NoticeBoardListHandler(List<NoticeBoard> noticeBoardList) {
     super(noticeBoardList);
   }
@@ -20,6 +21,7 @@ public class NoticeBoardListHandler extends AbstractNoticeBoardHandler{
     } else {
       for (NoticeBoard noticeBoard : noticeBoardList) {
         System.out.printf("%d, %s, %s, %s, %d, %d\n",
+            //            noticeNumBoardList
             noticeBoard.getNo(),
             noticeBoard.getTitle(),
             noticeBoard.getWriter().getId(),

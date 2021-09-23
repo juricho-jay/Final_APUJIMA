@@ -14,6 +14,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import Menu.Menu;
 import Menu.MenuGroup;
+import pms.domain.Bucket;
+import pms.domain.Comment;
 import pms.domain.CounselingMember;
 import pms.domain.DoctorBoard;
 import pms.domain.FreeBoard;
@@ -28,8 +30,13 @@ import pms.handler.AdminUpdateHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
 import pms.handler.AuthUserInfoHandler;
+import pms.handler.BucketAddHandler;
+import pms.handler.BucketCompleteHandler;
+import pms.handler.BucketDetailHandler;
+import pms.handler.BucketListHandler;
 import pms.handler.Command;
 import pms.handler.CommandRequest;
+import pms.handler.CommentAddHandler;
 import pms.handler.CounselingMemberAddHandler;
 import pms.handler.CounselingMemberDoctorListHandler;
 import pms.handler.CounselingMemberMyListHandler;
@@ -80,6 +87,8 @@ public class Main {
   List<FreeBoard> reportList = new LinkedList<>();
   List<MailBox> mailBoxList = new LinkedList<>();
   List<DoctorBoard> doctorReportList = new LinkedList<>();
+  List<Comment> commentList = new LinkedList<>();
+  List<Bucket> bucketList = new LinkedList<>();
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
@@ -141,7 +150,7 @@ public class Main {
     commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(counselingMemberList));
     // 바로 위에꺼 상담신청 이력
 
-
+    NoticeBoardListHandler noticeBoardListHandler = new NoticeBoardListHandler(noticeBoardList);
     commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardList));
     commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardList));
     commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardList));
@@ -151,7 +160,7 @@ public class Main {
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList, commentList));
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList));
     commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardList));
@@ -175,6 +184,14 @@ public class Main {
     commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxList));
     commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxList));
     commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList));
+
+    commandMap.put("/comment/add", new CommentAddHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
+
+
+    commandMap.put("/bucket/add", new BucketAddHandler(bucketList));
+    commandMap.put("/bucket/list", new BucketListHandler(bucketList));
+    commandMap.put("/bucket/detail", new BucketDetailHandler(bucketList));
+    commandMap.put("/bucket/complete", new BucketCompleteHandler(bucketList));
 
 
     commandMap.put("/wiseSaying/saying", new WiseSaying());
@@ -267,6 +284,7 @@ public class Main {
     mainMenuGroup.add(createCounselingMenu());
 
     mainMenuGroup.add(createCommunityMenu());
+    mainMenuGroup.add(createBucketMenu());
 
     mainMenuGroup.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
     mainMenuGroup.add(new MenuItem("회원가입", Menu.ACCESS_LOGOUT, "/member/add"));
@@ -344,8 +362,8 @@ public class Main {
     noticeMenu.add(new MenuItem("글쓰기", Menu.ACCESS_ADMIN,"/noticeBoard/add"));
     noticeMenu.add(new MenuItem("목록", "/noticeBoard/list"));
     noticeMenu.add(new MenuItem("상세보기", "/noticeBoard/detail"));
-    noticeMenu.add(new MenuItem("변경", Menu.ACCESS_ADMIN, "/noticeBoard/update"));
-    noticeMenu.add(new MenuItem("삭제", Menu.ACCESS_ADMIN, "/noticeBoard/delete"));
+    //    noticeMenu.add(new MenuItem("변경", Menu.ACCESS_ADMIN, "/noticeBoard/update"));
+    //    noticeMenu.add(new MenuItem("삭제", Menu.ACCESS_ADMIN, "/noticeBoard/delete"));
     noticeMenu.add(new MenuItem("검색", "/noticeBoard/search"));
     return noticeMenu;
   }
@@ -356,8 +374,8 @@ public class Main {
     freeBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/add"));
     freeBoardMenu.add(new MenuItem("목록", "/freeBoard/list"));
     freeBoardMenu.add(new MenuItem("상세보기", "/freeBoard/detail"));
-    freeBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/update"));
-    freeBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/delete"));
+    //    freeBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/update"));
+    //    freeBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/delete"));
     freeBoardMenu.add(new MenuItem("검색", "/freeBoard/search"));
     return freeBoardMenu;
   }
@@ -368,8 +386,8 @@ public class Main {
     doctorBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL, "/doctorBoard/add"));
     doctorBoardMenu.add(new MenuItem("목록", "/doctorBoard/list"));
     doctorBoardMenu.add(new MenuItem("상세보기", "/doctorBoard/detail"));
-    doctorBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL, "/doctorBoard/update"));
-    doctorBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL, "/doctorBoard/delete"));
+    //    doctorBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL, "/doctorBoard/update"));
+    //    doctorBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL, "/doctorBoard/delete"));
     doctorBoardMenu.add(new MenuItem("검색", "/doctorBoard/search"));
     return doctorBoardMenu;
   }
@@ -386,6 +404,18 @@ public class Main {
     return mailBoxMenu;
   }
 
+  private Menu createBucketMenu() {
+    MenuGroup bucketMenu = new MenuGroup("버킷리스트", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR);
+
+    bucketMenu.add(new MenuItem("버킷리스트 추가", "/bucket/add"));
+    bucketMenu.add(new MenuItem("버킷리스트 목록", "/bucket/list"));
+    bucketMenu.add(new MenuItem("버킷리스트 상세", "/bucket/detail"));
+    bucketMenu.add(new MenuItem("버킷리스트 달성체크", "/bucket/complete"));
+
+
+    return bucketMenu;
+
+  }
 
 
 

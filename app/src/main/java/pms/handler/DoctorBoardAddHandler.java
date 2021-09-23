@@ -17,7 +17,7 @@ public class DoctorBoardAddHandler extends AbstractDoctorBoardHandler{
     System.out.println();
     DoctorBoard doctorBoard = new DoctorBoard();
 
-    doctorBoard.setNo(Prompt.inputInt("번호> "));
+    doctorBoard.setNo(DoctorBoard.lastIndex++);
     doctorBoard.setTitle(Prompt.inputString("제목> "));
     doctorBoard.setContent(Prompt.inputString("내용> "));
 
