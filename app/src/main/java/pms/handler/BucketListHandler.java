@@ -18,6 +18,7 @@ public class BucketListHandler extends AbstractBucketListHandler {
     System.out.println("[나만의 버킷리스트 목록] 페이지입니다.");
     System.out.println();
     int count = 0;
+    int bucketNo = 0;
 
     if(bucketList.size() == 0) {
       System.out.println("현재 작성된 버킷리스트가 없습니다.");
@@ -25,6 +26,8 @@ public class BucketListHandler extends AbstractBucketListHandler {
     } else {
       for(int i = 0; i < bucketList.size(); i++) {
         if(bucketList.get(i).getWriter().equals(AuthLoginHandler.getLoginUser().getId())) {
+          bucketNo++;
+          bucketList.get(i).setNo(bucketNo);
           System.out.printf("%d, %s, %s, %s\n", bucketList.get(i).getNo(),
               bucketList.get(i).getTitle(),
               bucketList.get(i).getContent(), 
