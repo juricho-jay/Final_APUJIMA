@@ -18,8 +18,15 @@ public class Member implements Serializable{
   private String doctorLicense;
   private int doctorOrNot;
   private List<MailBox> mailBox;
+  private int count;
 
 
+  public int getCount() {
+    return count;
+  }
+  public void setCount(int count) {
+    this.count = count;
+  }
   public List<MailBox> getMailBox() {
     return mailBox;
   }
