@@ -34,9 +34,13 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler{
       System.out.println("게시글 삭제를 취소하였습니다.");
       return;
     }
+    if(freeBoard == freeBoardList.get(freeBoardList.size()-1)) {
+      FreeBoard.lastIndex++;
+    }
 
     freeBoardList.remove(freeBoard);
     System.out.println("게시글을 삭제하였습니다.");
+
   }
 
 }

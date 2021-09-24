@@ -7,7 +7,6 @@ import util.Prompt;
 
 public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
 
-  static int lastNo;// 게시물 마지막 번호
 
   public FreeBoardAddHandler(List<FreeBoard> freeBoardList) {
     super(freeBoardList);
@@ -20,23 +19,18 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
     System.out.println();
     FreeBoard freeBoard = new FreeBoard();
 
-    if (freeBoardList.size() == 0) {// 게시물이 0개일 경우
-      //      lastNo = FreeBoard.lastIndex;
-      freeBoard.setNo(FreeBoard.lastIndex);
-      FreeBoard.lastIndex++;
-      //      lastNo = FreeBoard.lastIndex;
+    if (freeBoardList.size() == 0) { // 게시물 0번 일 때,
+      freeBoard.setNo(FreeBoard.lastIndex++);
       return;
-    } else { // 게시물 1개 이상일 경우
-      if (freeBoard.getNo() == freeBoardList.size()) { // 현재 게시물번호와 총게시물개수와 같다면
-        FreeBoard.lastIndex = freeBoard.getNo();
-        lastNo = FreeBoard.lastIndex;
-        lastNo++;
-        FreeBoard.lastIndex = lastNo;
-        freeBoard.setNo(FreeBoard.lastIndex);
-        FreeBoard.lastIndex++;
+    } else if (freeBoardList.size() > 0) { // 게시물이 1번 이상일 때
+      for (FreeBoard freeBoardNo : freeBoardList) { // 리스트를 불러와서 반복한다.
+        //        FreeBoard.index = FreeBoard.lastIndex;
+        if (freeBoardList.size() - 1 == FreeBoard.lastIndex) { // 마지막번호와 사이즈가 다르면
+          freeBoardNo.setNo(FreeBoard.index++);
+        }
       }
-
-    }
+      FreeBoard.lastIndex = freeBoard.getNo();
+    } 
     freeBoard.setTitle(Prompt.inputString("제목> "));
     freeBoard.setContent(Prompt.inputString("내용> "));
 

@@ -17,7 +17,6 @@ public class CommentAddHandler extends AbstractCommentHandler {
 
 
 
-
   }
 
   protected FreeBoard findByFreeBoardNo(int freeBoardNo) {
