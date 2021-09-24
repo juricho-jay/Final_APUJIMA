@@ -19,11 +19,9 @@ public class AppInitListener implements ApplicationContextListener {
 
   @Override
   public void contextDestroyed(Map<String,Object> params) {
-    System.out.println("\r\n"
-        + "   ／l、\r\n"
-        + "ﾞ（ﾟ､ ｡ ７\r\n"
-        + "l、ﾞ ~ヽ\r\n"
-        + "じしf_, )ノ\r\n");    
+    System.out.println("  (\\_(\\\r\n"
+        + "(„• ֊ •„)\r\n"
+        + "(  O☕O  )");  
   }
 
 }
