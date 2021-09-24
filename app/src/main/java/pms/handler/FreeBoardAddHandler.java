@@ -19,21 +19,33 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
     System.out.println();
     FreeBoard freeBoard = new FreeBoard();
 
-    if (freeBoardList.size() == 0) { // 게시물 0번 일 때,
-      freeBoard.setNo(FreeBoard.lastIndex++);
-      return;
-    } else if (freeBoardList.size() > 0) { // 게시물이 1번 이상일 때
-      for (FreeBoard freeBoardNo : freeBoardList) { // 리스트를 불러와서 반복한다.
-        //        FreeBoard.index = FreeBoard.lastIndex;
-        if (freeBoardList.size() - 1 == FreeBoard.lastIndex) { // 마지막번호와 사이즈가 다르면
-          freeBoardNo.setNo(FreeBoard.index++);
-        }
-      }
-      FreeBoard.lastIndex = freeBoard.getNo();
-    } 
-    freeBoard.setTitle(Prompt.inputString("제목> "));
-    freeBoard.setContent(Prompt.inputString("내용> "));
 
+    if (FreeBoard.lastIndex == 1) {
+      freeBoard.setNo(FreeBoard.lastIndex);
+      FreeBoard.lastIndex++;
+    }else {
+      freeBoard.setNo(FreeBoard.lastIndex++);
+    }
+    while(true) {
+
+      freeBoard.setTitle(Prompt.inputString("제목> "));
+      if (freeBoard.getTitle().trim().equals("")) {
+        System.out.println("제목이 공백입니다. 다시 입력해주세요.");
+      }
+      else {
+        break;
+      }
+    }
+    while(true) {
+      freeBoard.setContent(Prompt.inputString("내용> "));
+      if (freeBoard.getContent().trim().equals("")) {
+        System.out.println("내용이 공백입니다. 다시 입력해주세요.");
+      } else {
+        break;
+      }
+
+
+    }
 
     freeBoard.setWriter(AuthLoginHandler.getLoginUser());
     freeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));

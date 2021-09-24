@@ -22,7 +22,7 @@ public class BucketAddHandler extends AbstractBucketListHandler {
     Bucket bucket = new Bucket();
 
 
-    bucket.setNo(bucketList.size() + 1);
+    // bucket.setNo(bucketList.size() + 1);
     bucket.setTitle(Prompt.inputString("제목> "));
     bucket.setContent(Prompt.inputString("내용> "));
     bucket.setWriter(AuthLoginHandler.getLoginUser().getId());

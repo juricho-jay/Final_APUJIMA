@@ -36,11 +36,20 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler{
     System.out.printf("조회수: %d\n", doctorBoard.getViewCount());
     System.out.printf("좋아요: %d\n", doctorBoard.getLike());
     while(true) {
-      String status = Prompt.inputString("[ 좋아요 (#: 👍🏻) / 신고하기(!: 🚨) / 넘어가기: Enter ]> ");
+      // if(doctorBoard.getLike() == 0) {
+      //   System.out.printf("[1.♡ : %s )] ", doctorBoard.getLike());
+      // } else {
+      //   System.out.printf("[1.❤ : %s )] ", doctorBoard.getLike());
+      // }
+      String status = Prompt.inputString("[ 좋아요 (#: ♡) / 신고하기(!: 🚨) / 넘어가기: Enter ]> ");
       if (status.equals("#")) {
         doctorBoard.setLike(doctorBoard.getLike() + 1);
-        System.out.println("게시글 좋아요를 눌렀습니다.");
+        System.out.printf("[1.❤ : %s )] ", doctorBoard.getLike());
         break;
+      } else if (status.equals("#")) {
+        if (do)
+          doctorBoard.setLike(doctorBoard.getLike() - 1);
+        System.out.printf("[1.♡ : %s )] ", doctorBoard.getLike());
       } else if (status.equals("!")) {
         doctorBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
         reportList.add(doctorBoard);

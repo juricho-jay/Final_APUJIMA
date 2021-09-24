@@ -11,6 +11,8 @@ public class Bucket {
   private String writer;
   private boolean complete;
   private Date registeredDate;
+  public static int lastIndex = 1;
+
 
 
   public String getWriter() {
