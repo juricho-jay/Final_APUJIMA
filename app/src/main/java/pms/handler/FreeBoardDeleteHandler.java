@@ -14,6 +14,7 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler{
   public void execute(CommandRequest request) {
     System.out.println("[삭제] 페이지입니다.");
     System.out.println();
+    int temp = 0;
     int no = Prompt.inputInt("게시글 번호> ");
 
     FreeBoard freeBoard = findByNo(no);
@@ -34,9 +35,14 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler{
       System.out.println("게시글 삭제를 취소하였습니다.");
       return;
     }
+    if(freeBoard == freeBoardList.get(freeBoardList.size()-1)) {
+      temp = freeBoardList.get(freeBoardList.size()-1).getNo() + 1;
+      FreeBoard.lastIndex++;
+    }
 
     freeBoardList.remove(freeBoard);
     System.out.println("게시글을 삭제하였습니다.");
+
   }
 
 }

@@ -14,7 +14,7 @@ public class FreeBoard implements Serializable{
   private String reason;
   private String requester;
   // private int lastIndex;
-  public static int lastIndex = 1;
+  public static int lastIndex;
 
   public static int getLastIndex() {
     return lastIndex;
