@@ -43,10 +43,6 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler{
       return;
     }
     if(freeBoard == freeBoardList.get(freeBoardList.size()-1)) {
-<<<<<<< HEAD
-=======
-      temp = freeBoardList.get(freeBoardList.size()-1).getNo() + 1;
->>>>>>> bb52b42cae21c961e0c42cef34a53f61081dfe9f
       FreeBoard.lastIndex++;
     }
 
