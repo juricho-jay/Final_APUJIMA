@@ -20,4 +20,9 @@ public abstract class AbstractFreeBoardHandler implements Command{
     return null;
   }
 
+
+  protected int noDeliver(int no) {
+    return no;
+  }
+
 }

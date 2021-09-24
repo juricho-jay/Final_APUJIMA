@@ -19,6 +19,9 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler{
 
     FreeBoard freeBoard = findByNo(no);
 
+
+
+
     if (freeBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
@@ -30,6 +33,10 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler{
       return;
     }
 
+
+
+
+
     String input = Prompt.inputString(" ❗ 정말 삭제하시겠습니까? (y/N)> ");
     if(input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("게시글 삭제를 취소하였습니다.");
@@ -38,6 +45,10 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler{
     if(freeBoard == freeBoardList.get(freeBoardList.size()-1)) {
       temp = freeBoardList.get(freeBoardList.size()-1).getNo() + 1;
       FreeBoard.lastIndex++;
+    }
+
+    if (freeBoard.getNo() == (freeBoardList.size()-1)) {
+      FreeBoard.setNextNo((freeBoardList.size() - 1));
     }
 
     freeBoardList.remove(freeBoard);

@@ -17,6 +17,7 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
     System.out.println("[자유게시판 글쓰기] 페이지입니다.");
     System.out.println();
     FreeBoard freeBoard = new FreeBoard();
+<<<<<<< HEAD
     int temp = 0;
     int count = 0;
 
@@ -50,6 +51,36 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
     }
     freeBoard.setTitle(Prompt.inputString("제목> "));
     freeBoard.setContent(Prompt.inputString("내용> "));
+=======
+
+
+    if (FreeBoard.lastIndex == 1) {
+      freeBoard.setNo(FreeBoard.lastIndex);
+      FreeBoard.lastIndex++;
+    }else {
+      freeBoard.setNo(FreeBoard.lastIndex++);
+    }
+    while(true) {
+
+      freeBoard.setTitle(Prompt.inputString("제목> "));
+      if (freeBoard.getTitle().trim().equals("")) {
+        System.out.println("제목이 공백입니다. 다시 입력해주세요.");
+      }
+      else {
+        break;
+      }
+    }
+    while(true) {
+      freeBoard.setContent(Prompt.inputString("내용> "));
+      if (freeBoard.getContent().trim().equals("")) {
+        System.out.println("내용이 공백입니다. 다시 입력해주세요.");
+      } else {
+        break;
+      }
+
+
+    }
+>>>>>>> 0be11f80701837cbc91025c30f1a4c4adf120501
 
     freeBoard.setWriter(AuthLoginHandler.getLoginUser());
     freeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));

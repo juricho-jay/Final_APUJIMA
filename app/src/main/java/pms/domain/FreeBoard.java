@@ -13,9 +13,22 @@ public class FreeBoard implements Serializable{
   private int like;
   private String reason;
   private String requester;
+<<<<<<< HEAD
   // private int lastIndex;
   public static int lastIndex;
+=======
+  public static int lastIndex;
+  public static int nextNo;
+>>>>>>> 0be11f80701837cbc91025c30f1a4c4adf120501
 
+
+
+  public static int getNextNo() {
+    return nextNo;
+  }
+  public static void setNextNo(int nextNo) {
+    FreeBoard.nextNo = nextNo;
+  }
   public static int getLastIndex() {
     return lastIndex;
   }

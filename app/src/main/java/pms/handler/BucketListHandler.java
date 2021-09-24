@@ -28,10 +28,10 @@ public class BucketListHandler extends AbstractBucketListHandler {
         if(bucketList.get(i).getWriter().equals(AuthLoginHandler.getLoginUser().getId())) {
           bucketNo++;
           bucketList.get(i).setNo(bucketNo);
-          System.out.printf("%d, %s, %s, %s\n", bucketList.get(i).getNo(),
+          System.out.printf("%s, %d, %s, %s\n",bucketList.get(i).getCheck(),
+              bucketList.get(i).getNo(),
               bucketList.get(i).getTitle(),
-              bucketList.get(i).getContent(), 
-              bucketList.get(i).getCheck());
+              bucketList.get(i).getContent());
 
           count++;
         }
@@ -42,11 +42,11 @@ public class BucketListHandler extends AbstractBucketListHandler {
       }
     }
 
-    String answer = Prompt.inputString("달성한 버켓리스트가 있으신가요?(y/N) 검색하기(#)");
+    String answer = Prompt.inputString("달성한 버켓리스트가 있으신가요?(y/N) 검색하기(#)> ");
 
     if (answer.equalsIgnoreCase("y")) {
       while(true) {
-        int no = Prompt.inputInt("달성한 버킷리스트 번호를 입력해주세요.> ");
+        int no = Prompt.inputInt("달성한 버킷리스트 번호를 입력해주세요> ");
         String input = Prompt.inputString("달성체크(C), 이전(0)> ");
         request.setAttribute("no", no);
         switch(input) {
