@@ -240,7 +240,7 @@ public class Main {
     params.put("mailbox.json", mailBoxList);
     params.put("counselingmember.json",counselingMemberList);
     params.put("bucketlist.json",bucketList);
-    System.out.println("[APUJIMA]에 방문해 주셔서 감사합니다. 좋은하루 되시기 바랍니다!");
+
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
     }

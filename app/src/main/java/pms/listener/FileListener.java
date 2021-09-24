@@ -65,7 +65,7 @@ public class FileListener implements ApplicationContextListener {
     saveObjects("mailbox.json", mailBoxList);
     saveObjects("counselingmember.json",counselingMemberList);
     saveObjects("bucketlist.json",bucketList);
-    System.out.println("[APUJIMA]에 방문해 주셔서 감사합니다. 좋은하루 되시기 바랍니다!");
+
   }
 
   private <E> void loadObjects(

@@ -19,11 +19,11 @@ public class AppInitListener implements ApplicationContextListener {
 
   @Override
   public void contextDestroyed(Map<String,Object> params) {
-    System.out.println("\r\n"
-        + "   ／l、\r\n"
-        + "ﾞ（ﾟ､ ｡ ７\r\n"
-        + "l、ﾞ ~ヽ\r\n"
-        + "じしf_, )ノ\r\n");    
+    System.out.println("  (\\_(\\\n"
+        + "(„• ֊ •„)\n"
+        + "(  O☕️O  )"); 
+    System.out.println("[APUJIMA]에 방문해 주셔서 감사합니다. 좋은하루 되시기 바랍니다!");
+    System.out.println();
   }
 
 }
