@@ -7,6 +7,7 @@ import util.Prompt;
 
 public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
 
+
   public FreeBoardAddHandler(List<FreeBoard> freeBoardList) {
     super(freeBoardList);
   }

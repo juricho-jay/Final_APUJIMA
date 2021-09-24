@@ -66,7 +66,4 @@ public class CommentAddHandler extends AbstractCommentHandler {
 
 
   }
-
-
-
 }
