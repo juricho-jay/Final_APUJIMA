@@ -54,6 +54,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
       } 
     }   
     System.out.println();
+    request.setAttribute("num", num);
     while(true) {
       String status = Prompt.inputString("[좋아요 (#: 👍🏻) / 신고하기(!: 🚨) /\n"
           + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
@@ -62,47 +63,49 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
         System.out.println("게시글 좋아요를 눌렀습니다.");
         break;
       } else if (status.equals("@")) {
-        System.out.println("[댓글 달기]");
-        System.out.println();
-        int commentTotal = Comment.getCommentTotal();
-        Comment comment = new Comment(); 
-
-        if (commentTotal == 0) {
-          comment.setNo(1);
-          commentTotal++;
-          Comment.setCommentTotal(commentTotal);
-          comment.setCommentBoardNo(freeBoard.getNo());
-          comment.setCommentWriter(freeBoard.getWriter().getId());
-          comment.setCommenter(AuthLoginHandler.getLoginUser().getId());
-          System.out.printf("-%s-\n", AuthLoginHandler.getLoginUser().getId());
-          comment.setCommentContent(Prompt.inputString("댓글 내용> "));
-
-          commentList.add(comment);
-          break;
-        } else {
-          int lastIndex = 0;
-          for (int i = 0; i < commentList.size(); i++) {
-            if (commentList.get(i).getCommentBoardNo() == freeBoard.getNo()) {
-              lastIndex++;
-            }
-          }
-
-          Comment.setCommentTotal(commentTotal++);
-          comment.setNo(++lastIndex);
-          comment.setCommentBoardNo(freeBoard.getNo());
-          comment.setCommentWriter(freeBoard.getWriter().getId());
-          comment.setCommenter(AuthLoginHandler.getLoginUser().getId());
-          System.out.printf("-%s-\n", AuthLoginHandler.getLoginUser().getId());
-          comment.setCommentContent(Prompt.inputString("댓글 내용> "));
-
-          commentList.add(comment);
-          break;
-
-
-          //        request.setAttribute("no", no);
-          //        request.getRequestDispatcher("/comment/add").forward(request);
-
-        }
+        request.getRequestDispatcher("/comment/add").forward(request);
+        return;
+        //        System.out.println("[댓글 달기]");
+        //        System.out.println();
+        //        int commentTotal = Comment.getCommentTotal();
+        //        Comment comment = new Comment(); 
+        //
+        //        if (commentTotal == 0) {
+        //          comment.setNo(1);
+        //          commentTotal++;
+        //          Comment.setCommentTotal(commentTotal);
+        //          comment.setCommentBoardNo(freeBoard.getNo());
+        //          comment.setCommentWriter(freeBoard.getWriter().getId());
+        //          comment.setCommenter(AuthLoginHandler.getLoginUser().getId());
+        //          System.out.printf("-%s-\n", AuthLoginHandler.getLoginUser().getId());
+        //          comment.setCommentContent(Prompt.inputString("댓글 내용> "));
+        //
+        //          commentList.add(comment);
+        //          break;
+        //        } else {
+        //          int lastIndex = 0;
+        //          for (int i = 0; i < commentList.size(); i++) {
+        //            if (commentList.get(i).getCommentBoardNo() == freeBoard.getNo()) {
+        //              lastIndex++;
+        //            }
+        //          }
+        //
+        //          Comment.setCommentTotal(commentTotal++);
+        //          comment.setNo(++lastIndex);
+        //          comment.setCommentBoardNo(freeBoard.getNo());
+        //          comment.setCommentWriter(freeBoard.getWriter().getId());
+        //          comment.setCommenter(AuthLoginHandler.getLoginUser().getId());
+        //          System.out.printf("-%s-\n", AuthLoginHandler.getLoginUser().getId());
+        //          comment.setCommentContent(Prompt.inputString("댓글 내용> "));
+        //
+        //          commentList.add(comment);
+        //          break;
+        //
+        //
+        //          //        request.setAttribute("no", no);
+        //          //        request.getRequestDispatcher("/comment/add").forward(request);
+        //
+        //        }
       } else if (status.equals("!")) {
         freeBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
         reportList.add(freeBoard);
@@ -138,5 +141,6 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
         }
       }
     }
+
   }
 }

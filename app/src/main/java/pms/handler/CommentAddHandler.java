@@ -17,17 +17,19 @@ public class CommentAddHandler extends AbstractCommentHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-
-
     System.out.println("[댓글 달기]");
     System.out.println();
-    int commentTotal = Comment.getCommentTotal();
+    int no = (int)request.getAttribute("num");
+
+    // int commentTotal = Comment.getCommentTotal(); // comentList.size();
+    int commentTotal = commentList.size(); // comentList.size();
     Comment comment = new Comment(); 
+    FreeBoard freeBoard = findByFreeBoardNo(no);
 
     if (commentTotal == 0) {
       comment.setNo(1);
-      commentTotal++;
-      Comment.setCommentTotal(commentTotal);
+      //  commentTotal++;
+      //  Comment.setCommentTotal(commentTotal);
       comment.setCommentBoardNo(freeBoard.getNo());
       comment.setCommentWriter(freeBoard.getWriter().getId());
       comment.setCommenter(AuthLoginHandler.getLoginUser().getId());
@@ -35,7 +37,7 @@ public class CommentAddHandler extends AbstractCommentHandler {
       comment.setCommentContent(Prompt.inputString("댓글 내용> "));
 
       commentList.add(comment);
-      break;
+      return;
     } else {
       int lastIndex = 0;
       for (int i = 0; i < commentList.size(); i++) {
@@ -43,10 +45,6 @@ public class CommentAddHandler extends AbstractCommentHandler {
           lastIndex++;
         }
       }
-
-
-      // 그러니까아... 입력한 숫자 num > freeBoard 찾아서 그 번호의 넘버를 넣고 ㅇㅅㅇ....
-      // 흠~~
 
       Comment.setCommentTotal(commentTotal++);
       comment.setNo(++lastIndex);
@@ -57,13 +55,12 @@ public class CommentAddHandler extends AbstractCommentHandler {
       comment.setCommentContent(Prompt.inputString("댓글 내용> "));
 
       commentList.add(comment);
-      break;
+      return;
+
+
+      //        request.setAttribute("no", no);
+      //        request.getRequestDispatcher("/comment/add").forward(request);
 
     }
-
-
   }
-
-
-
 }
