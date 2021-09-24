@@ -17,7 +17,7 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
     System.out.println("[자유게시판 글쓰기] 페이지입니다.");
     System.out.println();
     FreeBoard freeBoard = new FreeBoard();
-<<<<<<< HEAD
+
     int temp = 0;
     int count = 0;
 
@@ -51,7 +51,6 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
     }
     freeBoard.setTitle(Prompt.inputString("제목> "));
     freeBoard.setContent(Prompt.inputString("내용> "));
-=======
 
 
     if (FreeBoard.lastIndex == 1) {
@@ -80,7 +79,6 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
 
 
     }
->>>>>>> 0be11f80701837cbc91025c30f1a4c4adf120501
 
     freeBoard.setWriter(AuthLoginHandler.getLoginUser());
     freeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
