@@ -17,10 +17,15 @@ public class DoctorBoardAddHandler extends AbstractDoctorBoardHandler{
     System.out.println();
     DoctorBoard doctorBoard = new DoctorBoard();
 
-    doctorBoard.setNo(DoctorBoard.lastIndex++);
+    if (DoctorBoard.lastIndex == 1) {
+      doctorBoard.setNo(DoctorBoard.lastIndex);
+      DoctorBoard.lastIndex++;
+
+    }else {
+      doctorBoard.setNo(DoctorBoard.lastIndex++);
+    }
     doctorBoard.setTitle(Prompt.inputString("제목> "));
     doctorBoard.setContent(Prompt.inputString("내용> "));
-
     doctorBoard.setWriter(AuthLoginHandler.getLoginUser());
     doctorBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
     if(AuthLoginHandler.getLoginUser().getCount() < 10) {

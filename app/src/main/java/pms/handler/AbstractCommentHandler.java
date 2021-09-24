@@ -18,9 +18,9 @@ public abstract class AbstractCommentHandler implements Command {
     this.doctorBoardList = doctorBoardList;
     this.noticeBoardList = noticeBoardList;
   }
-  protected Comment findByCommentNo(int commentNo) {
+  protected Comment findByNo(int No) {
     for (Comment comment : commentList) {
-      if (comment.getCommentNo() == commentNo) {
+      if (comment.getNo() == No) {
         return comment;
       }
     }
