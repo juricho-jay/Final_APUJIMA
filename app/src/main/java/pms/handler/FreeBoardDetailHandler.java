@@ -138,5 +138,6 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
         }
       }
     }
+
   }
 }
