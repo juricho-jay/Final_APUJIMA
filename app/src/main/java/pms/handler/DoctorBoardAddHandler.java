@@ -28,13 +28,14 @@ public class DoctorBoardAddHandler extends AbstractDoctorBoardHandler{
     doctorBoard.setContent(Prompt.inputString("내용> "));
     doctorBoard.setWriter(AuthLoginHandler.getLoginUser());
     doctorBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
+
     if(AuthLoginHandler.getLoginUser().getCount() < 10) {
       System.out.println("포인트가 부족하여 게시글을 작성할 수 없습니다.");
       return;
     }
     else {
       AuthLoginHandler.getLoginUser().setCount(AuthLoginHandler.getLoginUser().getCount()-10);
-      System.out.println("게시글을 써 10포인트가 차감되었습니다.");
+      System.out.println("게시글을 작성하여 10포인트가 사용되었습니다.");
     }
     doctorBoardList.add(doctorBoard);
   }
