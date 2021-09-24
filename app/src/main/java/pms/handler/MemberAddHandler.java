@@ -103,6 +103,7 @@ public class MemberAddHandler extends AbstractMemberHandler{
     memberList.add(member);
     System.out.println();
     System.out.println("회원가입 완료!");
+    System.out.println("신규 회원가입 이벤트로 1000포인트가 지급되었습니다!");
   }
 
 
