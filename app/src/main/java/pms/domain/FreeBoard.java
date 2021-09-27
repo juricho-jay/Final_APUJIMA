@@ -15,6 +15,7 @@ public class FreeBoard implements Serializable{
   private String requester;
   public static int lastIndex;
 
+
   public static int getLastIndex() {
     return lastIndex;
   }
@@ -57,6 +58,7 @@ public class FreeBoard implements Serializable{
   public void setLike(int like) {
     this.like = like;
   }
+
   public int getNo() {
     return no;
   }
