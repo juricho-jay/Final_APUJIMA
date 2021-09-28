@@ -27,7 +27,6 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     FreeBoard freeBoard = findByNo(num);
 
 
-
     if (freeBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
@@ -39,10 +38,28 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
 
     freeBoard.setViewCount(freeBoard.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeBoard.getViewCount());
-    if (freeBoard.getLike() == 0) { // 좋아요 0개일 때 
-      System.out.printf("좋아요 ♡ : %d\n", freeBoard.getLike());
-    } else {
-      System.out.printf("좋아요 ❤ : %d\n", freeBoard.getLike());
+
+    freeBoard.setLiker(AuthLoginHandler.getLoginUser().getId());// 현재 계정과
+    for (FreeBoard freeBoard1 : freeBoardList) {
+      freeBoard1.setLiker(AuthLoginHandler.getLoginUser().getId());// 다른 계정
+      if (freeBoard1.getLiker() == freeBoard.getLiker()) {
+        if (freeBoard.getLike() == 0) {
+          System.out.printf("좋아요 ♡ : %d\n", freeBoard.getLike());
+          break;
+        }
+        System.out.printf("좋아요 ❤ : %d\n", freeBoard.getLike());
+        break;
+      } else { // 다른 계정이라면
+        if (freeBoard.getLike() == 0) {
+          System.out.printf("좋아요 ♡ : %d\n", freeBoard.getLike());
+          //          System.out.printf("좋아요 ❤ : %d\n", freeBoard.getLike());
+          break;
+        }
+        System.out.printf("좋아요 ❤ : %d\n", freeBoard.getLike());
+        //        System.out.printf("좋아요 ❤ : %d\n", freeBoard.getLike());
+
+
+      }
     }
 
     System.out.println();
@@ -55,8 +72,9 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
               comment.getCommenter(),
               comment.getCommentContent());
         }
-      } 
-    }   
+
+      }   
+    }
     // freeBoard.getLiker(AuthLoginHandler.loginUser.getId())
 
     System.out.println();
@@ -65,11 +83,27 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
       String status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
           + "댓글달기(@: 💬) / 내 글 관리 : * / 넘어가기: Enter]> ");
       if (status.equals("#")) {
-        freeBoard.setLike(freeBoard.getLike() + 1);
-        System.out.println("게시글 좋아요를 눌렀습니다.");
-        break;
-
-
+        for (FreeBoard freeBoard1 : freeBoardList) {
+          if (freeBoard1.getLiker() == freeBoard.getLiker()) {
+            if (freeBoard.getLike() == 0) {
+              freeBoard1.setLike(freeBoard1.getLike() + 1);
+              System.out.println("게시글 좋아요를 눌렀습니다.");
+              return;
+            }
+            freeBoard1.setLike(freeBoard1.getLike() - 1);
+            System.out.println("게시글 좋아요를 취소했습니다.");
+            break;
+          } else {
+            if (freeBoard.getLike() == 0) {
+              freeBoard1.setLike(freeBoard1.getLike() + 1);
+              System.out.println("게시글 좋아요를 눌렀습니다.");
+              return;
+            }
+            freeBoard1.setLike(freeBoard1.getLike() - 1);
+            System.out.println("게시글 좋아요를 취소했습니다.");
+            break;
+          }
+        }
       } else if (status.equals("@")) {
         request.getRequestDispatcher("/comment/add").forward(request);
         return;
@@ -148,13 +182,15 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
         System.out.println("메뉴에 맞는 명령어를 입력해 주세요.");
         continue;
       }
-    }
-
-
+    } 
 
   }
-
-
 }
+
+
+
+
+
+
 
 

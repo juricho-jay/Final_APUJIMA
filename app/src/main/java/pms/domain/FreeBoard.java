@@ -11,11 +11,19 @@ public class FreeBoard implements Serializable{
   private Date registeredDate;
   private int viewCount;
   private int like;
+  private String liker;
   private String reason;
   private String requester;
 
   public static int lastIndex = 1;
 
+
+  public String getLiker() {
+    return liker;
+  }
+  public void setLiker(String liker) {
+    this.liker = liker;
+  }
   public static int getLastIndex() {
     return lastIndex;
   }

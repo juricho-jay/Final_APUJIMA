@@ -217,14 +217,14 @@ public class Main {
 
   private void notifyOnApplicationStarted() {
     HashMap<String,Object> params = new HashMap<>();
-    params.put("freeboard.json", freeBoardList);
-    params.put("report.json", reportList);
-    params.put("member.json", memberList);
-    params.put("medicine.json", medicineList);
-    params.put("notice.json", noticeBoardList);
-    params.put("mailbox.json", mailBoxList);
-    params.put("counselingmember.json", counselingMemberList);
-    params.put("bucketlist.json",bucketList);
+    params.put("freeboardList", freeBoardList);
+    params.put("reportList", reportList);
+    params.put("memberList", memberList);
+    params.put("medicineList", medicineList);
+    params.put("noticeList", noticeBoardList);
+    params.put("mailboxList", mailBoxList);
+    params.put("counselingmemberList", counselingMemberList);
+    params.put("bucketlistList",bucketList);
     for (ApplicationContextListener listener : listeners) {
       listener.contextInitialized(params);
     }
@@ -232,14 +232,14 @@ public class Main {
 
   private void notifyOnApplicationEnded() {
     HashMap<String,Object> params = new HashMap<>();
-    params.put("freeboard.json", freeBoardList);
-    params.put("report.json", reportList);
-    params.put("member.json", memberList);
-    params.put("medicine.json", medicineList);
-    params.put("notice.json", noticeBoardList);
-    params.put("mailbox.json", mailBoxList);
-    params.put("counselingmember.json",counselingMemberList);
-    params.put("bucketlist.json",bucketList);
+    params.put("freeboardList", freeBoardList);
+    params.put("reportList", reportList);
+    params.put("memberList", memberList);
+    params.put("medicineList", medicineList);
+    params.put("noticeList", noticeBoardList);
+    params.put("mailboxList", mailBoxList);
+    params.put("counselingmemberList",counselingMemberList);
+    params.put("bucketlistList",bucketList);
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
