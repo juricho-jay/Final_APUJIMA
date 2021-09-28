@@ -85,11 +85,12 @@ public class Main {
   List<DoctorBoard> doctorReportList = new LinkedList<>();
   List<Comment> commentList = new LinkedList<>();
   List<Bucket> bucketList = new LinkedList<>();
+  List<Member> likeMemberList = new LinkedList<>();
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
 
-  MemberPrompt memberPrompt = new MemberPrompt(memberList);
+  MemberPrompt memberPrompt = new MemberPrompt(memberList, likeMemberList);
 
   //옵저버 관련 필드와 메서드
   // => 옵저버(리스너) 목록
@@ -174,7 +175,7 @@ public class Main {
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList, commentList));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList, commentList, memberPrompt, likeMemberList));
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList));
     commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardList));
@@ -217,14 +218,14 @@ public class Main {
 
   private void notifyOnApplicationStarted() {
     HashMap<String,Object> params = new HashMap<>();
-    params.put("freeboard.json", freeBoardList);
-    params.put("report.json", reportList);
+    params.put("freeboardList", freeBoardList);
+    params.put("reportList", reportList);
     params.put("memberList", memberList);
-    params.put("medicine.json", medicineList);
-    params.put("notice.json", noticeBoardList);
-    params.put("mailbox.json", mailBoxList);
-    params.put("counselingmember.json", counselingMemberList);
-    params.put("bucketlist.json",bucketList);
+    params.put("medicineList", medicineList);
+    params.put("noticeList", noticeBoardList);
+    params.put("mailboxList", mailBoxList);
+    params.put("counselingmemberList", counselingMemberList);
+    params.put("bucketlistList",bucketList);
     for (ApplicationContextListener listener : listeners) {
       listener.contextInitialized(params);
     }
@@ -232,14 +233,14 @@ public class Main {
 
   private void notifyOnApplicationEnded() {
     HashMap<String,Object> params = new HashMap<>();
-    params.put("freeboard.json", freeBoardList);
-    params.put("report.json", reportList);
+    params.put("freeboardList", freeBoardList);
+    params.put("reportList", reportList);
     params.put("memberList", memberList);
-    params.put("medicine.json", medicineList);
-    params.put("notice.json", noticeBoardList);
-    params.put("mailbox.json", mailBoxList);
-    params.put("counselingmember.json",counselingMemberList);
-    params.put("bucketlist.json",bucketList);
+    params.put("medicineList", medicineList);
+    params.put("noticeList", noticeBoardList);
+    params.put("mailboxList", mailBoxList);
+    params.put("counselingmemberList",counselingMemberList);
+    params.put("bucketlistList",bucketList);
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
@@ -253,8 +254,6 @@ public class Main {
     createMainMenu().execute();
     Prompt.close();
 
-
-
     notifyOnApplicationEnded();
   }
 
@@ -266,7 +265,6 @@ public class Main {
     MenuGroup mainMenuGroup = new MenuGroup("WELCOME TO APUJIMA!");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    //   mainMenuGroup.add(new MenuItem("명언", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/wiseSaying/saying"));
     mainMenuGroup.add(createApprovalMenu());
     mainMenuGroup.add(new MenuItem("소개", "/intro"));
     mainMenuGroup.add(createMedicineMenu());
@@ -281,7 +279,6 @@ public class Main {
     mainMenuGroup.add(createMailBoxMenu());
     mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN, "/auth/logout"));
 
-    //    mainMenuGroup.add(createCommunityMenu());
 
     return mainMenuGroup;
   }
@@ -350,8 +347,6 @@ public class Main {
     noticeMenu.add(new MenuItem("글쓰기", Menu.ACCESS_ADMIN,"/noticeBoard/add"));
     noticeMenu.add(new MenuItem("목록", "/noticeBoard/list"));
     noticeMenu.add(new MenuItem("상세보기", "/noticeBoard/detail"));
-    //    noticeMenu.add(new MenuItem("변경", Menu.ACCESS_ADMIN, "/noticeBoard/update"));
-    //    noticeMenu.add(new MenuItem("삭제", Menu.ACCESS_ADMIN, "/noticeBoard/delete"));
     noticeMenu.add(new MenuItem("검색", "/noticeBoard/search"));
     return noticeMenu;
   }
@@ -362,8 +357,6 @@ public class Main {
     freeBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/add"));
     freeBoardMenu.add(new MenuItem("목록", "/freeBoard/list"));
     freeBoardMenu.add(new MenuItem("상세보기", "/freeBoard/detail"));
-    //    freeBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/update"));
-    //    freeBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/delete"));
     freeBoardMenu.add(new MenuItem("검색", "/freeBoard/search"));
     return freeBoardMenu;
   }
@@ -374,8 +367,6 @@ public class Main {
     doctorBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL, "/doctorBoard/add"));
     doctorBoardMenu.add(new MenuItem("목록", "/doctorBoard/list"));
     doctorBoardMenu.add(new MenuItem("상세보기", "/doctorBoard/detail"));
-    //    doctorBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL, "/doctorBoard/update"));
-    //    doctorBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL, "/doctorBoard/delete"));
     doctorBoardMenu.add(new MenuItem("검색", "/doctorBoard/search"));
     return doctorBoardMenu;
   }
