@@ -58,6 +58,7 @@ public class FreeBoard implements Serializable{
   public void setLike(int like) {
     this.like = like;
   }
+
   public int getNo() {
     return no;
   }

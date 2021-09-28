@@ -23,10 +23,11 @@ import pms.domain.NoticeBoard;
 
 public class FileListener implements ApplicationContextListener {
 
+  @SuppressWarnings("unchecked")
   @Override
   public void contextInitialized(Map<String, Object> params) {
 
-    List<Member> memberList = new LinkedList<>();
+    List<Member> memberList = (List<Member>) params.get("memberList");
     List<CounselingMember> counselingMemberList = new LinkedList<>();
     List<Medicine> medicineList = new LinkedList<>();
     List<FreeBoard> freeBoardList = new LinkedList<>();
@@ -45,10 +46,11 @@ public class FileListener implements ApplicationContextListener {
     loadObjects("bucketlist.json",bucketList,Bucket.class);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public void contextDestroyed(Map<String, Object> params) {
 
-    List<Member> memberList = new LinkedList<>();
+    List<Member> memberList = (List<Member>) params.get("memberList");
     List<CounselingMember> counselingMemberList = new LinkedList<>();
     List<Medicine> medicineList = new LinkedList<>();
     List<FreeBoard> freeBoardList = new LinkedList<>();

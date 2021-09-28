@@ -219,7 +219,7 @@ public class Main {
     HashMap<String,Object> params = new HashMap<>();
     params.put("freeboard.json", freeBoardList);
     params.put("report.json", reportList);
-    params.put("member.json", memberList);
+    params.put("memberList", memberList);
     params.put("medicine.json", medicineList);
     params.put("notice.json", noticeBoardList);
     params.put("mailbox.json", mailBoxList);
@@ -234,7 +234,7 @@ public class Main {
     HashMap<String,Object> params = new HashMap<>();
     params.put("freeboard.json", freeBoardList);
     params.put("report.json", reportList);
-    params.put("member.json", memberList);
+    params.put("memberList", memberList);
     params.put("medicine.json", medicineList);
     params.put("notice.json", noticeBoardList);
     params.put("mailbox.json", mailBoxList);
