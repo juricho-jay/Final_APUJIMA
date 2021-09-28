@@ -45,8 +45,6 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     freeBoard.setViewCount(freeBoard.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeBoard.getViewCount());
 
-
-
     if (memberPrompt.findLikeMember(loginUser) == null) { 
       System.out.printf("좋아요 X : %d\n", freeBoard.getLike());
     } else {
@@ -69,6 +67,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
 
     System.out.println();
     request.setAttribute("num", num);
+
     while(true) {
       String status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
           + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
@@ -103,18 +102,19 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
         continue;
       }
     } 
+
     if (freeBoard.getWriter().getId().equals(AuthLoginHandler.loginUser.getId())) {
-      request.setAttribute("no", num);
+      request.setAttribute("num", num);
       while (true) {
         String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
         switch (input) {
           case "U":
           case "u":
-            request.getRequestDispatcher("/noticeBoard/update").forward(request);
+            request.getRequestDispatcher("/freeBoard/update").forward(request);
             return;
           case "D":
           case "d":
-            request.getRequestDispatcher("/noticeBoard/delete").forward(request);
+            request.getRequestDispatcher("/freeBoard/delete").forward(request);
             return;
           case "0":
             return;
