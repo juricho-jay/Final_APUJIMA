@@ -222,10 +222,10 @@ public class Main {
     params.put("reportList", reportList);
     params.put("memberList", memberList);
     params.put("medicineList", medicineList);
-    params.put("noticeList", noticeBoardList);
+    params.put("noticeboardList", noticeBoardList);
     params.put("mailboxList", mailBoxList);
     params.put("counselingmemberList", counselingMemberList);
-    params.put("bucketlistList",bucketList);
+    params.put("bucketList",bucketList);
     for (ApplicationContextListener listener : listeners) {
       listener.contextInitialized(params);
     }
@@ -237,10 +237,10 @@ public class Main {
     params.put("reportList", reportList);
     params.put("memberList", memberList);
     params.put("medicineList", medicineList);
-    params.put("noticeList", noticeBoardList);
+    params.put("noticeboardList", noticeBoardList);
     params.put("mailboxList", mailBoxList);
     params.put("counselingmemberList",counselingMemberList);
-    params.put("bucketlistList",bucketList);
+    params.put("bucketList",bucketList);
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
