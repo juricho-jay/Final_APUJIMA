@@ -3,24 +3,21 @@ package pms.handler;
 import java.util.List;
 import pms.domain.Comment;
 import pms.domain.DoctorBoard;
-import pms.domain.Member;
 import util.Prompt;
 
-public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler{
+public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler {
   List<DoctorBoard> reportList;
   List<Comment> commentList;
   MemberPrompt memberPrompt;
-  List<Member> likeMemberList;
 
 
   public DoctorBoardDetailHandler(List<DoctorBoard> doctorBoardList, 
       List<DoctorBoard> reportList, List<Comment> commentList, 
-      MemberPrompt memberPrompt, List<Member> likeMemberList) {
+      MemberPrompt memberPrompt) {
     super(doctorBoardList);
     this.reportList = reportList;
     this.commentList = commentList;
     this.memberPrompt = memberPrompt;
-    this.likeMemberList = likeMemberList;
   }
 
 
@@ -30,6 +27,7 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler{
     System.out.println();
     int num = Prompt.inputInt("게시글 번호> ");
     DoctorBoard doctorBoard = findByNo(num);
+
     String loginUser = AuthLoginHandler.getLoginUser().getId();
 
     if (doctorBoard == null) {
@@ -45,11 +43,11 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler{
     doctorBoard.setViewCount(doctorBoard.getViewCount() + 1);
     System.out.printf("조회수: %d\n", doctorBoard.getViewCount());
 
-    if (memberPrompt.findLikeMember(loginUser) == null) {
-      System.out.printf("[좋아요 ♡ : %d]\n ", doctorBoard.getLike());
-    } else {
-      System.out.printf("[좋아요 ♥ : %d]\n ", doctorBoard.getLike());
-    }
+    //    if (memberPrompt.findLikeMember(loginUser) == null) {
+    //      System.out.printf("[좋아요 ♡ : %d]\n ", doctorBoard.getLike());
+    //    } else {
+    //      System.out.printf("[좋아요 ♥ : %d]\n ", doctorBoard.getLike());
+    //    }
 
     System.out.println();
     System.out.println("[댓글]");
@@ -77,20 +75,10 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler{
           + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
       if (status.equals("#")) {
         String whichBoard = "doctor";
-        if (doctorBoard.getWhichBoard().equals(whichBoard) && 
-            memberPrompt.findLikeMember(loginUser) == null) {
-          doctorBoard.setLike(doctorBoard.getLike() + 1);
-          likeMemberList.add(AuthLoginHandler.getLoginUser());
-          System.out.println("게시글 좋아요를 눌렀습니다.");
-          break;
-        } else {
-          doctorBoard.setLike(doctorBoard.getLike() - 1);
-          likeMemberList.remove(AuthLoginHandler.getLoginUser());
-          System.out.println("게시글 좋아요가 취소되었습니다.");
-          break;
-        }
-
-      } else if (status.equals("@")) {
+        //        if (doctorBoard.getWhichBoard().equals(whichBoard) && 
+        //                      memberPrompt.findLikeMember(loginUser) == null) {
+        //            String status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) / 넘어가기: Enter ]> ");
+        //      } else if (status.equals("@")) {
         request.getRequestDispatcher("/comment/add").forward(request);
         return;
 

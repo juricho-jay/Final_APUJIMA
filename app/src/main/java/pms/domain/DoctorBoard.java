@@ -17,6 +17,7 @@ public class DoctorBoard extends XBoard implements Serializable {
   private List<Member> likeMemberList;
   public static int lastIndex;
 
+
   public static int getLastIndex() {
     return lastIndex;
   }
@@ -55,9 +56,11 @@ public class DoctorBoard extends XBoard implements Serializable {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+  @Override
   public int getLike() {
     return like;
   }
+  @Override
   public void setLike(int like) {
     this.like = like;
   }
@@ -86,6 +89,21 @@ public class DoctorBoard extends XBoard implements Serializable {
   }
   public void setLikeMemberList(List<Member> likeMemberList) {
     this.likeMemberList = likeMemberList;
+  }
+
+  public String getLikeMemberNames() {
+    if (this.likeMemberList == null) {
+      return "";
+    }
+
+    StringBuilder names = new StringBuilder();
+    for (Member member : this.likeMemberList) {
+      if (names.length() > 0) {
+        names.append(",");
+      }
+      names.append(member.getName());
+    }
+    return names.toString();
   }
 
 }
