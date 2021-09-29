@@ -1,19 +1,20 @@
 package pms.handler;
 
 import java.util.List;
+import Menu.Menu;
 import pms.domain.Member;
+import util.Prompt;
 
 
 public class AuthUserInfoHandler extends AbstractMemberHandler implements Command {
+
 
   public AuthUserInfoHandler(List<Member> memberList) {
     super(memberList);
   }
 
-
-
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[내정보] 페이지입니다.");
 
@@ -39,7 +40,39 @@ public class AuthUserInfoHandler extends AbstractMemberHandler implements Comman
     System.out.printf("성별: %s\n", loginUser.getSex());
     System.out.printf("가입일: %s\n", loginUser.getRegisteredDate());
     System.out.println("남은 포인트: " + loginUser.getCount());
-    System.out.println("회원 탈퇴");
+
+    //    if (loginUser.equals(AuthLoginHandler.loginUser.getId())) {
+
+    while(true) {
+      String input = Prompt.inputString("[회원 탈퇴(D) / 뒤로가기(0)]");
+
+      switch (input) {
+        case "D":
+        case "d":
+          String status = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+          if (status.equalsIgnoreCase("n") || status.length() == 0) {
+            System.out.println("회원 삭제를 취소하였습니다.");
+            return;
+          }
+          memberList.remove(AuthLoginHandler.getLoginUser());
+          AuthLoginHandler.loginUser = null;
+          AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
+          System.out.println("회원 탈퇴가 완료되었습니다. 그동안 이용해주셔서 감사합니다.");
+          return;
+        case "0":
+          return;
+        default:
+          System.out.println("명령어가 올바르지 않습니다!");
+      }
+    }
+
+
+    //      memberList.remove(AuthLoginHandler.getLoginUser());
+    //      System.out.println("정상적으로 회원을 삭제하였습니다. 이용해 주셔서 감사합니다.");
+    //      userAccessLevel = Menu.ACCESS_LOGOUT;
+    //      //로그아웃된 메인화면으로 나가야 함
+    //      return;
+    //    }
   }
 }
 
