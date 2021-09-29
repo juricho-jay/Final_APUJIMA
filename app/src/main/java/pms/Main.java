@@ -177,7 +177,7 @@ public class Main {
 
     commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardList));
     commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardList));
-    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardList));
+    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardList, memberPrompt, likeMemberList));
     commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(noticeBoardList));
     commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(noticeBoardList));
     commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(noticeBoardList));
@@ -191,7 +191,7 @@ public class Main {
 
     commandMap.put("/doctorBoard/add", new DoctorBoardAddHandler(doctorBoardList));
     commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(doctorBoardList));
-    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(doctorBoardList, doctorReportList));
+    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(doctorBoardList, doctorReportList, memberPrompt, likeMemberList));
     commandMap.put("/doctorBoard/update", new DoctorBoardUpdateHandler(doctorBoardList));
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardList));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));

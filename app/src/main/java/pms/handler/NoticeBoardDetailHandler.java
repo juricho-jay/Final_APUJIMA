@@ -1,13 +1,19 @@
 package pms.handler;
 
 import java.util.List;
+import pms.domain.Member;
 import pms.domain.NoticeBoard;
 import util.Prompt;
 
 public class NoticeBoardDetailHandler extends AbstractNoticeBoardHandler{
+  MemberPrompt memberPrompt;
+  List<Member> likeMemberList;
 
-  public NoticeBoardDetailHandler(List<NoticeBoard> noticeBoardList) {
+  public NoticeBoardDetailHandler(List<NoticeBoard> noticeBoardList,
+      MemberPrompt memberPrompt, List<Member> likeMemberList) {
     super(noticeBoardList);
+    this.memberPrompt = memberPrompt;
+    this.likeMemberList = likeMemberList;
   }
 
   @Override
@@ -17,6 +23,7 @@ public class NoticeBoardDetailHandler extends AbstractNoticeBoardHandler{
     int no = Prompt.inputInt("게시글 번호> ");
 
     NoticeBoard noticeBoard = findByNo(no);
+    String loginUser = AuthLoginHandler.getLoginUser().getId();
 
     if (noticeBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -30,11 +37,25 @@ public class NoticeBoardDetailHandler extends AbstractNoticeBoardHandler{
 
     noticeBoard.setViewCount(noticeBoard.getViewCount() + 1);
     System.out.printf("조회수: %d\n", noticeBoard.getViewCount());
-    System.out.printf("좋아요: %d\n", noticeBoard.getLike());
+    if (memberPrompt.findLikeMember(loginUser) == null) { 
+      System.out.printf("좋아요 ♡ : %d\n", noticeBoard.getLike());
+    } else {
+      System.out.printf("좋아요 ♥︎️ : %d\n", noticeBoard.getLike());
+    }
 
-    String likeNum = Prompt.inputString("[ 좋아요 (#: 👍🏻) / 넘어가기: Enter ]> ");
+    String likeNum = Prompt.inputString("[좋아요 (#: ♡) / 넘어가기: Enter ]> ");
     if (likeNum.equals("#")) {
-      noticeBoard.setLike(noticeBoard.getLike() + 1);
+      if (memberPrompt.findLikeMember(loginUser) == null) {
+        noticeBoard.setLike(noticeBoard.getLike() + 1);
+        likeMemberList.add(AuthLoginHandler.getLoginUser());
+        System.out.println("게시글 좋아요를 눌렀습니다.");
+        return;
+      } else {
+        noticeBoard.setLike(noticeBoard.getLike() - 1);
+        likeMemberList.remove(AuthLoginHandler.getLoginUser());
+        System.out.println("게시글 좋아요가 취소되었습니다.");
+        return;
+      }
     } 
 
     if (noticeBoard.getWriter().getId().equals(AuthLoginHandler.loginUser.getId())) {
