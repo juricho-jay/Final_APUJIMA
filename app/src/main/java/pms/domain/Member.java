@@ -18,9 +18,16 @@ public class Member implements Serializable{
   private String doctorLicense;
   private int doctorOrNot;
   private List<MailBox> mailBox;
+  private List<Plant> plant;
   private int count;
 
 
+  public List<Plant> getPlant() {
+    return plant;
+  }
+  public void setPlant(List<Plant> plant) {
+    this.plant = plant;
+  }
   public int getCount() {
     return count;
   }

@@ -23,6 +23,7 @@ import pms.domain.MailBox;
 import pms.domain.Medicine;
 import pms.domain.Member;
 import pms.domain.NoticeBoard;
+import pms.domain.Plant;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
@@ -74,6 +75,10 @@ import pms.handler.NoticeBoardDetailHandler;
 import pms.handler.NoticeBoardListHandler;
 import pms.handler.NoticeBoardSearchHandler;
 import pms.handler.NoticeBoardUpdateHandler;
+import pms.handler.PlantAddHandler;
+import pms.handler.PlantDetailHandler;
+import pms.handler.PlantGrowHandler;
+import pms.handler.PlantListHandler;
 import pms.handler.WiseSaying;
 import util.Prompt;
 
@@ -90,6 +95,7 @@ public class Main {
   List<DoctorBoard> doctorReportList = new LinkedList<>();
   List<Comment> commentList = new LinkedList<>();
   List<Bucket> bucketList = new LinkedList<>();
+  List<Plant> plantList = new LinkedList<>();
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
@@ -195,6 +201,12 @@ public class Main {
     commandMap.put("/bucket/complete", new BucketCompleteHandler(bucketList));
     commandMap.put("/bucket/search", new BucketSearchHandler(bucketList));
 
+    commandMap.put("/plant/add", new PlantAddHandler(plantList));
+    commandMap.put("/plant/grow", new PlantGrowHandler(plantList));
+    commandMap.put("/plant/detail", new PlantDetailHandler(plantList));
+    commandMap.put("/plant/list", new PlantListHandler(plantList));
+
+
 
     commandMap.put("/wiseSaying/saying", new WiseSaying());
 
@@ -277,6 +289,8 @@ public class Main {
         + "(•ㅅ•).||\r\n"
         + "/ . . . .づ\r\n"
         + "");
+
+
     MenuGroup mainMenuGroup = new MenuGroup("WELCOME TO APUJIMA!");
     mainMenuGroup.setPrevMenuTitle("종료");
 
@@ -289,6 +303,7 @@ public class Main {
 
     mainMenuGroup.add(createCommunityMenu());
     mainMenuGroup.add(createBucketMenu());
+    mainMenuGroup.add(createPlantMenu());
 
     mainMenuGroup.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
     mainMenuGroup.add(new MenuItem("회원가입", Menu.ACCESS_LOGOUT, "/member/add"));
@@ -418,6 +433,20 @@ public class Main {
 
 
     return bucketMenu;
+
+  }
+
+  private Menu createPlantMenu() {
+    MenuGroup plantMenu = new MenuGroup("화분 키우기", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR);
+
+    plantMenu.add(new MenuItem("화분 새로 키우기", "/plant/add"));
+    plantMenu.add(new MenuItem("화분 물 주기", "/plant/grow"));
+    plantMenu.add(new MenuItem("화분 상세 보기", "/plant/detail"));
+    plantMenu.add(new MenuItem("화분 목록 보기", "/plant/list"));
+
+
+
+    return plantMenu;
 
   }
 
