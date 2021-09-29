@@ -14,20 +14,17 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler{
   public void execute(CommandRequest request) {
     System.out.println("[삭제] 페이지입니다.");
     System.out.println();
-    int no = Prompt.inputInt("게시글 번호> ");
+
+    int no = (int)request.getAttribute("num");
 
     FreeBoard freeBoard = findByNo(no);
 
-    if (freeBoard == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
-      return;
-    }
-
-
-    if (freeBoard.getWriter().getId() != AuthLoginHandler.getLoginUser().getId()) {
+    if (!freeBoard.getWriter().getId().equals(AuthLoginHandler.getLoginUser().getId()) ) {
       System.out.println("삭제 권한이 없습니다.");
       return;
     }
+    // 사실 이것도 지워도 될 듯 강사님께 여쭤보고 지우기( == 이거는 인스턴스가 달라서
+    // 다르게 나오는건지
 
     String input = Prompt.inputString(" ❗ 정말 삭제하시겠습니까? (y/N)> ");
     if(input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -35,8 +32,10 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler{
       return;
     }
 
+
     freeBoardList.remove(freeBoard);
     System.out.println("게시글을 삭제하였습니다.");
+
   }
 
 }

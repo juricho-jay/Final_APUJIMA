@@ -7,6 +7,7 @@ import util.Prompt;
 
 public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
 
+
   public FreeBoardAddHandler(List<FreeBoard> freeBoardList) {
     super(freeBoardList);
   }
@@ -18,11 +19,18 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
     System.out.println();
     FreeBoard freeBoard = new FreeBoard();
 
-    if (FreeBoard.lastIndex == 1) {
+    if(freeBoardList.size() == 0) {
+      FreeBoard.lastIndex = 1;
       freeBoard.setNo(FreeBoard.lastIndex);
-      FreeBoard.lastIndex++;
-    }else {
-      freeBoard.setNo(FreeBoard.lastIndex++);
+    } else {
+      if(FreeBoard.lastIndex != freeBoardList.size()) {
+
+        FreeBoard.lastIndex = freeBoardList.get(freeBoardList.size()-1).getNo();
+        freeBoard.setNo(++FreeBoard.lastIndex);
+
+      } else {
+        freeBoard.setNo(++FreeBoard.lastIndex);
+      }
     }
     while(true) {
 
@@ -42,9 +50,7 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
         break;
       }
 
-
     }
-
 
     freeBoard.setWriter(AuthLoginHandler.getLoginUser());
     freeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));

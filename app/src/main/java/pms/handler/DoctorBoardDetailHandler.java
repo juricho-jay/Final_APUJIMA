@@ -34,9 +34,15 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler{
 
     doctorBoard.setViewCount(doctorBoard.getViewCount() + 1);
     System.out.printf("조회수: %d\n", doctorBoard.getViewCount());
-    System.out.printf("좋아요: %d\n", doctorBoard.getLike());
+    //    System.out.printf("♡ : %d\n", doctorBoard.getLike());
+    if(doctorBoard.getLike() == 0) {
+      System.out.printf("[1.♡ : %d\n)] ", doctorBoard.getLike());
+    } else {
+      System.out.printf("[1.❤ : %d\n)] ", doctorBoard.getLike());
+    }
     while(true) {
-      String status = Prompt.inputString("[ 좋아요 (#: 👍🏻) / 신고하기(!: 🚨) / 넘어가기: Enter ]> ");
+
+      String status = Prompt.inputString("[ 좋아요 (#: ♡) / 신고하기(!: 🚨) / 넘어가기: Enter ]> ");
       if (status.equals("#")) {
         doctorBoard.setLike(doctorBoard.getLike() + 1);
         System.out.println("게시글 좋아요를 눌렀습니다.");

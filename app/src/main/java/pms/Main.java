@@ -1,19 +1,12 @@
 package pms;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.lang.reflect.Type;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import Menu.Menu;
 import Menu.MenuGroup;
+import pms.context.ApplicationContextListener;
 import pms.domain.Bucket;
 import pms.domain.Comment;
 import pms.domain.CounselingMember;
@@ -80,6 +73,8 @@ import pms.handler.PlantDetailHandler;
 import pms.handler.PlantGrowHandler;
 import pms.handler.PlantListHandler;
 import pms.handler.WiseSaying;
+import pms.listener.AppInitListener;
+import pms.listener.FileListener;
 import util.Prompt;
 
 public class Main {
@@ -96,13 +91,30 @@ public class Main {
   List<Comment> commentList = new LinkedList<>();
   List<Bucket> bucketList = new LinkedList<>();
   List<Plant> plantList = new LinkedList<>();
+  List<Member> likeMemberList = new LinkedList<>();
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
 
-  MemberPrompt memberPrompt = new MemberPrompt(memberList);
+  MemberPrompt memberPrompt = new MemberPrompt(memberList, likeMemberList);
+
+  //옵저버 관련 필드와 메서드
+  // => 옵저버(리스너) 목록
+  List<ApplicationContextListener> listeners = new ArrayList<>();
+
+  //=> 옵저버(리스너)를 등록하는 메서드
+  public void addApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.add(listener);
+  }
+
+  // => 옵저버(리스너)를 제거하는 메서드
+  public void removeApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.remove(listener);
+  }
+
 
   class MenuItem extends Menu {
+
     String menuId;
 
     public MenuItem(String title, String menuId) {
@@ -131,6 +143,8 @@ public class Main {
 
   public static void main(String[] args) {
     Main main = new Main();
+    main.addApplicationContextListener(new AppInitListener());
+    main.addApplicationContextListener(new FileListener());
     main.service();
   }
 
@@ -167,7 +181,7 @@ public class Main {
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList, commentList));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList, commentList, memberPrompt, likeMemberList));
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList));
     commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardList));
@@ -210,73 +224,51 @@ public class Main {
 
     commandMap.put("/wiseSaying/saying", new WiseSaying());
 
+
+
+  }
+
+  private void notifyOnApplicationStarted() {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("freeboardList", freeBoardList);
+    params.put("reportList", reportList);
+    params.put("memberList", memberList);
+    params.put("medicineList", medicineList);
+    params.put("noticeboardList", noticeBoardList);
+    params.put("mailboxList", mailBoxList);
+    params.put("counselingmemberList", counselingMemberList);
+    params.put("bucketList",bucketList);
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextInitialized(params);
+    }
+  }
+
+  private void notifyOnApplicationEnded() {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("freeboardList", freeBoardList);
+    params.put("reportList", reportList);
+    params.put("memberList", memberList);
+    params.put("medicineList", medicineList);
+    params.put("noticeboardList", noticeBoardList);
+    params.put("mailboxList", mailBoxList);
+    params.put("counselingmemberList",counselingMemberList);
+    params.put("bucketList",bucketList);
+
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextDestroyed(params);
+    }
   }
 
   void service() {
 
-    loadObjects("freeboard.json", freeBoardList, FreeBoard.class);
-    loadObjects("report.json", reportList, FreeBoard.class);
-    loadObjects("member.json", memberList, Member.class);
-    loadObjects("medicine.json", medicineList, Medicine.class);
-    loadObjects("notice.json", noticeBoardList, NoticeBoard.class);
-    loadObjects("mailbox.json", mailBoxList, MailBox.class);
-    loadObjects("counselingmember.json", counselingMemberList,CounselingMember.class);
-    loadObjects("bucketlist.json",bucketList,Bucket.class);
-
+    notifyOnApplicationStarted();
 
     createMainMenu().execute();
     Prompt.close();
 
-    saveObjects("freeboard.json", freeBoardList);
-    saveObjects("report.json", reportList);
-    saveObjects("member.json", memberList);
-    saveObjects("medicine.json", medicineList);
-    saveObjects("notice.json", noticeBoardList);
-    saveObjects("mailbox.json", mailBoxList);
-    saveObjects("counselingmember.json",counselingMemberList);
-    saveObjects("bucketlist.json",bucketList);
-    System.out.println("[APUJIMA]에 방문해 주셔서 감사합니다. 좋은하루 되시기 바랍니다!");
+    notifyOnApplicationEnded();
   }
 
-  private <E> void loadObjects(
-      String filepath,
-      List<E> list,
-      Class<E> domainType
-      ) {
-    try (BufferedReader in = new BufferedReader(
-        new FileReader(filepath))){
-
-      StringBuilder strBuilder = new StringBuilder();
-      String str;
-      while((str = in.readLine()) != null) { 
-        strBuilder.append(str);
-      }
-
-      Type type = TypeToken.getParameterized(Collection.class, domainType).getType();
-      Collection<E> collection =  new Gson().fromJson(strBuilder.toString(), type);
-
-      list.addAll(collection);
-
-      System.out.printf("%s 데이터 로딩 완료!\n", filepath);
-    } catch (Exception e) {
-      System.out.printf("%s 데이터 로딩 오류!\n", filepath);
-    }
-
-  }
-
-
-  private void saveObjects(String filepath, List<?> list) {
-    try (PrintWriter out = new PrintWriter(
-        new BufferedWriter(
-            new FileWriter(filepath)))){
-
-      out.println(new Gson().toJson(list));
-      System.out.printf("%s 데이터 출력 완료!\n",filepath);
-
-    } catch (Exception e) {
-      System.out.printf("%s 데이터 출력 오류!\n",filepath);
-    }
-  }
 
 
 
@@ -294,8 +286,6 @@ public class Main {
     MenuGroup mainMenuGroup = new MenuGroup("WELCOME TO APUJIMA!");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-
-    //   mainMenuGroup.add(new MenuItem("명언", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/wiseSaying/saying"));
     mainMenuGroup.add(createApprovalMenu());
     mainMenuGroup.add(new MenuItem("소개", "/intro"));
     mainMenuGroup.add(createMedicineMenu());
@@ -310,8 +300,6 @@ public class Main {
     mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN, "/auth/userInfo"));
     mainMenuGroup.add(createMailBoxMenu());
     mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN, "/auth/logout"));
-
-    //    mainMenuGroup.add(createCommunityMenu());
 
 
     return mainMenuGroup;
@@ -381,8 +369,6 @@ public class Main {
     noticeMenu.add(new MenuItem("글쓰기", Menu.ACCESS_ADMIN,"/noticeBoard/add"));
     noticeMenu.add(new MenuItem("목록", "/noticeBoard/list"));
     noticeMenu.add(new MenuItem("상세보기", "/noticeBoard/detail"));
-    //    noticeMenu.add(new MenuItem("변경", Menu.ACCESS_ADMIN, "/noticeBoard/update"));
-    //    noticeMenu.add(new MenuItem("삭제", Menu.ACCESS_ADMIN, "/noticeBoard/delete"));
     noticeMenu.add(new MenuItem("검색", "/noticeBoard/search"));
     return noticeMenu;
   }
@@ -393,8 +379,6 @@ public class Main {
     freeBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/add"));
     freeBoardMenu.add(new MenuItem("목록", "/freeBoard/list"));
     freeBoardMenu.add(new MenuItem("상세보기", "/freeBoard/detail"));
-    //    freeBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/update"));
-    //    freeBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/delete"));
     freeBoardMenu.add(new MenuItem("검색", "/freeBoard/search"));
     return freeBoardMenu;
   }
@@ -405,8 +389,6 @@ public class Main {
     doctorBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL, "/doctorBoard/add"));
     doctorBoardMenu.add(new MenuItem("목록", "/doctorBoard/list"));
     doctorBoardMenu.add(new MenuItem("상세보기", "/doctorBoard/detail"));
-    //    doctorBoardMenu.add(new MenuItem("변경", Menu.ACCESS_GENERAL, "/doctorBoard/update"));
-    //    doctorBoardMenu.add(new MenuItem("삭제", Menu.ACCESS_GENERAL, "/doctorBoard/delete"));
     doctorBoardMenu.add(new MenuItem("검색", "/doctorBoard/search"));
     return doctorBoardMenu;
   }
