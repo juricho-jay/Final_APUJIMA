@@ -2,6 +2,7 @@ package pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 public class NoticeBoard implements Serializable{
   public int no;
@@ -14,7 +15,7 @@ public class NoticeBoard implements Serializable{
   public NoticeBoard index;
   //  public NoticeBoard listIndex;
   public static int lastIndex = 1;
-
+  private List<Member> likeMemberList;
 
 
   public static int getLastIndex() {
@@ -72,7 +73,27 @@ public class NoticeBoard implements Serializable{
   public void setIndex(NoticeBoard index) {
     this.index = index;
   }
+  public List<Member> getLikeMemberList() {
+    return likeMemberList;
+  }
+  public void setLikeMemberList(List<Member> likeMembers) {
+    this.likeMemberList = likeMembers;
+  }
 
+  public String getLikeMemberNames() {
+    if (this.likeMemberList == null) {
+      return "";
+    }
+
+    StringBuilder names = new StringBuilder();
+    for (Member member : this.likeMemberList) {
+      if (names.length() > 0) {
+        names.append(",");
+      }
+      names.append(member.getName());
+    }
+    return names.toString();
+  }
 
 
 

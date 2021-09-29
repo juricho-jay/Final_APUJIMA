@@ -46,9 +46,9 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     System.out.printf("조회수: %d\n", freeBoard.getViewCount());
 
     if (memberPrompt.findLikeMember(loginUser) == null) { 
-      System.out.printf("좋아요 X : %d\n", freeBoard.getLike());
+      System.out.printf("좋아요 ♡ : %d\n", freeBoard.getLike());
     } else {
-      System.out.printf("좋아요 O : %d\n", freeBoard.getLike());
+      System.out.printf("좋아요 ♥︎️ : %d\n", freeBoard.getLike());
     }
 
     System.out.println();
