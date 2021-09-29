@@ -66,13 +66,6 @@ public class AuthUserInfoHandler extends AbstractMemberHandler implements Comman
       }
     }
 
-
-    //      memberList.remove(AuthLoginHandler.getLoginUser());
-    //      System.out.println("정상적으로 회원을 삭제하였습니다. 이용해 주셔서 감사합니다.");
-    //      userAccessLevel = Menu.ACCESS_LOGOUT;
-    //      //로그아웃된 메인화면으로 나가야 함
-    //      return;
-    //    }
   }
 }
 
