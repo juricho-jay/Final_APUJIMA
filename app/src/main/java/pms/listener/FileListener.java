@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
+import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,8 @@ public class FileListener implements ApplicationContextListener {
     List<FreeBoard> reportList = (List<FreeBoard>) params.get("reportList");
     List<MailBox> mailBoxList = (List<MailBox>) params.get("mailboxList");
     List<Bucket> bucketList = (List<Bucket>) params.get("bucketList");
+    List<Date> dateList = (List<Date>) params.get("dateList");
+    List<Member> memberCheckList = (List<Member>) params.get("memberCheckList");
 
     loadObjects("member.json", memberList, Member.class);
     loadObjects("counselingmember.json", counselingMemberList,CounselingMember.class);
@@ -43,6 +46,8 @@ public class FileListener implements ApplicationContextListener {
     loadObjects("report.json", reportList, FreeBoard.class);
     loadObjects("mailbox.json", mailBoxList, MailBox.class);
     loadObjects("bucketlist.json",bucketList, Bucket.class);
+    loadObjects("dateList.json",dateList, Date.class);
+    loadObjects("membercheckList.json",memberCheckList, Member.class);
 
   }
 
@@ -58,6 +63,8 @@ public class FileListener implements ApplicationContextListener {
     List<FreeBoard> reportList = (List<FreeBoard>) params.get("reportList");
     List<MailBox> mailBoxList = (List<MailBox>) params.get("mailboxList");
     List<Bucket> bucketList = (List<Bucket>) params.get("bucketList");
+    List<Date> dateList = (List<Date>) params.get("dateList");
+    List<Member> memberCheckList = (List<Member>) params.get("memberCheckList");
 
     saveObjects("freeboard.json", freeBoardList);
     saveObjects("report.json", reportList);
@@ -67,6 +74,8 @@ public class FileListener implements ApplicationContextListener {
     saveObjects("mailbox.json", mailBoxList);
     saveObjects("counselingmember.json",counselingMemberList);
     saveObjects("bucketlist.json",bucketList);
+    saveObjects("dateList.json",dateList);
+    saveObjects("membercheckList.json",memberCheckList);
 
   }
 
