@@ -34,19 +34,19 @@ public class PlantGrowHandler extends AbstractPlantHandler{
 
       if(plant.getExp() >= 100 && plant.getExp()< 200) {
         System.out.println("레벨 업! 1단계 화분으로 성장했습니다!");
-        plant.setShape(" \"\\u2618\"");
+        plant.setShape("\u2618");
         plant.setLevel(1);
         plantList.add(plant);
       }
       else if(plant.getExp() >= 200  && plant.getExp()< 300) {
         System.out.println("레벨 업! 2단계 화분으로 성장했습니다!");
-        plant.setShape("\"\\uD83C\\uDF38\"");
+        plant.setShape( "\uD83C\uDF38");
         plant.setLevel(2);
         plantList.add(plant);
       }
       else if(plant.getExp() >= 300) {
         System.out.println("레벨 업! 3단계 화분으로 성장했습니다!");
-        plant.setShape("\"\\uD83D\\uDC90\"");
+        plant.setShape("\uD83D\uDC90");
         plant.setLevel(3);
         plantList.add(plant);
       }

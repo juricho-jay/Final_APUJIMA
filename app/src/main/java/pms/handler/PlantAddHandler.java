@@ -24,7 +24,9 @@ public class PlantAddHandler extends AbstractPlantHandler{
 
 
     if(AuthLoginHandler.getLoginUser().getCount() < 300) {
-      System.out.println("화분을 생성 할 수 없습니다.");
+      System.out.println("포인트가 부족하여 화분을 생성 할 수 없습니다.");
+      System.out.println("현재 포인트: " +  AuthLoginHandler.getLoginUser().getCount());
+      System.out.println("부족한 포인트: " + (300- AuthLoginHandler.getLoginUser().getCount()));
       return;
     }
 
