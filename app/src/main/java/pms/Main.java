@@ -175,7 +175,6 @@ public class Main {
     commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(counselingMemberList));
     // 바로 위에꺼 상담신청 이력
 
-    NoticeBoardListHandler noticeBoardListHandler = new NoticeBoardListHandler(noticeBoardList);
     commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardList));
     commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardList));
     commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardList));
