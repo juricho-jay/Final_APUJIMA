@@ -10,6 +10,7 @@ public class Comment implements Serializable {
   private String commentWriter;
   private String commentContent;
   private Date commentDate;
+  private String whichBoard;
   private int no; // 게시판마다 1부터 시작하는 댓글 번호
 
 
@@ -56,6 +57,12 @@ public class Comment implements Serializable {
   }
   public void setNo(int no) {
     this.no = no;
+  }
+  public String getWhichBoard() {
+    return whichBoard;
+  }
+  public void setWhichBoard(String whichBoard) {
+    this.whichBoard = whichBoard;
   }
 
 

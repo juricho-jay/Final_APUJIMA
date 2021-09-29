@@ -1,16 +1,26 @@
 package pms.handler;
 
 import java.util.List;
+import pms.domain.Comment;
 import pms.domain.DoctorBoard;
+import pms.domain.Member;
 import util.Prompt;
 
 public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler{
-
   List<DoctorBoard> reportList;
+  List<Comment> commentList;
+  MemberPrompt memberPrompt;
+  List<Member> likeMemberList;
 
-  public DoctorBoardDetailHandler(List<DoctorBoard> doctorBoardList, List<DoctorBoard> reportList) {
+
+  public DoctorBoardDetailHandler(List<DoctorBoard> doctorBoardList, 
+      List<DoctorBoard> reportList, List<Comment> commentList, 
+      MemberPrompt memberPrompt, List<Member> likeMemberList) {
     super(doctorBoardList);
     this.reportList = reportList;
+    this.commentList = commentList;
+    this.memberPrompt = memberPrompt;
+    this.likeMemberList = likeMemberList;
   }
 
 
@@ -18,9 +28,9 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler{
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();
-    int no = Prompt.inputInt("게시글 번호> ");
-
-    DoctorBoard doctorBoard = findByNo(no);
+    int num = Prompt.inputInt("게시글 번호> ");
+    DoctorBoard doctorBoard = findByNo(num);
+    String loginUser = AuthLoginHandler.getLoginUser().getId();
 
     if (doctorBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -34,23 +44,60 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler{
 
     doctorBoard.setViewCount(doctorBoard.getViewCount() + 1);
     System.out.printf("조회수: %d\n", doctorBoard.getViewCount());
-    //    System.out.printf("♡ : %d\n", doctorBoard.getLike());
-    if(doctorBoard.getLike() == 0) {
-      System.out.printf("[1.♡ : %d\n)] ", doctorBoard.getLike());
+
+    if (memberPrompt.findLikeMember(loginUser) == null) {
+      System.out.printf("[좋아요 ♡ : %d]\n ", doctorBoard.getLike());
     } else {
-      System.out.printf("[1.❤ : %d\n)] ", doctorBoard.getLike());
+      System.out.printf("[좋아요 ♥ : %d]\n ", doctorBoard.getLike());
     }
+
+    System.out.println();
+    System.out.println("[댓글]");
+    for (Comment comment : commentList) {
+      String whichBoard = doctorBoard.getWhichBoard();
+      if (comment.getCommentBoardNo() != 0) {
+        if (comment.getCommentBoardNo() == doctorBoard.getNo() 
+            && comment.getWhichBoard().equals(whichBoard)) {
+          System.out.printf("%d, %s, %s\n",
+              comment.getNo(),
+              comment.getCommenter(),
+              comment.getCommentContent());
+        }
+
+      }   
+    }
+
+    System.out.println();
+    request.setAttribute("num", num);
+    request.setAttribute("boardType", "doctorBoard");
+
     while(true) {
 
-      String status = Prompt.inputString("[ 좋아요 (#: ♡) / 신고하기(!: 🚨) / 넘어가기: Enter ]> ");
+      String status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
+          + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
       if (status.equals("#")) {
-        doctorBoard.setLike(doctorBoard.getLike() + 1);
-        System.out.println("게시글 좋아요를 눌렀습니다.");
-        break;
-      } else if (status.equals("!")) {
+        String whichBoard = "doctor";
+        if (doctorBoard.getWhichBoard().equals(whichBoard) && 
+            memberPrompt.findLikeMember(loginUser) == null) {
+          doctorBoard.setLike(doctorBoard.getLike() + 1);
+          likeMemberList.add(AuthLoginHandler.getLoginUser());
+          System.out.println("게시글 좋아요를 눌렀습니다.");
+          break;
+        } else {
+          doctorBoard.setLike(doctorBoard.getLike() - 1);
+          likeMemberList.remove(AuthLoginHandler.getLoginUser());
+          System.out.println("게시글 좋아요가 취소되었습니다.");
+          break;
+        }
+
+      } else if (status.equals("@")) {
+        request.getRequestDispatcher("/comment/add").forward(request);
+        return;
+
+      }else if (status.equals("!")) {
         doctorBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
         reportList.add(doctorBoard);
-        doctorBoard.setRequester(AuthLoginHandler.loginUser.getId());
+        doctorBoard.setRequester(loginUser);
         System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
         break;
       }
@@ -62,8 +109,8 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler{
       }
     }
 
-    if (doctorBoard.getWriter().getId().equals(AuthLoginHandler.loginUser.getId())) {
-      request.setAttribute("no", no);
+    if (doctorBoard.getWriter().getId().equals(loginUser)) {
+      request.setAttribute("num", num);
       while (true) {
         String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
         switch (input) {

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-public class FreeBoard implements Serializable{
+public class FreeBoard extends XBoard implements Serializable{
   private int no;
   private String title;
   private String content;
