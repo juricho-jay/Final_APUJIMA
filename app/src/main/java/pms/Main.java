@@ -1,5 +1,6 @@
 package pms;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -21,6 +22,7 @@ import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
 import pms.handler.AdminUpdateHandler;
+import pms.handler.AttendanceCheckHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
 import pms.handler.AuthUserInfoHandler;
@@ -92,6 +94,8 @@ public class Main {
   List<Bucket> bucketList = new LinkedList<>();
   List<Plant> plantList = new LinkedList<>();
   List<Member> likeMemberList = new LinkedList<>();
+  List<Date> dateList = new ArrayList<>();
+  List<Member> memberCheckList = new LinkedList<>();
 
   IntroMenu intro = new IntroMenu();
   HashMap<String,Command> commandMap = new HashMap<>();
@@ -143,8 +147,8 @@ public class Main {
 
   public static void main(String[] args) {
     Main main = new Main();
-    main.addApplicationContextListener(new AppInitListener());
     main.addApplicationContextListener(new FileListener());
+    main.addApplicationContextListener(new AppInitListener());
     main.service();
   }
 
@@ -199,6 +203,8 @@ public class Main {
     commandMap.put("/auth/login", new AuthLoginHandler(memberList));
     commandMap.put("/auth/logout", new AuthLogoutHandler());
     commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberList));
+    commandMap.put("/auth/check", new AttendanceCheckHandler(dateList, memberCheckList));
+
 
 
     commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxList, memberPrompt));
@@ -238,6 +244,8 @@ public class Main {
     params.put("mailboxList", mailBoxList);
     params.put("counselingmemberList", counselingMemberList);
     params.put("bucketList",bucketList);
+    params.put("dateList",dateList);
+    params.put("memberCheckList",memberCheckList);
     for (ApplicationContextListener listener : listeners) {
       listener.contextInitialized(params);
     }
@@ -253,6 +261,8 @@ public class Main {
     params.put("mailboxList", mailBoxList);
     params.put("counselingmemberList",counselingMemberList);
     params.put("bucketList",bucketList);
+    params.put("dateList",dateList);
+    params.put("memberCheckList",memberCheckList);
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
@@ -273,15 +283,6 @@ public class Main {
 
 
   Menu createMainMenu() {
-    System.out.println("\r\n"
-        + "|￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣ |\r\n"
-        + "|[APUJIMA]에 오신 것을 환영합니다.|\r\n"
-        + "|＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿ |\r\n"
-        + "(\\__/) ||\r\n"
-        + "(•ㅅ•).||\r\n"
-        + "/ . . . .づ\r\n"
-        + "");
-
 
     MenuGroup mainMenuGroup = new MenuGroup("WELCOME TO APUJIMA!");
     mainMenuGroup.setPrevMenuTitle("종료");
@@ -298,6 +299,7 @@ public class Main {
     mainMenuGroup.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
     mainMenuGroup.add(new MenuItem("회원가입", Menu.ACCESS_LOGOUT, "/member/add"));
     mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN, "/auth/userInfo"));
+    mainMenuGroup.add(new MenuItem("출석체크", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR , "/auth/check"));
     mainMenuGroup.add(createMailBoxMenu());
     mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN, "/auth/logout"));
 
