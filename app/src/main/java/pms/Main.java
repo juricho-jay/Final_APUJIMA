@@ -40,6 +40,7 @@ import pms.handler.CounselingMemberDoctorListHandler;
 import pms.handler.CounselingMemberMyListHandler;
 import pms.handler.DoctorBoardAddHandler;
 import pms.handler.DoctorBoardDeleteHandler;
+import pms.handler.DoctorBoardDetailHandler;
 import pms.handler.DoctorBoardListHandler;
 import pms.handler.DoctorBoardSearchHandler;
 import pms.handler.DoctorBoardUpdateHandler;
@@ -67,6 +68,7 @@ import pms.handler.MemberListHandler;
 import pms.handler.MemberPrompt;
 import pms.handler.NoticeBoardAddHandler;
 import pms.handler.NoticeBoardDeleteHandler;
+import pms.handler.NoticeBoardDetailHandler;
 import pms.handler.NoticeBoardListHandler;
 import pms.handler.NoticeBoardSearchHandler;
 import pms.handler.NoticeBoardUpdateHandler;
@@ -155,7 +157,7 @@ public class Main {
   public Main() {
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestList, medicineList));
     commandMap.put("/admin/update", new AdminUpdateHandler(requestList, medicineList));
-    commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, freeBoardList, doctorReportList));
+    commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, doctorReportList));
 
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(freeBoardList , reportList, mailBoxList));
 
@@ -177,21 +179,21 @@ public class Main {
 
     commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardList));
     commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardList));
-    //    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardList, commentList, memberPrompt, likeList));
+    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardList, commentList, likeList));
     commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(noticeBoardList));
     commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(noticeBoardList));
     commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(noticeBoardList));
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList, commentList, memberPrompt, likeList));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, reportList, commentList, likeList));
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList));
     commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardList));
 
     commandMap.put("/doctorBoard/add", new DoctorBoardAddHandler(doctorBoardList));
     commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(doctorBoardList));
-    //    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(doctorBoardList, doctorReportList, commentList, memberPrompt, likeList));
+    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(doctorBoardList, doctorReportList, commentList, likeList));
     commandMap.put("/doctorBoard/update", new DoctorBoardUpdateHandler(doctorBoardList));
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardList));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardList));
@@ -244,11 +246,14 @@ public class Main {
     params.put("doctorBoardList", doctorBoardList);
     params.put("medicineList", medicineList);
     params.put("mailBoxList", mailBoxList);
-    params.put("bucketList",bucketList);
-    params.put("dateList",dateList);
-    params.put("memberCheckList",memberCheckList);
+    params.put("bucketList", bucketList);
+    params.put("dateList", dateList);
+    params.put("memberCheckList", memberCheckList);
     params.put("reportList", reportList);
     params.put("doctorReportList", doctorReportList);
+    params.put("likeList", likeList);
+    params.put("commentList", commentList);
+
     for (ApplicationContextListener listener : listeners) {
       listener.contextInitialized(params);
     }
@@ -263,11 +268,14 @@ public class Main {
     params.put("doctorBoardList", doctorBoardList);
     params.put("medicineList", medicineList);
     params.put("mailBoxList", mailBoxList);
-    params.put("bucketList",bucketList);
-    params.put("dateList",dateList);
-    params.put("memberCheckList",memberCheckList);
+    params.put("bucketList", bucketList);
+    params.put("dateList", dateList);
+    params.put("memberCheckList", memberCheckList);
     params.put("reportList", reportList);
     params.put("doctorReportList", doctorReportList);
+    params.put("likeList", likeList);
+    params.put("commentList", commentList);
+
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
     }

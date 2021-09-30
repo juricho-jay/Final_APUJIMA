@@ -2,19 +2,14 @@ package pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
 public class FreeBoard extends XBoard implements Serializable{
-  private int no;
   private String title;
   private String content;
-  private Member writer;
   private Date registeredDate;
   private int viewCount;
-  private int like;
   private String reason;
   private String requester;
-  private List<Member> likeMemberList;
   public static int lastIndex;
 
 
@@ -36,12 +31,6 @@ public class FreeBoard extends XBoard implements Serializable{
   public void setReason(String reason) {
     this.reason = reason;
   }
-  public Member getWriter() {
-    return writer;
-  }
-  public void setWriter(Member writer) {
-    this.writer = writer;
-  }
   public Date getRegisteredDate() {
     return registeredDate;
   }
@@ -54,19 +43,7 @@ public class FreeBoard extends XBoard implements Serializable{
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  public int getLike() {
-    return like;
-  }
-  public void setLike(int like) {
-    this.like = like;
-  }
 
-  public int getNo() {
-    return no;
-  }
-  public void setNo(int no) {
-    this.no = no;
-  }
   public String getTitle() {
     return title;
   }
@@ -79,27 +56,5 @@ public class FreeBoard extends XBoard implements Serializable{
   public void setContent(String content) {
     this.content = content;
   }
-  public List<Member> getLikeMemberList() {
-    return likeMemberList;
-  }
-  public void setLikeMemberList(List<Member> likeMembers) {
-    this.likeMemberList = likeMembers;
-  }
-
-  public String getLikeMemberNames() {
-    if (this.likeMemberList == null) {
-      return "";
-    }
-
-    StringBuilder names = new StringBuilder();
-    for (Member member : this.likeMemberList) {
-      if (names.length() > 0) {
-        names.append(",");
-      }
-      names.append(member.getName());
-    }
-    return names.toString();
-  }
-
 }
 
