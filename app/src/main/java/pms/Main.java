@@ -20,6 +20,7 @@ import pms.domain.Member;
 import pms.domain.NoticeBoard;
 import pms.domain.Plant;
 import pms.handler.AdminApprovalHandler;
+import pms.handler.AdminDoctorReportDeleteHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
 import pms.handler.AdminUpdateHandler;
@@ -160,6 +161,7 @@ public class Main {
     commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, doctorReportList));
 
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(freeBoardList , reportList, mailBoxList));
+    commandMap.put("/admin/doctordelete", new AdminDoctorReportDeleteHandler(doctorBoardList, doctorReportList, mailBoxList));
 
 
     commandMap.put("/intro", new IntroMenu());
@@ -329,8 +331,8 @@ public class Main {
 
     approvalManagement.add(new MenuItem("약품 승인", Menu.ACCESS_ADMIN, "/admin/approval")); // 여기서 3지선다 승인, 삭제, 뒤로가기
     approvalManagement.add(new MenuItem("약품 변경", Menu.ACCESS_ADMIN, "/admin/update")); // 변경 or not
-    approvalManagement.add(new MenuItem("게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/delete")); // 신고하시겠습니까? yes => 삭제
-
+    approvalManagement.add(new MenuItem("자유게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/delete")); // 신고하시겠습니까? yes => 삭제
+    approvalManagement.add(new MenuItem("Healer 게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/doctordelete"));
 
 
     approvalMenu.add(approvalManagement);
