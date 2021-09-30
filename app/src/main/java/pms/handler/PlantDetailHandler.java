@@ -22,7 +22,7 @@ public class PlantDetailHandler extends AbstractPlantHandler{
       return;
     }
     System.out.println("화분 이름: " + plant.getPlantName());
-    System.out.println("화분 주인의 아이디: " + AuthLoginHandler.getLoginUser().getId());
+    System.out.println("화분 주인의 아이디: " + plant.getOwnerName());
     System.out.println("화분 누적 경험치: " + plant.getExp());
     System.out.println("화분 레벨: " + plant.getLevel());
     System.out.println("화분 모양: " + plant.getShape());

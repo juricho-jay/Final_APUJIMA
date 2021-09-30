@@ -16,6 +16,8 @@ public class PlantGrowHandler extends AbstractPlantHandler{
     String name = Prompt.inputString("화분의 이름> ");
     Plant plant = findByPlantName(name);
 
+
+
     if (plant == null) {
       System.out.println("찾는 화분이 없습니다. 다시 입력해주세요");
       return;
@@ -47,7 +49,6 @@ public class PlantGrowHandler extends AbstractPlantHandler{
           System.out.println("최대 경험치량 도달! 경험치가 500으로 고정됩니다.");
           AuthLoginHandler.getLoginUser().setCount(AuthLoginHandler.getLoginUser().getCount()-30);
           System.out.println("식물에 물을 주어 30포인트가 사용되었습니다.");
-          plantList.add(plant);
           return;
 
         }
@@ -61,27 +62,27 @@ public class PlantGrowHandler extends AbstractPlantHandler{
         }
         AuthLoginHandler.getLoginUser().setCount(AuthLoginHandler.getLoginUser().getCount()-30);
         System.out.println("식물에 물을 주어 30포인트가 사용되었습니다.");
-        plantList.add(plant);
         System.out.println();
+
 
       }
       if(plant.getExp() >= 100 && plant.getExp()< 200) {
         System.out.println("레벨 업! 1단계 화분으로 성장했습니다!");
         plant.setShape("\u2618");
         plant.setLevel(1);
-        plantList.add(plant);
+
       }
       else if(plant.getExp() >= 200  && plant.getExp()< 300) {
         System.out.println("레벨 업! 2단계 화분으로 성장했습니다!");
         plant.setShape( "\uD83C\uDF38");
         plant.setLevel(2);
-        plantList.add(plant);
+
       }
       else if(plant.getExp() >= 300) {
         System.out.println("레벨 업! 3단계 화분으로 성장했습니다!");
         plant.setShape("\uD83D\uDC90");
         plant.setLevel(3);
-        plantList.add(plant);
+
       }
       if (plant.getLevel() == 0) {
         System.out.println("1단계까지 필요한 경험치의 양 " + (100 - plant.getExp()));
