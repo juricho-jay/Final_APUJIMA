@@ -11,11 +11,11 @@ public class PlantAddHandler extends AbstractPlantHandler{
     super(plantList);
   }
 
-  Plant plant = new Plant();
+
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-
+    Plant plant = new Plant();
 
 
     System.out.println("");
@@ -40,22 +40,22 @@ public class PlantAddHandler extends AbstractPlantHandler{
         }
       } 
       plant.setPlantName(input);
-      break;
+      plant.setOwnerName(AuthLoginHandler.getLoginUser().getId());
+      plant.setRegisteredDate(new Date(System.currentTimeMillis()));
+      plant.setExp(0);
+      plant.setLevel(0);
+      plant.setShape("\uD83C\uDF31");
+      plant.setNoOfplant(1);
+      AuthLoginHandler.getLoginUser().setCount(AuthLoginHandler.getLoginUser().getCount() -300);
+      System.out.println("화분에 씨앗이 심어졌습니다!");
+      System.out.println("화분에 씨앗을 심어 300포인트가 차감되었습니다.");
+      plantList.add(plant);
+      return;
 
     }
 
 
-    plant.setOwnerName(AuthLoginHandler.getLoginUser().getId());
-    plant.setRegisteredDate(new Date(System.currentTimeMillis()));
-    plant.setExp(0);
-    plant.setLevel(0);
-    plant.setShape("\uD83C\uDF31");
-    plant.setNoOfplant(1);
-    plantList.add(plant);
 
-    AuthLoginHandler.getLoginUser().setCount(AuthLoginHandler.getLoginUser().getCount() -300);
-    System.out.println("화분에 씨앗이 심어졌습니다!");
-    System.out.println("화분에 씨앗을 심어 300포인트가 차감되었습니다.");
 
 
   }
