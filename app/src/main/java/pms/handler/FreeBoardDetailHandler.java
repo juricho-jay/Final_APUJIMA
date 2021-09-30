@@ -9,16 +9,14 @@ import util.Prompt;
 public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
   List<FreeBoard> reportList;
   List<Comment> commentList;
-  MemberPrompt memberPrompt;
   List<Like> likeList;
 
   public FreeBoardDetailHandler(List<FreeBoard> freeBoardList,
-      List<FreeBoard> reportList, List<Comment> commentList, 
-      MemberPrompt memberPrompt, List<Like> likeList) {
+      List<FreeBoard> reportList, List<Comment> commentList,
+      List<Like> likeList) {
     super(freeBoardList);
     this.reportList = reportList;
     this.commentList = commentList;
-    this.memberPrompt = memberPrompt;
     this.likeList = likeList;
 
   }
@@ -53,7 +51,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
 
     for (int i = 0; i < likeList.size(); i++) {
       if (likeList.get(i).getLikeBoardNo() == freeBoard.getNo() && 
-          likeList.get(i).getWhichBoard().equals(freeBoard.getWhichBoard()) &&
+          likeList.get(i).getWhichBoard().equals(whichBoard) &&
           likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
         System.out.print("[좋아요 ♥ :");
         break;

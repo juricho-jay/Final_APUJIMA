@@ -3,21 +3,22 @@ package pms.handler;
 import java.util.List;
 import pms.domain.Comment;
 import pms.domain.DoctorBoard;
+import pms.domain.Like;
 import util.Prompt;
 
 public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler {
-  List<DoctorBoard> reportList;
+  List<DoctorBoard> doctorReportList;
   List<Comment> commentList;
-  MemberPrompt memberPrompt;
+  List<Like> likeList;
 
 
   public DoctorBoardDetailHandler(List<DoctorBoard> doctorBoardList, 
-      List<DoctorBoard> reportList, List<Comment> commentList, 
-      MemberPrompt memberPrompt) {
+      List<DoctorBoard> doctorReportList, List<Comment> commentList, 
+      List<Like> likeList) {
     super(doctorBoardList);
-    this.reportList = reportList;
+    this.doctorReportList = doctorReportList;
     this.commentList = commentList;
-    this.memberPrompt = memberPrompt;
+    this.likeList = likeList;
   }
 
 
@@ -27,7 +28,6 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler {
     System.out.println();
     int num = Prompt.inputInt("게시글 번호> ");
     DoctorBoard doctorBoard = findByNo(num);
-
     String loginUser = AuthLoginHandler.getLoginUser().getId();
 
     if (doctorBoard == null) {
@@ -43,16 +43,40 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler {
     doctorBoard.setViewCount(doctorBoard.getViewCount() + 1);
     System.out.printf("조회수: %d\n", doctorBoard.getViewCount());
 
-    //    if (memberPrompt.findLikeMember(loginUser) == null) {
-    //      System.out.printf("[좋아요 ♡ : %d]\n ", doctorBoard.getLike());
-    //    } else {
-    //      System.out.printf("[좋아요 ♥ : %d]\n ", doctorBoard.getLike());
-    //    }
+    String whichBoard = doctorBoard.getWhichBoard();
+
+    if (likeList.size() == 0) {
+      System.out.print("[좋아요 ♡ :");
+    }
+
+    for (int i = 0; i < likeList.size(); i++) {
+      if (likeList.get(i).getLikeBoardNo() == doctorBoard.getNo() && 
+          likeList.get(i).getWhichBoard().equals(whichBoard) &&
+          likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+        System.out.print("[좋아요 ♥ :");
+        break;
+      } else if (i == (likeList.size() - 1)) {
+        System.out.print("[좋아요 ♡ :");
+        break;
+      }
+    }
+
+    int count = 0;
+    for (int j = 0; j < likeList.size(); j++) {
+      if (likeList.get(j).getLikeBoardNo() != 0) {
+        if (likeList.get(j).getLikeBoardNo() == doctorBoard.getNo() && 
+            likeList.get(j).getWhichBoard().equals(whichBoard)) {
+          count++;
+        }
+      }   
+    }
+
+    System.out.printf(" %d]\n", count);
+
 
     System.out.println();
     System.out.println("[댓글]");
     for (Comment comment : commentList) {
-      String whichBoard = doctorBoard.getWhichBoard();
       if (comment.getCommentBoardNo() != 0) {
         if (comment.getCommentBoardNo() == doctorBoard.getNo() 
             && comment.getWhichBoard().equals(whichBoard)) {
@@ -74,17 +98,16 @@ public class DoctorBoardDetailHandler extends AbstractDoctorBoardHandler {
       String status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
           + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
       if (status.equals("#")) {
-        String whichBoard = "doctor";
-        //        if (doctorBoard.getWhichBoard().equals(whichBoard) && 
-        //                      memberPrompt.findLikeMember(loginUser) == null) {
-        //            String status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) / 넘어가기: Enter ]> ");
-        //      } else if (status.equals("@")) {
+        request.getRequestDispatcher("/like/addCancel").forward(request);
+        return;
+
+      } else if (status.equals("@")) {
         request.getRequestDispatcher("/comment/add").forward(request);
         return;
 
-      }else if (status.equals("!")) {
+      } else if (status.equals("!")) {
         doctorBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
-        reportList.add(doctorBoard);
+        doctorReportList.add(doctorBoard);
         doctorBoard.setRequester(loginUser);
         System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
         break;

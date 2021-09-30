@@ -2,7 +2,6 @@ package pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
 public class DoctorBoard extends XBoard implements Serializable {
   private int no;
@@ -14,7 +13,6 @@ public class DoctorBoard extends XBoard implements Serializable {
   private int like;
   private String reason;
   private String requester;
-  private List<Member> likeMemberList;
   public static int lastIndex;
 
 
@@ -83,27 +81,6 @@ public class DoctorBoard extends XBoard implements Serializable {
   }
   public void setContent(String content) {
     this.content = content;
-  }
-  public List<Member> getLikeMemberList() {
-    return likeMemberList;
-  }
-  public void setLikeMemberList(List<Member> likeMemberList) {
-    this.likeMemberList = likeMemberList;
-  }
-
-  public String getLikeMemberNames() {
-    if (this.likeMemberList == null) {
-      return "";
-    }
-
-    StringBuilder names = new StringBuilder();
-    for (Member member : this.likeMemberList) {
-      if (names.length() > 0) {
-        names.append(",");
-      }
-      names.append(member.getName());
-    }
-    return names.toString();
   }
 
 }

@@ -14,9 +14,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import pms.context.ApplicationContextListener;
 import pms.domain.Bucket;
+import pms.domain.Comment;
 import pms.domain.CounselingMember;
 import pms.domain.DoctorBoard;
 import pms.domain.FreeBoard;
+import pms.domain.Like;
 import pms.domain.MailBox;
 import pms.domain.Medicine;
 import pms.domain.Member;
@@ -40,6 +42,10 @@ public class FileListener implements ApplicationContextListener {
     List<Member> memberCheckList = (List<Member>) params.get("memberCheckList");
     List<FreeBoard> reportList = (List<FreeBoard>) params.get("reportList");
     List<DoctorBoard> doctorReportList = (List<DoctorBoard>) params.get("doctorReportList");
+    List<Like> likeList = (List<Like>) params.get("likeList");
+    List<Comment> commentList = (List<Comment>) params.get("commentList");
+
+
 
     loadObjects("member.json", memberList, Member.class);
     loadObjects("counselingMember.json", counselingMemberList,CounselingMember.class);
@@ -48,11 +54,14 @@ public class FileListener implements ApplicationContextListener {
     loadObjects("doctorBoard.json", doctorBoardList, DoctorBoard.class);
     loadObjects("medicine.json", medicineList, Medicine.class);
     loadObjects("mailBox.json", mailBoxList, MailBox.class);
-    loadObjects("bucketlist.json",bucketList, Bucket.class);
+    loadObjects("bucketList.json",bucketList, Bucket.class);
     loadObjects("dateList.json",dateList, Date.class);
     loadObjects("memberCheckList.json",memberCheckList, Member.class);
     loadObjects("report.json", reportList, FreeBoard.class);
     loadObjects("doctorReport.json", doctorReportList, DoctorBoard.class);
+    loadObjects("like.json", likeList, Like.class);
+    loadObjects("comment.json", commentList, Comment.class);
+
 
 
   }
@@ -73,6 +82,9 @@ public class FileListener implements ApplicationContextListener {
     List<Member> memberCheckList = (List<Member>) params.get("memberCheckList");
     List<FreeBoard> reportList = (List<FreeBoard>) params.get("reportList");
     List<DoctorBoard> doctorReportList = (List<DoctorBoard>) params.get("doctorReportList");
+    List<Like> likeList = (List<Like>) params.get("likeList");
+    List<Comment> commentList = (List<Comment>) params.get("commentList");
+
 
 
     saveObjects("member.json", memberList);
@@ -87,6 +99,9 @@ public class FileListener implements ApplicationContextListener {
     saveObjects("memberCheckList.json",memberCheckList);
     saveObjects("report.json", reportList);
     saveObjects("doctorReport.json", doctorReportList);
+    saveObjects("like.json", likeList);
+    saveObjects("comment.json", commentList);
+
 
   }
 
