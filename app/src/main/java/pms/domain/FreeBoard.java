@@ -4,13 +4,10 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class FreeBoard extends XBoard implements Serializable{
-  private int no;
   private String title;
   private String content;
-  private Member writer;
   private Date registeredDate;
   private int viewCount;
-  private int like;
   private String reason;
   private String requester;
   public static int lastIndex;
@@ -34,14 +31,6 @@ public class FreeBoard extends XBoard implements Serializable{
   public void setReason(String reason) {
     this.reason = reason;
   }
-  @Override
-  public Member getWriter() {
-    return writer;
-  }
-  @Override
-  public void setWriter(Member writer) {
-    this.writer = writer;
-  }
   public Date getRegisteredDate() {
     return registeredDate;
   }
@@ -54,23 +43,7 @@ public class FreeBoard extends XBoard implements Serializable{
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  @Override
-  public int getLike() {
-    return like;
-  }
-  @Override
-  public void setLike(int like) {
-    this.like = like;
-  }
 
-  @Override
-  public int getNo() {
-    return no;
-  }
-  @Override
-  public void setNo(int no) {
-    this.no = no;
-  }
   public String getTitle() {
     return title;
   }

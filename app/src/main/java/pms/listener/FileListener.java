@@ -127,6 +127,7 @@ public class FileListener implements ApplicationContextListener {
       System.out.printf("%s 데이터 로딩 완료!\n", filepath);
     } catch (Exception e) {
       System.out.printf("%s 데이터 로딩 오류!\n", filepath);
+      e.printStackTrace();
     }
 
   }

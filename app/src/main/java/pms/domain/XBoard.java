@@ -1,11 +1,10 @@
 package pms.domain;
 
-public class XBoard {
+public abstract class XBoard {
   private int no;
   private Member writer;
   private String whichBoard;
   private int like;
-
 
   public int getNo() {
     return no;

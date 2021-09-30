@@ -4,13 +4,10 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class NoticeBoard extends XBoard implements Serializable{
-  public int no;
   private String title;
   private String content;
-  private Member writer;
   private Date registeredDate;
   private int viewCount;
-  private int like;
   public NoticeBoard index;
   public static int lastIndex;
 
@@ -21,14 +18,6 @@ public class NoticeBoard extends XBoard implements Serializable{
   }
   public static void setLastIndex(int lastIndex) {
     NoticeBoard.lastIndex = lastIndex;
-  }
-  @Override
-  public Member getWriter() {
-    return writer;
-  }
-  @Override
-  public void setWriter(Member writer) {
-    this.writer = writer;
   }
   public Date getRegisteredDate() {
     return registeredDate;
@@ -41,22 +30,6 @@ public class NoticeBoard extends XBoard implements Serializable{
   }
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
-  }
-  @Override
-  public int getLike() {
-    return like;
-  }
-  @Override
-  public void setLike(int like) {
-    this.like = like;
-  }
-  @Override
-  public int getNo() {
-    return no;
-  }
-  @Override
-  public void setNo(int no) {
-    this.no = no;
   }
 
   public String getTitle() {

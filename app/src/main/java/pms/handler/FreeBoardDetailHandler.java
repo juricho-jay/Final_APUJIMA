@@ -89,11 +89,17 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
 
     System.out.println();
     request.setAttribute("num", num);
+    String status;
     request.setAttribute("boardType", "freeBoard");
 
     while(true) {
-      String status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
+      //      if (memberPrompt.findLikeMember(loginUser) == null) { 
+      status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
           + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
+      //      } else {
+      //        status = Prompt.inputString("[좋아요 취소 (#: x) / 신고하기(!: 🚨) /\n"
+      //            + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
+      //      }
       if (status.equals("#")) {
         request.getRequestDispatcher("/like/addCancel").forward(request);
         return;
