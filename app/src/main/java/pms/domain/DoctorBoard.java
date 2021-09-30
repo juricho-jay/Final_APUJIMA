@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-public class DoctorBoard implements Serializable{
+public class DoctorBoard extends XBoard implements Serializable {
   private int no;
   private String title;
   private String content;
@@ -14,8 +14,9 @@ public class DoctorBoard implements Serializable{
   private int like;
   private String reason;
   private String requester;
-  public static int lastIndex = 1;
   private List<Member> likeMemberList;
+  public static int lastIndex;
+
 
   public static int getLastIndex() {
     return lastIndex;
@@ -35,9 +36,11 @@ public class DoctorBoard implements Serializable{
   public void setRequester(String requester) {
     this.requester = requester;
   }
+  @Override
   public Member getWriter() {
     return writer;
   }
+  @Override
   public void setWriter(Member writer) {
     this.writer = writer;
   }
@@ -53,15 +56,19 @@ public class DoctorBoard implements Serializable{
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+  @Override
   public int getLike() {
     return like;
   }
+  @Override
   public void setLike(int like) {
     this.like = like;
   }
+  @Override
   public int getNo() {
     return no;
   }
+  @Override
   public void setNo(int no) {
     this.no = no;
   }
@@ -77,12 +84,11 @@ public class DoctorBoard implements Serializable{
   public void setContent(String content) {
     this.content = content;
   }
-
   public List<Member> getLikeMemberList() {
     return likeMemberList;
   }
-  public void setLikeMemberList(List<Member> likeMembers) {
-    this.likeMemberList = likeMembers;
+  public void setLikeMemberList(List<Member> likeMemberList) {
+    this.likeMemberList = likeMemberList;
   }
 
   public String getLikeMemberNames() {

@@ -49,14 +49,14 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler{
       } else {
         break;
       }
-
     }
 
     freeBoard.setWriter(AuthLoginHandler.getLoginUser());
     freeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
+    freeBoard.setWhichBoard("free");
 
     freeBoardList.add(freeBoard);
-    System.out.println("게시판 등록이 완료되었습니다.");
+    System.out.println("게시글이 등록되었습니다.");
   }
 
 }

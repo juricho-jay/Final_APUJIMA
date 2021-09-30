@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-public class NoticeBoard implements Serializable{
+public class NoticeBoard extends XBoard implements Serializable{
   public int no;
   private String title;
   private String content;
@@ -13,9 +13,9 @@ public class NoticeBoard implements Serializable{
   private int viewCount;
   private int like;
   public NoticeBoard index;
-  //  public NoticeBoard listIndex;
-  public static int lastIndex = 1;
   private List<Member> likeMemberList;
+  public static int lastIndex;
+
 
 
   public static int getLastIndex() {
@@ -24,9 +24,11 @@ public class NoticeBoard implements Serializable{
   public static void setLastIndex(int lastIndex) {
     NoticeBoard.lastIndex = lastIndex;
   }
+  @Override
   public Member getWriter() {
     return writer;
   }
+  @Override
   public void setWriter(Member writer) {
     this.writer = writer;
   }
@@ -42,15 +44,19 @@ public class NoticeBoard implements Serializable{
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+  @Override
   public int getLike() {
     return like;
   }
+  @Override
   public void setLike(int like) {
     this.like = like;
   }
+  @Override
   public int getNo() {
     return no;
   }
+  @Override
   public void setNo(int no) {
     this.no = no;
   }
@@ -76,9 +82,10 @@ public class NoticeBoard implements Serializable{
   public List<Member> getLikeMemberList() {
     return likeMemberList;
   }
-  public void setLikeMemberList(List<Member> likeMembers) {
-    this.likeMemberList = likeMembers;
+  public void setLikeMemberList(List<Member> likeMemberList) {
+    this.likeMemberList = likeMemberList;
   }
+
 
   public String getLikeMemberNames() {
     if (this.likeMemberList == null) {

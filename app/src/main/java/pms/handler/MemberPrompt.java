@@ -7,11 +7,11 @@ import util.Prompt;
 
 public class MemberPrompt {
   List<Member> memberList;
-  List<Member> likeMembers;
+  //  List<Member> likeMemberList;
 
-  public MemberPrompt(List<Member> memberList, List<Member> likeMembers) {
+  public MemberPrompt(List<Member> memberList/* , List<Member> likeMemberList */) {
     this.memberList = memberList;
-    this.likeMembers = likeMembers;
+    //    this.likeMemberList = likeMemberList;
   }
 
   public Member findById(String id) {
@@ -24,15 +24,15 @@ public class MemberPrompt {
   }
 
 
-  public String findLikeMember(String id) {
-    for (Member member : likeMembers) {
-      if (member.getId().equalsIgnoreCase(id)) {
-        return id;
-      }
-    }
-
-    return null;
-  }
+  //  public String findLikeMember(String id) {
+  //    for (Member member : likeMemberList) {
+  //      if (member.getId().equalsIgnoreCase(id)) {
+  //        return id;
+  //      }
+  //    }
+  //
+  //    return null;
+  //  }
 
 
   //  public static Member findById(String id, List<Member> memberList) {

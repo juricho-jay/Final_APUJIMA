@@ -1,28 +1,29 @@
 package pms.handler;
 
 import java.util.List;
-import pms.domain.Comment;
 import pms.domain.DoctorBoard;
 import pms.domain.FreeBoard;
+import pms.domain.Like;
 import pms.domain.NoticeBoard;
 
-public abstract class AbstractCommentHandler implements Command {
-  List<Comment> commentList; 
+public abstract class AbstractLikeHandler implements Command {
+  List<Like> likeList; 
   List<FreeBoard> freeBoardList;
   List<NoticeBoard> noticeBoardList;
   List<DoctorBoard> doctorBoardList;
 
-  public AbstractCommentHandler(List<Comment> commentList, List<FreeBoard> freeBoardList, 
+  public AbstractLikeHandler(List<Like> likeList, List<FreeBoard> freeBoardList, 
       List<DoctorBoard> doctorBoardList, List<NoticeBoard> noticeBoardList) {
-    this.commentList = commentList;
+    this.likeList = likeList;
     this.freeBoardList = freeBoardList;
     this.doctorBoardList = doctorBoardList;
     this.noticeBoardList = noticeBoardList;
   }
-  protected Comment findByNo(int No) {
-    for (Comment comment : commentList) {
-      if (comment.getNo() == No) {
-        return comment;
+
+  protected Like findByLikeNo(int No) {
+    for (Like like : likeList) {
+      if (like.getLikeNo() == No) {
+        return like;
       }
     }
     return null;

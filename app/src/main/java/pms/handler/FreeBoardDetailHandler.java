@@ -3,23 +3,23 @@ package pms.handler;
 import java.util.List;
 import pms.domain.Comment;
 import pms.domain.FreeBoard;
-import pms.domain.Member;
+import pms.domain.Like;
 import util.Prompt;
 
 public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
   List<FreeBoard> reportList;
   List<Comment> commentList;
   MemberPrompt memberPrompt;
-  List<Member> likeMemberList;
+  List<Like> likeList;
 
   public FreeBoardDetailHandler(List<FreeBoard> freeBoardList,
       List<FreeBoard> reportList, List<Comment> commentList, 
-      MemberPrompt memberPrompt, List<Member> likeMemberList) {
+      MemberPrompt memberPrompt, List<Like> likeList) {
     super(freeBoardList);
     this.reportList = reportList;
     this.commentList = commentList;
     this.memberPrompt = memberPrompt;
-    this.likeMemberList = likeMemberList;
+    this.likeList = likeList;
 
   }
 
@@ -45,49 +45,66 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     freeBoard.setViewCount(freeBoard.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeBoard.getViewCount());
 
-    if (memberPrompt.findLikeMember(loginUser) == null) { 
-      System.out.printf("좋아요 ♡ : %d\n", freeBoard.getLike());
-    } else {
-      System.out.printf("좋아요 ♥︎️ : %d\n", freeBoard.getLike());
+    String whichBoard = freeBoard.getWhichBoard();
+
+    if (likeList.size() == 0) {
+      System.out.print("[좋아요 ♡ :");
     }
+
+    for (int i = 0; i < likeList.size(); i++) {
+      if (likeList.get(i).getLikeBoardNo() == freeBoard.getNo() && 
+          likeList.get(i).getWhichBoard().equals(freeBoard.getWhichBoard()) &&
+          likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+        System.out.print("[좋아요 ♥ :");
+        break;
+      } else if (i == (likeList.size() - 1)) {
+        System.out.print("[좋아요 ♡ :");
+        break;
+      }
+    }
+
+    int count = 0;
+    for (int j = 0; j < likeList.size(); j++) {
+      if (likeList.get(j).getLikeBoardNo() != 0) {
+        if (likeList.get(j).getLikeBoardNo() == freeBoard.getNo() && 
+            likeList.get(j).getWhichBoard().equals(whichBoard)) {
+          count++;
+        }
+      }   
+    }
+
+    System.out.printf(" %d]\n", count);
 
     System.out.println();
     System.out.println("[댓글]");
     for (Comment comment : commentList) {
       if (comment.getCommentBoardNo() != 0) {
-        if (comment.getCommentBoardNo() == freeBoard.getNo()) {
-          System.out.printf("%d, %s, %s\n",
+        if (comment.getCommentBoardNo() == freeBoard.getNo() && 
+            comment.getWhichBoard().equals(whichBoard)) {
+          System.out.printf("%d. %s, %s\n",
               comment.getNo(),
               comment.getCommenter(),
               comment.getCommentContent());
         }
-
       }   
     }
 
     System.out.println();
     request.setAttribute("num", num);
     String status;
+    request.setAttribute("boardType", "freeBoard");
+
     while(true) {
-      if (memberPrompt.findLikeMember(loginUser) == null) { 
-        status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
-            + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
-      } else {
-        status = Prompt.inputString("[좋아요 취소 (#: x) / 신고하기(!: 🚨) /\n"
-            + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
-      }
+      //      if (memberPrompt.findLikeMember(loginUser) == null) { 
+      status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
+          + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
+      //      } else {
+      //        status = Prompt.inputString("[좋아요 취소 (#: x) / 신고하기(!: 🚨) /\n"
+      //            + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
+      //      }
       if (status.equals("#")) {
-        if (memberPrompt.findLikeMember(loginUser) == null) {
-          freeBoard.setLike(freeBoard.getLike() + 1);
-          likeMemberList.add(AuthLoginHandler.getLoginUser());
-          System.out.println("게시글 좋아요를 눌렀습니다.");
-          break;
-        } else {
-          freeBoard.setLike(freeBoard.getLike() - 1);
-          likeMemberList.remove(AuthLoginHandler.getLoginUser());
-          System.out.println("게시글 좋아요가 취소되었습니다.");
-          break;
-        }
+        request.getRequestDispatcher("/like/addCancel").forward(request);
+        return;
 
       } else if (status.equals("@")) {
         request.getRequestDispatcher("/comment/add").forward(request);
@@ -96,7 +113,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
       } else if (status.equals("!")) {
         freeBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
         reportList.add(freeBoard);
-        freeBoard.setRequester(AuthLoginHandler.loginUser.getId());
+        freeBoard.setRequester(loginUser);
         System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
         break;
 
@@ -108,7 +125,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
       }
     } 
 
-    if (freeBoard.getWriter().getId().equals(AuthLoginHandler.loginUser.getId())) {
+    if (freeBoard.getWriter().getId().equals(loginUser)) {
       request.setAttribute("num", num);
       while (true) {
         String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");

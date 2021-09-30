@@ -58,7 +58,9 @@ public class AttendanceCheckHandler implements Command{
         }
       }
 
-
+      System.out.println("금일 첫 출석체크로 30포인트가 적립되었습니다.");
+      dateList.add(new Date(System.currentTimeMillis()));
+      memberCheckList.add(AuthLoginHandler.loginUser);
     }
 
   }
