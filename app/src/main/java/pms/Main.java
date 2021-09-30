@@ -73,7 +73,6 @@ import pms.handler.NoticeBoardListHandler;
 import pms.handler.NoticeBoardSearchHandler;
 import pms.handler.NoticeBoardUpdateHandler;
 import pms.handler.PlantAddHandler;
-import pms.handler.PlantDetailHandler;
 import pms.handler.PlantGrowHandler;
 import pms.handler.PlantListHandler;
 import pms.handler.PlantMyListHandler;
@@ -227,7 +226,6 @@ public class Main {
 
     commandMap.put("/plant/add", new PlantAddHandler(plantList));
     commandMap.put("/plant/grow", new PlantGrowHandler(plantList));
-    commandMap.put("/plant/detail", new PlantDetailHandler(plantList));
     commandMap.put("/plant/list", new PlantListHandler(plantList));
     commandMap.put("/plant/mylist", new PlantMyListHandler(plantList));
 
@@ -439,7 +437,6 @@ public class Main {
 
     plantMenu.add(new MenuItem("화분 새로 키우기", "/plant/add"));
     plantMenu.add(new MenuItem("화분 물 주기", "/plant/grow"));
-    plantMenu.add(new MenuItem("화분 상세 보기", "/plant/detail"));
     plantMenu.add(new MenuItem("APUs 화분 보기", "/plant/list"));
     plantMenu.add(new MenuItem("내 화분", "/plant/mylist"));
 

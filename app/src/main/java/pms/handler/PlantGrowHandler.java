@@ -59,26 +59,31 @@ public class PlantGrowHandler extends AbstractPlantHandler{
         if (plant.getExp() >= 500) {
           plant.setExp(500);
           System.out.println("최대 경험치량 도달! 경험치가 500으로 고정됩니다.");
+          System.out.println();
         }
         AuthLoginHandler.getLoginUser().setCount(AuthLoginHandler.getLoginUser().getCount()-30);
+
         System.out.println("식물에 물을 주어 30포인트가 사용되었습니다.");
         System.out.println();
 
 
       }
       if(plant.getExp() >= 100 && plant.getExp()< 200) {
+        System.out.println();
         System.out.println("레벨 업! 1단계 화분으로 성장했습니다!");
         plant.setShape("\u2618");
         plant.setLevel(1);
 
       }
       else if(plant.getExp() >= 200  && plant.getExp()< 300) {
+        System.out.println();
         System.out.println("레벨 업! 2단계 화분으로 성장했습니다!");
         plant.setShape( "\uD83C\uDF38");
         plant.setLevel(2);
 
       }
       else if(plant.getExp() >= 300) {
+        System.out.println();
         System.out.println("레벨 업! 3단계 화분으로 성장했습니다!");
         plant.setShape("\uD83D\uDC90");
         plant.setLevel(3);

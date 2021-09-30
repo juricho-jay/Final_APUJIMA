@@ -7,7 +7,6 @@ public class Plant {
   private String PlantName;
   private int level;
   private int exp;
-  private int noOfplant;
   private String shape;
   private Date registeredDate;
   private String ownerName;
@@ -37,12 +36,6 @@ public class Plant {
   }
   public void setExp(int exp) {
     this.exp = exp;
-  }
-  public int getNoOfplant() {
-    return noOfplant;
-  }
-  public void setNoOfplant(int noOfplant) {
-    this.noOfplant = noOfplant;
   }
   public Date getRegisteredDate() {
     return registeredDate;
