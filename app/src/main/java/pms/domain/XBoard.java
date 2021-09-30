@@ -1,6 +1,6 @@
 package pms.domain;
 
-public abstract class XBoard {
+public class XBoard {
   private int no;
   private Member writer;
   private String whichBoard;
