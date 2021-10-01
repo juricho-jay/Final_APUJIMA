@@ -19,7 +19,9 @@ public abstract class AbstractCommentHandler implements Command {
     this.doctorBoardList = doctorBoardList;
     this.noticeBoardList = noticeBoardList;
   }
-  protected Comment findByNo(int No) {
+
+
+  protected Comment findByNo(int No) { //게시글에서 1번으로 시작하는 댓글no
     for (Comment comment : commentList) {
       if (comment.getNo() == No) {
         return comment;
@@ -27,6 +29,7 @@ public abstract class AbstractCommentHandler implements Command {
     }
     return null;
   }
+
 
   protected FreeBoard findByFreeBoardNo(int freeBoardNo) {
     for (FreeBoard freeBoard : freeBoardList) {
@@ -54,5 +57,6 @@ public abstract class AbstractCommentHandler implements Command {
     }
     return null;
   }
+
 
 }
