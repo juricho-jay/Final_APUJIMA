@@ -5,6 +5,7 @@ import pms.domain.Comment;
 import pms.domain.DoctorBoard;
 import pms.domain.FreeBoard;
 import pms.domain.NoticeBoard;
+import util.Prompt;
 
 public class CommentUpdateHandler extends AbstractCommentHandler {
 
@@ -16,48 +17,67 @@ public class CommentUpdateHandler extends AbstractCommentHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    //    System.out.println("[댓글 변경]");
-    //    System.out.println();
-    //    int no = (int)request.getAttribute("num");
-    //
-    //    String whichBoard = (String)request.getAttribute("boardType"); // 어떤 게시판인지 String으로 변수 지정
-    //
-    //    if (whichBoard.equals("freeBoard")) { // 그게 만약 자유게시판이면
-    //      Comment comment = findByCommentNo(no); // 찾는 번호의 댓글을 지정하고
-    //
-    //      String commentContent = Prompt.inputString(String.format("댓글 내용(%s)> ", comment.getCommentContent()));
-    //      String input = Prompt.inputString("❗ 정말 변경하시겠습니까? (y/N)> ");
-    //      if(input.equalsIgnoreCase("n") || input.length() == 0) {
-    //        System.out.println("댓글 변경을 취소하였습니다.");
-    //        return;
-    //      }
-    //      comment.setCommentContent(commentContent);
-    //      System.out.println("댓글을 변경하였습니다.");
-    //
-    //    } else if (whichBoard.equals("doctorBoard")) { // 그게 만약 힐러지식인게시판이면
-    //      Comment comment = findByCommentNo(commentNo);
-    //
-    //      String commentContent = Prompt.inputString(String.format("댓글 내용(%s)> ", comment.getCommentContent()));
-    //      String input = Prompt.inputString("❗ 정말 변경하시겠습니까? (y/N)> ");
-    //      if(input.equalsIgnoreCase("n") || input.length() == 0) {
-    //        System.out.println("댓글 변경을 취소하였습니다.");
-    //        return;
-    //      }
-    //      comment.setCommentContent(commentContent);
-    //      System.out.println("댓글을 변경하였습니다.");
-    //
-    //    } else if (whichBoard.equals("noticeBoard")) { // 그게 만약 공지사항이면
-    //      Comment comment = findByCommentNo(commentNo);
-    //
-    //      String commentContent = Prompt.inputString(String.format("댓글 내용(%s)> ", comment.getCommentContent()));
-    //      String input = Prompt.inputString("❗ 정말 변경하시겠습니까? (y/N)> ");
-    //      if(input.equalsIgnoreCase("n") || input.length() == 0) {
-    //        System.out.println("댓글 변경을 취소하였습니다.");
-    //        return;
-    //      }
-    //      comment.setCommentContent(commentContent);
-    //      System.out.println("댓글을 변경하였습니다.");
-    //    }
+    System.out.println();
+    System.out.println("[댓글 변경]");
+    System.out.println();
+    int no = Prompt.inputInt("번호? ");
+
+    String whichBoard = (String)request.getAttribute("boardType"); // 어떤 게시판인지 String으로 변수 지정
+    //    Comment comment = findByNo(no);
+
+    if (whichBoard.equals("freeBoard")) { 
+      FreeBoard freeBoard = findByFreeBoardNo(no); 
+
+      if (commentList.size() == 0) {
+        return;
+      }
+      String commentContent = null;
+      int commentNo = 0;
+      Comment comment = new Comment();
+      for (int i = 0; i < commentList.size(); i++) {
+        if (commentList.get(i).getWhichBoard().equals(freeBoard.getWhichBoard())&& 
+            commentList.get(i).getCommentBoardNo() == freeBoard.getNo() &&
+            commentList.get(i).getNo() == no && 
+            commentList.get(i).getCommenter().equals(AuthLoginHandler.getLoginUser().getId())) {
+          commentNo = i;
+          commentContent = commentList.get(i).getCommentContent();
+          break;
+        }
+      }
+      String newCommentContent = Prompt.inputString(String.format("댓글 내용(%s)> ", commentContent));
+      String input = Prompt.inputString("❗ 정말 변경하시겠습니까? (y/N)> ");
+      if(input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("댓글 변경을 취소하였습니다.");
+        return;
+      }
+      commentList.set(commentNo, newCommentContent);
+      System.out.println("댓글을 변경하였습니다.");
+
+
+    } /*else if (whichBoard.equals("doctorBoard")) { // 그게 만약 힐러지식인게시판이면
+      Comment comment = findByCommentNo(commentNo);
+
+      String commentContent = Prompt.inputString(String.format("댓글 내용(%s)> ", comment.getCommentContent()));
+      String input = Prompt.inputString("❗ 정말 변경하시겠습니까? (y/N)> ");
+      if(input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("댓글 변경을 취소하였습니다.");
+        return;
+      }
+      comment.setCommentContent(commentContent);
+      System.out.println("댓글을 변경하였습니다.");
+
+    } else if (whichBoard.equals("noticeBoard")) { // 그게 만약 공지사항이면
+      Comment comment = findByCommentNo(commentNo);
+
+      String commentContent = Prompt.inputString(String.format("댓글 내용(%s)> ", comment.getCommentContent()));
+      String input = Prompt.inputString("❗ 정말 변경하시겠습니까? (y/N)> ");
+      if(input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("댓글 변경을 취소하였습니다.");
+        return;
+      }
+      comment.setCommentContent(commentContent);
+      System.out.println("댓글을 변경하였습니다.");
+    }*/
 
     ///////////////////////////////
 

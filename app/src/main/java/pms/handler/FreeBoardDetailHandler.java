@@ -120,11 +120,13 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
         return;
 
       } else if (status.equals("!")) {
-        freeBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
-        reportList.add(freeBoard);
-        freeBoard.setRequester(loginUser);
-        System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
-        break;
+        request.getRequestDispatcher("/comment/update").forward(request);
+        return;
+        //        freeBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
+        //        reportList.add(freeBoard);
+        //        freeBoard.setRequester(loginUser);
+        //        System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
+        //        break;
 
       } else if (status.equals("")){
         break;
