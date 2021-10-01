@@ -17,9 +17,9 @@ public class MailBoxListHandler extends AbstractMailBoxHandler {
     int count = 0;
     int mailNo = 0;
 
-    for(int i = 0; i< mailBoxList.size(); i++) {
+    for (int i = 0; i< mailBoxList.size(); i++) {
 
-      if(mailBoxList.get(i).getReceiver().equals(AuthLoginHandler.getLoginUser().getId())) {
+      if (mailBoxList.get(i).getReceiver().equals(AuthLoginHandler.getLoginUser().getId())) {
         mailNo++;
         mailBoxList.get(i).setMailNo(mailNo);
         System.out.println("쪽지 번호 :"  + mailBoxList.get(i).getMailNo());

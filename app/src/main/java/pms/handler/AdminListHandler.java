@@ -10,19 +10,16 @@ public class AdminListHandler implements Command {
   List<Medicine> requestList;
   List<Medicine> medicineList;
   List<FreeBoard> reportList;
-  List<FreeBoard> freeBoardList;
   List<DoctorBoard> doctorReportList;
 
 
   public AdminListHandler(List<Medicine> requestList, 
       List<Medicine> medicineList, 
-      List<FreeBoard> reportList, 
-      List<FreeBoard> freeBoardList, 
+      List<FreeBoard> reportList,  
       List<DoctorBoard> doctorReportList) {
     this.requestList = requestList;
     this.medicineList = medicineList;
     this.reportList = reportList;
-    this.freeBoardList = freeBoardList;
     this.doctorReportList = doctorReportList;
 
   }

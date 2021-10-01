@@ -9,16 +9,14 @@ import util.Prompt;
 public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
   List<FreeBoard> reportList;
   List<Comment> commentList;
-  MemberPrompt memberPrompt;
   List<Like> likeList;
 
   public FreeBoardDetailHandler(List<FreeBoard> freeBoardList,
-      List<FreeBoard> reportList, List<Comment> commentList, 
-      MemberPrompt memberPrompt, List<Like> likeList) {
+      List<FreeBoard> reportList, List<Comment> commentList,
+      List<Like> likeList) {
     super(freeBoardList);
     this.reportList = reportList;
     this.commentList = commentList;
-    this.memberPrompt = memberPrompt;
     this.likeList = likeList;
 
   }
@@ -53,7 +51,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
 
     for (int i = 0; i < likeList.size(); i++) {
       if (likeList.get(i).getLikeBoardNo() == freeBoard.getNo() && 
-          likeList.get(i).getWhichBoard().equals(freeBoard.getWhichBoard()) &&
+          likeList.get(i).getWhichBoard().equals(whichBoard) &&
           likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
         System.out.print("[좋아요 ♥ :");
         break;
@@ -94,8 +92,20 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     request.setAttribute("boardType", "freeBoard");
 
     while(true) {
-      String status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
-          + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
+      String status = "";
+
+      for (int i = 0; i < likeList.size(); i++) {
+        if (likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId()) &&
+            likeList.get(i).getWhichBoard().equals(whichBoard)) {
+          status = Prompt.inputString("[좋아요 취소(#: 💔) / 신고하기(!: 🚨) /\n"
+              + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
+          break;
+        }  else if (i == (likeList.size() - 1)) {
+          status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
+              + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
+        }
+      }
+
       if (status.equals("#")) {
         request.getRequestDispatcher("/like/addCancel").forward(request);
         return;

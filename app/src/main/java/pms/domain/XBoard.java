@@ -6,7 +6,6 @@ public class XBoard {
   private String whichBoard;
   private int like;
 
-
   public int getNo() {
     return no;
   }
