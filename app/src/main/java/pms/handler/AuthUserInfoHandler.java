@@ -67,6 +67,5 @@ public class AuthUserInfoHandler extends AbstractMemberHandler implements Comman
     }
 
   }
-}
-
+} 
 

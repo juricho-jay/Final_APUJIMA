@@ -90,14 +90,18 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     System.out.println();
     request.setAttribute("num", num);
     request.setAttribute("boardType", "freeBoard");
-
     while(true) {
       String status = "";
 
+
+      if (likeList.size() == 0) {
+        status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
+            + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
+      }
       for (int i = 0; i < likeList.size(); i++) {
         if (likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId()) &&
             likeList.get(i).getWhichBoard().equals(whichBoard)) {
-          status = Prompt.inputString("[좋아요 취소(#: ㅠㅠ) / 신고하기(!: 🚨) /\n"
+          status = Prompt.inputString("[좋아요 취소(#: 💔) / 신고하기(!: 🚨) /\n"
               + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
           break;
         }  else if (i == (likeList.size() - 1)) {
@@ -105,6 +109,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
               + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
         }
       }
+
 
       if (status.equals("#")) {
         request.getRequestDispatcher("/like/addCancel").forward(request);
@@ -128,7 +133,6 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
         continue;
       }
     } 
-
     if (freeBoard.getWriter().getId().equals(loginUser)) {
       request.setAttribute("num", num);
       while (true) {

@@ -12,9 +12,16 @@ public class Comment implements Serializable {
   private Date commentDate;
   private String whichBoard;
   private int no; // 게시판마다 1부터 시작하는 댓글 번호
+  private int commentNo; // 댓글 고유번호
 
 
 
+  public int getCommentNo() {
+    return commentNo;
+  }
+  public void setCommentNo(int commentNo) {
+    this.commentNo = commentNo;
+  }
   public static int getCommentTotal() {
     return commentTotal;
   }

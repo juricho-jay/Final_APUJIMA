@@ -47,6 +47,7 @@ public class CommentAddHandler extends AbstractCommentHandler {
 
     if (commentTotal == 0) {
       comment.setNo(1);
+      comment.setCommentNo(0);
       comment.setCommentBoardNo(xxxBoard.getNo());
       comment.setCommentWriter(xxxBoard.getWriter().getId());
       comment.setCommenter(AuthLoginHandler.getLoginUser().getId());
@@ -65,6 +66,7 @@ public class CommentAddHandler extends AbstractCommentHandler {
       }
 
       comment.setNo(++lastIndex);
+      comment.setCommentNo(commentList.size());
       comment.setCommentBoardNo(xxxBoard.getNo());
       comment.setCommentWriter(xxxBoard.getWriter().getId());
       comment.setCommenter(AuthLoginHandler.getLoginUser().getId());

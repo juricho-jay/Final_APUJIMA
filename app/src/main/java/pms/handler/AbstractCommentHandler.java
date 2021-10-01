@@ -21,7 +21,16 @@ public abstract class AbstractCommentHandler implements Command {
   }
 
 
-  protected Comment findByNo(int No) { //게시글에서 1번으로 시작하는 댓글no
+  protected Comment findByCommentNo(int CommentNo) {
+    for (Comment comment : commentList) {
+      if (comment.getCommentNo() == CommentNo) {
+        return comment;
+      }
+    }
+    return null;
+  }
+
+  protected Comment findByNo(int No) {
     for (Comment comment : commentList) {
       if (comment.getNo() == No) {
         return comment;
