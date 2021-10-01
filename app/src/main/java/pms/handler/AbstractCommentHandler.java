@@ -20,6 +20,7 @@ public abstract class AbstractCommentHandler implements Command {
     this.noticeBoardList = noticeBoardList;
   }
 
+
   protected Comment findByCommentNo(int CommentNo) {
     for (Comment comment : commentList) {
       if (comment.getCommentNo() == CommentNo) {
@@ -28,6 +29,7 @@ public abstract class AbstractCommentHandler implements Command {
     }
     return null;
   }
+
   protected Comment findByNo(int No) {
     for (Comment comment : commentList) {
       if (comment.getNo() == No) {
@@ -36,6 +38,7 @@ public abstract class AbstractCommentHandler implements Command {
     }
     return null;
   }
+
 
   protected FreeBoard findByFreeBoardNo(int freeBoardNo) {
     for (FreeBoard freeBoard : freeBoardList) {
@@ -63,5 +66,6 @@ public abstract class AbstractCommentHandler implements Command {
     }
     return null;
   }
+
 
 }

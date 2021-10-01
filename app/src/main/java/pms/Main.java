@@ -36,6 +36,7 @@ import pms.handler.BucketSearchHandler;
 import pms.handler.Command;
 import pms.handler.CommandRequest;
 import pms.handler.CommentAddHandler;
+import pms.handler.CommentAutoDeleteHandler;
 import pms.handler.CounselingMemberAddHandler;
 import pms.handler.CounselingMemberDoctorListHandler;
 import pms.handler.CounselingMemberMyListHandler;
@@ -54,6 +55,7 @@ import pms.handler.FreeBoardSearchHandler;
 import pms.handler.FreeBoardUpdateHandler;
 import pms.handler.IntroMenu;
 import pms.handler.LikeAddCancelHandler;
+import pms.handler.LikeAutoDeleteHandler;
 import pms.handler.MailBoxDeleteHandler;
 import pms.handler.MailBoxDetailHandler;
 import pms.handler.MailBoxListHandler;
@@ -216,9 +218,10 @@ public class Main {
     commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList));
 
     commandMap.put("/comment/add", new CommentAddHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
+    commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
 
     commandMap.put("/like/addCancel", new LikeAddCancelHandler(likeList, freeBoardList, doctorBoardList, noticeBoardList));
-
+    commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(likeList, freeBoardList, doctorBoardList, noticeBoardList));
 
     commandMap.put("/bucket/add", new BucketAddHandler(bucketList));
     commandMap.put("/bucket/list", new BucketListHandler(bucketList));
