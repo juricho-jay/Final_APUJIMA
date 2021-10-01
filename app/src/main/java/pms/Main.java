@@ -37,6 +37,7 @@ import pms.handler.Command;
 import pms.handler.CommandRequest;
 import pms.handler.CommentAddHandler;
 import pms.handler.CommentAutoDeleteHandler;
+import pms.handler.CommentUpdateHandler;
 import pms.handler.CounselingMemberAddHandler;
 import pms.handler.CounselingMemberDoctorListHandler;
 import pms.handler.CounselingMemberMyListHandler;
@@ -219,6 +220,8 @@ public class Main {
 
     commandMap.put("/comment/add", new CommentAddHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
     commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
+    commandMap.put("/comment/update", new CommentUpdateHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
+
 
     commandMap.put("/like/addCancel", new LikeAddCancelHandler(likeList, freeBoardList, doctorBoardList, noticeBoardList));
     commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(likeList, freeBoardList, doctorBoardList, noticeBoardList));
