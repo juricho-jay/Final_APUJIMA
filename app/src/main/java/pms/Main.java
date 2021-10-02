@@ -222,7 +222,6 @@ public class Main {
     commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
     commandMap.put("/comment/update", new CommentUpdateHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
 
-
     commandMap.put("/like/addCancel", new LikeAddCancelHandler(likeList, freeBoardList, doctorBoardList, noticeBoardList));
     commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(likeList, freeBoardList, doctorBoardList, noticeBoardList));
 
