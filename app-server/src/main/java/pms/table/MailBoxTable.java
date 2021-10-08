@@ -11,10 +11,11 @@ public class MailBoxTable extends JsonDataTable<MailBox> implements DataProcesso
     super("mailBox.json", MailBox.class);
   }
 
+  @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "mailBox.insert": insert(request, response); break;
-      case "report.selectList": selectList(request, response); break;
+      case "mailBox.selectList": selectList(request, response); break;
       case "mailBox.selectOne": selectOne(request, response); break;
       case "mailBox.selectOne2": selectOne2(request, response); break;
       case "mailBox.delete": delete(request, response); break;

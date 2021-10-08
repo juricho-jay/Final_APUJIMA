@@ -11,13 +11,12 @@ public class RequestTable extends JsonDataTable<Medicine> implements DataProcess
     super("request.json", Medicine.class);
   }
 
+  @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "request.insert": insert(request, response); break;
-      case "request.selectList": selectList(request, response); break;
       //      case "medicine.selectOne": selectOne(request, response); break;
-      //      case "medicine.listPull": listPull(request, response); break;
-      case "request.listPull": listPull(request, response); break;
+      case "request.selectList": selectList(request, response); break;
       case "request.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
@@ -32,12 +31,8 @@ public class RequestTable extends JsonDataTable<Medicine> implements DataProcess
     response.setStatus(Response.SUCCESS);
   }
 
-  private void selectList(Request request, Response response) throws Exception {
-    response.setStatus(Response.SUCCESS);
-    response.setValue(list);
-  }
 
-  private void listPull(Request request, Response response) throws Exception {
+  private void selectList(Request request, Response response) throws Exception {
     if(list.size() == 0) {
       response.setStatus(Response.FAIL);
       return;

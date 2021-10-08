@@ -34,14 +34,6 @@ public class MedicineRequestHandler implements Command {
           System.out.println("약품 등록요청이 취소되었습니다.");
           return;
         }
-        //        requestList.add(medicine);
-        //        break;
-        //      } else if(input.equalsIgnoreCase("n") || input.equals("")) {
-        //        System.out.println("등록요청이 취소되었습니다.");
-        //        break;
-        //      }
-        //        else {
-        //          System.out.println("입력이 잘못되었습니다.");
       }
     }
 

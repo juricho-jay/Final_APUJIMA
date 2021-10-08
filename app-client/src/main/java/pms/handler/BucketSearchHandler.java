@@ -23,10 +23,11 @@ public class BucketSearchHandler implements Command {
     System.out.println();
 
     String input = Prompt.inputString("검색어> ");
+
     HashMap<String, String> params = new HashMap<>();
     params.put("keyword", input);
 
-    requestAgent.request("bucket.search", input);
+    requestAgent.request("bucket.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("검색 실패!");
@@ -51,7 +52,7 @@ public class BucketSearchHandler implements Command {
     }
 
     if (count == 0 ) {
-      System.out.println("버킷리스트 검색 실패!");
+      System.out.println("버킷리스트가 없습니다.");
     }
   }
 }

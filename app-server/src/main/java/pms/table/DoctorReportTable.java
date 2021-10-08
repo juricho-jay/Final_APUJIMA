@@ -11,12 +11,12 @@ public class DoctorReportTable extends JsonDataTable<DoctorBoard> implements Dat
     super("doctorReport.json", DoctorBoard.class);
   }
 
+  @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "doctorReport.insert": insert(request, response); break;
-      //      case "doctorReport.selectList": selectList(request, response); break;
+      case "doctorReport.selectList": selectList(request, response); break;
       case "doctorReport.selectOne": selectOne(request, response); break;
-      case "doctorReport.listPull": listPull(request, response); break;
       case "doctorReport.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
@@ -31,7 +31,7 @@ public class DoctorReportTable extends JsonDataTable<DoctorBoard> implements Dat
     response.setStatus(Response.SUCCESS);
   }
 
-  private void listPull(Request request, Response response) throws Exception {
+  private void selectList(Request request, Response response) throws Exception {
     if(list.size() == 0) {
       response.setStatus(Response.FAIL);
       return;

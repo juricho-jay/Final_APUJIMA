@@ -79,28 +79,31 @@ public class PlantAddHandler implements Command {
       // AuthLoginHandler.getLoginUser().plantList().get(i).getPlantName();
 
 
+      int count = 0;
 
       for (int i = 0; i < plantList.size(); i++) {
         if (plantList.get(i).getOwnerName().equals(AuthLoginHandler.getLoginUser().getId())) {
           if(input.equals(plantList.get(i).getPlantName())) {
             System.out.println("화분 이름이 중복되어 만들 수 없습니다. 다시 입력해 주세요");
-            continue;
+            count++;
           }
         } 
       }
 
-      plant.setPlantName(input);
-      plant.setOwnerName(loginUser);
-      plant.setRegisteredDate(new Date(System.currentTimeMillis()));
-      plant.setExp(0);
-      plant.setLevel(0);
-      plant.setShape("\uD83C\uDF31");
-      break;
-    }
-    //      plantList.add(plant);
-    //      return;
+      if (count != 0) {
+        continue;
+      } else {
 
-    //    }
+        plant.setPlantName(input);
+        plant.setOwnerName(loginUser);
+        plant.setRegisteredDate(new Date(System.currentTimeMillis()));
+        plant.setExp(0);
+        plant.setLevel(0);
+        plant.setShape("\uD83C\uDF31");
+        break;
+      }
+    }
+
     requestAgent.request("plant.insert", plant);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("화분 등록 실패!");

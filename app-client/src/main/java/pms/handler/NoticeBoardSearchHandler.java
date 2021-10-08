@@ -30,7 +30,7 @@ public class NoticeBoardSearchHandler implements Command{
 
     HashMap<String,String> params = new HashMap<>();
     params.put("keyword", input);
-    requestAgent.request("noticeBoard.search", params);
+    requestAgent.request("noticeBoard.selectListByKeyword", params);
 
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {

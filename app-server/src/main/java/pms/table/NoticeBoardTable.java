@@ -20,7 +20,7 @@ public class NoticeBoardTable extends JsonDataTable<NoticeBoard> implements Data
     switch (request.getCommand()) {
       case "noticeBoard.insert": insert(request, response); break;
       case "noticeBoard.selectList": selectList(request, response); break;
-      case "noticeBoard.search": search(request, response); break;
+      case "noticeBoard.selectListByKeyword": selectListByKeyword(request, response); break;
       case "noticeBoard.selectOne": selectOne(request, response); break;
       case "noticeBoard.update": update(request, response); break;
       case "noticeBoard.delete": delete(request, response); break;
@@ -47,17 +47,17 @@ public class NoticeBoardTable extends JsonDataTable<NoticeBoard> implements Data
 
   }
 
-  private void search(Request request, Response response) throws Exception {
+  private void selectListByKeyword(Request request, Response response) throws Exception {
     String keyword = request.getParameter("keyword");
 
     ArrayList<NoticeBoard> searchResult = new ArrayList<>();
-    for (NoticeBoard board : list) {
-      if (!board.getTitle().contains(keyword) &&
-          !board.getContent().contains(keyword) &&
-          !board.getWriter().getName().contains(keyword)) {
+    for (NoticeBoard noticeBoard : list) {
+      if (!noticeBoard.getTitle().contains(keyword) &&
+          !noticeBoard.getContent().contains(keyword) &&
+          !noticeBoard.getWriter().getName().contains(keyword)) {
         continue;
       }
-      searchResult.add(board);
+      searchResult.add(noticeBoard);
     }
 
     response.setStatus(Response.SUCCESS);

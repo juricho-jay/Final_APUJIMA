@@ -17,7 +17,7 @@ public class BucketTable extends JsonDataTable<Bucket> implements DataProcessor 
     switch (request.getCommand()) {
       case "bucket.insert": insert(request, response); break;
       case "bucket.selectList": selectList(request, response); break;
-      case "bucket.search": search(request, response); break;
+      case "bucket.selectListByKeyword": selectListByKeyword(request, response); break;
       case "bucket.selectOne": selectOne(request, response); break;
       case "bucket.update": update(request, response); break;
       case "bucket.delete": delete(request, response); break;
@@ -42,7 +42,7 @@ public class BucketTable extends JsonDataTable<Bucket> implements DataProcessor 
     response.setValue(list);
   }
 
-  private void search(Request request, Response response) throws Exception {
+  private void selectListByKeyword(Request request, Response response) throws Exception {
     String keyword = request.getParameter("keyword");
 
     ArrayList<Bucket> searchResult = new ArrayList<>();

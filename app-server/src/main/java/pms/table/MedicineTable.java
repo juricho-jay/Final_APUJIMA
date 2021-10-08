@@ -12,6 +12,7 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     super("medicine.json", Medicine.class);
   }
 
+  @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "medicine.insert": insert(request, response); break;
@@ -43,8 +44,8 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     response.setValue(list);
   }
 
+  //이름으로 불러옴
   private void selectOne(Request request, Response response) throws Exception {
-    //    Map<String,String> params = request.getObject(Map.class);
     String name = request.getParameter("name");
     Medicine medicine = findByName(name);
     if (medicine != null) {
