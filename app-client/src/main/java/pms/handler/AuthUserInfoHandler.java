@@ -8,6 +8,7 @@ import util.Prompt;
 
 
 public class AuthUserInfoHandler implements Command {
+
   RequestAgent requestAgent;
 
   public AuthUserInfoHandler(RequestAgent requestAgent) {
@@ -19,12 +20,19 @@ public class AuthUserInfoHandler implements Command {
     System.out.println();
     System.out.println("[내정보] 페이지입니다.");
 
-    Member loginUser = AuthLoginHandler.getLoginUser();
+    String loginUserId = AuthLoginHandler.getLoginUser().getId();
 
-    if (loginUser == null) {
-      System.out.println("로그인 하지 않았습니다.");
+    HashMap<String,String> params = new HashMap<>();
+    params.put("id", loginUserId);
+
+    requestAgent.request("member.selectOneById", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("로그인하지 않았습니다.");
       return;
     }
+
+    Member loginUser = requestAgent.getObject(Member.class);
 
     if (loginUser.getDoctorOrNot() == 2) {
       System.out.printf("%s 힐러님 환영합니다!\n", loginUser.getName());
@@ -42,12 +50,6 @@ public class AuthUserInfoHandler implements Command {
     System.out.printf("가입일: %s\n", loginUser.getRegisteredDate());
     System.out.println("남은 포인트: " + loginUser.getCount());
 
-    //    if (loginUser.equals(AuthLoginHandler.loginUser.getId())) {
-
-    String id = loginUser.getId();
-
-    HashMap<String,String> params = new HashMap<>();
-    params.put("id", id);
 
     while(true) {
       String input = Prompt.inputString("[회원 탈퇴(D) / 뒤로가기(0)]");

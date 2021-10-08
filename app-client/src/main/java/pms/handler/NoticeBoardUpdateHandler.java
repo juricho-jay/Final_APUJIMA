@@ -22,7 +22,7 @@ public class NoticeBoardUpdateHandler implements Command {
     HashMap<String, String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
-    requestAgent.request("noticeboard.selectOne", params);
+    requestAgent.request("noticeBoard.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 게시글이 없습니다.");
