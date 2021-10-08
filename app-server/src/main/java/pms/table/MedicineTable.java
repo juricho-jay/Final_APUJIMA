@@ -12,6 +12,7 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     super("medicine.json", Medicine.class);
   }
 
+  @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "medicine.insert": insert(request, response); break;
@@ -19,6 +20,7 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
       case "medicine.selectListByKeyword": selectListByKeyword(request, response); break;
       case "medicine.selectOne": selectOne(request, response); break;
       case "medicine.delete": delete(request, response); break;
+      case "medicine.request": delete(request, response); break;
       case "medicine.selectOneByName": selectOneByName(request, response); break;
       default:
         response.setStatus(Response.FAIL);

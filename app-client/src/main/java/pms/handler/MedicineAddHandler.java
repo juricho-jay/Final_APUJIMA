@@ -29,12 +29,12 @@ public class MedicineAddHandler implements Command{
 
 
     requestAgent.request("medicine.insert", medicine);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("약품 등록 실패!");
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("약품이 등록되었습니다.");
       return;
     }
-
-    System.out.println("약품을 등록했습니다.");
+    System.out.println("약품 등록 실패!");
   }
 
 
