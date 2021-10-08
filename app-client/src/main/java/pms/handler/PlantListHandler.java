@@ -15,22 +15,11 @@ public class PlantListHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    //    int count = 0;
     int findCount = 0;
-
-    System.out.println("[화분 목록]");
     System.out.println();
+    System.out.println("[화분 목록]");
 
-    //    for (int i = 0 ; i<plantList.size(); i++) {
-    //      System.out.println("화분 이름: " + plantList.get(i).getPlantName());
-    //      System.out.println("화분 주인의 아이디: " + plantList.get(i).getOwnerName());
-    //      count++;
-    //    }
 
-    //    if(count == 0) {
-    //      System.out.println("화분이 없습니다.");
-    //      return;
-    //    }
 
 
     requestAgent.request("plant.selectList", null);
@@ -46,7 +35,7 @@ public class PlantListHandler implements Command {
 
 
     for (Plant plant : plantList) {
-      System.out.printf("%s, %s,\n",
+      System.out.printf("%s, %s\n",
           plant.getPlantName(),
           plant.getOwnerName()
           );

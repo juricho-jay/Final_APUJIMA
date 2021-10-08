@@ -12,6 +12,7 @@ public class FreeBoardTable extends JsonDataTable<FreeBoard> implements DataProc
     super("freeBoard.json", FreeBoard.class);
   }
 
+  @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "freeBoard.insert": insert(request, response); break;
@@ -85,18 +86,6 @@ public class FreeBoardTable extends JsonDataTable<FreeBoard> implements DataProc
     response.setValue(searchResult);
   }
 
-  private FreeBoard findByNo(int no) {
-    for (FreeBoard b : list) {
-      if (b.getNo() == no) {
-        return b;
-      }
-    }
-    return null;
-  }
-
-
-
-
   private void delete(Request request, Response response) throws Exception {
     int no = Integer.parseInt(request.getParameter("no"));
     int index = indexOf(no);
@@ -109,6 +98,15 @@ public class FreeBoardTable extends JsonDataTable<FreeBoard> implements DataProc
 
     list.remove(index);
     response.setStatus(Response.SUCCESS);
+  }
+
+  private FreeBoard findByNo(int no) {
+    for (FreeBoard b : list) {
+      if (b.getNo() == no) {
+        return b;
+      }
+    }
+    return null;
   }
 
   private int indexOf(int no) {

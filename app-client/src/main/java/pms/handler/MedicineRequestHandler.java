@@ -28,8 +28,7 @@ public class MedicineRequestHandler implements Command {
     //      String input = Prompt.inputString("작성한 약품을 등록요청 하시겠습니까?(y/N)");
     //      if(input.equalsIgnoreCase("y")) {
     //        System.out.println("관리자에게 약품등록을 요청하였습니다.");
-
-    requestAgent.request("medicine.request", medicine);
+    requestAgent.request("request.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("약품 등록요청이 되었습니다.");

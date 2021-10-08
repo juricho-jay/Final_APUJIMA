@@ -20,19 +20,20 @@ public class MedicineListHandler implements Command {
     requestAgent.request("medicine.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("목록 조회 실패!");
+      System.out.println("현재 약품 리스트는 없습니다.");
       return;
     }
 
     Collection<Medicine> medicineList = requestAgent.getObjects(Medicine.class);
 
     for (Medicine medicine : medicineList) {
-      System.out.printf("%s, %d, %s, %s, %s\n",
+      System.out.printf("%d, %s, %d, %s, %s, %s\n",
+          medicine.getNo(),
           medicine.getName(),
           medicine.getAgeLimit(),
-          medicine.getEffect(),
           medicine.getShape(),
-          medicine.getColor());
+          medicine.getColor(),
+          medicine.getEffect());
     }
     //serachM();
 

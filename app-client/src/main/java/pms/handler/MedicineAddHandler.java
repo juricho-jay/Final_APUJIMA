@@ -1,5 +1,6 @@
 package pms.handler;
 
+import java.util.List;
 import pms.domain.Medicine;
 import request.RequestAgent;
 import util.Prompt;
@@ -18,12 +19,33 @@ public class MedicineAddHandler implements Command{
 
     Medicine medicine = new Medicine();
 
+    requestAgent.request("medicine.selectList", null);
+
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      Medicine.lastIndex = 1;
+      medicine.setNo(Medicine.lastIndex);
+    }
+
+    else {
+      List<Medicine> medicineList = (List<Medicine>) requestAgent.getObjects(Medicine.class);
+
+      if(Medicine.lastIndex != medicineList.size()) {
+
+        Medicine.lastIndex = medicineList.get(medicineList.size()-1).getNo();
+        medicine.setNo(++Medicine.lastIndex);
+
+      } else {
+        medicine.setNo(++Medicine.lastIndex);
+      }
+    }
+
+
     medicine.setName(Prompt.inputString("약품명> "));
     // if(약이름이 같으면 이미 있는 약입니다!)
     medicine.setAgeLimit(Prompt.inputInt("권장 나이> "));
     medicine.setShape(Prompt.inputString("모  양> "));
-    medicine.setShape(Prompt.inputString("색  상> "));
-    medicine.setShape(Prompt.inputString("효  능> "));
+    medicine.setColor(Prompt.inputString("색  상> "));
+    medicine.setEffect(Prompt.inputString("효  능> "));
 
     //    medicineList.add(medicine);
 
