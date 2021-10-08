@@ -93,10 +93,15 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     while(true) {
       String status = "";
 
+
+      if (likeList.size() == 0) {
+        status = Prompt.inputString("[좋아요 (#: ♡) / 신고하기(!: 🚨) /\n"
+            + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
+      }
       for (int i = 0; i < likeList.size(); i++) {
         if (likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId()) &&
             likeList.get(i).getWhichBoard().equals(whichBoard)) {
-          status = Prompt.inputString("[좋아요 취소(#: ㅠㅠ) / 신고하기(!: 🚨) /\n"
+          status = Prompt.inputString("[좋아요 취소(#: 💔) / 신고하기(!: 🚨) /\n"
               + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
           break;
         }  else if (i == (likeList.size() - 1)) {
@@ -104,6 +109,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
               + "댓글달기(@: 💬) / 넘어가기: Enter]> ");
         }
       }
+
 
       if (status.equals("#")) {
         request.getRequestDispatcher("/like/addCancel").forward(request);
@@ -151,11 +157,32 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
           return;
         default:
           System.out.println("명령어가 올바르지 않습니다!");
+          if (freeBoard.getWriter().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+            request.setAttribute("num", num);
+            while (true) {
+              String input2 = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+              switch (input2) {
+                case "U":
+                case "u":
+                  request.getRequestDispatcher("/freeBoard/update").forward(request);
+                  return;
+                case "D":
+                case "d":
+                  request.getRequestDispatcher("/freeBoard/delete").forward(request);
+                  return;
+                case "0":
+                  return;
+                default:
+                  System.out.println("명령어가 올바르지 않습니다!");
+              }
+            }
+          }
       }
     }
-
   }
 }
+
+
 
 
 

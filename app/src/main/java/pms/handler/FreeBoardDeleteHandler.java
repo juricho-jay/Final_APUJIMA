@@ -11,13 +11,14 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler{
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[삭제] 페이지입니다.");
     System.out.println();
 
     int no = (int)request.getAttribute("num");
 
     FreeBoard freeBoard = findByNo(no);
+
 
     if (!freeBoard.getWriter().getId().equals(AuthLoginHandler.getLoginUser().getId()) ) {
       System.out.println("삭제 권한이 없습니다.");
@@ -32,7 +33,8 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler{
       return;
     }
 
-
+    request.getRequestDispatcher("/comment/autoDelete").forward(request);
+    request.getRequestDispatcher("/like/autoDelete").forward(request);
     freeBoardList.remove(freeBoard);
     System.out.println("게시글을 삭제하였습니다.");
 

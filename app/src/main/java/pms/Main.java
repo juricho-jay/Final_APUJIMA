@@ -20,6 +20,7 @@ import pms.domain.Member;
 import pms.domain.NoticeBoard;
 import pms.domain.Plant;
 import pms.handler.AdminApprovalHandler;
+import pms.handler.AdminDoctorReportDeleteHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
 import pms.handler.AdminUpdateHandler;
@@ -35,6 +36,8 @@ import pms.handler.BucketSearchHandler;
 import pms.handler.Command;
 import pms.handler.CommandRequest;
 import pms.handler.CommentAddHandler;
+import pms.handler.CommentAutoDeleteHandler;
+import pms.handler.CommentUpdateHandler;
 import pms.handler.CounselingMemberAddHandler;
 import pms.handler.CounselingMemberDoctorListHandler;
 import pms.handler.CounselingMemberMyListHandler;
@@ -53,6 +56,7 @@ import pms.handler.FreeBoardSearchHandler;
 import pms.handler.FreeBoardUpdateHandler;
 import pms.handler.IntroMenu;
 import pms.handler.LikeAddCancelHandler;
+import pms.handler.LikeAutoDeleteHandler;
 import pms.handler.MailBoxDeleteHandler;
 import pms.handler.MailBoxDetailHandler;
 import pms.handler.MailBoxListHandler;
@@ -160,6 +164,7 @@ public class Main {
     commandMap.put("/admin/list", new AdminListHandler(requestList, medicineList, reportList, doctorReportList));
 
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(freeBoardList , reportList, mailBoxList));
+    commandMap.put("/admin/doctordelete", new AdminDoctorReportDeleteHandler(doctorBoardList, doctorReportList, mailBoxList));
 
 
     commandMap.put("/intro", new IntroMenu());
@@ -214,9 +219,11 @@ public class Main {
     commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxList));
 
     commandMap.put("/comment/add", new CommentAddHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
+    commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
+    commandMap.put("/comment/update", new CommentUpdateHandler(commentList, freeBoardList, doctorBoardList, noticeBoardList));
 
     commandMap.put("/like/addCancel", new LikeAddCancelHandler(likeList, freeBoardList, doctorBoardList, noticeBoardList));
-
+    commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(likeList, freeBoardList, doctorBoardList, noticeBoardList));
 
     commandMap.put("/bucket/add", new BucketAddHandler(bucketList));
     commandMap.put("/bucket/list", new BucketListHandler(bucketList));
@@ -329,8 +336,8 @@ public class Main {
 
     approvalManagement.add(new MenuItem("약품 승인", Menu.ACCESS_ADMIN, "/admin/approval")); // 여기서 3지선다 승인, 삭제, 뒤로가기
     approvalManagement.add(new MenuItem("약품 변경", Menu.ACCESS_ADMIN, "/admin/update")); // 변경 or not
-    approvalManagement.add(new MenuItem("게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/delete")); // 신고하시겠습니까? yes => 삭제
-
+    approvalManagement.add(new MenuItem("자유게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/delete")); // 신고하시겠습니까? yes => 삭제
+    approvalManagement.add(new MenuItem("Healer 게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/doctordelete"));
 
 
     approvalMenu.add(approvalManagement);

@@ -8,7 +8,7 @@ public class Like implements Serializable {
   private int likeBoardNo; // 좋아요 달린 게시판 번호
   private Member liker; // 좋아요 누른 사람
   private String likeWriter; // 좋아요 누른 게시판의 글쓴이
-  private String whichBoard;
+  private String whichBoard; // 좋아요 눌린 게시판 종류 (free/doctor/notice)
 
 
 
