@@ -1,0 +1,416 @@
+package pms;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import Menu.Menu;
+import Menu.MenuGroup;
+import pms.context.ApplicationContextListener;
+import pms.handler.AdminApprovalHandler;
+import pms.handler.AdminListHandler;
+import pms.handler.AdminReportDeleteHandler;
+import pms.handler.AdminUpdateHandler;
+import pms.handler.AuthLoginHandler;
+import pms.handler.AuthLogoutHandler;
+import pms.handler.AuthUserInfoHandler;
+import pms.handler.Command;
+import pms.handler.CommandRequest;
+import pms.handler.CommentAddHandler;
+import pms.handler.CommentAutoDeleteHandler;
+import pms.handler.CommentDeleteHandler;
+import pms.handler.CommentUpdateHandler;
+import pms.handler.DoctorBoardAddHandler;
+import pms.handler.DoctorBoardDeleteHandler;
+import pms.handler.DoctorBoardDetailHandler;
+import pms.handler.DoctorBoardListHandler;
+import pms.handler.DoctorBoardSearchHandler;
+import pms.handler.DoctorBoardUpdateHandler;
+import pms.handler.FreeBoardAddHandler;
+import pms.handler.FreeBoardDeleteHandler;
+import pms.handler.FreeBoardDetailHandler;
+import pms.handler.FreeBoardListHandler;
+import pms.handler.FreeBoardSearchHandler;
+import pms.handler.FreeBoardUpdateHandler;
+import pms.handler.LikeAddCancelHandler;
+import pms.handler.LikeAutoDeleteHandler;
+import pms.handler.MailBoxDeleteHandler;
+import pms.handler.MailBoxDetailHandler;
+import pms.handler.MailBoxListHandler;
+import pms.handler.MailBoxSendHandler;
+import pms.handler.MemberAddHandler;
+import pms.handler.MemberListHandler;
+import pms.handler.WiseSaying;
+import pms.listener.AppInitListener;
+import request.RequestAgent;
+import util.Prompt;
+
+public class ClientApp {
+
+  RequestAgent requestAgent;
+
+  HashMap<String,Command> commandMap = new HashMap<>();
+
+  List<ApplicationContextListener> listeners = new ArrayList<>();
+
+  //=> 옵저버(리스너)를 등록하는 메서드
+  public void addApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.add(listener);
+  }
+
+  // => 옵저버(리스너)를 제거하는 메서드
+  public void removeApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.remove(listener);
+  }
+
+
+
+  class MenuItem extends Menu {
+
+    String menuId;
+
+    public MenuItem(String title, String menuId) {
+      super(title);
+      this.menuId = menuId;
+    }
+
+    public MenuItem(String title, int accessScope, String menuId) {
+      super(title, accessScope);
+      this.menuId = menuId;
+    }
+
+    @Override
+    public void execute() {
+      Command command = commandMap.get(menuId);
+      try {
+        command.execute(new CommandRequest(commandMap));
+      } catch (Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
+        e.printStackTrace();
+      }
+    }
+
+  }
+
+
+  private void notifyOnApplicationStarted() {
+    HashMap<String,Object> params = new HashMap<>();
+    //    params.put("memberList", memberList);
+    //    params.put("counselingMemberList", counselingMemberList);
+    //    params.put("noticeBoardList", noticeBoardList);
+    //    params.put("freeBoardList", freeBoardList);
+    //    params.put("doctorBoardList", doctorBoardList);
+    //    params.put("medicineList", medicineList);
+    //    params.put("mailBoxList", mailBoxList);
+    //    params.put("bucketList", bucketList);
+    //    params.put("dateList", dateList);
+    //    params.put("memberCheckList", memberCheckList);
+    //    params.put("reportList", reportList);
+    //    params.put("doctorReportList", doctorReportList);
+    //    params.put("likeList", likeList);
+    //    params.put("commentList", commentList);
+
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextInitialized(params);
+    }
+  }
+
+  private void notifyOnApplicationEnded() {
+    HashMap<String,Object> params = new HashMap<>();
+    //    params.put("memberList", memberList);
+    //    params.put("counselingMemberList", counselingMemberList);
+    //    params.put("noticeBoardList", noticeBoardList);
+    //    params.put("freeBoardList", freeBoardList);
+    //    params.put("doctorBoardList", doctorBoardList);
+    //    params.put("medicineList", medicineList);
+    //    params.put("mailBoxList", mailBoxList);
+    //    params.put("bucketList", bucketList);
+    //    params.put("dateList", dateList);
+    //    params.put("memberCheckList", memberCheckList);
+    //    params.put("reportList", reportList);
+    //    params.put("doctorReportList", doctorReportList);
+    //    params.put("likeList", likeList);
+    //    params.put("commentList", commentList);
+
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextDestroyed(params);
+    }
+  }
+
+
+  public ClientApp() throws Exception {
+
+    // 서버와 통신을 담당할 객체 준비
+    requestAgent = new RequestAgent("127.0.0.1", 8888);
+
+    // Command 객체 준비
+    commandMap.put("/admin/approval", new AdminApprovalHandler(requestAgent));
+    commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
+    commandMap.put("/admin/list", new AdminListHandler(requestAgent));
+    commandMap.put("/admin/delete", new AdminReportDeleteHandler(requestAgent));
+    //    commandMap.put("/intro", new IntroMenu());
+    //
+    //    commandMap.put("/medicine/add", new MedicineAddHandler(medicineList));
+    //    commandMap.put("/medicine/request", new MedicineRequestHandler(requestList));
+    //    commandMap.put("/medicine/list", new MedicineListHandler(medicineList));
+    //    commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineList));
+    //    commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineList));
+    //    commandMap.put("/medicine/search", new MedicineSearchHandler(medicineList));
+    //
+    //    commandMap.put("/counselingMember/list", new DoctorMemberListHandler(memberList));
+    //    commandMap.put("/counselingMember/add", new CounselingMemberAddHandler(counselingMemberList));
+    //    commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(counselingMemberList));
+    //    commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(counselingMemberList));
+    //    // 바로 위에꺼 상담신청 이력
+    //
+    //    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardList));
+    //    commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardList));
+    //    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardList, commentList, likeList));
+    //    commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(noticeBoardList));
+    //    commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(noticeBoardList));
+    //    commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(noticeBoardList));
+    //
+    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(requestAgent));
+    commandMap.put("/freeBoard/list", new FreeBoardListHandler(requestAgent));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(requestAgent));
+    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(requestAgent));
+    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(requestAgent));
+    commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(requestAgent));
+    //
+    commandMap.put("/doctorBoard/add", new DoctorBoardAddHandler(requestAgent));
+    commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(requestAgent));
+    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(requestAgent));
+    commandMap.put("/doctorBoard/update", new DoctorBoardUpdateHandler(requestAgent));
+    commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(requestAgent));
+    commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(requestAgent));
+
+    commandMap.put("/member/add", new MemberAddHandler(requestAgent));
+    commandMap.put("/member/list", new MemberListHandler(requestAgent));
+
+    commandMap.put("/auth/login", new AuthLoginHandler(requestAgent));
+    commandMap.put("/auth/logout", new AuthLogoutHandler());
+    commandMap.put("/auth/userInfo", new AuthUserInfoHandler(requestAgent));
+    //    commandMap.put("/auth/check", new AttendanceCheckHandler(dateList, memberCheckList));
+    //
+    commandMap.put("/mailBox/send", new MailBoxSendHandler(requestAgent));
+    commandMap.put("/mailBox/list", new MailBoxListHandler(requestAgent));
+    commandMap.put("/mailBox/detail", new MailBoxDetailHandler(requestAgent));
+    commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(requestAgent));
+    //
+
+    commandMap.put("/comment/add", new CommentAddHandler(requestAgent));
+    commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(requestAgent));
+    commandMap.put("/comment/update", new CommentUpdateHandler(requestAgent));
+    commandMap.put("/comment/delete", new CommentDeleteHandler(requestAgent));
+
+    //
+    commandMap.put("/like/addCancel", new LikeAddCancelHandler(requestAgent));
+    commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(requestAgent));
+    //
+    //
+    //    commandMap.put("/bucket/add", new BucketAddHandler(bucketList));
+    //    commandMap.put("/bucket/list", new BucketListHandler(bucketList));
+    //    commandMap.put("/bucket/detail", new BucketDetailHandler(bucketList));
+    //    commandMap.put("/bucket/complete", new BucketCompleteHandler(bucketList));
+    //    commandMap.put("/bucket/search", new BucketSearchHandler(bucketList));
+    //
+    //    commandMap.put("/plant/add", new PlantAddHandler(plantList));
+    //    commandMap.put("/plant/grow", new PlantGrowHandler(plantList));
+    //    commandMap.put("/plant/list", new PlantListHandler(plantList));
+    //    commandMap.put("/plant/mylist", new PlantMyListHandler(plantList));
+    //
+    //
+    //
+    commandMap.put("/wiseSaying/saying", new WiseSaying());
+
+  }
+
+
+  void service() throws Exception {
+
+    notifyOnApplicationStarted();
+
+    createMainMenu().execute();
+    requestAgent.request("quit", null);
+    Prompt.close();
+
+    notifyOnApplicationEnded();
+  }
+
+  Menu createMainMenu() {
+
+    MenuGroup mainMenuGroup = new MenuGroup("WELCOME TO APUJIMA!");
+    mainMenuGroup.setPrevMenuTitle("종료");
+
+    mainMenuGroup.add(createApprovalMenu());
+    mainMenuGroup.add(new MenuItem("소개", "/intro"));
+    mainMenuGroup.add(createMedicineMenu());
+    mainMenuGroup.add(createCounselingMenu());
+
+    mainMenuGroup.add(createCommunityMenu());
+    mainMenuGroup.add(createBucketMenu());
+    mainMenuGroup.add(createPlantMenu());
+
+    mainMenuGroup.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
+    mainMenuGroup.add(new MenuItem("회원가입", Menu.ACCESS_LOGOUT, "/member/add"));
+    mainMenuGroup.add(new MenuItem("내정보", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN, "/auth/userInfo"));
+    mainMenuGroup.add(new MenuItem("출석체크", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR , "/auth/check"));
+    mainMenuGroup.add(createMailBoxMenu());
+    mainMenuGroup.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN, "/auth/logout"));
+
+
+    return mainMenuGroup;
+  }
+
+
+  private Menu createApprovalMenu() {
+    MenuGroup approvalMenu = new MenuGroup("관리자 메뉴", Menu.ACCESS_ADMIN);
+
+    approvalMenu.add(new MenuItem("승인 요청 / 신고 목록", Menu.ACCESS_ADMIN,"/admin/list")); // AdminListHandler
+    //   approvalMenu.add(new MenuItem("승인 내역", Menu.ACCESS_ADMIN,"/admin/*")); // AdminListHandler
+    MenuGroup approvalManagement = new MenuGroup("승인 관리", Menu.ACCESS_ADMIN);
+
+    approvalManagement.add(new MenuItem("약품 승인", Menu.ACCESS_ADMIN, "/admin/approval")); // 여기서 3지선다 승인, 삭제, 뒤로가기
+    approvalManagement.add(new MenuItem("약품 변경", Menu.ACCESS_ADMIN, "/admin/update")); // 변경 or not
+    approvalManagement.add(new MenuItem("게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/delete")); // 신고하시겠습니까? yes => 삭제
+
+
+
+    approvalMenu.add(approvalManagement);
+    approvalMenu.add(new MenuItem("회원 목록", Menu.ACCESS_ADMIN, "/member/list"));
+
+
+
+    return approvalMenu;
+  }
+
+
+  //소개는 바로 intro 연결
+
+  private Menu createMedicineMenu() {
+    MenuGroup medicineMenu = new MenuGroup("약국");
+
+    medicineMenu.add(new MenuItem("약품 목록", "/medicine/list"));
+    medicineMenu.add(new MenuItem("약품 추가", Menu.ACCESS_ADMIN, "/medicine/add"));
+    medicineMenu.add(new MenuItem("약품 등록 요청", Menu.ACCESS_DOCTOR, "/medicine/request"));
+    medicineMenu.add(new MenuItem("약품 수정", Menu.ACCESS_ADMIN, "/medicine/update"));
+    medicineMenu.add(new MenuItem("약품 삭제", Menu.ACCESS_ADMIN, "/medicine/delete"));
+    medicineMenu.add(new MenuItem("약품 검색", "/medicine/search"));
+
+    return medicineMenu;
+  }
+
+  private Menu createCounselingMenu() {
+    MenuGroup memberMenu = new MenuGroup("HEALER");
+    memberMenu.add(new MenuItem("의사 리스트", Menu.ACCESS_LOGOUT | Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN ,"/counselingMember/list"));
+    memberMenu.add(new MenuItem("상담신청", Menu.ACCESS_GENERAL, "/counselingMember/add"));
+    memberMenu.add(new MenuItem("My 상담 목록", Menu.ACCESS_GENERAL, "/counselingMember/myList"));
+    memberMenu.add(new MenuItem("Healer 상담 목록", Menu.ACCESS_DOCTOR, "/counselingMember/doctorList"));
+
+    return memberMenu;
+  }
+
+  private Menu createCommunityMenu() {
+    MenuGroup communityMenu = new MenuGroup("커뮤니티");
+
+    communityMenu.add(createNoticeMenu());
+    communityMenu.add(createFreeBoardMenu());
+    communityMenu.add(createDoctorBoardMenu());
+
+    return communityMenu;
+  }
+
+  private Menu createNoticeMenu() {
+    MenuGroup noticeMenu = new MenuGroup("공지사항");
+
+    noticeMenu.add(new MenuItem("글쓰기", Menu.ACCESS_ADMIN,"/noticeBoard/add"));
+    noticeMenu.add(new MenuItem("목록", "/noticeBoard/list"));
+    noticeMenu.add(new MenuItem("상세보기", "/noticeBoard/detail"));
+    noticeMenu.add(new MenuItem("검색", "/noticeBoard/search"));
+    return noticeMenu;
+  }
+
+  private Menu createFreeBoardMenu() {
+    MenuGroup freeBoardMenu = new MenuGroup("APUs 자유게시판");
+
+    freeBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR, "/freeBoard/add"));
+    freeBoardMenu.add(new MenuItem("목록", "/freeBoard/list"));
+    freeBoardMenu.add(new MenuItem("상세보기", "/freeBoard/detail"));
+    freeBoardMenu.add(new MenuItem("검색", "/freeBoard/search"));
+    return freeBoardMenu;
+  }
+
+  private Menu createDoctorBoardMenu() {
+    MenuGroup doctorBoardMenu = new MenuGroup("HEALER 지식in");
+
+    doctorBoardMenu.add(new MenuItem("글쓰기", Menu.ACCESS_GENERAL, "/doctorBoard/add"));
+    doctorBoardMenu.add(new MenuItem("목록", "/doctorBoard/list"));
+    doctorBoardMenu.add(new MenuItem("상세보기", "/doctorBoard/detail"));
+    doctorBoardMenu.add(new MenuItem("검색", "/doctorBoard/search"));
+    return doctorBoardMenu;
+  }
+
+  private Menu createMailBoxMenu() {
+    MenuGroup mailBoxMenu = new MenuGroup("쪽지함", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR | Menu.ACCESS_ADMIN);
+
+    mailBoxMenu.add(new MenuItem("쪽지 전송", "/mailBox/send"));
+    mailBoxMenu.add(new MenuItem("목록", "/mailBox/list"));
+    mailBoxMenu.add(new MenuItem("상세보기", "/mailBox/detail"));
+    mailBoxMenu.add(new MenuItem("삭제", "/mailBox/delete"));
+
+
+    return mailBoxMenu;
+  }
+
+  private Menu createBucketMenu() {
+    MenuGroup bucketMenu = new MenuGroup("버킷리스트", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR);
+
+    bucketMenu.add(new MenuItem("버킷리스트 추가", "/bucket/add"));
+    bucketMenu.add(new MenuItem("버킷리스트 목록", "/bucket/list"));
+    //bucketMenu.add(new MenuItem("버킷리스트 상세", "/bucket/detail"));
+    //  bucketMenu.add(new MenuItem("버킷리스트 달성체크", "/bucket/complete"));
+
+
+    return bucketMenu;
+
+  }
+
+  private Menu createPlantMenu() {
+    MenuGroup plantMenu = new MenuGroup("화분 키우기", Menu.ACCESS_GENERAL | Menu.ACCESS_DOCTOR);
+
+    plantMenu.add(new MenuItem("화분 새로 키우기", "/plant/add"));
+    plantMenu.add(new MenuItem("화분 물 주기", "/plant/grow"));
+    plantMenu.add(new MenuItem("APUs 화분 보기", "/plant/list"));
+    plantMenu.add(new MenuItem("내 화분", "/plant/mylist"));
+
+
+
+    return plantMenu;
+
+  }
+
+
+
+  public static void main(String[] args) throws Exception {
+    System.out.println("[PMS 클라이언트]");
+
+    ClientApp app = new ClientApp(); 
+    app.addApplicationContextListener(new AppInitListener());
+    app.service();
+
+    Prompt.close();
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,3 +9,5 @@
 
 rootProject.name = 'Final_APUJIMA'
 include('app')
+include('app-client')
+include('app-server')

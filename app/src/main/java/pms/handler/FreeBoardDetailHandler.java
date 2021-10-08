@@ -29,7 +29,6 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     System.out.println();
     int num = Prompt.inputInt("게시글 번호> ");
     FreeBoard freeBoard = findByNo(num);
-    String loginUser = AuthLoginHandler.getLoginUser().getId();
 
     if (freeBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -88,7 +87,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
     }
 
     System.out.println();
-    request.setAttribute("num", num);
+    // request.setAttribute("num", num);
     request.setAttribute("boardType", "freeBoard");
 
     while(true) {
@@ -117,7 +116,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
       } else if (status.equals("!")) {
         freeBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
         reportList.add(freeBoard);
-        freeBoard.setRequester(loginUser);
+        freeBoard.setRequester(AuthLoginHandler.getLoginUser().getId());
         System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
         break;
 
@@ -129,28 +128,35 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler{
       }
     } 
 
-    if (freeBoard.getWriter().getId().equals(loginUser)) {
-      request.setAttribute("num", num);
-      while (true) {
-        String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
-        switch (input) {
-          case "U":
-          case "u":
-            request.getRequestDispatcher("/freeBoard/update").forward(request);
-            return;
-          case "D":
-          case "d":
-            request.getRequestDispatcher("/freeBoard/delete").forward(request);
-            return;
-          case "0":
-            return;
-          default:
-            System.out.println("명령어가 올바르지 않습니다!");
-        }
+    request.setAttribute("num", num);
+    String input = "";
+    //    if (freeBoard.getWriter().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+    //      for(int i = 0; i < commentList.size(); i++) {
+    //        if(commentList.get(i).getCommenter().equals(AuthLoginHandler.getLoginUser().getId())) {
+    //          input = Prompt.inputString("게시글 변경(U), 게시글 삭제(D), \n댓글 변경(C), 댓글 삭제(K), 이전(0)>");
+    //        } 
+    //      }
+    while (true) {
+      input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+      switch (input) {
+        case "U":
+        case "u":
+          request.getRequestDispatcher("/freeBoard/update").forward(request);
+          return;
+        case "D":
+        case "d":
+          request.getRequestDispatcher("/freeBoard/delete").forward(request);
+          return;
+        case "0":
+          return;
+        default:
+          System.out.println("명령어가 올바르지 않습니다!");
       }
     }
+
   }
 }
+
 
 
 
