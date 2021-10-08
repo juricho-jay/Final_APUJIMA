@@ -1,5 +1,6 @@
 package pms.table;
 
+import java.util.ArrayList;
 import pms.domain.FreeBoard;
 import server.DataProcessor;
 import server.Request;
@@ -16,7 +17,7 @@ public class FreeBoardTable extends JsonDataTable<FreeBoard> implements DataProc
       case "freeBoard.insert": insert(request, response); break;
       case "freeBoard.selectList": selectList(request, response); break;
       case "freeBoard.selectOne": selectOne(request, response); break;
-      // case "freeBoard.selectOne2": selectOne2(request, response); break;
+      case "freeBoard.selectListByKeyword":selectListByKeyword(request , response); break;
       case "freeBoard.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
@@ -67,6 +68,22 @@ public class FreeBoardTable extends JsonDataTable<FreeBoard> implements DataProc
   //    }
   //
   //  }
+  private void selectListByKeyword(Request request, Response response) throws Exception {
+    String keyword = request.getParameter("keyword");
+
+    ArrayList<FreeBoard> searchResult = new ArrayList<>();
+    for (FreeBoard freeBoard : list) {
+      if (!freeBoard.getTitle().contains(keyword) &&
+          !freeBoard.getContent().contains(keyword) &&
+          !freeBoard.getWriter().getId().contains(keyword)) {
+        continue;
+      }
+      searchResult.add(freeBoard);
+    }
+
+    response.setStatus(Response.SUCCESS);
+    response.setValue(searchResult);
+  }
 
   private FreeBoard findByNo(int no) {
     for (FreeBoard b : list) {

@@ -54,7 +54,7 @@ public class AdminApprovalHandler implements Command {
 
     Medicine medicine = requestAgent.getObject(Medicine.class);
 
-    requestAgent.request("medicine.insult", medicine);
+    requestAgent.request("medicine.insert", medicine);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("약품이 등록되었습니다.");
