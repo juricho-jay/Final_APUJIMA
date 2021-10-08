@@ -26,7 +26,7 @@ public class BucketSearchHandler implements Command {
     HashMap<String, String> params = new HashMap<>();
     params.put("keyword", input);
 
-    requestAgent.request("bucket.search", input);
+    requestAgent.request("bucket.search", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("검색 실패!");

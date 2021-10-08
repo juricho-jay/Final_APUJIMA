@@ -14,10 +14,14 @@ public class PlantMyListHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    int count = 0;
-    System.out.println("[내 화분 목록]");
 
     String loginUser = AuthLoginHandler.getLoginUser().getId();
+
+
+    int count = 0;
+    System.out.println();
+    System.out.println("[내 화분 목록]");
+
 
 
     requestAgent.request("plant.selectList", null);

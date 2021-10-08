@@ -18,8 +18,8 @@ public class PlantTable extends JsonDataTable<Plant> implements DataProcessor {
       case "plant.insert": insert(request, response); break;
       case "plant.selectList": selectList(request, response); break;
       case "plant.selectListByKeyword": selectListByKeyword(request, response); break;
-      //      case "plant.selectOne": selectOne(request, response); break;
-      // case "plant.update": update(request, response); break;
+      case "plant.selectOne": selectOne(request, response); break;
+      case "plant.update": update(request, response); break;
       //      case "plant.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
@@ -60,34 +60,33 @@ public class PlantTable extends JsonDataTable<Plant> implements DataProcessor {
   }
 
 
-  //  private void selectOne(Request request, Response response) throws Exception {
-  //    //    Map<String,String> params = request.getObject(Map.class);
-  //    String name = request.getParameter("name");
-  //    Plant plant = findByPlantName(name);
-  //    if (plant != null) {
-  //      response.setStatus(Response.SUCCESS);
-  //      response.setValue(plant);
-  //    } else {
-  //      response.setStatus(Response.FAIL);
-  //      response.setValue("해당 약품이 없습니다.");
-  //    }
-  //
-  //  }
+  private void selectOne(Request request, Response response) throws Exception {
+    String name = request.getParameter("name");
+    Plant plant = findByPlantName(name);
+    if (plant != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(plant);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 화분이 없습니다.");
+    }
+
+  }
 
 
-  //  private void update(Request request, Response response) throws Exception {
-  //    Plant plant = request.getObject(Plant.class);
-  //
-  //    int index = indexOf(plant.getNo());
-  //    if (index == -1) {
-  //      response.setStatus(Response.FAIL);
-  //      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
-  //      return;
-  //    }
-  //
-  //    list.set(index, plant);
-  //    response.setStatus(Response.SUCCESS);
-  //  }
+  private void update(Request request, Response response) throws Exception {
+    Plant plant= request.getObject(Plant.class);
+
+    int index = indexOf(plant.getNo());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      return;
+    }
+
+    list.set(index, plant);
+    response.setStatus(Response.SUCCESS);
+  }
 
   //  private void delete(Request request, Response response) throws Exception {
   //    int no = Integer.parseInt(request.getParameter("no"));
@@ -112,15 +111,15 @@ public class PlantTable extends JsonDataTable<Plant> implements DataProcessor {
     }
     return null;
   }
+
+
+
+  private int indexOf(int no) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getNo() == no) {
+        return i;
+      }
+    }
+    return -1;
+  }
 }
-
-
-//  private int indexOf(int no) {
-//    for (int i = 0; i < list.size(); i++) {
-//      if (list.get(i).getNo() == no) {
-//        return i;
-//      }
-//    }
-//    return -1;
-//  }
-//}}
