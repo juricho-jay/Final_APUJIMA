@@ -21,7 +21,7 @@ public class AdminListHandler implements Command {
     System.out.println();
     System.out.println("[약품 승인 요청 내역]");
 
-    requestAgent.request("medicine.selectList", null);
+    requestAgent.request("request.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("약품 승인 요청내역이 없습니다.");

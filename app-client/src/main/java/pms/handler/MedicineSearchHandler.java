@@ -17,8 +17,10 @@ public class MedicineSearchHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
 
+    int count = 0;
+    System.out.println("[약품 검색] 페이지입니다.");
     System.out.println();
-    String input = Prompt.inputString("검색할 약품명을 입력해주세요 > ");
+    String input = Prompt.inputString("검색어> ");
     System.out.println();
 
     HashMap<String,String> params = new HashMap<>();
@@ -33,12 +35,18 @@ public class MedicineSearchHandler implements Command {
 
     Collection<Medicine> medicineList = requestAgent.getObjects(Medicine.class);
 
-    //    int count = 0;
+
     for (Medicine medicine : medicineList) {
       if (!medicine.getName().contains(input)) {
         continue;
       }
-      //      count++;
+      count++;
+      System.out.printf("%d, %s, %s, %s, %d\n",
+          medicine.getName(),
+          medicine.getAgeLimit(),
+          medicine.getShape(),
+          medicine.getColor(),
+          medicine.getEffect());
       System.out.printf("약품명: %s\n", medicine.getName());
       System.out.printf("권장연령: %d\n", medicine.getAgeLimit());
       System.out.printf("모  양: %s\n", medicine.getShape());
@@ -47,9 +55,9 @@ public class MedicineSearchHandler implements Command {
       System.out.println();
 
     }
-    //    if (count == 0 ) {
-    //      System.out.println("찾는 약품이 없습니다.");
-    //    }
+    if (count == 0 ) {
+      System.out.println("찾는 약품이 없습니다.");
+    }
   }
 
 

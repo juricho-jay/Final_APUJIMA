@@ -3,13 +3,27 @@ package pms.domain;
 import java.io.Serializable;
 
 public class Medicine implements Serializable{
-
+  private int no;
   private String name;
   private int ageLimit;
   private String shape;
   private String color;
   private String effect;
+  public static int lastIndex;
 
+
+  public int getNo() {
+    return no;
+  }
+  public void setNo(int no) {
+    this.no = no;
+  }
+  public static int getLastIndex() {
+    return lastIndex;
+  }
+  public static void setLastIndex(int lastIndex) {
+    FreeBoard.lastIndex = lastIndex;
+  }
   public String getName() {
     return name;
   }

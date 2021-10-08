@@ -68,14 +68,14 @@ public class AdminReportDeleteHandler implements Command{
 
     if(count == 2)
       return;
-
+    // 여러 번 신고된 게시글일 경우에는? 삭제 어케행~
     System.out.println("삭제할 게시판을 선택해주세요. (1. 자유게시판 / 2. 지식인 게시판)");
     String inputNum = Prompt.inputString("번호 (뒤로가기 #)> ");
     if (inputNum.equals("#")) {
       return;
     } else if (inputNum.equals("1")) {
       while(true) {
-        String input = Prompt.inputString("삭제할 게시판의 번호를 입력해 주세요 (취소 #)> ");
+        String input = Prompt.inputString("삭제할 게시글의 번호를 입력해 주세요 (취소 #)> ");
         if(input.equals("#"))
           return;
         String input2 = Prompt.inputString("❗ 정말 삭제하시겠습니까? (y/N)> ");
@@ -84,7 +84,7 @@ public class AdminReportDeleteHandler implements Command{
           params.put("no", input);
           requestAgent.request("freeBoard.delete", params);
           if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-            System.out.println("삭제 목록 게시판에 입력하신 게시판 번호가 없습니다.");
+            System.out.println("삭제 목록 게시판에 입력하신 게시글 번호가 없습니다.");
           } else {
             System.out.println("해당 게시글이 삭제되었습니다.");
             requestAgent.request("report.selectOne", params);
@@ -95,16 +95,16 @@ public class AdminReportDeleteHandler implements Command{
               MailBox mailBox1 = new MailBox();
               mailBox1.setReceiver(freeBoard.getRequester());
               mailBox1.setSender(AuthLoginHandler.getLoginUser().getId());//현재 로그인된 admin
-              mailBox1.setTitle("신고하신 게시물이 삭제되었습니다.");
-              mailBox1.setContent("요청하신 게시물은 삭제되었습니다. 다른 문의사항이 필요하신가요?");
+              mailBox1.setTitle("신고하신 게시글이 삭제되었습니다.");
+              mailBox1.setContent("요청하신 게시글이 삭제되었습니다. 다른 문의사항이 필요하신가요?");
               mailBox1.setSendingTime(new Date(System.currentTimeMillis()));
 
 
               MailBox mailBox2 = new MailBox();
               mailBox2.setReceiver(freeBoard.getWriter().getId());
               mailBox2.setSender(AuthLoginHandler.getLoginUser().getId());//현재 로그인된 admin
-              mailBox2.setTitle("회원님의 게시물이 신고되어 삭제되었습니다.");
-              mailBox2.setContent("신고되어 게시물은 삭제되었습니다. 다른 문의사항이 필요하신가요?");
+              mailBox2.setTitle("회원님의 게시글이 신고되어 삭제되었습니다.");
+              mailBox2.setContent("신고되어 게시글이 삭제되었습니다. 다른 문의사항이 필요하신가요?");
               mailBox2.setSendingTime(new Date(System.currentTimeMillis()));
 
               requestAgent.request("mailBox.insert", mailBox1);
@@ -137,7 +137,7 @@ public class AdminReportDeleteHandler implements Command{
       }
     } else if (inputNum.equals("2")) {
       while(true) {
-        String input = Prompt.inputString("삭제할 게시판의 번호를 입력해 주세요 (취소 #)> ");
+        String input = Prompt.inputString("삭제할 게시글의 번호를 입력해 주세요 (취소 #)> ");
         if(input.equals("#"))
           return;
         String input2 = Prompt.inputString("❗ 정말 삭제하시겠습니까? (y/N)> ");
@@ -146,7 +146,7 @@ public class AdminReportDeleteHandler implements Command{
           params.put("no", input);
           requestAgent.request("doctorBoard.delete", params);
           if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-            System.out.println("삭제 목록 게시판에 입력하신 게시판 번호가 없습니다.");
+            System.out.println("삭제 목록 게시판에 입력하신 게시글 번호가 없습니다.");
           } else {
             System.out.println("해당 게시글이 삭제되었습니다.");
             requestAgent.request("doctorReport.selectOne", params);
@@ -157,8 +157,8 @@ public class AdminReportDeleteHandler implements Command{
               MailBox mailBox1 = new MailBox();
               mailBox1.setReceiver(doctorBoard.getRequester());
               mailBox1.setSender(AuthLoginHandler.getLoginUser().getId());//현재 로그인된 admin
-              mailBox1.setTitle("신고하신 게시물이 삭제되었습니다.");
-              mailBox1.setContent("요청하신 게시물은 삭제되었습니다. 다른 문의사항이 필요하신가요?");
+              mailBox1.setTitle("신고하신 게시글이 삭제되었습니다.");
+              mailBox1.setContent("요청하신 게시글이 삭제되었습니다. 다른 문의사항이 필요하신가요?");
               mailBox1.setSendingTime(new Date(System.currentTimeMillis()));
 
 
@@ -166,7 +166,7 @@ public class AdminReportDeleteHandler implements Command{
               mailBox2.setReceiver(doctorBoard.getWriter().getId());
               mailBox2.setSender(AuthLoginHandler.getLoginUser().getId());//현재 로그인된 admin
               mailBox2.setTitle("회원님의 게시물이 신고되어 삭제되었습니다.");
-              mailBox2.setContent("신고되어 게시물은 삭제되었습니다. 다른 문의사항이 필요하신가요?");
+              mailBox2.setContent("신고되어 게시물이 삭제되었습니다. 다른 문의사항이 필요하신가요?");
               mailBox2.setSendingTime(new Date(System.currentTimeMillis()));
 
               requestAgent.request("mailBox.insert", mailBox1);

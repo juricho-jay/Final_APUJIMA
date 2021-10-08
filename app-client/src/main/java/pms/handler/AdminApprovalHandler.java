@@ -44,17 +44,24 @@ public class AdminApprovalHandler implements Command {
     System.out.println("승인 허가할 약품의 이름을 입력하세요.");
 
     String input = Prompt.inputString("약품명 (뒤로가기 #)> ");
-    if(input.equals("#"))
+    if (input.equals("#")) {
       return;
+    }
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("input", input);
+    params.put("name", input);
 
-    requestAgent.request("medicine.selectOneByName", params);
+    // 요청 목록에서 승인 허가할 약품 이름 검색> 선택
+    requestAgent.request("request.selectOneByName", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("승인 목록에서 해당 약품 이름을 찾을 수 없습니다.");
+      return;
+    }
 
     Medicine medicine = requestAgent.getObject(Medicine.class);
 
-    requestAgent.request("medicine.insult", medicine);
+    requestAgent.request("medicine.insert", medicine);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("약품이 등록되었습니다.");

@@ -19,6 +19,7 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
       case "medicine.selectList": selectList(request, response); break;
       case "medicine.selectListByKeyword": selectListByKeyword(request, response); break;
       case "medicine.selectOne": selectOne(request, response); break;
+      case "medicine.update": update(request, response); break;
       case "medicine.delete": delete(request, response); break;
       case "medicine.selectOneByName": selectOneByName(request, response); break;
       default:
@@ -27,6 +28,7 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     }
   }
 
+  // 관리자가 약품 승인 허가 > 약품 등록할 때 || 약품 등록 메뉴에서 약품 추가할 때
   private void insert(Request request, Response response) throws Exception {
     Medicine medicine = request.getObject(Medicine.class);
     list.add(medicine);
@@ -44,10 +46,10 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     response.setValue(list);
   }
 
-  //이름으로 불러옴
   private void selectOne(Request request, Response response) throws Exception {
-    String name = request.getParameter("name");
-    Medicine medicine = findByName(name);
+    int no = Integer.parseInt(request.getParameter("no"));
+    Medicine medicine = findByNo(no);
+
     if (medicine != null) {
       response.setStatus(Response.SUCCESS);
       response.setValue(medicine);
@@ -64,8 +66,8 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     ArrayList<Medicine> searchResult = new ArrayList<>();
     for (Medicine medicine : list) {
       if (!medicine.getName().contains(keyword) &&
-          !medicine.getEffect().contains(keyword) /*&&
-          !medicine.getWriter().getName().contains(keyword)*/) {
+          !medicine.getEffect().contains(keyword) &&
+          !medicine.getName().contains(keyword)) {
         continue;
       }
       searchResult.add(medicine);
@@ -94,9 +96,24 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     }
   }
 
-  private void delete(Request request, Response response) throws Exception {
+  private void update(Request request, Response response) throws Exception {
     Medicine medicine = request.getObject(Medicine.class);
-    int index = indexOf(medicine.getName());
+
+    int index = indexOf(medicine.getNo());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      return;
+    }
+
+    list.set(index, medicine);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void delete(Request request, Response response) throws Exception {
+    //    Medicine medicine = request.getObject(Medicine.class);
+    int no = Integer.parseInt(request.getParameter("no"));
+    int index = indexOf(no);
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
@@ -108,9 +125,15 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     response.setStatus(Response.SUCCESS);
   }
 
-  private Medicine findByName(String name) {
+  //  private void adminRequest(Request request, Response response) throws Exception {
+  //    Medicine medicine = request.getObject(Medicine.class);
+  //    list.add(medicine);
+  //    response.setStatus(Response.SUCCESS);
+  //  }
+
+  private Medicine findByNo(int no) {
     for (Medicine m : list) {
-      if (m.getName() == name) {
+      if (m.getNo() == no) {
         return m;
       }
     }
@@ -118,9 +141,10 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
   }
 
 
-  private int indexOf(String name) {
+
+  private int indexOf(int no) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getName() == name) {
+      if (list.get(i).getNo() == no) {
         return i;
       }
     }

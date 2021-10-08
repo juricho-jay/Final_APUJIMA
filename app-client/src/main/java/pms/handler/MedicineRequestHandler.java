@@ -17,7 +17,9 @@ public class MedicineRequestHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[약품 등록 요청]");
+
     Medicine medicine = new Medicine();
+
     medicine.setName(Prompt.inputString("약품명> "));
     medicine.setAgeLimit(Prompt.inputInt("권장연령> "));
     medicine.setShape(Prompt.inputString("모  양> "));
@@ -29,15 +31,25 @@ public class MedicineRequestHandler implements Command {
       if(input.equalsIgnoreCase("y")) {
         System.out.println("관리자에게 약품등록을 요청하였습니다.");
 
-        requestAgent.request("medicine.request", medicine);
+        // 약품 요청은 requestTable 담당
+        requestAgent.request("request.insert", medicine);
+
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("약품 등록요청이 취소되었습니다.");
+          System.out.println("약품 등록 요청 실패!");
           return;
         }
+
+      } else if (input.equalsIgnoreCase("n") || input.equals("")) {
+        System.out.println("등록 요청이 취소되었습니다.");
+        break;
+      } else {
+        System.out.println("입력이 잘못되었습니다."); 
       }
+
     }
-
   }
-
-
 }
+
+
+
+
