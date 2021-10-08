@@ -14,6 +14,7 @@ import pms.table.LikeTable;
 import pms.table.MailBoxTable;
 import pms.table.MedicineTable;
 import pms.table.MemberTable;
+import pms.table.NoticeBoardTable;
 import pms.table.PlantTable;
 import pms.table.ReportTable;
 import server.DataProcessor;
@@ -34,7 +35,6 @@ public class ServerApp {
     HashMap<String,DataProcessor> dataProcessorMap = new HashMap<String,DataProcessor>();
 
     // => 데이터 처리 담당자를 등록한다.
-    //  dataProcessorMap.put("board.", new BoardTable());
     dataProcessorMap.put("member.", new MemberTable());
     dataProcessorMap.put("freeBoard.", new FreeBoardTable());
     dataProcessorMap.put("comment.", new CommentTable());
@@ -45,6 +45,7 @@ public class ServerApp {
     dataProcessorMap.put("bucket.", new BucketTable());
     dataProcessorMap.put("plant.", new PlantTable());
     dataProcessorMap.put("medicine.", new MedicineTable());
+    dataProcessorMap.put("noticeBoard.", new NoticeBoardTable());
     dataProcessorMap.put("doctorReport.", new DoctorReportTable());
 
 

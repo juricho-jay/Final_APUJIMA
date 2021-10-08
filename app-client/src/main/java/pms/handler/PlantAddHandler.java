@@ -30,11 +30,12 @@ public class PlantAddHandler implements Command {
     params.put("id", loginUser);
 
 
-
-    if(AuthLoginHandler.getLoginUser().getCount() < 300) {
+    requestAgent.request("member.selectOne",params);
+    Member member = requestAgent.getObject(Member.class);
+    if(member.getCount() < 300) {
       System.out.println("포인트가 부족하여 화분을 생성 할 수 없습니다.");
-      System.out.println("현재 포인트: " +  AuthLoginHandler.getLoginUser().getCount());
-      System.out.println("부족한 포인트: " + (300- AuthLoginHandler.getLoginUser().getCount()));
+      System.out.println("현재 포인트: " +  member.getCount());
+      System.out.println("부족한 포인트: " + (300- member.getCount()));
 
       return;
     }
@@ -58,8 +59,6 @@ public class PlantAddHandler implements Command {
         System.out.println("화분 등록 실패!");
         return;
       }
-      requestAgent.request("member.selectOne",params);
-      Member member = requestAgent.getObject(Member.class);
       member.setCount(member.getCount()-300);
       requestAgent.request("member.update", member);
 
@@ -73,6 +72,7 @@ public class PlantAddHandler implements Command {
 
 
     List<Plant> plantList =(List<Plant>) requestAgent.getObjects(Plant.class);
+
 
     while(true) {
       String input = Prompt.inputString("화분 이름> " );
@@ -103,14 +103,11 @@ public class PlantAddHandler implements Command {
         break;
       }
     }
-
     requestAgent.request("plant.insert", plant);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("화분 등록 실패!");
       return;
     }
-    requestAgent.request("member.selectOne",params);
-    Member member = requestAgent.getObject(Member.class);
     member.setCount(member.getCount()-300);
     requestAgent.request("member.update", member);
 

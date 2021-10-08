@@ -1,7 +1,7 @@
 package pms.handler;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import pms.domain.NoticeBoard;
 import request.RequestAgent;
 import util.Prompt;
@@ -21,7 +21,6 @@ public class NoticeBoardSearchHandler implements Command{
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    Collection<NoticeBoard> noticeBoardList = requestAgent.getObjects(NoticeBoard.class);
 
     System.out.println("[게시글 검색] 페이지입니다.");
     System.out.println();
@@ -39,6 +38,7 @@ public class NoticeBoardSearchHandler implements Command{
     }
 
     int count = 0;
+    List<NoticeBoard> noticeBoardList =(List<NoticeBoard>) requestAgent.getObjects(NoticeBoard.class);
 
     for (NoticeBoard noticeBoard : noticeBoardList) {
       if (!noticeBoard.getTitle().contains(input) &&

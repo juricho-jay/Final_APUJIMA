@@ -24,18 +24,23 @@ import pms.handler.CommentAddHandler;
 import pms.handler.CommentAutoDeleteHandler;
 import pms.handler.CommentDeleteHandler;
 import pms.handler.CommentUpdateHandler;
+import pms.handler.CounselingMemberAddHandler;
+import pms.handler.CounselingMemberDoctorListHandler;
+import pms.handler.CounselingMemberMyListHandler;
 import pms.handler.DoctorBoardAddHandler;
 import pms.handler.DoctorBoardDeleteHandler;
 import pms.handler.DoctorBoardDetailHandler;
 import pms.handler.DoctorBoardListHandler;
 import pms.handler.DoctorBoardSearchHandler;
 import pms.handler.DoctorBoardUpdateHandler;
+import pms.handler.DoctorMemberListHandler;
 import pms.handler.FreeBoardAddHandler;
 import pms.handler.FreeBoardDeleteHandler;
 import pms.handler.FreeBoardDetailHandler;
 import pms.handler.FreeBoardListHandler;
 import pms.handler.FreeBoardSearchHandler;
 import pms.handler.FreeBoardUpdateHandler;
+import pms.handler.IntroMenu;
 import pms.handler.LikeAddCancelHandler;
 import pms.handler.LikeAutoDeleteHandler;
 import pms.handler.MailBoxDeleteHandler;
@@ -115,20 +120,6 @@ public class ClientApp {
 
   private void notifyOnApplicationStarted() {
     HashMap<String,Object> params = new HashMap<>();
-    //    params.put("memberList", memberList);
-    //    params.put("counselingMemberList", counselingMemberList);
-    //    params.put("noticeBoardList", noticeBoardList);
-    //    params.put("freeBoardList", freeBoardList);
-    //    params.put("doctorBoardList", doctorBoardList);
-    //    params.put("medicineList", medicineList);
-    //    params.put("mailBoxList", mailBoxList);
-    //    params.put("bucketList", bucketList);
-    //    params.put("dateList", dateList);
-    //    params.put("memberCheckList", memberCheckList);
-    //    params.put("reportList", reportList);
-    //    params.put("doctorReportList", doctorReportList);
-    //    params.put("likeList", likeList);
-    //    params.put("commentList", commentList);
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextInitialized(params);
@@ -137,20 +128,6 @@ public class ClientApp {
 
   private void notifyOnApplicationEnded() {
     HashMap<String,Object> params = new HashMap<>();
-    //    params.put("memberList", memberList);
-    //    params.put("counselingMemberList", counselingMemberList);
-    //    params.put("noticeBoardList", noticeBoardList);
-    //    params.put("freeBoardList", freeBoardList);
-    //    params.put("doctorBoardList", doctorBoardList);
-    //    params.put("medicineList", medicineList);
-    //    params.put("mailBoxList", mailBoxList);
-    //    params.put("bucketList", bucketList);
-    //    params.put("dateList", dateList);
-    //    params.put("memberCheckList", memberCheckList);
-    //    params.put("reportList", reportList);
-    //    params.put("doctorReportList", doctorReportList);
-    //    params.put("likeList", likeList);
-    //    params.put("commentList", commentList);
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
@@ -168,7 +145,7 @@ public class ClientApp {
     commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
     commandMap.put("/admin/list", new AdminListHandler(requestAgent));
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(requestAgent));
-    // commandMap.put("/intro", new IntroMenu());
+    commandMap.put("/intro", new IntroMenu());
 
     commandMap.put("/medicine/add", new MedicineAddHandler(requestAgent));
     commandMap.put("/medicine/request", new MedicineRequestHandler(requestAgent));
@@ -176,13 +153,12 @@ public class ClientApp {
     commandMap.put("/medicine/update", new MedicineUpdateHandler(requestAgent));
     commandMap.put("/medicine/delete", new MedicineDeleteHandler(requestAgent));
     commandMap.put("/medicine/search", new MedicineSearchHandler(requestAgent));
-    //
-    //    commandMap.put("/counselingMember/list", new DoctorMemberListHandler(memberList));
-    //    commandMap.put("/counselingMember/add", new CounselingMemberAddHandler(counselingMemberList));
-    //    commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(counselingMemberList));
-    //    commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(counselingMemberList));
-    //    // 바로 위에꺼 상담신청 이력
-    //
+
+    commandMap.put("/counselingMember/list", new DoctorMemberListHandler(requestAgent));
+    commandMap.put("/counselingMember/add", new CounselingMemberAddHandler(requestAgent));
+    commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(requestAgent));
+    commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(requestAgent));
+
 
     commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(requestAgent));
     commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(requestAgent));

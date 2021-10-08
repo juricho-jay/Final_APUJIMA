@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Plant {
 
+  private int no;
   private String PlantName;
   private int level;
   private int exp;
@@ -11,6 +12,13 @@ public class Plant {
   private Date registeredDate;
   private String ownerName;
 
+
+  public int getNo() {
+    return no;
+  }
+  public void setNo(int no) {
+    this.no = no;
+  }
   public String getPlantName() {
     return PlantName;
   }

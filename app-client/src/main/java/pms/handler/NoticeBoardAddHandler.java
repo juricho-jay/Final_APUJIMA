@@ -27,8 +27,6 @@ public class NoticeBoardAddHandler implements Command{
     requestAgent.request("noticeBoard.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("글을 작성할 수 없습니다.");
-
       NoticeBoard.lastIndex = 1;
       noticeBoard.setNo(NoticeBoard.lastIndex);
 
@@ -37,6 +35,7 @@ public class NoticeBoardAddHandler implements Command{
     else {
       List<NoticeBoard> noticeBoardList = (List<NoticeBoard>) requestAgent.getObjects(NoticeBoard.class); 
       if(NoticeBoard.lastIndex != noticeBoardList.size()) {
+
         NoticeBoard.lastIndex = noticeBoardList.get(noticeBoardList.size()-1).getNo();
         noticeBoard.setNo(++NoticeBoard.lastIndex);
 
@@ -69,11 +68,11 @@ public class NoticeBoardAddHandler implements Command{
 
     requestAgent.request("noticeBoard.insert", noticeBoard);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글 등록 실패!");
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("게시글 등록 성공!");
       return;
     }
-    System.out.println("게시글이 등록되었습니다.");
+    System.out.println("게시글 등록 실패!");
   }
 
 }

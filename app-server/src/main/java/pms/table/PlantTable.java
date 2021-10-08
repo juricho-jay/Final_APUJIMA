@@ -61,7 +61,6 @@ public class PlantTable extends JsonDataTable<Plant> implements DataProcessor {
 
 
   private void selectOne(Request request, Response response) throws Exception {
-    //    Map<String,String> params = request.getObject(Map.class);
     String name = request.getParameter("name");
     Plant plant = findByPlantName(name);
     if (plant != null) {
@@ -69,7 +68,7 @@ public class PlantTable extends JsonDataTable<Plant> implements DataProcessor {
       response.setValue(plant);
     } else {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 약품이 없습니다.");
+      response.setValue("해당 화분이 없습니다.");
     }
 
   }
@@ -81,7 +80,7 @@ public class PlantTable extends JsonDataTable<Plant> implements DataProcessor {
     int index = indexOf(plant.getNo());
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      response.setValue("해당 번호의 화분을 찾을 수 없습니다.");
       return;
     }
 
@@ -95,7 +94,7 @@ public class PlantTable extends JsonDataTable<Plant> implements DataProcessor {
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      response.setValue("해당 번호의 화분을 찾을 수 없습니다.");
       return;
     }
 
