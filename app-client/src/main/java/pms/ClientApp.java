@@ -13,6 +13,11 @@ import pms.handler.AdminUpdateHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
 import pms.handler.AuthUserInfoHandler;
+import pms.handler.BucketAddHandler;
+import pms.handler.BucketCompleteHandler;
+import pms.handler.BucketDetailHandler;
+import pms.handler.BucketListHandler;
+import pms.handler.BucketSearchHandler;
 import pms.handler.Command;
 import pms.handler.CommandRequest;
 import pms.handler.CommentAddHandler;
@@ -37,8 +42,24 @@ import pms.handler.MailBoxDeleteHandler;
 import pms.handler.MailBoxDetailHandler;
 import pms.handler.MailBoxListHandler;
 import pms.handler.MailBoxSendHandler;
+import pms.handler.MedicineAddHandler;
+import pms.handler.MedicineDeleteHandler;
+import pms.handler.MedicineListHandler;
+import pms.handler.MedicineRequestHandler;
+import pms.handler.MedicineSearchHandler;
+import pms.handler.MedicineUpdateHandler;
 import pms.handler.MemberAddHandler;
 import pms.handler.MemberListHandler;
+import pms.handler.NoticeBoardAddHandler;
+import pms.handler.NoticeBoardDeleteHandler;
+import pms.handler.NoticeBoardDetailHandler;
+import pms.handler.NoticeBoardListHandler;
+import pms.handler.NoticeBoardSearchHandler;
+import pms.handler.NoticeBoardUpdateHandler;
+import pms.handler.PlantAddHandler;
+import pms.handler.PlantGrowHandler;
+import pms.handler.PlantListHandler;
+import pms.handler.PlantMyListHandler;
 import pms.handler.WiseSaying;
 import pms.listener.AppInitListener;
 import request.RequestAgent;
@@ -147,14 +168,14 @@ public class ClientApp {
     commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
     commandMap.put("/admin/list", new AdminListHandler(requestAgent));
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(requestAgent));
-    //    commandMap.put("/intro", new IntroMenu());
-    //
-    //    commandMap.put("/medicine/add", new MedicineAddHandler(medicineList));
-    //    commandMap.put("/medicine/request", new MedicineRequestHandler(requestList));
-    //    commandMap.put("/medicine/list", new MedicineListHandler(medicineList));
-    //    commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineList));
-    //    commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineList));
-    //    commandMap.put("/medicine/search", new MedicineSearchHandler(medicineList));
+    // commandMap.put("/intro", new IntroMenu());
+
+    commandMap.put("/medicine/add", new MedicineAddHandler(requestAgent));
+    commandMap.put("/medicine/request", new MedicineRequestHandler(requestAgent));
+    commandMap.put("/medicine/list", new MedicineListHandler(requestAgent));
+    commandMap.put("/medicine/update", new MedicineUpdateHandler(requestAgent));
+    commandMap.put("/medicine/delete", new MedicineDeleteHandler(requestAgent));
+    commandMap.put("/medicine/search", new MedicineSearchHandler(requestAgent));
     //
     //    commandMap.put("/counselingMember/list", new DoctorMemberListHandler(memberList));
     //    commandMap.put("/counselingMember/add", new CounselingMemberAddHandler(counselingMemberList));
@@ -162,13 +183,14 @@ public class ClientApp {
     //    commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(counselingMemberList));
     //    // 바로 위에꺼 상담신청 이력
     //
-    //    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardList));
-    //    commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardList));
-    //    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardList, commentList, likeList));
-    //    commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(noticeBoardList));
-    //    commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(noticeBoardList));
-    //    commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(noticeBoardList));
-    //
+
+    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(requestAgent));
+    commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(requestAgent));
+    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(requestAgent));
+    commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(requestAgent));
+    commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(requestAgent));
+    commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(requestAgent));
+
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(requestAgent));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(requestAgent));
     commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(requestAgent));
@@ -207,16 +229,16 @@ public class ClientApp {
     commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(requestAgent));
     //
     //
-    //    commandMap.put("/bucket/add", new BucketAddHandler(bucketList));
-    //    commandMap.put("/bucket/list", new BucketListHandler(bucketList));
-    //    commandMap.put("/bucket/detail", new BucketDetailHandler(bucketList));
-    //    commandMap.put("/bucket/complete", new BucketCompleteHandler(bucketList));
-    //    commandMap.put("/bucket/search", new BucketSearchHandler(bucketList));
-    //
-    //    commandMap.put("/plant/add", new PlantAddHandler(plantList));
-    //    commandMap.put("/plant/grow", new PlantGrowHandler(plantList));
-    //    commandMap.put("/plant/list", new PlantListHandler(plantList));
-    //    commandMap.put("/plant/mylist", new PlantMyListHandler(plantList));
+    commandMap.put("/bucket/add", new BucketAddHandler(requestAgent));
+    commandMap.put("/bucket/list", new BucketListHandler(requestAgent));
+    commandMap.put("/bucket/detail", new BucketDetailHandler(requestAgent));
+    commandMap.put("/bucket/complete", new BucketCompleteHandler(requestAgent));
+    commandMap.put("/bucket/search", new BucketSearchHandler(requestAgent));
+
+    commandMap.put("/plant/add", new PlantAddHandler(requestAgent));
+    commandMap.put("/plant/grow", new PlantGrowHandler(requestAgent));
+    commandMap.put("/plant/list", new PlantListHandler(requestAgent));
+    commandMap.put("/plant/mylist", new PlantMyListHandler(requestAgent));
     //
     //
     //
@@ -366,8 +388,7 @@ public class ClientApp {
 
     bucketMenu.add(new MenuItem("버킷리스트 추가", "/bucket/add"));
     bucketMenu.add(new MenuItem("버킷리스트 목록", "/bucket/list"));
-    //bucketMenu.add(new MenuItem("버킷리스트 상세", "/bucket/detail"));
-    //  bucketMenu.add(new MenuItem("버킷리스트 달성체크", "/bucket/complete"));
+    bucketMenu.add(new MenuItem("버킷리스트 상세", "/bucket/detail"));
 
 
     return bucketMenu;

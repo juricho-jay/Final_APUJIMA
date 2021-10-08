@@ -4,13 +4,17 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Collection;
 import java.util.HashMap;
+import pms.table.BucketTable;
 import pms.table.CommentTable;
 import pms.table.DoctorBoardTable;
+import pms.table.DoctorReportTable;
 import pms.table.FreeBoardTable;
 import pms.table.JsonDataTable;
 import pms.table.LikeTable;
 import pms.table.MailBoxTable;
+import pms.table.MedicineTable;
 import pms.table.MemberTable;
+import pms.table.PlantTable;
 import pms.table.ReportTable;
 import server.DataProcessor;
 import server.RequestProcessor;
@@ -38,6 +42,15 @@ public class ServerApp {
     dataProcessorMap.put("like.", new LikeTable());
     dataProcessorMap.put("doctorBoard.", new DoctorBoardTable());
     dataProcessorMap.put("mailBox.", new MailBoxTable());
+    dataProcessorMap.put("bucket.", new BucketTable());
+    dataProcessorMap.put("plant.", new PlantTable());
+    dataProcessorMap.put("medicine.", new MedicineTable());
+    dataProcessorMap.put("doctorReport.", new DoctorReportTable());
+
+
+
+
+
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
     requestProcessor.service();
