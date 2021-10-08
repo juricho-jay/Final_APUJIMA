@@ -19,6 +19,7 @@ public class FreeBoardTable extends JsonDataTable<FreeBoard> implements DataProc
       case "freeBoard.selectList": selectList(request, response); break;
       case "freeBoard.selectOne": selectOne(request, response); break;
       case "freeBoard.selectListByKeyword":selectListByKeyword(request , response); break;
+      case "freeBoard.update": update(request, response); break;
       case "freeBoard.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
@@ -84,6 +85,20 @@ public class FreeBoardTable extends JsonDataTable<FreeBoard> implements DataProc
 
     response.setStatus(Response.SUCCESS);
     response.setValue(searchResult);
+  }
+
+  private void update(Request request, Response response) throws Exception {
+    FreeBoard freeBoard = request.getObject(FreeBoard.class);
+
+    int index = indexOf(freeBoard.getNo());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      return;
+    }
+
+    list.set(index, freeBoard);
+    response.setStatus(Response.SUCCESS);
   }
 
   private void delete(Request request, Response response) throws Exception {
