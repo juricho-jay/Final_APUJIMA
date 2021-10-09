@@ -10,6 +10,8 @@ import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
 import pms.handler.AdminUpdateHandler;
+import pms.handler.AttendanceAutoDeleteHandler;
+import pms.handler.AttendanceCheckHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
 import pms.handler.AuthUserInfoHandler;
@@ -159,7 +161,6 @@ public class ClientApp {
     commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(requestAgent));
     commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(requestAgent));
 
-
     commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(requestAgent));
     commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(requestAgent));
     commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(requestAgent));
@@ -187,24 +188,23 @@ public class ClientApp {
     commandMap.put("/auth/login", new AuthLoginHandler(requestAgent));
     commandMap.put("/auth/logout", new AuthLogoutHandler());
     commandMap.put("/auth/userInfo", new AuthUserInfoHandler(requestAgent));
-    //    commandMap.put("/auth/check", new AttendanceCheckHandler(dateList, memberCheckList));
-    //
+    commandMap.put("/auth/check", new AttendanceCheckHandler(requestAgent));
+    commandMap.put("/auth/deleteCheck", new AttendanceAutoDeleteHandler(requestAgent));
+
     commandMap.put("/mailBox/send", new MailBoxSendHandler(requestAgent));
     commandMap.put("/mailBox/list", new MailBoxListHandler(requestAgent));
     commandMap.put("/mailBox/detail", new MailBoxDetailHandler(requestAgent));
     commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(requestAgent));
-    //
 
     commandMap.put("/comment/add", new CommentAddHandler(requestAgent));
     commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(requestAgent));
     commandMap.put("/comment/update", new CommentUpdateHandler(requestAgent));
     commandMap.put("/comment/delete", new CommentDeleteHandler(requestAgent));
 
-    //
     commandMap.put("/like/addCancel", new LikeAddCancelHandler(requestAgent));
     commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(requestAgent));
-    //
-    //
+
+
     commandMap.put("/bucket/add", new BucketAddHandler(requestAgent));
     commandMap.put("/bucket/list", new BucketListHandler(requestAgent));
     commandMap.put("/bucket/detail", new BucketDetailHandler(requestAgent));
@@ -215,9 +215,7 @@ public class ClientApp {
     commandMap.put("/plant/grow", new PlantGrowHandler(requestAgent));
     commandMap.put("/plant/list", new PlantListHandler(requestAgent));
     commandMap.put("/plant/mylist", new PlantMyListHandler(requestAgent));
-    //
-    //
-    //
+
     commandMap.put("/wiseSaying/saying", new WiseSaying());
 
   }
