@@ -37,22 +37,24 @@ public class MedicineSearchHandler implements Command {
 
 
     for (Medicine medicine : medicineList) {
-      if (!medicine.getName().contains(input)) {
+      if (!medicine.getName().contains(input) &&
+          !medicine.getEffect().contains(input)) {
         continue;
       }
       count++;
-      System.out.printf("%d, %s, %s, %s, %d\n",
+      System.out.printf("%d, %s, %d, %s, %s, %s\n",
+          medicine.getNo(),
           medicine.getName(),
           medicine.getAgeLimit(),
           medicine.getShape(),
           medicine.getColor(),
           medicine.getEffect());
-      System.out.printf("약품명: %s\n", medicine.getName());
-      System.out.printf("권장연령: %d\n", medicine.getAgeLimit());
-      System.out.printf("모  양: %s\n", medicine.getShape());
-      System.out.printf("색  상: %s\n", medicine.getColor());
-      System.out.printf("효  능: %s\n", medicine.getEffect());
-      System.out.println();
+      //      System.out.printf("약품명: %s\n", medicine.getName());
+      //      System.out.printf("권장연령: %d\n", medicine.getAgeLimit());
+      //      System.out.printf("모  양: %s\n", medicine.getShape());
+      //      System.out.printf("색  상: %s\n", medicine.getColor());
+      //      System.out.printf("효  능: %s\n", medicine.getEffect());
+      //      System.out.println();
 
     }
     if (count == 0 ) {

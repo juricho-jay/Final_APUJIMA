@@ -17,6 +17,7 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     switch (request.getCommand()) {
       case "medicine.insert": insert(request, response); break;
       case "medicine.selectList": selectList(request, response); break;
+      case "medicine.check": check(request, response); break;
       case "medicine.selectListByKeyword": selectListByKeyword(request, response); break;
       case "medicine.selectOne": selectOne(request, response); break;
       case "medicine.update": update(request, response); break;
@@ -44,6 +45,19 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     }
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
+  }
+
+  private void check(Request request, Response response) throws Exception {
+    Medicine medicine = request.getObject(Medicine.class);
+    for(int i = 0 ; i < list.size() ; i++) {
+      if(medicine.getName().equals(list.get(i).getName())) {
+        System.out.println("중복되는 아이디 입니다. 다른 아이디를 사용해 주세요.");
+        medicine.setName("");
+        response.setStatus(Response.FAIL);
+        return;
+      }
+    }
+    response.setStatus(Response.SUCCESS);
   }
 
   private void selectOne(Request request, Response response) throws Exception {
