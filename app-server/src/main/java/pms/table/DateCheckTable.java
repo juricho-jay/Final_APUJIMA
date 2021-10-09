@@ -71,11 +71,9 @@ public class DateCheckTable extends JsonDataTable<DateCheck> implements DataProc
       //3일 지난 데이터 삭제
       if (diffDay > 3) {
         list.remove(i);
+      } else if (i == (list.size() - 1)) {
         response.setStatus(Response.SUCCESS);
-        return;
       }
-
-      response.setStatus(Response.FAIL);
     }
   }
 

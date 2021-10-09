@@ -16,11 +16,9 @@ public class AttendanceAutoDeleteHandler implements Command {
 
     requestAgent.request("dateCheck.delete", null);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("데이터 정리 완료(0)");
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("데이터 정리 완료!");
       return;
     }
-
-    System.out.println("데이터 정리 완료!");
   }
 }
