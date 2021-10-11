@@ -28,24 +28,31 @@ public class MedicineRequestHandler implements Command {
 
     while(true) {
       String input = Prompt.inputString("작성한 약품을 등록요청 하시겠습니까?(y/N)");
-      if(input.equalsIgnoreCase("y")) {
-        System.out.println("관리자에게 약품등록을 요청하였습니다.");
-
-        // 약품 요청은 requestTable 담당
-        requestAgent.request("request.insert", medicine);
-
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("약품 등록 요청 실패!");
-          return;
-        }
-
-      } else if (input.equalsIgnoreCase("n") || input.equals("")) {
-        System.out.println("등록 요청이 취소되었습니다.");
-        break;
-      } else {
-        System.out.println("입력이 잘못되었습니다."); 
+      if(input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("관리자에게 약품등록 요청을 취소하였습니다.");
+        return;
       }
+      //      if(input.equalsIgnoreCase("y")) {
+      //        System.out.println("관리자에게 약품등록을 요청하였습니다.");
 
+      // 약품 요청은 requestTable 담당
+      requestAgent.request("request.insert", medicine);
+
+      //      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      //        System.out.println("약품 등록 요청 실패!");
+      //        System.out.println(requestAgent.getObject(String.class));
+      //        return;
+      //      }
+
+      //      } else if (input.equalsIgnoreCase("n") || input.equals("")) {
+      //        System.out.println("등록 요청이 취소되었습니다.");
+      //        break;
+      //      } else {
+      //        System.out.println("입력이 잘못되었습니다."); 
+      //      }
+
+      System.out.println("관리자에게 약품등록을 요청하였습니다.");
+      break;
     }
   }
 }

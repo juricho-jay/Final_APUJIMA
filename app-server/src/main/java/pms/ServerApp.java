@@ -18,6 +18,7 @@ import pms.table.MemberTable;
 import pms.table.NoticeBoardTable;
 import pms.table.PlantTable;
 import pms.table.ReportTable;
+import pms.table.RequestTable;
 import server.DataProcessor;
 import server.RequestProcessor;
 
@@ -46,6 +47,7 @@ public class ServerApp {
     dataProcessorMap.put("bucket.", new BucketTable());
     dataProcessorMap.put("plant.", new PlantTable());
     dataProcessorMap.put("medicine.", new MedicineTable());
+    dataProcessorMap.put("request.", new RequestTable());
     dataProcessorMap.put("noticeBoard.", new NoticeBoardTable());
     dataProcessorMap.put("doctorReport.", new DoctorReportTable());
     dataProcessorMap.put("dateCheck.", new DateCheckTable());

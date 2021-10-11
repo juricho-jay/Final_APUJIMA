@@ -56,20 +56,6 @@ public class MedicineAddHandler implements Command{
         break;
     }
 
-    //      List<Medicine> medicineList = (List<Medicine>) requestAgent.getObjects(Medicine.class);
-    //
-    //      int count = 0;
-    //      for (int i = 0; i < medicineList.size(); i++) {
-    //        if (medicineList.get(i).getName().equals(input)) {
-    //          System.out.println("이미 등록된 약품입니다. 다시 입력해 주세요.");
-    //          count++;
-    //        }
-    //      } 
-    //
-    //      if (count != 0) {
-    //        continue;
-    //      } else {
-
     medicine.setAgeLimit(Prompt.inputInt("권장 나이> "));
     medicine.setShape(Prompt.inputString("모  양> "));
     medicine.setColor(Prompt.inputString("색  상> "));

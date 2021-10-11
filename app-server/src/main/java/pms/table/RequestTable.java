@@ -33,6 +33,7 @@ public class RequestTable extends JsonDataTable<Medicine> implements DataProcess
   }
 
 
+
   private void selectList(Request request, Response response) throws Exception {
     if(list.size() == 0) {
       response.setStatus(Response.FAIL);

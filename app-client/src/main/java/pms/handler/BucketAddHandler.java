@@ -40,7 +40,6 @@ public class BucketAddHandler implements Command {
         Bucket.lastIndex = bucketList.get(bucketList.size()-1).getNo();
         bucket.setNo(++Bucket.lastIndex);
 
-
       } else {
         bucket.setNo(++Bucket.lastIndex);
       }
