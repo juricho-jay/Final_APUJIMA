@@ -44,7 +44,12 @@ public class MedicineSearchHandler implements Command {
         continue;
       }
       count++;
-      System.out.printf("%d, %s, %d, %s, %s, %s\n",
+      System.out.printf("번호 : %d\n"
+          + "약품명 : %s\n"
+          + "권장연령 : %d\n"
+          + "모양 : %s\n"
+          + "색상 :  %s\n"
+          + "효능 :  %s\n",
           medicine.getNo(),
           medicine.getName(),
           medicine.getAgeLimit(),
