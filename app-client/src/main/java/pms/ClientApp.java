@@ -226,7 +226,6 @@ public class ClientApp {
     notifyOnApplicationStarted();
 
     createMainMenu().execute();
-    requestAgent.request("quit", null);
     Prompt.close();
 
     notifyOnApplicationEnded();
