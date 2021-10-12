@@ -52,7 +52,7 @@ public class ServerApp {
     dataProcessorMap.put("noticeBoard.", new NoticeBoardTable());
     dataProcessorMap.put("doctorReport.", new DoctorReportTable());
     dataProcessorMap.put("dateCheck.", new DateCheckTable());
-    dataProcessorMap.put("counselingMember.", new CounselingMemberTable());
+    dataProcessorMap.put("counselingMember.", new CounselingMemberTable());   
 
 
 

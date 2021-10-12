@@ -43,6 +43,7 @@ public class PlantGrowHandler implements Command {
         System.out.printf("화분 레벨: %d\n", plant.getLevel());
         System.out.printf("화분 모양: %s\n", plant.getShape());
         System.out.printf("화분을 키운 날짜: %s\n", plant.getRegisteredDate());
+        System.out.println();
       }
     }
     String name = Prompt.inputString("물을 줄 화분의 이름> ");
@@ -53,7 +54,7 @@ public class PlantGrowHandler implements Command {
     requestAgent.request("plant.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("내 화분이 아니어서 물을 줄 수 없습니다.");
+      System.out.println("내 화분이 아니거나 화분을 찾을수 없어서 물을 줄 수 없습니다.");
       return;
     }
 

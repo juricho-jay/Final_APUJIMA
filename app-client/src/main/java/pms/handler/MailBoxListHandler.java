@@ -27,7 +27,6 @@ public class MailBoxListHandler  implements Command{
     }
 
     Collection<MailBox> mailBoxList = requestAgent.getObjects(MailBox.class);
-    System.out.println("현재 mailboxLIst 사이즈는 = " + mailBoxList.size());
 
     for (MailBox mailBox : mailBoxList) {
       if(mailBox.getReceiver().equals(AuthLoginHandler.getLoginUser().getId())) {
