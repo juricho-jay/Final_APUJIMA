@@ -20,11 +20,13 @@ public class MedicineSearchHandler implements Command {
     int count = 0;
     System.out.println("[약품 검색] 페이지입니다.");
     System.out.println();
-    String input = Prompt.inputString("검색어> ");
-    System.out.println();
+    String input = Prompt.inputString("검색어 (뒤로가기 #)> ");
+    if (input.equals("#")) {
+      return;
+    }
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("keyword", String.valueOf(input));
+    params.put("keyword", input);
 
     requestAgent.request("medicine.selectListByKeyword", params);
 

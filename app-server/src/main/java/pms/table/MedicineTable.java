@@ -20,6 +20,7 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
       case "medicine.check": check(request, response); break;
       case "medicine.selectListByKeyword": selectListByKeyword(request, response); break;
       case "medicine.selectOne": selectOne(request, response); break;
+      case "medicine.selectOne2": selectOne2(request, response); break;
       case "medicine.update": update(request, response); break;
       case "medicine.delete": delete(request, response); break;
       case "medicine.selectOneByName": selectOneByName(request, response); break;
@@ -51,7 +52,7 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     Medicine medicine = request.getObject(Medicine.class);
     for(int i = 0 ; i < list.size() ; i++) {
       if(medicine.getName().equals(list.get(i).getName())) {
-        System.out.println("중복되는 아이디 입니다. 다른 아이디를 사용해 주세요.");
+        System.out.println("이미 존재하는 약품 입니다.");
         medicine.setName("");
         response.setStatus(Response.FAIL);
         return;
@@ -74,14 +75,25 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
 
   }
 
+  private void selectOne2(Request request, Response response) throws Exception {
+    String name = request.getParameter("name");
+    Medicine medicine = findByName(name);
+    if (medicine != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(medicine);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 약품이 없습니다.");
+    }
+  }
+
   private void selectListByKeyword(Request request, Response response) throws Exception {
     String keyword = request.getParameter("keyword");
 
     ArrayList<Medicine> searchResult = new ArrayList<>();
     for (Medicine medicine : list) {
       if (!medicine.getName().contains(keyword) &&
-          !medicine.getEffect().contains(keyword) &&
-          !medicine.getName().contains(keyword)) {
+          !medicine.getEffect().contains(keyword)) {
         continue;
       }
       searchResult.add(medicine);
@@ -116,7 +128,7 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     int index = indexOf(medicine.getNo());
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      response.setValue("해당 약품을 찾을 수 없습니다.");
       return;
     }
 
@@ -125,23 +137,30 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
   }
 
   private void delete(Request request, Response response) throws Exception {
-    //    Medicine medicine = request.getObject(Medicine.class);
-    int no = Integer.parseInt(request.getParameter("no"));
-    int index = indexOf(no);
-
-    if (index == -1) {
+    String name = request.getParameter("name");
+    Medicine medicine = findByName(name);
+    if (medicine != null) {
+      list.remove(medicine);
+      response.setStatus(Response.SUCCESS);
+      response.setValue(medicine);
+    } else {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 이름의 약품을 찾을 수 없습니다.");
-      return;
+      response.setValue("해당 약품이 없습니다.");
     }
-
-    list.remove(index);
-    response.setStatus(Response.SUCCESS);
   }
 
-  //  private void adminRequest(Request request, Response response) throws Exception {
-  //    Medicine medicine = request.getObject(Medicine.class);
-  //    list.add(medicine);
+  //  private void delete(Request request, Response response) throws Exception {
+  //    //    Medicine medicine = request.getObject(Medicine.class);
+  //    int no = Integer.parseInt(request.getParameter("no"));
+  //    int index = indexOf(no);
+  //
+  //    if (index == -1) {
+  //      response.setStatus(Response.FAIL);
+  //      response.setValue("해당 약품을 찾을 수 없습니다.");
+  //      return;
+  //    }
+  //
+  //    list.remove(index);
   //    response.setStatus(Response.SUCCESS);
   //  }
 
@@ -154,6 +173,14 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
     return null;
   }
 
+  protected Medicine findByName(String name) {
+    for (Medicine m : list) {
+      if (m.getName().equals(name) ) {
+        return m;
+      }
+    }
+    return null;
+  }
 
 
   private int indexOf(int no) {

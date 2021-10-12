@@ -17,17 +17,20 @@ public class MedicineUpdateHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[약품 변경] 페이지입니다.");
     System.out.println();
-    int no = Prompt.inputInt("번호> "); // 지정한 번호를 선택
+    String input = Prompt.inputString("약품명 (뒤로가기 #)> ");
+    if (input.equals("#")) {
+      return;
+    }
 
     // 번호를 no에 저장
     HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no)); // 해쉬맵에 추가한다.
+    params.put("name", input);
     // no에는 숫자값을 넣는다.
 
-    requestAgent.request("medicine.selectOne", params); // 약품의 
+    requestAgent.request("medicine.selectOne2", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("해당 약품이 없습니다.");
       return;
     }
 
@@ -46,6 +49,7 @@ public class MedicineUpdateHandler implements Command {
     }
     //    requestAgent.request("medicine.delete", params);
 
+    //    medicine.setNo(medicine.getNo());
     medicine.setName(name);
     medicine.setAgeLimit(ageLimit);
     medicine.setShape(shape);
