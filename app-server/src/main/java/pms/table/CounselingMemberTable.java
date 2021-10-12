@@ -19,8 +19,10 @@ public class CounselingMemberTable extends JsonDataTable<CounselingMember> imple
     switch (request.getCommand()) {
       case "counselingMember.insert": insert(request, response); break;
       case "counselingMember.selectList": selectList(request, response); break;
-      //      case "member.selectOne": selectOne(request, response); break; 
-      //      case "counselingMember.selectOneByIdPassword": selectOneByIdPassword(request, response); break;
+      // id 찾기 (이름+번호)
+      // case "counselingMember.selectOneByNamePhoneNum": selectOneByNamePhoneNum(request, response); break;
+      // pw 찾기 (아이디+번호)
+      //  case "counselingMember.selectOneByIdPhoneNum": selectOneByIdPhoneNum(request, response); break;
       //      case "counselingMember.selectOneById": selectOneById(request, response); break;
       case "counselingMember.selectOneByName": selectOneByName(request, response); break;
       case "counselingMember.update": update(request, response); break; //id로 인덱스 찾아서 인덱스로 리스트에서 변경
@@ -128,7 +130,19 @@ public class CounselingMemberTable extends JsonDataTable<CounselingMember> imple
       response.setValue("해당 회원을 찾을 수 없습니다.");
     }
   }
-
+  //  private void update(Request request, Response response) throws Exception {
+  //    CounselingMember counselingMember = request.getObject(CounselingMember.class);
+  //
+  //    int index = indexOf(counselingMember.getId());
+  //    if (index == -1) {
+  //      response.setStatus(Response.FAIL);
+  //      response.setValue("해당 회원을 찾을 수 없습니다.");
+  //      return;
+  //    }
+  //
+  //    list.set(index, counselingMember);
+  //    response.setStatus(Response.SUCCESS);
+  //  }
   private void update(Request request, Response response) throws Exception {
     CounselingMember counselingMember = request.getObject(CounselingMember.class);
 

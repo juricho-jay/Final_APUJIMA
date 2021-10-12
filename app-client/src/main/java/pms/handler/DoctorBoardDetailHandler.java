@@ -230,7 +230,7 @@ public class DoctorBoardDetailHandler implements Command {
       }
 
       // 내 댓글이 있고 내가 게시글 글쓴이가 아닐 때
-    } else if (myComment == 0 && doctorBoard.getWriter().getId().equals(loginUser)) {
+    } else if (myComment != 0 && !doctorBoard.getWriter().getId().equals(loginUser)) {
       while (true) {
         System.out.println();
         String input = Prompt.inputString("[댓글] 변경(M) / 삭제(R) / 이전 메뉴(0)> ");

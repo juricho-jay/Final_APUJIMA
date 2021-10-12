@@ -57,7 +57,8 @@ public class CommentDeleteHandler implements Command {
       for (int i = commentList.size() - 1; i >= 0; i--) {
         if (commentList.get(i).getWhichBoard().equals(whichBoard2) &&
             commentList.get(i).getCommentBoardNo() == freeBoard.getNo() &&
-            commentList.get(i).getNo() == commentResetNo) {
+            commentList.get(i).getNo() == commentResetNo &&
+            commentList.get(i).getCommenter().equals(AuthLoginHandler.getLoginUser().getId())) {
 
           HashMap<String,String> deleteIndex = new HashMap<>();
           deleteIndex.put("deleteIndex", String.valueOf(i));
@@ -67,6 +68,11 @@ public class CommentDeleteHandler implements Command {
           if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
             return;
           }
+          System.out.println("댓글이 삭제되었습니다.");
+          return;
+        } else {
+          System.out.println("내가 쓴 댓글이 아닙니다.");
+          return;
         }
       }
 
@@ -79,7 +85,8 @@ public class CommentDeleteHandler implements Command {
       for (int i = commentList.size() - 1; i >= 0; i--) {
         if (commentList.get(i).getWhichBoard().equals(whichBoard2) &&
             commentList.get(i).getCommentBoardNo() == doctorBoard.getNo() &&
-            commentList.get(i).getNo() == commentResetNo) {
+            commentList.get(i).getNo() == commentResetNo &&
+            commentList.get(i).getCommenter().equals(AuthLoginHandler.getLoginUser().getId())) {
 
           HashMap<String,String> deleteIndex = new HashMap<>();
           deleteIndex.put("deleteIndex", String.valueOf(i));
@@ -89,6 +96,11 @@ public class CommentDeleteHandler implements Command {
           if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
             return;
           }
+          System.out.println("댓글이 삭제되었습니다.");
+          return;
+        } else {
+          System.out.println("내가 쓴 댓글이 아닙니다.");
+          return;
         }
       }
 
@@ -101,7 +113,8 @@ public class CommentDeleteHandler implements Command {
       for (int i = commentList.size() - 1; i >= 0; i--) {
         if (commentList.get(i).getWhichBoard().equals(whichBoard2) &&
             commentList.get(i).getCommentBoardNo() == noticeBoard.getNo() &&
-            commentList.get(i).getNo() == commentResetNo) {
+            commentList.get(i).getNo() == commentResetNo &&
+            commentList.get(i).getCommenter().equals(AuthLoginHandler.getLoginUser().getId())) {
 
           HashMap<String,String> deleteIndex = new HashMap<>();
           deleteIndex.put("deleteIndex", String.valueOf(i));
@@ -111,6 +124,11 @@ public class CommentDeleteHandler implements Command {
           if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
             return;
           }
+          System.out.println("댓글이 삭제되었습니다.");
+          return;
+        } else {
+          System.out.println("내가 쓴 댓글이 아닙니다.");
+          return;
         }
       }
 
