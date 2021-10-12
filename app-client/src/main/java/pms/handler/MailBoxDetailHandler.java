@@ -20,6 +20,8 @@ public class MailBoxDetailHandler  implements Command{
 
     requestAgent.request("mailBox.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("쪽지함이 비어 상세보기를 할 수 없습니다.");
+      return;
     } else {
 
       Collection<MailBox> mailBoxList = requestAgent.getObjects(MailBox.class);

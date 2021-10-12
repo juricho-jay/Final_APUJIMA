@@ -19,17 +19,19 @@ public class CounselingMemberTable extends JsonDataTable<CounselingMember> imple
     switch (request.getCommand()) {
       case "counselingMember.insert": insert(request, response); break;
       case "counselingMember.selectList": selectList(request, response); break;
-      //      case "member.selectOne": selectOne(request, response); break; 
-      //      case "counselingMember.selectOneByIdPassword": selectOneByIdPassword(request, response); break;
-      //  case "counselingMember.selectOneById": selectOneById(request, response); break;
-      case "counselingMember.selectOneByName": selectOneByName(request, response); break;
-      //   case "counselingMember.update": update(request, response); break; //id로 인덱스 찾아서 인덱스로 리스트에서 변경
-      case "counselingMember.delete": delete(request, response); break;//id로 인덱스 찾아서 인덱스로 리스트에서 삭제
-      case "counselingMember.check": check(request, response); break; //id 중복 검사
       // id 찾기 (이름+번호)
       // case "counselingMember.selectOneByNamePhoneNum": selectOneByNamePhoneNum(request, response); break;
       // pw 찾기 (아이디+번호)
       //  case "counselingMember.selectOneByIdPhoneNum": selectOneByIdPhoneNum(request, response); break;
+      //      case "counselingMember.selectOneById": selectOneById(request, response); break;
+      case "counselingMember.selectOneByName": selectOneByName(request, response); break;
+      case "counselingMember.update": update(request, response); break; //id로 인덱스 찾아서 인덱스로 리스트에서 변경
+      case "counselingMember.delete": delete(request, response); break;//id로 인덱스 찾아서 인덱스로 리스트에서 삭제
+      case "counselingMember.check": check(request, response); break; //id 중복 검사
+      // id 찾기 (이름+번호)
+      //      case "counselingMember.selectOneByNamePhoneNum": selectOneByNamePhoneNum(request, response); break;
+      // pw 찾기 (아이디+번호)
+      //      case "counselingMember.selectOneByIdPhoneNum": selectOneByIdPhoneNum(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -128,7 +130,6 @@ public class CounselingMemberTable extends JsonDataTable<CounselingMember> imple
       response.setValue("해당 회원을 찾을 수 없습니다.");
     }
   }
-
   //  private void update(Request request, Response response) throws Exception {
   //    CounselingMember counselingMember = request.getObject(CounselingMember.class);
   //
@@ -142,6 +143,19 @@ public class CounselingMemberTable extends JsonDataTable<CounselingMember> imple
   //    list.set(index, counselingMember);
   //    response.setStatus(Response.SUCCESS);
   //  }
+  private void update(Request request, Response response) throws Exception {
+    CounselingMember counselingMember = request.getObject(CounselingMember.class);
+
+    int index = indexOf(counselingMember.getName());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 회원을 찾을 수 없습니다.");
+      return;
+    }
+
+    list.set(index, counselingMember);
+    response.setStatus(Response.SUCCESS);
+  }
 
   private void delete(Request request, Response response) throws Exception {
     String id = request.getParameter("id");
