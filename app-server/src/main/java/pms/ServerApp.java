@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import pms.table.BucketTable;
 import pms.table.CommentTable;
+import pms.table.CounselingMemberTable;
 import pms.table.DateCheckTable;
 import pms.table.DoctorBoardTable;
 import pms.table.DoctorReportTable;
@@ -51,6 +52,7 @@ public class ServerApp {
     dataProcessorMap.put("noticeBoard.", new NoticeBoardTable());
     dataProcessorMap.put("doctorReport.", new DoctorReportTable());
     dataProcessorMap.put("dateCheck.", new DateCheckTable());
+    dataProcessorMap.put("counselingMember.", new CounselingMemberTable());
 
 
 
