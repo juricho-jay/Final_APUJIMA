@@ -6,6 +6,7 @@ import java.util.List;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
+import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetFreeBoardDao;
 import pms.dao.impl.NetMemberDao;
 import pms.handler.AdminApprovalHandler;
@@ -40,7 +41,6 @@ import pms.handler.DoctorBoardUpdateHandler;
 import pms.handler.DoctorMemberListHandler;
 import pms.handler.FreeBoardAddHandler;
 import pms.handler.FreeBoardDeleteHandler;
-import pms.handler.FreeBoardDetailHandler;
 import pms.handler.FreeBoardListHandler;
 import pms.handler.FreeBoardSearchHandler;
 import pms.handler.FreeBoardUpdateHandler;
@@ -146,6 +146,7 @@ public class ClientApp {
 
     NetMemberDao memberDao = new NetMemberDao(requestAgent);
     NetFreeBoardDao freeBoardDao = new NetFreeBoardDao(requestAgent);
+    NetBucketDao bucketDao = new NetBucketDao(requestAgent);
 
     // Command 객체 준비
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestAgent));
@@ -175,7 +176,7 @@ public class ClientApp {
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardDao));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardDao));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardDao));
+    //    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardDao));
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardDao));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardDao));
     commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardDao));
@@ -210,11 +211,11 @@ public class ClientApp {
     commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(requestAgent));
 
 
-    commandMap.put("/bucket/add", new BucketAddHandler(requestAgent));
-    commandMap.put("/bucket/list", new BucketListHandler(requestAgent));
-    commandMap.put("/bucket/detail", new BucketDetailHandler(requestAgent));
-    commandMap.put("/bucket/complete", new BucketCompleteHandler(requestAgent));
-    commandMap.put("/bucket/search", new BucketSearchHandler(requestAgent));
+    commandMap.put("/bucket/add", new BucketAddHandler(bucketDao));
+    commandMap.put("/bucket/list", new BucketListHandler(bucketDao));
+    commandMap.put("/bucket/detail", new BucketDetailHandler(bucketDao));
+    commandMap.put("/bucket/complete", new BucketCompleteHandler(bucketDao));
+    commandMap.put("/bucket/search", new BucketSearchHandler(bucketDao));
 
     commandMap.put("/plant/add", new PlantAddHandler(requestAgent));
     commandMap.put("/plant/grow", new PlantGrowHandler(requestAgent));

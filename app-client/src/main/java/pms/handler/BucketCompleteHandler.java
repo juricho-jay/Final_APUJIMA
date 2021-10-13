@@ -1,18 +1,16 @@
 package pms.handler;
 
-import java.util.HashMap;
+import pms.dao.BucketDao;
 import pms.domain.Bucket;
-import request.RequestAgent;
 import util.Prompt;
 
 public class BucketCompleteHandler implements Command {
-  RequestAgent requestAgent;
 
-  public BucketCompleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  BucketDao bucketDao;
+
+  public BucketCompleteHandler(BucketDao bucketDao) {
+    this.bucketDao = bucketDao;
   }
-
-
 
   @Override
   public void execute(CommandRequest request) throws Exception{
@@ -22,28 +20,36 @@ public class BucketCompleteHandler implements Command {
     System.out.println();
     int no = (int)request.getAttribute("no");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    Bucket bucket = bucketDao.findByNo(no);
 
-    requestAgent.request("bucket.selectOne", params);
-
-
-    Bucket bucket = requestAgent.getObject(Bucket.class);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 버킷리스트가 없습니다.");
+    if (bucket == null) {
+      System.out.println("해당 번호의 버켓리스트가 없습니다.");
       return;
     }
+
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("no", String.valueOf(no));
+    //
+    //    requestAgent.request("bucket.selectOne", params);
+    //
+    //
+    //    Bucket bucket = requestAgent.getObject(Bucket.class);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("해당 번호의 버킷리스트가 없습니다.");
+    //      return;
+    //    }
 
     if(bucket.getNo() == no) {
       if(bucket.isComplete() == false) {
         bucket.setCheck("🗹");
         bucket.setComplete(true);
-        requestAgent.request("bucket.update", bucket);
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("버킷 리스트 완성 실패!");
-          return;
-        }
+        bucketDao.update(bucket);
+        //        requestAgent.request("bucket.update", bucket);
+        //        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        //          System.out.println("버킷 리스트 완성 실패!");
+        //          return;
+        //        }
         System.out.println("해당 버킷리스트를 완성하였습니다. 축하드립니다!");
         return;
       } else {
@@ -51,11 +57,12 @@ public class BucketCompleteHandler implements Command {
         if(input.equalsIgnoreCase("y")) {
           bucket.setCheck("☐");
           bucket.setComplete(false);
-          requestAgent.request("bucket.update", bucket);
-          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-            System.out.println("완료한 버킷리스트 취소 실패!");
-            return;
-          }
+          bucketDao.update(bucket);
+          //          requestAgent.request("bucket.update", bucket);
+          //          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+          //            System.out.println("완료한 버킷리스트 취소 실패!");
+          //            return;
+          //          }
           System.out.println("해당 버킷리스트를 취소하였습니다. 성공하신 후 성공등록을 해주세요.");
           return;
         } else if(input.equalsIgnoreCase("n")) {

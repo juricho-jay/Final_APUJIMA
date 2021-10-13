@@ -1,18 +1,16 @@
 package pms.handler;
 
-import java.util.HashMap;
+import pms.dao.BucketDao;
 import pms.domain.Bucket;
-import request.RequestAgent;
 import util.Prompt;
 
 public class BucketDetailHandler implements Command {
-  RequestAgent requestAgent;
 
-  public BucketDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  BucketDao bucketDao;
+
+  public BucketDetailHandler(BucketDao bucketDao) {
+    this.bucketDao = bucketDao;
   }
-
-
 
   @Override
   public void execute(CommandRequest request) throws Exception{
@@ -24,19 +22,26 @@ public class BucketDetailHandler implements Command {
 
     int no = Prompt.inputInt("버킷리스트 번호> ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    Bucket bucket = bucketDao.findByNo(no);
 
-    requestAgent.request("bucket.selectOne", params);
-
-
-
-    Bucket bucket = requestAgent.getObject(Bucket.class);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (bucket == null) {
       System.out.println("해당 번호의 버킷리스트가 없습니다.");
       return;
     }
+
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("no", String.valueOf(no));
+    //
+    //    requestAgent.request("bucket.selectOne", params);
+    //
+    //
+    //
+    //    Bucket bucket = requestAgent.getObject(Bucket.class);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("해당 번호의 버킷리스트가 없습니다.");
+    //      return;
+    //    }
     System.out.printf("번호: %d\n", bucket.getNo());
     System.out.printf("제목: %s\n", bucket.getTitle());
     System.out.printf("내용: %s\n", bucket.getContent());
@@ -50,7 +55,6 @@ public class BucketDetailHandler implements Command {
         case "c": 
           request.getRequestDispatcher("/bucket/complete").forward(request);
           return;
-
         case "0":
           return;
         default:
