@@ -6,6 +6,7 @@ import java.util.List;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
+import pms.dao.impl.NetFreeBoardDao;
 import pms.dao.impl.NetMemberDao;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
@@ -144,7 +145,7 @@ public class ClientApp {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     NetMemberDao memberDao = new NetMemberDao(requestAgent);
-
+    NetFreeBoardDao freeBoardDao = new NetFreeBoardDao(requestAgent);
 
     // Command 객체 준비
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestAgent));
@@ -172,12 +173,12 @@ public class ClientApp {
     commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(requestAgent));
     commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(requestAgent));
 
-    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(requestAgent));
-    commandMap.put("/freeBoard/list", new FreeBoardListHandler(requestAgent));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(requestAgent));
-    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(requestAgent));
-    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(requestAgent));
-    commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(requestAgent));
+    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardDao));
+    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardDao));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardDao));
+    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardDao));
+    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardDao));
+    commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardDao));
     //
     commandMap.put("/doctorBoard/add", new DoctorBoardAddHandler(requestAgent));
     commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(requestAgent));

@@ -1,19 +1,20 @@
 package pms.handler;
 
 import java.sql.Date;
+import java.util.Collection;
 import java.util.List;
+import pms.dao.FreeBoardDao;
 import pms.domain.FreeBoard;
-import request.RequestAgent;
 import util.Prompt;
 
 public class FreeBoardAddHandler implements Command{
 
+  FreeBoardDao freeBoardDao;
 
-  RequestAgent requestAgent;
-
-  public FreeBoardAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public FreeBoardAddHandler(FreeBoardDao freeBoardDao) {
+    this.freeBoardDao = freeBoardDao;
   }
+
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
@@ -21,25 +22,41 @@ public class FreeBoardAddHandler implements Command{
     System.out.println();
     FreeBoard freeBoard = new FreeBoard();
 
-    requestAgent.request("freeBoard.selectList", null);
+    //프리보드리스트가 0일 때 lastIndext = 1로 지정하고 사이즈가 1이 아닐 때
+    Collection<FreeBoard> freeBoardList = freeBoardDao.findAll();
 
-    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (freeBoardList.size() == 0) {
       FreeBoard.lastIndex = 1;
       freeBoard.setNo(FreeBoard.lastIndex);
+    } else if(FreeBoard.lastIndex != freeBoardList.size()) {
+
+      FreeBoard.lastIndex = ((List<FreeBoard>) freeBoardList).get(freeBoardList.size()-1).getNo();
+      freeBoard.setNo(++FreeBoard.lastIndex);
+
+    } else {
+      freeBoard.setNo(++FreeBoard.lastIndex);
     }
 
-    else {
-      List<FreeBoard> freeBoardList = (List<FreeBoard>) requestAgent.getObjects(FreeBoard.class);
+    //    requestAgent.request("freeBoard.selectList", null);
+    //
+    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      FreeBoard.lastIndex = 1;
+    //      freeBoard.setNo(FreeBoard.lastIndex);
+    //    }
+    //
+    //    else {
+    //      List<FreeBoard> freeBoardList = (List<FreeBoard>) requestAgent.getObjects(FreeBoard.class);
+    //
+    //      if(FreeBoard.lastIndex != freeBoardList.size()) {
+    //
+    //        FreeBoard.lastIndex = freeBoardList.get(freeBoardList.size()-1).getNo();
+    //        freeBoard.setNo(++FreeBoard.lastIndex);
+    //
+    //      } else {
+    //        freeBoard.setNo(++FreeBoard.lastIndex);
+    //      }
+    //    }
 
-      if(FreeBoard.lastIndex != freeBoardList.size()) {
-
-        FreeBoard.lastIndex = freeBoardList.get(freeBoardList.size()-1).getNo();
-        freeBoard.setNo(++FreeBoard.lastIndex);
-
-      } else {
-        freeBoard.setNo(++FreeBoard.lastIndex);
-      }
-    }
     while(true) {
 
       freeBoard.setTitle(Prompt.inputString("제목> "));
@@ -63,13 +80,9 @@ public class FreeBoardAddHandler implements Command{
     freeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
     freeBoard.setWhichBoard("free");
 
-    requestAgent.request("freeBoard.insert", freeBoard);
+    freeBoardDao.insert(freeBoard);
 
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("게시글이 등록되었습니다.");
-      return;
-    }
-    System.out.println("게시글 저장 실패!");
+    System.out.println("게시글을 저장했습니다.");
   }
 
 }

@@ -137,7 +137,3 @@ public class LikeAddCancelHandler implements Command {
     }
   } 
 }
-
-
-
-
