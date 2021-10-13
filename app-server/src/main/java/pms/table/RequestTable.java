@@ -32,8 +32,6 @@ public class RequestTable extends JsonDataTable<Medicine> implements DataProcess
     response.setStatus(Response.SUCCESS);
   }
 
-
-
   private void selectList(Request request, Response response) throws Exception {
     if(list.size() == 0) {
       response.setStatus(Response.FAIL);
@@ -44,26 +42,16 @@ public class RequestTable extends JsonDataTable<Medicine> implements DataProcess
   }
 
   private void delete(Request request, Response response) throws Exception {
-
     String name = request.getParameter("name");
-    int index = indexOf(name);
+    Medicine index = indexOf(name);
 
-    if (index == -1) {
-      response.setStatus(Response.FAIL);
-      return;
-    }
-
-    list.remove(index);
-    response.setStatus(Response.SUCCESS);
-  }
-
-  private int indexOf(String name) {
-    for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getName() == name) {
-        return i;
+    for (Medicine medicine : list) {
+      if (!medicine.getName().contains(name)) {
+        continue;
       }
     }
-    return -1;
+    list.remove(index);
+    response.setStatus(Response.SUCCESS);
   }
 
   private void selectOneByName(Request request, Response response) throws Exception {
@@ -82,8 +70,17 @@ public class RequestTable extends JsonDataTable<Medicine> implements DataProcess
       response.setValue(medicine);
     } else {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 이름의 회원을 찾을 수 없습니다.");
+      response.setValue("해당 이름의 약품을 찾을 수 없습니다.");
     }
+  }
+
+  private Medicine indexOf(String name) {
+    for (Medicine medicine : list) {
+      if (medicine.getName().equals(name) ) {
+        return medicine;
+      }
+    }
+    return null;
   }
 
 

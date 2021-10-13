@@ -2,6 +2,8 @@ package pms.handler;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import pms.domain.Bucket;
 import pms.domain.Medicine;
 import request.RequestAgent;
 import util.Prompt;
@@ -61,11 +63,33 @@ public class AdminApprovalHandler implements Command {
 
     Medicine medicine = requestAgent.getObject(Medicine.class);
 
+    requestAgent.request("medicine.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+
+
+      Medicine.lastIndex = 1;
+      medicine.setNo(Medicine.lastIndex);
+
+    }
+
+    else {
+      List<Medicine> medicineList = (List<Medicine>) requestAgent.getObjects(Medicine.class);
+      if (Bucket.lastIndex != medicineList.size()) {
+        Bucket.lastIndex = medicineList.get(medicineList.size()-1).getNo();
+        medicine.setNo(++Bucket.lastIndex);
+
+      } else {
+        medicine.setNo(++Bucket.lastIndex);
+      }
+    }
+
     requestAgent.request("medicine.insert", medicine);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("약품이 등록되었습니다.");
       requestAgent.request("request.delete", params);
+      return;
 
     } 
   } 
