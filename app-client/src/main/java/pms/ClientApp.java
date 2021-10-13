@@ -6,6 +6,7 @@ import java.util.List;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
+import pms.dao.impl.NetMemberDao;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
@@ -142,6 +143,9 @@ public class ClientApp {
     // 서버와 통신을 담당할 객체 준비
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
+    NetMemberDao memberDao = new NetMemberDao(requestAgent);
+
+
     // Command 객체 준비
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestAgent));
     commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
@@ -182,8 +186,8 @@ public class ClientApp {
     commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(requestAgent));
     commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(requestAgent));
 
-    commandMap.put("/member/add", new MemberAddHandler(requestAgent));
-    commandMap.put("/member/list", new MemberListHandler(requestAgent));
+    commandMap.put("/member/add", new MemberAddHandler(memberDao));
+    commandMap.put("/member/list", new MemberListHandler(memberDao));
 
     commandMap.put("/auth/login", new AuthLoginHandler(requestAgent));
     commandMap.put("/auth/logout", new AuthLogoutHandler());

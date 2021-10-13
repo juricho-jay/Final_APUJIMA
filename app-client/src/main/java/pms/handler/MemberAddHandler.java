@@ -1,16 +1,16 @@
 package pms.handler;
 
 import java.sql.Date;
+import pms.dao.MemberDao;
 import pms.domain.Member;
-import request.RequestAgent;
 import util.Prompt;
 
 public class MemberAddHandler implements Command{
 
-  RequestAgent requestAgent;
+  MemberDao memberDao;
 
-  public MemberAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MemberAddHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -67,14 +67,7 @@ public class MemberAddHandler implements Command{
         continue;
       } 
 
-      requestAgent.request("member.check", member);
-
-      if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("중복되는 아이디 입니다. 다른 아이디를 사용해 주세요.");
-        member.setId("");
-        continue;
-      }
-
+      memberDao.check(member);
 
       if(member.getId() != "")
         break;
@@ -112,15 +105,11 @@ public class MemberAddHandler implements Command{
     System.out.println(member.getId());
 
 
-    requestAgent.request("member.insert", member);
+    memberDao.insert(member);
 
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println();
-      System.out.println("회원가입 완료!");
-      System.out.println("신규 회원가입 이벤트로 1000포인트가 지급되었습니다!");
-    } else {
-      System.out.println("회원가입 실패!");
-    }
+    System.out.println();
+    System.out.println("회원가입 완료!");
+    System.out.println("신규 회원가입 이벤트로 1000포인트가 지급되었습니다!");
   }
 
 }
