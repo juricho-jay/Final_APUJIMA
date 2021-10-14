@@ -1,15 +1,15 @@
 package pms.handler;
 
+import pms.dao.MedicineDao;
 import pms.domain.Medicine;
-import request.RequestAgent;
 import util.Prompt;
 
 public class MedicineRequestHandler implements Command {
 
-  RequestAgent requestAgent;
+  MedicineDao medicineDao;
 
-  public MedicineRequestHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MedicineRequestHandler(MedicineDao medicineDao) {
+    this.medicineDao = medicineDao;
   }
 
 
@@ -20,7 +20,14 @@ public class MedicineRequestHandler implements Command {
 
     Medicine medicine = new Medicine();
 
-    medicine.setName(Prompt.inputString("약품명> "));
+
+    while(true) {
+      medicine.setName(Prompt.inputString("약품명> " ));
+
+      medicineDao.check(medicine);
+      if(medicine.getName() != "")
+        break;
+    }
     medicine.setAgeLimit(Prompt.inputInt("권장연령> "));
     medicine.setShape(Prompt.inputString("모  양> "));
     medicine.setColor(Prompt.inputString("색  상> "));
@@ -32,24 +39,8 @@ public class MedicineRequestHandler implements Command {
         System.out.println("관리자에게 약품등록 요청을 취소하였습니다.");
         return;
       }
-      //      if(input.equalsIgnoreCase("y")) {
-      //        System.out.println("관리자에게 약품등록을 요청하였습니다.");
 
-      // 약품 요청은 requestTable 담당
-      requestAgent.request("request.insert", medicine);
-
-      //      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      //        System.out.println("약품 등록 요청 실패!");
-      //        System.out.println(requestAgent.getObject(String.class));
-      //        return;
-      //      }
-
-      //      } else if (input.equalsIgnoreCase("n") || input.equals("")) {
-      //        System.out.println("등록 요청이 취소되었습니다.");
-      //        break;
-      //      } else {
-      //        System.out.println("입력이 잘못되었습니다."); 
-      //      }
+      //약품 요청은 requestDao.insert(medicine);
 
       System.out.println("관리자에게 약품등록을 요청하였습니다.");
       break;

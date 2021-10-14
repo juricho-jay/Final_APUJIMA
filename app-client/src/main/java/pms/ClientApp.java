@@ -8,6 +8,7 @@ import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetFreeBoardDao;
+import pms.dao.impl.NetMedicineDao;
 import pms.dao.impl.NetMemberDao;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
@@ -147,6 +148,8 @@ public class ClientApp {
     NetMemberDao memberDao = new NetMemberDao(requestAgent);
     NetFreeBoardDao freeBoardDao = new NetFreeBoardDao(requestAgent);
     NetBucketDao bucketDao = new NetBucketDao(requestAgent);
+    NetMedicineDao medicineDao = new NetMedicineDao(requestAgent);
+
 
     // Command 객체 준비
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestAgent));
@@ -155,12 +158,12 @@ public class ClientApp {
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(requestAgent));
     commandMap.put("/intro", new IntroMenu());
 
-    commandMap.put("/medicine/add", new MedicineAddHandler(requestAgent));
-    commandMap.put("/medicine/request", new MedicineRequestHandler(requestAgent));
-    commandMap.put("/medicine/list", new MedicineListHandler(requestAgent));
-    commandMap.put("/medicine/update", new MedicineUpdateHandler(requestAgent));
-    commandMap.put("/medicine/delete", new MedicineDeleteHandler(requestAgent));
-    commandMap.put("/medicine/search", new MedicineSearchHandler(requestAgent));
+    commandMap.put("/medicine/add", new MedicineAddHandler(medicineDao));
+    commandMap.put("/medicine/request", new MedicineRequestHandler(medicineDao));
+    commandMap.put("/medicine/list", new MedicineListHandler(medicineDao));
+    commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineDao));
+    commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineDao));
+    commandMap.put("/medicine/search", new MedicineSearchHandler(medicineDao));
 
     commandMap.put("/counselingMember/list", new DoctorMemberListHandler(requestAgent));
     commandMap.put("/counselingMember/add", new CounselingMemberAddHandler(requestAgent));

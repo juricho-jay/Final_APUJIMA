@@ -1,15 +1,16 @@
 package pms.handler;
 
-import java.util.HashMap;
-import request.RequestAgent;
+import java.util.Collection;
+import pms.dao.MedicineDao;
+import pms.domain.Medicine;
 import util.Prompt;
 
 public class MedicineDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
+  MedicineDao medicineDao;
 
-  public MedicineDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MedicineDeleteHandler(MedicineDao medicineDao) {
+    this.medicineDao = medicineDao;
   }
 
   @Override
@@ -21,67 +22,23 @@ public class MedicineDeleteHandler implements Command {
     if (input.equals("#")) {
       return;
     }
+    Collection<Medicine> medicineList = medicineDao.findAll();
 
-    // 번호를 no에 저장
-    HashMap<String,String> params = new HashMap<>();
-    params.put("name", input);
-    // no에는 숫자값을 넣는다.
+    for (Medicine medicine : medicineList) {
+      if (!medicine.getName().contains(input)) {
+        continue;
+      }
 
-    requestAgent.request("medicine.selectOne2", params);
+      String input2 = Prompt.inputString(" ❗ 정말 삭제하시겠습니까? (y/N)> ");
+      if(input2.equalsIgnoreCase("n") || input2.length() == 0) {
+        System.out.println("약품 삭제를 취소하였습니다.");
+        return;
+      }
 
-    //    int no = Prompt.inputInt("번호> "); // 지정한 번호를 선택
-    //
-    //    // 번호를 no에 저장
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("no", String.valueOf(no)); // 해쉬맵에 추가한다.
-    //    // no에는 숫자값을 넣는다.
-    //
-    //    requestAgent.request("medicine.selectOne", params); // 약품의 
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("해당 번호의 게시글이 없습니다.");
-    //      return;
-    //    }
+      medicineDao.delete(input);
 
-    requestAgent.request("medicine.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("약품리스트가 없습니다.");
-      return;
+      System.out.println("약품을 삭제하였습니다.");
     }
-
-    //    int no = (int)request.getAttribute("no"); 
-    //
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("no", String.valueOf(no));
-    //
-    //    requestAgent.request("medicine.selectList", null);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("약품리스트가 없습니다.");
-    //      return;
-    //    }
-    //
-    //    requestAgent.request("medicine.selectOne", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("해당 번호의 약품이 없습니다!");
-    //      return;
-    //    }
-
-    String input2 = Prompt.inputString(" ❗ 정말 삭제하시겠습니까? (y/N)> ");
-    if(input2.equalsIgnoreCase("n") || input2.length() == 0) {
-      System.out.println("약품 삭제를 취소하였습니다.");
-      return;
-    }
-
-    requestAgent.request("medicine.delete", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("약품 삭제 실패!");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
-    System.out.println("약품을 삭제하였습니다.");
   }
 
 }
