@@ -2,18 +2,29 @@ package pms.handler;
 
 import java.util.HashMap;
 import java.util.List;
+import pms.dao.CommentDao;
+import pms.dao.DoctorBoardDao;
+import pms.dao.FreeBoardDao;
+import pms.dao.NoticeBoardDao;
 import pms.domain.Comment;
 import pms.domain.DoctorBoard;
 import pms.domain.FreeBoard;
 import pms.domain.NoticeBoard;
-import request.RequestAgent;
 
 public class CommentAutoDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
+  CommentDao commentDao;
+  FreeBoardDao freeBoardDao;
+  DoctorBoardDao doctorBoardDao;
+  NoticeBoardDao noticeBoardDao;
 
-  public CommentAutoDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+
+  public CommentAutoDeleteHandler(CommentDao commentDao, FreeBoardDao freeBoardDao,
+      DoctorBoardDao doctorBoardDao, NoticeBoardDao noticeBoardDao) {
+    this.commentDao = commentDao;
+    this.freeBoardDao = freeBoardDao;
+    this.doctorBoardDao = doctorBoardDao;
+    this.noticeBoardDao = noticeBoardDao;
   }
 
   @Override
@@ -25,21 +36,13 @@ public class CommentAutoDeleteHandler implements Command {
     HashMap<String,String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
-    requestAgent.request("comment.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return;
-    }
-
-    List<Comment> commentList = (List<Comment>) requestAgent.getObjects(Comment.class);
-
+    List<Comment> commentList = commentDao.findAll();
 
     String whichBoard = (String)request.getAttribute("boardType");
 
 
     if (whichBoard.equals("freeBoard")) {
-      requestAgent.request("freeBoard.selectOne", params);
-      FreeBoard freeBoard = requestAgent.getObject(FreeBoard.class);
+      FreeBoard freeBoard = freeBoardDao.findByNo(no);
       String whichBoard2 = freeBoard.getWhichBoard();
 
 
@@ -47,20 +50,16 @@ public class CommentAutoDeleteHandler implements Command {
         if (commentList.get(i).getWhichBoard().equals(whichBoard2) &&
             commentList.get(i).getCommentBoardNo() == freeBoard.getNo()) {
 
-          HashMap<String,String> deleteIndex = new HashMap<>();
-          deleteIndex.put("deleteIndex", String.valueOf(i));
+          //          HashMap<String,String> deleteIndex = new HashMap<>();
+          //          deleteIndex.put("deleteIndex", String.valueOf(i));
+          //          requestAgent.request("comment.delete", deleteIndex);
+          commentDao.delete(i);
 
-          requestAgent.request("comment.delete", deleteIndex);
-
-          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-            return;
-          }
         }
       }
 
     } else if (whichBoard.equals("doctorBoard")) {
-      requestAgent.request("doctorBoard.selectOne", params);
-      DoctorBoard doctorBoard = requestAgent.getObject(DoctorBoard.class);
+      DoctorBoard doctorBoard = doctorBoardDao.findByNo(no);
       String whichBoard2 = doctorBoard.getWhichBoard();
 
 
@@ -68,20 +67,18 @@ public class CommentAutoDeleteHandler implements Command {
         if (commentList.get(i).getWhichBoard().equals(whichBoard2) &&
             commentList.get(i).getCommentBoardNo() == doctorBoard.getNo()) {
 
-          HashMap<String,String> deleteIndex = new HashMap<>();
-          deleteIndex.put("deleteIndex", String.valueOf(i));
+          //          HashMap<String,String> deleteIndex = new HashMap<>();
+          //          deleteIndex.put("deleteIndex", String.valueOf(i));
+          //          requestAgent.request("comment.delete", deleteIndex);
 
-          requestAgent.request("comment.delete", deleteIndex);
-
-          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-            return;
-          }
+          commentDao.delete(i);
         }
       }
 
     } else if (whichBoard.equals("noticeBoard")) {
-      requestAgent.request("noticeBoard.selectOne", params);
-      NoticeBoard noticeBoard = requestAgent.getObject(NoticeBoard.class);
+      //      requestAgent.request("noticeBoard.selectOne", params);
+      //      NoticeBoard noticeBoard = requestAgent.getObject(NoticeBoard.class);
+      NoticeBoard noticeBoard = noticeBoardDao.findByNo(no);
       String whichBoard2 = noticeBoard.getWhichBoard();
 
 
@@ -89,14 +86,10 @@ public class CommentAutoDeleteHandler implements Command {
         if (commentList.get(i).getWhichBoard().equals(whichBoard2) &&
             commentList.get(i).getCommentBoardNo() == noticeBoard.getNo()) {
 
-          HashMap<String,String> deleteIndex = new HashMap<>();
-          deleteIndex.put("deleteIndex", String.valueOf(i));
+          //          HashMap<String,String> deleteIndex = new HashMap<>();
+          //          deleteIndex.put("deleteIndex", String.valueOf(i));
 
-          requestAgent.request("comment.delete", deleteIndex);
-
-          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-            return;
-          }
+          commentDao.delete(i);
         }
       }
 

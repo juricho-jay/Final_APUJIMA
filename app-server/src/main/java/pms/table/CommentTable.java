@@ -89,7 +89,7 @@ public class CommentTable extends JsonDataTable<Comment> implements DataProcesso
   }
 
   private void delete(Request request, Response response) throws Exception {
-    int deleteIndex = Integer.parseInt(request.getParameter("deleteIndex"));
+    int deleteIndex = Integer.parseInt(request.getParameter("no"));
     int index = indexOf(deleteIndex);
 
     if (index == -1) {

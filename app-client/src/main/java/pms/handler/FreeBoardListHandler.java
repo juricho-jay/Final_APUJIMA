@@ -1,15 +1,15 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
+import pms.dao.FreeBoardDao;
 import pms.domain.FreeBoard;
-import request.RequestAgent;
 
 public class FreeBoardListHandler implements Command{
 
-  RequestAgent requestAgent;
+  FreeBoardDao freeBoardDao;
 
-  public FreeBoardListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public FreeBoardListHandler(FreeBoardDao freeBoardDao) {
+    this.freeBoardDao = freeBoardDao;
   }
 
   @Override
@@ -17,15 +17,8 @@ public class FreeBoardListHandler implements Command{
     System.out.println("[게시글 목록] 페이지입니다.");
     System.out.println();
 
-    requestAgent.request("freeBoard.selectList", null);
+    List<FreeBoard> freeBoardList = freeBoardDao.findAll();
 
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("현재 게시판에 작성된 글이 없습니다.");
-      return;
-    }
-
-    Collection<FreeBoard> freeBoardList = requestAgent.getObjects(FreeBoard.class);
 
     for (FreeBoard freeBoard : freeBoardList) {
       System.out.printf("%d, %s, %s, %s, %d\n",

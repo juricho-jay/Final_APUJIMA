@@ -1,20 +1,29 @@
 package pms.handler;
 
-import java.util.HashMap;
 import java.util.List;
+import pms.dao.CommentDao;
+import pms.dao.DoctorBoardDao;
+import pms.dao.FreeBoardDao;
+import pms.dao.NoticeBoardDao;
 import pms.domain.Comment;
 import pms.domain.DoctorBoard;
 import pms.domain.FreeBoard;
 import pms.domain.NoticeBoard;
-import request.RequestAgent;
 import util.Prompt;
 
 public class CommentDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
+  CommentDao commentDao;
+  FreeBoardDao freeBoardDao;
+  DoctorBoardDao doctorBoardDao;
+  NoticeBoardDao noticeBoardDao;
 
-  public CommentDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public CommentDeleteHandler(CommentDao commentDao, FreeBoardDao freeBoardDao,
+      DoctorBoardDao doctorBoardDao, NoticeBoardDao noticeBoardDao) {
+    this.commentDao = commentDao;
+    this.freeBoardDao = freeBoardDao;
+    this.doctorBoardDao = doctorBoardDao;
+    this.noticeBoardDao = noticeBoardDao;
   }
 
   @Override
@@ -25,32 +34,28 @@ public class CommentDeleteHandler implements Command {
     //댓글 번호 (게시물마다 1번으로 시작되는)
     int commentResetNo = Prompt.inputInt("번호> ");
 
-    requestAgent.request("comment.selectList", null);
+    List<Comment> commentList = commentDao.findAll();
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (commentList.size() == 0) {
       System.out.println("등록된 댓글이 없습니다.");
       return;
     }
 
-    List<Comment> commentList = (List<Comment>) requestAgent.getObjects(Comment.class);
-
     int no = (int)request.getAttribute("no"); //게시글 번호
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("no", String.valueOf(no));
 
     String whichBoard = (String)request.getAttribute("boardType");
 
     if (whichBoard.equals("freeBoard")) {
 
-      requestAgent.request("freeBoard.selectOne", params);
+      FreeBoard freeBoard = freeBoardDao.findByNo(no);
 
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      if (freeBoard == null) {
         System.out.println("해당 번호의 게시글이 없습니다.");
         return;
       }
-
-      FreeBoard freeBoard = requestAgent.getObject(FreeBoard.class);
       String whichBoard2 = freeBoard.getWhichBoard();
 
       // 조건: 어느 보드/ 어느 게시글 / 어느 댓글 번호(1로 reset되는 번호)
@@ -60,14 +65,10 @@ public class CommentDeleteHandler implements Command {
             commentList.get(i).getNo() == commentResetNo &&
             commentList.get(i).getCommenter().equals(AuthLoginHandler.getLoginUser().getId())) {
 
-          HashMap<String,String> deleteIndex = new HashMap<>();
-          deleteIndex.put("deleteIndex", String.valueOf(i));
+          //          HashMap<String,String> deleteIndex = new HashMap<>();
+          //          deleteIndex.put("deleteIndex", String.valueOf(i));
 
-          requestAgent.request("comment.delete", deleteIndex);
-
-          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-            return;
-          }
+          commentDao.delete(i);
           System.out.println("댓글이 삭제되었습니다.");
           return;
         } else {
@@ -77,8 +78,12 @@ public class CommentDeleteHandler implements Command {
       }
 
     } else if (whichBoard.equals("doctorBoard")) {
-      requestAgent.request("doctorBoard.selectOne", params);
-      DoctorBoard doctorBoard = requestAgent.getObject(DoctorBoard.class);
+      DoctorBoard doctorBoard = doctorBoardDao.findByNo(no);
+
+      if (doctorBoard == null) {
+        System.out.println("해당 번호의 게시글이 없습니다.");
+        return;
+      }
       String whichBoard2 = doctorBoard.getWhichBoard();
 
 
@@ -88,14 +93,10 @@ public class CommentDeleteHandler implements Command {
             commentList.get(i).getNo() == commentResetNo &&
             commentList.get(i).getCommenter().equals(AuthLoginHandler.getLoginUser().getId())) {
 
-          HashMap<String,String> deleteIndex = new HashMap<>();
-          deleteIndex.put("deleteIndex", String.valueOf(i));
+          //          HashMap<String,String> deleteIndex = new HashMap<>();
+          //          deleteIndex.put("deleteIndex", String.valueOf(i));
 
-          requestAgent.request("comment.delete", deleteIndex);
-
-          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-            return;
-          }
+          commentDao.delete(i);
           System.out.println("댓글이 삭제되었습니다.");
           return;
         } else {
@@ -105,8 +106,12 @@ public class CommentDeleteHandler implements Command {
       }
 
     } else if (whichBoard.equals("noticeBoard")) {
-      requestAgent.request("noticeBoard.selectOne", params);
-      NoticeBoard noticeBoard = requestAgent.getObject(NoticeBoard.class);
+      NoticeBoard noticeBoard = noticeBoardDao.findByNo(no);
+
+      if (noticeBoard == null) {
+        System.out.println("해당 번호의 게시글이 없습니다.");
+        return;
+      }
       String whichBoard2 = noticeBoard.getWhichBoard();
 
 
@@ -116,14 +121,10 @@ public class CommentDeleteHandler implements Command {
             commentList.get(i).getNo() == commentResetNo &&
             commentList.get(i).getCommenter().equals(AuthLoginHandler.getLoginUser().getId())) {
 
-          HashMap<String,String> deleteIndex = new HashMap<>();
-          deleteIndex.put("deleteIndex", String.valueOf(i));
+          //          HashMap<String,String> deleteIndex = new HashMap<>();
+          //          deleteIndex.put("deleteIndex", String.valueOf(i));
 
-          requestAgent.request("comment.delete", deleteIndex);
-
-          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-            return;
-          }
+          commentDao.delete(i);
           System.out.println("댓글이 삭제되었습니다.");
           return;
         } else {

@@ -3,80 +3,80 @@ package pms.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import pms.dao.FreeBoardDao;
-import pms.domain.FreeBoard;
+import pms.dao.DoctorBoardDao;
+import pms.domain.DoctorBoard;
 import request.RequestAgent;
 
-public class NetFreeBoardDao implements FreeBoardDao{
+public class NetDoctorBoardDao implements DoctorBoardDao{
 
   RequestAgent requestAgent;
 
-  public NetFreeBoardDao(RequestAgent requestAgent) {
+  public NetDoctorBoardDao(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
   @Override
-  public void insert(FreeBoard freeBoard) throws Exception {
-    requestAgent.request("freeBoard.insert", freeBoard);
+  public void insert(DoctorBoard doctorBoard) throws Exception {
+    requestAgent.request("doctorBoard.insert", doctorBoard);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception(requestAgent.getObject(String.class));
     }
   }
 
   @Override
-  public List<FreeBoard> findAll() throws Exception {
-    requestAgent.request("freeBoard.selectList", null);
+  public List<DoctorBoard> findAll() throws Exception {
+    requestAgent.request("doctorBoard.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception(requestAgent.getObject(String.class));
     }
 
-    return new ArrayList<>(requestAgent.getObjects(FreeBoard.class));
+    return new ArrayList<>(requestAgent.getObjects(DoctorBoard.class));
   }
 
   @Override
-  public FreeBoard findByNo(int no) throws Exception {
+  public DoctorBoard findByNo(int no) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
-    requestAgent.request("freeBoard.selectOne", params);
+    requestAgent.request("doctorBoard.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
 
-    return requestAgent.getObject(FreeBoard.class);
+    return requestAgent.getObject(DoctorBoard.class);
   }
 
   @Override
-  public FreeBoard findByName(String name) throws Exception {
+  public DoctorBoard findByName(String name) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("name", name);
 
-    requestAgent.request("freeBoard.selectOneByName", params);
+    requestAgent.request("doctorBoard.selectOneByName", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
 
-    return requestAgent.getObject(FreeBoard.class);
+    return requestAgent.getObject(DoctorBoard.class);
   }
 
-  public List<FreeBoard> findByKeyword(String keyword) throws Exception {
+  public List<DoctorBoard> findByKeyword(String keyword) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("keyword", keyword);
-    requestAgent.request("freeBoard.selectListByKeyword", params);
+    requestAgent.request("doctorBoard.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 검색 실패!");
+      throw new Exception("해당 키워드로 검색 가능한 게시글이 없습니다.");
     }
 
-    return new ArrayList<>(requestAgent.getObjects(FreeBoard.class));
+    return new ArrayList<>(requestAgent.getObjects(DoctorBoard.class));
   }
 
 
   @Override
-  public void update(FreeBoard freeBoard) throws Exception {
-    requestAgent.request("freeBoard.update", freeBoard);
+  public void update(DoctorBoard doctorBoard) throws Exception {
+    requestAgent.request("doctorBoard.update", doctorBoard);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception(requestAgent.getObject(String.class));
@@ -88,7 +88,7 @@ public class NetFreeBoardDao implements FreeBoardDao{
     HashMap<String,String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
-    requestAgent.request("freeBoard.delete", params);
+    requestAgent.request("doctorBoard.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception(requestAgent.getObject(String.class));

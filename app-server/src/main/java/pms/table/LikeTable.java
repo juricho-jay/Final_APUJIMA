@@ -62,7 +62,7 @@ public class LikeTable extends JsonDataTable<Like> implements DataProcessor {
 
 
   private void delete(Request request, Response response) throws Exception {
-    int deleteIndex = Integer.parseInt(request.getParameter("deleteIndex"));
+    int deleteIndex = Integer.parseInt(request.getParameter("no"));
     int index = indexOf(deleteIndex);
 
     if (index == -1) {

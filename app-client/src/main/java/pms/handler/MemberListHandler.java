@@ -1,6 +1,6 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
 import pms.dao.MemberDao;
 import pms.domain.Member;
 
@@ -16,7 +16,7 @@ public class MemberListHandler implements Command{
     System.out.println("[회원 목록]");
 
 
-    Collection<Member> memberList = memberDao.findAll();
+    List<Member> memberList = memberDao.findAll();
 
     for (Member member : memberList) {
       if (member.getDoctorOrNot() == 2) {

@@ -6,7 +6,12 @@ import java.util.List;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
+import pms.dao.impl.NetCommentDao;
+import pms.dao.impl.NetDoctorBoardDao;
+import pms.dao.impl.NetFreeBoardDao;
+import pms.dao.impl.NetLikeDao;
 import pms.dao.impl.NetMemberDao;
+import pms.dao.impl.NetNoticeBoardDao;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
@@ -144,7 +149,11 @@ public class ClientApp {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     NetMemberDao memberDao = new NetMemberDao(requestAgent);
-
+    NetFreeBoardDao freeBoardDao = new NetFreeBoardDao(requestAgent);
+    NetLikeDao likeDao = new NetLikeDao(requestAgent);
+    NetDoctorBoardDao doctorBoardDao = new NetDoctorBoardDao(requestAgent);
+    NetNoticeBoardDao noticeBoardDao = new NetNoticeBoardDao(requestAgent);
+    NetCommentDao commentDao = new NetCommentDao(requestAgent);
 
     // Command 객체 준비
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestAgent));
@@ -172,14 +181,14 @@ public class ClientApp {
     commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(requestAgent));
     commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(requestAgent));
 
-    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(requestAgent));
-    commandMap.put("/freeBoard/list", new FreeBoardListHandler(requestAgent));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(requestAgent));
-    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(requestAgent));
-    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(requestAgent));
-    commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(requestAgent));
+    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardDao));
+    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardDao));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardDao, likeDao, commentDao));
+    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardDao));
+    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardDao));
+    commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardDao));
     //
-    commandMap.put("/doctorBoard/add", new DoctorBoardAddHandler(requestAgent));
+    commandMap.put("/doctorBoard/add", new DoctorBoardAddHandler(doctorBoardDao, memberDao));
     commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(requestAgent));
     commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(requestAgent));
     commandMap.put("/doctorBoard/update", new DoctorBoardUpdateHandler(requestAgent));
@@ -200,13 +209,13 @@ public class ClientApp {
     commandMap.put("/mailBox/detail", new MailBoxDetailHandler(requestAgent));
     commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(requestAgent));
 
-    commandMap.put("/comment/add", new CommentAddHandler(requestAgent));
-    commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(requestAgent));
-    commandMap.put("/comment/update", new CommentUpdateHandler(requestAgent));
-    commandMap.put("/comment/delete", new CommentDeleteHandler(requestAgent));
+    commandMap.put("/comment/add", new CommentAddHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
+    commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
+    commandMap.put("/comment/update", new CommentUpdateHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
+    commandMap.put("/comment/delete", new CommentDeleteHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
 
-    commandMap.put("/like/addCancel", new LikeAddCancelHandler(requestAgent));
-    commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(requestAgent));
+    commandMap.put("/like/addCancel", new LikeAddCancelHandler(likeDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
+    commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(likeDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
 
 
     commandMap.put("/bucket/add", new BucketAddHandler(requestAgent));

@@ -1,9 +1,9 @@
 package pms.handler;
 
 import java.sql.Date;
-import java.util.Collection;
 import java.util.List;
 import pms.dao.FreeBoardDao;
+import pms.domain.DoctorBoard;
 import pms.domain.FreeBoard;
 import util.Prompt;
 
@@ -14,6 +14,7 @@ public class FreeBoardAddHandler implements Command{
   public FreeBoardAddHandler(FreeBoardDao freeBoardDao) {
     this.freeBoardDao = freeBoardDao;
   }
+
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
@@ -21,24 +22,24 @@ public class FreeBoardAddHandler implements Command{
     System.out.println();
     FreeBoard freeBoard = new FreeBoard();
 
-    Collection<FreeBoard> freeBoardList = freeBoardDao.findAll();
+    List<FreeBoard> freeBoardList = freeBoardDao.findAll();
 
     if (freeBoardList.size() == 0) {
       FreeBoard.lastIndex = 1;
       freeBoard.setNo(FreeBoard.lastIndex);
-    }
 
-    else {
+    } else {
 
       if(FreeBoard.lastIndex != freeBoardList.size()) {
 
-        FreeBoard.lastIndex = ((List<FreeBoard>) freeBoardList).get(freeBoardList.size()-1).getNo();
-        freeBoard.setNo(++FreeBoard.lastIndex);
+        FreeBoard.lastIndex = freeBoardList.get(freeBoardList.size()-1).getNo();
+        freeBoard.setNo(++DoctorBoard.lastIndex);
 
       } else {
-        freeBoard.setNo(++FreeBoard.lastIndex);
+        freeBoard.setNo(++DoctorBoard.lastIndex);
       }
     }
+
     while(true) {
 
       freeBoard.setTitle(Prompt.inputString("제목> "));

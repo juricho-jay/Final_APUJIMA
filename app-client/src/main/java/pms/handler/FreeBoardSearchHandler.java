@@ -1,19 +1,17 @@
 package pms.handler;
 
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.List;
+import pms.dao.FreeBoardDao;
 import pms.domain.FreeBoard;
-import request.RequestAgent;
 import util.Prompt;
 
 public class FreeBoardSearchHandler implements Command {
 
-  RequestAgent requestAgent;
+  FreeBoardDao freeBoardDao;
 
-  public FreeBoardSearchHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public FreeBoardSearchHandler(FreeBoardDao freeBoardDao) {
+    this.freeBoardDao = freeBoardDao;
   }
-
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -22,18 +20,7 @@ public class FreeBoardSearchHandler implements Command {
     System.out.println();
     String input = Prompt.inputString("검색어> ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("keyword", String.valueOf(input));
-
-    requestAgent.request("freeBoard.selectListByKeyword", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("목록 조회 실패!");
-      return;
-    }
-
-    Collection<FreeBoard> freeBoardList = requestAgent.getObjects(FreeBoard.class);
-
+    List<FreeBoard> freeBoardList = freeBoardDao.findByKeyword(input);
 
     for (FreeBoard freeBoard : freeBoardList) {
       if (!freeBoard.getTitle().contains(input) &&

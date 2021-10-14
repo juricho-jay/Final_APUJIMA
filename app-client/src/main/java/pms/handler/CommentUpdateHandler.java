@@ -2,19 +2,29 @@ package pms.handler;
 
 import java.util.HashMap;
 import java.util.List;
+import pms.dao.CommentDao;
+import pms.dao.DoctorBoardDao;
+import pms.dao.FreeBoardDao;
+import pms.dao.NoticeBoardDao;
 import pms.domain.Comment;
 import pms.domain.DoctorBoard;
 import pms.domain.FreeBoard;
 import pms.domain.NoticeBoard;
-import request.RequestAgent;
 import util.Prompt;
 
 public class CommentUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  CommentDao commentDao;
+  FreeBoardDao freeBoardDao;
+  DoctorBoardDao doctorBoardDao;
+  NoticeBoardDao noticeBoardDao;
 
-  public CommentUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public CommentUpdateHandler(CommentDao commentDao, FreeBoardDao freeBoardDao,
+      DoctorBoardDao doctorBoardDao, NoticeBoardDao noticeBoardDao) {
+    this.commentDao = commentDao;
+    this.freeBoardDao = freeBoardDao;
+    this.doctorBoardDao = doctorBoardDao;
+    this.noticeBoardDao = noticeBoardDao;
   }
 
 
@@ -25,16 +35,15 @@ public class CommentUpdateHandler implements Command {
       System.out.println();
       System.out.println("[댓글 변경]");
       System.out.println();
+
       int commentResetNo = Prompt.inputInt("번호> "); //댓글 번호 (게시물마다 1번으로 시작되는)
+      List<Comment> commentList = commentDao.findAll();
 
-      requestAgent.request("comment.selectList", null);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      if (commentList.size() == 0) {
         System.out.println("등록된 댓글이 없습니다.");
         return;
       }
 
-      List<Comment> commentList = (List<Comment>) requestAgent.getObjects(Comment.class);
 
       int no = (int)request.getAttribute("no"); // freeBoardDetailHandler에서 입력한 게시판 번호 불러오기
 
@@ -45,15 +54,12 @@ public class CommentUpdateHandler implements Command {
 
       if (whichBoard.equals("freeBoard")) { 
 
-        requestAgent.request("freeBoard.selectOne", params);
+        FreeBoard freeBoard = freeBoardDao.findByNo(no);
 
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        if (freeBoard == null) {
           System.out.println("해당 번호의 게시글이 없습니다.");
           return;
         }
-
-        FreeBoard freeBoard = requestAgent.getObject(FreeBoard.class);
-
 
         String commentContent = null;
         Comment comment = new Comment();
@@ -84,27 +90,17 @@ public class CommentUpdateHandler implements Command {
         }
 
         comment.setCommentContent(newCommentContent);
-        requestAgent.request("comment.update", comment);
-
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("댓글 변경 실패!");
-          System.out.println(requestAgent.getObject(String.class));
-          return;
-        }
-
+        commentDao.update(comment);
         System.out.println("댓글을 변경하였습니다.");
 
       } else if (whichBoard.equals("doctorBoard")) {
 
-        requestAgent.request("doctorBoard.selectOne", params);
+        DoctorBoard doctorBoard = doctorBoardDao.findByNo(no);
 
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        if (doctorBoard == null) {
           System.out.println("해당 번호의 게시글이 없습니다.");
           return;
         }
-
-        DoctorBoard doctorBoard = requestAgent.getObject(DoctorBoard.class); 
-
 
         String commentContent = null;
         Comment comment = new Comment();
@@ -135,27 +131,17 @@ public class CommentUpdateHandler implements Command {
         }
 
         comment.setCommentContent(newCommentContent);
-        requestAgent.request("comment.update", comment);
-
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("댓글 변경 실패!");
-          System.out.println(requestAgent.getObject(String.class));
-          return;
-        }
-
+        commentDao.update(comment);
         System.out.println("댓글을 변경하였습니다.");
 
       } else if (whichBoard.equals("noticeBoard")) {
 
-        requestAgent.request("noticeBoard.selectOne", params);
+        NoticeBoard noticeBoard = noticeBoardDao.findByNo(no);
 
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        if (noticeBoard == null) {
           System.out.println("해당 번호의 게시글이 없습니다.");
           return;
         }
-
-        NoticeBoard noticeBoard = requestAgent.getObject(NoticeBoard.class);
-
 
         String commentContent = null;
         Comment comment = new Comment();
@@ -186,14 +172,7 @@ public class CommentUpdateHandler implements Command {
         }
 
         comment.setCommentContent(newCommentContent);
-        requestAgent.request("comment.update", comment);
-
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("댓글 변경 실패!");
-          System.out.println(requestAgent.getObject(String.class));
-          return;
-        }
-
+        commentDao.update(comment);
         System.out.println("댓글을 변경하였습니다.");
       }
     } catch (Exception e) {

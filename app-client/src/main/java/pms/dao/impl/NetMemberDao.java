@@ -28,7 +28,7 @@ public class NetMemberDao implements MemberDao{
   public List<Member> findAll() throws Exception {
     requestAgent.request("member.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(Member.class));
@@ -40,6 +40,20 @@ public class NetMemberDao implements MemberDao{
     params.put("no", String.valueOf(no));
 
     requestAgent.request("member.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+
+    return requestAgent.getObject(Member.class);
+  }
+
+  @Override
+  public Member findById(String id) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("id", id);
+
+    requestAgent.request("member.selectOneById", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
@@ -67,6 +81,7 @@ public class NetMemberDao implements MemberDao{
     requestAgent.request("member.update", member);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("포인트 차감 실패!");
       throw new Exception(requestAgent.getObject(String.class));
     }
   }

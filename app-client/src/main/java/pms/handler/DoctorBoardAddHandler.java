@@ -1,19 +1,21 @@
 package pms.handler;
 
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
+import pms.dao.DoctorBoardDao;
+import pms.dao.MemberDao;
 import pms.domain.DoctorBoard;
 import pms.domain.Member;
-import request.RequestAgent;
 import util.Prompt;
 
 public class DoctorBoardAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  DoctorBoardDao doctorBoardDao;
+  MemberDao memberDao;
 
-  public DoctorBoardAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public DoctorBoardAddHandler(DoctorBoardDao doctorBoardDao, MemberDao memberDao) {
+    this.doctorBoardDao = doctorBoardDao;
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -24,15 +26,13 @@ public class DoctorBoardAddHandler implements Command {
     DoctorBoard doctorBoard = new DoctorBoard();
     String loginUser = AuthLoginHandler.getLoginUser().getId();
 
-    requestAgent.request("doctorBoard.selectList", null);
+    List<DoctorBoard> doctorBoardList = doctorBoardDao.findAll();
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (doctorBoardList.size() == 0) {
       DoctorBoard.lastIndex = 1;
       doctorBoard.setNo(DoctorBoard.lastIndex);
 
     } else {
-
-      List<DoctorBoard> doctorBoardList = (List<DoctorBoard>) requestAgent.getObjects(DoctorBoard.class);
 
       if(DoctorBoard.lastIndex != doctorBoardList.size()) {
 
@@ -73,38 +73,25 @@ public class DoctorBoardAddHandler implements Command {
       return;
     } else {
 
-      HashMap<String,String> params = new HashMap<>();
+      //      HashMap<String,String> params = new HashMap<>();
+      //      params.put("id", loginUser);
+      //      requestAgent.request("member.selectOneById", params);
 
-      params.put("id", loginUser);
-      requestAgent.request("member.selectOneById", params);
+      Member member = memberDao.findById(loginUser);
 
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      if (member.equals(null)) {
         System.out.println("해당 회원이 없습니다.");
         return;
       }
 
-      Member member = requestAgent.getObject(Member.class);
-
       member.setCount(member.getCount() - 10);
 
-      requestAgent.request("member.update", member);
+      memberDao.update(member);
 
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("포인트 차감 실패!");
-        return;
-      }
-
-      //      AuthLoginHandler.getLoginUser().setCount(AuthLoginHandler.getLoginUser().getCount()-10);
       System.out.println("게시글을 작성하여 10포인트가 사용되었습니다.");
     }
 
-    requestAgent.request("doctorBoard.insert", doctorBoard);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글 저장 실패!");
-      return;
-    }
-
+    doctorBoardDao.insert(doctorBoard);
     System.out.println("게시글이 등록되었습니다.");
   }
 

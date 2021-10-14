@@ -83,6 +83,12 @@ public class FreeBoardTable extends JsonDataTable<FreeBoard> implements DataProc
       searchResult.add(freeBoard);
     }
 
+    if(searchResult.size() == 0) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 키워드로 검색 가능한 게시글이 없습니다.");
+      return;
+    }
+
     response.setStatus(Response.SUCCESS);
     response.setValue(searchResult);
   }

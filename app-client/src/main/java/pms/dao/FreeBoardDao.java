@@ -10,5 +10,6 @@ public interface FreeBoardDao {
   FreeBoard findByName(String name) throws Exception;
   void update(FreeBoard freeBoard) throws Exception;
   void delete(int no) throws Exception;
+  List<FreeBoard> findByKeyword(String keyword) throws Exception;
   // void check(FreeBoard freeBoard) throws Exception;
 }

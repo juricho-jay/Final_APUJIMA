@@ -1,21 +1,24 @@
 package pms.handler;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
+import pms.dao.CommentDao;
+import pms.dao.FreeBoardDao;
+import pms.dao.LikeDao;
 import pms.domain.Comment;
 import pms.domain.FreeBoard;
 import pms.domain.Like;
-import request.RequestAgent;
 import util.Prompt;
 
 public class FreeBoardDetailHandler implements Command { 
 
-  RequestAgent requestAgent;
+  FreeBoardDao freeBoardDao;
+  LikeDao likeDao;
+  CommentDao commentDao;
 
-
-  public FreeBoardDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public FreeBoardDetailHandler(FreeBoardDao freeBoardDao, LikeDao likeDao, CommentDao commentDao) {
+    this.freeBoardDao = freeBoardDao;
+    this.likeDao = likeDao;
+    this.commentDao = commentDao;
   }
 
   @Override
@@ -26,18 +29,12 @@ public class FreeBoardDetailHandler implements Command {
     String loginUser = AuthLoginHandler.getLoginUser().getId();
     int no = Prompt.inputInt("게시글 번호> ");
 
-    // 게시글 번호를 no에 저장
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    FreeBoard freeBoard = freeBoardDao.findByNo(no);
 
-    requestAgent.request("freeBoard.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (freeBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
-
-    FreeBoard freeBoard = requestAgent.getObject(FreeBoard.class);
 
     System.out.printf("제목: %s\n", freeBoard.getTitle());
     System.out.printf("내용: %s\n", freeBoard.getContent());
@@ -49,15 +46,10 @@ public class FreeBoardDetailHandler implements Command {
 
     String whichBoard = freeBoard.getWhichBoard();
 
-
-    requestAgent.request("like.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    List<Like> likeList = likeDao.findAll();
+    if (likeList.size() == 0) {
       System.out.print("[좋아요 ♡ : 0]");
     } else {
-
-      List<Like> likeList = (List<Like>) requestAgent.getObjects(Like.class);
-
       for (int i = 0; i < likeList.size(); i++) {
         if (likeList.get(i).getLikeBoardNo() == freeBoard.getNo() && 
             likeList.get(i).getWhichBoard().equals(whichBoard) &&
@@ -86,13 +78,8 @@ public class FreeBoardDetailHandler implements Command {
     System.out.println();
     System.out.println("[댓글]");
 
-    requestAgent.request("comment.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    } else {
-
-      Collection<Comment> commentList = requestAgent.getObjects(Comment.class);
-
+    List<Comment> commentList = commentDao.findAll();
+    if(commentList.size() != 0) {
       for (Comment comment : commentList) {
         if (comment.getCommentBoardNo() != 0) {
           if (comment.getCommentBoardNo() == freeBoard.getNo() && 
@@ -110,17 +97,13 @@ public class FreeBoardDetailHandler implements Command {
     request.setAttribute("no", no); //게시글 번호 num에 저장
     request.setAttribute("boardType", "freeBoard");
 
+
     while(true) {
       String status = "";
-
-      requestAgent.request("like.selectList", null);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      if (likeList.size() == 0) {
         status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) /\n"
             + "댓글달기💬(@) / 넘어가기(Enter)]> ");
       } else {
-        List<Like> likeList = (List<Like>) requestAgent.getObjects(Like.class);
-
         for (int i = 0; i < likeList.size(); i++) {
           if (likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId()) &&
               likeList.get(i).getWhichBoard().equals(whichBoard)) {
@@ -134,7 +117,6 @@ public class FreeBoardDetailHandler implements Command {
         }
       }
 
-
       if (status.equals("#")) {
         request.getRequestDispatcher("/like/addCancel").forward(request);
         return;
@@ -147,7 +129,7 @@ public class FreeBoardDetailHandler implements Command {
 
         freeBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
         freeBoard.setRequester(loginUser);
-        requestAgent.request("report.insert", freeBoard);
+        //        requestAgent.request("report.insert", freeBoard);
         System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
         break;
 
@@ -161,22 +143,15 @@ public class FreeBoardDetailHandler implements Command {
     } 
 
     int myComment = 0;
-    requestAgent.request("comment.selectList", null);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    } else {
-
-      Collection<Comment> commentList = requestAgent.getObjects(Comment.class);
-      for (Comment comment : commentList) {
-        if (comment.getCommentBoardNo() != 0) {
-          if (comment.getCommentBoardNo() == freeBoard.getNo() && 
-              comment.getWhichBoard().equals(whichBoard) &&
-              comment.getCommenter().equals(loginUser)) {
-            myComment++;
-          }
-        }   
-      }
+    for (Comment comment : commentList) {
+      if (comment.getCommentBoardNo() != 0) {
+        if (comment.getCommentBoardNo() == freeBoard.getNo() && 
+            comment.getWhichBoard().equals(whichBoard) &&
+            comment.getCommenter().equals(loginUser)) {
+          myComment++;
+        }
+      }   
     }
-
 
     //내 댓글도 있고 내가 게시글 글쓴이일 때
     if (myComment != 0 && freeBoard.getWriter().getId().equals(loginUser)) {
@@ -207,7 +182,7 @@ public class FreeBoardDetailHandler implements Command {
             System.out.println("명령어가 올바르지 않습니다!");
         }
       }
-
+      //
       // 내 댓글이 없고 내가 게시글 글쓴이일 때 
     } else if (myComment == 0 && freeBoard.getWriter().getId().equals(loginUser)) {
       while (true) {
@@ -250,6 +225,7 @@ public class FreeBoardDetailHandler implements Command {
         }
       }
     }
+
 
   }
 }

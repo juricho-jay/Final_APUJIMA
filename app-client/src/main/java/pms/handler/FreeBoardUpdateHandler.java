@@ -1,16 +1,15 @@
 package pms.handler;
 
-import java.util.HashMap;
+import pms.dao.FreeBoardDao;
 import pms.domain.FreeBoard;
-import request.RequestAgent;
 import util.Prompt;
 
 public class FreeBoardUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  FreeBoardDao freeBoardDao;
 
-  public FreeBoardUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public FreeBoardUpdateHandler(FreeBoardDao freeBoardDao) {
+    this.freeBoardDao = freeBoardDao;
   }
 
   @Override
@@ -19,17 +18,19 @@ public class FreeBoardUpdateHandler implements Command {
     System.out.println();
     int no = (int)request.getAttribute("no");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    FreeBoard freeBoard = freeBoardDao.findByNo(no);
 
-    requestAgent.request("freeBoard.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
-      return;
-    }
-
-    FreeBoard freeBoard = requestAgent.getObject(FreeBoard.class);
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("no", String.valueOf(no));
+    //
+    //    requestAgent.request("freeBoard.selectOne", params);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("해당 번호의 게시글이 없습니다.");
+    //      return;
+    //    }
+    //
+    //    FreeBoard freeBoard = requestAgent.getObject(FreeBoard.class);
 
     String title = Prompt.inputString(String.format("제목(%s)> ", freeBoard.getTitle()));
     String content = Prompt.inputString(String.format("내용(%s)> ", freeBoard.getContent()));
@@ -43,12 +44,12 @@ public class FreeBoardUpdateHandler implements Command {
     freeBoard.setTitle(title);
     freeBoard.setContent(content);
 
-    requestAgent.request("freeBoard.update", freeBoard);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글 변경 실패!");
-      return;
-    }
+    //    requestAgent.request("freeBoard.update", freeBoard);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("게시글 변경 실패!");
+    //      return;
+    //    }
 
     System.out.println("게시글을 변경하였습니다.");
 
