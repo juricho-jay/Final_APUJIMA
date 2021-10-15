@@ -1,37 +1,29 @@
 package pms.handler;
 
-import java.util.HashMap;
+import pms.dao.NoticeBoardDao;
 import pms.domain.NoticeBoard;
-import request.RequestAgent;
 import util.Prompt;
 
 public class NoticeBoardUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  NoticeBoardDao noticeBoardDao;
 
-  public NoticeBoardUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public NoticeBoardUpdateHandler(NoticeBoardDao noticeBoardDao) {
+    this.noticeBoardDao = noticeBoardDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[공지사항 게시글 변경] 페이지입니다.");
     System.out.println();
-    int no = Prompt.inputInt("게시글 번호> ");
+    int no = (int)request.getAttribute("no");
 
-    HashMap<String, String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    NoticeBoard noticeBoard = noticeBoardDao.findByNo(no);
 
-    requestAgent.request("noticeBoard.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (noticeBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
-
     } 
-
-    // else if (noticeBoard.getWriter().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
-    NoticeBoard noticeBoard = requestAgent.getObject(NoticeBoard.class);
 
 
     String title = Prompt.inputString(String.format("제목(%s)> ", noticeBoard.getTitle()));
@@ -45,15 +37,8 @@ public class NoticeBoardUpdateHandler implements Command {
 
     noticeBoard.setTitle(title);
     noticeBoard.setContent(content);
+    noticeBoardDao.update(noticeBoard);
 
-    requestAgent.request("noticeBoard.update", noticeBoard);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글 변경 실패");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
     System.out.println("게시글을 변경하였습니다.");
-
   }
 }

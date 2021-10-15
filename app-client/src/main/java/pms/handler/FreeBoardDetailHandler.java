@@ -94,7 +94,7 @@ public class FreeBoardDetailHandler implements Command {
     }
 
     System.out.println();
-    request.setAttribute("no", no); //게시글 번호 num에 저장
+    request.setAttribute("no", no);
     request.setAttribute("boardType", "freeBoard");
 
 

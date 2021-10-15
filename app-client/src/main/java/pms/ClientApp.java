@@ -10,11 +10,8 @@ import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
 import pms.dao.impl.NetDoctorBoardDao;
 import pms.dao.impl.NetFreeBoardDao;
-<<<<<<< HEAD
 import pms.dao.impl.NetLikeDao;
-=======
 import pms.dao.impl.NetMedicineDao;
->>>>>>> 2c5c4751a0565dae89940f5ffa48defd9a4a1c42
 import pms.dao.impl.NetMemberDao;
 import pms.dao.impl.NetNoticeBoardDao;
 import pms.handler.AdminApprovalHandler;
@@ -182,12 +179,12 @@ public class ClientApp {
     commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(requestAgent));
     commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(requestAgent));
 
-    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(requestAgent));
-    commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(requestAgent));
-    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(requestAgent));
-    commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(requestAgent));
-    commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(requestAgent));
-    commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(requestAgent));
+    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardDao, likeDao, commentDao));
+    commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(noticeBoardDao));
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardDao));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardDao));
