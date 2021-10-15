@@ -32,10 +32,10 @@ public class PlantAddHandler implements Command {
 
     requestAgent.request("member.selectOne",params);
     Member member = requestAgent.getObject(Member.class);
-    if(member.getCount() < 300) {
+    if(member.getPoint() < 300) {
       System.out.println("포인트가 부족하여 화분을 생성 할 수 없습니다.");
-      System.out.println("현재 포인트: " +  member.getCount());
-      System.out.println("부족한 포인트: " + (300- member.getCount()));
+      System.out.println("현재 포인트: " +  member.getPoint());
+      System.out.println("부족한 포인트: " + (300- member.getPoint()));
 
       return;
     }
@@ -59,7 +59,7 @@ public class PlantAddHandler implements Command {
         System.out.println("화분 등록 실패!");
         return;
       }
-      member.setCount(member.getCount()-300);
+      member.setPoint(member.getPoint()-300);
       requestAgent.request("member.update", member);
 
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -108,7 +108,7 @@ public class PlantAddHandler implements Command {
       System.out.println("화분 등록 실패!");
       return;
     }
-    member.setCount(member.getCount()-300);
+    member.setPoint(member.getPoint()-300);
     requestAgent.request("member.update", member);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {

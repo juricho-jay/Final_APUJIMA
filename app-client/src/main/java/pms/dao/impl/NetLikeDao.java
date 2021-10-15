@@ -81,8 +81,7 @@ public class NetLikeDao implements LikeDao{
       throw new Exception(requestAgent.getObject(String.class));
     }
   }
-
-
-
-
 }
+
+
+

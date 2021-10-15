@@ -1,17 +1,17 @@
 package pms.handler;
 
 import java.util.Collection;
+import pms.dao.BucketDao;
 import pms.domain.Bucket;
-import request.RequestAgent;
 import util.Prompt;
 
 public class BucketListHandler  implements Command {
-  RequestAgent requestAgent;
 
-  public BucketListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  BucketDao bucketDao;
+
+  public BucketListHandler(BucketDao bucketDao) {
+    this.bucketDao = bucketDao;
   }
-
 
   @Override
   public void execute(CommandRequest request) throws Exception{
@@ -22,33 +22,35 @@ public class BucketListHandler  implements Command {
     int count = 0;
     int bucketNo = 0;
 
-    requestAgent.request("bucket.selectList", null);
+    Collection<Bucket> bucketList = bucketDao.findAll();
 
+    //    requestAgent.request("bucket.selectList", null);
+    //
+    //
+    //
+    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("현재 작성된 버킷리스트가 없습니다.");
+    //      return;
+    //    } else {
+    //      Collection<Bucket> bucketList = requestAgent.getObjects(Bucket.class);
+    for(Bucket bucket : bucketList) {
+      if(bucket.getWriter().equals(AuthLoginHandler.getLoginUser().getId())) {
+        bucketNo++;
+        bucket.setNo(bucketNo);
+        System.out.printf("%s, %d, %s ,%s \n",bucket.getCheck(),
+            bucket.getNo(),
+            bucket.getTitle(),
+            bucket.getContent());
 
-
-    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("현재 작성된 버킷리스트가 없습니다.");
-      return;
-    } else {
-      Collection<Bucket> bucketList = requestAgent.getObjects(Bucket.class);
-      for(Bucket bucket : bucketList) {
-        if(bucket.getWriter().equals(AuthLoginHandler.getLoginUser().getId())) {
-          bucketNo++;
-          bucket.setNo(bucketNo);
-          System.out.printf("%s, %d, %s ,%s \n",bucket.getCheck(),
-              bucket.getNo(),
-              bucket.getTitle(),
-              bucket.getContent());
-
-          count++;
-        }
-
+        count++;
       }
-      if (count == 0 ){
-        System.out.println("버킷리스트 목록 중 현재 본인이 작성한 버킷리스트가 없습니다.");
-        return;
-      }
+
     }
+    if (count == 0 ){
+      System.out.println("버킷리스트 목록 중 현재 본인이 작성한 버킷리스트가 없습니다.");
+      return;
+    }
+    //    }
 
     String answer = Prompt.inputString("달성한 버켓리스트가 있으신가요?(y/N) 검색하기(#)> ");
 
@@ -62,7 +64,6 @@ public class BucketListHandler  implements Command {
           case "c": 
             request.getRequestDispatcher("/bucket/complete").forward(request);
             return;
-
           case "0":
             return;
           default:

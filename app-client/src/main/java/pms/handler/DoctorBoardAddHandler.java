@@ -68,7 +68,7 @@ public class DoctorBoardAddHandler implements Command {
     doctorBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
     doctorBoard.setWhichBoard("doctor");
 
-    if(AuthLoginHandler.getLoginUser().getCount() < 10) {
+    if(AuthLoginHandler.getLoginUser().getPoint() < 10) {
       System.out.println("포인트가 부족하여 게시글을 작성할 수 없습니다.");
       return;
     } else {
@@ -84,7 +84,7 @@ public class DoctorBoardAddHandler implements Command {
         return;
       }
 
-      member.setCount(member.getCount() - 10);
+      member.setPoint(member.getPoint() - 10);
 
       memberDao.update(member);
 

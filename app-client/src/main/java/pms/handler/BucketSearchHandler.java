@@ -1,18 +1,17 @@
 package pms.handler;
 
 import java.util.Collection;
-import java.util.HashMap;
+import pms.dao.BucketDao;
 import pms.domain.Bucket;
-import request.RequestAgent;
 import util.Prompt;
 
 public class BucketSearchHandler implements Command {
-  RequestAgent requestAgent;
 
-  public BucketSearchHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  BucketDao bucketDao;
+
+  public BucketSearchHandler(BucketDao bucketDao) {
+    this.bucketDao = bucketDao;
   }
-
 
   @Override
   public void execute(CommandRequest request) throws Exception{
@@ -24,17 +23,20 @@ public class BucketSearchHandler implements Command {
 
     String input = Prompt.inputString("검색어> ");
 
-    HashMap<String, String> params = new HashMap<>();
-    params.put("keyword", input);
+    Collection<Bucket> bucketList = bucketDao.findByKeyword(input);
 
-    requestAgent.request("bucket.selectListByKeyword", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("검색 실패!");
-      return;
-    }
-
-    Collection<Bucket> bucketList = requestAgent.getObjects(Bucket.class);
+    //
+    //    HashMap<String, String> params = new HashMap<>();
+    //    params.put("keyword", input);
+    //
+    //    requestAgent.request("bucket.selectListByKeyword", params);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("검색 실패!");
+    //      return;
+    //    }
+    //
+    //    Collection<Bucket> bucketList = requestAgent.getObjects(Bucket.class);
 
 
     for (Bucket bucket : bucketList) {

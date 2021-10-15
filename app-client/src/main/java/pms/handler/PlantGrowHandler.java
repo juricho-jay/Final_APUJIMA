@@ -59,7 +59,7 @@ public class PlantGrowHandler implements Command {
     }
 
 
-    if(member.getCount() < 30) {
+    if(member.getPoint() < 30) {
       System.out.println("포인트가 부족하여 물을 줄 수 없습니다.");
       return;
     }
@@ -89,7 +89,7 @@ public class PlantGrowHandler implements Command {
         plant.setExp(500);
         requestAgent.request("plant.update", plant);
         System.out.println("최대 경험치량 도달! 경험치가 500으로 고정됩니다.");
-        member.setCount(member.getCount()-30);
+        member.setPoint(member.getPoint()-30);
         requestAgent.request("member.update", member);
         System.out.println("식물에 물을 주어 30포인트가 사용되었습니다.");
         return;
@@ -105,7 +105,7 @@ public class PlantGrowHandler implements Command {
       //        System.out.println("최대 경험치량 도달! 경험치가 500으로 고정됩니다.");
       //        System.out.println();
       //      }
-      member.setCount(member.getCount()-30);
+      member.setPoint(member.getPoint()-30);
       requestAgent.request("member.update", member);
       System.out.println("식물에 물을 주어 30포인트가 사용되었습니다.");
       System.out.println();

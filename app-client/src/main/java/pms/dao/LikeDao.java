@@ -11,3 +11,4 @@ public interface LikeDao {
   void update(Like like) throws Exception;
   void delete(int no) throws Exception;
 }
+

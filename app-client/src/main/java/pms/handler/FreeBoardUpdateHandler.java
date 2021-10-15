@@ -20,6 +20,11 @@ public class FreeBoardUpdateHandler implements Command {
 
     FreeBoard freeBoard = freeBoardDao.findByNo(no);
 
+    if (freeBoard == null) {
+      System.out.println("해당 번호의 게시글이 없습니다.");
+      return;
+    }
+
     //    HashMap<String,String> params = new HashMap<>();
     //    params.put("no", String.valueOf(no));
     //
@@ -43,7 +48,7 @@ public class FreeBoardUpdateHandler implements Command {
 
     freeBoard.setTitle(title);
     freeBoard.setContent(content);
-
+    freeBoardDao.update(freeBoard);
     //    requestAgent.request("freeBoard.update", freeBoard);
     //
     //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {

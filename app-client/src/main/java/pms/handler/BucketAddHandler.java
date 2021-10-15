@@ -1,17 +1,18 @@
 package pms.handler;
 
 import java.sql.Date;
+import java.util.Collection;
 import java.util.List;
+import pms.dao.BucketDao;
 import pms.domain.Bucket;
-import request.RequestAgent;
 import util.Prompt;
 
 public class BucketAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  BucketDao bucketDao;
 
-  public BucketAddHandler(RequestAgent requestAgent ) {
-    this.requestAgent = requestAgent;
+  public BucketAddHandler(BucketDao bucketDao) {
+    this.bucketDao = bucketDao;
   }
 
 
@@ -24,26 +25,20 @@ public class BucketAddHandler implements Command {
 
     Bucket bucket = new Bucket();
 
-    requestAgent.request("bucket.selectList", null);
+    Collection<Bucket> bucketList = bucketDao.findAll();
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-
-
+    if (bucketList.size() == 0) {
       Bucket.lastIndex = 1;
       bucket.setNo(Bucket.lastIndex);
+    } else if(Bucket.lastIndex != bucketList.size()) {
 
+      Bucket.lastIndex = ((List<Bucket>) bucketList).get(bucketList.size()-1).getNo();
+      bucket.setNo(++Bucket.lastIndex);
+
+    } else {
+      bucket.setNo(++Bucket.lastIndex);
     }
 
-    else {
-      List<Bucket> bucketList = (List<Bucket>) requestAgent.getObjects(Bucket.class);
-      if (Bucket.lastIndex != bucketList.size()) {
-        Bucket.lastIndex = bucketList.get(bucketList.size()-1).getNo();
-        bucket.setNo(++Bucket.lastIndex);
-
-      } else {
-        bucket.setNo(++Bucket.lastIndex);
-      }
-    }
     while (true) {
       bucket.setTitle(Prompt.inputString("제목> "));
       if (bucket.getTitle().trim().equals("")) {
@@ -65,12 +60,7 @@ public class BucketAddHandler implements Command {
     bucket.setRegisteredDate(new Date(System.currentTimeMillis()));
     bucket.setCheck("☐");
 
-    requestAgent.request("bucket.insert", bucket);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("버킷리스트 등록 실패!");
-      return;
-    } 
+    bucketDao.insert(bucket);
 
     System.out.println();
     System.out.println("[나만의 버킷리스트] 가 정상적으로 등록되었습니다.");

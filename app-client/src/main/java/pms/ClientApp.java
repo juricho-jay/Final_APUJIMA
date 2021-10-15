@@ -6,6 +6,7 @@ import java.util.List;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
+import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
 import pms.dao.impl.NetDoctorBoardDao;
 import pms.dao.impl.NetFreeBoardDao;
@@ -154,6 +155,7 @@ public class ClientApp {
     NetDoctorBoardDao doctorBoardDao = new NetDoctorBoardDao(requestAgent);
     NetNoticeBoardDao noticeBoardDao = new NetNoticeBoardDao(requestAgent);
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
+    NetBucketDao bucketDao = new NetBucketDao(requestAgent);
 
     // Command 객체 준비
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestAgent));
@@ -218,11 +220,11 @@ public class ClientApp {
     commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(likeDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
 
 
-    commandMap.put("/bucket/add", new BucketAddHandler(requestAgent));
-    commandMap.put("/bucket/list", new BucketListHandler(requestAgent));
-    commandMap.put("/bucket/detail", new BucketDetailHandler(requestAgent));
-    commandMap.put("/bucket/complete", new BucketCompleteHandler(requestAgent));
-    commandMap.put("/bucket/search", new BucketSearchHandler(requestAgent));
+    commandMap.put("/bucket/add", new BucketAddHandler(bucketDao));
+    commandMap.put("/bucket/list", new BucketListHandler(bucketDao));
+    commandMap.put("/bucket/detail", new BucketDetailHandler(bucketDao));
+    commandMap.put("/bucket/complete", new BucketCompleteHandler(bucketDao));
+    commandMap.put("/bucket/search", new BucketSearchHandler(bucketDao));
 
     commandMap.put("/plant/add", new PlantAddHandler(requestAgent));
     commandMap.put("/plant/grow", new PlantGrowHandler(requestAgent));

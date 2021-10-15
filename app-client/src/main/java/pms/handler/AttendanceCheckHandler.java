@@ -48,7 +48,7 @@ public class AttendanceCheckHandler implements Command {
           return;
         }
         Member member = requestAgent.getObject(Member.class);
-        member.setCount(member.getCount() + 30);
+        member.setPoint(member.getPoint() + 30);
         requestAgent.request("member.update", member);
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -94,7 +94,7 @@ public class AttendanceCheckHandler implements Command {
               return;
             }
             Member member = requestAgent.getObject(Member.class);
-            member.setCount(member.getCount() + 30);
+            member.setPoint(member.getPoint() + 30);
             requestAgent.request("member.update", member);
 
             if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -128,7 +128,7 @@ public class AttendanceCheckHandler implements Command {
           return;
         }
         Member member = requestAgent.getObject(Member.class);
-        member.setCount(member.getCount() + 30);
+        member.setPoint(member.getPoint() + 30);
         requestAgent.request("member.update", member);
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
