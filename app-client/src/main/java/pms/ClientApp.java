@@ -9,11 +9,13 @@ import pms.context.ApplicationContextListener;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
 import pms.dao.impl.NetDoctorBoardDao;
+import pms.dao.impl.NetDoctorReportDao;
 import pms.dao.impl.NetFreeBoardDao;
 import pms.dao.impl.NetLikeDao;
 import pms.dao.impl.NetMedicineDao;
 import pms.dao.impl.NetMemberDao;
 import pms.dao.impl.NetNoticeBoardDao;
+import pms.dao.impl.NetReportDao;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
@@ -158,6 +160,9 @@ public class ClientApp {
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
     NetBucketDao bucketDao = new NetBucketDao(requestAgent);
     NetMedicineDao medicineDao = new NetMedicineDao(requestAgent);
+    NetReportDao reportDao = new NetReportDao(requestAgent);
+    NetDoctorReportDao doctorReportDao = new NetDoctorReportDao(requestAgent);
+
 
 
     // Command 객체 준비
@@ -174,7 +179,7 @@ public class ClientApp {
     commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineDao));
     commandMap.put("/medicine/search", new MedicineSearchHandler(medicineDao));
 
-    commandMap.put("/counselingMember/list", new DoctorMemberListHandler(requestAgent));
+    commandMap.put("/counselingMember/list", new DoctorMemberListHandler(memberDao));
     commandMap.put("/counselingMember/add", new CounselingMemberAddHandler(requestAgent));
     commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(requestAgent));
     commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(requestAgent));
@@ -188,17 +193,17 @@ public class ClientApp {
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardDao));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardDao));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardDao, likeDao, commentDao));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardDao, likeDao, commentDao, reportDao));
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardDao));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardDao));
     commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardDao));
     //
     commandMap.put("/doctorBoard/add", new DoctorBoardAddHandler(doctorBoardDao, memberDao));
-    commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(requestAgent));
-    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(requestAgent));
-    commandMap.put("/doctorBoard/update", new DoctorBoardUpdateHandler(requestAgent));
-    commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(requestAgent));
-    commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(requestAgent));
+    commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(doctorBoardDao));
+    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(doctorBoardDao, likeDao, commentDao, doctorReportDao));
+    commandMap.put("/doctorBoard/update", new DoctorBoardUpdateHandler(doctorBoardDao));
+    commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardDao));
+    commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardDao));
 
     commandMap.put("/member/add", new MemberAddHandler(memberDao));
     commandMap.put("/member/list", new MemberListHandler(memberDao));
