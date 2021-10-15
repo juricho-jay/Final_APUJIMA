@@ -10,7 +10,11 @@ import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
 import pms.dao.impl.NetDoctorBoardDao;
 import pms.dao.impl.NetFreeBoardDao;
+<<<<<<< HEAD
 import pms.dao.impl.NetLikeDao;
+=======
+import pms.dao.impl.NetMedicineDao;
+>>>>>>> 2c5c4751a0565dae89940f5ffa48defd9a4a1c42
 import pms.dao.impl.NetMemberDao;
 import pms.dao.impl.NetNoticeBoardDao;
 import pms.handler.AdminApprovalHandler;
@@ -156,6 +160,8 @@ public class ClientApp {
     NetNoticeBoardDao noticeBoardDao = new NetNoticeBoardDao(requestAgent);
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
     NetBucketDao bucketDao = new NetBucketDao(requestAgent);
+    NetMedicineDao medicineDao = new NetMedicineDao(requestAgent);
+
 
     // Command 객체 준비
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestAgent));
@@ -164,12 +170,12 @@ public class ClientApp {
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(requestAgent));
     commandMap.put("/intro", new IntroMenu());
 
-    commandMap.put("/medicine/add", new MedicineAddHandler(requestAgent));
-    commandMap.put("/medicine/request", new MedicineRequestHandler(requestAgent));
-    commandMap.put("/medicine/list", new MedicineListHandler(requestAgent));
-    commandMap.put("/medicine/update", new MedicineUpdateHandler(requestAgent));
-    commandMap.put("/medicine/delete", new MedicineDeleteHandler(requestAgent));
-    commandMap.put("/medicine/search", new MedicineSearchHandler(requestAgent));
+    commandMap.put("/medicine/add", new MedicineAddHandler(medicineDao));
+    commandMap.put("/medicine/request", new MedicineRequestHandler(medicineDao));
+    commandMap.put("/medicine/list", new MedicineListHandler(medicineDao));
+    commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineDao));
+    commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineDao));
+    commandMap.put("/medicine/search", new MedicineSearchHandler(medicineDao));
 
     commandMap.put("/counselingMember/list", new DoctorMemberListHandler(requestAgent));
     commandMap.put("/counselingMember/add", new CounselingMemberAddHandler(requestAgent));

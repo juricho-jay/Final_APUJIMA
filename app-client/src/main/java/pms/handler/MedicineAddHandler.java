@@ -1,16 +1,17 @@
 package pms.handler;
 
+import java.util.Collection;
 import java.util.List;
+import pms.dao.MedicineDao;
 import pms.domain.Medicine;
-import request.RequestAgent;
 import util.Prompt;
 
 public class MedicineAddHandler implements Command{
 
-  RequestAgent requestAgent;
+  MedicineDao medicineDao;
 
-  public MedicineAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MedicineAddHandler(MedicineDao medicineDao) {
+    this.medicineDao = medicineDao;
   }
 
   @Override
@@ -19,39 +20,24 @@ public class MedicineAddHandler implements Command{
 
     Medicine medicine = new Medicine();
 
-    requestAgent.request("medicine.selectList", null);
+    Collection<Medicine> medicineList = medicineDao.findAll();
 
-    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (medicineList.size() == 0) {
       Medicine.lastIndex = 1;
       medicine.setNo(Medicine.lastIndex);
+    } else if(Medicine.lastIndex != medicineList.size()) {
+
+      Medicine.lastIndex = ((List<Medicine>) medicineList).get(medicineList.size()-1).getNo();
+      medicine.setNo(++Medicine.lastIndex);
 
     } else {
-      List<Medicine> medicineList = (List<Medicine>) requestAgent.getObjects(Medicine.class);
-
-      if(Medicine.lastIndex != medicineList.size()) {
-
-        Medicine.lastIndex = medicineList.get(medicineList.size()-1).getNo();
-        medicine.setNo(++Medicine.lastIndex);
-
-      } else {
-        medicine.setNo(++Medicine.lastIndex);
-      }
+      medicine.setNo(++Medicine.lastIndex);
     }
 
-
-    //    medicine.setName(Prompt.inputString("약품명> "));
-    // if(약이름이 같으면 이미 있는 약입니다!)
     while(true) {
       medicine.setName(Prompt.inputString("약품명> " ));
 
-      requestAgent.request("medicine.check", medicine);
-
-      if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("이미 존재하는 약품 입니다.");
-        medicine.setName("");
-        continue;
-      }
-
+      medicineDao.check(medicine);
       if(medicine.getName() != "")
         break;
     }
@@ -61,14 +47,11 @@ public class MedicineAddHandler implements Command{
     medicine.setColor(Prompt.inputString("색  상> "));
     medicine.setEffect(Prompt.inputString("효  능> "));
 
+    medicineDao.insert(medicine);
 
-    requestAgent.request("medicine.insert", medicine);
+    System.out.println("약품을 등록했습니다.");
 
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("약품이 등록되었습니다.");
-      return;
-    }
-    System.out.println("약품 등록 실패!");
+
   }
 
 }
