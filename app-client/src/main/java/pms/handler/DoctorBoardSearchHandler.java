@@ -1,19 +1,18 @@
 package pms.handler;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import pms.dao.DoctorBoardDao;
 import pms.domain.DoctorBoard;
-import request.RequestAgent;
 import util.Prompt;
 
 public class DoctorBoardSearchHandler implements Command {
 
-  RequestAgent requestAgent;
+  DoctorBoardDao doctorBoardDao;
 
-  public DoctorBoardSearchHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public DoctorBoardSearchHandler(DoctorBoardDao doctorBoardDao) {
+    this.doctorBoardDao = doctorBoardDao;
   }
-
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -25,14 +24,7 @@ public class DoctorBoardSearchHandler implements Command {
     HashMap<String,String> params = new HashMap<>();
     params.put("keyword", String.valueOf(input));
 
-    requestAgent.request("doctorBoard.selectListByKeyword", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("목록 조회 실패!");
-      return;
-    }
-
-    Collection<DoctorBoard> doctorBoardList = requestAgent.getObjects(DoctorBoard.class);
+    List<DoctorBoard> doctorBoardList = doctorBoardDao.findByKeyword(input);
 
     for (DoctorBoard doctorBoard : doctorBoardList) {
       if (!doctorBoard.getTitle().contains(input) &&

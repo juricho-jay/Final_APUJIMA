@@ -1,16 +1,15 @@
 package pms.handler;
 
-import java.util.HashMap;
+import pms.dao.DoctorBoardDao;
 import pms.domain.DoctorBoard;
-import request.RequestAgent;
 import util.Prompt;
 
 public class DoctorBoardDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
+  DoctorBoardDao doctorBoardDao;
 
-  public DoctorBoardDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public DoctorBoardDeleteHandler(DoctorBoardDao doctorBoardDao) {
+    this.doctorBoardDao = doctorBoardDao;
   }
 
   @Override
@@ -20,24 +19,12 @@ public class DoctorBoardDeleteHandler implements Command {
 
     int no = (int)request.getAttribute("no"); // 게시판 번호
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    DoctorBoard doctorBoard = doctorBoardDao.findByNo(no);
 
-    requestAgent.request("doctorBoard.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글이 없습니다.");
+    if (doctorBoard == null) {
+      System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
-
-    requestAgent.request("doctorBoard.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 게시판이 없습니다!");
-      return;
-    }
-
-    DoctorBoard doctorBoard = requestAgent.getObject(DoctorBoard.class);
 
 
     if (!doctorBoard.getWriter().getId().equals(AuthLoginHandler.getLoginUser().getId()) ) {
@@ -56,15 +43,10 @@ public class DoctorBoardDeleteHandler implements Command {
     request.getRequestDispatcher("/comment/autoDelete").forward(request);
     request.getRequestDispatcher("/like/autoDelete").forward(request);
 
-
-    requestAgent.request("doctorBoard.delete", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글 삭제 실패!");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    doctorBoardDao.delete(no);
     System.out.println("게시글을 삭제하였습니다.");
 
   }
 
 }
+

@@ -1,24 +1,23 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
+import pms.dao.MemberDao;
 import pms.domain.Member;
-import request.RequestAgent;
 
 public class DoctorMemberListHandler implements Command {
 
-  RequestAgent requestAgent;
+  MemberDao memberDao;
 
-  public DoctorMemberListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public DoctorMemberListHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
 
-    requestAgent.request("member.selectList", null);
 
-    Collection<Member> memberList = requestAgent.getObjects(Member.class);
+    List<Member> memberList = memberDao.findAll();
 
     for (Member member : memberList) {
       if (member.getDoctorOrNot() == 2) {
