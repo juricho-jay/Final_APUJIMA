@@ -75,7 +75,7 @@ public class NetMailBoxDao implements MailBoxDao {
 
     requestAgent.request("mailBox.delete", params);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 

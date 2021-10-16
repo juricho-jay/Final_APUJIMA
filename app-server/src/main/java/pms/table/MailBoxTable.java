@@ -43,8 +43,8 @@ public class MailBoxTable extends JsonDataTable<MailBox> implements DataProcesso
   }
 
   private void delete(Request request, Response response) throws Exception {
-    MailBox mailBox = request.getObject(MailBox.class);
-    int index = indexOf(mailBox.getMailNo());
+    int no = Integer.parseInt(request.getParameter("no"));
+    int index = indexOf(no);
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
