@@ -20,7 +20,6 @@ import pms.dao.impl.NetRequestDao;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
-import pms.handler.AdminUpdateHandler;
 import pms.handler.AttendanceAutoDeleteHandler;
 import pms.handler.AttendanceCheckHandler;
 import pms.handler.AuthLoginHandler;
@@ -169,8 +168,8 @@ public class ClientApp {
 
     // Command 객체 준비
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestDao, medicineDao));
-    commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
-    commandMap.put("/admin/list", new AdminListHandler(requestAgent));
+    //    commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
+    commandMap.put("/admin/list", new AdminListHandler(requestDao, reportDao, doctorReportDao));
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(requestAgent));
     commandMap.put("/intro", new IntroMenu());
 
