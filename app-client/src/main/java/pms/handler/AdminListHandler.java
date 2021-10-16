@@ -27,19 +27,62 @@ public class AdminListHandler implements Command {
     System.out.println();
     System.out.println("[승인 요청/신고 목록]");
     System.out.println();
-    System.out.println("[약품 승인 요청 내역]");
+
+    //    System.out.println();
+    //    System.out.println("[게시판 신고 접수 내역]");
 
     List<Medicine> requestList = requestDao.findAll();
+    List<FreeBoard> reportList = reportDao.findAll();
+    List<DoctorBoard> doctorReportList = doctorReportDao.findAll();
+
     if (requestList == null) {
+      System.out.println("-[약품 승인 요청 내역]");
       System.out.println("약품 승인 요청건이 없습니다.");
+      System.out.println();
+
+    } else if (reportList == null) {
+      System.out.println("-[게시판 신고 접수 내역]");
+      System.out.println("자유게시판 신고 접수건이 없습니다.");
+      System.out.println();
+
+    } else if (doctorReportList == null) {
+      System.out.println("지식in게시판 신고 접수건이 없습니다.");
+      System.out.println();
+      return;
+    } 
+
+    if (requestList != null) {
+      System.out.println("-[약품 승인 요청 내역]");
+      for (Medicine medicine : requestList) {
+        System.out.printf("약품명 : %s\n"
+            + "효 능 : %s\n", medicine.getName(), medicine.getEffect());
+        System.out.println();
+      }
+    } else if (reportList != null) {
+      System.out.println("-[게시판 신고 접수 내역]");
+      for (FreeBoard freeBoard : reportList) {
+        System.out.printf("게시판 번호 : %d"
+            + ", 제목 : %s\n",
+            freeBoard.getNo(),
+            freeBoard.getTitle());
+        System.out.println();
+      }
+    } else if (doctorReportList != null) {
+      for (DoctorBoard doctorBoard : doctorReportList) {
+        System.out.printf("게시판 번호 : %d"
+            + ", 제목 : %s\n",
+            doctorBoard.getNo(),
+            doctorBoard.getTitle());
+      }
       return;
     }
-    for (Medicine medicine : requestList) {
-      System.out.printf("약품명 : %s\n"
-          + "효 능 : %s\n", medicine.getName(), medicine.getEffect());
-    }
 
-    System.out.println();
+    //      for (Medicine medicine : requestList) {
+    //        System.out.printf("약품명 : %s\n"
+    //            + "효 능 : %s\n", medicine.getName(), medicine.getEffect());
+    //      }
+    //
+    //    System.out.println();
 
     //    requestAgent.request("request.selectList", null);
     //
@@ -56,19 +99,19 @@ public class AdminListHandler implements Command {
     //      System.out.println();
     //    }
 
-    System.out.println();
-    System.out.println("[게시판 신고 접수 내역]");
+    //    System.out.println();
+    //    System.out.println("[게시판 신고 접수 내역]");
 
-    List<FreeBoard> reportList = reportDao.findAll();
-    if (reportList == null) {
-      System.out.println("자유게시판 신고 접수건이 없습니다.");
-    }
-    for (FreeBoard freeBoard : reportList) {
-      System.out.printf("게시판 번호 : %d\n"
-          + "게시판 제목 : %s\n",
-          freeBoard.getNo(),
-          freeBoard.getTitle());
-    }
+    //    List<FreeBoard> reportList = reportDao.findAll();
+    //    if (reportList == null) {
+    //      System.out.println("자유게시판 신고 접수건이 없습니다.");
+    //    }
+    //    for (FreeBoard freeBoard : reportList) {
+    //      System.out.printf("게시판 번호 : %d\n"
+    //          + "게시판 제목 : %s\n",
+    //          freeBoard.getNo(),
+    //          freeBoard.getTitle());
+    //    }
 
     //    requestAgent.request("report.selectList", null);
     //
@@ -84,16 +127,16 @@ public class AdminListHandler implements Command {
     //      }
     //    }
 
-    List<DoctorBoard> doctorReportList = doctorReportDao.findAll();
-    if (doctorReportList == null) {
-      System.out.println("자유게시판 신고 접수건이 없습니다.");
-    }
-    for (DoctorBoard doctorBoard : doctorReportList) {
-      System.out.printf("게시판 번호 : %d\n"
-          + "게시판 제목 : %s\n",
-          doctorBoard.getNo(),
-          doctorBoard.getTitle());
-    }
+    //    List<DoctorBoard> doctorReportList = doctorReportDao.findAll();
+    //    if (doctorReportList == null) {
+    //      System.out.println("자유게시판 신고 접수건이 없습니다.");
+    //    }
+    //    for (DoctorBoard doctorBoard : doctorReportList) {
+    //      System.out.printf("게시판 번호 : %d\n"
+    //          + "게시판 제목 : %s\n",
+    //          doctorBoard.getNo(),
+    //          doctorBoard.getTitle());
+    //    }
 
     //    requestAgent.request("doctorReport.selectList", null);
     //
