@@ -3,16 +3,20 @@ package pms.handler;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
+import pms.dao.MailBoxDao;
+import pms.dao.MemberDao;
 import pms.domain.MailBox;
 import pms.domain.Member;
-import request.RequestAgent;
 import util.Prompt;
 
 public class MailBoxSendHandler implements Command{
-  RequestAgent requestAgent;
 
-  public MailBoxSendHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  MailBoxDao mailBoxDao;
+  MemberDao memberDao;
+
+  public MailBoxSendHandler(MailBoxDao mailBoxDao , MemberDao memberDao) {
+    this.mailBoxDao = mailBoxDao;
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -20,24 +24,18 @@ public class MailBoxSendHandler implements Command{
     System.out.println();
     System.out.println("[쪽지 전송] 페이지입니다.");
     System.out.println();
-    MailBox mailBox = new MailBox();
+    //  MailBox mailBox = new MailBox();
     //    mailBox.setMailNo(Prompt.inputInt("쪽지 번호> "));
     String id = Prompt.inputString("수신인> ");
 
     HashMap<String,String> params = new HashMap<>();
     params.put("id", id);
-    requestAgent.request("member.selectOne", params);
+    MailBox mailBox = new MailBox();
+    List<MailBox> mailBoxList = mailBoxDao.findAll();
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 아이디를 사용하는 회원을 찾을 수 없습니다.");
-      return;
-    } 
 
-    Member member = requestAgent.getObject(Member.class);
 
-    requestAgent.request("mailBox.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (mailBoxList == null) {
       mailBox.setNo(1);
       mailBox.setMailNo(1);
       mailBox.setReceiver(id);
@@ -52,18 +50,18 @@ public class MailBoxSendHandler implements Command{
         System.out.println("쪽지 전송을 취소하였습니다.");
         return;
       } else if(input.equalsIgnoreCase("y")) {
-        requestAgent.request("mailBox.insert", mailBox);
+        mailBoxDao.insert(mailBox);
         System.out.println("쪽지를 전송하였습니다.");
       } else {
         System.out.println("잘못된 입력입니다.");
       }
 
       return;
-    } 
+    }
 
-    List<MailBox> mailBoxList = (List<MailBox>) requestAgent.getObjects(MailBox.class);
+    Member member =  memberDao.findById(id);
 
-    int count = 0; //기존에 존재하는 쪽지 갯수
+    int count = 0 ; //기존에 존재하는 쪽지 갯수
 
     if (member == null) {
       System.out.printf("-%s- (이)라는 ID는 찾을 수 없습니다.",id);
@@ -105,7 +103,7 @@ public class MailBoxSendHandler implements Command{
         System.out.println("쪽지 전송을 취소하였습니다.");
         return;
       } else if(input.equalsIgnoreCase("y")) {
-        requestAgent.request("mailBox.insert", mailBox);
+        mailBoxDao.insert(mailBox);
         System.out.println("쪽지를 전송하였습니다.");
       } else {
         System.out.println("잘못된 입력입니다.");

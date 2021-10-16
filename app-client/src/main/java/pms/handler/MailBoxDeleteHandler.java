@@ -1,15 +1,15 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
+import pms.dao.MailBoxDao;
 import pms.domain.MailBox;
-import request.RequestAgent;
 import util.Prompt;
 
 public class MailBoxDeleteHandler implements Command{
-  RequestAgent requestAgent;
+  MailBoxDao mailBoxDao;
 
-  public MailBoxDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MailBoxDeleteHandler(MailBoxDao mailBoxDao) {
+    this.mailBoxDao = mailBoxDao;
   }
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -21,21 +21,20 @@ public class MailBoxDeleteHandler implements Command{
         int mailNo = 0;
         int count = 0;
 
-        requestAgent.request("mailBox.selectList", null);
+        List<MailBox> mailBoxList = mailBoxDao.findAll();
 
 
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        if (mailBoxList == null) {
           System.out.println("쪽지함이 비어 있습니다.");
           return;
         }
 
-        Collection<MailBox> mailBoxList = requestAgent.getObjects(MailBox.class);
 
         for (MailBox mailBox : mailBoxList) {
           if(mailBox.getReceiver().equals(AuthLoginHandler.getLoginUser().getId())) {
             mailNo++;
             mailBox.setMailNo(mailNo);
-            requestAgent.request("mailBox.update", mailBox);
+            mailBoxDao.update(mailBox);
 
             System.out.printf("쪽지 번호 : %d\n"
                 +"보낸 사람 : %s\n"
@@ -56,13 +55,12 @@ public class MailBoxDeleteHandler implements Command{
       }
 
       else {
-
-        requestAgent.request("mailBox.selectList", null);
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        List<MailBox> mailBoxList = mailBoxDao.findAll();
+        MailBox mailBoxNo = mailBoxDao.findByNo(Integer.parseInt(no));
+        if (mailBoxNo == null) {
           System.out.println("입력한 숫자의 쪽지가 없습니다.");
           return;
         } else {
-          Collection<MailBox> mailBoxList = requestAgent.getObjects(MailBox.class);
 
           String input = Prompt.inputString(" ❗ 정말 삭제하시겠습니까? (y/N)> ");
           if(input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -72,17 +70,13 @@ public class MailBoxDeleteHandler implements Command{
 
           for (MailBox mailBox : mailBoxList) {
             if(mailBox.getReceiver().equals(AuthLoginHandler.getLoginUser().getId()) && mailBox.getNo() == Integer.parseInt(no)) {
-              requestAgent.request("mailBox.delete", mailBox);
+              mailBoxDao.delete(Integer.parseInt(no));
             }
           }
 
-          if(requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-            System.out.println("선택한 쪽지를 삭제하였습니다.");
-            return;
-          } else {
-            System.out.println("입력한 숫자의 쪽지가 없습니다.");
-          }
-        }
+          System.out.println("선택한 쪽지를 삭제하였습니다.");
+          return;
+        } 
       }
     }
   }

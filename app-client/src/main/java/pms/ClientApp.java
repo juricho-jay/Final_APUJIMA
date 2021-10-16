@@ -6,15 +6,14 @@ import java.util.List;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
+import pms.dao.MailBoxDao;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
 import pms.dao.impl.NetDoctorBoardDao;
 import pms.dao.impl.NetFreeBoardDao;
-<<<<<<< HEAD
 import pms.dao.impl.NetLikeDao;
-=======
+import pms.dao.impl.NetMailBoxDao;
 import pms.dao.impl.NetMedicineDao;
->>>>>>> 2c5c4751a0565dae89940f5ffa48defd9a4a1c42
 import pms.dao.impl.NetMemberDao;
 import pms.dao.impl.NetNoticeBoardDao;
 import pms.handler.AdminApprovalHandler;
@@ -161,6 +160,7 @@ public class ClientApp {
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
     NetBucketDao bucketDao = new NetBucketDao(requestAgent);
     NetMedicineDao medicineDao = new NetMedicineDao(requestAgent);
+    MailBoxDao mailBoxDao = new NetMailBoxDao(requestAgent);
 
 
     // Command 객체 준비
@@ -212,10 +212,10 @@ public class ClientApp {
     commandMap.put("/auth/check", new AttendanceCheckHandler(requestAgent));
     commandMap.put("/auth/deleteCheck", new AttendanceAutoDeleteHandler(requestAgent));
 
-    commandMap.put("/mailBox/send", new MailBoxSendHandler(requestAgent));
-    commandMap.put("/mailBox/list", new MailBoxListHandler(requestAgent));
-    commandMap.put("/mailBox/detail", new MailBoxDetailHandler(requestAgent));
-    commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(requestAgent));
+    commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxDao , memberDao));
+    commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxDao));
+    commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxDao));
+    commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxDao));
 
     commandMap.put("/comment/add", new CommentAddHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
     commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));

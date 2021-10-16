@@ -1,15 +1,15 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
+import pms.dao.MailBoxDao;
 import pms.domain.MailBox;
-import request.RequestAgent;
 import util.Prompt;
 
 public class MailBoxDetailHandler  implements Command{
-  RequestAgent requestAgent;
+  MailBoxDao mailBoxDao;
 
-  public MailBoxDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MailBoxDetailHandler(MailBoxDao mailBoxDao) {
+    this.mailBoxDao = mailBoxDao;
   }
 
   @Override
@@ -18,13 +18,13 @@ public class MailBoxDetailHandler  implements Command{
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();
 
-    requestAgent.request("mailBox.selectList", null);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    List<MailBox> mailBoxList=  mailBoxDao.findAll();
+    int count =0;
+    if (mailBoxList == null) {
       System.out.println("쪽지함이 비어 상세보기를 할 수 없습니다.");
       return;
     } else {
 
-      Collection<MailBox> mailBoxList = requestAgent.getObjects(MailBox.class);
       int no = Prompt.inputInt("쪽지 번호> ");
 
       for (MailBox mailBox : mailBoxList) {
@@ -36,10 +36,12 @@ public class MailBoxDetailHandler  implements Command{
           System.out.printf("수신자 : %s\n", AuthLoginHandler.getLoginUser().getId());
           System.out.printf("보낸 날짜 : %s\n",mailBox.getSendingTime());
           System.out.println();
-
+          count ++ ;
         }
       }
-
+      if (count == 0) {
+        System.out.println("받은 쪽지가 없어 상세보기를 할 수 없습니다.");
+      }
 
     }
 
