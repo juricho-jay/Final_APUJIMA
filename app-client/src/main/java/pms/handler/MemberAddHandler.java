@@ -101,9 +101,6 @@ public class MemberAddHandler implements Command{
     member.setPoint(1000);
     member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    System.out.println(member.getPoint());
-    System.out.println(member.getId());
-
 
     memberDao.insert(member);
 
