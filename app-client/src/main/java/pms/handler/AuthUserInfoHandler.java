@@ -1,18 +1,17 @@
 package pms.handler;
 
-import java.util.HashMap;
 import Menu.Menu;
+import pms.dao.MemberDao;
 import pms.domain.Member;
-import request.RequestAgent;
 import util.Prompt;
 
 
 public class AuthUserInfoHandler implements Command {
 
-  RequestAgent requestAgent;
+  MemberDao memberDao;
 
-  public AuthUserInfoHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AuthUserInfoHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -22,17 +21,8 @@ public class AuthUserInfoHandler implements Command {
 
     String loginUserId = AuthLoginHandler.getLoginUser().getId();
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("id", loginUserId);
 
-    requestAgent.request("member.selectOneById", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("로그인하지 않았습니다.");
-      return;
-    }
-
-    Member loginUser = requestAgent.getObject(Member.class);
+    Member loginUser = memberDao.findById(loginUserId);
 
     if (loginUser.getDoctorOrNot() == 2) {
       System.out.printf("%s 힐러님 환영합니다!\n", loginUser.getName());
@@ -57,13 +47,13 @@ public class AuthUserInfoHandler implements Command {
       switch (input) {
         case "D":
         case "d":
-          String status = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+          String status = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
           if (status.equalsIgnoreCase("n") || status.length() == 0) {
             System.out.println("회원 삭제를 취소하였습니다.");
             return;
           }
 
-          requestAgent.request("member.delete", params);
+          memberDao.delete(loginUserId);
 
           AuthLoginHandler.loginUser = null;
           AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;

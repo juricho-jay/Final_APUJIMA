@@ -21,6 +21,7 @@ public class MedicineUpdateHandler implements Command {
     if (input.equals("#")) {
       return;
     }
+
     Medicine medicine = medicineDao.findByName(input);
 
     //    for (Medicine medicine : medicineList) {
@@ -48,7 +49,6 @@ public class MedicineUpdateHandler implements Command {
     medicineDao.update(medicine);
 
     System.out.println("약품 정보를 변경하였습니다.");
-
-
   }
+
 }

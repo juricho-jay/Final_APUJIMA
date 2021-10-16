@@ -7,7 +7,7 @@ import pms.dao.NoticeBoardDao;
 import pms.domain.NoticeBoard;
 import request.RequestAgent;
 
-public class NetNoticeBoardDao implements NoticeBoardDao{
+public class NetNoticeBoardDao implements NoticeBoardDao {
 
   RequestAgent requestAgent;
 
@@ -61,6 +61,7 @@ public class NetNoticeBoardDao implements NoticeBoardDao{
     return requestAgent.getObject(NoticeBoard.class);
   }
 
+  @Override
   public List<NoticeBoard> findByKeyword(String keyword) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("keyword", keyword);

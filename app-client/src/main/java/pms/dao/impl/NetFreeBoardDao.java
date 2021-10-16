@@ -48,18 +48,18 @@ public class NetFreeBoardDao implements FreeBoardDao{
   }
 
   @Override
-  public FreeBoard findByName(String name) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("name", name);
-
-    requestAgent.request("freeBoard.selectOneByName", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return null;
-    }
-
-    return requestAgent.getObject(FreeBoard.class);
-  }
+  //  public FreeBoard findByName(String name) throws Exception {
+  //    HashMap<String,String> params = new HashMap<>();
+  //    params.put("name", name);
+  //
+  //    requestAgent.request("freeBoard.selectOneByName", params);
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      return null;
+  //    }
+  //
+  //    return requestAgent.getObject(FreeBoard.class);
+  //  }
 
   public List<FreeBoard> findByKeyword(String keyword) throws Exception {
     HashMap<String,String> params = new HashMap<>();

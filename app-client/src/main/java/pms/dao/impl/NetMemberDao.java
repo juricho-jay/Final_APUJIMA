@@ -81,15 +81,16 @@ public class NetMemberDao implements MemberDao{
     requestAgent.request("member.update", member);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("포인트 차감 실패!");
+      System.out.println("정보 변경 실패!");
       throw new Exception(requestAgent.getObject(String.class));
     }
   }
 
   @Override
-  public void delete(int no) throws Exception {
+  // id로 찾아서 삭제
+  public void delete(String id) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    params.put("id", id);
 
     requestAgent.request("member.delete", params);
 
@@ -98,6 +99,7 @@ public class NetMemberDao implements MemberDao{
     }
   }
 
+  @Override
   public void check(Member member) throws Exception {
     requestAgent.request("member.check", member);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {

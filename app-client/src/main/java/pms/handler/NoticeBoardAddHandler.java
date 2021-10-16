@@ -2,17 +2,17 @@ package pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import pms.dao.NoticeBoardDao;
 import pms.domain.NoticeBoard;
-import request.RequestAgent;
 import util.Prompt;
 
-public class NoticeBoardAddHandler implements Command{
+public class NoticeBoardAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  NoticeBoardDao noticeBoardDao;
 
 
-  public NoticeBoardAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public NoticeBoardAddHandler(NoticeBoardDao noticeBoardDao) {
+    this.noticeBoardDao = noticeBoardDao;
 
   }
 
@@ -21,19 +21,19 @@ public class NoticeBoardAddHandler implements Command{
     System.out.println();
     System.out.println("[글쓰기] 페이지입니다.");
     System.out.println();
-
     NoticeBoard noticeBoard = new NoticeBoard();
 
-    requestAgent.request("noticeBoard.selectList", null);
+    List<NoticeBoard> noticeBoardList = noticeBoardDao.findAll();
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+
+    if (noticeBoardList.size() == 0) {
       NoticeBoard.lastIndex = 1;
       noticeBoard.setNo(NoticeBoard.lastIndex);
 
     }
 
     else {
-      List<NoticeBoard> noticeBoardList = (List<NoticeBoard>) requestAgent.getObjects(NoticeBoard.class); 
+
       if(NoticeBoard.lastIndex != noticeBoardList.size()) {
 
         NoticeBoard.lastIndex = noticeBoardList.get(noticeBoardList.size()-1).getNo();
@@ -66,13 +66,8 @@ public class NoticeBoardAddHandler implements Command{
     noticeBoard.setRegisteredDate(new Date(System.currentTimeMillis()));
     noticeBoard.setWhichBoard("notice");
 
-    requestAgent.request("noticeBoard.insert", noticeBoard);
-
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("게시글 등록 성공!");
-      return;
-    }
-    System.out.println("게시글 등록 실패!");
+    noticeBoardDao.insert(noticeBoard);
+    System.out.println("게시글이 등록되었습니다.");
   }
 
 }

@@ -68,6 +68,7 @@ public class NetMedicineDao implements MedicineDao {
     requestAgent.request("medicine.selectOneByName", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("검색 실패!");
       return null;
     }
 

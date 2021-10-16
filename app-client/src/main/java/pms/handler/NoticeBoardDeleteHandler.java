@@ -1,16 +1,16 @@
 package pms.handler;
 
-import java.util.HashMap;
-import request.RequestAgent;
+import pms.dao.NoticeBoardDao;
+import pms.domain.NoticeBoard;
 import util.Prompt;
 
-public class NoticeBoardDeleteHandler implements Command{
+public class NoticeBoardDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
+  NoticeBoardDao noticeBoardDao;
 
 
-  public NoticeBoardDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public NoticeBoardDeleteHandler(NoticeBoardDao noticeBoardDao) {
+    this.noticeBoardDao = noticeBoardDao;
   }
 
 
@@ -18,16 +18,18 @@ public class NoticeBoardDeleteHandler implements Command{
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[삭제] 페이지입니다.");
     System.out.println();
-    int no = Prompt.inputInt("게시글 번호> ");
-    no = (int)request.getAttribute("no");
 
-    HashMap<String ,String > params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    int no = (int)request.getAttribute("no");
 
-    requestAgent.request("noticeBoard.selectOne", params);
+    NoticeBoard noticeBoard = noticeBoardDao.findByNo(no);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (noticeBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
+      return;
+    }
+
+    if (!noticeBoard.getWriter().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+      System.out.println("삭제 권한이 없습니다.");
       return;
     }
 
@@ -40,15 +42,8 @@ public class NoticeBoardDeleteHandler implements Command{
     request.getRequestDispatcher("/comment/autoDelete").forward(request);
     request.getRequestDispatcher("/like/autoDelete").forward(request);
 
-    requestAgent.request("noticeBoard.delete", params);
+    noticeBoardDao.delete(no);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글 삭제 실패! ");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
     System.out.println("게시글을 삭제하였습니다.");
-    //    }
-    //  }
   }
 }

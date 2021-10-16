@@ -17,7 +17,8 @@ public class MailBoxTable extends JsonDataTable<MailBox> implements DataProcesso
       case "mailBox.insert": insert(request, response); break;
       case "mailBox.selectList": selectList(request, response); break;
       case "mailBox.selectOne": selectOne(request, response); break;
-      case "mailBox.selectOne2": selectOne2(request, response); break;
+      //  case "mailBox.selectOne2": selectOne2(request, response); break;
+      case "mailBox.selectOneById": selectOneById( request, response); break;
       case "mailBox.delete": delete(request, response); break;
       case "mailBox.update": update(request, response); break;
       default:
@@ -42,8 +43,8 @@ public class MailBoxTable extends JsonDataTable<MailBox> implements DataProcesso
   }
 
   private void delete(Request request, Response response) throws Exception {
-    MailBox mailBox = request.getObject(MailBox.class);
-    int index = indexOf(mailBox.getMailNo());
+    int no = Integer.parseInt(request.getParameter("no"));
+    int index = indexOf(no);
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
@@ -70,19 +71,19 @@ public class MailBoxTable extends JsonDataTable<MailBox> implements DataProcesso
     }
   }
 
-  private void selectOne2(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("no"));
-
-    MailBox b = getfindByNo(no);
-
-    if (b != null) {
-      response.setStatus(Response.SUCCESS);
-      response.setValue(b);
-    } else {
-      response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 쪽지함을 찾을 수 없습니다.");
-    }
-  }
+  //  private void selectOne2(Request request, Response response) throws Exception {
+  //    int no = Integer.parseInt(request.getParameter("no"));
+  //
+  //    MailBox b = getfindByNo(no);
+  //
+  //    if (b != null) {
+  //      response.setStatus(Response.SUCCESS);
+  //      response.setValue(b);
+  //    } else {
+  //      response.setStatus(Response.FAIL);
+  //      response.setValue("해당 번호의 쪽지함을 찾을 수 없습니다.");
+  //    }
+  //  }
 
   private int indexOf(int no) {
     for (int i = 0; i < list.size(); i++) {
@@ -123,6 +124,25 @@ public class MailBoxTable extends JsonDataTable<MailBox> implements DataProcesso
 
     list.set(index, mailBox);
     response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectOneById(Request request, Response response) throws Exception {
+    String id = request.getParameter("id");
+    MailBox mailBox = null;
+    for (MailBox m : list) {
+      if (m.getReceiver().equals(id)) {
+        mailBox = m;
+        break;
+      }
+    }
+
+    if (mailBox != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(mailBox);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 회원을 찾을 수 없습니다.");
+    }
   }
 
 
