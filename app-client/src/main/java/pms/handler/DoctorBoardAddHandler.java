@@ -28,7 +28,7 @@ public class DoctorBoardAddHandler implements Command {
 
     List<DoctorBoard> doctorBoardList = doctorBoardDao.findAll();
 
-    if (doctorBoardList.size() == 0) {
+    if (doctorBoardList == null) {
       DoctorBoard.lastIndex = 1;
       doctorBoard.setNo(DoctorBoard.lastIndex);
 

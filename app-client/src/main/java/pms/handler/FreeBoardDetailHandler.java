@@ -48,6 +48,7 @@ public class FreeBoardDetailHandler implements Command {
 
     String whichBoard = freeBoard.getWhichBoard();
 
+<<<<<<< HEAD
     //    List<Like> likeList = likeDao.findAll();
     //    if (likeList.size() == 0) {
     //      System.out.print("[좋아요 ♡ : 0]");
@@ -76,12 +77,42 @@ public class FreeBoardDetailHandler implements Command {
     //
     //      System.out.printf(" %d]\n", count);
     //    }
+=======
+    List<Like> likeList = likeDao.findAll();
+    if (likeList == null) {
+      System.out.print("[좋아요 ♡ : 0]");
+    } else {
+      for (int i = 0; i < likeList.size(); i++) {
+        if (likeList.get(i).getLikeBoardNo() == freeBoard.getNo() && 
+            likeList.get(i).getWhichBoard().equals(whichBoard) &&
+            likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+          System.out.print("[좋아요 ♥ :");
+          break;
+        } else if (i == (likeList.size() - 1)) {
+          System.out.print("[좋아요 ♡ :");
+          break;
+        }
+      }
+
+      int count = 0;
+      for (int j = 0; j < likeList.size(); j++) {
+        if (likeList.get(j).getLikeBoardNo() != 0) {
+          if (likeList.get(j).getLikeBoardNo() == freeBoard.getNo() && 
+              likeList.get(j).getWhichBoard().equals(whichBoard)) {
+            count++;
+          }
+        }   
+      }
+
+      System.out.printf(" %d]\n", count);
+    }
+>>>>>>> dc2c090986471b06c7a97a11ebbfe9e25a37a727
 
     System.out.println();
     System.out.println("[댓글]");
 
     List<Comment> commentList = commentDao.findAll();
-    if(commentList.size() != 0) {
+    if(commentList != null) {
       for (Comment comment : commentList) {
         if (comment.getCommentBoardNo() != 0) {
           if (comment.getCommentBoardNo() == freeBoard.getNo() && 
@@ -146,6 +177,31 @@ public class FreeBoardDetailHandler implements Command {
       }
 
     } 
+
+    // 댓글list 없는 경우
+    if (commentList == null) {
+      if (freeBoard.getWriter().getId().equals(loginUser)) {
+        while (true) {
+          System.out.println();
+          String input = Prompt.inputString("[글] 변경(U) / 삭제(D) / 이전 메뉴(0)> ");
+          switch (input) {
+            case "U":
+            case "u":
+              request.getRequestDispatcher("/freeBoard/update").forward(request);
+              return;
+            case "D":
+            case "d":
+              request.getRequestDispatcher("/freeBoard/delete").forward(request);
+              return;
+            case "0":
+              return;
+            default:
+              System.out.println("명령어가 올바르지 않습니다!");
+          }
+        }
+      }
+      return;
+    }
 
     int myComment = 0;
     for (Comment comment : commentList) {
@@ -230,9 +286,7 @@ public class FreeBoardDetailHandler implements Command {
         }
       }
     }
-
-
   }
-}
 
+}
 

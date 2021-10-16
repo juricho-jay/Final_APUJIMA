@@ -27,7 +27,8 @@ public class NetDoctorBoardDao implements DoctorBoardDao{
   public List<DoctorBoard> findAll() throws Exception {
     requestAgent.request("doctorBoard.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      System.out.println("작성된 게시물이 없습니다.");
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(DoctorBoard.class));
@@ -61,13 +62,15 @@ public class NetDoctorBoardDao implements DoctorBoardDao{
     return requestAgent.getObject(DoctorBoard.class);
   }
 
+  @Override
   public List<DoctorBoard> findByKeyword(String keyword) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("keyword", keyword);
     requestAgent.request("doctorBoard.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("해당 키워드로 검색 가능한 게시글이 없습니다.");
+      System.out.println("해당 키워드로 검색 가능한 게시글이 없습니다.");
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(DoctorBoard.class));
@@ -79,7 +82,8 @@ public class NetDoctorBoardDao implements DoctorBoardDao{
     requestAgent.request("doctorBoard.update", doctorBoard);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      System.out.println("정보 변경 실패!");
+      return;
     }
   }
 
@@ -91,7 +95,8 @@ public class NetDoctorBoardDao implements DoctorBoardDao{
     requestAgent.request("doctorBoard.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      System.out.println("삭제 실패!");
+      return;
     }
 
   }

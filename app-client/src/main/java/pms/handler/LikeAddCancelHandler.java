@@ -71,7 +71,7 @@ public class LikeAddCancelHandler implements Command {
 
     List<Like> likeList = likeDao.findAll();
 
-    if(likeList.size() == 0) {
+    if(likeList == null) {
       like.setLikeNo(0);
       like.setLikeBoardNo(xxxBoard.getNo());
       like.setLikeWriter(xxxBoard.getWriter().getId());

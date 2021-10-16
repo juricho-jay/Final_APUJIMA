@@ -38,23 +38,27 @@ public class BucketSearchHandler implements Command {
     //
     //    Collection<Bucket> bucketList = requestAgent.getObjects(Bucket.class);
 
+    if (bucketList == null) {
+      return;
+    } else {
 
-    for (Bucket bucket : bucketList) {
-      if (bucket.getWriter().equals(AuthLoginHandler.getLoginUser().getId())) {
-        System.out.printf("%d, %s, %s, %s, %s\n",
-            bucket.getNo(),
-            bucket.getTitle(),
-            bucket.getWriter(),
-            bucket.getRegisteredDate(),
-            bucket.getCheck());
-        count++;
+      for (Bucket bucket : bucketList) {
+        if (bucket.getWriter().equals(AuthLoginHandler.getLoginUser().getId())) {
+          System.out.printf("%d, %s, %s, %s, %s\n",
+              bucket.getNo(),
+              bucket.getTitle(),
+              bucket.getWriter(),
+              bucket.getRegisteredDate(),
+              bucket.getCheck());
+          count++;
 
+        }
+        continue;
       }
-      continue;
-    }
 
-    if (count == 0 ) {
-      System.out.println("버킷리스트가 없습니다.");
+      if (count == 0 ) {
+        System.out.println("버킷리스트가 없습니다.");
+      }
     }
   }
 }
