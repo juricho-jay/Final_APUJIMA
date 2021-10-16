@@ -1,15 +1,18 @@
 package pms.handler;
 
 import pms.dao.MedicineDao;
+import pms.dao.RequestDao;
 import pms.domain.Medicine;
 import util.Prompt;
 
 public class MedicineRequestHandler implements Command {
 
   MedicineDao medicineDao;
+  RequestDao requestDao;
 
-  public MedicineRequestHandler(MedicineDao medicineDao) {
+  public MedicineRequestHandler(MedicineDao medicineDao, RequestDao requestDao) {
     this.medicineDao = medicineDao;
+    this.requestDao = requestDao;
   }
 
 
@@ -40,7 +43,7 @@ public class MedicineRequestHandler implements Command {
         return;
       }
 
-      //약품 요청은 requestDao.insert(medicine);
+      requestDao.insert(medicine);
 
       System.out.println("관리자에게 약품등록을 요청하였습니다.");
       break;

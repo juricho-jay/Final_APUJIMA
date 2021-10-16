@@ -1,6 +1,6 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
 import pms.dao.MedicineDao;
 import pms.domain.Medicine;
 import util.Prompt;
@@ -25,7 +25,7 @@ public class MedicineSearchHandler implements Command {
       return;
     }
 
-    Collection<Medicine> medicineList = medicineDao.findByKeyword(input);
+    List<Medicine> medicineList = medicineDao.findByKeyword(input);
 
     for (Medicine medicine : medicineList) {
       if (!medicine.getName().contains(input) &&

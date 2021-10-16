@@ -3,21 +3,22 @@ package pms.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import pms.dao.MedicineDao;
+import pms.dao.RequestDao;
 import pms.domain.Medicine;
 import request.RequestAgent;
 
-public class NetMedicineDao implements MedicineDao {
+public class NetRequestDao implements RequestDao {
+
   RequestAgent requestAgent;
 
-  public NetMedicineDao(RequestAgent requestAgent) {
+  public NetRequestDao(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
 
   @Override
   public void insert(Medicine medicine) throws Exception {
-    requestAgent.request("medicine.insert", medicine);
+    requestAgent.request("request.insert", medicine);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception(requestAgent.getObject(String.class));
     }
@@ -25,7 +26,7 @@ public class NetMedicineDao implements MedicineDao {
 
   @Override
   public List<Medicine> findAll() throws Exception {
-    requestAgent.request("medicine.selectList", null);
+    requestAgent.request("request.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception(requestAgent.getObject(String.class));
     }
@@ -63,9 +64,9 @@ public class NetMedicineDao implements MedicineDao {
   @Override
   public Medicine findByName(String name) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("input", name);
+    params.put("name", name);
 
-    requestAgent.request("medicine.selectOneByName", params);
+    requestAgent.request("request.selectOneByName", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
@@ -76,7 +77,7 @@ public class NetMedicineDao implements MedicineDao {
 
   @Override
   public void update(Medicine medicine) throws Exception {
-    requestAgent.request("medicine.update", medicine);
+    requestAgent.request("request.update", medicine);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("약품 변경 실패!");
@@ -88,7 +89,7 @@ public class NetMedicineDao implements MedicineDao {
     HashMap<String,String> params = new HashMap<>();
     params.put("name", String.valueOf(name));
 
-    requestAgent.request("medicine.delete", params);
+    requestAgent.request("request.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("약품 삭제 실패!");
@@ -97,12 +98,10 @@ public class NetMedicineDao implements MedicineDao {
 
   @Override
   public void check(Medicine medicine) throws Exception {
-    requestAgent.request("medicine.check", medicine);
+    requestAgent.request("request.check", medicine);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("이미 등록된 약품 입니다.");
     }
   }
-
-
 
 }

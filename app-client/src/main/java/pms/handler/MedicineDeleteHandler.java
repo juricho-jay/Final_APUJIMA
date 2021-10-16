@@ -1,6 +1,6 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
 import pms.dao.MedicineDao;
 import pms.domain.Medicine;
 import util.Prompt;
@@ -18,14 +18,15 @@ public class MedicineDeleteHandler implements Command {
     System.out.println("[약품 삭제] 페이지입니다.");
     System.out.println();
 
-    String input = Prompt.inputString("약품명 (뒤로가기 #)> ");
-    if (input.equals("#")) {
+    String name = Prompt.inputString("약품명 (뒤로가기 #)> ");
+    if (name.equals("#")) {
       return;
     }
-    Collection<Medicine> medicineList = medicineDao.findAll();
+    List<Medicine> medicineList = medicineDao.findAll();
 
     for (Medicine medicine : medicineList) {
-      if (!medicine.getName().contains(input)) {
+      if (!medicine.getName().contains(name)) {
+        System.out.println("검색하신 약품은 없는 약품입니다.");
         continue;
       }
 
@@ -35,7 +36,7 @@ public class MedicineDeleteHandler implements Command {
         return;
       }
 
-      medicineDao.delete(input);
+      medicineDao.delete(name);
 
       System.out.println("약품을 삭제하였습니다.");
     }

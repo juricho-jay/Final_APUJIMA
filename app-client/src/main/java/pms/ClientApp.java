@@ -16,6 +16,7 @@ import pms.dao.impl.NetMedicineDao;
 import pms.dao.impl.NetMemberDao;
 import pms.dao.impl.NetNoticeBoardDao;
 import pms.dao.impl.NetReportDao;
+import pms.dao.impl.NetRequestDao;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
@@ -162,18 +163,19 @@ public class ClientApp {
     NetMedicineDao medicineDao = new NetMedicineDao(requestAgent);
     NetReportDao reportDao = new NetReportDao(requestAgent);
     NetDoctorReportDao doctorReportDao = new NetDoctorReportDao(requestAgent);
+    NetRequestDao requestDao = new NetRequestDao(requestAgent);
 
 
 
     // Command 객체 준비
-    commandMap.put("/admin/approval", new AdminApprovalHandler(requestAgent));
+    commandMap.put("/admin/approval", new AdminApprovalHandler(requestDao, medicineDao));
     commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
     commandMap.put("/admin/list", new AdminListHandler(requestAgent));
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(requestAgent));
     commandMap.put("/intro", new IntroMenu());
 
     commandMap.put("/medicine/add", new MedicineAddHandler(medicineDao));
-    commandMap.put("/medicine/request", new MedicineRequestHandler(medicineDao));
+    commandMap.put("/medicine/request", new MedicineRequestHandler(medicineDao, requestDao));
     commandMap.put("/medicine/list", new MedicineListHandler(medicineDao));
     commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineDao));
     commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineDao));
