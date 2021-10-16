@@ -4,6 +4,7 @@ import java.util.List;
 import pms.dao.CommentDao;
 import pms.dao.FreeBoardDao;
 import pms.dao.LikeDao;
+import pms.dao.ReportDao;
 import pms.domain.Comment;
 import pms.domain.FreeBoard;
 import pms.domain.Like;
@@ -14,11 +15,13 @@ public class FreeBoardDetailHandler implements Command {
   FreeBoardDao freeBoardDao;
   LikeDao likeDao;
   CommentDao commentDao;
+  ReportDao reportDao;
 
-  public FreeBoardDetailHandler(FreeBoardDao freeBoardDao, LikeDao likeDao, CommentDao commentDao) {
+  public FreeBoardDetailHandler(FreeBoardDao freeBoardDao, LikeDao likeDao, CommentDao commentDao, ReportDao reportDao) {
     this.freeBoardDao = freeBoardDao;
     this.likeDao = likeDao;
     this.commentDao = commentDao;
+    this.reportDao = reportDao;
   }
 
   @Override
@@ -94,7 +97,7 @@ public class FreeBoardDetailHandler implements Command {
     }
 
     System.out.println();
-    request.setAttribute("no", no); //게시글 번호 num에 저장
+    request.setAttribute("no", no);
     request.setAttribute("boardType", "freeBoard");
 
 
@@ -130,6 +133,7 @@ public class FreeBoardDetailHandler implements Command {
         freeBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
         freeBoard.setRequester(loginUser);
         //        requestAgent.request("report.insert", freeBoard);
+        reportDao.insert(freeBoard);
         System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
         break;
 

@@ -1,44 +1,27 @@
 package pms.handler;
 
-import java.util.HashMap;
 import java.util.List;
+import pms.dao.NoticeBoardDao;
 import pms.domain.NoticeBoard;
-import request.RequestAgent;
 import util.Prompt;
 
-public class NoticeBoardSearchHandler implements Command{
+public class NoticeBoardSearchHandler implements Command {
 
-  RequestAgent requestAgent;
+  NoticeBoardDao noticeBoardDao;
 
-  public NoticeBoardSearchHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public NoticeBoardSearchHandler(NoticeBoardDao noticeBoardDao) {
+    this.noticeBoardDao = noticeBoardDao;
   }
-
-
-
 
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-
-
+    int count = 0;
     System.out.println("[게시글 검색] 페이지입니다.");
     System.out.println();
     String input = Prompt.inputString("검색어> ");
 
-
-    HashMap<String,String> params = new HashMap<>();
-    params.put("keyword", input);
-    requestAgent.request("noticeBoard.selectListByKeyword", params);
-
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("현재 게시판에 작성된 글이 없습니다.!");
-      return;
-    }
-
-    int count = 0;
-    List<NoticeBoard> noticeBoardList =(List<NoticeBoard>) requestAgent.getObjects(NoticeBoard.class);
+    List<NoticeBoard> noticeBoardList = noticeBoardDao.findByKeyword(input);
 
     for (NoticeBoard noticeBoard : noticeBoardList) {
       if (!noticeBoard.getTitle().contains(input) &&
@@ -46,6 +29,7 @@ public class NoticeBoardSearchHandler implements Command{
           !noticeBoard.getWriter().getId().contains(input)) {
         continue;
       }
+      count ++;
       System.out.printf("%d, %s, %s, %s, %d, %d\n",
           noticeBoard.getNo(),
           noticeBoard.getTitle(),
@@ -53,7 +37,6 @@ public class NoticeBoardSearchHandler implements Command{
           noticeBoard.getRegisteredDate(),
           noticeBoard.getViewCount(),
           noticeBoard.getLike());
-      count ++;
     }
 
     if (count == 0) {

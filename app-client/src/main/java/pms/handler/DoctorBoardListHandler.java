@@ -1,15 +1,15 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
+import pms.dao.DoctorBoardDao;
 import pms.domain.DoctorBoard;
-import request.RequestAgent;
 
 public class DoctorBoardListHandler implements Command {
 
-  RequestAgent requestAgent;
+  DoctorBoardDao doctorBoardDao;
 
-  public DoctorBoardListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public DoctorBoardListHandler(DoctorBoardDao doctorBoardDao) {
+    this.doctorBoardDao = doctorBoardDao;
   }
 
   @Override
@@ -17,15 +17,8 @@ public class DoctorBoardListHandler implements Command {
     System.out.println("[게시글 목록] 페이지입니다.");
     System.out.println();
 
-    requestAgent.request("doctorBoard.selectList", null);
+    List<DoctorBoard> doctorBoardList = doctorBoardDao.findAll();
 
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("현재 게시판에 작성된 글이 없습니다.");
-      return;
-    }
-
-    Collection<DoctorBoard> doctorBoardList = requestAgent.getObjects(DoctorBoard.class);
 
     for (DoctorBoard doctorBoard : doctorBoardList) {
       System.out.printf("%d, %s, %s, %s, %d\n",

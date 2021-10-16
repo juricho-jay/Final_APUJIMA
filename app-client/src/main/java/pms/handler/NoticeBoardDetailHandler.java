@@ -1,53 +1,40 @@
 package pms.handler;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
+import pms.dao.CommentDao;
+import pms.dao.LikeDao;
+import pms.dao.NoticeBoardDao;
 import pms.domain.Comment;
 import pms.domain.Like;
 import pms.domain.NoticeBoard;
-import request.RequestAgent;
 import util.Prompt;
 
-public class NoticeBoardDetailHandler implements Command{
+public class NoticeBoardDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  NoticeBoardDao noticeeBoardDao;
+  LikeDao likeDao;
+  CommentDao commentDao;
 
-  public NoticeBoardDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public NoticeBoardDetailHandler(NoticeBoardDao noticeeBoardDao, LikeDao likeDao, CommentDao commentDao) {
+    this.noticeeBoardDao = noticeeBoardDao;
+    this.likeDao = likeDao;
+    this.commentDao = commentDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception{
-    String loginUser = AuthLoginHandler.getLoginUser().getId();
     System.out.println();
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();
+    String loginUser = AuthLoginHandler.getLoginUser().getId();
     int no = Prompt.inputInt("게시글 번호> ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    NoticeBoard noticeBoard = noticeeBoardDao.findByNo(no);
 
-    requestAgent.request("noticeBoard.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (noticeBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
-
-
-
-
-
-
-
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
-      return;
-    }
-
-    NoticeBoard noticeBoard = requestAgent.getObject(NoticeBoard.class);
 
     System.out.printf("제목: %s\n", noticeBoard.getTitle());
     System.out.printf("내용: %s\n", noticeBoard.getContent());
@@ -59,18 +46,11 @@ public class NoticeBoardDetailHandler implements Command{
 
     String whichBoard = noticeBoard.getWhichBoard();
 
-    requestAgent.request("like.selectList", null);
+    List<Like> likeList = likeDao.findAll();
 
-    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("");
+    if(likeList.size() == 0) {
       System.out.print("[좋아요 ♡ :");
-    }
-
-    else { 
-
-      List<Like> likeList = (List<Like>) requestAgent.getObjects(Like.class);
-
-
+    } else { 
 
       for (int i = 0; i < likeList.size(); i++) {
         if (likeList.get(i).getLikeBoardNo() == noticeBoard.getNo() && 
@@ -97,17 +77,12 @@ public class NoticeBoardDetailHandler implements Command{
       System.out.printf(" %d]\n", count);
     }
 
-    requestAgent.request("comment.selectList", null);
+    System.out.println();
+    System.out.println("[댓글]");
 
-    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("");
-    }
+    List<Comment> commentList= commentDao.findAll();  
 
-    else {
-      List<Comment> commentList= (List<Comment>) requestAgent.getObjects(Comment.class);  
-
-      System.out.println();
-      System.out.println("[댓글]");
+    if(commentList.size() != 0) {
       for (Comment comment : commentList) {
         if (comment.getCommentBoardNo() != 0) {
           if (comment.getCommentBoardNo() == noticeBoard.getNo() && 
@@ -117,9 +92,10 @@ public class NoticeBoardDetailHandler implements Command{
                 comment.getCommenter(),
                 comment.getCommentContent());
           }
-        }   
+        }  
       }
     }
+
     System.out.println();
     request.setAttribute("no", no);
     request.setAttribute("boardType", "noticeBoard");
@@ -127,14 +103,9 @@ public class NoticeBoardDetailHandler implements Command{
 
     while(true) {
       String status = "";
-
-      requestAgent.request("like.selectList", null);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      if (likeList.size() == 0) {
         status = Prompt.inputString("[좋아요♡(#) / 댓글달기💬(@) / 넘어가기(Enter)]> ");
       } else {
-        List<Like> likeList = (List<Like>) requestAgent.getObjects(Like.class);
-
         for (int i = 0; i < likeList.size(); i++) {
           if (likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId()) &&
               likeList.get(i).getWhichBoard().equals(whichBoard)) {
@@ -145,7 +116,6 @@ public class NoticeBoardDetailHandler implements Command{
           }
         }
       }
-
 
       if (status.equals("#")) {
         request.getRequestDispatcher("/like/addCancel").forward(request);
@@ -165,20 +135,15 @@ public class NoticeBoardDetailHandler implements Command{
     } 
 
     int myComment = 0;
-    requestAgent.request("comment.selectList", null);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    } else {
 
-      Collection<Comment> commentList = requestAgent.getObjects(Comment.class);
-      for (Comment comment : commentList) {
-        if (comment.getCommentBoardNo() != 0) {
-          if (comment.getCommentBoardNo() == noticeBoard.getNo() && 
-              comment.getWhichBoard().equals(whichBoard) &&
-              comment.getCommenter().equals(loginUser)) {
-            myComment++;
-          }
-        }   
-      }
+    for (Comment comment : commentList) {
+      if (comment.getCommentBoardNo() != 0) {
+        if (comment.getCommentBoardNo() == noticeBoard.getNo() && 
+            comment.getWhichBoard().equals(whichBoard) &&
+            comment.getCommenter().equals(loginUser)) {
+          myComment++;
+        }
+      }   
     }
 
 

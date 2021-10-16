@@ -9,18 +9,24 @@ import pms.context.ApplicationContextListener;
 import pms.dao.MailBoxDao;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
+import pms.dao.impl.NetDateCheckDao;
 import pms.dao.impl.NetDoctorBoardDao;
+import pms.dao.impl.NetDoctorReportDao;
 import pms.dao.impl.NetFreeBoardDao;
 import pms.dao.impl.NetLikeDao;
+<<<<<<< HEAD
 import pms.dao.impl.NetMailBoxDao;
+=======
+>>>>>>> a8cf2d97a07a708610d9e69fe188eea4b53c3313
 import pms.dao.impl.NetMedicineDao;
 import pms.dao.impl.NetMemberDao;
 import pms.dao.impl.NetNoticeBoardDao;
+import pms.dao.impl.NetReportDao;
+import pms.dao.impl.NetRequestDao;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
 import pms.handler.AdminUpdateHandler;
-import pms.handler.AttendanceAutoDeleteHandler;
 import pms.handler.AttendanceCheckHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
@@ -161,56 +167,60 @@ public class ClientApp {
     NetBucketDao bucketDao = new NetBucketDao(requestAgent);
     NetMedicineDao medicineDao = new NetMedicineDao(requestAgent);
     MailBoxDao mailBoxDao = new NetMailBoxDao(requestAgent);
+    NetReportDao reportDao = new NetReportDao(requestAgent);
+    NetDoctorReportDao doctorReportDao = new NetDoctorReportDao(requestAgent);
+    NetDateCheckDao dateCheckDao = new NetDateCheckDao(requestAgent);
+    NetRequestDao requestDao = new NetRequestDao(requestAgent);
+
 
 
     // Command 객체 준비
-    commandMap.put("/admin/approval", new AdminApprovalHandler(requestAgent));
+    commandMap.put("/admin/approval", new AdminApprovalHandler(requestDao, medicineDao));
     commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
     commandMap.put("/admin/list", new AdminListHandler(requestAgent));
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(requestAgent));
     commandMap.put("/intro", new IntroMenu());
 
     commandMap.put("/medicine/add", new MedicineAddHandler(medicineDao));
-    commandMap.put("/medicine/request", new MedicineRequestHandler(medicineDao));
+    commandMap.put("/medicine/request", new MedicineRequestHandler(medicineDao, requestDao));
     commandMap.put("/medicine/list", new MedicineListHandler(medicineDao));
     commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineDao));
     commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineDao));
     commandMap.put("/medicine/search", new MedicineSearchHandler(medicineDao));
 
-    commandMap.put("/counselingMember/list", new DoctorMemberListHandler(requestAgent));
+    commandMap.put("/counselingMember/list", new DoctorMemberListHandler(memberDao));
     commandMap.put("/counselingMember/add", new CounselingMemberAddHandler(requestAgent));
     commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(requestAgent));
     commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(requestAgent));
 
-    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(requestAgent));
-    commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(requestAgent));
-    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(requestAgent));
-    commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(requestAgent));
-    commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(requestAgent));
-    commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(requestAgent));
+    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardDao, likeDao, commentDao));
+    commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(noticeBoardDao));
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardDao));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardDao));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardDao, likeDao, commentDao));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardDao, likeDao, commentDao, reportDao));
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardDao));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardDao));
     commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardDao));
     //
     commandMap.put("/doctorBoard/add", new DoctorBoardAddHandler(doctorBoardDao, memberDao));
-    commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(requestAgent));
-    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(requestAgent));
-    commandMap.put("/doctorBoard/update", new DoctorBoardUpdateHandler(requestAgent));
-    commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(requestAgent));
-    commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(requestAgent));
+    commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(doctorBoardDao));
+    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(doctorBoardDao, likeDao, commentDao, doctorReportDao));
+    commandMap.put("/doctorBoard/update", new DoctorBoardUpdateHandler(doctorBoardDao));
+    commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardDao));
+    commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardDao));
 
     commandMap.put("/member/add", new MemberAddHandler(memberDao));
     commandMap.put("/member/list", new MemberListHandler(memberDao));
 
     commandMap.put("/auth/login", new AuthLoginHandler(requestAgent));
     commandMap.put("/auth/logout", new AuthLogoutHandler());
-    commandMap.put("/auth/userInfo", new AuthUserInfoHandler(requestAgent));
-    commandMap.put("/auth/check", new AttendanceCheckHandler(requestAgent));
-    commandMap.put("/auth/deleteCheck", new AttendanceAutoDeleteHandler(requestAgent));
+    commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberDao));
+    commandMap.put("/auth/check", new AttendanceCheckHandler(dateCheckDao, memberDao));
 
     commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxDao , memberDao));
     commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxDao));

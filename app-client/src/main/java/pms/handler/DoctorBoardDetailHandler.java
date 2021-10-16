@@ -1,20 +1,27 @@
 package pms.handler;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
+import pms.dao.CommentDao;
+import pms.dao.DoctorBoardDao;
+import pms.dao.DoctorReportDao;
+import pms.dao.LikeDao;
 import pms.domain.Comment;
 import pms.domain.DoctorBoard;
 import pms.domain.Like;
-import request.RequestAgent;
 import util.Prompt;
 
 public class DoctorBoardDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  DoctorBoardDao doctorBoardDao;
+  LikeDao likeDao;
+  CommentDao commentDao;
+  DoctorReportDao doctorReportDao;
 
-  public DoctorBoardDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public DoctorBoardDetailHandler(DoctorBoardDao doctorBoardDao, LikeDao likeDao, CommentDao commentDao, DoctorReportDao doctorReportDao) {
+    this.doctorBoardDao = doctorBoardDao;
+    this.likeDao = likeDao;
+    this.commentDao = commentDao;
+    this.doctorReportDao = doctorReportDao;
   }
 
 
@@ -26,18 +33,12 @@ public class DoctorBoardDetailHandler implements Command {
     String loginUser = AuthLoginHandler.getLoginUser().getId();
     int no = Prompt.inputInt("게시글 번호> ");
 
-    // 게시글 번호를 no에 저장
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    DoctorBoard doctorBoard = doctorBoardDao.findByNo(no);
 
-    requestAgent.request("doctorBoard.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (doctorBoard == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
-
-    DoctorBoard doctorBoard = requestAgent.getObject(DoctorBoard.class);
 
     System.out.printf("제목: %s\n", doctorBoard.getTitle());
     System.out.printf("내용: %s\n", doctorBoard.getContent());
@@ -50,13 +51,10 @@ public class DoctorBoardDetailHandler implements Command {
     String whichBoard = doctorBoard.getWhichBoard();
 
 
-    requestAgent.request("like.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    List<Like> likeList = likeDao.findAll();
+    if (likeList.size() == 0) {
       System.out.print("[좋아요 ♡ : 0]");
     } else {
-
-      List<Like> likeList = (List<Like>) requestAgent.getObjects(Like.class);
 
       for (int i = 0; i < likeList.size(); i++) {
         if (likeList.get(i).getLikeBoardNo() == doctorBoard.getNo() && 
@@ -86,13 +84,8 @@ public class DoctorBoardDetailHandler implements Command {
     System.out.println();
     System.out.println("[댓글]");
 
-    requestAgent.request("comment.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    } else {
-
-      Collection<Comment> commentList = requestAgent.getObjects(Comment.class);
-
+    List<Comment> commentList = commentDao.findAll();
+    if(commentList.size() != 0) {
       for (Comment comment : commentList) {
         if (comment.getCommentBoardNo() != 0) {
           if (comment.getCommentBoardNo() == doctorBoard.getNo() && 
@@ -113,14 +106,10 @@ public class DoctorBoardDetailHandler implements Command {
     while(true) {
       String status = "";
 
-      requestAgent.request("like.selectList", null);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      if (likeList.size() == 0) {
         status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) /\n"
             + "댓글달기💬(@) / 넘어가기(Enter)]> ");
       } else {
-        List<Like> likeList = (List<Like>) requestAgent.getObjects(Like.class);
-
         for (int i = 0; i < likeList.size(); i++) {
           if (likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId()) &&
               likeList.get(i).getWhichBoard().equals(whichBoard)) {
@@ -147,7 +136,8 @@ public class DoctorBoardDetailHandler implements Command {
 
         doctorBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
         doctorBoard.setRequester(loginUser);
-        requestAgent.request("doctorReport.insert", doctorBoard);
+        //  requestAgent.request("doctorReport.insert", doctorBoard);
+        doctorReportDao.insert(doctorBoard);
         System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
         break;
 
@@ -161,20 +151,14 @@ public class DoctorBoardDetailHandler implements Command {
     } 
 
     int myComment = 0;
-    requestAgent.request("comment.selectList", null);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    } else {
-
-      Collection<Comment> commentList = requestAgent.getObjects(Comment.class);
-      for (Comment comment : commentList) {
-        if (comment.getCommentBoardNo() != 0) {
-          if (comment.getCommentBoardNo() == doctorBoard.getNo() && 
-              comment.getWhichBoard().equals(whichBoard) &&
-              comment.getCommenter().equals(loginUser)) {
-            myComment++;
-          }
-        }   
-      }
+    for (Comment comment : commentList) {
+      if (comment.getCommentBoardNo() != 0) {
+        if (comment.getCommentBoardNo() == doctorBoard.getNo() && 
+            comment.getWhichBoard().equals(whichBoard) &&
+            comment.getCommenter().equals(loginUser)) {
+          myComment++;
+        }
+      }   
     }
 
 

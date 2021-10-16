@@ -19,7 +19,7 @@ public class Member implements Serializable{
   private int doctorOrNot;
   private List<MailBox> mailBox;
   private List<Plant> plant;
-  private int count;
+  private int point;
 
 
   public List<Plant> getPlant() {
@@ -28,11 +28,11 @@ public class Member implements Serializable{
   public void setPlant(List<Plant> plant) {
     this.plant = plant;
   }
-  public int getCount() {
-    return count;
+  public int getPoint() {
+    return point;
   }
-  public void setCount(int count) {
-    this.count = count;
+  public void setPoint(int point) {
+    this.point = point;
   }
   public List<MailBox> getMailBox() {
     return mailBox;

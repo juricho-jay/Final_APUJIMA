@@ -1,15 +1,15 @@
 package pms.handler;
 
 import java.util.List;
+import pms.dao.NoticeBoardDao;
 import pms.domain.NoticeBoard;
-import request.RequestAgent;
 
-public class NoticeBoardListHandler implements Command{
+public class NoticeBoardListHandler implements Command {
 
-  RequestAgent requestAgent;
+  NoticeBoardDao noticeBoardDao;
 
-  public NoticeBoardListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public NoticeBoardListHandler(NoticeBoardDao noticeBoardDao) {
+    this.noticeBoardDao = noticeBoardDao;
   }
 
   @Override
@@ -17,15 +17,7 @@ public class NoticeBoardListHandler implements Command{
     System.out.println("[게시글 목록] 페이지입니다.");
     System.out.println();
 
-    requestAgent.request("noticeBoard.selectList", null);
-
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("현재 게시판에 작성된 글이 없습니다.!");
-      return;
-    }
-
-    List<NoticeBoard> noticeBoardList = (List<NoticeBoard>) requestAgent.getObjects(NoticeBoard.class);
+    List<NoticeBoard> noticeBoardList = noticeBoardDao.findAll();
 
 
     for (NoticeBoard noticeBoard : noticeBoardList) {
