@@ -24,7 +24,7 @@ public class FreeBoardAddHandler implements Command{
 
     List<FreeBoard> freeBoardList = freeBoardDao.findAll();
 
-    if (freeBoardList.size() == 0) {
+    if (freeBoardList == null) {
       FreeBoard.lastIndex = 1;
       freeBoard.setNo(FreeBoard.lastIndex);
 

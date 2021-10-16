@@ -27,7 +27,7 @@ public class BucketAddHandler implements Command {
 
     Collection<Bucket> bucketList = bucketDao.findAll();
 
-    if (bucketList.size() == 0) {
+    if (bucketList == null) {
       Bucket.lastIndex = 1;
       bucket.setNo(Bucket.lastIndex);
     } else if(Bucket.lastIndex != bucketList.size()) {

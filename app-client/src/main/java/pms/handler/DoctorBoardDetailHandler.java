@@ -52,7 +52,8 @@ public class DoctorBoardDetailHandler implements Command {
 
 
     List<Like> likeList = likeDao.findAll();
-    if (likeList.size() == 0) {
+
+    if (likeList == null) {
       System.out.print("[좋아요 ♡ : 0]");
     } else {
 
@@ -85,7 +86,7 @@ public class DoctorBoardDetailHandler implements Command {
     System.out.println("[댓글]");
 
     List<Comment> commentList = commentDao.findAll();
-    if(commentList.size() != 0) {
+    if(commentList != null) {
       for (Comment comment : commentList) {
         if (comment.getCommentBoardNo() != 0) {
           if (comment.getCommentBoardNo() == doctorBoard.getNo() && 
@@ -106,7 +107,7 @@ public class DoctorBoardDetailHandler implements Command {
     while(true) {
       String status = "";
 
-      if (likeList.size() == 0) {
+      if (likeList == null) {
         status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) /\n"
             + "댓글달기💬(@) / 넘어가기(Enter)]> ");
       } else {
@@ -149,6 +150,33 @@ public class DoctorBoardDetailHandler implements Command {
       }
 
     } 
+
+    // 댓글list 없는 경우
+    if (commentList == null) {
+      if (doctorBoard.getWriter().getId().equals(loginUser)) {
+        while (true) {
+          System.out.println();
+          String input = Prompt.inputString("[글] 변경(U) / 삭제(D) / 이전 메뉴(0)> ");
+          switch (input) {
+            case "U":
+            case "u":
+              request.getRequestDispatcher("/doctorBoard/update").forward(request);
+              return;
+            case "D":
+            case "d":
+              request.getRequestDispatcher("/doctorBoard/delete").forward(request);
+              return;
+            case "0":
+              return;
+            default:
+              System.out.println("명령어가 올바르지 않습니다!");
+          }
+        }
+      }
+      return;
+    }
+
+
 
     int myComment = 0;
     for (Comment comment : commentList) {
@@ -234,6 +262,5 @@ public class DoctorBoardDetailHandler implements Command {
         }
       }
     }
-
   }
 }

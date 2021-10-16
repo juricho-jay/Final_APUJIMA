@@ -27,7 +27,8 @@ public class NetNoticeBoardDao implements NoticeBoardDao {
   public List<NoticeBoard> findAll() throws Exception {
     requestAgent.request("noticeBoard.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      System.out.println("작성된 게시물이 없습니다.");
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(NoticeBoard.class));
@@ -69,7 +70,8 @@ public class NetNoticeBoardDao implements NoticeBoardDao {
     requestAgent.request("noticeBoard.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("해당 키워드로 검색 가능한 게시글이 없습니다.");
+      System.out.println("해당 키워드로 검색 가능한 게시글이 없습니다.");
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(NoticeBoard.class));
@@ -81,7 +83,8 @@ public class NetNoticeBoardDao implements NoticeBoardDao {
     requestAgent.request("noticeBoard.update", noticeBoard);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      System.out.println("정보 변경 실패");
+      return;
     }
   }
 
@@ -93,7 +96,8 @@ public class NetNoticeBoardDao implements NoticeBoardDao {
     requestAgent.request("noticeBoard.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      System.out.println("삭제 실패!");
+      return;
     }
 
   }

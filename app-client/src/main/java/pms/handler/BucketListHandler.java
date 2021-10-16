@@ -24,69 +24,63 @@ public class BucketListHandler  implements Command {
 
     Collection<Bucket> bucketList = bucketDao.findAll();
 
-    //    requestAgent.request("bucket.selectList", null);
-    //
-    //
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("현재 작성된 버킷리스트가 없습니다.");
-    //      return;
-    //    } else {
-    //      Collection<Bucket> bucketList = requestAgent.getObjects(Bucket.class);
-    for(Bucket bucket : bucketList) {
-      if(bucket.getWriter().equals(AuthLoginHandler.getLoginUser().getId())) {
-        bucketNo++;
-        bucket.setNo(bucketNo);
-        System.out.printf("%s, %d, %s ,%s \n",bucket.getCheck(),
-            bucket.getNo(),
-            bucket.getTitle(),
-            bucket.getContent());
-
-        count++;
-      }
-
-    }
-    if (count == 0 ){
-      System.out.println("버킷리스트 목록 중 현재 본인이 작성한 버킷리스트가 없습니다.");
+    if (bucketList == null) {
+      System.out.println("현재 작성된 버킷 리스트가 없습니다.");
       return;
-    }
-    //    }
+    } else {
 
-    String answer = Prompt.inputString("달성한 버켓리스트가 있으신가요?(y/N) 검색하기(#)> ");
+      for(Bucket bucket : bucketList) {
+        if(bucket.getWriter().equals(AuthLoginHandler.getLoginUser().getId())) {
+          bucketNo++;
+          bucket.setNo(bucketNo);
+          System.out.printf("%s, %d, %s ,%s \n",bucket.getCheck(),
+              bucket.getNo(),
+              bucket.getTitle(),
+              bucket.getContent());
 
-    if (answer.equalsIgnoreCase("y")) {
-      while(true) {
-        int no = Prompt.inputInt("달성한 버킷리스트 번호를 입력해주세요> ");
-        String input = Prompt.inputString("달성체크(C), 이전(0)> ");
-        request.setAttribute("no", no);
-        switch(input) {
-          case "C":
-          case "c": 
-            request.getRequestDispatcher("/bucket/complete").forward(request);
-            return;
-          case "0":
-            return;
-          default:
-            System.out.println("명령어가 올바르지 않습니다!");
+          count++;
         }
+
       }
 
-    } else if(answer.equalsIgnoreCase("n") || (answer.length() == 0)) {
-      System.out.println("당신의 버킷리스트를 응원합니다!");
-      return;
-    } else if(answer.equals("#")) {
-      request.getRequestDispatcher("/bucket/search").forward(request);
-      return;
+      if (count == 0 ){
+        System.out.println("버킷리스트 목록 중 현재 본인이 작성한 버킷리스트가 없습니다.");
+        return;
+      }
+      //    }
+
+      String answer = Prompt.inputString("달성한 버켓리스트가 있으신가요?(y/N) 검색하기(#)> ");
+
+      if (answer.equalsIgnoreCase("y")) {
+        while(true) {
+          int no = Prompt.inputInt("달성한 버킷리스트 번호를 입력해주세요> ");
+          String input = Prompt.inputString("달성체크(C), 이전(0)> ");
+          request.setAttribute("no", no);
+          switch(input) {
+            case "C":
+            case "c": 
+              request.getRequestDispatcher("/bucket/complete").forward(request);
+              return;
+            case "0":
+              return;
+            default:
+              System.out.println("명령어가 올바르지 않습니다!");
+          }
+        }
+
+      } else if(answer.equalsIgnoreCase("n") || (answer.length() == 0)) {
+        System.out.println("당신의 버킷리스트를 응원합니다!");
+        return;
+      } else if(answer.equals("#")) {
+        request.getRequestDispatcher("/bucket/search").forward(request);
+        return;
+      }
+      else {
+        System.out.println("명령어가 잘못 입력되었습니다.");
+        return;
+      }
+
+
     }
-    else {
-      System.out.println("명령어가 잘못 입력되었습니다.");
-      return;
-    }
-
-
-
-
-
-
   }
 }

@@ -48,7 +48,7 @@ public class NoticeBoardDetailHandler implements Command {
 
     List<Like> likeList = likeDao.findAll();
 
-    if(likeList.size() == 0) {
+    if(likeList == null) {
       System.out.print("[좋아요 ♡ :");
     } else { 
 
@@ -82,7 +82,7 @@ public class NoticeBoardDetailHandler implements Command {
 
     List<Comment> commentList= commentDao.findAll();  
 
-    if(commentList.size() != 0) {
+    if(commentList != null) {
       for (Comment comment : commentList) {
         if (comment.getCommentBoardNo() != 0) {
           if (comment.getCommentBoardNo() == noticeBoard.getNo() && 
@@ -134,8 +134,33 @@ public class NoticeBoardDetailHandler implements Command {
 
     } 
 
-    int myComment = 0;
+    // 댓글list 없는 경우
+    if (commentList == null) {
+      if (noticeBoard.getWriter().getId().equals(loginUser)) {
+        while (true) {
+          System.out.println();
+          String input = Prompt.inputString("[글] 변경(U) / 삭제(D) / 이전 메뉴(0)> ");
+          switch (input) {
+            case "U":
+            case "u":
+              request.getRequestDispatcher("/noticeBoard/update").forward(request);
+              return;
+            case "D":
+            case "d":
+              request.getRequestDispatcher("/noticeBoard/delete").forward(request);
+              return;
+            case "0":
+              return;
+            default:
+              System.out.println("명령어가 올바르지 않습니다!");
+          }
+        }
+      }
+      return;
+    }
 
+
+    int myComment = 0;
     for (Comment comment : commentList) {
       if (comment.getCommentBoardNo() != 0) {
         if (comment.getCommentBoardNo() == noticeBoard.getNo() && 
@@ -219,6 +244,5 @@ public class NoticeBoardDetailHandler implements Command {
         }
       }
     }
-
   }
 }
