@@ -73,86 +73,32 @@ public class AttendanceCheckHandler implements Command {
         String time2 = format.format(today);
         for(int i = 0; i < dateCheckList.size(); i++) {
           String time1 = format.format(dateCheckList.get(i).getDate());
-          // today O && loginUser O
           if(time1.equals(time2) && dateCheckList.get(i).getUser().equals(loginUser)) {
             System.out.println("이미 출석체크 포인트를 받으셨습니다.");
+            dateCheckDao.delete();
             return;
 
-            // today O && loginUser X
+            //끝까지 돌렸는데 없을 때
           } else if (i == dateCheckList.size() -1)  { 
-            if (time1.equals(time2) && !dateCheckList.get(i).getUser().equals(loginUser)) {
 
+            Member member = memberDao.findById(loginUser);
+            member.setPoint(member.getPoint() + 30);
+            System.out.println(member.getPoint());
+            memberDao.update(member);
 
-              Member member = memberDao.findById(loginUser);
-              member.setPoint(member.getPoint() + 30);
-              System.out.println(member.getPoint());
-              memberDao.update(member);
+            System.out.println("금일 첫 출석체크로 30포인트가 적립되었습니다.");
 
-              System.out.println("금일 첫 출석체크로 30포인트가 적립되었습니다.");
-              System.out.println("t o / l x");
-              System.out.println(time1);
-              System.out.println(time2);
+            DateCheck dateCheck = new DateCheck();
+            dateCheck.setDate(today);
+            dateCheck.setUser(loginUser);
 
-              DateCheck dateCheck = new DateCheck();
-              dateCheck.setDate(today);
-              dateCheck.setUser(loginUser);
+            dateCheckDao.insert(dateCheck);
 
-              dateCheckDao.insert(dateCheck);
+            // 3일 지난 데이터 정리
+            dateCheckDao.delete();
 
-              // 3일 지난 데이터 정리
-              dateCheckDao.delete();
+            return;
 
-              return;
-
-              // today X && loginUser O
-            } else if (!time1.equals(time2) && dateCheckList.get(i).getUser().equals(loginUser)) {
-
-              Member member = memberDao.findById(loginUser);
-              member.setPoint(member.getPoint() + 30);
-              System.out.println(member.getPoint());
-              memberDao.update(member);
-
-              System.out.println("금일 첫 출석체크로 30포인트가 적립되었습니다.");
-              System.out.println("t x / l o");
-              System.out.println(time1);
-              System.out.println(time2);
-
-
-              DateCheck dateCheck = new DateCheck();
-              dateCheck.setDate(today);
-              dateCheck.setUser(loginUser);
-
-              dateCheckDao.insert(dateCheck);
-
-              // 3일 지난 데이터 정리
-              dateCheckDao.delete();
-
-              return;
-
-              // today X && loginUser X
-            } else if (!time1.equals(time2) && !dateCheckList.get(i).getUser().equals(loginUser)) {
-              Member member = memberDao.findById(loginUser);
-              member.setPoint(member.getPoint() + 30);
-              System.out.println(member.getPoint());
-              memberDao.update(member);
-
-              System.out.println("금일 첫 출석체크로 30포인트가 적립되었습니다.");
-              System.out.println("t x / l x");
-              System.out.println(time1);
-              System.out.println(time2);
-
-
-              DateCheck dateCheck = new DateCheck();
-              dateCheck.setDate(today);
-              dateCheck.setUser(loginUser);
-
-              dateCheckDao.insert(dateCheck);
-
-              // 3일 지난 데이터 정리
-              dateCheckDao.delete();
-
-              return;
-            }
           }
         }
       }
