@@ -10,6 +10,6 @@ public interface MemberDao {
   Member findByName(String name) throws Exception;
   Member findById(String id) throws Exception;
   void update(Member member) throws Exception;
-  void delete(int no) throws Exception;
+  void delete(String id) throws Exception;
   void check(Member member) throws Exception;
 }

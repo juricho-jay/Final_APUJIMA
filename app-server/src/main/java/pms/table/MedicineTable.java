@@ -104,7 +104,7 @@ public class MedicineTable extends JsonDataTable<Medicine> implements DataProces
   }
 
   private void selectOneByName(Request request, Response response) throws Exception {
-    String name = request.getParameter("input");
+    String name = request.getParameter("name");
     Medicine medicine = null;
     for (Medicine m : list) {
       if (m.getName().equals(name)) {

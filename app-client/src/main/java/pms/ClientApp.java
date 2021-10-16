@@ -8,6 +8,7 @@ import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
+import pms.dao.impl.NetDateCheckDao;
 import pms.dao.impl.NetDoctorBoardDao;
 import pms.dao.impl.NetDoctorReportDao;
 import pms.dao.impl.NetFreeBoardDao;
@@ -20,7 +21,6 @@ import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
 import pms.handler.AdminUpdateHandler;
-import pms.handler.AttendanceAutoDeleteHandler;
 import pms.handler.AttendanceCheckHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
@@ -162,6 +162,7 @@ public class ClientApp {
     NetMedicineDao medicineDao = new NetMedicineDao(requestAgent);
     NetReportDao reportDao = new NetReportDao(requestAgent);
     NetDoctorReportDao doctorReportDao = new NetDoctorReportDao(requestAgent);
+    NetDateCheckDao dateCheckDao = new NetDateCheckDao(requestAgent);
 
 
 
@@ -210,9 +211,8 @@ public class ClientApp {
 
     commandMap.put("/auth/login", new AuthLoginHandler(requestAgent));
     commandMap.put("/auth/logout", new AuthLogoutHandler());
-    commandMap.put("/auth/userInfo", new AuthUserInfoHandler(requestAgent));
-    commandMap.put("/auth/check", new AttendanceCheckHandler(requestAgent));
-    commandMap.put("/auth/deleteCheck", new AttendanceAutoDeleteHandler(requestAgent));
+    commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberDao));
+    commandMap.put("/auth/check", new AttendanceCheckHandler(dateCheckDao, memberDao));
 
     commandMap.put("/mailBox/send", new MailBoxSendHandler(requestAgent));
     commandMap.put("/mailBox/list", new MailBoxListHandler(requestAgent));
