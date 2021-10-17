@@ -7,7 +7,7 @@ import pms.dao.PlantDao;
 import pms.domain.Member;
 import pms.domain.Plant;
 import util.Prompt;
-// where is plant.grow?
+// Line 61 : null.
 public class PlantGrowHandler implements Command {
   PlantDao plantDao;
   MemberDao memberDao;
@@ -53,12 +53,12 @@ public class PlantGrowHandler implements Command {
     }
     String name = Prompt.inputString("물을 줄 화분의 이름> ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("name", String.valueOf(name));
-
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("name", String.valueOf(name));
     // requestAgent.request("plant.selectOne", params);
-    Plant plantName =  plantDao.findByName(name);
-    if (!name.equals(plantName)) {
+
+    Plant plant =  plantDao.findByName(name);
+    if (!plant.getOwnerName().equals(loginUser)) {
       System.out.println("내 화분이 아니거나 화분을 찾을수 없어서 물을 줄 수 없습니다.");
       return;
     }
@@ -69,7 +69,7 @@ public class PlantGrowHandler implements Command {
       return;
     }
 
-    Plant plant = new Plant();
+    //    Plant plant = new Plant();
 
     String input = Prompt.inputString("화분에 물을 주시겠습니까? 30포인트가 차감됩니다. (y/N)> ");
 

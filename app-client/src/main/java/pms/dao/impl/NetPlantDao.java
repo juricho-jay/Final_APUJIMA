@@ -48,10 +48,10 @@ public class NetPlantDao implements PlantDao {
 
   @Override
   public Plant findByName(String name) throws Exception {
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("no", String.valueOf(no));
+    HashMap<String,String> params = new HashMap<>();
+    params.put("name", String.valueOf(name));
 
-    requestAgent.request("plant.selectOne", name);
+    requestAgent.request("plant.selectOneByName", name);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
