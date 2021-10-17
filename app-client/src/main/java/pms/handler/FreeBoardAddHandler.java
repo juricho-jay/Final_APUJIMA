@@ -1,6 +1,7 @@
 package pms.handler;
 
 import java.sql.Date;
+import java.util.Collection;
 import java.util.List;
 import pms.dao.FreeBoardDao;
 import pms.domain.DoctorBoard;
@@ -22,19 +23,16 @@ public class FreeBoardAddHandler implements Command{
     System.out.println();
     FreeBoard freeBoard = new FreeBoard();
 
-    List<FreeBoard> freeBoardList = freeBoardDao.findAll();
+    Collection<FreeBoard> freeBoardList = freeBoardDao.findAll();
 
     if (freeBoardList == null) {
       FreeBoard.lastIndex = 1;
       freeBoard.setNo(FreeBoard.lastIndex);
 
     } else {
-
       if(FreeBoard.lastIndex != freeBoardList.size()) {
-
-        FreeBoard.lastIndex = freeBoardList.get(freeBoardList.size()-1).getNo();
+        FreeBoard.lastIndex = ((List<FreeBoard>) freeBoardList).get(freeBoardList.size()-1).getNo();
         freeBoard.setNo(++DoctorBoard.lastIndex);
-
       } else {
         freeBoard.setNo(++DoctorBoard.lastIndex);
       }
