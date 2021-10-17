@@ -18,6 +18,7 @@ public class DoctorReportTable extends JsonDataTable<DoctorBoard> implements Dat
       case "doctorReport.selectList": selectList(request, response); break;
       case "doctorReport.selectOne": selectOne(request, response); break;
       case "doctorReport.delete": delete(request, response); break;
+      case "doctorReport.autoDelete": autoDelete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -66,6 +67,32 @@ public class DoctorReportTable extends JsonDataTable<DoctorBoard> implements Dat
     list.remove(index);
     response.setStatus(Response.SUCCESS);
   }
+
+  private void autoDelete(Request request, Response response) throws Exception {
+    int no = Integer.parseInt(request.getParameter("no"));
+
+    if (list.size() == 0) {
+      System.out.println("목록이 없습니다.");
+      response.setStatus(Response.FAIL);
+      return;
+    }
+
+    int count = 0;
+    for (int i = list.size() - 1; i >= 0; i--) {
+      if (list.get(i).getNo() == no) {
+        list.remove(i);
+        count++;
+      }
+    }
+
+    if (count == 0) {
+      response.setStatus(Response.FAIL);
+      return;
+    }
+
+    response.setStatus(Response.SUCCESS);
+  }
+
 
   private int indexOf(int no) {
     for (int i = 0; i < list.size(); i++) {

@@ -44,8 +44,9 @@ public class AdminReportDeleteHandler implements Command{
       System.out.println("-[자유게시판 신고 접수 내역]");
       System.out.println("신고 접수건이 없습니다.");
       System.out.println();
+    } 
 
-    } else  if (doctorReportList == null) {
+    if (doctorReportList == null) {
       System.out.println("-[지식in게시판 신고 접수 내역]");
       System.out.println("신고 접수건이 없습니다.");
       System.out.println();
@@ -65,7 +66,9 @@ public class AdminReportDeleteHandler implements Command{
             freeBoard.getReason(),freeBoard.getRequester());
         System.out.println();
       }
-    } else  if (doctorReportList != null) {
+    } 
+
+    if (doctorReportList != null) {
       System.out.println("-[지식in게시판 신고 접수 내역]");
       for (DoctorBoard doctorBoard : doctorReportList) {
         System.out.printf("게시글 번호 : %d\n"
@@ -79,7 +82,7 @@ public class AdminReportDeleteHandler implements Command{
             doctorBoard.getReason(),doctorBoard.getRequester());
       }
     }
-    System.out.println("삭제할 게시판을 선택해주세요. (1. 자유게시판 / 2. 지식인 게시판)");
+    System.out.println("게시물을 삭제할 게시판을 선택해주세요. (1. 자유게시판 / 2. 지식인 게시판)");
     String inputNum = Prompt.inputString("번호 (뒤로가기 #)> ");
     if (inputNum.equals("#")) {
       return;
@@ -90,6 +93,10 @@ public class AdminReportDeleteHandler implements Command{
         String input2 = Prompt.inputString("❗ 정말 삭제하시겠습니까? (y/N)> ");
         if(input2.equalsIgnoreCase("y")) {
           freeBoardDao.delete(no);
+          //          request.setAttribute("no", no);
+          //          request.setAttribute("boardType", "freeBoard");
+          //          request.getRequestDispatcher("/comment/autoDelete").forward(request);
+          //          request.getRequestDispatcher("/like/autoDelete").forward(request);
 
           MailBox mailBox1 = new MailBox();
           mailBox1.setReceiver(freeBoard.getRequester());
@@ -108,10 +115,10 @@ public class AdminReportDeleteHandler implements Command{
           mailBoxDao.insert(mailBox1);
           mailBoxDao.insert(mailBox2);
           // 같은 번호들을 찾아서 다 지운다.
-          reportDao.delete(no);
+          reportDao.autoDelete(no);
 
           System.out.println("자동쪽지가 발송되었습니다.");
-          break;
+          return;
           // n를 할 때 취소부분
         } else if (input2.equalsIgnoreCase("n") || input2.length() == 0) {  
           System.out.println("삭제가 취소되었습니다.");
@@ -124,12 +131,8 @@ public class AdminReportDeleteHandler implements Command{
           mailBox3.setSendingTime(new Date(System.currentTimeMillis()));
 
           mailBoxDao.insert(mailBox3);
-          while(true) {
-            if (freeBoard.getNo() == no) {
-              reportDao.delete(no);
-              break;
-            }
-          }
+          reportDao.autoDelete(no);
+          return;
         }
       }
       // 지식인 게시판 선택부분
@@ -140,6 +143,10 @@ public class AdminReportDeleteHandler implements Command{
         String input2 = Prompt.inputString("❗ 정말 삭제하시겠습니까? (y/N)> ");
         if(input2.equalsIgnoreCase("y")) {
           doctorBoardDao.delete(no);
+          //          request.setAttribute("no", no);
+          //          request.setAttribute("boardType", "doctorBoard");
+          //          request.getRequestDispatcher("/comment/autoDelete").forward(request);
+          //          request.getRequestDispatcher("/like/autoDelete").forward(request);
 
           MailBox mailBox1 = new MailBox();
           mailBox1.setReceiver(doctorBoard.getRequester());
@@ -158,10 +165,10 @@ public class AdminReportDeleteHandler implements Command{
 
           mailBoxDao.insert(mailBox1);
           mailBoxDao.insert(mailBox2);
-          doctorReportDao.delete(no);
+          doctorReportDao.autoDelete(no);
 
           System.out.println("자동쪽지가 발송되었습니다.");
-          break;
+          return;
         } else if (input2.equalsIgnoreCase("n") || input2.length() == 0) {  
           System.out.println("삭제가 취소되었습니다.");
 
@@ -173,7 +180,8 @@ public class AdminReportDeleteHandler implements Command{
           mailBox3.setSendingTime(new Date(System.currentTimeMillis()));
 
           mailBoxDao.insert(mailBox3);
-          doctorReportDao.delete(no);
+          doctorReportDao.autoDelete(no);
+          return;
         }
       }
     }

@@ -10,5 +10,6 @@ public interface ReportDao {
   FreeBoard findByName(String name) throws Exception;
   void update(FreeBoard freeBoard) throws Exception;
   void delete(int no) throws Exception;
+  void autoDelete(int no) throws Exception;
 }
 

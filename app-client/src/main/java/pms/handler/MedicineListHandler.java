@@ -20,6 +20,11 @@ public class MedicineListHandler implements Command {
 
     List<Medicine> medicineList = medicineDao.findAll();
 
+    if (medicineList == null) {
+      System.out.println("현재 약품 리스트가 없습니다.");
+      return;
+    }
+
     for (Medicine medicine : medicineList) {
       System.out.printf("번호 : %d\n"
           + "약품명 : %s\n"

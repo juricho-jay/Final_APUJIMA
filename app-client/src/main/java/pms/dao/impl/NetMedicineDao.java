@@ -63,7 +63,7 @@ public class NetMedicineDao implements MedicineDao {
   @Override
   public Medicine findByName(String name) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("input", name);
+    params.put("name", name);
 
     requestAgent.request("medicine.selectOneByName", params);
 
