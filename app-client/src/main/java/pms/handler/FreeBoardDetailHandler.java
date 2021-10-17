@@ -7,6 +7,7 @@ import pms.dao.LikeDao;
 import pms.dao.ReportDao;
 import pms.domain.Comment;
 import pms.domain.FreeBoard;
+import pms.domain.Like;
 import util.Prompt;
 
 public class FreeBoardDetailHandler implements Command { 
@@ -48,36 +49,6 @@ public class FreeBoardDetailHandler implements Command {
 
     String whichBoard = freeBoard.getWhichBoard();
 
-<<<<<<< HEAD
-    //    List<Like> likeList = likeDao.findAll();
-    //    if (likeList.size() == 0) {
-    //      System.out.print("[좋아요 ♡ : 0]");
-    //    } else {
-    //      for (int i = 0; i < likeList.size(); i++) {
-    //        if (likeList.get(i).getLikeBoardNo() == freeBoard.getNo() && 
-    //            likeList.get(i).getWhichBoard().equals(whichBoard) &&
-    //            likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
-    //          System.out.print("[좋아요 ♥ :");
-    //          break;
-    //        } else if (i == (likeList.size() - 1)) {
-    //          System.out.print("[좋아요 ♡ :");
-    //          break;
-    //        }
-    //      }
-    //
-    //      int count = 0;
-    //      for (int j = 0; j < likeList.size(); j++) {
-    //        if (likeList.get(j).getLikeBoardNo() != 0) {
-    //          if (likeList.get(j).getLikeBoardNo() == freeBoard.getNo() && 
-    //              likeList.get(j).getWhichBoard().equals(whichBoard)) {
-    //            count++;
-    //          }
-    //        }   
-    //      }
-    //
-    //      System.out.printf(" %d]\n", count);
-    //    }
-=======
     List<Like> likeList = likeDao.findAll();
     if (likeList == null) {
       System.out.print("[좋아요 ♡ : 0]");
@@ -106,7 +77,6 @@ public class FreeBoardDetailHandler implements Command {
 
       System.out.printf(" %d]\n", count);
     }
->>>>>>> dc2c090986471b06c7a97a11ebbfe9e25a37a727
 
     System.out.println();
     System.out.println("[댓글]");
@@ -132,25 +102,23 @@ public class FreeBoardDetailHandler implements Command {
 
 
     while(true) {
-      String status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) /\n"
-          + "댓글달기💬(@) / 넘어가기(Enter)]> ");
-      //      String status = "";
-      //      if (likeList.size() == 0) {
-      //        status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) /\n"
-      //            + "댓글달기💬(@) / 넘어가기(Enter)]> ");
-      //      } else {
-      //        for (int i = 0; i < likeList.size(); i++) {
-      //          if (likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId()) &&
-      //              likeList.get(i).getWhichBoard().equals(whichBoard)) {
-      //            status = Prompt.inputString("[좋아요 취소💔(#) / 신고하기🚨(!) /\n"
-      //                + "댓글달기💬(@) / 넘어가기(Enter)]> ");
-      //            break;
-      //          }  else if (i == likeList.size() - 1) {
-      //            status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) /\\n"
-      //                + "댓글달기💬(@) / 넘어가기(Enter)]> ");
-      //          }
-      //        }
-      //      }
+      String status = "";
+      if (likeList.size() == 0) {
+        status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) /\n"
+            + "댓글달기💬(@) / 넘어가기(Enter)]> ");
+      } else {
+        for (int i = 0; i < likeList.size(); i++) {
+          if (likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId()) &&
+              likeList.get(i).getWhichBoard().equals(whichBoard)) {
+            status = Prompt.inputString("[좋아요 취소💔(#) / 신고하기🚨(!) /\n"
+                + "댓글달기💬(@) / 넘어가기(Enter)]> ");
+            break;
+          }  else if (i == likeList.size() - 1) {
+            status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) /\\n"
+                + "댓글달기💬(@) / 넘어가기(Enter)]> ");
+          }
+        }
+      }
 
       if (status.equals("#")) {
         request.getRequestDispatcher("/like/addCancel").forward(request);
