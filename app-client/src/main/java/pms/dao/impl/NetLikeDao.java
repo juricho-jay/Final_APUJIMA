@@ -19,7 +19,7 @@ public class NetLikeDao implements LikeDao{
   public void insert(Like like) throws Exception {
     requestAgent.request("like.insert", like);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 

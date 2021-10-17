@@ -20,7 +20,7 @@ public class NetRequestDao implements RequestDao {
   public void insert(Medicine medicine) throws Exception {
     requestAgent.request("request.insert", medicine);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 

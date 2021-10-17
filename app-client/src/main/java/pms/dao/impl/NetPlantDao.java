@@ -19,7 +19,8 @@ public class NetPlantDao implements PlantDao {
   public void insert(Plant plant) throws Exception {
     requestAgent.request("plant.insert", plant);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("화분 심기 실패!");
+      System.out.println("화분 심기 실패!");
+      return;
     }
   }
 

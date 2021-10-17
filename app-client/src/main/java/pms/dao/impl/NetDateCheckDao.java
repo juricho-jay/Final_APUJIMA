@@ -19,7 +19,7 @@ public class NetDateCheckDao implements DateCheckDao {
   public void insert(DateCheck dateCheck) throws Exception {
     requestAgent.request("dateCheck.insert", dateCheck);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 

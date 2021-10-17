@@ -19,7 +19,7 @@ public class NetMedicineDao implements MedicineDao {
   public void insert(Medicine medicine) throws Exception {
     requestAgent.request("medicine.insert", medicine);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 

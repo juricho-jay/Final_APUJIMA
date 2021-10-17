@@ -19,7 +19,7 @@ public class NetFreeBoardDao implements FreeBoardDao{
   public void insert(FreeBoard freeBoard) throws Exception {
     requestAgent.request("freeBoard.insert", freeBoard);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 

@@ -19,7 +19,8 @@ public class NetBucketDao implements BucketDao {
   public void insert(Bucket bucket) throws Exception {
     requestAgent.request("bucket.insert", bucket);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("버킷리스트 데이터 저장 실패!");
+      System.out.println("버킷리스트 데이터 저장 실패!");
+      return;
     }
   }
 
