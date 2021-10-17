@@ -27,7 +27,7 @@ public class NetDoctorReportDao implements DoctorReportDao{
   public List<DoctorBoard> findAll() throws Exception {
     requestAgent.request("doctorReport.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(DoctorBoard.class));

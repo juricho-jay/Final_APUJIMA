@@ -24,7 +24,6 @@ import pms.dao.impl.NetRequestDao;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
-import pms.handler.AdminUpdateHandler;
 import pms.handler.AttendanceCheckHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
@@ -175,9 +174,9 @@ public class ClientApp {
 
     // Command 객체 준비
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestDao, medicineDao));
-    commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
-    commandMap.put("/admin/list", new AdminListHandler(requestAgent));
-    commandMap.put("/admin/delete", new AdminReportDeleteHandler(requestAgent));
+    //    commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
+    commandMap.put("/admin/list", new AdminListHandler(requestDao, reportDao, doctorReportDao));
+    commandMap.put("/admin/delete", new AdminReportDeleteHandler(reportDao, doctorReportDao, freeBoardDao, mailBoxDao, doctorBoardDao));
     commandMap.put("/intro", new IntroMenu());
 
     commandMap.put("/medicine/add", new MedicineAddHandler(medicineDao));
@@ -295,7 +294,7 @@ public class ClientApp {
     MenuGroup approvalManagement = new MenuGroup("승인 관리", Menu.ACCESS_ADMIN);
 
     approvalManagement.add(new MenuItem("약품 승인", Menu.ACCESS_ADMIN, "/admin/approval")); // 여기서 3지선다 승인, 삭제, 뒤로가기
-    approvalManagement.add(new MenuItem("약품 변경", Menu.ACCESS_ADMIN, "/admin/update")); // 변경 or not
+    //    approvalManagement.add(new MenuItem("약품 변경", Menu.ACCESS_ADMIN, "/admin/update")); // 변경 or not
     approvalManagement.add(new MenuItem("게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/delete")); // 신고하시겠습니까? yes => 삭제
 
 

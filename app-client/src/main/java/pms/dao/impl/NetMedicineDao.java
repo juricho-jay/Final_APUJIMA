@@ -27,7 +27,7 @@ public class NetMedicineDao implements MedicineDao {
   public List<Medicine> findAll() throws Exception {
     requestAgent.request("medicine.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(Medicine.class));
@@ -40,7 +40,7 @@ public class NetMedicineDao implements MedicineDao {
     requestAgent.request("medicine.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("약품 검색 실패!");
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(Medicine.class));

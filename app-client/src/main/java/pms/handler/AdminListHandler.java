@@ -1,73 +1,158 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
+import pms.dao.DoctorReportDao;
+import pms.dao.ReportDao;
+import pms.dao.RequestDao;
 import pms.domain.DoctorBoard;
 import pms.domain.FreeBoard;
 import pms.domain.Medicine;
-import request.RequestAgent;
 
 public class AdminListHandler implements Command {
 
-  RequestAgent requestAgent;
+  RequestDao requestDao;
+  ReportDao reportDao;
+  DoctorReportDao doctorReportDao;
 
-  public AdminListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AdminListHandler(RequestDao requestDao
+      , ReportDao reportDao, DoctorReportDao doctorReportDao) {
+    this.requestDao = requestDao;
+    this.reportDao = reportDao;
+    this.doctorReportDao = doctorReportDao;
   }
+
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("[승인 요청/신고 목록]");
     System.out.println();
-    System.out.println("[약품 승인 요청 내역]");
 
-    requestAgent.request("request.selectList", null);
+    //    System.out.println();
+    //    System.out.println("[게시판 신고 접수 내역]");
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("약품 승인 요청내역이 없습니다.");
-    } else {
-      Collection<Medicine> requestList = requestAgent.getObjects(Medicine.class);
+    List<Medicine> requestList = requestDao.findAll();
+    List<FreeBoard> reportList = reportDao.findAll();
+    List<DoctorBoard> doctorReportList = doctorReportDao.findAll();
 
+    if (requestList == null) {
+      System.out.println("-[약품 승인 요청 내역]");
+      System.out.println("약품 승인 요청건이 없습니다.");
+      System.out.println();
+
+    } else if (reportList == null) {
+      System.out.println("-[게시판 신고 접수 내역]");
+      System.out.println("자유게시판 신고 접수건이 없습니다.");
+      System.out.println();
+
+    } else if (doctorReportList == null) {
+      System.out.println("지식in게시판 신고 접수건이 없습니다.");
+      System.out.println();
+      return;
+    } 
+
+    if (requestList != null) {
+      System.out.println("-[약품 승인 요청 내역]");
       for (Medicine medicine : requestList) {
         System.out.printf("약품명 : %s\n"
             + "효 능 : %s\n", medicine.getName(), medicine.getEffect());
+        System.out.println();
       }
-
-      System.out.println();
-    }
-
-    System.out.println();
-    System.out.println("[게시판 신고 접수 내역]");
-
-    requestAgent.request("report.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("자유게시판 신고 접수건이 없습니다.");
-    } else {
-      Collection<FreeBoard> reportList = requestAgent.getObjects(FreeBoard.class);
+    } else if (reportList != null) {
+      System.out.println("-[게시판 신고 접수 내역]");
       for (FreeBoard freeBoard : reportList) {
-        System.out.printf("게시판 번호 : %d\n"
-            + "게시판 제목 : %s\n",
+        System.out.printf("게시판 번호 : %d"
+            + ", 제목 : %s\n",
             freeBoard.getNo(),
             freeBoard.getTitle());
+        System.out.println();
       }
-    }
-
-    requestAgent.request("doctorReport.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("지식인 게시판 신고 접수건이 없습니다.");
-    } else {
-      Collection<DoctorBoard> doctorReportList = requestAgent.getObjects(DoctorBoard.class);
+    } else if (doctorReportList != null) {
       for (DoctorBoard doctorBoard : doctorReportList) {
-        System.out.printf("게시판 번호 : %d\n"
-            + "게시판 제목 : %s\n",
+        System.out.printf("게시판 번호 : %d"
+            + ", 제목 : %s\n",
             doctorBoard.getNo(),
             doctorBoard.getTitle());
       }
-
-
+      return;
     }
+
+    //      for (Medicine medicine : requestList) {
+    //        System.out.printf("약품명 : %s\n"
+    //            + "효 능 : %s\n", medicine.getName(), medicine.getEffect());
+    //      }
+    //
+    //    System.out.println();
+
+    //    requestAgent.request("request.selectList", null);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("약품 승인 요청내역이 없습니다.");
+    //    } else {
+    //      Collection<Medicine> requestList = requestAgent.getObjects(Medicine.class);
+    //
+    //      for (Medicine medicine : requestList) {
+    //        System.out.printf("약품명 : %s\n"
+    //            + "효 능 : %s\n", medicine.getName(), medicine.getEffect());
+    //      }
+    //
+    //      System.out.println();
+    //    }
+
+    //    System.out.println();
+    //    System.out.println("[게시판 신고 접수 내역]");
+
+    //    List<FreeBoard> reportList = reportDao.findAll();
+    //    if (reportList == null) {
+    //      System.out.println("자유게시판 신고 접수건이 없습니다.");
+    //    }
+    //    for (FreeBoard freeBoard : reportList) {
+    //      System.out.printf("게시판 번호 : %d\n"
+    //          + "게시판 제목 : %s\n",
+    //          freeBoard.getNo(),
+    //          freeBoard.getTitle());
+    //    }
+
+    //    requestAgent.request("report.selectList", null);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("자유게시판 신고 접수건이 없습니다.");
+    //    } else {
+    //      Collection<FreeBoard> reportList = requestAgent.getObjects(FreeBoard.class);
+    //      for (FreeBoard freeBoard : reportList) {
+    //        System.out.printf("게시판 번호 : %d\n"
+    //            + "게시판 제목 : %s\n",
+    //            freeBoard.getNo(),
+    //            freeBoard.getTitle());
+    //      }
+    //    }
+
+    //    List<DoctorBoard> doctorReportList = doctorReportDao.findAll();
+    //    if (doctorReportList == null) {
+    //      System.out.println("자유게시판 신고 접수건이 없습니다.");
+    //    }
+    //    for (DoctorBoard doctorBoard : doctorReportList) {
+    //      System.out.printf("게시판 번호 : %d\n"
+    //          + "게시판 제목 : %s\n",
+    //          doctorBoard.getNo(),
+    //          doctorBoard.getTitle());
+    //    }
+
+    //    requestAgent.request("doctorReport.selectList", null);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("지식인 게시판 신고 접수건이 없습니다.");
+    //    } else {
+    //      Collection<DoctorBoard> doctorReportList = requestAgent.getObjects(DoctorBoard.class);
+    //      for (DoctorBoard doctorBoard : doctorReportList) {
+    //        System.out.printf("게시판 번호 : %d\n"
+    //            + "게시판 제목 : %s\n",
+    //            doctorBoard.getNo(),
+    //            doctorBoard.getTitle());
+    //      }
+    //
+    //
+    //    }
 
   }
 }

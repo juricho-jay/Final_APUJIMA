@@ -19,6 +19,11 @@ public class DoctorBoardListHandler implements Command {
 
     List<DoctorBoard> doctorBoardList = doctorBoardDao.findAll();
 
+    if (doctorBoardList == null) {
+      System.out.println("작성된 게시물이 없습니다.");
+      return;
+    }
+
 
     for (DoctorBoard doctorBoard : doctorBoardList) {
       System.out.printf("%d, %s, %s, %s, %d\n",

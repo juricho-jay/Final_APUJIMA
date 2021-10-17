@@ -38,7 +38,7 @@ public class LikeTable extends JsonDataTable<Like> implements DataProcessor {
 
   private void selectList(Request request, Response response) throws Exception {
     if (list.size() == 0) {
-      response.setValue(null);
+      response.setStatus(Response.FAIL);
       return;
     }
     response.setStatus(Response.SUCCESS);
