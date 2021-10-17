@@ -27,7 +27,7 @@ public class NetBucketDao implements BucketDao {
   public List<Bucket> findAll() throws Exception {
     requestAgent.request("bucket.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("버킷리스트 목록 조회 실패!");
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(Bucket.class));
