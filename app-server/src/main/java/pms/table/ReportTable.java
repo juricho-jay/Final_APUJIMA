@@ -11,17 +11,21 @@ public class ReportTable extends JsonDataTable<FreeBoard> implements DataProcess
     super("report.json", FreeBoard.class);
   }
 
+  @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "report.insert": insert(request, response); break;
       case "report.selectList": selectList(request, response); break;
       case "report.selectOne": selectOne(request, response); break;
       case "report.delete": delete(request, response); break;
+      case "report.autoDelete": autoDelete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
   }
+
+
 
   private void insert(Request request, Response response) throws Exception {
     FreeBoard board = request.getObject(FreeBoard.class);
@@ -66,6 +70,33 @@ public class ReportTable extends JsonDataTable<FreeBoard> implements DataProcess
     response.setStatus(Response.SUCCESS);
   }
 
+  private void autoDelete(Request request, Response response) throws Exception {
+    int no = Integer.parseInt(request.getParameter("no"));
+
+    if (list.size() == 0) {
+      System.out.println("목록이 없습니다.");
+      response.setStatus(Response.FAIL);
+      return;
+    }
+
+    int count = 0;
+    for (int i = list.size() - 1; i >= 0; i--) {
+      if (list.get(i).getNo() == no) {
+        list.remove(i);
+        count++;
+      }
+    }
+
+    if (count == 0) {
+      response.setStatus(Response.FAIL);
+      return;
+    }
+
+    response.setStatus(Response.SUCCESS);
+  }
+
+
+
   private int indexOf(int no) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getNo() == no) {
@@ -74,6 +105,8 @@ public class ReportTable extends JsonDataTable<FreeBoard> implements DataProcess
     }
     return -1;
   }
+
+
 
   private FreeBoard findByNo(int no) {
     for (FreeBoard b : list) {

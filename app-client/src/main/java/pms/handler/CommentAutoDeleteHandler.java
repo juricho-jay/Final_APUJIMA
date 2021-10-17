@@ -47,6 +47,7 @@ public class CommentAutoDeleteHandler implements Command {
 
     if (whichBoard.equals("freeBoard")) {
       FreeBoard freeBoard = freeBoardDao.findByNo(no);
+
       String whichBoard2 = freeBoard.getWhichBoard();
 
 
