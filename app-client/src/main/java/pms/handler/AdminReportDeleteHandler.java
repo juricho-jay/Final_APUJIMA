@@ -93,10 +93,10 @@ public class AdminReportDeleteHandler implements Command{
         String input2 = Prompt.inputString("❗ 정말 삭제하시겠습니까? (y/N)> ");
         if(input2.equalsIgnoreCase("y")) {
           freeBoardDao.delete(no);
-          //          request.setAttribute("no", no);
-          //          request.setAttribute("boardType", "freeBoard");
-          //          request.getRequestDispatcher("/comment/autoDelete").forward(request);
-          //          request.getRequestDispatcher("/like/autoDelete").forward(request);
+          request.setAttribute("no", no);
+          request.setAttribute("boardType", "freeBoard");
+          request.getRequestDispatcher("/comment/autoDelete").forward(request);
+          request.getRequestDispatcher("/like/autoDelete").forward(request);
 
           MailBox mailBox1 = new MailBox();
           mailBox1.setReceiver(freeBoard.getRequester());
@@ -143,10 +143,10 @@ public class AdminReportDeleteHandler implements Command{
         String input2 = Prompt.inputString("❗ 정말 삭제하시겠습니까? (y/N)> ");
         if(input2.equalsIgnoreCase("y")) {
           doctorBoardDao.delete(no);
-          //          request.setAttribute("no", no);
-          //          request.setAttribute("boardType", "doctorBoard");
-          //          request.getRequestDispatcher("/comment/autoDelete").forward(request);
-          //          request.getRequestDispatcher("/like/autoDelete").forward(request);
+          request.setAttribute("no", no);
+          request.setAttribute("boardType", "doctorBoard");
+          request.getRequestDispatcher("/comment/autoDelete").forward(request);
+          request.getRequestDispatcher("/like/autoDelete").forward(request);
 
           MailBox mailBox1 = new MailBox();
           mailBox1.setReceiver(doctorBoard.getRequester());
