@@ -20,7 +20,7 @@ public class NetMemberDao implements MemberDao{
   public void insert(Member member) throws Exception {
     requestAgent.request("member.insert", member);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 

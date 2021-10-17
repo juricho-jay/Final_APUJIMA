@@ -3,17 +3,20 @@ package pms.handler;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
+import pms.dao.MemberDao;
+import pms.dao.PlantDao;
 import pms.domain.Member;
 import pms.domain.Plant;
-import request.RequestAgent;
 import util.Prompt;
 
 
 public class PlantAddHandler implements Command {
 
-  RequestAgent requestAgent;
-  public PlantAddHandler(RequestAgent requestAgent ) {
-    this.requestAgent = requestAgent;
+  PlantDao plantDao;
+  MemberDao memberDao;
+  public PlantAddHandler(PlantDao plantDao , MemberDao memberDao) {
+    this.plantDao = plantDao;
+    this.memberDao = memberDao;
   }
 
 
@@ -30,8 +33,9 @@ public class PlantAddHandler implements Command {
     params.put("id", loginUser);
 
 
-    requestAgent.request("member.selectOne",params);
-    Member member = requestAgent.getObject(Member.class);
+    Member member = memberDao.findById(loginUser);
+    //    requestAgent.request("member.selectOne",params);
+    //    Member member = requestAgent.getObject(Member.class);
     if(member.getPoint() < 300) {
       System.out.println("포인트가 부족하여 화분을 생성 할 수 없습니다.");
       System.out.println("현재 포인트: " +  member.getPoint());
@@ -40,10 +44,9 @@ public class PlantAddHandler implements Command {
       return;
     }
 
-    requestAgent.request("plant.selectList", null);
+    List<Plant> plantList = plantDao.findAll();
 
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (plantList == null ) {
       String input = Prompt.inputString("화분 이름> " );
       System.out.println("아직 생성된 화분이 없습니다.");
       plant.setPlantName(input);
@@ -54,28 +57,19 @@ public class PlantAddHandler implements Command {
       plant.setShape("\uD83C\uDF31");
 
 
-      requestAgent.request("plant.insert", plant);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("화분 등록 실패!");
-        return;
-      }
+      plantDao.insert(plant);
       member.setPoint(member.getPoint()-300);
-      requestAgent.request("member.update", member);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("포인트 차감 실패!");
-        return;
-      }
+      //requestAgent.request("member.update", member);
+      memberDao.update(member);
       System.out.println("화분에 씨앗을 심어 300포인트가 차감되었습니다.");
       return;
+
+
+
     }
 
-
-    List<Plant> plantList =(List<Plant>) requestAgent.getObjects(Plant.class);
-
-
     while(true) {
-      String input = Prompt.inputString("화분 이름> " );
+      String  input = Prompt.inputString("화분 이름> " );
       // AuthLoginHandler.getLoginUser().plantList().get(i).getPlantName();
 
 
@@ -103,18 +97,10 @@ public class PlantAddHandler implements Command {
         break;
       }
     }
-    requestAgent.request("plant.insert", plant);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("화분 등록 실패!");
-      return;
-    }
+    plantDao.insert(plant);
     member.setPoint(member.getPoint()-300);
-    requestAgent.request("member.update", member);
+    memberDao.update(member);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("포인트 차감 실패!");
-      return;
-    }
     System.out.println("화분에 씨앗을 심어 300포인트가 차감되었습니다.");
 
 

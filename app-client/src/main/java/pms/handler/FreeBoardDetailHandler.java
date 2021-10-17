@@ -103,7 +103,7 @@ public class FreeBoardDetailHandler implements Command {
 
     while(true) {
       String status = "";
-      if (likeList.size() == 0) {
+      if (likeList == null) {
         status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) /\n"
             + "댓글달기💬(@) / 넘어가기(Enter)]> ");
       } else {

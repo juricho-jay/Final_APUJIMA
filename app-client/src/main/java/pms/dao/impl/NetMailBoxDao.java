@@ -20,7 +20,8 @@ public class NetMailBoxDao implements MailBoxDao {
     requestAgent.request("mailBox.insert", mailbox);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("쪽지함 데이터 저장 실패!");
+      System.out.println("쪽지함 데이터 저장 실패!");
+      return;
     }
   }
 

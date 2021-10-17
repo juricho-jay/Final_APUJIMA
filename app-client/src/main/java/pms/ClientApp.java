@@ -18,6 +18,7 @@ import pms.dao.impl.NetMailBoxDao;
 import pms.dao.impl.NetMedicineDao;
 import pms.dao.impl.NetMemberDao;
 import pms.dao.impl.NetNoticeBoardDao;
+import pms.dao.impl.NetPlantDao;
 import pms.dao.impl.NetReportDao;
 import pms.dao.impl.NetRequestDao;
 import pms.handler.AdminApprovalHandler;
@@ -167,6 +168,7 @@ public class ClientApp {
     NetDoctorReportDao doctorReportDao = new NetDoctorReportDao(requestAgent);
     NetDateCheckDao dateCheckDao = new NetDateCheckDao(requestAgent);
     NetRequestDao requestDao = new NetRequestDao(requestAgent);
+    NetPlantDao plantDao = new NetPlantDao(requestAgent);
 
 
 
@@ -238,10 +240,10 @@ public class ClientApp {
     commandMap.put("/bucket/complete", new BucketCompleteHandler(bucketDao));
     commandMap.put("/bucket/search", new BucketSearchHandler(bucketDao));
 
-    commandMap.put("/plant/add", new PlantAddHandler(requestAgent));
-    commandMap.put("/plant/grow", new PlantGrowHandler(requestAgent));
-    commandMap.put("/plant/list", new PlantListHandler(requestAgent));
-    commandMap.put("/plant/mylist", new PlantMyListHandler(requestAgent));
+    commandMap.put("/plant/add", new PlantAddHandler(plantDao,memberDao));
+    commandMap.put("/plant/grow", new PlantGrowHandler(plantDao, memberDao));
+    commandMap.put("/plant/list", new PlantListHandler(plantDao));
+    commandMap.put("/plant/mylist", new PlantMyListHandler(plantDao));
 
     commandMap.put("/wiseSaying/saying", new WiseSaying());
 

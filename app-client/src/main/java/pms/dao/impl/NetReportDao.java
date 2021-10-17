@@ -19,7 +19,7 @@ public class NetReportDao implements ReportDao{
   public void insert(FreeBoard freeBoard) throws Exception {
     requestAgent.request("report.insert", freeBoard);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 

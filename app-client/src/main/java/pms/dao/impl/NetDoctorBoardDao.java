@@ -19,7 +19,7 @@ public class NetDoctorBoardDao implements DoctorBoardDao{
   public void insert(DoctorBoard doctorBoard) throws Exception {
     requestAgent.request("doctorBoard.insert", doctorBoard);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 

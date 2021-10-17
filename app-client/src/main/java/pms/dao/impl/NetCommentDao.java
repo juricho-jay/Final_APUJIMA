@@ -19,7 +19,7 @@ public class NetCommentDao implements CommentDao{
   public void insert(Comment comment) throws Exception {
     requestAgent.request("comment.insert", comment);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 
@@ -27,7 +27,7 @@ public class NetCommentDao implements CommentDao{
   public List<Comment> findAll() throws Exception {
     requestAgent.request("comment.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(Comment.class));

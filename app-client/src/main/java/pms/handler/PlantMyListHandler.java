@@ -2,14 +2,15 @@ package pms.handler;
 
 
 import java.util.List;
+import pms.dao.PlantDao;
 import pms.domain.Plant;
-import request.RequestAgent;
 
 public class PlantMyListHandler implements Command {
 
-  RequestAgent requestAgent;
-  public PlantMyListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  PlantDao plantDao;
+
+  public PlantMyListHandler(PlantDao plantDao) {
+    this.plantDao = plantDao;
   }
 
   @Override
@@ -24,18 +25,17 @@ public class PlantMyListHandler implements Command {
 
 
 
-    requestAgent.request("plant.selectList", null);
+    List<Plant> plantList = plantDao.findAll();
 
     if (loginUser == null) {
       System.out.println("로그인 하지 않았습니다.");
       return;
     }
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (plantList == null) {
       System.out.println("목록 불러오기 실패.");
     }
 
-    List<Plant> plantList =(List<Plant>) requestAgent.getObjects(Plant.class);
 
     for (Plant plant :plantList) {
       if(plant.getOwnerName().equals(loginUser)) {

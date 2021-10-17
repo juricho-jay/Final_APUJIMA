@@ -31,6 +31,10 @@ public class LikeAutoDeleteHandler implements Command {
     int no = (int)request.getAttribute("no"); //게시판 번호
 
     List<Like> likeList = likeDao.findAll();
+
+    if (likeList == null) {
+      return;
+    }
     //    requestAgent.request("like.selectList", null);
     //
     //    HashMap<String,String> params = new HashMap<>();

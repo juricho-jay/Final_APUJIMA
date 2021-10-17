@@ -19,7 +19,7 @@ public class NetNoticeBoardDao implements NoticeBoardDao {
   public void insert(NoticeBoard noticeBoard) throws Exception {
     requestAgent.request("noticeBoard.insert", noticeBoard);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 

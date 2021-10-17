@@ -1,16 +1,15 @@
 package pms.handler;
 
 import java.util.List;
+import pms.dao.PlantDao;
 import pms.domain.Plant;
-import request.RequestAgent;
 import util.Prompt;
 
 
 public class PlantListHandler implements Command {
-
-  RequestAgent requestAgent;
-  public PlantListHandler(RequestAgent requestAgent ) {
-    this.requestAgent = requestAgent;
+  PlantDao plantDao;
+  public PlantListHandler(PlantDao plantDao ) {
+    this.plantDao = plantDao;
   }
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -22,17 +21,16 @@ public class PlantListHandler implements Command {
 
 
 
-    requestAgent.request("plant.selectList", null);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+
+
+
+    List<Plant> plantList = plantDao.findAll();
+
+    if (plantList == null) {
       System.out.println("화분 조회 실패!");
       return;
     }
-
-    List<Plant> plantList = (List<Plant>) requestAgent.getObjects(Plant.class);
-
-
-
 
     for (Plant plant : plantList) {
       System.out.printf("%s, %s\n",
