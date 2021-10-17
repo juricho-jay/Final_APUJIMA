@@ -81,6 +81,20 @@ public class NetDoctorReportDao implements DoctorReportDao{
       throw new Exception(requestAgent.getObject(String.class));
     }
   }
+
+  @Override
+  public void autoDelete(int no) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
+
+    requestAgent.request("doctorReport.autoDelete", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("삭제 실패!");
+      return;
+    }
+  }
+
 }
 
 

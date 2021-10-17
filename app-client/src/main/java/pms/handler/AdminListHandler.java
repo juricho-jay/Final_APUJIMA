@@ -39,14 +39,23 @@ public class AdminListHandler implements Command {
       System.out.println("-[약품 승인 요청 내역]");
       System.out.println("약품 승인 요청건이 없습니다.");
       System.out.println();
+    } 
 
-    } else if (reportList == null) {
+    if (reportList == null) {
       System.out.println("-[게시판 신고 접수 내역]");
       System.out.println("자유게시판 신고 접수건이 없습니다.");
       System.out.println();
+    } 
 
-    } else if (doctorReportList == null) {
+    if (doctorReportList == null) {
       System.out.println("지식in게시판 신고 접수건이 없습니다.");
+      System.out.println();
+    } 
+
+    if (requestList == null && 
+        reportList == null &&
+        doctorReportList == null) {
+      System.out.println("신고 접수건이 없습니다.");
       System.out.println();
       return;
     } 
