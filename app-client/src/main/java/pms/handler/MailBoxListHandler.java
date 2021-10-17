@@ -1,14 +1,14 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
+import pms.dao.MailBoxDao;
 import pms.domain.MailBox;
-import request.RequestAgent;
 
 public class MailBoxListHandler  implements Command{
-  RequestAgent requestAgent;
+  MailBoxDao mailBoxDao;
 
-  public MailBoxListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MailBoxListHandler(MailBoxDao mailBoxDao) {
+    this.mailBoxDao = mailBoxDao;
   }
 
   @Override
@@ -18,20 +18,19 @@ public class MailBoxListHandler  implements Command{
     System.out.println();
     int count = 0;
 
-    requestAgent.request("mailBox.selectList", null);
+    List<MailBox> mailBoxList = mailBoxDao.findAll();
 
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (mailBoxList == null) {
       System.out.println("쪽지함이 비어 있습니다.");
       return;
     }
 
-    Collection<MailBox> mailBoxList = requestAgent.getObjects(MailBox.class);
 
     for (MailBox mailBox : mailBoxList) {
       if(mailBox.getReceiver().equals(AuthLoginHandler.getLoginUser().getId())) {
-        System.out.printf("이 글의 실행 조건은 %d번의 메일박스의 수신자 아이디가 로그인 아이디와 같을때\n", mailBox.getMailNo());
-        requestAgent.request("mailBox.update", mailBox);
+        //  System.out.printf("이 글의 실행 조건은 %d번의 메일박스의 수신자 아이디가 로그인 아이디와 같을때\n", mailBox.getMailNo());
+        //    requestAgent.request("mailBox.update", mailBox);
 
         System.out.printf("쪽지 번호 : %d\n"
             +"보낸 사람 : %s\n"

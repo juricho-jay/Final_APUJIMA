@@ -36,7 +36,7 @@ public class CommentDeleteHandler implements Command {
 
     List<Comment> commentList = commentDao.findAll();
 
-    if (commentList.size() == 0) {
+    if (commentList == null) {
       System.out.println("등록된 댓글이 없습니다.");
       return;
     }

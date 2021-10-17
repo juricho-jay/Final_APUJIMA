@@ -19,6 +19,7 @@ public class PlantTable extends JsonDataTable<Plant> implements DataProcessor {
       case "plant.selectList": selectList(request, response); break;
       case "plant.selectListByKeyword": selectListByKeyword(request, response); break;
       case "plant.selectOne": selectOne(request, response); break;
+      case "plant.selectOneByName":selectOneByName(request,response); break;
       case "plant.update": update(request, response); break;
       case "plant.delete": delete(request, response); break;
       default:
@@ -112,6 +113,25 @@ public class PlantTable extends JsonDataTable<Plant> implements DataProcessor {
     return null;
   }
 
+
+  private void selectOneByName(Request request, Response response) throws Exception {
+    String name = request.getParameter("name");
+    Plant plant = null;
+    for (Plant p : list) {
+      if (p.getPlantName().equals(name)) {
+        plant = p;
+        break;
+      }
+    }
+
+    if (plant != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(plant);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 이름의 화분을 찾을 수 없습니다.");
+    }
+  }
 
 
   private int indexOf(int no) {

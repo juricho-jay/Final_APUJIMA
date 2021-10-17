@@ -19,7 +19,8 @@ public class NetBucketDao implements BucketDao {
   public void insert(Bucket bucket) throws Exception {
     requestAgent.request("bucket.insert", bucket);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("버킷리스트 데이터 저장 실패!");
+      System.out.println("버킷리스트 데이터 저장 실패!");
+      return;
     }
   }
 
@@ -27,7 +28,7 @@ public class NetBucketDao implements BucketDao {
   public List<Bucket> findAll() throws Exception {
     requestAgent.request("bucket.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("버킷리스트 목록 조회 실패!");
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(Bucket.class));
@@ -40,7 +41,8 @@ public class NetBucketDao implements BucketDao {
     requestAgent.request("bucket.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 검색 실패!");
+      System.out.println("입력한 검색어를 찾을 수 없습니다.");
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(Bucket.class));
@@ -65,7 +67,8 @@ public class NetBucketDao implements BucketDao {
     requestAgent.request("bucket.update", bucket);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 변경 실패!");
+      System.out.println("게시글 변경 실패!");
+      return;
     }
   }
 
@@ -77,7 +80,8 @@ public class NetBucketDao implements BucketDao {
     requestAgent.request("bucket.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 삭제 실패!");
+      System.out.println("게시글 삭제 실패!");
+      return;
     }
   }
 

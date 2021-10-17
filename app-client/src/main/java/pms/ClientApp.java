@@ -6,21 +6,24 @@ import java.util.List;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
+import pms.dao.MailBoxDao;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
+import pms.dao.impl.NetDateCheckDao;
 import pms.dao.impl.NetDoctorBoardDao;
 import pms.dao.impl.NetDoctorReportDao;
 import pms.dao.impl.NetFreeBoardDao;
 import pms.dao.impl.NetLikeDao;
+import pms.dao.impl.NetMailBoxDao;
 import pms.dao.impl.NetMedicineDao;
 import pms.dao.impl.NetMemberDao;
 import pms.dao.impl.NetNoticeBoardDao;
+import pms.dao.impl.NetPlantDao;
 import pms.dao.impl.NetReportDao;
+import pms.dao.impl.NetRequestDao;
 import pms.handler.AdminApprovalHandler;
 import pms.handler.AdminListHandler;
 import pms.handler.AdminReportDeleteHandler;
-import pms.handler.AdminUpdateHandler;
-import pms.handler.AttendanceAutoDeleteHandler;
 import pms.handler.AttendanceCheckHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
@@ -160,20 +163,24 @@ public class ClientApp {
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
     NetBucketDao bucketDao = new NetBucketDao(requestAgent);
     NetMedicineDao medicineDao = new NetMedicineDao(requestAgent);
+    MailBoxDao mailBoxDao = new NetMailBoxDao(requestAgent);
     NetReportDao reportDao = new NetReportDao(requestAgent);
     NetDoctorReportDao doctorReportDao = new NetDoctorReportDao(requestAgent);
+    NetDateCheckDao dateCheckDao = new NetDateCheckDao(requestAgent);
+    NetRequestDao requestDao = new NetRequestDao(requestAgent);
+    NetPlantDao plantDao = new NetPlantDao(requestAgent);
 
 
 
     // Command 객체 준비
-    commandMap.put("/admin/approval", new AdminApprovalHandler(requestAgent));
-    commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
-    commandMap.put("/admin/list", new AdminListHandler(requestAgent));
-    commandMap.put("/admin/delete", new AdminReportDeleteHandler(requestAgent));
+    commandMap.put("/admin/approval", new AdminApprovalHandler(requestDao, medicineDao));
+    //    commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
+    commandMap.put("/admin/list", new AdminListHandler(requestDao, reportDao, doctorReportDao));
+    commandMap.put("/admin/delete", new AdminReportDeleteHandler(reportDao, doctorReportDao, freeBoardDao, mailBoxDao, doctorBoardDao));
     commandMap.put("/intro", new IntroMenu());
 
     commandMap.put("/medicine/add", new MedicineAddHandler(medicineDao));
-    commandMap.put("/medicine/request", new MedicineRequestHandler(medicineDao));
+    commandMap.put("/medicine/request", new MedicineRequestHandler(medicineDao, requestDao));
     commandMap.put("/medicine/list", new MedicineListHandler(medicineDao));
     commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineDao));
     commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineDao));
@@ -184,12 +191,12 @@ public class ClientApp {
     commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(requestAgent));
     commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(requestAgent));
 
-    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(requestAgent));
-    commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(requestAgent));
-    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(requestAgent));
-    commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(requestAgent));
-    commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(requestAgent));
-    commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(requestAgent));
+    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardDao, likeDao, commentDao));
+    commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(noticeBoardDao));
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardDao));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardDao));
@@ -210,14 +217,13 @@ public class ClientApp {
 
     commandMap.put("/auth/login", new AuthLoginHandler(requestAgent));
     commandMap.put("/auth/logout", new AuthLogoutHandler());
-    commandMap.put("/auth/userInfo", new AuthUserInfoHandler(requestAgent));
-    commandMap.put("/auth/check", new AttendanceCheckHandler(requestAgent));
-    commandMap.put("/auth/deleteCheck", new AttendanceAutoDeleteHandler(requestAgent));
+    commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberDao));
+    commandMap.put("/auth/check", new AttendanceCheckHandler(dateCheckDao, memberDao));
 
-    commandMap.put("/mailBox/send", new MailBoxSendHandler(requestAgent));
-    commandMap.put("/mailBox/list", new MailBoxListHandler(requestAgent));
-    commandMap.put("/mailBox/detail", new MailBoxDetailHandler(requestAgent));
-    commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(requestAgent));
+    commandMap.put("/mailBox/send", new MailBoxSendHandler(mailBoxDao , memberDao));
+    commandMap.put("/mailBox/list", new MailBoxListHandler(mailBoxDao));
+    commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxDao));
+    commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxDao));
 
     commandMap.put("/comment/add", new CommentAddHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
     commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
@@ -234,10 +240,10 @@ public class ClientApp {
     commandMap.put("/bucket/complete", new BucketCompleteHandler(bucketDao));
     commandMap.put("/bucket/search", new BucketSearchHandler(bucketDao));
 
-    commandMap.put("/plant/add", new PlantAddHandler(requestAgent));
-    commandMap.put("/plant/grow", new PlantGrowHandler(requestAgent));
-    commandMap.put("/plant/list", new PlantListHandler(requestAgent));
-    commandMap.put("/plant/mylist", new PlantMyListHandler(requestAgent));
+    commandMap.put("/plant/add", new PlantAddHandler(plantDao,memberDao));
+    commandMap.put("/plant/grow", new PlantGrowHandler(plantDao, memberDao));
+    commandMap.put("/plant/list", new PlantListHandler(plantDao));
+    commandMap.put("/plant/mylist", new PlantMyListHandler(plantDao));
 
     commandMap.put("/wiseSaying/saying", new WiseSaying());
 
@@ -288,7 +294,7 @@ public class ClientApp {
     MenuGroup approvalManagement = new MenuGroup("승인 관리", Menu.ACCESS_ADMIN);
 
     approvalManagement.add(new MenuItem("약품 승인", Menu.ACCESS_ADMIN, "/admin/approval")); // 여기서 3지선다 승인, 삭제, 뒤로가기
-    approvalManagement.add(new MenuItem("약품 변경", Menu.ACCESS_ADMIN, "/admin/update")); // 변경 or not
+    //    approvalManagement.add(new MenuItem("약품 변경", Menu.ACCESS_ADMIN, "/admin/update")); // 변경 or not
     approvalManagement.add(new MenuItem("게시판 신고 승인", Menu.ACCESS_ADMIN, "/admin/delete")); // 신고하시겠습니까? yes => 삭제
 
 

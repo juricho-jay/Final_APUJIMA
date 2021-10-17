@@ -19,15 +19,15 @@ public class NetLikeDao implements LikeDao{
   public void insert(Like like) throws Exception {
     requestAgent.request("like.insert", like);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 
   @Override
   public List<Like> findAll() throws Exception {
     requestAgent.request("like.selectList", null);
+
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      //throw new Exception(requestAgent.getObject(String.class));
       return null;
     }
 
@@ -67,7 +67,7 @@ public class NetLikeDao implements LikeDao{
     requestAgent.request("like.update", like);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 
@@ -79,7 +79,7 @@ public class NetLikeDao implements LikeDao{
     requestAgent.request("like.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 }

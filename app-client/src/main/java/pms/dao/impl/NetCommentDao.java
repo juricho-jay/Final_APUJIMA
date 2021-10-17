@@ -19,7 +19,7 @@ public class NetCommentDao implements CommentDao{
   public void insert(Comment comment) throws Exception {
     requestAgent.request("comment.insert", comment);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 
@@ -27,7 +27,7 @@ public class NetCommentDao implements CommentDao{
   public List<Comment> findAll() throws Exception {
     requestAgent.request("comment.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(Comment.class));
@@ -41,6 +41,7 @@ public class NetCommentDao implements CommentDao{
     requestAgent.request("comment.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("댓글을 찾을 수 없습니다.");
       return null;
     }
 
@@ -55,19 +56,22 @@ public class NetCommentDao implements CommentDao{
     requestAgent.request("comment.selectOneByName", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("댓글을 찾을 수 없습니다.");
       return null;
     }
 
     return requestAgent.getObject(Comment.class);
   }
 
+  @Override
   public List<Comment> findByKeyword(String keyword) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("keyword", keyword);
     requestAgent.request("comment.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 검색 실패!");
+      System.out.println("게시글 검색 실패!");
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(Comment.class));

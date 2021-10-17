@@ -19,6 +19,7 @@ public class CounselingMemberAddHandler implements Command {
     System.out.println("[상담 신청]페이지입니다.");
     System.out.println();
     Member loginUser = AuthLoginHandler.getLoginUser();
+
     CounselingMember counselingMember = new CounselingMember();
 
     System.out.printf("이름: %s\n", loginUser.getName());

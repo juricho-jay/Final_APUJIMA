@@ -79,7 +79,7 @@ public class CommentAddHandler implements Command {
 
     List<Comment> commentList = commentDao.findAll();
 
-    if (commentList.size() == 0) {
+    if (commentList == null) {
       comment.setNo(1);
       comment.setCommentNo(0);
       comment.setCommentBoardNo(xxxBoard.getNo());

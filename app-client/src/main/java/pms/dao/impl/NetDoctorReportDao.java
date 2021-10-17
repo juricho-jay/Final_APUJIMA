@@ -19,7 +19,7 @@ public class NetDoctorReportDao implements DoctorReportDao{
   public void insert(DoctorBoard doctorBoard) throws Exception {
     requestAgent.request("doctorReport.insert", doctorBoard);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 
@@ -27,7 +27,7 @@ public class NetDoctorReportDao implements DoctorReportDao{
   public List<DoctorBoard> findAll() throws Exception {
     requestAgent.request("doctorReport.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(DoctorBoard.class));
@@ -81,6 +81,20 @@ public class NetDoctorReportDao implements DoctorReportDao{
       throw new Exception(requestAgent.getObject(String.class));
     }
   }
+
+  @Override
+  public void autoDelete(int no) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
+
+    requestAgent.request("doctorReport.autoDelete", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("삭제 실패!");
+      return;
+    }
+  }
+
 }
 
 

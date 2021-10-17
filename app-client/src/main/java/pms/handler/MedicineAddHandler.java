@@ -1,6 +1,5 @@
 package pms.handler;
 
-import java.util.Collection;
 import java.util.List;
 import pms.dao.MedicineDao;
 import pms.domain.Medicine;
@@ -20,14 +19,14 @@ public class MedicineAddHandler implements Command{
 
     Medicine medicine = new Medicine();
 
-    Collection<Medicine> medicineList = medicineDao.findAll();
+    List<Medicine> medicineList = medicineDao.findAll();
 
-    if (medicineList.size() == 0) {
+    if (medicineList == null) {
       Medicine.lastIndex = 1;
       medicine.setNo(Medicine.lastIndex);
     } else if(Medicine.lastIndex != medicineList.size()) {
 
-      Medicine.lastIndex = ((List<Medicine>) medicineList).get(medicineList.size()-1).getNo();
+      Medicine.lastIndex = medicineList.get(medicineList.size()-1).getNo();
       medicine.setNo(++Medicine.lastIndex);
 
     } else {

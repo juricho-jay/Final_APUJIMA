@@ -40,9 +40,19 @@ public class CommentAutoDeleteHandler implements Command {
 
     String whichBoard = (String)request.getAttribute("boardType");
 
+    if (commentList == null) {
+      return;
+    }
+
 
     if (whichBoard.equals("freeBoard")) {
       FreeBoard freeBoard = freeBoardDao.findByNo(no);
+
+      if (freeBoard == null) {
+        System.out.println("해당 번호의 게시글이 없습니다.");
+        return;
+      }
+
       String whichBoard2 = freeBoard.getWhichBoard();
 
 

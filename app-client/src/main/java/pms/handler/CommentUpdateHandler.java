@@ -39,12 +39,6 @@ public class CommentUpdateHandler implements Command {
       int commentResetNo = Prompt.inputInt("번호> "); //댓글 번호 (게시물마다 1번으로 시작되는)
       List<Comment> commentList = commentDao.findAll();
 
-      if (commentList.size() == 0) {
-        System.out.println("등록된 댓글이 없습니다.");
-        return;
-      }
-
-
       int no = (int)request.getAttribute("no"); // freeBoardDetailHandler에서 입력한 게시판 번호 불러오기
 
       HashMap<String,String> params = new HashMap<>();

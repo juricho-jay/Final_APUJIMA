@@ -19,7 +19,7 @@ public class NetFreeBoardDao implements FreeBoardDao{
   public void insert(FreeBoard freeBoard) throws Exception {
     requestAgent.request("freeBoard.insert", freeBoard);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      return;
     }
   }
 
@@ -27,7 +27,8 @@ public class NetFreeBoardDao implements FreeBoardDao{
   public List<FreeBoard> findAll() throws Exception {
     requestAgent.request("freeBoard.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      System.out.println("작성된 게시물이 없습니다.");
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(FreeBoard.class));
@@ -48,18 +49,18 @@ public class NetFreeBoardDao implements FreeBoardDao{
   }
 
   @Override
-  public FreeBoard findByName(String name) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("name", name);
-
-    requestAgent.request("freeBoard.selectOneByName", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return null;
-    }
-
-    return requestAgent.getObject(FreeBoard.class);
-  }
+  //  public FreeBoard findByName(String name) throws Exception {
+  //    HashMap<String,String> params = new HashMap<>();
+  //    params.put("name", name);
+  //
+  //    requestAgent.request("freeBoard.selectOneByName", params);
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      return null;
+  //    }
+  //
+  //    return requestAgent.getObject(FreeBoard.class);
+  //  }
 
   public List<FreeBoard> findByKeyword(String keyword) throws Exception {
     HashMap<String,String> params = new HashMap<>();
@@ -67,7 +68,8 @@ public class NetFreeBoardDao implements FreeBoardDao{
     requestAgent.request("freeBoard.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("게시글 검색 실패!");
+      System.out.println("게시글 검색 실패!");
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(FreeBoard.class));
@@ -79,7 +81,8 @@ public class NetFreeBoardDao implements FreeBoardDao{
     requestAgent.request("freeBoard.update", freeBoard);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      System.out.println("정보 변경 실패!");
+      return;
     }
   }
 
@@ -91,7 +94,8 @@ public class NetFreeBoardDao implements FreeBoardDao{
     requestAgent.request("freeBoard.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      System.out.println("삭제 실패!");
+      return;
     }
 
   }

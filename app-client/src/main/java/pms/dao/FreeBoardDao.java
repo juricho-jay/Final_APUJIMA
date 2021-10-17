@@ -7,7 +7,7 @@ public interface FreeBoardDao {
   void insert(FreeBoard freeBoard) throws Exception;
   List<FreeBoard> findAll() throws Exception;
   FreeBoard findByNo(int no) throws Exception;
-  FreeBoard findByName(String name) throws Exception;
+  // FreeBoard findByName(String name) throws Exception;
   void update(FreeBoard freeBoard) throws Exception;
   void delete(int no) throws Exception;
   List<FreeBoard> findByKeyword(String keyword) throws Exception;

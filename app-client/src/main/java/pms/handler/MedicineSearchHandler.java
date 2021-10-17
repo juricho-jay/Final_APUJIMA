@@ -1,6 +1,6 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
 import pms.dao.MedicineDao;
 import pms.domain.Medicine;
 import util.Prompt;
@@ -20,16 +20,16 @@ public class MedicineSearchHandler implements Command {
     int count = 0;
     System.out.println("[약품 검색] 페이지입니다.");
     System.out.println();
-    String input = Prompt.inputString("검색어 (뒤로가기 #)> ");
-    if (input.equals("#")) {
+    String name = Prompt.inputString("검색어 (뒤로가기 #)> ");
+    if (name.equals("#")) {
       return;
     }
 
-    Collection<Medicine> medicineList = medicineDao.findByKeyword(input);
+    List<Medicine> medicineList = medicineDao.findByKeyword(name);
 
     for (Medicine medicine : medicineList) {
-      if (!medicine.getName().contains(input) &&
-          !medicine.getEffect().contains(input)) {
+      if (!medicine.getName().contains(name) &&
+          !medicine.getEffect().contains(name)) {
         continue;
       }
       count++;

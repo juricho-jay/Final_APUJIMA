@@ -1,6 +1,5 @@
 package pms.handler;
 
-import java.util.HashMap;
 import java.util.List;
 import pms.dao.DoctorBoardDao;
 import pms.domain.DoctorBoard;
@@ -21,10 +20,12 @@ public class DoctorBoardSearchHandler implements Command {
     System.out.println();
     String input = Prompt.inputString("검색어> ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("keyword", String.valueOf(input));
-
     List<DoctorBoard> doctorBoardList = doctorBoardDao.findByKeyword(input);
+
+    if (doctorBoardList == null) {
+      System.out.println("찾는 게시물이 없습니다.");
+      return;
+    }
 
     for (DoctorBoard doctorBoard : doctorBoardList) {
       if (!doctorBoard.getTitle().contains(input) &&

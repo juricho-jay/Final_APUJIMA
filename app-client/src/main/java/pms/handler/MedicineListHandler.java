@@ -1,6 +1,6 @@
 package pms.handler;
 
-import java.util.Collection;
+import java.util.List;
 import pms.dao.MedicineDao;
 import pms.domain.Medicine;
 
@@ -18,7 +18,12 @@ public class MedicineListHandler implements Command {
     System.out.println("[약 리스트]");
     System.out.println();
 
-    Collection<Medicine> medicineList = medicineDao.findAll();
+    List<Medicine> medicineList = medicineDao.findAll();
+
+    if (medicineList == null) {
+      System.out.println("현재 약품 리스트가 없습니다.");
+      return;
+    }
 
     for (Medicine medicine : medicineList) {
       System.out.printf("번호 : %d\n"
@@ -33,8 +38,8 @@ public class MedicineListHandler implements Command {
           medicine.getShape(),
           medicine.getColor(),
           medicine.getEffect());
+      System.out.println();
     }
-    System.out.println();
     //serachM();
 
   }

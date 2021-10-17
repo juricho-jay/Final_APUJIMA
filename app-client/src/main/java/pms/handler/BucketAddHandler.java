@@ -1,7 +1,6 @@
 package pms.handler;
 
 import java.sql.Date;
-import java.util.Collection;
 import java.util.List;
 import pms.dao.BucketDao;
 import pms.domain.Bucket;
@@ -25,14 +24,14 @@ public class BucketAddHandler implements Command {
 
     Bucket bucket = new Bucket();
 
-    Collection<Bucket> bucketList = bucketDao.findAll();
+    List<Bucket> bucketList = bucketDao.findAll();
 
-    if (bucketList.size() == 0) {
+    if (bucketList == null) {
       Bucket.lastIndex = 1;
       bucket.setNo(Bucket.lastIndex);
     } else if(Bucket.lastIndex != bucketList.size()) {
 
-      Bucket.lastIndex = ((List<Bucket>) bucketList).get(bucketList.size()-1).getNo();
+      Bucket.lastIndex = bucketList.get(bucketList.size()-1).getNo();
       bucket.setNo(++Bucket.lastIndex);
 
     } else {

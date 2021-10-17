@@ -10,5 +10,6 @@ public interface DoctorReportDao {
   DoctorBoard findByName(String name) throws Exception;
   void update(DoctorBoard doctorBoard) throws Exception;
   void delete(int no) throws Exception;
+  void autoDelete(int no) throws Exception;
 }
 
