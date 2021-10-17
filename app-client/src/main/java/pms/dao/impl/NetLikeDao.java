@@ -27,7 +27,8 @@ public class NetLikeDao implements LikeDao{
   public List<Like> findAll() throws Exception {
     requestAgent.request("like.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      //throw new Exception(requestAgent.getObject(String.class));
+      return null;
     }
 
     return new ArrayList<>(requestAgent.getObjects(Like.class));
