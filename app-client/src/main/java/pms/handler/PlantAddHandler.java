@@ -49,6 +49,7 @@ public class PlantAddHandler implements Command {
     if (plantList == null ) {
       String input = Prompt.inputString("화분 이름> " );
       System.out.println("아직 생성된 화분이 없습니다.");
+      System.out.println("화분을 새로 생성합니다.");
       plant.setPlantName(input);
       plant.setOwnerName(loginUser);
       plant.setRegisteredDate(new Date(System.currentTimeMillis()));
