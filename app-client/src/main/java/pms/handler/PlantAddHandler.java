@@ -19,7 +19,7 @@ public class PlantAddHandler implements Command {
     this.memberDao = memberDao;
   }
 
-
+  int plantCount = 0;// 두번째 화분부터 생성할때 사용.
   @Override
   public void execute(CommandRequest request) throws Exception {
 
@@ -34,8 +34,7 @@ public class PlantAddHandler implements Command {
 
 
     Member member = memberDao.findById(loginUser);
-    //    requestAgent.request("member.selectOne",params);
-    //    Member member = requestAgent.getObject(Member.class);
+
     if(member.getPoint() < 300) {
       System.out.println("포인트가 부족하여 화분을 생성 할 수 없습니다.");
       System.out.println("현재 포인트: " +  member.getPoint());
@@ -46,10 +45,11 @@ public class PlantAddHandler implements Command {
 
     List<Plant> plantList = plantDao.findAll();
 
-    if (plantList == null ) {
+    if (plantList == null) {
       String input = Prompt.inputString("화분 이름> " );
       System.out.println("아직 생성된 화분이 없습니다.");
       System.out.println("화분을 새로 생성합니다.");
+      plant.setNo(1);
       plant.setPlantName(input);
       plant.setOwnerName(loginUser);
       plant.setRegisteredDate(new Date(System.currentTimeMillis()));
@@ -60,7 +60,6 @@ public class PlantAddHandler implements Command {
 
       plantDao.insert(plant);
       member.setPoint(member.getPoint()-300);
-      //requestAgent.request("member.update", member);
       memberDao.update(member);
       System.out.println("화분에 씨앗을 심어 300포인트가 차감되었습니다.");
       return;
@@ -71,7 +70,6 @@ public class PlantAddHandler implements Command {
 
     while(true) {
       String  input = Prompt.inputString("화분 이름> " );
-      // AuthLoginHandler.getLoginUser().plantList().get(i).getPlantName();
 
 
       int count = 0;
@@ -88,7 +86,7 @@ public class PlantAddHandler implements Command {
       if (count != 0) {
         continue;
       } else {
-
+        plant.setNo(++plantCount);
         plant.setPlantName(input);
         plant.setOwnerName(loginUser);
         plant.setRegisteredDate(new Date(System.currentTimeMillis()));

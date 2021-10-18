@@ -33,7 +33,8 @@ public class PlantListHandler implements Command {
     }
 
     for (Plant plant : plantList) {
-      System.out.printf("%s, %s\n",
+      System.out.printf("%d,%s, %s\n",
+          plant.getNo(),
           plant.getPlantName(),
           plant.getOwnerName()
           );

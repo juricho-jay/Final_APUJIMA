@@ -24,8 +24,6 @@ public class MailBoxSendHandler implements Command{
     System.out.println();
     System.out.println("[쪽지 전송] 페이지입니다.");
     System.out.println();
-    //  MailBox mailBox = new MailBox();
-    //    mailBox.setMailNo(Prompt.inputInt("쪽지 번호> "));
     String id = Prompt.inputString("수신인> ");
 
     HashMap<String,String> params = new HashMap<>();
@@ -67,10 +65,7 @@ public class MailBoxSendHandler implements Command{
       System.out.printf("-%s- (이)라는 ID는 찾을 수 없습니다.",id);
       System.out.println();
     } 
-    //    else if (member.getId().equalsIgnoreCase(AuthLoginHandler.getLoginUser().getId())){
-    //      System.out.println("쪽지를 보내는 아이디가 같습니다. 다시 입력해주세요.");
-    //      System.out.println();
-    //    }
+
     else if(member.getId().equalsIgnoreCase("admin")) {
       System.out.println("관리자에게는 쪽지를 보낼수 없습니다!");
     } else {
@@ -78,17 +73,10 @@ public class MailBoxSendHandler implements Command{
       for (int i = 0; i < mailBoxList.size(); i++) {
         if (mailBoxList.get(i).getReceiver().equals(member.getId())) {
           count++;
-          //conditionLast = mailBoxList.get(i).getNo();
+
         }
       }
-
-      //      if(conditionLast != count) {
-      //        mailBox.setNo(++conditionLast);
-      //      } 
-      //      else {
       mailBox.setNo(++count);
-      //      }
-
       mailBox.setMailNo(mailBoxList.size() +1);
       mailBox.setReceiver(id);
       mailBox.setTitle(Prompt.inputString("제목> "));
