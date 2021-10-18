@@ -9,6 +9,7 @@ import pms.context.ApplicationContextListener;
 import pms.dao.MailBoxDao;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
+import pms.dao.impl.NetCounselingMemberDao;
 import pms.dao.impl.NetDateCheckDao;
 import pms.dao.impl.NetDoctorBoardDao;
 import pms.dao.impl.NetDoctorReportDao;
@@ -169,6 +170,7 @@ public class ClientApp {
     NetDateCheckDao dateCheckDao = new NetDateCheckDao(requestAgent);
     NetRequestDao requestDao = new NetRequestDao(requestAgent);
     NetPlantDao plantDao = new NetPlantDao(requestAgent);
+    NetCounselingMemberDao counselingMemberDao = new NetCounselingMemberDao(requestAgent);
 
 
 
@@ -187,9 +189,9 @@ public class ClientApp {
     commandMap.put("/medicine/search", new MedicineSearchHandler(medicineDao));
 
     commandMap.put("/counselingMember/list", new DoctorMemberListHandler(memberDao));
-    commandMap.put("/counselingMember/add", new CounselingMemberAddHandler(requestAgent));
-    commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(requestAgent));
-    commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(requestAgent));
+    commandMap.put("/counselingMember/add", new CounselingMemberAddHandler(counselingMemberDao));
+    commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(counselingMemberDao));
+    commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(counselingMemberDao));
 
     commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardDao));
     commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardDao));

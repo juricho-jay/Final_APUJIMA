@@ -1,16 +1,16 @@
 package pms.handler;
 
+import pms.dao.CounselingMemberDao;
 import pms.domain.CounselingMember;
 import pms.domain.Member;
-import request.RequestAgent;
 import util.Prompt;
 
 public class CounselingMemberAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  CounselingMemberDao counselingMemberDao;
 
-  public CounselingMemberAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public CounselingMemberAddHandler(CounselingMemberDao counselingMemberDao) {
+    this.counselingMemberDao = counselingMemberDao;
   }
 
   @Override
@@ -120,12 +120,7 @@ public class CounselingMemberAddHandler implements Command {
       }
     }
 
-    requestAgent.request("counselingMember.insert", counselingMember);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("상담 신청 실패!");
-      return;
-    }
+    counselingMemberDao.insert(counselingMember);
 
     System.out.println();
     System.out.println("신청이 완료되었습니다.");
