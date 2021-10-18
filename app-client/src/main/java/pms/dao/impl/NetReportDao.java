@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import pms.dao.ReportDao;
-import pms.domain.FreeBoard;
+import pms.domain.Board;
 import request.RequestAgent;
 
 public class NetReportDao implements ReportDao{
@@ -16,7 +16,7 @@ public class NetReportDao implements ReportDao{
 
 
   @Override
-  public void insert(FreeBoard freeBoard) throws Exception {
+  public void insert(Board freeBoard) throws Exception {
     requestAgent.request("report.insert", freeBoard);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return;
@@ -24,17 +24,17 @@ public class NetReportDao implements ReportDao{
   }
 
   @Override
-  public List<FreeBoard> findAll() throws Exception {
+  public List<Board> findAll() throws Exception {
     requestAgent.request("report.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
 
-    return new ArrayList<>(requestAgent.getObjects(FreeBoard.class));
+    return new ArrayList<>(requestAgent.getObjects(Board.class));
   }
 
   @Override
-  public FreeBoard findByNo(int no) throws Exception {
+  public Board findByNo(int no) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
@@ -44,11 +44,11 @@ public class NetReportDao implements ReportDao{
       return null;
     }
 
-    return requestAgent.getObject(FreeBoard.class);
+    return requestAgent.getObject(Board.class);
   }
 
   @Override
-  public FreeBoard findByName(String name) throws Exception {
+  public Board findByName(String name) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("name", name);
 
@@ -58,11 +58,11 @@ public class NetReportDao implements ReportDao{
       return null;
     }
 
-    return requestAgent.getObject(FreeBoard.class);
+    return requestAgent.getObject(Board.class);
   }
 
   @Override
-  public void update(FreeBoard freeBoard) throws Exception {
+  public void update(Board freeBoard) throws Exception {
     requestAgent.request("report.update", freeBoard);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {

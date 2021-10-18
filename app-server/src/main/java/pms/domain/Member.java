@@ -2,7 +2,6 @@ package pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
 public class Member implements Serializable{
   private String name;
@@ -17,29 +16,29 @@ public class Member implements Serializable{
   private String interest;
   private String doctorLicense;
   private int doctorOrNot;
-  private List<MailBox> mailBox;
-  private List<Plant> plant;
+  //  private List<MailBox> mailBox;
+  //  private List<Plant> plant;
   private int point;
 
 
-  public List<Plant> getPlant() {
-    return plant;
-  }
-  public void setPlant(List<Plant> plant) {
-    this.plant = plant;
-  }
+  //  public List<Plant> getPlant() {
+  //    return plant;
+  //  }
+  //  public void setPlant(List<Plant> plant) {
+  //    this.plant = plant;
+  //  }
   public int getPoint() {
     return point;
   }
   public void setPoint(int point) {
     this.point = point;
   }
-  public List<MailBox> getMailBox() {
-    return mailBox;
-  }
-  public void setMailBox(List<MailBox> mailBox) {
-    this.mailBox = mailBox;
-  }
+  //  public List<MailBox> getMailBox() {
+  //    return mailBox;
+  //  }
+  //  public void setMailBox(List<MailBox> mailBox) {
+  //    this.mailBox = mailBox;
+  //  }
   public int getDoctorOrNot() {
     return doctorOrNot;
   }

@@ -7,18 +7,15 @@ import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
 import pms.dao.MailBoxDao;
+import pms.dao.impl.NetBoardDao;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
 import pms.dao.impl.NetCounselingMemberDao;
 import pms.dao.impl.NetDateCheckDao;
-import pms.dao.impl.NetDoctorBoardDao;
-import pms.dao.impl.NetDoctorReportDao;
-import pms.dao.impl.NetFreeBoardDao;
 import pms.dao.impl.NetLikeDao;
 import pms.dao.impl.NetMailBoxDao;
 import pms.dao.impl.NetMedicineDao;
 import pms.dao.impl.NetMemberDao;
-import pms.dao.impl.NetNoticeBoardDao;
 import pms.dao.impl.NetPlantDao;
 import pms.dao.impl.NetReportDao;
 import pms.dao.impl.NetRequestDao;
@@ -29,6 +26,12 @@ import pms.handler.AttendanceCheckHandler;
 import pms.handler.AuthLoginHandler;
 import pms.handler.AuthLogoutHandler;
 import pms.handler.AuthUserInfoHandler;
+import pms.handler.BoardAddHandler;
+import pms.handler.BoardDeleteHandler;
+import pms.handler.BoardDetailHandler;
+import pms.handler.BoardListHandler;
+import pms.handler.BoardSearchHandler;
+import pms.handler.BoardUpdateHandler;
 import pms.handler.BucketAddHandler;
 import pms.handler.BucketCompleteHandler;
 import pms.handler.BucketDetailHandler;
@@ -43,19 +46,7 @@ import pms.handler.CommentUpdateHandler;
 import pms.handler.CounselingMemberAddHandler;
 import pms.handler.CounselingMemberDoctorListHandler;
 import pms.handler.CounselingMemberMyListHandler;
-import pms.handler.DoctorBoardAddHandler;
-import pms.handler.DoctorBoardDeleteHandler;
-import pms.handler.DoctorBoardDetailHandler;
-import pms.handler.DoctorBoardListHandler;
-import pms.handler.DoctorBoardSearchHandler;
-import pms.handler.DoctorBoardUpdateHandler;
 import pms.handler.DoctorMemberListHandler;
-import pms.handler.FreeBoardAddHandler;
-import pms.handler.FreeBoardDeleteHandler;
-import pms.handler.FreeBoardDetailHandler;
-import pms.handler.FreeBoardListHandler;
-import pms.handler.FreeBoardSearchHandler;
-import pms.handler.FreeBoardUpdateHandler;
 import pms.handler.IntroMenu;
 import pms.handler.LikeAddCancelHandler;
 import pms.handler.LikeAutoDeleteHandler;
@@ -71,12 +62,6 @@ import pms.handler.MedicineSearchHandler;
 import pms.handler.MedicineUpdateHandler;
 import pms.handler.MemberAddHandler;
 import pms.handler.MemberListHandler;
-import pms.handler.NoticeBoardAddHandler;
-import pms.handler.NoticeBoardDeleteHandler;
-import pms.handler.NoticeBoardDetailHandler;
-import pms.handler.NoticeBoardListHandler;
-import pms.handler.NoticeBoardSearchHandler;
-import pms.handler.NoticeBoardUpdateHandler;
 import pms.handler.PlantAddHandler;
 import pms.handler.PlantGrowHandler;
 import pms.handler.PlantListHandler;
@@ -157,16 +142,13 @@ public class ClientApp {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     NetMemberDao memberDao = new NetMemberDao(requestAgent);
-    NetFreeBoardDao freeBoardDao = new NetFreeBoardDao(requestAgent);
+    NetBoardDao boardDao = new NetBoardDao(requestAgent);
     NetLikeDao likeDao = new NetLikeDao(requestAgent);
-    NetDoctorBoardDao doctorBoardDao = new NetDoctorBoardDao(requestAgent);
-    NetNoticeBoardDao noticeBoardDao = new NetNoticeBoardDao(requestAgent);
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
     NetBucketDao bucketDao = new NetBucketDao(requestAgent);
     NetMedicineDao medicineDao = new NetMedicineDao(requestAgent);
     MailBoxDao mailBoxDao = new NetMailBoxDao(requestAgent);
     NetReportDao reportDao = new NetReportDao(requestAgent);
-    NetDoctorReportDao doctorReportDao = new NetDoctorReportDao(requestAgent);
     NetDateCheckDao dateCheckDao = new NetDateCheckDao(requestAgent);
     NetRequestDao requestDao = new NetRequestDao(requestAgent);
     NetPlantDao plantDao = new NetPlantDao(requestAgent);
@@ -176,9 +158,8 @@ public class ClientApp {
 
     // Command 객체 준비
     commandMap.put("/admin/approval", new AdminApprovalHandler(requestDao, medicineDao));
-    //    commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
-    commandMap.put("/admin/list", new AdminListHandler(requestDao, reportDao, doctorReportDao));
-    commandMap.put("/admin/delete", new AdminReportDeleteHandler(reportDao, doctorReportDao, freeBoardDao, mailBoxDao, doctorBoardDao));
+    commandMap.put("/admin/list", new AdminListHandler(requestDao, reportDao));
+    commandMap.put("/admin/delete", new AdminReportDeleteHandler(reportDao, boardDao, mailBoxDao));
     commandMap.put("/intro", new IntroMenu());
 
     commandMap.put("/medicine/add", new MedicineAddHandler(medicineDao));
@@ -193,26 +174,26 @@ public class ClientApp {
     commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(counselingMemberDao));
     commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(counselingMemberDao));
 
-    commandMap.put("/noticeBoard/add", new NoticeBoardAddHandler(noticeBoardDao));
-    commandMap.put("/noticeBoard/list", new NoticeBoardListHandler(noticeBoardDao));
-    commandMap.put("/noticeBoard/detail", new NoticeBoardDetailHandler(noticeBoardDao, likeDao, commentDao));
-    commandMap.put("/noticeBoard/update", new NoticeBoardUpdateHandler(noticeBoardDao));
-    commandMap.put("/noticeBoard/delete", new NoticeBoardDeleteHandler(noticeBoardDao));
-    commandMap.put("/noticeBoard/search", new NoticeBoardSearchHandler(noticeBoardDao));
+    commandMap.put("/noticeBoard/add", new BoardAddHandler(boardDao));
+    commandMap.put("/noticeBoard/list", new BoardListHandler(boardDao));
+    commandMap.put("/noticeBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao));
+    commandMap.put("/noticeBoard/update", new BoardUpdateHandler(boardDao));
+    commandMap.put("/noticeBoard/delete", new BoardDeleteHandler(boardDao));
+    commandMap.put("/noticeBoard/search", new BoardSearchHandler(boardDao));
 
-    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardDao));
-    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardDao));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardDao, likeDao, commentDao, reportDao));
-    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardDao));
-    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardDao));
-    commandMap.put("/freeBoard/search", new FreeBoardSearchHandler(freeBoardDao));
-    //
-    commandMap.put("/doctorBoard/add", new DoctorBoardAddHandler(doctorBoardDao, memberDao));
-    commandMap.put("/doctorBoard/list", new DoctorBoardListHandler(doctorBoardDao));
-    commandMap.put("/doctorBoard/detail", new DoctorBoardDetailHandler(doctorBoardDao, likeDao, commentDao, doctorReportDao));
-    commandMap.put("/doctorBoard/update", new DoctorBoardUpdateHandler(doctorBoardDao));
-    commandMap.put("/doctorBoard/delete", new DoctorBoardDeleteHandler(doctorBoardDao));
-    commandMap.put("/doctorBoard/search", new DoctorBoardSearchHandler(doctorBoardDao));
+    commandMap.put("/freeBoard/add", new BoardAddHandler(boardDao));
+    commandMap.put("/freeBoard/list", new BoardListHandler(boardDao));
+    commandMap.put("/freeBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao));
+    commandMap.put("/freeBoard/update", new BoardUpdateHandler(boardDao));
+    commandMap.put("/freeBoard/delete", new BoardDeleteHandler(boardDao));
+    commandMap.put("/freeBoard/search", new BoardSearchHandler(boardDao));
+
+    commandMap.put("/doctorBoard/add", new BoardAddHandler(boardDao));
+    commandMap.put("/doctorBoard/list", new BoardListHandler(boardDao));
+    commandMap.put("/doctorBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao));
+    commandMap.put("/doctorBoard/update", new BoardUpdateHandler(boardDao));
+    commandMap.put("/doctorBoard/delete", new BoardDeleteHandler(boardDao));
+    commandMap.put("/doctorBoard/search", new BoardSearchHandler(boardDao));
 
     commandMap.put("/member/add", new MemberAddHandler(memberDao));
     commandMap.put("/member/list", new MemberListHandler(memberDao));
@@ -227,14 +208,13 @@ public class ClientApp {
     commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxDao));
     commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxDao));
 
-    commandMap.put("/comment/add", new CommentAddHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
-    commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
-    commandMap.put("/comment/update", new CommentUpdateHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
-    commandMap.put("/comment/delete", new CommentDeleteHandler(commentDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
+    commandMap.put("/comment/add", new CommentAddHandler(commentDao, boardDao));
+    commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(commentDao, boardDao));
+    commandMap.put("/comment/update", new CommentUpdateHandler(commentDao, boardDao));
+    commandMap.put("/comment/delete", new CommentDeleteHandler(commentDao, boardDao));
 
-    commandMap.put("/like/addCancel", new LikeAddCancelHandler(likeDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
-    commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(likeDao, freeBoardDao, doctorBoardDao, noticeBoardDao));
-
+    commandMap.put("/like/addCancel", new LikeAddCancelHandler(likeDao, boardDao));
+    commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(likeDao, boardDao));
 
     commandMap.put("/bucket/add", new BucketAddHandler(bucketDao));
     commandMap.put("/bucket/list", new BucketListHandler(bucketDao));

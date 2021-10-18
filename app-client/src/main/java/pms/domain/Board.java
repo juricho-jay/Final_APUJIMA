@@ -3,7 +3,10 @@ package pms.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class FreeBoard extends XBoard implements Serializable{
+public class Board implements Serializable{
+  private int no;
+  private Member writer;
+  private int whichBoard; //보드 type
   private String title;
   private String content;
   private Date registeredDate;
@@ -17,7 +20,7 @@ public class FreeBoard extends XBoard implements Serializable{
     return lastIndex;
   }
   public static void setLastIndex(int lastIndex) {
-    FreeBoard.lastIndex = lastIndex;
+    Board.lastIndex = lastIndex;
   }
   public String getRequester() {
     return requester;
@@ -56,5 +59,25 @@ public class FreeBoard extends XBoard implements Serializable{
   public void setContent(String content) {
     this.content = content;
   }
+  public int getNo() {
+    return no;
+  }
+  public void setNo(int no) {
+    this.no = no;
+  }
+  public Member getWriter() {
+    return writer;
+  }
+  public void setWriter(Member writer) {
+    this.writer = writer;
+  }
+  public int getWhichBoard() {
+    return whichBoard;
+  }
+  public void setWhichBoard(int whichBoard) {
+    this.whichBoard = whichBoard;
+  }
+
+
 }
 

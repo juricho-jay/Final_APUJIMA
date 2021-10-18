@@ -8,7 +8,7 @@ public class Like implements Serializable {
   private int likeBoardNo; // 좋아요 달린 게시판 번호
   private Member liker; // 좋아요 누른 사람
   private String likeWriter; // 좋아요 누른 게시판의 글쓴이
-  private String whichBoard;
+  private int whichBoard;
 
 
 
@@ -37,10 +37,10 @@ public class Like implements Serializable {
   public void setLikeWriter(String likeWriter) {
     this.likeWriter = likeWriter;
   }
-  public String getWhichBoard() {
+  public int getWhichBoard() {
     return whichBoard;
   }
-  public void setWhichBoard(String whichBoard) {
+  public void setWhichBoard(int whichBoard) {
     this.whichBoard = whichBoard;
   }
 

@@ -1,14 +1,14 @@
 package pms.table;
 
-import pms.domain.FreeBoard;
+import pms.domain.Board;
 import server.DataProcessor;
 import server.Request;
 import server.Response;
 
-public class ReportTable extends JsonDataTable<FreeBoard> implements DataProcessor{
+public class ReportTable extends JsonDataTable<Board> implements DataProcessor{
 
   public ReportTable() {
-    super("report.json", FreeBoard.class);
+    super("report.json", Board.class);
   }
 
   @Override
@@ -28,7 +28,7 @@ public class ReportTable extends JsonDataTable<FreeBoard> implements DataProcess
 
 
   private void insert(Request request, Response response) throws Exception {
-    FreeBoard board = request.getObject(FreeBoard.class);
+    Board board = request.getObject(Board.class);
     list.add(board);
     System.out.println("서버에 신고 데이터 저장 성공!");
     response.setStatus(Response.SUCCESS);
@@ -45,7 +45,7 @@ public class ReportTable extends JsonDataTable<FreeBoard> implements DataProcess
 
   private void selectOne(Request request, Response response) throws Exception {
     int no = Integer.parseInt(request.getParameter("no"));
-    FreeBoard b = findByNo(no);
+    Board b = findByNo(no);
 
     if (b != null) {
       response.setStatus(Response.SUCCESS);
@@ -108,8 +108,8 @@ public class ReportTable extends JsonDataTable<FreeBoard> implements DataProcess
 
 
 
-  private FreeBoard findByNo(int no) {
-    for (FreeBoard b : list) {
+  private Board findByNo(int no) {
+    for (Board b : list) {
       if (b.getNo() == no) {
         return b;
       }
