@@ -17,9 +17,27 @@ public class BoardAddHandler implements Command{
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("[자유게시판 글쓰기] 페이지입니다.");
+    System.out.println("[게시판 글쓰기] 페이지입니다.");
     System.out.println();
+
     Board board = new Board();
+
+    while (true) {
+      System.out.println("1.자유게시판 2.지식in 게시판 3.공지사항");
+      try {
+        int selectBoard = Prompt.inputInt("게시판 선택> ");
+
+        if (selectBoard < 1 || selectBoard > 3) {
+          System.out.println("다시 입력하세요.");
+        } else {
+          board.setWhichBoard(selectBoard);
+          break;
+        }
+      } catch (Exception e) {
+        System.out.println("다시 입력하세요.");
+      }
+    }
+
 
     List<Board> boardList = boardDao.findAll();
 
@@ -56,7 +74,7 @@ public class BoardAddHandler implements Command{
 
     board.setWriter(AuthLoginHandler.getLoginUser());
     board.setRegisteredDate(new Date(System.currentTimeMillis()));
-    board.setWhichBoard(2);
+    board.setWhichBoard(board.getWhichBoard());
 
     boardDao.insert(board);
     System.out.println("게시글이 등록되었습니다.");

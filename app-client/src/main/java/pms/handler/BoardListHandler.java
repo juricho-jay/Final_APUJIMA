@@ -19,6 +19,10 @@ public class BoardListHandler implements Command{
 
     List<Board> boardList = boardDao.findAll();
 
+    if (boardList == null) {
+      System.out.println("작성된 게시글이 없습니다.");
+      return;
+    }
 
     for (Board board : boardList) {
       System.out.printf("%d, %s, %s, %s, %d\n",

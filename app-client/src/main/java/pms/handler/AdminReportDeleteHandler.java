@@ -80,7 +80,6 @@ public class AdminReportDeleteHandler implements Command{
         if(input2.equalsIgnoreCase("y")) {
           boardDao.delete(no);
           request.setAttribute("no", no);
-          request.setAttribute("boardType", "freeBoard");
           request.getRequestDispatcher("/comment/autoDelete").forward(request);
           request.getRequestDispatcher("/like/autoDelete").forward(request);
 
