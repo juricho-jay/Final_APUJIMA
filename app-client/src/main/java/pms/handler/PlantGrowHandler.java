@@ -53,23 +53,17 @@ public class PlantGrowHandler implements Command {
     }
     String name = Prompt.inputString("물을 줄 화분의 이름> ");
 
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("name", String.valueOf(name));
-    // requestAgent.request("plant.selectOne", params);
 
     Plant plant =  plantDao.findByName(name);
-    if (!plant.getOwnerName().equals(loginUser)) {
+    if (!plant.getOwnerName().equals(member.getId())) {
       System.out.println("내 화분이 아니거나 화분을 찾을수 없어서 물을 줄 수 없습니다.");
       return;
     }
-    //???????
-
     if(member.getPoint() < 30) {
       System.out.println("포인트가 부족하여 물을 줄 수 없습니다.");
       return;
     }
 
-    //    Plant plant = new Plant();
 
     String input = Prompt.inputString("화분에 물을 주시겠습니까? 30포인트가 차감됩니다. (y/N)> ");
 
@@ -105,11 +99,6 @@ public class PlantGrowHandler implements Command {
       System.out.println( plant.getPlantName() +" 화분에 물을 주었습니다");
       plant.setExp(plant.getExp() + plusExp);
       plantDao.update(plant);
-      //      if (plant.getExp() >= 500) {
-      //        plant.setExp(500);
-      //        System.out.println("최대 경험치량 도달! 경험치가 500으로 고정됩니다.");
-      //        System.out.println();
-      //      }
       member.setPoint(member.getPoint()-30);
       memberDao.update(member);
       System.out.println("식물에 물을 주어 30포인트가 사용되었습니다.");
