@@ -62,6 +62,23 @@ public class NetMemberDao implements MemberDao{
     return requestAgent.getObject(Member.class);
   }
 
+
+  @Override
+  public Member findByIdPwd(String id, String password) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("id", id);
+    params.put("password", password);
+
+    requestAgent.request("member.selectOneByIdPassword", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+
+    return requestAgent.getObject(Member.class);
+  }
+
+
   @Override
   public Member findByName(String name) throws Exception {
     HashMap<String,String> params = new HashMap<>();
@@ -107,6 +124,8 @@ public class NetMemberDao implements MemberDao{
       // throw new Exception(requestAgent.getObject(String.class));
     }
   }
+
+
 
 
 
