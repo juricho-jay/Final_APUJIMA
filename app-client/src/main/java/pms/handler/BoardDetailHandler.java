@@ -95,9 +95,7 @@ public class BoardDetailHandler implements Command {
           }
         }   
       }
-    } else {
-      System.out.println("널이지렁><");
-    }
+    } 
 
     System.out.println();
     request.setAttribute("no", no);
@@ -105,8 +103,10 @@ public class BoardDetailHandler implements Command {
     while(true) {
       String status = "";
       if (likeList == null) {
-        status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) /\n"
+        status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) / \n"
             + "댓글달기💬(@) / 넘어가기(Enter)]> ");
+      } else if (whichBoard == 3) {
+        status = Prompt.inputString("[좋아요♡(#) / 댓글달기💬(@) / 넘어가기(Enter)]> ");
       } else {
         for (int i = 0; i < likeList.size(); i++) {
           if (likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId()) &&
