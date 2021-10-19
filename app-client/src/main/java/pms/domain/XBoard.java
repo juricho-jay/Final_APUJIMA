@@ -18,12 +18,15 @@ public class XBoard {
   public void setWriter(Member writer) {
     this.writer = writer;
   }
+
   public String getWhichBoard() {
     return whichBoard;
   }
+
   public void setWhichBoard(String whichBoard) {
     this.whichBoard = whichBoard;
   }
+
   public int getLike() {
     return like;
   }

@@ -1,6 +1,5 @@
 package pms.handler;
 
-import java.util.HashMap;
 import java.util.List;
 import pms.dao.MemberDao;
 import pms.dao.PlantDao;
@@ -27,8 +26,8 @@ public class PlantGrowHandler implements Command {
     //    Plant plant = findByPlantName(name);
     String loginUser = AuthLoginHandler.getLoginUser().getId();
 
-    HashMap<String,String> paramsMember = new HashMap<>();
-    paramsMember.put("id", String.valueOf(loginUser));
+    //    HashMap<String,String> paramsMember = new HashMap<>();
+    //    paramsMember.put("id", String.valueOf(loginUser));
     //  requestAgent.request("member.selectOne",paramsMember);
     // Member member = requestAgent.getObject(Member.class);
 
@@ -129,7 +128,7 @@ public class PlantGrowHandler implements Command {
       plantDao.update(plant);
     }
 
-    plantDao.update(plant);
+    // plantDao.update(plant);
 
 
     if (plant.getLevel() == 0) {

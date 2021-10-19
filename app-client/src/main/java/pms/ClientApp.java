@@ -6,7 +6,6 @@ import java.util.List;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
-import pms.dao.MailBoxDao;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
 import pms.dao.impl.NetCounselingMemberDao;
@@ -164,7 +163,7 @@ public class ClientApp {
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
     NetBucketDao bucketDao = new NetBucketDao(requestAgent);
     NetMedicineDao medicineDao = new NetMedicineDao(requestAgent);
-    MailBoxDao mailBoxDao = new NetMailBoxDao(requestAgent);
+    NetMailBoxDao mailBoxDao = new NetMailBoxDao(requestAgent);
     NetReportDao reportDao = new NetReportDao(requestAgent);
     NetDoctorReportDao doctorReportDao = new NetDoctorReportDao(requestAgent);
     NetDateCheckDao dateCheckDao = new NetDateCheckDao(requestAgent);
