@@ -1,24 +1,24 @@
 package pms.handler;
 
 import java.util.List;
+import pms.dao.BoardDao;
 import pms.dao.CommentDao;
-import pms.dao.FreeBoardDao;
 import pms.dao.LikeDao;
 import pms.dao.ReportDao;
+import pms.domain.Board;
 import pms.domain.Comment;
-import pms.domain.FreeBoard;
 import pms.domain.Like;
 import util.Prompt;
 
-public class FreeBoardDetailHandler implements Command { 
+public class BoardDetailHandler implements Command { 
 
-  FreeBoardDao freeBoardDao;
+  BoardDao boardDao;
   LikeDao likeDao;
   CommentDao commentDao;
   ReportDao reportDao;
 
-  public FreeBoardDetailHandler(FreeBoardDao freeBoardDao, LikeDao likeDao, CommentDao commentDao, ReportDao reportDao) {
-    this.freeBoardDao = freeBoardDao;
+  public BoardDetailHandler(BoardDao boardDao, LikeDao likeDao, CommentDao commentDao, ReportDao reportDao) {
+    this.boardDao = boardDao;
     this.likeDao = likeDao;
     this.commentDao = commentDao;
     this.reportDao = reportDao;
@@ -32,30 +32,31 @@ public class FreeBoardDetailHandler implements Command {
     String loginUser = AuthLoginHandler.getLoginUser().getId();
     int no = Prompt.inputInt("게시글 번호> ");
 
-    FreeBoard freeBoard = freeBoardDao.findByNo(no);
+    Board board = boardDao.findByNo(no);
 
-    if (freeBoard == null) {
+    if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
-    System.out.printf("제목: %s\n", freeBoard.getTitle());
-    System.out.printf("내용: %s\n", freeBoard.getContent());
-    System.out.printf("작성자: %s\n", freeBoard.getWriter().getId()); // 우리는 익명이기 때문에 Id로
-    System.out.printf("등록일: %s\n", freeBoard.getRegisteredDate());
+    System.out.printf("제목: %s\n", board.getTitle());
+    System.out.printf("내용: %s\n", board.getContent());
+    System.out.printf("작성자: %s\n", board.getWriter().getId()); // 우리는 익명이기 때문에 Id로
+    System.out.printf("등록일: %s\n", board.getRegisteredDate());
 
-    freeBoard.setViewCount(freeBoard.getViewCount() + 1);
-    System.out.printf("조회수: %d\n", freeBoard.getViewCount());
+    board.setViewCount(board.getViewCount() + 1);
+    System.out.printf("조회수: %d\n", board.getViewCount());
+    boardDao.update(board);
 
-    String whichBoard = freeBoard.getWhichBoard();
+    int whichBoard = board.getWhichBoard();
 
     List<Like> likeList = likeDao.findAll();
     if (likeList == null) {
       System.out.print("[좋아요 ♡ : 0]");
     } else {
       for (int i = 0; i < likeList.size(); i++) {
-        if (likeList.get(i).getLikeBoardNo() == freeBoard.getNo() && 
-            likeList.get(i).getWhichBoard().equals(whichBoard) &&
+        if (likeList.get(i).getLikeBoardNo() == board.getNo() && 
+            likeList.get(i).getWhichBoard() == whichBoard &&
             likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
           System.out.print("[좋아요 ♥ :");
           break;
@@ -68,8 +69,8 @@ public class FreeBoardDetailHandler implements Command {
       int count = 0;
       for (int j = 0; j < likeList.size(); j++) {
         if (likeList.get(j).getLikeBoardNo() != 0) {
-          if (likeList.get(j).getLikeBoardNo() == freeBoard.getNo() && 
-              likeList.get(j).getWhichBoard().equals(whichBoard)) {
+          if (likeList.get(j).getLikeBoardNo() == board.getNo() && 
+              likeList.get(j).getWhichBoard() == whichBoard) {
             count++;
           }
         }   
@@ -85,8 +86,8 @@ public class FreeBoardDetailHandler implements Command {
     if(commentList != null) {
       for (Comment comment : commentList) {
         if (comment.getCommentBoardNo() != 0) {
-          if (comment.getCommentBoardNo() == freeBoard.getNo() && 
-              comment.getWhichBoard().equals(whichBoard)) {
+          if (comment.getCommentBoardNo() == board.getNo() && 
+              comment.getWhichBoard() == whichBoard) {
             System.out.printf("%d. %s, %s\n",
                 comment.getNo(),
                 comment.getCommenter(),
@@ -94,22 +95,22 @@ public class FreeBoardDetailHandler implements Command {
           }
         }   
       }
-    }
+    } 
 
     System.out.println();
     request.setAttribute("no", no);
-    request.setAttribute("boardType", "freeBoard");
-
 
     while(true) {
       String status = "";
       if (likeList == null) {
-        status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) /\n"
+        status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) / \n"
             + "댓글달기💬(@) / 넘어가기(Enter)]> ");
+      } else if (whichBoard == 3) {
+        status = Prompt.inputString("[좋아요♡(#) / 댓글달기💬(@) / 넘어가기(Enter)]> ");
       } else {
         for (int i = 0; i < likeList.size(); i++) {
           if (likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId()) &&
-              likeList.get(i).getWhichBoard().equals(whichBoard)) {
+              likeList.get(i).getWhichBoard() == whichBoard) {
             status = Prompt.inputString("[좋아요 취소💔(#) / 신고하기🚨(!) /\n"
                 + "댓글달기💬(@) / 넘어가기(Enter)]> ");
             break;
@@ -130,10 +131,9 @@ public class FreeBoardDetailHandler implements Command {
 
       } else if (status.equals("!")) {
 
-        freeBoard.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
-        freeBoard.setRequester(loginUser);
-        //        requestAgent.request("report.insert", freeBoard);
-        reportDao.insert(freeBoard);
+        board.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
+        board.setRequester(loginUser);
+        reportDao.insert(board);
         System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
         break;
 
@@ -148,18 +148,18 @@ public class FreeBoardDetailHandler implements Command {
 
     // 댓글list 없는 경우
     if (commentList == null) {
-      if (freeBoard.getWriter().getId().equals(loginUser)) {
+      if (board.getWriter().getId().equals(loginUser)) {
         while (true) {
           System.out.println();
           String input = Prompt.inputString("[글] 변경(U) / 삭제(D) / 이전 메뉴(0)> ");
           switch (input) {
             case "U":
             case "u":
-              request.getRequestDispatcher("/freeBoard/update").forward(request);
+              request.getRequestDispatcher("/board/update").forward(request);
               return;
             case "D":
             case "d":
-              request.getRequestDispatcher("/freeBoard/delete").forward(request);
+              request.getRequestDispatcher("/board/delete").forward(request);
               return;
             case "0":
               return;
@@ -174,8 +174,8 @@ public class FreeBoardDetailHandler implements Command {
     int myComment = 0;
     for (Comment comment : commentList) {
       if (comment.getCommentBoardNo() != 0) {
-        if (comment.getCommentBoardNo() == freeBoard.getNo() && 
-            comment.getWhichBoard().equals(whichBoard) &&
+        if (comment.getCommentBoardNo() == board.getNo() && 
+            comment.getWhichBoard() == whichBoard &&
             comment.getCommenter().equals(loginUser)) {
           myComment++;
         }
@@ -183,7 +183,7 @@ public class FreeBoardDetailHandler implements Command {
     }
 
     //내 댓글도 있고 내가 게시글 글쓴이일 때
-    if (myComment != 0 && freeBoard.getWriter().getId().equals(loginUser)) {
+    if (myComment != 0 && board.getWriter().getId().equals(loginUser)) {
       while (true) {
         System.out.println();
         String input = Prompt.inputString("[글] 변경(U) / 삭제(D) /\n"
@@ -191,11 +191,11 @@ public class FreeBoardDetailHandler implements Command {
         switch (input) {
           case "U":
           case "u":
-            request.getRequestDispatcher("/freeBoard/update").forward(request);
+            request.getRequestDispatcher("/board/update").forward(request);
             return;
           case "D":
           case "d":
-            request.getRequestDispatcher("/freeBoard/delete").forward(request);
+            request.getRequestDispatcher("/board/delete").forward(request);
             return;
           case "M":
           case "m":
@@ -213,18 +213,18 @@ public class FreeBoardDetailHandler implements Command {
       }
       //
       // 내 댓글이 없고 내가 게시글 글쓴이일 때 
-    } else if (myComment == 0 && freeBoard.getWriter().getId().equals(loginUser)) {
+    } else if (myComment == 0 && board.getWriter().getId().equals(loginUser)) {
       while (true) {
         System.out.println();
         String input = Prompt.inputString("[글] 변경(U) / 삭제(D) / 이전 메뉴(0)> ");
         switch (input) {
           case "U":
           case "u":
-            request.getRequestDispatcher("/freeBoard/update").forward(request);
+            request.getRequestDispatcher("/board/update").forward(request);
             return;
           case "D":
           case "d":
-            request.getRequestDispatcher("/freeBoard/delete").forward(request);
+            request.getRequestDispatcher("/board/delete").forward(request);
             return;
           case "0":
             return;
@@ -234,7 +234,7 @@ public class FreeBoardDetailHandler implements Command {
       }
 
       // 내 댓글이 있고 내가 게시글 글쓴이가 아닐 때
-    } else if (myComment != 0 && !freeBoard.getWriter().getId().equals(loginUser)) {
+    } else if (myComment != 0 && !board.getWriter().getId().equals(loginUser)) {
       while (true) {
         System.out.println();
         String input = Prompt.inputString("[댓글] 변경(M) / 삭제(R) / 이전 메뉴(0)> ");

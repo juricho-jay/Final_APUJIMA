@@ -2,6 +2,7 @@ package pms.domain;
 
 import java.sql.Date;
 
+
 public class MailBox {
 
   private int no;  // 아이디 별로 1번부터 보이는 번호
@@ -11,6 +12,7 @@ public class MailBox {
   private String content;
   private String receiver;
   private Date sendingTime;
+  private Date receivedTime;
 
 
   public int getNo() {
@@ -55,6 +57,12 @@ public class MailBox {
   }
   public void setReceiver(String receiver) {
     this.receiver = receiver;
+  }
+  public Date getReceivedTime() {
+    return receivedTime;
+  }
+  public void setReceivedTime(Date receivedTime) {
+    this.receivedTime = receivedTime;
   }
 
 

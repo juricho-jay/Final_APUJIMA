@@ -117,8 +117,9 @@ public class PlantTable extends JsonDataTable<Plant> implements DataProcessor {
 
 
   private void selectOneByName(Request request, Response response) throws Exception {
-    String name = request.getParameter("name");
 
+    String name = request.getParameter("name");
+    System.out.println("-----> " + name);
     Plant plant = null;
     for (Plant p : list) {
       if (p.getPlantName().equals(name)) {

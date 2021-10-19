@@ -3,82 +3,82 @@ package pms.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import pms.dao.FreeBoardDao;
-import pms.domain.FreeBoard;
+import pms.dao.BoardDao;
+import pms.domain.Board;
 import request.RequestAgent;
 
-public class NetFreeBoardDao implements FreeBoardDao{
+public class NetBoardDao implements BoardDao {
 
   RequestAgent requestAgent;
 
-  public NetFreeBoardDao(RequestAgent requestAgent) {
+  public NetBoardDao(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
   @Override
-  public void insert(FreeBoard freeBoard) throws Exception {
-    requestAgent.request("freeBoard.insert", freeBoard);
+  public void insert(Board board) throws Exception {
+    requestAgent.request("board.insert", board);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return;
     }
   }
 
   @Override
-  public List<FreeBoard> findAll() throws Exception {
-    requestAgent.request("freeBoard.selectList", null);
+  public List<Board> findAll() throws Exception {
+    requestAgent.request("board.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("작성된 게시물이 없습니다.");
       return null;
     }
 
-    return new ArrayList<>(requestAgent.getObjects(FreeBoard.class));
+    return new ArrayList<>(requestAgent.getObjects(Board.class));
   }
 
   @Override
-  public FreeBoard findByNo(int no) throws Exception {
+  public Board findByNo(int no) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
-    requestAgent.request("freeBoard.selectOne", params);
+    requestAgent.request("board.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
 
-    return requestAgent.getObject(FreeBoard.class);
+    return requestAgent.getObject(Board.class);
   }
 
   @Override
-  //  public FreeBoard findByName(String name) throws Exception {
+  //  public Board findByName(String name) throws Exception {
   //    HashMap<String,String> params = new HashMap<>();
   //    params.put("name", name);
   //
-  //    requestAgent.request("freeBoard.selectOneByName", params);
+  //    requestAgent.request("board.selectOneByName", params);
   //
   //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
   //      return null;
   //    }
   //
-  //    return requestAgent.getObject(FreeBoard.class);
+  //    return requestAgent.getObject(Board.class);
   //  }
 
-  public List<FreeBoard> findByKeyword(String keyword) throws Exception {
+  public List<Board> findByKeyword(String keyword) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("keyword", keyword);
-    requestAgent.request("freeBoard.selectListByKeyword", params);
+    requestAgent.request("board.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("게시글 검색 실패!");
       return null;
     }
 
-    return new ArrayList<>(requestAgent.getObjects(FreeBoard.class));
+    return new ArrayList<>(requestAgent.getObjects(Board.class));
   }
 
 
   @Override
-  public void update(FreeBoard freeBoard) throws Exception {
-    requestAgent.request("freeBoard.update", freeBoard);
+  public void update(Board board) throws Exception {
+    requestAgent.request("board.update", board);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("정보 변경 실패!");
@@ -91,7 +91,7 @@ public class NetFreeBoardDao implements FreeBoardDao{
     HashMap<String,String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
-    requestAgent.request("freeBoard.delete", params);
+    requestAgent.request("board.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("삭제 실패!");

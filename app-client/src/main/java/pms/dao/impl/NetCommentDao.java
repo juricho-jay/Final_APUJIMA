@@ -83,7 +83,8 @@ public class NetCommentDao implements CommentDao{
     requestAgent.request("comment.update", comment);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      System.out.println("정보 변경 실패!");
+      return;
     }
   }
 
@@ -95,7 +96,8 @@ public class NetCommentDao implements CommentDao{
     requestAgent.request("comment.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      System.out.println("정보 삭제 실패!");
+      return;
     }
 
   }

@@ -8,7 +8,7 @@ public class Comment implements Serializable {
   private String commenter; // 댓글 달은 사람
   private String commentWriter; // 댓글이 달린 글의 작성자
   private String commentContent; //댓글 내용
-  private String whichBoard; //댓글 달린 게시판 종류 (free/doctor/notice)
+  private int whichBoard; //댓글 달린 게시판 종류 (free/doctor/notice)
   private int no; // 게시판마다 1부터 시작하는 댓글 번호
   private int commentNo; // 댓글 고유번호
 
@@ -57,12 +57,13 @@ public class Comment implements Serializable {
   public void setNo(int no) {
     this.no = no;
   }
-  public String getWhichBoard() {
+  public int getWhichBoard() {
     return whichBoard;
   }
-  public void setWhichBoard(String whichBoard) {
+  public void setWhichBoard(int whichBoard) {
     this.whichBoard = whichBoard;
   }
+
 
 
 }

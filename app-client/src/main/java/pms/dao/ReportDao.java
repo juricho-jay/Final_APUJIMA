@@ -1,14 +1,14 @@
 package pms.dao;
 
 import java.util.List;
-import pms.domain.FreeBoard;
+import pms.domain.Board;
 
 public interface ReportDao {
-  void insert(FreeBoard freeBoard) throws Exception;
-  List<FreeBoard> findAll() throws Exception;
-  FreeBoard findByNo(int no) throws Exception;
-  FreeBoard findByName(String name) throws Exception;
-  void update(FreeBoard freeBoard) throws Exception;
+  void insert(Board freeBoard) throws Exception;
+  List<Board> findAll() throws Exception;
+  Board findByNo(int no) throws Exception;
+  Board findByName(String name) throws Exception;
+  void update(Board freeBoard) throws Exception;
   void delete(int no) throws Exception;
   void autoDelete(int no) throws Exception;
 }

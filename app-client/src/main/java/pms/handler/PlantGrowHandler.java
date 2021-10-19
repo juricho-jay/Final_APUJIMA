@@ -31,11 +31,12 @@ public class PlantGrowHandler implements Command {
     //  requestAgent.request("member.selectOne",paramsMember);
     // Member member = requestAgent.getObject(Member.class);
 
-
     Member member = memberDao.findById(loginUser);
 
-
-    // requestAgent.request("plant.selectList", null);
+    if(member.getPoint() < 30) {
+      System.out.println("포인트가 부족하여 물을 줄 수 없습니다.");
+      return;
+    }
 
     List<Plant> plantList = plantDao.findAll();
 
@@ -50,18 +51,19 @@ public class PlantGrowHandler implements Command {
         System.out.println();
       }
     }
+
+
     String name = Prompt.inputString("물을 줄 화분의 이름> ");
+    Plant growPlant = null;
+    for (int i = 0; i < plantList.size(); i++) {
+
+      if (plantList.get(i).getOwnerName().equals(loginUser) && plantList.get(i).getPlantName().equals(name)) {
+        growPlant = plantList.get(i);
+        break;
+      }
+    }
 
 
-    Plant plant =  plantDao.findByName(name);
-    if (!plant.getOwnerName().equals(member.getId())) {
-      System.out.println("내 화분이 아니거나 화분을 찾을수 없어서 물을 줄 수 없습니다.");
-      return;
-    }
-    if(member.getPoint() < 30) {
-      System.out.println("포인트가 부족하여 물을 줄 수 없습니다.");
-      return;
-    }
 
 
     String input = Prompt.inputString("화분에 물을 주시겠습니까? 30포인트가 차감됩니다. (y/N)> ");
@@ -70,12 +72,12 @@ public class PlantGrowHandler implements Command {
       System.out.println("화분 물주기를 취소하였습니다.");
       return;
 
-    }else if (plant.getExp() >= 500 ) {
+    }else if (growPlant.getExp() >= 500 ) {
       System.out.println("화분의 경험치가 가득 차서 물을 줄 수 없습니다.");
       return;
 
-    } else if ( (plant.getExp() + plusExp >= 500)) {
-      String check = Prompt.inputString( " 화분에 물을 주어도 " + (500-plant.getExp()) 
+    } else if ( (growPlant.getExp() + plusExp >= 500)) {
+      String check = Prompt.inputString( " 화분에 물을 주어도 " + (500-growPlant.getExp()) 
           + " 밖에 경험치가 오르지 않습니다"
           + " 그래도 화분에 물을 주시겠습니까? 30포인트가 차감됩니다. (y/N)> ");
 
@@ -84,8 +86,8 @@ public class PlantGrowHandler implements Command {
 
       } else if (check.equalsIgnoreCase("y") || check.length() == 0) {
         System.out.println("화분에 물을 주었습니다.");
-        plant.setExp(500);
-        plantDao.update(plant);
+        growPlant.setExp(500);
+        plantDao.update(growPlant);
         System.out.println("최대 경험치량 도달! 경험치가 500으로 고정됩니다.");
         member.setPoint(member.getPoint()-30);
         memberDao.update(member);
@@ -95,53 +97,53 @@ public class PlantGrowHandler implements Command {
 
     } else {
       System.out.println();
-      System.out.println( plant.getPlantName() +" 화분에 물을 주었습니다");
-      plant.setExp(plant.getExp() + plusExp);
-      plantDao.update(plant);
+      System.out.println(growPlant.getPlantName() +" 화분에 물을 주었습니다");
+      growPlant.setExp(growPlant.getExp() + plusExp);
+      plantDao.update(growPlant);
       member.setPoint(member.getPoint()-30);
       memberDao.update(member);
       System.out.println("식물에 물을 주어 30포인트가 사용되었습니다.");
       System.out.println();
     }
 
-    if(plant.getExp() >= 100 && plant.getExp()< 200) {
+    if(growPlant.getExp() >= 100 && growPlant.getExp()< 200) {
       System.out.println();
       System.out.println("레벨 업! 1단계 화분으로 성장했습니다!");
-      plant.setShape("\u2618");
-      plant.setLevel(1);
-      plantDao.update(plant);
+      growPlant.setShape("\u2618");
+      growPlant.setLevel(1);
+      plantDao.update(growPlant);
     }
 
-    else if(plant.getExp() >= 200  && plant.getExp()< 300) {
+    else if(growPlant.getExp() >= 200  && growPlant.getExp()< 300) {
       System.out.println();
       System.out.println("레벨 업! 2단계 화분으로 성장했습니다!");
-      plant.setShape( "\uD83C\uDF38");
-      plant.setLevel(2);
-      plantDao.update(plant);
+      growPlant.setShape( "\uD83C\uDF38");
+      growPlant.setLevel(2);
+      plantDao.update(growPlant);
     }
 
-    else if(plant.getExp() >= 300) {
+    else if(growPlant.getExp() >= 300) {
       System.out.println();
       System.out.println("레벨 업! 3단계 화분으로 성장했습니다!");
-      plant.setShape("\uD83D\uDC90");
-      plant.setLevel(3);
-      plantDao.update(plant);
+      growPlant.setShape("\uD83D\uDC90");
+      growPlant.setLevel(3);
+      plantDao.update(growPlant);
     }
 
-    // plantDao.update(plant);
+    plantDao.update(growPlant);
 
 
-    if (plant.getLevel() == 0) {
-      System.out.println("1단계까지 필요한 경험치의 양 " + (100 - plant.getExp()));
+    if (growPlant.getLevel() == 0) {
+      System.out.println("1단계까지 필요한 경험치의 양 " + (100 - growPlant.getExp()));
 
-    } else if (plant.getLevel() == 1) {
-      System.out.println("2단계까지 필요한 경험치의 양 " + (200 - plant.getExp()));
+    } else if (growPlant.getLevel() == 1) {
+      System.out.println("2단계까지 필요한 경험치의 양 " + (200 - growPlant.getExp()));
 
-    } else if (plant.getLevel() == 2 ) {
-      System.out.println("3단계까지 필요한 경험치의 양 " + (300 - plant.getExp()));
+    } else if (growPlant.getLevel() == 2 ) {
+      System.out.println("3단계까지 필요한 경험치의 양 " + (300 - growPlant.getExp()));
     }
 
-    System.out.println("현재까지의 경험치의 양 " + plant.getExp());
+    System.out.println("현재까지의 경험치의 양 " + growPlant.getExp());
 
   } 
 }

@@ -22,7 +22,7 @@ public class Medicine implements Serializable{
     return lastIndex;
   }
   public static void setLastIndex(int lastIndex) {
-    FreeBoard.lastIndex = lastIndex;
+    Board.lastIndex = lastIndex;
   }
   public String getName() {
     return name;
