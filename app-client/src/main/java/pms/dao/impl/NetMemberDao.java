@@ -99,14 +99,14 @@ public class NetMemberDao implements MemberDao{
     }
   }
 
-  @Override
-  public void check(Member member) throws Exception {
-    requestAgent.request("member.check", member);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("중복되는 아이디 입니다. 다른 아이디를 사용해 주세요.");
-      // throw new Exception(requestAgent.getObject(String.class));
-    }
-  }
+  //  @Override
+  //  public void check(Member member) throws Exception {
+  //    requestAgent.request("member.check", member);
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      System.out.println("중복되는 아이디 입니다. 다른 아이디를 사용해 주세요.");
+  //      // throw new Exception(requestAgent.getObject(String.class));
+  //    }
+  //  }
 
 
 
