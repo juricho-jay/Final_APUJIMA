@@ -75,35 +75,35 @@ public class MariadbMemberDao  implements MemberDao{
     }
   }
 
-  @Override
-  public Member findByNo(int no) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select member_no,name,id,password,birth,tel,email,"
-            + "photo,sex,created_dt,point,role,active"
-            + " from apus_member"
-            + " where member_no=" + no
-        );
-        ResultSet rs = stmt.executeQuery()) {
-
-      if (!rs.next()) {
-        return null;
-      }
-      Member member = new Member();
-      member.setNo(rs.getInt("member_no"));
-      member.setName(rs.getString("name"));
-      member.setId(rs.getString("id"));
-      member.setBirthDay(rs.getDate("birth"));
-      member.setPhoneNum(rs.getString("tel"));
-      member.setEmail(rs.getString("email"));
-      member.setPhoto(rs.getString("photo"));
-      member.setSex(rs.getString("sex"));
-      member.setRegisteredDate(rs.getDate("created_dt"));
-      member.setPoint(rs.getInt("point"));
-      member.setDoctorOrNot(rs.getInt("role"));
-      member.setActive(rs.getInt("active"));
-      return member;
-    }
-  }
+  //  @Override
+  //  public Member findByNo(int no) throws Exception {
+  //    try (PreparedStatement stmt = con.prepareStatement(
+  //        "select member_no,name,id,password,birth,tel,email,"
+  //            + "photo,sex,created_dt,point,role,active"
+  //            + " from apus_member"
+  //            + " where member_no=" + no
+  //        );
+  //        ResultSet rs = stmt.executeQuery()) {
+  //
+  //      if (!rs.next()) {
+  //        return null;
+  //      }
+  //      Member member = new Member();
+  //      member.setNo(rs.getInt("member_no"));
+  //      member.setName(rs.getString("name"));
+  //      member.setId(rs.getString("id"));
+  //      member.setBirthDay(rs.getDate("birth"));
+  //      member.setPhoneNum(rs.getString("tel"));
+  //      member.setEmail(rs.getString("email"));
+  //      member.setPhoto(rs.getString("photo"));
+  //      member.setSex(rs.getString("sex"));
+  //      member.setRegisteredDate(rs.getDate("created_dt"));
+  //      member.setPoint(rs.getInt("point"));
+  //      member.setDoctorOrNot(rs.getInt("role"));
+  //      member.setActive(rs.getInt("active"));
+  //      return member;
+  //    }
+  //  }
 
   @Override
   public Member findByName(String name) throws Exception {
