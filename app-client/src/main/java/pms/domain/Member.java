@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Member implements Serializable{
+  private int no;
   private String name;
   private String id;
   private String password;
@@ -19,8 +20,15 @@ public class Member implements Serializable{
   //  private List<MailBox> mailBox;
   //  private List<Plant> plant;
   private int point;
+  private int active;
 
 
+  public int getNo() {
+    return no;
+  }
+  public void setNo(int no) {
+    this.no = no;
+  }
   //  public List<Plant> getPlant() {
   //    return plant;
   //  }
@@ -111,6 +119,12 @@ public class Member implements Serializable{
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+  }
+  public int getActive() {
+    return active;
+  }
+  public void setActive(int active) {
+    this.active = active;
   }
 
 }

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MemberMapper">
+  
+  <resultMap type="Member" id="MemberMap">
+    <id column="member_no" property="no"/> 
+    <result column="name" property="name"/>
+    <result column="id" property="id"/>
+    <result column="password" property="password"/>
+    <result column="birth" property="birthDay"/>
+    <result column="email" property="email"/>
+    <result column="photo" property="photo"/>
+    <result column="tel" property="phoneNum"/>
+    <result column="sex" property="sex"/>
+    <result column="created_dt" property="registeredDate"/>
+    <result column="interest" property="interest"/>
+    <result column="doctorLicense" property="doctorLicense"/>
+    <result column="role" property="doctorOrNot"/>
+    <result column="point" property="point"/>
+    <result column="active" property="active"/>
+  </resultMap>
+  
+  <select id="findAll" resultMap="MemberMap">
+    select
+	    member_no,
+	    name,
+	    id,
+	    password,
+	    birth,
+	    tel,
+	    email,
+	    photo,
+	    sex,
+	    created_dt,
+	    point,
+	    role,
+	    active
+    from
+      apus_member
+    order by
+      member_no asc
+  </select>
+  
+	<select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
+	  select
+		  member_no,
+		  name,
+		  id,
+		  password,
+		  birth,
+		  tel,
+		  email,
+	    photo,
+	    sex,
+		  created_dt,
+		  point,
+		  role,
+		  active
+	  from
+	    apus_member
+	  where id=#{id} and password=password(#{password})
+	</select>
+	
+	<insert id="insert" parameterType="member">
+	 insert into apus_member(name,id,password,birth,tel,email,
+	   photo,sex,point,role,active)
+   values(#{name},#{id},password(#{password}),#{birthDay},#{phoneNum},#{email},
+     #{photo},#{sex},#{point},#{doctorOrNot},#{active})
+	</insert>
+	
+	<update id="update" parameterType="member">
+	 update apus_member set
+	   name=#{name},
+	   id=#{id},
+	   password=password(#{password}),
+	   birth=#{birthDay},
+	   tel=#{phoneNum},
+	   email=#{email},
+	   photo=#{photo},
+	   sex=#{sex},
+	   point=#{point},
+	   role=#{doctorOrNot}
+    where member_no=#{values}
+	</update>
+	
+	<delete id="delete" parameterType="string">
+	 delete from apus_member
+	 where id=#{id}
+	</delete>
+	
+	<select id="findById" resultMap="MemberMap" parameterType="string">
+	 select
+      member_no,
+      name,
+      id,
+      password,
+      birth,
+      tel,
+      email,
+      photo,
+      sex,
+      created_dt,
+      point,
+      role,
+      active
+    from
+      apus_member
+    where id=#{id}
+	</select>
+	
+	<select id="findByName" resultMap="MemberMap" parameterType="string">
+   select
+      member_no,
+      name,
+      id,
+      password,
+      birth,
+      tel,
+      email,
+      photo,
+      sex,
+      created_dt,
+      point,
+      role,
+      active
+    from
+      apus_member
+    where name=#{name}
+  </select>
+  
+</mapper>
+
+
+
+
+
+
+

@@ -67,7 +67,7 @@ public class MemberAddHandler implements Command{
         continue;
       } 
 
-      memberDao.check(member);
+      //   memberDao.check(member);
 
       if(member.getId() != "")
         break;

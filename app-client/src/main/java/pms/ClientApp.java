@@ -1,11 +1,22 @@
 package pms;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
+<<<<<<< HEAD
+=======
+import pms.dao.MailBoxDao;
+import pms.dao.MemberDao;
+import pms.dao.impl.MybatisMemberDao;
+>>>>>>> c8eaea58b267ddcec26dd71856c017ce2d95ea9d
 import pms.dao.impl.NetBoardDao;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
@@ -14,7 +25,6 @@ import pms.dao.impl.NetDateCheckDao;
 import pms.dao.impl.NetLikeDao;
 import pms.dao.impl.NetMailBoxDao;
 import pms.dao.impl.NetMedicineDao;
-import pms.dao.impl.NetMemberDao;
 import pms.dao.impl.NetPlantDao;
 import pms.dao.impl.NetReportDao;
 import pms.dao.impl.NetRequestDao;
@@ -73,6 +83,8 @@ import util.Prompt;
 public class ClientApp {
 
   RequestAgent requestAgent;
+  Connection con;
+
 
   HashMap<String,Command> commandMap = new HashMap<>();
 
@@ -139,8 +151,16 @@ public class ClientApp {
 
     // 서버와 통신을 담당할 객체 준비
     requestAgent = new RequestAgent("127.0.0.1", 8888);
+    con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/apusdb?user=root&password=1111");
 
-    NetMemberDao memberDao = new NetMemberDao(requestAgent);
+    // Mybatis의 SqlSession 객체 준비
+    SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+        "pms/conf/mybatis-config.xml")).openSession();
+
+    //NetMemberDao memberDao = new NetMemberDao(requestAgent);
+    MemberDao memberDao = new MybatisMemberDao(sqlSession);
+
     NetBoardDao boardDao = new NetBoardDao(requestAgent);
     NetLikeDao likeDao = new NetLikeDao(requestAgent);
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
