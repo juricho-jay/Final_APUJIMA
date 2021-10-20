@@ -5,11 +5,15 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
 import pms.dao.MailBoxDao;
-import pms.dao.impl.MariadbMemberDao;
+import pms.dao.MemberDao;
+import pms.dao.impl.MybatisMemberDao;
 import pms.dao.impl.NetBoardDao;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
@@ -78,6 +82,7 @@ public class ClientApp {
   RequestAgent requestAgent;
   Connection con;
 
+
   HashMap<String,Command> commandMap = new HashMap<>();
 
   List<ApplicationContextListener> listeners = new ArrayList<>();
@@ -145,8 +150,13 @@ public class ClientApp {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
     con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/apusdb?user=root&password=1111");
+
+    // Mybatis의 SqlSession 객체 준비
+    SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+        "pms/conf/mybatis-config.xml")).openSession();
+
     //NetMemberDao memberDao = new NetMemberDao(requestAgent);
-    MariadbMemberDao memberDao = new MariadbMemberDao(con);
+    MemberDao memberDao = new MybatisMemberDao(sqlSession);
 
     NetBoardDao boardDao = new NetBoardDao(requestAgent);
     NetLikeDao likeDao = new NetLikeDao(requestAgent);
