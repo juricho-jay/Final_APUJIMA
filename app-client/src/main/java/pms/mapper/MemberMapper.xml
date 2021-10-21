@@ -78,7 +78,8 @@
 	  where id=#{id} and password=password(#{password})
 	</select>
 	
-	<insert id="insert" parameterType="member">
+	<insert id="insert" parameterType="member" 
+	useGeneratedKeys="true" keyColumn="member_no" keyProperty="no">
     insert into apus_member(name,id,password,birth,tel,email,photo,sex,point,role)
     values(#{name},#{id},password(#{password}),#{birthDay},#{phoneNum},#{email},
      #{photo},#{sex},#{point},#{doctorOrNot})
