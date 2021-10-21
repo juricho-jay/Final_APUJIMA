@@ -12,34 +12,47 @@
     <result column="password" property="password"/>
     <result column="birth" property="birthDay"/>
     <result column="email" property="email"/>
-    <result column="photo" property="photo"/>
     <result column="tel" property="phoneNum"/>
+    <result column="photo" property="photo"/>
     <result column="sex" property="sex"/>
     <result column="created_dt" property="registeredDate"/>
-    <result column="interest" property="interest"/>
-    <result column="doctorLicense" property="doctorLicense"/>
     <result column="role" property="doctorOrNot"/>
     <result column="point" property="point"/>
     <result column="active" property="active"/>
+    
+    <association property="doctor" javaType="Doctor">
+      <id column="doctor_no" property="no"/>
+      <result column="major" property="major"/>
+      <result column="license" property="license"/>
+      <result column="homepage" property="homepage"/>
+      <result column="introduction" property="introduction"/>
+    </association>
+    
   </resultMap>
   
   <select id="findAll" resultMap="MemberMap">
     select
-	    member_no,
-	    name,
-	    id,
-	    password,
-	    birth,
-	    tel,
-	    email,
-	    photo,
-	    sex,
-	    created_dt,
-	    point,
-	    role,
-	    active
+	    m.member_no,
+	    m.name,
+	    m.id,
+	    m.password,
+	    m.birth,
+	    m.email,
+	    m.tel,
+	    m.photo,
+	    m.sex,
+	    m.created_dt,
+	    m.point,
+	    m.role,
+	    m.active,
+	    d.doctor_no,
+	    d.major,
+	    d.license,
+	    d.homepage,
+	    d.introduction
     from
-      apus_member
+      apus_member m
+      inner join apus_doctor d on m.member_no=d.doctor_no
     order by
       member_no asc
   </select>
@@ -71,6 +84,12 @@
      #{photo},#{sex},#{point},#{doctorOrNot},#{active})
 	</insert>
 	
+	<insert id="insert2" parameterType="member">
+   insert into apus_doctor(license)
+   values(#{name},#{id},password(#{password}),#{birthDay},#{phoneNum},#{email},
+     #{photo},#{sex},#{point},#{doctorOrNot},#{active})
+  </insert>
+	
 	<update id="update" parameterType="member">
 	 update apus_member set
 	   name=#{name},
@@ -85,7 +104,7 @@
 	   role=#{doctorOrNot}
     where member_no=#{values}
 	</update>
-	
+	 
 	<delete id="delete" parameterType="string">
 	 delete from apus_member
 	 where id=#{id}
@@ -129,6 +148,14 @@
     from
       apus_member
     where name=#{name}
+  </select>
+  
+  <select id="findRoleNo" resultMap="MemberMap" parameterType="int">
+    select
+      role
+    from
+      apus_member
+    where role=#{no}
   </select>
   
 </mapper>

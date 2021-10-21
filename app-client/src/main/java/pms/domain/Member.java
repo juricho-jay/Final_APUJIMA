@@ -14,13 +14,10 @@ public class Member implements Serializable{
   private String photo;
   private String sex;
   private Date registeredDate;
-  private String interest;
-  private String doctorLicense;
   private int doctorOrNot;
-  //  private List<MailBox> mailBox;
-  //  private List<Plant> plant;
   private int point;
   private int active;
+  private Doctor doctor;
 
 
   public int getNo() {
@@ -29,43 +26,18 @@ public class Member implements Serializable{
   public void setNo(int no) {
     this.no = no;
   }
-  //  public List<Plant> getPlant() {
-  //    return plant;
-  //  }
-  //  public void setPlant(List<Plant> plant) {
-  //    this.plant = plant;
-  //  }
   public int getPoint() {
     return point;
   }
   public void setPoint(int point) {
     this.point = point;
   }
-  //  public List<MailBox> getMailBox() {
-  //    return mailBox;
-  //  }
-  //  public void setMailBox(List<MailBox> mailBox) {
-  //    this.mailBox = mailBox;
-  //  }
   public int getDoctorOrNot() {
     return doctorOrNot;
   }
   public void setDoctorOrNot(int doctorOrNot) {
     this.doctorOrNot = doctorOrNot;
   }
-  public String getDoctorLicense() {
-    return doctorLicense;
-  }
-  public void setDoctorLicense(String doctorLicense) {
-    this.doctorLicense = doctorLicense;
-  }
-  public String getInterest() {
-    return interest;
-  }
-  public void setInterest(String interest) {
-    this.interest = interest;
-  }
-
   public String getName() {
     return name;
   }
@@ -125,6 +97,12 @@ public class Member implements Serializable{
   }
   public void setActive(int active) {
     this.active = active;
+  }
+  public Doctor getDoctor() {
+    return doctor;
+  }
+  public void setDoctor(Doctor doctor) {
+    this.doctor = doctor;
   }
 
 }

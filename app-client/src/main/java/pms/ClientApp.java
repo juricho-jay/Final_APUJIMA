@@ -11,10 +11,11 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
+import pms.dao.BoardDao;
 import pms.dao.MailBoxDao;
 import pms.dao.MemberDao;
+import pms.dao.impl.MybatisBoardDao;
 import pms.dao.impl.MybatisMemberDao;
-import pms.dao.impl.NetBoardDao;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;
 import pms.dao.impl.NetCounselingMemberDao;
@@ -157,8 +158,8 @@ public class ClientApp {
 
     //NetMemberDao memberDao = new NetMemberDao(requestAgent);
     MemberDao memberDao = new MybatisMemberDao(sqlSession);
+    BoardDao boardDao = new MybatisBoardDao(sqlSession);
 
-    NetBoardDao boardDao = new NetBoardDao(requestAgent);
     NetLikeDao likeDao = new NetLikeDao(requestAgent);
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
     NetBucketDao bucketDao = new NetBucketDao(requestAgent);
