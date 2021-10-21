@@ -20,6 +20,7 @@ public class MybatisMemberDao  implements MemberDao{
   @Override
   public void insert(Member member) throws Exception {
     sqlSession.insert("MemberMapper.insert", member);
+
     sqlSession.commit();
   }
 

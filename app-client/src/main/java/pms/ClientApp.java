@@ -11,12 +11,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
-<<<<<<< HEAD
-=======
-import pms.dao.MailBoxDao;
 import pms.dao.MemberDao;
 import pms.dao.impl.MybatisMemberDao;
->>>>>>> c8eaea58b267ddcec26dd71856c017ce2d95ea9d
 import pms.dao.impl.NetBoardDao;
 import pms.dao.impl.NetBucketDao;
 import pms.dao.impl.NetCommentDao;

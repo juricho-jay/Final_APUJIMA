@@ -71,6 +71,7 @@
      #{photo},#{sex},#{point},#{doctorOrNot},#{active})
 	</insert>
 	
+	
 	<update id="update" parameterType="member">
 	 update apus_member set
 	   name=#{name},
