@@ -21,6 +21,8 @@ public class MybatisMemberDao  implements MemberDao{
   public void insert(Member member) throws Exception {
     sqlSession.insert("MemberMapper.insert", member);
 
+
+    // sqlSession.insert("MemberMapper.insert2", member);
     sqlSession.commit();
   }
 
@@ -64,6 +66,13 @@ public class MybatisMemberDao  implements MemberDao{
   public void delete(String id) throws Exception {
     sqlSession.delete("MemberMapper.delete", id);
     sqlSession.commit();
+  }
+
+
+  @Override
+  public void findRoleNo(int no) throws Exception {
+    // TODO Auto-generated method stub
+
   }
 
   // @Override

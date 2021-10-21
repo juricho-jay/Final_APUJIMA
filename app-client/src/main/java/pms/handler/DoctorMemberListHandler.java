@@ -28,7 +28,7 @@ public class DoctorMemberListHandler implements Command {
             + "연락처 : %s\n"
             + "성별 : %s\n",
             member.getName(),
-            member.getInterest(),
+            member.getDoctor().getMajor(),
             member.getEmail(),
             member.getPhoneNum(),
             member.getSex());

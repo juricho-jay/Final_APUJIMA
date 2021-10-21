@@ -29,8 +29,8 @@ public class MemberListHandler implements Command{
             member.getPhoneNum(),
             member.getPhoto(),
             member.getSex(),
-            member.getInterest(),
-            member.getDoctorLicense(),
+            member.getDoctor().getMajor(),
+            member.getDoctor().getLicense(),
             member.getRegisteredDate());
       } else if(member.getDoctorOrNot() == 1) {
         System.out.print("[일반 회원] ");

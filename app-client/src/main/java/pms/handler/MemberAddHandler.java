@@ -2,6 +2,7 @@ package pms.handler;
 
 import java.sql.Date;
 import pms.dao.MemberDao;
+import pms.domain.Doctor;
 import pms.domain.Member;
 import util.Prompt;
 
@@ -31,8 +32,10 @@ public class MemberAddHandler implements Command{
         if (member.getDoctorOrNot() == 1) {
           break;
         } else if (member.getDoctorOrNot() == 2) {
-          member.setDoctorLicense(Prompt.inputString("의료인 면허 증명서> "));
-          member.setInterest(Prompt.inputString("전문 분야> "));
+          Doctor doctor = new Doctor();
+          doctor.setLicense(Prompt.inputString("의료인 면허 증명서> "));
+          doctor.setMajor(Prompt.inputString("전문 분야> "));
+          member.setDoctor(doctor);
           break;
         } else {
           System.out.println("1 or 2 중에 하나로 입력해 주세요.");
