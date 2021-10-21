@@ -26,8 +26,8 @@ public class AuthUserInfoHandler implements Command {
 
     if (loginUser.getDoctorOrNot() == 2) {
       System.out.printf("%s 힐러님 환영합니다!\n", loginUser.getName());
-      System.out.printf("전문 분야: %s\n", loginUser.getInterest());
-      System.out.printf("의료인 면허 증명서: %s\n", loginUser.getDoctorLicense());
+      System.out.printf("전문 분야: %s\n", loginUser.getDoctor().getMajor());
+      System.out.printf("의료인 면허 증명서: %s\n", loginUser.getDoctor().getLicense());
     } else {
       System.out.printf("%s님 환영합니다!\n", loginUser.getName());
     }
@@ -67,4 +67,4 @@ public class AuthUserInfoHandler implements Command {
     }
 
   }
-} 
+}

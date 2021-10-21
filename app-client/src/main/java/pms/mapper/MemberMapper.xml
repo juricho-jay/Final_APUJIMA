@@ -30,6 +30,7 @@
     
   </resultMap>
   
+  
   <select id="findAll" resultMap="MemberMap">
     select
 	    m.member_no,
@@ -78,16 +79,14 @@
 	</select>
 	
 	<insert id="insert" parameterType="member">
-	 insert into apus_member(name,id,password,birth,tel,email,
-	   photo,sex,point,role,active)
-   values(#{name},#{id},password(#{password}),#{birthDay},#{phoneNum},#{email},
-     #{photo},#{sex},#{point},#{doctorOrNot},#{active})
+    insert into apus_member(name,id,password,birth,tel,email,photo,sex,point,role)
+    values(#{name},#{id},password(#{password}),#{birthDay},#{phoneNum},#{email},
+     #{photo},#{sex},#{point},#{doctorOrNot})
 	</insert>
 	
 	<insert id="insert2" parameterType="member">
-   insert into apus_doctor(license)
-   values(#{name},#{id},password(#{password}),#{birthDay},#{phoneNum},#{email},
-     #{photo},#{sex},#{point},#{doctorOrNot},#{active})
+   insert into apus_doctor(doctor_no,major,license,homepage,introduction)
+   values(#{no},#{doctor.major},#{doctor.license},#{doctor.homepage},#{doctor.introduction})
   </insert>
 	
 	<update id="update" parameterType="member">
@@ -148,14 +147,6 @@
     from
       apus_member
     where name=#{name}
-  </select>
-  
-  <select id="findRoleNo" resultMap="MemberMap" parameterType="int">
-    select
-      role
-    from
-      apus_member
-    where role=#{no}
   </select>
   
 </mapper>
