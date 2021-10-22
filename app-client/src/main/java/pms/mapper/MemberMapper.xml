@@ -33,24 +33,24 @@
   
   <select id="findAll" resultMap="MemberMap">
     select
-	    m.member_no,
-	    m.name,
-	    m.id,
-	    m.password,
-	    m.birth,
-	    m.email,
-	    m.tel,
-	    m.photo,
-	    m.sex,
-	    m.created_dt,
-	    m.point,
-	    m.role,
-	    m.active,
-	    d.doctor_no,
-	    d.major,
-	    d.license,
-	    d.homepage,
-	    d.introduction
+       m.member_no,
+       m.name,
+       m.id,
+       m.password,
+       m.birth,
+       m.email,
+       m.tel,
+       m.photo,
+       m.sex,
+       m.created_dt,
+       m.point,
+       m.role,
+       m.active,
+       d.doctor_no,
+       d.major,
+       d.license,
+       d.homepage,
+       d.introduction
     from
       apus_member m
       inner join apus_doctor d on m.member_no=d.doctor_no
@@ -58,59 +58,60 @@
       member_no asc
   </select>
   
-	<select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
-	  select
-		  member_no,
-		  name,
-		  id,
-		  password,
-		  birth,
-		  tel,
-		  email,
-	    photo,
-	    sex,
-		  created_dt,
-		  point,
-		  role,
-		  active
-	  from
-	    apus_member
-	  where id=#{id} and password=password(#{password})
-	</select>
-	
-	<insert id="insert" parameterType="member">
+   <select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
+     select
+        member_no,
+        name,
+        id,
+        password,
+        birth,
+        tel,
+        email,
+       photo,
+       sex,
+        created_dt,
+        point,
+        role,
+        active
+     from
+       apus_member
+     where id=#{id} and password=password(#{password})
+   </select>
+   
+   <insert id="insert" parameterType="member" 
+   useGeneratedKeys="true" keyColumn="member_no" keyProperty="no">
     insert into apus_member(name,id,password,birth,tel,email,photo,sex,point,role)
     values(#{name},#{id},password(#{password}),#{birthDay},#{phoneNum},#{email},
      #{photo},#{sex},#{point},#{doctorOrNot})
-	</insert>
-	
-	<insert id="insert2" parameterType="member">
+   </insert>
+   
+   <insert id="insert2" parameterType="member">
    insert into apus_doctor(doctor_no,major,license,homepage,introduction)
    values(#{no},#{doctor.major},#{doctor.license},#{doctor.homepage},#{doctor.introduction})
   </insert>
-	
-	<update id="update" parameterType="member">
-	 update apus_member set
-	   name=#{name},
-	   id=#{id},
-	   password=password(#{password}),
-	   birth=#{birthDay},
-	   tel=#{phoneNum},
-	   email=#{email},
-	   photo=#{photo},
-	   sex=#{sex},
-	   point=#{point},
-	   role=#{doctorOrNot}
+   
+   <update id="update" parameterType="member">
+    update apus_member set
+      name=#{name},
+      id=#{id},
+      password=password(#{password}),
+      birth=#{birthDay},
+      tel=#{phoneNum},
+      email=#{email},
+      photo=#{photo},
+      sex=#{sex},
+      point=#{point},
+      role=#{doctorOrNot}
     where member_no=#{values}
-	</update>
-	 
-	<delete id="delete" parameterType="string">
-	 delete from apus_member
-	 where id=#{id}
-	</delete>
-	
-	<select id="findById" resultMap="MemberMap" parameterType="string">
-	 select
+   </update>
+    
+   <delete id="delete" parameterType="string">
+    delete from apus_member
+    where id=#{id}
+   </delete>
+   
+   <select id="findById" resultMap="MemberMap" parameterType="string">
+    select
       member_no,
       name,
       id,
@@ -127,9 +128,9 @@
     from
       apus_member
     where id=#{id}
-	</select>
-	
-	<select id="findByName" resultMap="MemberMap" parameterType="string">
+   </select>
+   
+   <select id="findByName" resultMap="MemberMap" parameterType="string">
    select
       member_no,
       name,
@@ -150,7 +151,6 @@
   </select>
   
 </mapper>
-
 
 
 
