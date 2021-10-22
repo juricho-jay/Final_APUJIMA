@@ -58,7 +58,6 @@
       member_no asc
   </select>
   
-<<<<<<< HEAD
     <select id="check" resultMap="MemberMap">
     select
       id
@@ -66,29 +65,6 @@
       apus_member
   </select>
   
-   <select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
-     select
-        member_no,
-        name,
-        id,
-        password,
-        birth,
-        tel,
-        email,
-       photo,
-       sex,
-        created_dt,
-        point,
-        role,
-        active
-     from
-       apus_member
-     where id=#{id} and password=password(#{password})
-   </select>
-   
-   <insert id="insert" parameterType="member" 
-   useGeneratedKeys="true" keyColumn="member_no" keyProperty="no">
-=======
 	<select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
 	  select
 		  member_no,
@@ -111,7 +87,6 @@
 	
 	<insert id="insert" parameterType="member" 
 	useGeneratedKeys="true" keyColumn="member_no" keyProperty="no">
->>>>>>> 479a8926e7d17e29ac14c373e106dac7c93979e0
     insert into apus_member(name,id,password,birth,tel,email,photo,sex,point,role)
     values(#{name},#{id},password(#{password}),#{birthDay},#{phoneNum},#{email},
      #{photo},#{sex},#{point},#{doctorOrNot})
