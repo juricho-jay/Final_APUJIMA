@@ -60,4 +60,3 @@ public class MemberListHandler implements Command{
     }
   }
 }
-

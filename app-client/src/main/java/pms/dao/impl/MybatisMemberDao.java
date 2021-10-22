@@ -20,10 +20,9 @@ public class MybatisMemberDao  implements MemberDao{
   @Override
   public void insert(Member member) throws Exception {
     sqlSession.insert("MemberMapper.insert", member);
-
-
-    // sqlSession.insert("MemberMapper.insert2", member);
+    sqlSession.insert("MemberMapper.insert2", member);
     sqlSession.commit();
+
   }
 
   @Override
@@ -69,16 +68,19 @@ public class MybatisMemberDao  implements MemberDao{
   }
 
 
-  @Override
-  public void findRoleNo(int no) throws Exception {
+
+  public void check(Member member) throws Exception {
     // TODO Auto-generated method stub
+    List<Member> list =  sqlSession.selectList("MemberMapper.check");
+    for(int i = 0 ; i < list.size() ; i++) {
+      if(member.getId().equals(list.get(i).getId())) {
+        System.out.println("중복되는 아이디 입니다. 다른 아이디를 사용해 주세요.");
+        member.setId("");
+        return;
+      }
+    }
+
 
   }
-
-  // @Override
-  //  public void check(Member member) throws Exception {
-  //    // TODO Auto-generated method stub
-  //
-  //  }
 
 }
