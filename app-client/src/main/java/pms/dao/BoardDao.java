@@ -12,4 +12,8 @@ public interface BoardDao {
   void delete(int no) throws Exception;
   List<Board> findByKeyword(String keyword) throws Exception;
   // void check(Board board) throws Exception;
+  void insertComment(int boardNo) throws Exception;
+  void deleteComment(int boardNo) throws Exception;
+  //  void insertLike(int boardNo) throws Exception;
+  //  void deleteLike(int boardNo) throws Exception;
 }

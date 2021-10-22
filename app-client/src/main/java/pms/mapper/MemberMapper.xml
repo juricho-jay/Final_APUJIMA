@@ -65,6 +65,7 @@
       apus_member
   </select>
   
+<<<<<<< HEAD
    <select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
      select
         member_no,
@@ -87,6 +88,30 @@
    
    <insert id="insert" parameterType="member" 
    useGeneratedKeys="true" keyColumn="member_no" keyProperty="no">
+=======
+	<select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
+	  select
+		  member_no,
+		  name,
+		  id,
+		  password,
+		  birth,
+		  tel,
+		  email,
+	    photo,
+	    sex,
+		  created_dt,
+		  point,
+		  role,
+		  active
+	  from
+	    apus_member
+	  where id=#{id} and password=password(#{password})
+	</select>
+	
+	<insert id="insert" parameterType="member" 
+	useGeneratedKeys="true" keyColumn="member_no" keyProperty="no">
+>>>>>>> f478870ba53ccae7aaac7ab9b5817c0557dc195d
     insert into apus_member(name,id,password,birth,tel,email,photo,sex,point,role)
     values(#{name},#{id},password(#{password}),#{birthDay},#{phoneNum},#{email},
      #{photo},#{sex},#{point},#{doctorOrNot})

@@ -56,15 +56,15 @@ public class AdminApprovalHandler implements Command {
 
     List<Medicine> medicineList = medicineDao.findAll();
 
-    if (medicineList.size() == 0) {
-      Medicine.lastIndex = 1;
-      medicine.setNo(Medicine.lastIndex);
-    } else if(Medicine.lastIndex != medicineList.size()) {
-      Medicine.lastIndex = medicineList.get(medicineList.size()-1).getNo();
-      medicine.setNo(++Medicine.lastIndex);
-    } else {
-      medicine.setNo(++Medicine.lastIndex);
-    }
+    //    if (medicineList.size() == 0) {
+    //      Medicine.lastIndex = 1;
+    //      medicine.setNo(Medicine.lastIndex);
+    //    } else if(Medicine.lastIndex != medicineList.size()) {
+    //      Medicine.lastIndex = medicineList.get(medicineList.size()-1).getNo();
+    //      medicine.setNo(++Medicine.lastIndex);
+    //    } else {
+    //      medicine.setNo(++Medicine.lastIndex);
+    //    }
 
     medicineDao.insert(medicine);
 

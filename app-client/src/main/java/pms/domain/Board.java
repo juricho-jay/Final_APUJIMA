@@ -2,6 +2,8 @@ package pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board implements Serializable{
   private int no;
@@ -11,28 +13,14 @@ public class Board implements Serializable{
   private String content;
   private Date registeredDate;
   private int viewCount;
-  private String reason;
-  private String requester;
-  public static int lastIndex;
+  private Comment comment;
+  private List<Comment> comments = new ArrayList<>();
 
-
-  public static int getLastIndex() {
-    return lastIndex;
+  public Comment getComment() {
+    return comment;
   }
-  public static void setLastIndex(int lastIndex) {
-    Board.lastIndex = lastIndex;
-  }
-  public String getRequester() {
-    return requester;
-  }
-  public void setRequester(String requester) {
-    this.requester = requester;
-  }
-  public String getReason() {
-    return reason;
-  }
-  public void setReason(String reason) {
-    this.reason = reason;
+  public void setComment(Comment comment) {
+    this.comment = comment;
   }
   public Date getRegisteredDate() {
     return registeredDate;
@@ -76,6 +64,12 @@ public class Board implements Serializable{
   }
   public void setWhichBoard(int whichBoard) {
     this.whichBoard = whichBoard;
+  }
+  public List<Comment> getComments() {
+    return comments;
+  }
+  public void setComments(List<Comment> comments) {
+    this.comments = comments;
   }
 
 

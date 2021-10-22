@@ -21,17 +21,17 @@ public class MedicineAddHandler implements Command{
 
     List<Medicine> medicineList = medicineDao.findAll();
 
-    if (medicineList == null) {
-      Medicine.lastIndex = 1;
-      medicine.setNo(Medicine.lastIndex);
-    } else if(Medicine.lastIndex != medicineList.size()) {
-
-      Medicine.lastIndex = medicineList.get(medicineList.size()-1).getNo();
-      medicine.setNo(++Medicine.lastIndex);
-
-    } else {
-      medicine.setNo(++Medicine.lastIndex);
-    }
+    //    if (medicineList == null) {
+    //      Medicine.lastIndex = 1;
+    //      medicine.setNo(Medicine.lastIndex);
+    //    } else if(Medicine.lastIndex != medicineList.size()) {
+    //
+    //      Medicine.lastIndex = medicineList.get(medicineList.size()-1).getNo();
+    //      medicine.setNo(++Medicine.lastIndex);
+    //
+    //    } else {
+    //      medicine.setNo(++Medicine.lastIndex);
+    //    }
 
     while(true) {
       medicine.setName(Prompt.inputString("약품명> " ));

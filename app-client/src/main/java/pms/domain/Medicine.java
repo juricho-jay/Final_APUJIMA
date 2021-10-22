@@ -9,7 +9,6 @@ public class Medicine implements Serializable{
   private String shape;
   private String color;
   private String effect;
-  public static int lastIndex;
 
 
   public int getNo() {
@@ -17,12 +16,6 @@ public class Medicine implements Serializable{
   }
   public void setNo(int no) {
     this.no = no;
-  }
-  public static int getLastIndex() {
-    return lastIndex;
-  }
-  public static void setLastIndex(int lastIndex) {
-    Board.lastIndex = lastIndex;
   }
   public String getName() {
     return name;

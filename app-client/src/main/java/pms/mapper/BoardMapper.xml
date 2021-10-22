@@ -20,21 +20,26 @@
       <result column="email" property="email"/>
     </association>
     
+    <association property="comment" javaType="comment">
+      <id column="comment_no" property="no"/>
+      <result column="content" property="content"/>
+    </association>
+     
   </resultMap>
   
   
-  <select id="findAll" resultMap="BoardMap">
+   <select id="findAll" resultMap="BoardMap">
     select
-	    b.board_no,
-	    b.title,
-	    b.content,
-	    b.created_dt,
-	    b.view_cnt,
-	    b.type,
-	    m.member_no,
-	    m.id,
-	    m.name,
-	    m.email
+       b.board_no,
+       b.title,
+       b.content,
+       b.created_dt,
+       b.view_cnt,
+       b.type,
+       m.member_no,
+       m.id,
+       m.name,
+       m.email
     from
       apus_board b
       inner join apus_member m on b.member_no=m.member_no
@@ -42,10 +47,38 @@
       b.board_no desc
   </select>
   
-	<insert id="insert" parameterType="member">
+  <select id="findComment" parameterType="int">
+    select
+	    c.coment_no,
+	    c.content
+	    m.member_no,
+	    m.id
+    from apus_comment c
+      inner join apus_member_m on c.member_no=m.member_no
+    where
+      board_no=#{no}
+  </select>
+  
+	<insert id="insert" parameterType="board"
+	useGeneratedKeys="true" keyColumn="board_no" keyProperty="no">
 	 insert into pms_board(title,content,member_no,whichBoard_no) 
 	 values(#{title},#{content},#{writer.no},#{whichBoard})
 	</insert>
+	
+	<insert id="insert2" parameterType="board">
+   insert into pms_freeboard(title,content,member_no,whichBoard_no) 
+   values(#{title},#{content},#{writer.no},#{whichBoard})
+  </insert>
+  
+  <insert id="insert3" parameterType="board">
+   insert into pms_doctorboard(title,content,member_no,whichBoard_no) 
+   values(#{title},#{content},#{writer.no},#{whichBoard})
+  </insert>
+  
+  <insert id="insert4" parameterType="board">
+   insert into pms_noticeboard(title,content,member_no,whichBoard_no) 
+   values(#{title},#{content},#{writer.no},#{whichBoard})
+  </insert>
 	
 	
   <!--

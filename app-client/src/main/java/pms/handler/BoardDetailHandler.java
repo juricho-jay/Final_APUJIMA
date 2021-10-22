@@ -82,20 +82,10 @@ public class BoardDetailHandler implements Command {
     System.out.println();
     System.out.println("[댓글]");
 
-    List<Comment> commentList = commentDao.findAll();
-    if(commentList != null) {
-      for (Comment comment : commentList) {
-        if (comment.getCommentBoardNo() != 0) {
-          if (comment.getCommentBoardNo() == board.getNo() && 
-              comment.getWhichBoard() == whichBoard) {
-            System.out.printf("%d. %s, %s\n",
-                comment.getNo(),
-                comment.getCommenter(),
-                comment.getCommentContent());
-          }
-        }   
-      }
-    } 
+    //    List<Comment> commentList = commentDao.findAll();
+    //    for (Comment c : commentList) {
+    //
+    //    }
 
     System.out.println();
     request.setAttribute("no", no);

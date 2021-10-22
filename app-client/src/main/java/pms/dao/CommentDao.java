@@ -11,4 +11,5 @@ public interface CommentDao {
   void update(Comment comment) throws Exception;
   void delete(int no) throws Exception;
   List<Comment> findByKeyword(String keyword) throws Exception;
+  List<Comment> findComment(int boardNo) throws Exception;
 }

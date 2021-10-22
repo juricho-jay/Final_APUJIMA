@@ -41,17 +41,17 @@ public class BoardAddHandler implements Command{
 
     List<Board> boardList = boardDao.findAll();
 
-    if (boardList == null) {
-      Board.lastIndex = 1;
-      board.setNo(Board.lastIndex);
-    } else {
-      if(Board.lastIndex != boardList.size()) {
-        Board.lastIndex = boardList.get(boardList.size()-1).getNo();
-        board.setNo(++Board.lastIndex);
-      } else {
-        board.setNo(++Board.lastIndex);
-      }
-    }
+    //    if (boardList == null) {
+    //      Board.lastIndex = 1;
+    //      board.setNo(Board.lastIndex);
+    //    } else {
+    //      if(Board.lastIndex != boardList.size()) {
+    //        Board.lastIndex = boardList.get(boardList.size()-1).getNo();
+    //        board.setNo(++Board.lastIndex);
+    //      } else {
+    //        board.setNo(++Board.lastIndex);
+    //      }
+    //    }
 
     while(true) {
 
