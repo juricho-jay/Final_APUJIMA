@@ -65,10 +65,20 @@ public class MybatisMemberDao  implements MemberDao{
     sqlSession.commit();
   }
 
-  // @Override
-  //  public void check(Member member) throws Exception {
-  //    // TODO Auto-generated method stub
-  //
-  //  }
+
+
+  public void check(Member member) throws Exception {
+    // TODO Auto-generated method stub
+    List<Member> list =  sqlSession.selectList("MemberMapper.check");
+    for(int i = 0 ; i < list.size() ; i++) {
+      if(member.getId().equals(list.get(i).getId())) {
+        System.out.println("중복되는 아이디 입니다. 다른 아이디를 사용해 주세요.");
+        member.setId("");
+        return;
+      }
+    }
+
+
+  }
 
 }

@@ -58,6 +58,13 @@
       member_no asc
   </select>
   
+    <select id="check" resultMap="MemberMap">
+    select
+      id
+    from
+      apus_member
+  </select>
+  
    <select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
      select
         member_no,

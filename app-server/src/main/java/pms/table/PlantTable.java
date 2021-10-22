@@ -81,10 +81,12 @@ public class PlantTable extends JsonDataTable<Plant> implements DataProcessor {
     int index = indexOf(plant.getNo());
     if (index == -1) {
       response.setStatus(Response.FAIL);
+      System.out.println("업데이트 실행 안됨 스바스바");
       response.setValue("해당 번호의 화분을 찾을 수 없습니다.");
       return;
     }
 
+    System.out.println("업데이트 실행 됨");
     list.set(index, plant);
     response.setStatus(Response.SUCCESS);
   }

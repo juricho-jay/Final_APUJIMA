@@ -22,8 +22,14 @@ public class PlantGrowHandler implements Command {
     System.out.println();
     System.out.println("[화분 물주기] 페이지입니다.");
     int plusExp = 130;
-
+    //    String name = Prompt.inputString("화분의 이름> ");
+    //    Plant plant = findByPlantName(name);
     String loginUser = AuthLoginHandler.getLoginUser().getId();
+
+    //    HashMap<String,String> paramsMember = new HashMap<>();
+    //    paramsMember.put("id", String.valueOf(loginUser));
+    //  requestAgent.request("member.selectOne",paramsMember);
+    // Member member = requestAgent.getObject(Member.class);
 
     Member member = memberDao.findById(loginUser);
 

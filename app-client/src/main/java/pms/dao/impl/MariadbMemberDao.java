@@ -243,6 +243,14 @@ public class MariadbMemberDao  implements MemberDao{
     }
   }
 
+
+  @Override
+  public void check(Member member) throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
+
   // @Override
   //  public void check(Member member) throws Exception {
   //    // TODO Auto-generated method stub

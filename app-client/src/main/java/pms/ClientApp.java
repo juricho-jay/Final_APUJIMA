@@ -12,7 +12,6 @@ import Menu.Menu;
 import Menu.MenuGroup;
 import pms.context.ApplicationContextListener;
 import pms.dao.BoardDao;
-import pms.dao.MailBoxDao;
 import pms.dao.MemberDao;
 import pms.dao.impl.MybatisBoardDao;
 import pms.dao.impl.MybatisMemberDao;
@@ -164,7 +163,7 @@ public class ClientApp {
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
     NetBucketDao bucketDao = new NetBucketDao(requestAgent);
     NetMedicineDao medicineDao = new NetMedicineDao(requestAgent);
-    MailBoxDao mailBoxDao = new NetMailBoxDao(requestAgent);
+    NetMailBoxDao mailBoxDao = new NetMailBoxDao(requestAgent);
     NetReportDao reportDao = new NetReportDao(requestAgent);
     NetDateCheckDao dateCheckDao = new NetDateCheckDao(requestAgent);
     NetRequestDao requestDao = new NetRequestDao(requestAgent);

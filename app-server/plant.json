@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+[{"no":0,"PlantName":"suba3","level":1,"exp":130,"shape":"☘","registeredDate":"10월 18, 2021","ownerName":"aaa"},{"no":0,"PlantName":"suba2","level":0,"exp":0,"shape":"🌱","registeredDate":"10월 18, 2021","ownerName":"aaa"},{"no":0,"PlantName":"suba3","level":0,"exp":0,"shape":"🌱","registeredDate":"10월 18, 2021","ownerName":"aaa"}]
+=======
 [{"no":1,"PlantName":"a","level":1,"exp":130,"shape":"☘","registeredDate":"10월 18, 2021","ownerName":"aaa"},{"no":2,"PlantName":"b","level":1,"exp":130,"shape":"☘","registeredDate":"10월 18, 2021","ownerName":"aaa"}]
+>>>>>>> 28ba597d5b63a971a6e1197b2f1d749c6db6e9bc
