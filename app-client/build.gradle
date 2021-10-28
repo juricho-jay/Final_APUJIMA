@@ -27,18 +27,10 @@ dependencies {
 // google json 라이브러리
    implementation 'com.google.code.gson:gson:2.8.8'
    implementation 'org.mybatis:mybatis:3.5.7'
-    // Use JUnit test framework.
     testImplementation 'junit:junit:4.13.2'
-    implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
-    // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.1-jre'
-<<<<<<< HEAD
-        implementation 'org.mybatis:mybatis:3.5.7'
-        implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
-=======
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
     
-    implementation 'org.mybatis:mybatis:3.5.7'
->>>>>>> 6e915ba8a117172f72a659068a7f4edd7badb1e9
 }
 
 application {

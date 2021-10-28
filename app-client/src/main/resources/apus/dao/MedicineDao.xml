@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="apus.dao.MedicineDao">
+  
+  <resultMap type="Medicine" id="MedicineMap">
+    <id column="medicine_no" property="no"/> 
+    <result column="name" property="name"/>
+    <result column="age" property="ageLimit"/>
+    <result column="shape" property="shape"/>
+    <result column="color" property="color"/>
+    <result column="effect" property="effect"/>
+    
+  </resultMap>
+  
+   <select id="findAll" resultMap="MedicineMap">
+    select
+       medicine_no,
+       name,
+       age,
+       shape,
+       color,
+       effect
+    from
+      apus_medicine
+    order by
+      name asc
+  </select>
+  
+	<insert id="insert" parameterType="medicine"
+	useGeneratedKeys="true" keyColumn="medicine_no" keyProperty="no">
+	 insert into apus_medicine(name,age,shape,color,effect) 
+	 values(#{name},#{ageLimit},#{shape},#{color},#{effect})
+	</insert>
+
+	<delete id="delete" parameterType="string">
+	 delete from apus_medicine
+	 where name=#{name}
+	</delete>
+	
+  <update id="update" parameterType="medicine">
+    update apus_medicine set
+      name=#{name},
+      age=#{ageLimit},
+      shape=#{shape},
+      color=#{color},
+      effect=#{effect}
+    where 
+      medicine_no=#{no}
+  </update>
+  
+  <select id="findByName" resultMap="MedicineMap" parameterType="string">
+  select
+    medicine_no,
+    name,
+    age,
+    shape,
+    color,
+    effect 
+  from 
+    apus_medicine
+  where 
+    name=#{value}
+  </select>
+  
+  <select id="findByKeyword" resultMap="MedicineMap" parameterType="string">
+    select
+      medicine_no,
+      name,
+      age,
+      shape,
+      color,
+      effect
+    from
+      apus_medicine
+    where 
+      name like(concat('%',#{keyword},'%'))
+      or shape like (concat('%',#{keyword},'%'))
+      or color like (concat('%',#{keyword},'%'))
+      or effect like (concat('%',#{keyword},'%'))
+    order by 
+      name asc
+  </select>
+  
+</mapper>
+
+
+
+
+
+
+

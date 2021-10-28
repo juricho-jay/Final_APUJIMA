@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="apus.dao.PlantDao">
+  
+  <resultMap type="Plant" id="PlantMap">
+    <id column="plant_no" property="no"/> 
+    <result column="level" property="level"/>
+    <result column="name" property="plantName"/>
+    <result column="experience" property="exp"/>
+    <result column="shape" property="shape"/>
+    <result column="created_dt" property="registeredDate"/>
+    
+    <association property="ownerName" javaType="member">
+      <id column="member_no" property="no"/>
+      <result column="id" property="id"/>
+      <result column="name" property="name"/>
+    </association>
+    
+  </resultMap>
+  
+  
+   <select id="findAll" resultMap="PlantMap">
+    select
+       p.plant_no,
+       p.level,
+       p.name,
+       p.experience,
+       p.shape,
+       p.created_dt,
+       m.member_no,
+       m.id,
+       m.name
+    from
+      apus_plant p
+      inner join apus_member m on p.member_no=m.member_no
+    order by
+      p.plant_no asc
+  </select>
+  
+	<insert id="insert" parameterType="plant"
+	useGeneratedKeys="true" keyColumn="plant_no" keyProperty="no">
+	 insert into apus_plant(level,name,experience,shape,created_dt,member_no) 
+	 values(#{level},#{plantName},#{exp},#{shape},#{registeredDate},#{ownerName.no})
+	</insert>
+	
+	
+  <update id="update" parameterType="plant">
+    update apus_plant set
+      level=#{level},
+      name=#{plantName},
+      experience=#{exp},
+      shape=#{shape}
+    where 
+      plant_no=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+   delete from apus_plant
+   where plant_no=#{no}
+  </delete>
+  
+</mapper>
+
+
+
+
+
+
+
