@@ -1,7 +1,6 @@
 package apus.handler;
 
 import java.sql.Date;
-import java.util.List;
 import apus.dao.BoardDao;
 import apus.domain.Board;
 import util.Prompt;
@@ -23,9 +22,18 @@ public class BoardAddHandler implements Command{
     Board board = new Board();
 
     while (true) {
-      System.out.println("1.자유게시판 2.지식in 게시판 3.공지사항");
+      System.out.println("1.자유게시판 2.지식in 게시판 3.공지사항 (0:돌아가기)>" );
       try {
         int selectBoard = Prompt.inputInt("게시판 선택> ");
+
+        if (selectBoard == 0) {
+          return;
+        }
+
+        if (selectBoard == 3 && AuthLoginHandler.getLoginUser().getDoctorOrNot() != 3) {
+          System.out.println("관리자만 공지사항을 입력할 수 있습니다.");
+          continue;
+        }
 
         if (selectBoard < 1 || selectBoard > 3) {
           System.out.println("다시 입력하세요.");
@@ -38,20 +46,6 @@ public class BoardAddHandler implements Command{
       }
     }
 
-
-    List<Board> boardList = boardDao.findAll();
-
-    //    if (boardList == null) {
-    //      Board.lastIndex = 1;
-    //      board.setNo(Board.lastIndex);
-    //    } else {
-    //      if(Board.lastIndex != boardList.size()) {
-    //        Board.lastIndex = boardList.get(boardList.size()-1).getNo();
-    //        board.setNo(++Board.lastIndex);
-    //      } else {
-    //        board.setNo(++Board.lastIndex);
-    //      }
-    //    }
 
     while(true) {
 
@@ -76,7 +70,14 @@ public class BoardAddHandler implements Command{
     board.setRegisteredDate(new Date(System.currentTimeMillis()));
     board.setWhichBoard(board.getWhichBoard());
 
-    boardDao.insert(board);
+    if (board.getWhichBoard() == 1) {
+      boardDao.insert(board);
+    } else if (board.getWhichBoard() == 2) {
+      boardDao.insert2(board);
+    } else if (board.getWhichBoard() == 3) {
+      boardDao.insert3(board);
+    }
+
     System.out.println("게시글이 등록되었습니다.");
   }
 

@@ -57,21 +57,21 @@
 	<insert id="insert" parameterType="board"
 	useGeneratedKeys="true" keyColumn="board_no" keyProperty="no">
 	 insert into apus_board(title,content,type,member_no) 
-	 values(#{title},#{content},'freeBoard',#{writer.no})
+	 values(#{title},#{content},'1',#{writer.no})
 	</insert>
 	
 	<!-- doctorboard -->
 	<insert id="insert2" parameterType="board" 
 	useGeneratedKeys="true" keyColumn="board_no" keyProperty="no">
   insert into apus_board(title,content,type,member_no) 
-   values(#{title},#{content},'doctorBoard',#{writer.no})
+   values(#{title},#{content},'2',#{writer.no})
   </insert>
   
   <!-- noticeboard -->
   <insert id="insert3" parameterType="board" 
   useGeneratedKeys="true" keyColumn="board_no" keyProperty="no">
   insert into apus_board(title,content,type,member_no) 
-   values(#{title},#{content},'noticeBoard',#{writer.no})
+   values(#{title},#{content},'3',#{writer.no})
   </insert>
   
 	 <update id="updateCount" parameterType="int">

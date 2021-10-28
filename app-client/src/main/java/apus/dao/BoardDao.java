@@ -5,6 +5,8 @@ import apus.domain.Board;
 
 public interface BoardDao {
   void insert(Board board) throws Exception;
+  void insert2(Board board) throws Exception;
+  void insert3(Board board) throws Exception;
   List<Board> findAll() throws Exception;
   Board findByNo(int no) throws Exception;
   // board findByName(String name) throws Exception;
