@@ -3,8 +3,8 @@ package apus.handler;
 import java.util.List;
 import apus.dao.ReportDao;
 import apus.dao.RequestDao;
-import apus.domain.Board;
 import apus.domain.Medicine;
+import apus.domain.Report;
 
 public class AdminListHandler implements Command {
 
@@ -30,7 +30,7 @@ public class AdminListHandler implements Command {
     //    System.out.println("[게시판 신고 접수 내역]");
 
     List<Medicine> requestList = requestDao.findAll();
-    List<Board> reportList = reportDao.findAll();
+    List<Report> reportList = reportDao.findAll();
 
     if (requestList == null && 
         reportList == null) {
@@ -67,16 +67,18 @@ public class AdminListHandler implements Command {
             + "효 능 : %s\n", medicine.getName(), medicine.getEffect());
         System.out.println();
       }
-    } else if (reportList != null) {
-      System.out.println("-[게시판 신고 접수 내역]");
-      for (Board freeBoard : reportList) {
-        System.out.printf("게시판 번호 : %d"
-            + ", 제목 : %s\n",
-            freeBoard.getNo(),
-            freeBoard.getTitle());
-        System.out.println();
-      }
-    } /*
+    } 
+    //    else if (reportList != null) {
+    //      System.out.println("-[게시판 신고 접수 내역]");
+    //      for (Report report : reportList) {
+    //        // System.out.printf("게시판 번호 : %d"
+    //            + ", 제목 : %s\n",
+    //            //   freeBoard.getNo(),
+    //            //    freeBoard.getTitle());
+    //            System.out.println();
+    //      }
+    //    } 
+    /*
      * else if (doctorReportList != null) { for (DoctorBoard doctorBoard : doctorReportList) {
      * System.out.printf("게시판 번호 : %d" + ", 제목 : %s\n", doctorBoard.getNo(),
      * doctorBoard.getTitle()); } return; }
