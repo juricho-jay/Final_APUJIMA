@@ -191,22 +191,22 @@ public class ClientApp {
     commandMap.put("/noticeBoard/add", new BoardAddHandler(boardDao, sqlSession));
     commandMap.put("/noticeBoard/list", new BoardListHandler(boardDao));
     commandMap.put("/noticeBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao, sqlSession));
-    commandMap.put("/noticeBoard/update", new BoardUpdateHandler(boardDao));
-    commandMap.put("/noticeBoard/delete", new BoardDeleteHandler(boardDao, sqlSession, commentDao, likeDao));
+    commandMap.put("/board/update", new BoardUpdateHandler(boardDao));
+    commandMap.put("/board/delete", new BoardDeleteHandler(boardDao, sqlSession, commentDao, likeDao));
     commandMap.put("/noticeBoard/search", new BoardSearchHandler(boardDao));
 
     commandMap.put("/freeBoard/add", new BoardAddHandler(boardDao, sqlSession));
     commandMap.put("/freeBoard/list", new BoardListHandler(boardDao));
     commandMap.put("/freeBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao, sqlSession));
-    commandMap.put("/freeBoard/update", new BoardUpdateHandler(boardDao));
-    commandMap.put("/freeBoard/delete", new BoardDeleteHandler(boardDao, sqlSession, commentDao, likeDao));
+    commandMap.put("/board/update", new BoardUpdateHandler(boardDao));
+    commandMap.put("/board/delete", new BoardDeleteHandler(boardDao, sqlSession, commentDao, likeDao));
     commandMap.put("/freeBoard/search", new BoardSearchHandler(boardDao));
 
     commandMap.put("/doctorBoard/add", new BoardAddHandler(boardDao, sqlSession));
     commandMap.put("/doctorBoard/list", new BoardListHandler(boardDao));
     commandMap.put("/doctorBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao, sqlSession));
-    commandMap.put("/doctorBoard/update", new BoardUpdateHandler(boardDao));
-    commandMap.put("/doctorBoard/delete", new BoardDeleteHandler(boardDao, sqlSession, commentDao, likeDao));
+    commandMap.put("/board/update", new BoardUpdateHandler(boardDao));
+    commandMap.put("/board/delete", new BoardDeleteHandler(boardDao, sqlSession, commentDao, likeDao));
     commandMap.put("/doctorBoard/search", new BoardSearchHandler(boardDao));
 
     commandMap.put("/member/add", new MemberAddHandler(memberDao, sqlSession));

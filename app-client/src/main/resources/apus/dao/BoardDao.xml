@@ -84,13 +84,13 @@
 	<update id="update" parameterType="board">
 	  update apus_board set
      title=#{title},
-     content=#{content},
+     content=#{content}
     where board_no=#{no}
 	</update>
 	
 	<delete id="delete" parameterType="int">
 	 delete from apus_board
-	 where no=#{no}
+	 where board_no=#{no}
 	</delete>
 
 
