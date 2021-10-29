@@ -1,21 +1,29 @@
 package apus.handler;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.dao.CommentDao;
+import apus.dao.MemberDao;
 import apus.domain.Board;
 import apus.domain.Comment;
+import apus.domain.Member;
 import util.Prompt;
 
 public class CommentUpdateHandler implements Command {
 
   CommentDao commentDao;
   BoardDao boardDao;
+  MemberDao memberDao;
+  SqlSession sqlSession;
 
-  public CommentUpdateHandler(CommentDao commentDao, BoardDao boardDao) {
+  public CommentUpdateHandler(CommentDao commentDao, BoardDao boardDao,MemberDao memberDao,SqlSession sqlSession) {
     this.commentDao = commentDao;
     this.boardDao = boardDao;
+    this.memberDao = memberDao;
+    this.sqlSession = sqlSession;
   }
+
 
 
   @Override
@@ -27,6 +35,7 @@ public class CommentUpdateHandler implements Command {
 
       int commentResetNo = Prompt.inputInt("번호> "); //댓글 번호 (게시물마다 1번으로 시작되는)
       List<Comment> commentList = commentDao.findAll();
+      Member loginUser = memberDao.findById(AuthLoginHandler.getLoginUser().getId());
 
       int no = (int)request.getAttribute("no"); // freeBoardDetailHandler에서 입력한 게시판 번호 불러오기
 
@@ -41,15 +50,15 @@ public class CommentUpdateHandler implements Command {
       Comment comment = new Comment();
 
       for (int i = 0; i < commentList.size(); i++) {
-        if (commentList.get(i).getWhichBoard() == board.getWhichBoard() && 
-            commentList.get(i).getCommentBoardNo() == board.getNo() &&
+        if ( 
+            commentList.get(i).getCommentBoard() == board &&
             commentList.get(i).getNo() == commentResetNo && 
-            commentList.get(i).getCommenter().equals(AuthLoginHandler.getLoginUser().getId())) {
+            commentList.get(i).getCommenter().equals(loginUser)) {
           comment = commentList.get(i);
-          commentContent = commentList.get(i).getCommentContent();
+          commentContent = commentList.get(i).getContent();
           break;
-        } else if (commentList.get(i).getWhichBoard() == board.getWhichBoard() && 
-            commentList.get(i).getCommentBoardNo() == board.getNo() &&
+        } else if ( 
+            commentList.get(i).getCommentBoard() == board &&
             commentList.get(i).getNo() == commentResetNo &&
             !commentList.get(i).getCommenter().equals(AuthLoginHandler.getLoginUser().getId())) {
           System.out.println("댓글 변경 권한이 없습니다.");
@@ -65,8 +74,9 @@ public class CommentUpdateHandler implements Command {
         return;
       }
 
-      comment.setCommentContent(newCommentContent);
+      comment.setContent(newCommentContent);
       commentDao.update(comment);
+      sqlSession.commit();
       System.out.println("댓글을 변경하였습니다.");
 
     } catch (Exception e) {

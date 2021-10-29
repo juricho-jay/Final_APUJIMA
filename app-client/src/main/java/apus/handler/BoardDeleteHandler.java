@@ -1,15 +1,25 @@
 package apus.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
+import apus.dao.CommentDao;
+import apus.dao.LikeDao;
 import apus.domain.Board;
 import util.Prompt;
 
-public class BoardDeleteHandler implements Command{
+public class BoardDeleteHandler implements Command {
 
   BoardDao boardDao;
+  SqlSession sqlSession;
+  CommentDao commentDao;
+  LikeDao likeDao;
 
-  public BoardDeleteHandler(BoardDao boardDao) {
+  public BoardDeleteHandler(BoardDao boardDao, SqlSession sqlSession, 
+      CommentDao commentDao, LikeDao likeDao) {
     this.boardDao = boardDao;
+    this.sqlSession = sqlSession;
+    this.commentDao = commentDao;
+    this.likeDao = likeDao;
   }
 
   @Override
@@ -37,10 +47,11 @@ public class BoardDeleteHandler implements Command{
       return;
     }
 
-    request.getRequestDispatcher("/comment/autoDelete").forward(request);
-    request.getRequestDispatcher("/like/autoDelete").forward(request);
+    //    commentDao.delete(no);
+    //    likeDao.delete(no);
 
     boardDao.delete(no);
+    sqlSession.commit();
 
     System.out.println("게시글을 삭제하였습니다.");
 

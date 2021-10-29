@@ -11,6 +11,7 @@ public interface BoardDao {
   Board findByNo(int no) throws Exception;
   // board findByName(String name) throws Exception;
   void update(Board board) throws Exception;
+  void updateCount(int no) throws Exception;
   void delete(int no) throws Exception;
   List<Board> findByKeyword(String keyword) throws Exception;
   // void check(Board board) throws Exception;
@@ -18,4 +19,5 @@ public interface BoardDao {
   void deleteComment(int boardNo) throws Exception;
   //  void insertLike(int boardNo) throws Exception;
   //  void deleteLike(int boardNo) throws Exception;
+
 }

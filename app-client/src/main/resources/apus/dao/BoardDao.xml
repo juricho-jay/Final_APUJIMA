@@ -88,31 +88,29 @@
     where board_no=#{no}
 	</update>
 	
-  <!--
-	<delete id="delete" parameterType="string">
-	 delete from apus_member
-	 where id=#{id}
+	<delete id="delete" parameterType="int">
+	 delete from apus_board
+	 where no=#{no}
 	</delete>
-	
-	<select id="findById" resultMap="MemberMap" parameterType="string">
+
+
+	<select id="findByNo" resultMap="BoardMap" parameterType="int">
 	 select
-      member_no,
-      name,
-      id,
-      password,
-      birth,
-      tel,
-      email,
-      photo,
-      sex,
-      created_dt,
-      point,
-      role,
-      active
+      b.board_no,
+       b.title,
+       b.content,
+       b.created_dt,
+       b.view_cnt,
+       b.type,
+       m.member_no,
+       m.id writer_id,
+       m.name writer_name
     from
-      apus_member
-    where id=#{id}
+      apus_board b
+      inner join apus_member m on b.member_no=m.member_no
+    where board_no=#{no}
 	</select>
+  <!--
 	
 	<select id="findByName" resultMap="MemberMap" parameterType="string">
    select

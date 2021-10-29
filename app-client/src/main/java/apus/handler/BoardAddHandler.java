@@ -1,6 +1,7 @@
 package apus.handler;
 
 import java.sql.Date;
+import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.domain.Board;
 import util.Prompt;
@@ -8,9 +9,11 @@ import util.Prompt;
 public class BoardAddHandler implements Command{
 
   BoardDao boardDao;
+  SqlSession sqlSession;
 
-  public BoardAddHandler(BoardDao boardDao) {
+  public BoardAddHandler(BoardDao boardDao, SqlSession sqlSession) {
     this.boardDao = boardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -72,10 +75,16 @@ public class BoardAddHandler implements Command{
 
     if (board.getWhichBoard() == 1) {
       boardDao.insert(board);
+      sqlSession.commit();
+
     } else if (board.getWhichBoard() == 2) {
       boardDao.insert2(board);
+      sqlSession.commit();
+
     } else if (board.getWhichBoard() == 3) {
       boardDao.insert3(board);
+      sqlSession.commit();
+
     }
 
     System.out.println("게시글이 등록되었습니다.");

@@ -1,6 +1,7 @@
 package apus.handler;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.dao.LikeDao;
 import apus.domain.Board;
@@ -10,11 +11,13 @@ public class LikeAddCancelHandler implements Command {
 
   LikeDao likeDao;
   BoardDao boardDao;
+  SqlSession sqlSession;
 
 
-  public LikeAddCancelHandler(LikeDao likeDao, BoardDao boardDao) {
+  public LikeAddCancelHandler(LikeDao likeDao, BoardDao boardDao, SqlSession sqlSession) {
     this.likeDao = likeDao;
     this.boardDao = boardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -31,15 +34,14 @@ public class LikeAddCancelHandler implements Command {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
+
     List<Like> likeList = likeDao.findAll();
 
-    if(likeList == null) {
-      like.setLikeNo(0);
-      like.setLikeBoardNo(board.getNo());
-      like.setLikeWriter(board.getWriter().getId());
+    if(likeList.size() == 0) {
+      like.setLikeBoard(board);
       like.setLiker(AuthLoginHandler.getLoginUser());
-      like.setWhichBoard(board.getWhichBoard());
       likeDao.insert(like);
+      sqlSession.commit();
 
     } else { // likeList[0]가 존재하는 경우
 
@@ -47,36 +49,34 @@ public class LikeAddCancelHandler implements Command {
       int myLike = 0;
 
       for (int i = 0; i < likeList.size(); i++) {
-        if (likeList.get(i).getLikeBoardNo() == board.getNo() && 
-            likeList.get(i).getWhichBoard() == board.getWhichBoard() &&
+        if (likeList.get(i).getLikeBoard().getNo() == board.getNo() && 
             likeList.get(i).getLiker().getId().equals(loginUser)) {
           myLike++;
         }
       }
 
       if (myLike == 0) {
-        like.setLikeNo(likeList.size());
-        like.setLikeBoardNo(board.getNo());
-        like.setLikeWriter(board.getWriter().getId());
+        like.setLikeBoard(board);
         like.setLiker(AuthLoginHandler.getLoginUser());
-        like.setWhichBoard(board.getWhichBoard());
 
         System.out.println("게시글에 좋아요를 눌렀습니다.");
 
         likeDao.insert(like);
+        sqlSession.commit();
+
         return;
       } else {
         for (int i = 0; i < likeList.size(); i++) {
-          if (likeList.get(i).getLikeBoardNo() == board.getNo() && 
-              likeList.get(i).getWhichBoard() == board.getWhichBoard() &&
+          if (likeList.get(i).getLikeBoard().getNo() == board.getNo() && 
               likeList.get(i).getLiker().getId().equals(loginUser)) {
 
-            likeDao.delete(i);
+            likeDao.delete(board.getNo(), AuthLoginHandler.getLoginUser().getNo());
 
             System.out.println("좋아요를 취소했습니다.");
             break;
           }
         }
+        sqlSession.commit();
       }
     }
   } 

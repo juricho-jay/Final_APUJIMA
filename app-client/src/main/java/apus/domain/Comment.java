@@ -5,10 +5,9 @@ import java.sql.Date;
 
 public class Comment implements Serializable {
   private int no;
-  private Board boardNo;
+  private Board commentBoard;
   private Member commenter;
   private String content;
-  private int whichBoard;
   private Date registeredDate;
 
   public int getNo() {
@@ -16,12 +15,6 @@ public class Comment implements Serializable {
   }
   public void setNo(int no) {
     this.no = no;
-  }
-  public int getWhichBoard() {
-    return whichBoard;
-  }
-  public void setWhichBoard(int whichBoard) {
-    this.whichBoard = whichBoard;
   }
   public String getContent() {
     return content;
@@ -35,11 +28,11 @@ public class Comment implements Serializable {
   public void setCommenter(Member commenter) {
     this.commenter = commenter;
   }
-  public Board getBoardNo() {
-    return boardNo;
+  public Board getCommentBoard() {
+    return commentBoard;
   }
-  public void setBoardNo(Board boardNo) {
-    this.boardNo = boardNo;
+  public void setCommentBoard(Board commentBoard) {
+    this.commentBoard = commentBoard;
   }
   public Date getRegisteredDate() {
     return registeredDate;

@@ -9,6 +9,7 @@ public interface LikeDao {
   Like findByNo(int no) throws Exception;
   Like findByName(String name) throws Exception;
   void update(Like like) throws Exception;
-  void delete(int no) throws Exception;
+  void delete(int boardNo, int memberNo) throws Exception;
+  void autoDelete(int boardNo) throws Exception;
 }
 

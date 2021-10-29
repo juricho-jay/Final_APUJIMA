@@ -2,6 +2,7 @@ package apus.handler;
 
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.dao.CommentDao;
 import apus.domain.Board;
@@ -11,10 +12,13 @@ public class CommentAutoDeleteHandler implements Command {
 
   CommentDao commentDao;
   BoardDao boardDao;
+  SqlSession sqlSession;
 
-  public CommentAutoDeleteHandler(CommentDao commentDao, BoardDao boardDao) {
+  public CommentAutoDeleteHandler(CommentDao commentDao, BoardDao boardDao,
+      SqlSession sqlSession) {
     this.commentDao = commentDao;
     this.boardDao = boardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -39,17 +43,16 @@ public class CommentAutoDeleteHandler implements Command {
       return;
     }
 
-    int whichBoard = board.getWhichBoard();
 
 
     for (int i = commentList.size() - 1; i >= 0; i--) {
-      if (commentList.get(i).getWhichBoard() == whichBoard &&
-          commentList.get(i).getCommentBoardNo() == board.getNo()) {
+      if ( commentList.get(i).getCommentBoard() == board) {
 
         commentDao.delete(i);
 
       }
     }
+    sqlSession.commit();
   } 
 }
 

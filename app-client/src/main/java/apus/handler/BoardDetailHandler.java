@@ -1,6 +1,7 @@
 package apus.handler;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.dao.CommentDao;
 import apus.dao.LikeDao;
@@ -16,12 +17,15 @@ public class BoardDetailHandler implements Command {
   LikeDao likeDao;
   CommentDao commentDao;
   ReportDao reportDao;
+  SqlSession sqlSession;
 
-  public BoardDetailHandler(BoardDao boardDao, LikeDao likeDao, CommentDao commentDao, ReportDao reportDao) {
+  public BoardDetailHandler(BoardDao boardDao, LikeDao likeDao, 
+      CommentDao commentDao, ReportDao reportDao, SqlSession sqlSession) {
     this.boardDao = boardDao;
     this.likeDao = likeDao;
     this.commentDao = commentDao;
     this.reportDao = reportDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -46,17 +50,17 @@ public class BoardDetailHandler implements Command {
 
     board.setViewCount(board.getViewCount() + 1);
     System.out.printf("조회수: %d\n", board.getViewCount());
-    boardDao.update(board);
+    boardDao.updateCount(no);
+    sqlSession.commit();
 
     int whichBoard = board.getWhichBoard();
 
     List<Like> likeList = likeDao.findAll();
-    if (likeList == null) {
+    if (likeList.size() == 0) {
       System.out.print("[좋아요 ♡ : 0]");
     } else {
       for (int i = 0; i < likeList.size(); i++) {
-        if (likeList.get(i).getLikeBoardNo() == board.getNo() && 
-            likeList.get(i).getWhichBoard() == whichBoard &&
+        if (likeList.get(i).getLikeBoard().getNo() == board.getNo() && 
             likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
           System.out.print("[좋아요 ♥ :");
           break;
@@ -68,9 +72,8 @@ public class BoardDetailHandler implements Command {
 
       int count = 0;
       for (int j = 0; j < likeList.size(); j++) {
-        if (likeList.get(j).getLikeBoardNo() != 0) {
-          if (likeList.get(j).getLikeBoardNo() == board.getNo() && 
-              likeList.get(j).getWhichBoard() == whichBoard) {
+        if (likeList.get(j).getLikeBoard().getNo() != 0) {
+          if (likeList.get(j).getLikeBoard().getNo() == board.getNo()) {
             count++;
           }
         }   
@@ -83,16 +86,27 @@ public class BoardDetailHandler implements Command {
     System.out.println("[댓글]");
 
     List<Comment> commentList = commentDao.findAll();
-    //    for (Comment c : commentList) {
-    //
-    //    }
+
+
+    if(commentList.size() != 0) {
+      for (Comment comment : commentList) {
+        if (comment.getCommentBoard().getNo() != 0) {
+          if (comment.getCommentBoard().getNo() == board.getNo()) {
+            System.out.printf("%d. %s, %s\n",
+                comment.getNo(),
+                comment.getCommenter(),
+                comment.getContent());
+          }
+        }   
+      }
+    }
 
     System.out.println();
     request.setAttribute("no", no);
 
     while(true) {
       String status = "";
-      if (likeList == null) {
+      if (likeList.size() == 0) {
         status = Prompt.inputString("[좋아요♡(#) / 신고하기🚨(!) / \n"
             + "댓글달기💬(@) / 넘어가기(Enter)]> ");
       } else if (whichBoard == 3) {
@@ -100,7 +114,7 @@ public class BoardDetailHandler implements Command {
       } else {
         for (int i = 0; i < likeList.size(); i++) {
           if (likeList.get(i).getLiker().getId().equals(AuthLoginHandler.getLoginUser().getId()) &&
-              likeList.get(i).getWhichBoard() == whichBoard) {
+              likeList.get(i).getLikeBoard().getNo() == board.getNo()) {
             status = Prompt.inputString("[좋아요 취소💔(#) / 신고하기🚨(!) /\n"
                 + "댓글달기💬(@) / 넘어가기(Enter)]> ");
             break;
@@ -121,9 +135,12 @@ public class BoardDetailHandler implements Command {
 
       } else if (status.equals("!")) {
 
-        board.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
-        board.setRequester(loginUser);
-        reportDao.insert(board);
+        //        Report report = new Report();
+        //        report.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
+        //        report.setRequester(AuthLoginHandler.getLoginUser());
+        //        report.setRequestBoard(board);
+        //        reportDao.insert(report);
+        //        sqlSession.commit();
         System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
         break;
 
@@ -137,7 +154,7 @@ public class BoardDetailHandler implements Command {
     } 
 
     // 댓글list 없는 경우
-    if (commentList == null) {
+    if (commentList.size() == 0) {
       if (board.getWriter().getId().equals(loginUser)) {
         while (true) {
           System.out.println();
@@ -163,10 +180,10 @@ public class BoardDetailHandler implements Command {
 
     int myComment = 0;
     for (Comment comment : commentList) {
-      if (comment.getCommentBoardNo() != 0) {
-        if (comment.getCommentBoardNo() == board.getNo() && 
-            comment.getWhichBoard() == whichBoard &&
-            comment.getCommenter().equals(loginUser)) {
+      if (comment.getCommentBoard().getNo() != 0) {
+        if (comment.getCommentBoard().getNo() == board.getNo() && 
+            //            comment.getWhichBoard() == whichBoard &&
+            comment.getCommenter().getId().equals(loginUser)) {
           myComment++;
         }
       }   

@@ -16,11 +16,11 @@ import apus.dao.BucketDao;
 import apus.dao.CommentDao;
 import apus.dao.CounselingDao;
 import apus.dao.DateCheckDao;
+import apus.dao.LikeDao;
 import apus.dao.MailBoxDao;
 import apus.dao.MedicineDao;
 import apus.dao.MemberDao;
 import apus.dao.PlantDao;
-import apus.dao.impl.NetLikeDao;
 import apus.dao.impl.NetReportDao;
 import apus.dao.impl.NetRequestDao;
 import apus.handler.AdminApprovalHandler;
@@ -163,8 +163,8 @@ public class ClientApp {
     BucketDao bucketDao = sqlSession.getMapper(BucketDao.class);
     DateCheckDao dateCheckDao = sqlSession.getMapper(DateCheckDao.class);
     CounselingDao counselingDao = sqlSession.getMapper(CounselingDao.class);
+    LikeDao likeDao = sqlSession.getMapper(LikeDao.class);
 
-    NetLikeDao likeDao = new NetLikeDao(requestAgent);
     NetReportDao reportDao = new NetReportDao(requestAgent);
     NetRequestDao requestDao = new NetRequestDao(requestAgent);
 
@@ -188,25 +188,25 @@ public class ClientApp {
     commandMap.put("/counselingMember/myList", new CounselingMemberMyListHandler(counselingDao, memberDao));
     commandMap.put("/counselingMember/doctorList", new CounselingMemberDoctorListHandler(counselingDao));
 
-    commandMap.put("/noticeBoard/add", new BoardAddHandler(boardDao));
+    commandMap.put("/noticeBoard/add", new BoardAddHandler(boardDao, sqlSession));
     commandMap.put("/noticeBoard/list", new BoardListHandler(boardDao));
-    commandMap.put("/noticeBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao));
+    commandMap.put("/noticeBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao, sqlSession));
     commandMap.put("/noticeBoard/update", new BoardUpdateHandler(boardDao));
-    commandMap.put("/noticeBoard/delete", new BoardDeleteHandler(boardDao));
+    commandMap.put("/noticeBoard/delete", new BoardDeleteHandler(boardDao, sqlSession, commentDao, likeDao));
     commandMap.put("/noticeBoard/search", new BoardSearchHandler(boardDao));
 
-    commandMap.put("/freeBoard/add", new BoardAddHandler(boardDao));
+    commandMap.put("/freeBoard/add", new BoardAddHandler(boardDao, sqlSession));
     commandMap.put("/freeBoard/list", new BoardListHandler(boardDao));
-    commandMap.put("/freeBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao));
+    commandMap.put("/freeBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao, sqlSession));
     commandMap.put("/freeBoard/update", new BoardUpdateHandler(boardDao));
-    commandMap.put("/freeBoard/delete", new BoardDeleteHandler(boardDao));
+    commandMap.put("/freeBoard/delete", new BoardDeleteHandler(boardDao, sqlSession, commentDao, likeDao));
     commandMap.put("/freeBoard/search", new BoardSearchHandler(boardDao));
 
-    commandMap.put("/doctorBoard/add", new BoardAddHandler(boardDao));
+    commandMap.put("/doctorBoard/add", new BoardAddHandler(boardDao, sqlSession));
     commandMap.put("/doctorBoard/list", new BoardListHandler(boardDao));
-    commandMap.put("/doctorBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao));
+    commandMap.put("/doctorBoard/detail", new BoardDetailHandler(boardDao, likeDao, commentDao, reportDao, sqlSession));
     commandMap.put("/doctorBoard/update", new BoardUpdateHandler(boardDao));
-    commandMap.put("/doctorBoard/delete", new BoardDeleteHandler(boardDao));
+    commandMap.put("/doctorBoard/delete", new BoardDeleteHandler(boardDao, sqlSession, commentDao, likeDao));
     commandMap.put("/doctorBoard/search", new BoardSearchHandler(boardDao));
 
     commandMap.put("/member/add", new MemberAddHandler(memberDao, sqlSession));
@@ -222,13 +222,13 @@ public class ClientApp {
     commandMap.put("/mailBox/detail", new MailBoxDetailHandler(mailBoxDao, sqlSession));
     commandMap.put("/mailBox/delete", new MailBoxDeleteHandler(mailBoxDao, sqlSession));
 
-    commandMap.put("/comment/add", new CommentAddHandler(commentDao, boardDao));
-    commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(commentDao, boardDao));
-    commandMap.put("/comment/update", new CommentUpdateHandler(commentDao, boardDao));
-    commandMap.put("/comment/delete", new CommentDeleteHandler(commentDao, boardDao));
+    commandMap.put("/comment/add", new CommentAddHandler(commentDao, boardDao, sqlSession, memberDao));
+    commandMap.put("/comment/autoDelete", new CommentAutoDeleteHandler(commentDao, boardDao, sqlSession));
+    commandMap.put("/comment/update", new CommentUpdateHandler(commentDao, boardDao, memberDao, sqlSession));
+    commandMap.put("/comment/delete", new CommentDeleteHandler(commentDao, boardDao, memberDao, sqlSession));
 
-    commandMap.put("/like/addCancel", new LikeAddCancelHandler(likeDao, boardDao));
-    commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(likeDao, boardDao));
+    commandMap.put("/like/addCancel", new LikeAddCancelHandler(likeDao, boardDao, sqlSession));
+    commandMap.put("/like/autoDelete", new LikeAutoDeleteHandler(likeDao, boardDao, sqlSession));
 
     commandMap.put("/bucket/add", new BucketAddHandler(bucketDao, sqlSession));
     commandMap.put("/bucket/list", new BucketListHandler(bucketDao));
