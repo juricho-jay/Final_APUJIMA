@@ -8,11 +8,16 @@
   <resultMap type="Comment" id="CommentMap">
     <id column="comment_no" property="no"/> 
     <result column="content" property="content"/>
+    <result column="created_dt" property="registeredDate"/>
     
     
     <association property="commenter" javaType="Member">
       <id column="member_no" property="no"/>
       <result column="id" property="id"/>
+    </association>
+    
+    <association property="commentBoard" javaType="Board">
+      <id column="commentBoard_no" property="no"/>
     </association>
     
     
@@ -23,11 +28,14 @@
     select
       c.comment_no,
       c.content,
+      c.created_dt,
       m.member_no,
-      m.id
+      m.id,
+      b.commentBoard_no
     from
       apus_comment c
       inner join apus_member m on m.member_no=c.member_no
+      inner join apus_board b on b.board_no=c.board_no
   </select>
   
   <select id = "findBoardComment" resultMap ="CommentMap" parameterType="int">
@@ -48,7 +56,7 @@
     <insert id="insert" parameterType="comment" 
   useGeneratedKeys="true" keyColumn="comment_no" keyProperty="no">
     insert into apus_comment(content,created_dt,member_no,board_no)
-    values(#{content},#{registedDate},#{writer.no},#{boardNo})
+    values(#{content},#{registeredDate},#{commenter.no},#{commentBoard.no})
    </insert>
   
   <delete id ="delete" parameterType = "int">
