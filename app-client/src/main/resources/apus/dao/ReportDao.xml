@@ -20,6 +20,32 @@
     
   </resultMap>
   
+    <select id="findAll" resultMap="ReportMap">
+    select
+      r.report_no,
+      r.reason,
+      m.id requester_id,
+      m.name requester_name,
+      m.email requester_email,
+      b.board_no requestBoard_no,
+      b.title requestBoard_title,
+      b.content requestBoard_content
+    from
+      apus_report r
+      inner join apus_member m on r.member_no=m.member_no
+      inner join apus_board b on b.board_no=r.board_no
+    order by
+      r.report_no desc    
+
+  </select>
+  
+  
+    <insert id="insert" parameterType="report" 
+  useGeneratedKeys="true" keyColumn="report_no" keyProperty="no">
+    insert into apus_report(reason,member_no,board_no)
+    values(#{reason},#{requester.no},#{requestBoard.no})
+   </insert>
+  
   
   <!-- <select id="findReport" resultMap="ReportMap">
     select

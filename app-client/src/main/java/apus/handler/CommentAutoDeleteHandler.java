@@ -46,9 +46,9 @@ public class CommentAutoDeleteHandler implements Command {
 
 
     for (int i = commentList.size() - 1; i >= 0; i--) {
-      if ( commentList.get(i).getCommentBoard() == board) {
+      if ( commentList.get(i).getCommentBoard().getNo() == board.getNo()) {
 
-        commentDao.delete(i);
+        commentDao.delete(commentList.get(i).getNo());
 
       }
     }

@@ -9,6 +9,7 @@ import apus.dao.ReportDao;
 import apus.domain.Board;
 import apus.domain.Comment;
 import apus.domain.Like;
+import apus.domain.Report;
 import util.Prompt;
 
 public class BoardDetailHandler implements Command { 
@@ -33,6 +34,10 @@ public class BoardDetailHandler implements Command {
     System.out.println();
     System.out.println("[상세보기] 페이지입니다.");
     System.out.println();
+    if(AuthLoginHandler.getLoginUser() == null) {
+      System.out.println("로그인 후 이용해 주시기 바랍니다.");
+      return;
+    }
     String loginUser = AuthLoginHandler.getLoginUser().getId();
     int no = Prompt.inputInt("게시글 번호> ");
 
@@ -94,7 +99,7 @@ public class BoardDetailHandler implements Command {
           if (comment.getCommentBoard().getNo() == board.getNo()) {
             System.out.printf("%d. %s, %s\n",
                 comment.getNo(),
-                comment.getCommenter(),
+                comment.getCommenter().getId(),
                 comment.getContent());
           }
         }   
@@ -134,13 +139,23 @@ public class BoardDetailHandler implements Command {
         return;
 
       } else if (status.equals("!")) {
+        // 중복신고 차단
+        List<Report> reportList = reportDao.findAll();
+        for (Report report : reportList) {
+          if (report.getRequestBoard().getNo() == board.getNo() &&
+              report.getRequester().getId().equals(AuthLoginHandler.getLoginUser().getId())) {
+            System.out.println("이미 신고 신청이 된 게시글 입니다.");
+            return;
+          }
+        }
 
-        //        Report report = new Report();
-        //        report.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
-        //        report.setRequester(AuthLoginHandler.getLoginUser());
-        //        report.setRequestBoard(board);
-        //        reportDao.insert(report);
-        //        sqlSession.commit();
+        Report report = new Report();
+        report.setReason(Prompt.inputString("신고 사유를 작성해 주세요> "));
+        report.setRequester(AuthLoginHandler.getLoginUser());
+        report.setRequestBoard(board);
+        reportDao.insert(report);
+        sqlSession.commit();
+
         System.out.println("신고 접수가 완료되었습니다. 깨끗한 게시판 문화를 만드는데 도움을 주셔서 감사합니다!");
         break;
 

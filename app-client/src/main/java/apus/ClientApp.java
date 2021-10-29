@@ -21,7 +21,7 @@ import apus.dao.MailBoxDao;
 import apus.dao.MedicineDao;
 import apus.dao.MemberDao;
 import apus.dao.PlantDao;
-import apus.dao.impl.NetReportDao;
+import apus.dao.ReportDao;
 import apus.dao.impl.NetRequestDao;
 import apus.handler.AdminApprovalHandler;
 import apus.handler.AdminListHandler;
@@ -164,8 +164,8 @@ public class ClientApp {
     DateCheckDao dateCheckDao = sqlSession.getMapper(DateCheckDao.class);
     CounselingDao counselingDao = sqlSession.getMapper(CounselingDao.class);
     LikeDao likeDao = sqlSession.getMapper(LikeDao.class);
+    ReportDao reportDao = sqlSession.getMapper(ReportDao.class);
 
-    NetReportDao reportDao = new NetReportDao(requestAgent);
     NetRequestDao requestDao = new NetRequestDao(requestAgent);
 
 

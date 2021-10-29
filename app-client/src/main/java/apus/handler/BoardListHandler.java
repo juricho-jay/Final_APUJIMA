@@ -46,39 +46,50 @@ public class BoardListHandler implements Command{
       return;
     }
 
-    if (selectBoard == 1) {
-      for (Board board : boardList) {
-        if (board.getWhichBoard() == 1) {
-          System.out.printf("%d, %s, %s, %s, %d\n",
-              board.getNo(),
-              board.getTitle(),
-              board.getWriter().getId(), //우리는 name이 아니라 id를 가져옴
-              board.getRegisteredDate(),
-              board.getViewCount());
-        }
-      }
-    } else if (selectBoard == 2) {
-      for (Board board : boardList) {
-        if (board.getWhichBoard() == 2) {
-          System.out.printf("%d, %s, %s, %s, %d\n",
-              board.getNo(),
-              board.getTitle(),
-              board.getWriter().getId(), //우리는 name이 아니라 id를 가져옴
-              board.getRegisteredDate(),
-              board.getViewCount());
-        }
-      }
-    } else if (selectBoard == 3) {
-      for (Board board : boardList) {
-        if (board.getWhichBoard() == 3) {
-          System.out.printf("%d, %s, %s, %s, %d\n",
-              board.getNo(),
-              board.getTitle(),
-              board.getWriter().getId(), //우리는 name이 아니라 id를 가져옴
-              board.getRegisteredDate(),
-              board.getViewCount());
-        }
+    for(Board board : boardList) {
+      if (board.getWhichBoard() == selectBoard) {
+        System.out.printf("%d, %s, %s, %s, %d\n",
+            board.getNo(),
+            board.getTitle(),
+            board.getWriter().getId(), //우리는 name이 아니라 id를 가져옴
+            board.getRegisteredDate(),
+            board.getViewCount());
       }
     }
+    //
+    //    if (selectBoard == 1) {
+    //      for (Board board : boardList) {
+    //        if (board.getWhichBoard() == 1) {
+    //          System.out.printf("%d, %s, %s, %s, %d\n",
+    //              board.getNo(),
+    //              board.getTitle(),
+    //              board.getWriter().getId(), //우리는 name이 아니라 id를 가져옴
+    //              board.getRegisteredDate(),
+    //              board.getViewCount());
+    //        }
+    //      }
+    //    } else if (selectBoard == 2) {
+    //      for (Board board : boardList) {
+    //        if (board.getWhichBoard() == 2) {
+    //          System.out.printf("%d, %s, %s, %s, %d\n",
+    //              board.getNo(),
+    //              board.getTitle(),
+    //              board.getWriter().getId(), //우리는 name이 아니라 id를 가져옴
+    //              board.getRegisteredDate(),
+    //              board.getViewCount());
+    //        }
+    //      }
+    //    } else if (selectBoard == 3) {
+    //      for (Board board : boardList) {
+    //        if (board.getWhichBoard() == 3) {
+    //          System.out.printf("%d, %s, %s, %s, %d\n",
+    //              board.getNo(),
+    //              board.getTitle(),
+    //              board.getWriter().getId(), //우리는 name이 아니라 id를 가져옴
+    //              board.getRegisteredDate(),
+    //              board.getViewCount());
+    //        }
+    //      }
+    //    }
   }
 }
