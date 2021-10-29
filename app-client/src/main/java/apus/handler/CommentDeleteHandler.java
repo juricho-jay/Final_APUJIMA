@@ -8,6 +8,7 @@ import apus.dao.MemberDao;
 import apus.domain.Board;
 import apus.domain.Comment;
 import apus.domain.Member;
+import util.Prompt;
 
 public class CommentDeleteHandler implements Command {
 
@@ -41,7 +42,6 @@ public class CommentDeleteHandler implements Command {
 
     int no = (int)request.getAttribute("no"); //게시글 번호
 
-
     Board board = boardDao.findByNo(no);
 
     if (board == null) {
@@ -50,19 +50,35 @@ public class CommentDeleteHandler implements Command {
     }
 
 
-    for(int i = 0; i < commentList.size(); i++) {
-      if (commentList.get(i).getCommentBoard() == board &&
-          commentList.get(i).getCommenter().equals(loginUser)) {
-
-        commentDao.delete(i);
-        sqlSession.commit();
-        System.out.println("댓글이 삭제되었습니다.");
-        return;
+    for (Comment comment : commentList) {
+      if (comment.getCommenter().getId().equals(loginUser.getId())) {
+        System.out.printf("%d, %s, %s",
+            comment.getNo(),
+            comment.getCommenter().getId(),
+            comment.getContent());
       }
-    } 
-    System.out.println("내가 쓴 댓글이 아닙니다.");
-    return;
+    }
+
+    System.out.println();
+    int deleteNo = Prompt.inputInt("삭제할 댓글 번호> ");
+
+    Comment deleteComment = commentDao.findByNo(deleteNo);
+
+    if (deleteComment == null) {
+      System.out.println("해당 번호의 댓글을 찾을 수 없습니다.");
+      return;
+    }
+
+    if (!deleteComment.getCommenter().getId().equals(loginUser.getId())) {
+      System.out.println("내가 작성한 댓글이 아닙니다.");
+      return;
+    }
+
+    commentDao.delete(deleteNo);
+    sqlSession.commit();
+    System.out.println("댓글이 삭제되었습니다.");
 
   } 
 }
+
 

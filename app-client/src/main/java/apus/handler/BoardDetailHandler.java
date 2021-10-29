@@ -94,7 +94,7 @@ public class BoardDetailHandler implements Command {
           if (comment.getCommentBoard().getNo() == board.getNo()) {
             System.out.printf("%d. %s, %s\n",
                 comment.getNo(),
-                comment.getCommenter(),
+                comment.getCommenter().getId(),
                 comment.getContent());
           }
         }   
