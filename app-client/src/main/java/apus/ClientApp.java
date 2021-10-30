@@ -22,7 +22,6 @@ import apus.dao.MedicineDao;
 import apus.dao.MemberDao;
 import apus.dao.PlantDao;
 import apus.dao.ReportDao;
-import apus.dao.RequestDao;
 import apus.handler.AdminApprovalHandler;
 import apus.handler.AdminListHandler;
 import apus.handler.AdminReportDeleteHandler;
@@ -165,7 +164,6 @@ public class ClientApp {
     CounselingDao counselingDao = sqlSession.getMapper(CounselingDao.class);
     LikeDao likeDao = sqlSession.getMapper(LikeDao.class);
     ReportDao reportDao = sqlSession.getMapper(ReportDao.class);
-    RequestDao requestDao = sqlSession.getMapper(RequestDao.class);
 
 
 
