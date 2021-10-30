@@ -9,8 +9,19 @@ public class Medicine implements Serializable{
   private String shape;
   private String color;
   private String effect;
+  private int active; // 활성화 여부 => 1 : 활성화  0 : 비활성화
+  private int check; // 새로 등록된 약품에 대한 관리자 확인 여부 => 1 : 체크  0 : 미체크
+  private Member requester; // 약품 요청자(의사)
 
 
+
+
+  public Member getRequester() {
+    return requester;
+  }
+  public void setRequester(Member requester) {
+    this.requester = requester;
+  }
   public int getNo() {
     return no;
   }
@@ -48,7 +59,19 @@ public class Medicine implements Serializable{
     this.effect = effect;
   }
 
-  //add , list , search, update, delete
+  public int getActive() {
+    return active;
+  }
+  public void setActive(int active) {
+    this.active = active;
+  }
+  public int getCheck() {
+    return check;
+  }
+  public void setCheck(int check) {
+    this.check = check;
+  }
+
 }
 
 

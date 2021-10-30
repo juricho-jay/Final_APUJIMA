@@ -1,19 +1,18 @@
 package apus.handler;
 
 import java.util.List;
+import apus.dao.MedicineDao;
 import apus.dao.ReportDao;
-import apus.dao.RequestDao;
 import apus.domain.Medicine;
 import apus.domain.Report;
 
 public class AdminListHandler implements Command {
 
-  RequestDao requestDao;
+  MedicineDao medicineDao;
   ReportDao reportDao;
 
-  public AdminListHandler(RequestDao requestDao
-      , ReportDao reportDao) {
-    this.requestDao = requestDao;
+  public AdminListHandler(MedicineDao medicineDao, ReportDao reportDao) {
+    this.medicineDao = medicineDao;
     this.reportDao = reportDao;
   }
 
@@ -25,64 +24,73 @@ public class AdminListHandler implements Command {
     System.out.println();
     System.out.println("[승인 요청/신고 목록]");
     System.out.println();
+    int count = 0;
+    String boardType = "";
 
     //    System.out.println();
     //    System.out.println("[게시판 신고 접수 내역]");
 
-    List<Medicine> requestList = requestDao.findAll();
+    List<Medicine> requestList = medicineDao.findAll();
     List<Report> reportList = reportDao.findAll();
 
     if (requestList == null && 
         reportList == null) {
       System.out.println("-[약품 승인 요청 내역]");
-      System.out.println("신고 접수건이 없습니다.");
+      System.out.println("약품 승인 요청건이 없습니다.");
       System.out.println();
       System.out.println("-[게시판 신고 접수 내역]");
       System.out.println("신고 접수건이 없습니다.");
       System.out.println();
       return;
 
-    } else {
-      if (requestList == null) {
-        System.out.println("-[약품 승인 요청 내역]");
-        System.out.println("약품 승인 요청건이 없습니다.");
-        System.out.println();
-      } 
+    } 
 
-      if (reportList == null ) {
-        System.out.println("-[자유게시판 신고 접수 내역]");
-        System.out.println("신고 접수건이 없습니다.");
-        System.out.println();
-        System.out.println("-[지식in게시판 신고 접수 내역]");
-        System.out.println("신고 접수건이 없습니다.");
-        System.out.println();
-      } 
+    if (requestList != null) {
+      for (Medicine medicine : requestList) {
+        if(medicine.getCheck() == 0) {
+          count++;
+          System.out.println("-[약품 승인 요청 내역]");
+          System.out.printf("약품명 : %s\n"
+              + "효 능 : %s\n"
+              + "승인 요청자 : %s\n", 
+              medicine.getName(), 
+              medicine.getEffect(),
+              medicine.getRequester().getId());
+          System.out.println();
+        }
+      }
+      if(count == 0) {
+        System.out.println("약품 승인 요청건이 없습니다.");
+      }
     }
 
 
-    if (requestList != null) {
-      System.out.println("-[약품 승인 요청 내역]");
-      for (Medicine medicine : requestList) {
-        System.out.printf("약품명 : %s\n"
-            + "효 능 : %s\n", medicine.getName(), medicine.getEffect());
+    if (reportList == null ) {
+      System.out.println("-[게시판 신고 접수 내역]");
+      System.out.println("신고 접수건이 없습니다.");
+      System.out.println();
+    } else {
+      System.out.println("-[게시판 신고 접수 내역]");
+      for (Report report : reportList) {
+
+        if(report.getRequestBoard().getWhichBoard() == 1) 
+          boardType = "자유 게시판";
+        else if(report.getRequestBoard().getWhichBoard() == 2) 
+          boardType = "지식인 게시판";
+
+        System.out.printf("게시판 번호 : %d\n"
+            + "게시판 종류 : %s\n"
+            + "제목 : %s\n"
+            + "신고 내용 : %s\n"
+            + "신고 요청자 : %s\n",
+            report.getRequestBoard().getNo(),
+            boardType,
+            report.getRequestBoard().getTitle(),
+            report.getReason(),
+            report.getRequester().getId());
         System.out.println();
       }
     } 
-    //    else if (reportList != null) {
-    //      System.out.println("-[게시판 신고 접수 내역]");
-    //      for (Report report : reportList) {
-    //        // System.out.printf("게시판 번호 : %d"
-    //            + ", 제목 : %s\n",
-    //            //   freeBoard.getNo(),
-    //            //    freeBoard.getTitle());
-    //            System.out.println();
-    //      }
-    //    } 
-    /*
-     * else if (doctorReportList != null) { for (DoctorBoard doctorBoard : doctorReportList) {
-     * System.out.printf("게시판 번호 : %d" + ", 제목 : %s\n", doctorBoard.getNo(),
-     * doctorBoard.getTitle()); } return; }
-     */
 
   }
 }

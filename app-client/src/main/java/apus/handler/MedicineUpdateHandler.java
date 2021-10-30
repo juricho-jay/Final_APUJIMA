@@ -41,7 +41,7 @@ public class MedicineUpdateHandler implements Command {
 
     String input2 = Prompt.inputString("❗ 정말 변경하시겠습니까? (y/N)> ");
     if(input2.equalsIgnoreCase("n") || input2.length() == 0) {
-      System.out.println("게시글 변경을 취소하였습니다.");
+      System.out.println("약품 변경을 취소하였습니다.");
       return;
     }
 

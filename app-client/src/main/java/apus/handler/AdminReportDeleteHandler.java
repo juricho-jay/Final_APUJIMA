@@ -7,6 +7,7 @@ import apus.dao.MailBoxDao;
 import apus.dao.ReportDao;
 import apus.domain.Board;
 import apus.domain.MailBox;
+import apus.domain.Report;
 import util.Prompt;
 
 public class AdminReportDeleteHandler implements Command{
@@ -32,7 +33,7 @@ public class AdminReportDeleteHandler implements Command{
     System.out.println("[신고 게시판 삭제 허가]");
     System.out.println();
 
-    List<Board> reportList = reportDao.findAll();
+    List<Report> reportList = reportDao.findAll();
 
     if (reportList == null) {
       System.out.println("-[자유게시판 신고 접수 내역]");

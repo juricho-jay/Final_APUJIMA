@@ -12,30 +12,73 @@
     <result column="shape" property="shape"/>
     <result column="color" property="color"/>
     <result column="effect" property="effect"/>
+    <result column="active" property="active"/>
+    <result column="confirm" property="check"/>
+    
+    <association property="requester" javaType="member">
+      <id column="requester_no" property="no"/>
+      <result column="requester_id" property="id"/>
+      <result column="requester_name" property="name"/>
+      <result column="requester_email" property="email"/>
+    </association>
     
   </resultMap>
   
    <select id="findAll" resultMap="MedicineMap">
     select
-       medicine_no,
-       name,
-       age,
-       shape,
-       color,
-       effect
+       c.medicine_no,
+       c.name,
+       c.age,
+       c.shape,
+       c.color,
+       c.effect,
+       c.active,
+       c.confirm,
+       m.id requester_id,
+       m.name requester_name,
+       m.email requester_email
     from
-      apus_medicine
+      apus_medicine c
+      left outer join apus_member m on c.member_no=m.member_no
     order by
-      name asc
+      c.name asc
+  </select>
+  
+  <select id="findRequest" resultMap="MedicineMap">
+    select
+       c.medicine_no,
+       c.name,
+       c.age,
+       c.shape,
+       c.color,
+       c.effect,
+       c.active,
+       c.confirm,
+       m.id requester_id,
+       m.name requester_name,
+       m.email requester_email
+    from
+      apus_medicine c
+      left outer join apus_member m on c.member_no=m.member_no
+    where 
+      c.active = 0 and c.confirm = 0
   </select>
   
 	<insert id="insert" parameterType="medicine"
 	useGeneratedKeys="true" keyColumn="medicine_no" keyProperty="no">
-	 insert into apus_medicine(name,age,shape,color,effect) 
-	 values(#{name},#{ageLimit},#{shape},#{color},#{effect})
+	 insert into apus_medicine(name,age,shape,color,effect,active,confirm,member_no) 
+	 values(#{name},#{ageLimit},#{shape},#{color},#{effect},#{active},#{check},#{requester.no})
 	</insert>
 
-	<delete id="delete" parameterType="string">
+	 <delete id="delete" parameterType="string">
+   update apus_medicine set
+    active = 0
+   where
+    name=#{name}
+  </delete>
+	
+	
+	<delete id="delete2" parameterType="string">
 	 delete from apus_medicine
 	 where name=#{name}
 	</delete>
@@ -51,6 +94,21 @@
       medicine_no=#{no}
   </update>
   
+    <update id="requestApprove" parameterType="medicine">
+    update apus_medicine set
+      active = 1,
+      confirm = 1
+    where 
+      name=#{name}
+  </update>
+  
+  <update id="requestCancle" parameterType="medicine">
+    update apus_medicine set
+      confirm = 1
+    where 
+      name=#{name}
+  </update>
+  
   <select id="findByName" resultMap="MedicineMap" parameterType="string">
   select
     medicine_no,
@@ -58,11 +116,13 @@
     age,
     shape,
     color,
-    effect 
+    effect,
+    active,
+    confirm
   from 
     apus_medicine
   where 
-    name=#{value}
+    name=#{name}
   </select>
   
   <select id="findByKeyword" resultMap="MedicineMap" parameterType="string">
@@ -72,7 +132,9 @@
       age,
       shape,
       color,
-      effect
+      effect,
+      active,
+      confirm
     from
       apus_medicine
     where 

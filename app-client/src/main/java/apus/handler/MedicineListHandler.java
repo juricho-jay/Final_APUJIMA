@@ -19,24 +19,28 @@ public class MedicineListHandler implements Command {
     System.out.println();
 
     List<Medicine> medicineList = medicineDao.findAll();
-
-    if (medicineList.size() == 0) {
-      System.out.println("현재 약품 리스트가 없습니다.");
-      return;
-    }
+    int count = 0;
 
     for (Medicine medicine : medicineList) {
-      System.out.printf("약품명 : %s\n"
-          + "권장연령 : %d\n"
-          + "모양 : %s\n"
-          + "색상 : %s\n"
-          + "효능 : %s\n",
-          medicine.getName(),
-          medicine.getAgeLimit(),
-          medicine.getShape(),
-          medicine.getColor(),
-          medicine.getEffect());
-      System.out.println();
+      if(medicine.getActive() == 1) {
+        count++;
+        System.out.printf("약품명 : %s\n"
+            + "권장연령 : %d\n"
+            + "모양 : %s\n"
+            + "색상 : %s\n"
+            + "효능 : %s\n",
+            medicine.getName(),
+            medicine.getAgeLimit(),
+            medicine.getShape(),
+            medicine.getColor(),
+            medicine.getEffect());
+        System.out.println();
+      }
+    }
+
+    if(count == 0) {
+      System.out.println("현재 약품 리스트가 없습니다.");
+      return;
     }
     //serachM();
 

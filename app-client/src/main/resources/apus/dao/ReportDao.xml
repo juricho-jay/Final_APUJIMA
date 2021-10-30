@@ -11,6 +11,8 @@
     
     <association property="requestBoard" javaType="board">
       <id column="requestBoard_no" property="no"/>
+      <result column="requestBoard_type" property="whichBoard"/>
+      <result column="requestBoard_title" property="title"/>
     </association>
     
     <association property="requester" javaType="member">
@@ -29,11 +31,12 @@
       m.email requester_email,
       b.board_no requestBoard_no,
       b.title requestBoard_title,
-      b.content requestBoard_content
+      b.content requestBoard_content,
+      b.type requestBoard_type
     from
       apus_report r
       inner join apus_member m on r.member_no=m.member_no
-      inner join apus_board b on b.board_no=r.board_no
+      inner join apus_board b on r.board_no=b.board_no
     order by
       r.report_no desc    
 

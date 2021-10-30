@@ -71,7 +71,7 @@ public class BoardAddHandler implements Command{
 
     board.setWriter(AuthLoginHandler.getLoginUser());
     board.setRegisteredDate(new Date(System.currentTimeMillis()));
-    board.setWhichBoard(board.getWhichBoard());
+    //board.setWhichBoard(board.getWhichBoard());
 
     if (board.getWhichBoard() == 1) {
       boardDao.insert(board);

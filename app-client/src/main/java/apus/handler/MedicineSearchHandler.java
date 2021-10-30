@@ -44,6 +44,7 @@ public class MedicineSearchHandler implements Command {
           medicine.getShape(),
           medicine.getColor(),
           medicine.getEffect());
+      System.out.println();
 
     }
     if (count == 0 ) {

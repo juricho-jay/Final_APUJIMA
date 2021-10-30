@@ -50,6 +50,8 @@ public class MedicineAddHandler implements Command{
     medicine.setShape(Prompt.inputString("모  양> "));
     medicine.setColor(Prompt.inputString("색  상> "));
     medicine.setEffect(Prompt.inputString("효  능> "));
+    medicine.setActive(1);
+    medicine.setCheck(1);
 
     String input2 = Prompt.inputString("약품을 등록하시겠습니까? (y/N)> ");
     if(input2.equalsIgnoreCase("n") || input2.length() == 0) {

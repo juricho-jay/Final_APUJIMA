@@ -3,19 +3,16 @@ package apus.handler;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.MedicineDao;
-import apus.dao.RequestDao;
 import apus.domain.Medicine;
 import util.Prompt;
 
 public class MedicineRequestHandler implements Command {
 
   MedicineDao medicineDao;
-  RequestDao requestDao;
   SqlSession sqlSession;
 
-  public MedicineRequestHandler(MedicineDao medicineDao, RequestDao requestDao, SqlSession sqlSession) {
+  public MedicineRequestHandler(MedicineDao medicineDao, SqlSession sqlSession) {
     this.medicineDao = medicineDao;
-    this.requestDao = requestDao;
     this.sqlSession = sqlSession;
   }
 
@@ -32,6 +29,10 @@ public class MedicineRequestHandler implements Command {
     String input = "";
     while(true) {
       input = Prompt.inputString("약품명> ");
+
+      if(input.equals("#")) {
+        break;
+      }
 
       for (Medicine m : medicineList) {
         if (m.getName().equals(input)) {
@@ -50,6 +51,9 @@ public class MedicineRequestHandler implements Command {
     medicine.setShape(Prompt.inputString("모  양> "));
     medicine.setColor(Prompt.inputString("색  상> "));
     medicine.setEffect(Prompt.inputString("효  능> "));
+    medicine.setActive(0);
+    medicine.setCheck(0);
+    medicine.setRequester(AuthLoginHandler.getLoginUser());
 
     while(true) {
       String input2 = Prompt.inputString("작성한 약품을 등록요청 하시겠습니까?(y/N)");
@@ -61,7 +65,10 @@ public class MedicineRequestHandler implements Command {
       //      requestDao.insert(medicine);
       //      sqlSession.commit();
 
+      medicineDao.insert(medicine);
+      sqlSession.commit();
       System.out.println("관리자에게 약품등록을 요청하였습니다.");
+
       break;
     }
   }

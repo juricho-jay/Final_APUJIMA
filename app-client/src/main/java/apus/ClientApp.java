@@ -22,7 +22,7 @@ import apus.dao.MedicineDao;
 import apus.dao.MemberDao;
 import apus.dao.PlantDao;
 import apus.dao.ReportDao;
-import apus.dao.impl.NetRequestDao;
+import apus.dao.RequestDao;
 import apus.handler.AdminApprovalHandler;
 import apus.handler.AdminListHandler;
 import apus.handler.AdminReportDeleteHandler;
@@ -165,19 +165,19 @@ public class ClientApp {
     CounselingDao counselingDao = sqlSession.getMapper(CounselingDao.class);
     LikeDao likeDao = sqlSession.getMapper(LikeDao.class);
     ReportDao reportDao = sqlSession.getMapper(ReportDao.class);
+    RequestDao requestDao = sqlSession.getMapper(RequestDao.class);
 
-    NetRequestDao requestDao = new NetRequestDao(requestAgent);
 
 
 
     // Command 객체 준비
-    commandMap.put("/admin/approval", new AdminApprovalHandler(requestDao, medicineDao));
-    commandMap.put("/admin/list", new AdminListHandler(requestDao, reportDao));
+    commandMap.put("/admin/approval", new AdminApprovalHandler(medicineDao, sqlSession));
+    commandMap.put("/admin/list", new AdminListHandler(medicineDao, reportDao));
     commandMap.put("/admin/delete", new AdminReportDeleteHandler(reportDao, boardDao, mailBoxDao));
     commandMap.put("/intro", new IntroMenu());
 
     commandMap.put("/medicine/add", new MedicineAddHandler(medicineDao, sqlSession));
-    commandMap.put("/medicine/request", new MedicineRequestHandler(medicineDao, requestDao, sqlSession));
+    commandMap.put("/medicine/request", new MedicineRequestHandler(medicineDao, sqlSession));
     commandMap.put("/medicine/list", new MedicineListHandler(medicineDao));
     commandMap.put("/medicine/update", new MedicineUpdateHandler(medicineDao, sqlSession));
     commandMap.put("/medicine/delete", new MedicineDeleteHandler(medicineDao, sqlSession));
