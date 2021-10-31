@@ -33,9 +33,8 @@ public class CommentUpdateHandler implements Command {
       System.out.println("[댓글 변경]");
       System.out.println();
 
-      int commentResetNo = Prompt.inputInt("번호> "); //댓글 번호 (게시물마다 1번으로 시작되는)
-      List<Comment> commentList = commentDao.findAll();
       Member loginUser = memberDao.findById(AuthLoginHandler.getLoginUser().getId());
+      List<Comment> commentList = commentDao.findAll();
 
       int no = (int)request.getAttribute("no"); // freeBoardDetailHandler에서 입력한 게시판 번호 불러오기
 
@@ -46,36 +45,41 @@ public class CommentUpdateHandler implements Command {
         return;
       }
 
-      String commentContent = null;
-      Comment comment = new Comment();
-
-      for (int i = 0; i < commentList.size(); i++) {
-        if ( 
-            commentList.get(i).getCommentBoard() == board &&
-            commentList.get(i).getNo() == commentResetNo && 
-            commentList.get(i).getCommenter().equals(loginUser)) {
-          comment = commentList.get(i);
-          commentContent = commentList.get(i).getContent();
-          break;
-        } else if ( 
-            commentList.get(i).getCommentBoard() == board &&
-            commentList.get(i).getNo() == commentResetNo &&
-            !commentList.get(i).getCommenter().equals(AuthLoginHandler.getLoginUser().getId())) {
-          System.out.println("댓글 변경 권한이 없습니다.");
-          return;
+      for (Comment comment : commentList) {
+        if (comment.getCommenter().getId().equals(loginUser.getId())) {
+          System.out.printf("%d, %s, %s",
+              comment.getNo(),
+              comment.getCommenter().getId(),
+              comment.getContent());
         }
       }
 
+      System.out.println();
+      int updateNo = Prompt.inputInt("변경할 댓글 번호> "); 
 
-      String newCommentContent = Prompt.inputString(String.format("댓글 내용(%s)> ", commentContent));
+      Comment updateComment = commentDao.findByNo(updateNo);
+
+      if (updateComment == null) {
+        System.out.println("해당 번호의 댓글을 찾을 수 없습니다.");
+        return;
+      }
+
+      if (!updateComment.getCommenter().getId().equals(loginUser.getId())) {
+        System.out.println("내가 작성한 댓글이 아닙니다.");
+        return;
+      }
+
+      String newContent = Prompt.inputString(String.format("댓글 내용(%s)> ", updateComment.getContent()));
+
       String input = Prompt.inputString("❗ 정말 변경하시겠습니까? (y/N)> ");
       if(input.equalsIgnoreCase("n") || input.length() == 0) {
         System.out.println("댓글 변경을 취소하였습니다.");
         return;
       }
 
-      comment.setContent(newCommentContent);
-      commentDao.update(comment);
+      updateComment.setContent(newContent);
+
+      commentDao.update(updateComment);
       sqlSession.commit();
       System.out.println("댓글을 변경하였습니다.");
 

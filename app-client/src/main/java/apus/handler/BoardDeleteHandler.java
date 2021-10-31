@@ -46,10 +46,10 @@ public class BoardDeleteHandler implements Command {
       System.out.println("게시글 삭제를 취소하였습니다.");
       return;
     }
-
-    boardDao.delete(no);
     commentDao.autoDelete(no);
     likeDao.autoDelete(no);
+
+    boardDao.delete(no);
 
     sqlSession.commit();
 
