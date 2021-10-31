@@ -171,7 +171,7 @@ public class ClientApp {
     // Command 객체 준비
     commandMap.put("/admin/approval", new AdminApprovalHandler(medicineDao, sqlSession));
     commandMap.put("/admin/list", new AdminListHandler(medicineDao, reportDao));
-    commandMap.put("/admin/delete", new AdminReportDeleteHandler(reportDao, boardDao, mailBoxDao));
+    commandMap.put("/admin/delete", new AdminReportDeleteHandler(reportDao, boardDao, mailBoxDao,sqlSession));
     commandMap.put("/intro", new IntroMenu());
 
     commandMap.put("/medicine/add", new MedicineAddHandler(medicineDao, sqlSession));

@@ -80,7 +80,7 @@ public class AdminListHandler implements Command {
 
         System.out.printf("게시판 번호 : %d\n"
             + "게시판 종류 : %s\n"
-            + "제목 : %s\n"
+            + "게시글 제목 : %s\n"
             + "신고 내용 : %s\n"
             + "신고 요청자 : %s\n",
             report.getRequestBoard().getNo(),

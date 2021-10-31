@@ -48,6 +48,11 @@
     insert into apus_report(reason,member_no,board_no)
     values(#{reason},#{requester.no},#{requestBoard.no})
    </insert>
+   
+   <delete id="delete" parameterType="int">
+   delete from apus_report
+   where board_no=#{no}
+  </delete>
   
   
   <!-- <select id="findReport" resultMap="ReportMap">
