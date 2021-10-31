@@ -32,7 +32,6 @@ public class CommentDeleteHandler implements Command {
     System.out.println("[댓글 삭제]");
 
     Member loginUser = memberDao.findById(AuthLoginHandler.getLoginUser().getId());
-    //Comment comment = new Comment();
     List<Comment> commentList = commentDao.findAll();
 
     if (commentList == null) {
