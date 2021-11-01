@@ -89,15 +89,16 @@ public class AdminReportDeleteHandler implements Command{
 
       String input2 = Prompt.inputString("❗ 정말 삭제하시겠습니까? (y/N)> ");
       if(input2.equalsIgnoreCase("y")) {
-        reportDao.delete(no);
-        boardDao.delete(no);
-        sqlSession.commit();
 
-        System.out.println("보드 넘버 맞는거 삭제!");
+
         request.setAttribute("no", no);
         request.getRequestDispatcher("/comment/autoDelete").forward(request);
         request.getRequestDispatcher("/like/autoDelete").forward(request);
-        System.out.println("코멘트, 라이크 자동삭제!");
+
+        reportDao.delete(no);
+        boardDao.delete(no);
+        sqlSession.commit();
+        return;
 
       }
     }
