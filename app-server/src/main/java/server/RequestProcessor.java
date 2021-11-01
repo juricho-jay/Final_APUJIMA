@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import com.google.gson.Gson;
-import pms.table.JsonDataTable;
+import apus.table.JsonDataTable;
 
 // 역할
 // - 클라이언트와 통신하는 일을 담당한다.
