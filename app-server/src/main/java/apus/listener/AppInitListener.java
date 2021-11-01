@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebListener;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import com.eomcs.pms.dao.MemberDao;
+import apus.dao.MemberDao;
 
 @WebListener
 public class AppInitListener implements ServletContextListener {

@@ -1,6 +1,5 @@
 package apus.handler;
 
-import Menu.Menu;
 import apus.dao.MemberDao;
 import apus.domain.Member;
 import util.Prompt;
@@ -42,22 +41,16 @@ public class AuthUserInfoHandler implements Command {
 
 
     while(true) {
-      String input = Prompt.inputString("[회원 탈퇴(D) / 뒤로가기(0)]");
+      String input = Prompt.inputString("[내정보 변경(U) / 회원 탈퇴(D) / 뒤로가기(0)]");
 
       switch (input) {
+        case "U":
+        case "u":
+          request.getRequestDispatcher("/member/update").forward(request);
+          return;
         case "D":
         case "d":
-          String status = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
-          if (status.equalsIgnoreCase("n") || status.length() == 0) {
-            System.out.println("회원 삭제를 취소하였습니다.");
-            return;
-          }
-
-          memberDao.delete(loginUserId);
-
-          AuthLoginHandler.loginUser = null;
-          AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
-          System.out.println("회원 탈퇴가 완료되었습니다. 그동안 이용해주셔서 감사합니다.");
+          request.getRequestDispatcher("/member/delete").forward(request);
           return;
         case "0":
           return;

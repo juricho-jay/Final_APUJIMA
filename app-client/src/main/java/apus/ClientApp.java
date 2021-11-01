@@ -64,7 +64,9 @@ import apus.handler.MedicineRequestHandler;
 import apus.handler.MedicineSearchHandler;
 import apus.handler.MedicineUpdateHandler;
 import apus.handler.MemberAddHandler;
+import apus.handler.MemberDeleteHandler;
 import apus.handler.MemberListHandler;
+import apus.handler.MemberUpdateHandler;
 import apus.handler.PlantAddHandler;
 import apus.handler.PlantDeleteHandler;
 import apus.handler.PlantGrowHandler;
@@ -209,6 +211,8 @@ public class ClientApp {
 
     commandMap.put("/member/add", new MemberAddHandler(memberDao, sqlSession));
     commandMap.put("/member/list", new MemberListHandler(memberDao));
+    commandMap.put("/member/update", new MemberUpdateHandler(memberDao));
+    commandMap.put("/member/delete", new MemberDeleteHandler(memberDao, sqlSession));
 
     commandMap.put("/auth/login", new AuthLoginHandler(memberDao));
     commandMap.put("/auth/logout", new AuthLogoutHandler());

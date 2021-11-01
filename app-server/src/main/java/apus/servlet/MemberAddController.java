@@ -7,12 +7,12 @@ import apus.domain.Doctor;
 import apus.domain.Member;
 import util.Prompt;
 
-public class MemberAddHandler implements Command{
+public class MemberAddController implements Command{
 
   MemberDao memberDao;
   SqlSession sqlSession;
 
-  public MemberAddHandler(MemberDao memberDao, SqlSession sqlSession) {
+  public MemberAddController(MemberDao memberDao, SqlSession sqlSession) {
     this.memberDao = memberDao;
     this.sqlSession = sqlSession;
   }
@@ -129,4 +129,3 @@ public class MemberAddHandler implements Command{
   }
 
 }
-

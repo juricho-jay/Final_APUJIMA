@@ -4,11 +4,11 @@ import java.util.List;
 import apus.dao.MemberDao;
 import apus.domain.Member;
 
-public class MemberListHandler implements Command{
+public class MemberListController implements Command{
 
   MemberDao memberDao;
 
-  public MemberListHandler(MemberDao memberDao) {
+  public MemberListController(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
   @Override
@@ -60,7 +60,3 @@ public class MemberListHandler implements Command{
     }
   }
 }
-
-
-
-

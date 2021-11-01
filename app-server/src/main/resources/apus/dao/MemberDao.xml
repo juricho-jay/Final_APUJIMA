@@ -129,8 +129,7 @@
       sex=#{sex},
       point=#{point},
       role=#{doctorOrNot}
-    where
-      member_no=#{no}
+    where member_no=#{values}
    </update>
    
       <!-- 멤버 정보 변경하는 일 외에는 update2를 써야
