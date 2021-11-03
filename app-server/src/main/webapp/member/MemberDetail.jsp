@@ -5,13 +5,16 @@
 <html>
 <head>
   <title>회원상세</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  
   <style>
-  label {
-    margin-right: 5px;
-    text-align: right;
-    display: inline-block;
-    width: 60px;
-  }
+    .container {
+        xborder: 1px solid red;
+        width: 640px;
+    }
   </style>
 </head>
 <body>
