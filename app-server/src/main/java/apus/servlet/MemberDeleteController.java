@@ -5,7 +5,6 @@ import org.apache.ibatis.session.SqlSession;
 import apus.dao.MemberDao;
 import apus.domain.Doctor;
 import apus.domain.Member;
-import util.Prompt;
 
 public class MemberDeleteController implements Command{
 

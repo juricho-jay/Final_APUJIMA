@@ -23,7 +23,7 @@
 <!-- <form action='add'> -->
 <form action='add'>
 <div class="col-md-3">
-  <label for="validationServer04" class="form-label">일반/의사</label>
+  <label for="validationServer04" class="form-label ">일반/의사</label>
   <select class="form-select is-invalid" name="userType" id="validationServer04" aria-describedby="validationServer04Feedback" required>
     <option selected disabled value="0">선택</option>
     <option value="1">일반 회원</option>
@@ -77,6 +77,11 @@
   </div>
   <div class="col-md-6">
     <label for="validationServer03" class="form-label">City</label>
+    <script>
+    
+    <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+
+    </script>
     <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
     <div id="validationServer03Feedback" class="invalid-feedback">
       필수 **입니다.
