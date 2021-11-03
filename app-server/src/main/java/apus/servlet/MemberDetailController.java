@@ -28,8 +28,8 @@ public class MemberDetailController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      String no = Integer.parseInt(request.getParameter("no"));
-      Member member = memberDao.findById(no);
+      int no = Integer.parseInt(request.getParameter("no"));
+      Member member = memberDao.findByNo(no);
 
       if (member == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");

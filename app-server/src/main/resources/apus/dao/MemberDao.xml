@@ -84,6 +84,27 @@
       apus_member
     where id=#{id}
   </select>
+  
+    <select id="findByNo" resultMap="MemberMap" parameterType="int">
+    select
+      member_no,
+      name,
+      id,
+      password,
+      birth,
+      tel,
+      email,
+      photo,
+      sex,
+      created_dt,
+      point,
+      role,
+      active
+    from
+      apus_member
+    where 
+      member_no=#{no}
+  </select>
    
   <select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
     select
@@ -129,7 +150,8 @@
       sex=#{sex},
       point=#{point},
       role=#{doctorOrNot}
-    where member_no=#{values}
+    where 
+      member_no=#{values}
    </update>
    
       <!-- 멤버 정보 변경하는 일 외에는 update2를 써야

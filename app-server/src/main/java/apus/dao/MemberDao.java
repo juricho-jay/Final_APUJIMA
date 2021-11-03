@@ -10,7 +10,7 @@ public interface MemberDao {
   List<Member> findDoctor() throws Exception;
   List<Member> findMan() throws Exception;
   List<Member> findWoman() throws Exception;
-  //  Member findByNo(int no) throws Exception;
+  Member findByNo(int no) throws Exception;
   Member findByName(String name) throws Exception;
   Member findById(String id) throws Exception;
   Member findByIdPwd(String id, String password) throws Exception;
