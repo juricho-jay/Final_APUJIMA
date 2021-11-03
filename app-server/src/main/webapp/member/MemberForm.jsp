@@ -63,10 +63,10 @@
     </div>
 </div>
 <div class="mb-3 row">
-  <label for='f-birthDay' class="col-sm-2 col-form-label">생일</label>
+  <label for='f-birth' class="col-sm-2 col-form-label">생일</label>
     <!-- <input id='f-birthDay' type='text' name='birthDay' class="form-control"> -->
   <div class="col-sm-7">
-      <input id='f-birthDay' type='text' name='birthDay' class="form-control">
+      <input id='f-birth' type='text' name='birth' class="form-control">
     <!-- <select class="form-select" id="signupYear" name="signupYear" value="년도">
 <option value="">년도</option>
 <option value="2021">2021</option>
