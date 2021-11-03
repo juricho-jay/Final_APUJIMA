@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,9 +109,10 @@ form{
   color:#fff;
 }
 
-btn > b {
+ btn > b {
   margin-left: 50%;
-}
+} 
+
   
   </style>
 </head>
@@ -141,13 +143,14 @@ btn > b {
         <div class="row">
            <b><a href='DoctorForm.jsp' class="btn">의사 회원가입</a></b>
         </div>
+        </div>
           <div class="row">
             <p><a href="list">목록</a></p>
+            <p><a href="../auth/LogIn.jsp">로그인</a></p>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
 </body>
 </html>
