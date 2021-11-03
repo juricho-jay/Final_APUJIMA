@@ -23,10 +23,6 @@
 <h1>회원가입</h1>
 <form action='add'>
 <div class="col-md-3">
-<<<<<<< HEAD
-  <label for="validationServer04" class="form-label ">일반/의사</label>
-  <select class="form-select is-invalid" name="userType" id="validationServer04" aria-describedby="validationServer04Feedback" required>
-=======
   <label for="validationServer04" class="form-label">-일반회원 가입 페이지-</label>
   <!-- <select class="form-select is-invalid" name="userType" id="validationServer04" aria-describedby="validationServer04Feedback" required>
 >>>>>>> b6e15b3759b79dde3a02669aa19a1f3809a9b2c7
