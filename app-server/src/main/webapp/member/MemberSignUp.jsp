@@ -145,7 +145,7 @@ form{
         </div>
         </div>
           <div class="row">
-            <p><a href="list">목록</a></p>
+            <!-- <p><a href="list">목록</a></p> -->
             <p><a href="../auth/LogIn.jsp">로그인</a></p>
           </div>
         </div>
