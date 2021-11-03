@@ -23,17 +23,27 @@
     <label for='f-name'>이름</label>
     <input id='f-name' type='text' name='name' value='${member.name}'><br>
     
-    <label for='f-email'>이메일</label> 
-    <input id='f-email' type='email' name='email' value='${member.email}'><br>
+    <label for='f-id'>아이디</label>
+    <input id='f-id' type='text' name='id' value='${member.id}'><br>
     
     <label for='f-password'>암호</label> 
     <input id='f-password' type='password' name='password'><br>
     
+    <label for='f-birthDay'>생일</label>
+    <input id='f-ibirthDay' type='text' name='birthDay' value='${member.birthDay}'><br>
+    
+    <label for='f-email'>이메일</label> 
+    <input id='f-email' type='email' name='email' value='${member.email}'><br>
+    
+    <label for='f-tel'>전화</label> 
+    <input id='f-tel' type='tel' name='tel' value='${member.phoneNum}'><br>
+    
     <label for='f-photo'>사진</label> 
     <input id='f-photo' type='text' name='photo' value='${member.photo}'><br>
     
-    <label for='f-tel'>전화</label> 
-    <input id='f-tel' type='tel' name='tel' value='${member.tel}'><br>
+    <label for='f-sex'>성별</label> 
+    <input id='f-sex' type='text' name='sex' value='${member.sex}'><br>
+    
     
     <label for='f-registeredDate'>등록일</label> 
     <span id='f-registeredDate'>${member.registeredDate}</span><br>
