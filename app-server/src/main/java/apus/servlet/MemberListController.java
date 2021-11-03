@@ -17,7 +17,6 @@ import apus.domain.Member;
 public class MemberListController extends HttpServlet{
 
   private static final long serialVersionUID = 1L;
-
   MemberDao memberDao;
 
   @Override
@@ -49,4 +48,5 @@ public class MemberListController extends HttpServlet{
       요청배달자.forward(request, response);
     }
   }
+
 }
