@@ -17,7 +17,6 @@
 <body>
 <h1>회원가입</h1>
 <form action='add'>
-<form action='add'>
   <div class="col-md-4">
     <label for="validationServer01" class="form-label">이름</label>
     <input type="text" class="form-control is-valid" id="validationServer01" value="Mark" required>
