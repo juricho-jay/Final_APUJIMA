@@ -60,7 +60,7 @@
   <!-- <div class="col-sm-10"> -->
   <div class="col-sm-3">
     <!-- <input id='f-birthDay' type='text' name='birthDay' class="form-control"> -->
-    <select class="form-select is-invalid" id="signupYear" name="signupYear" value="년도">
+    <select class="form-select" id="signupYear" name="signupYear" value="년도">
 <option value="">년도</option>
 <option value="2021">2021</option>
 <option value="2020">2020</option>
@@ -166,7 +166,7 @@
 </select>
 </div>
 <div class="col-sm-3">
-<select class="form-select is-invalid" id="signupMonth" name="signupMonth" value="월">
+<select class="form-select" id="signupMonth" name="signupMonth" value="월">
 <option value="">월</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -183,7 +183,7 @@
 </select>
 </div>
 <div class="col-sm-3">
-<select class="form-select is-invalid" id="signupDate" name="signupDate" value="일">
+<select class="form-select" id="signupDate" name="signupDate" value="일">
 <option value="">일</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -290,12 +290,12 @@
 </form>
 </div><!-- .container -->
 
-<label for='f-name'>이름</label> <input id='f-name' type='text' name='name'><br>
+<!-- <label for='f-name'>이름</label> <input id='f-name' type='text' name='name'><br>
 <label for='f-email'>이메일</label> <input id='f-email' type='email' name='email'><br>
 <label for='f-password'>암호</label> <input id='f-password' type='password' name='password'><br>
 <label for='f-photo'>사진</label> <input id='f-photo' type='text' name='photo'><br>
 <label for='f-tel'>전화</label> <input id='f-tel' type='tel' name='tel'><br>
-<button>등록</button><br>
+<button>등록</button><br> -->
 </form>
 </body>
 </html>
