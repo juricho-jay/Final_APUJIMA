@@ -1,10 +1,15 @@
 package apus.servlet;
 
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import apus.dao.MemberDao;
 import apus.domain.Member;
 
-public class MemberListController implements Command{
+public class MemberListController extends GenericServlet{
 
   MemberDao memberDao;
 
@@ -58,5 +63,11 @@ public class MemberListController implements Command{
             member.getRegisteredDate());
       }
     }
+  }
+  @Override
+  public void service(ServletRequest req, ServletResponse res)
+      throws ServletException, IOException {
+    // TODO Auto-generated method stub
+
   }
 }
