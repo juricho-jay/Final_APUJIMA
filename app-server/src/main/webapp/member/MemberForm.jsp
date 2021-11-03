@@ -15,6 +15,13 @@
     xborder: 1px solid red;
     width: 640px;
   }
+  .gender{
+    xborder: 1px solid red;
+    width: 100px;
+    margin-top: 5px;
+  }
+  
+  
   </style>
 </head>
 <body>
@@ -57,10 +64,10 @@
 </div>
 <div class="mb-3 row">
   <label for='f-birthDay' class="col-sm-2 col-form-label">생일</label>
-  
-  <div class="col-sm-3">
     <!-- <input id='f-birthDay' type='text' name='birthDay' class="form-control"> -->
-    <select class="form-select" id="signupYear" name="signupYear" value="년도">
+  <div class="col-sm-7">
+      <input id='f-birthDay' type='text' name='birthDay' class="form-control">
+    <!-- <select class="form-select" id="signupYear" name="signupYear" value="년도">
 <option value="">년도</option>
 <option value="2021">2021</option>
 <option value="2020">2020</option>
@@ -216,7 +223,7 @@
 <option value="29">29</option>
 <option value="30">30</option>
 <option value="31">31</option>
-</select>
+</select> -->
 </div>
   </div>
 
@@ -233,17 +240,24 @@
   </div>
 </div>
 <div class="mb-3 row">
+
   <label for='f-sex' class="col-sm-2 col-form-label">성별</label>
-  <div class="col-sm-6">
+
+  <div class="col-sm-3 gender">
 	<div class="form-check form-check-inline">
 	  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
 	  <label class="form-check-label" for="inlineRadio1">여성</label>
 	</div>
+	</div>
+
+	<div class="col-sm-3 gender">
 	<div class="form-check form-check-inline">
 	  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
 	  <label class="form-check-label" for="inlineRadio2">남성</label>
 	</div>
-  </div>
+	</div>
+
+  
 </div>
 
   <div class="col-12">
