@@ -22,7 +22,7 @@
 <div class=""></div>
 <h1>회원가입</h1>
 <form action='add'>
-<div class="col-md-3">
+<div class="col-md-6">
   <label for="validationServer04" class="form-label">-일반회원 가입 페이지-</label>
   <!-- <select class="form-select is-invalid" name="userType" id="validationServer04" aria-describedby="validationServer04Feedback" required>
     <option selected disabled value="0">선택</option>
@@ -57,10 +57,10 @@
 </div>
 <div class="mb-3 row">
   <label for='f-birthDay' class="col-sm-2 col-form-label">생일</label>
-  <!-- <div class="col-sm-10"> -->
+  
   <div class="col-sm-3">
     <!-- <input id='f-birthDay' type='text' name='birthDay' class="form-control"> -->
-    <select class="form-select is-invalid" id="signupYear" name="signupYear" value="년도">
+    <select class="form-select" id="signupYear" name="signupYear" value="년도">
 <option value="">년도</option>
 <option value="2021">2021</option>
 <option value="2020">2020</option>
@@ -166,7 +166,7 @@
 </select>
 </div>
 <div class="col-sm-3">
-<select class="form-select is-invalid" id="signupMonth" name="signupMonth" value="월">
+<select class="form-select" id="signupMonth" name="signupMonth" value="월">
 <option value="">월</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -183,7 +183,7 @@
 </select>
 </div>
 <div class="col-sm-3">
-<select class="form-select is-invalid" id="signupDate" name="signupDate" value="일">
+<select class="form-select" id="signupDate" name="signupDate" value="일">
 <option value="">일</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -219,7 +219,7 @@
 </select>
 </div>
   </div>
-<!-- </div> -->
+
 <div class="mb-3 row">
   <label for='f-phoneNum' class="col-sm-2 col-form-label">휴대전화</label>
   <div class="col-sm-6">
@@ -245,58 +245,11 @@
 	</div>
   </div>
 </div>
-
-
-  
-  <!-- <div class="col-md-4">
-    <label for="validationServerUsername" class="form-label">Username</label>
-    <div class="input-group has-validation">
-      <span class="input-group-text" id="inputGroupPrepend3">@</span>
-      <input type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
-      <div id="validationServerUsernameFeedback" class="invalid-feedback">
-        이름은 필수 입력입니다.
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <label for="validationServer03" class="form-label">City</label>
-    <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
-    <div id="validationServer03Feedback" class="invalid-feedback">
-      필수 **입니다.
-    </div>
-  </div>
- 
-  <div class="col-md-3">
-    <label for="validationServer05" class="form-label">Zip</label>
-    <input type="text" class="form-control is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" required>
-    <div id="validationServer05Feedback" class="invalid-feedback">
-      Please provide a valid zip.
-    </div>
-  </div>
-  <div class="col-12">
-    <div class="form-check">
-      <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
-      <label class="form-check-label" for="invalidCheck3">
-        Agree to terms and conditions
-      </label>
-      <div id="invalidCheck3Feedback" class="invalid-feedback">
-        You must agree before submitting.
-      </div>
-    </div>
-  </div> -->
   <div class="col-12">
     <button class="btn btn-primary btn-sm" type="submit">회원 가입</button>
   </div>
 </form>
 </div><!-- .container -->
-
-<!-- <label for='f-name'>이름</label> <input id='f-name' type='text' name='name'><br>
-<label for='f-email'>이메일</label> <input id='f-email' type='email' name='email'><br>
-<label for='f-password'>암호</label> <input id='f-password' type='password' name='password'><br>
-<label for='f-photo'>사진</label> <input id='f-photo' type='text' name='photo'><br>
-<label for='f-tel'>전화</label> <input id='f-tel' type='tel' name='tel'><br>
-<button>등록</button><br> -->
-<!-- </form> -->
 </body>
 </html>
 
