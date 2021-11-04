@@ -37,11 +37,11 @@
 <div class="content">
   <label for="box">제목</label>
   <br>
-  <textarea id="box" name="box" rows=1 cols=74></textarea>
+  <textarea id="box" name="box" rows=1 cols=73></textarea>
   <br><br>
   <label for="box">내용</label>
   <br>
-  <textarea id="box" name="box" rows=10 cols=74></textarea>
+  <textarea id="box" name="box" rows=10 cols=73></textarea>
 </div>
 <div class="sendbtn">
 <a href='MailBoxAdd.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br>
