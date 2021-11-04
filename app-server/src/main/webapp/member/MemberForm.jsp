@@ -15,6 +15,13 @@
     xborder: 1px solid red;
     width: 640px;
   }
+  .gender{
+    xborder: 1px solid red;
+    width: 100px;
+    margin-top: 5px;
+  }
+  
+  
   </style>
 </head>
 <body>
@@ -55,12 +62,26 @@
       <input id='f-email' type='email' name='email' class="form-control">
     </div>
 </div>
+
+<div class="mb-3 row">
+  <label for='f-phoneNum' class="col-sm-2 col-form-label">생일</label>
+  <div class="col-sm-6">
+    <input id='f-birthDay' type='text' name='birthday' class="form-control">
+  </div>
+  </div>
+<!--  
 <div class="mb-3 row">
   <label for='f-birthDay' class="col-sm-2 col-form-label">생일</label>
   
   <div class="col-sm-3">
-    <!-- <input id='f-birthDay' type='text' name='birthDay' class="form-control"> -->
+    <!-- <input id='f-birthDay' type='text' name='birthDay' class="form-control"> 
     <select class="form-select" id="signupYear" name="signupYear" value="년도">
+  <label for='f-birth' class="col-sm-2 col-form-label">생일</label>
+    <!-- <input id='f-birthDay' type='text' name='birthDay' class="form-control"> -->
+  <div class="col-sm-7">
+      <input id='f-birth' type='text' name='birth' class="form-control">
+    <!-- <select class="form-select" id="signupYear" name="signupYear" value="년도">
+>>>>>>> f5c88ad77ba1675025b7285d037933cd46a2830f
 <option value="">년도</option>
 <option value="2021">2021</option>
 <option value="2020">2020</option>
@@ -216,9 +237,9 @@
 <option value="29">29</option>
 <option value="30">30</option>
 <option value="31">31</option>
-</select>
+</select> -->
 </div>
-  </div>
+  </div> -->
 
 <div class="mb-3 row">
   <label for='f-phoneNum' class="col-sm-2 col-form-label">휴대전화</label>
@@ -232,20 +253,28 @@
     <input id='f-photo' type='text' name='photo' class="form-control">
   </div>
 </div>
+<!--  
 <div class="mb-3 row">
+
   <label for='f-sex' class="col-sm-2 col-form-label">성별</label>
-  <div class="col-sm-6">
+
+  <div class="col-sm-3 gender">
 	<div class="form-check form-check-inline">
 	  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
 	  <label class="form-check-label" for="inlineRadio1">여성</label>
 	</div>
+	</div>
+
+	<div class="col-sm-3 gender">
 	<div class="form-check form-check-inline">
 	  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
 	  <label class="form-check-label" for="inlineRadio2">남성</label>
 	</div>
-  </div>
-</div>
+	</div>
 
+  
+</div>
+-->
   <div class="col-12">
     <button class="btn btn-primary btn-sm" type="submit">회원 가입</button>
   </div>
@@ -256,8 +285,8 @@
 <label for='f-password'>암호</label> <input id='f-password' type='password' name='password'><br>
 <label for='f-photo'>사진</label> <input id='f-photo' type='text' name='photo'><br>
 <label for='f-tel'>전화</label> <input id='f-tel' type='tel' name='tel'><br>
-<button>등록</button><br> -->
-</form>
+<button>등록</button><br>
+</form>  -->
 </body>
 </html>
 
