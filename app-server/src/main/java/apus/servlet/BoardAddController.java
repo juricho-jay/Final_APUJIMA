@@ -35,10 +35,10 @@ public class BoardAddController extends HttpServlet {
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+      throws ServletException, IOException { 
     Member writer = memberDao.findById(AuthLoginController.getLoginUser().getId());
     Board board = new Board();
-
+    int whichBoard = Integer.parseInt(request.getParameter("whichBoard"));
     //    String convertDate = request.getParameter("birthDay");
     //    SimpleDateFormat convertDate2 = new SimpleDateFormat("yyyy-MM-dd");
     //
@@ -47,8 +47,8 @@ public class BoardAddController extends HttpServlet {
     board.setTitle(request.getParameter("title"));
     board.setWriter(writer);
     board.setContent(request.getParameter("content"));
-    /*    
-   board.setWhichBoard(request.getParameter("whichBoard"));
+    board.setWhichBoard(whichBoard);
+    /*
     board.setRegisteredDate(request.getParameter("date"));
      내일 질문하기.
      */
