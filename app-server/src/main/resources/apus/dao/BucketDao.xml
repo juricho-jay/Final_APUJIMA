@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="apus.dao.BucketDao">
+  
+  <resultMap type="Bucket" id="BucketMap">
+    <id column="bucket_no" property="no"/> 
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="created_dt" property="registeredDate"/>
+    <result column="completed_dt" property="completedDate"/>
+    <result column="complete" property="complete"/>
+    
+    <association property="writer" javaType="member">
+      <id column="writer_no" property="no"/>
+      <result column="writer_id" property="id"/>
+      <result column="writer_name" property="name"/>
+      <result column="writer_email" property="email"/>
+    </association>
+    
+  </resultMap>
+ 
+  
+  <select id="findAll" resultMap="BucketMap">
+    select
+      t.bucket_no,
+      t.title,
+      t.content,
+      t.created_dt,
+      t.completed_dt,
+      t.complete,
+      m.id writer_id,
+      m.name writer_name,
+      m.email writer_email
+    from
+      apus_bucket t
+      inner join apus_member m on t.member_no=m.member_no
+    order by
+      t.bucket_no desc    
+
+  </select>
+   
+  <insert id="insert" parameterType="bucket" 
+  useGeneratedKeys="true" keyColumn="bucket_no" keyProperty="no">
+    insert into apus_bucket(title,content,member_no,created_dt,completed_dt,complete)
+    values(#{title},#{content},#{writer.no},#{registeredDate},#{completedDate},#{complete})
+   </insert>
+   
+     <select id="findByNo" resultMap="BucketMap" parameterType="int">
+    select 
+      t.bucket_no,
+      t.title,
+      t.content,
+      t.created_dt,
+      t.completed_dt,
+      t.complete,
+      m.id writer_id,
+      m.name writer_name,
+      m.email writer_email
+    from 
+      apus_bucket t
+      inner join apus_member m on t.member_no=m.member_no
+    where bucket_no=#{no}
+  </select>
+  
+  <update id="update" parameterType="bucket">
+    update apus_bucket set
+      completed_dt=now(),
+      complete=1
+    where 
+      bucket_no=#{no}
+  </update>
+  
+   
+  <update id="failupdate" parameterType="bucket">
+    update apus_bucket set
+      completed_dt=null,
+      complete=0
+    where 
+      bucket_no=#{no}
+  </update>
+  
+  <select id="findByKeyword" resultMap="BucketMap" parameterType="string">
+     select
+      t.bucket_no,
+      t.title,
+      t.content,
+      t.created_dt,
+      t.completed_dt,
+      t.complete,
+      m.id writer_id,
+      m.name writer_name,
+      m.email writer_email
+    from
+      apus_bucket t
+      inner join apus_member m on t.member_no=m.member_no
+    where t.title like(concat('%',#{keyword},'%')) or t.content like (concat('%',#{keyword},'%'));
+  </select>
+
+</mapper>
+
+
+
+
+
+
