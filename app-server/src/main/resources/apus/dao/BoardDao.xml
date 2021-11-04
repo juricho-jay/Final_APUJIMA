@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="apus.dao.BoardDao">
+  
+  <resultMap type="Board" id="BoardMap">
+    <id column="board_no" property="no"/> 
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="created_dt" property="registeredDate"/>
+    <result column="view_cnt" property="viewCount"/>
+    <result column="type" property="whichBoard"/>
+    
+    <association property="writer" javaType="member">
+      <id column="member_no" property="no"/>
+      <result column="writer_id" property="id"/>
+      <result column="writer_name" property="name"/>
+    </association>
+    
+  </resultMap>
+  
+  
+   <select id="findAll" resultMap="BoardMap">
+    select
+       b.board_no,
+       b.title,
+       b.content,
+       b.created_dt,
+       b.view_cnt,
+       b.type,
+       m.member_no,
+       m.id writer_id,
+       m.name writer_name
+    from
+      apus_board b
+      inner join apus_member m on b.member_no=m.member_no
+    order by
+      b.board_no desc
+  </select>
+  
+  <!-- <select id="findComment" parameterType="int">
+    select
+	    c.coment_no,
+	    c.content
+	    m.member_no,
+	    m.id
+    from apus_comment c
+      inner join apus_member_m on c.member_no=m.member_no
+    where
+      board_no=#{no}
+  </select>
+  -->
+  
+  <!-- freeboard -->
+	<insert id="insert" parameterType="board"
+	useGeneratedKeys="true" keyColumn="board_no" keyProperty="no">
+	 insert into apus_board(title,content,type,member_no) 
+	 values(#{title},#{content},'1',#{writer.no})
+	</insert>
+	
+	<!-- doctorboard -->
+	<insert id="insert2" parameterType="board" 
+	useGeneratedKeys="true" keyColumn="board_no" keyProperty="no">
+  insert into apus_board(title,content,type,member_no) 
+   values(#{title},#{content},'2',#{writer.no})
+  </insert>
+  
+  <!-- noticeboard -->
+  <insert id="insert3" parameterType="board" 
+  useGeneratedKeys="true" keyColumn="board_no" keyProperty="no">
+  insert into apus_board(title,content,type,member_no) 
+   values(#{title},#{content},'3',#{writer.no})
+  </insert>
+  
+	 <update id="updateCount" parameterType="int">
+    update apus_board set
+      view_cnt = view_cnt + 1
+    where board_no=#{no}
+   </update>
+	
+	
+	<update id="update" parameterType="board">
+	  update apus_board set
+     title=#{title},
+     content=#{content}
+    where board_no=#{no}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+	 delete from apus_board
+	 where board_no=#{no}
+	</delete>
+
+
+	<select id="findByNo" resultMap="BoardMap" parameterType="int">
+	 select
+      b.board_no,
+       b.title,
+       b.content,
+       b.created_dt,
+       b.view_cnt,
+       b.type,
+       m.member_no,
+       m.id writer_id,
+       m.name writer_name
+    from
+      apus_board b
+      inner join apus_member m on b.member_no=m.member_no
+    where board_no=#{no}
+	</select>
+  <!--
+	
+	<select id="findByName" resultMap="MemberMap" parameterType="string">
+   select
+      member_no,
+      name,
+      id,
+      password,
+      birth,
+      tel,
+      email,
+      photo,
+      sex,
+      created_dt,
+      point,
+      role,
+      active
+    from
+      apus_member
+    where name=#{name}
+  </select>
+  -->
+</mapper>
+
+
+
+
+
+
+
