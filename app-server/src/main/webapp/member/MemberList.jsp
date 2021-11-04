@@ -40,6 +40,10 @@
 </thead>
 <tbody>
 
+<c:if test='${not empty reviewList}'>
+
+</c:if>
+
 <c:forEach items="${memberList}" var="member">
 <tr>
     <td>${member.no}</td>

@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import apus.dao.BoardDao;
 import apus.dao.BucketDao;
+import apus.dao.MailBoxDao;
 import apus.dao.MemberDao;
 
 @WebListener
@@ -30,6 +31,7 @@ public class AppInitListener implements ServletContextListener {
       MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
       BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
       BucketDao bucketDao = sqlSession.getMapper(BucketDao.class);
+      MailBoxDao mailBoxDao = sqlSession.getMapper(MailBoxDao.class);
 
 
       // 모든 웹 애플리케이션의 컴포넌트(서블릿, 리스너, 필터)가 공유할 객체를 두는 저장소
@@ -41,6 +43,7 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("memberDao", memberDao);
       웹애플리케이션공용저장소.setAttribute("boardDao", boardDao);
       웹애플리케이션공용저장소.setAttribute("bucketDao", bucketDao);
+      웹애플리케이션공용저장소.setAttribute("mailBoxDao", mailBoxDao);
 
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
