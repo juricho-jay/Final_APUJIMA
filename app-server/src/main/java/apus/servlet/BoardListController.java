@@ -14,7 +14,7 @@ import apus.dao.BoardDao;
 import apus.domain.Board;
 
 @WebServlet("/board/list")
-public class BoardListController extends HttpServlet{
+public class BoardListController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
   BoardDao boardDao;
