@@ -5,6 +5,8 @@
 <html>
 <head>
   <title>회원등록</title>
+  
+  
 </head>
 <body>
 <h1>회원등록결과(MVC)</h1>
