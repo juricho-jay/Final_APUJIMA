@@ -1,9 +1,10 @@
 package apus.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 
-public class MailBox {
+public class MailBox implements Serializable {
 
   private int no;  // 아이디 별로 1번부터 보이는 번호
   private Member sender;

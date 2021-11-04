@@ -10,60 +10,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import apus.dao.BoardDao;
+import apus.dao.MailBoxDao;
 import apus.dao.MemberDao;
-import apus.domain.Board;
-import apus.domain.Member;
+import apus.domain.MailBox;
 
-@WebServlet("/board/add")
-public class BoardAddController extends HttpServlet {
+@WebServlet("/mailBox/send")
+public class MailBoxSendController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  BoardDao boardDao;
-  MemberDao memberDao;
+  MailBoxDao mailBoxDao;
   SqlSession sqlSession;
+  MemberDao memberDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    mailBoxDao = (MailBoxDao) 웹애플리케이션공용저장소.getAttribute("mailBoxDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    boardDao = (BoardDao) 웹애플리케이션공용저장소.getAttribute("boardDao");
-
   }
-
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException { 
-    Member writer = memberDao.findById(AuthLoginController.getLoginUser().getId());
-    Board board = new Board();
-    int whichBoard = Integer.parseInt(request.getParameter("whichBoard"));
-    //    String convertDate = request.getParameter("birthDay");
-    //    SimpleDateFormat convertDate2 = new SimpleDateFormat("yyyy-MM-dd");
-    //
-    //    Date bDate = convertDate2.parse(convertDate);
+      throws ServletException, IOException {
 
-    board.setTitle(request.getParameter("title"));
-    board.setWriter(writer);
-    board.setContent(request.getParameter("content"));
-    board.setWhichBoard(whichBoard);
-    /*
-    board.setRegisteredDate(request.getParameter("date"));
-     내일 질문하기.
-     */
+    MailBox mailBox = new MailBox();
 
-    /*
-     board.setComment/like.. detail에서 보여주는게 맞지않나../
-     */
-
-
+    mailBox.setTitle(request.getParameter("title"));
+    mailBox.setContent(request.getParameter("content"));
 
     try {
-      boardDao.insert(board);
+      mailBoxDao.insert(mailBox);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("MemberAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("MailBoxSend.jsp").forward(request, response);
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
@@ -72,13 +52,7 @@ public class BoardAddController extends HttpServlet {
       // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
       요청배달자.forward(request, response);
-
-
-
-
-
-
-
     }
   }
 }
+

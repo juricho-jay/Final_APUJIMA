@@ -7,9 +7,9 @@
 <head>
   <title>회원가입 유형</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../bootstrap/dist/bootstrap.css"></script>
+  
+  <script src="../node_modules/@popperjs/core//dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
   <style>
   .container {

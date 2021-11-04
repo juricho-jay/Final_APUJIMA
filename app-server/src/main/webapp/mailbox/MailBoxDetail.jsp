@@ -14,35 +14,39 @@
   <style>
     .container {
     xborder: 1px solid red;
-    xwidth: 640px;
+    width: 640px;
+    }
+    .listbtn {
+    xborder: 1px solid red;
+    width: 640px;
+    text-align: center;
+    margin-top: 20px;
     }
   </style>
   
 </head>
 <body>
 <div class="container">
-<h1>쪽지함</h1>
-<a href='MailBoxSend.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br>
-<table class="table table-hover">
-<thead>
-  <tr>
-    <th>번호</th>
-    <th>보낸사람</th>
-    <th>제목</th>
-    <th>날짜</th>
-  </tr>
-</thead>
+<h1>쪽지함 상세보기</h1>
+<table class = "table">
 <tbody>
-<c:forEach items="${mailBoxList}" var="mailBox">
 <tr>
-  <td>${mailBox.no}</td>
-  <td><a href='detail?no=${mailBox.no}'>${mailBox.receiver}</a></td> 
-  <td>${mailBox.content}</td>
-  <td>${mailBox.receivedTime}</td>
+	<td style = "width: 20%">제목</td>
+	<td colspan ="2">${mailbox.title}</td>
 </tr>
-</c:forEach>
+<tr>
+	<td>작성자</td>
+	<td>${mailbox.receiver.id}</td>
+</tr>
+<tr>
+	<td>내용</td>
+	<td>${mailbox.content}</td>
+</tr>
 </tbody>
 </table>
+<div class="listbtn">
+<a href='MailBoxList.jsp' class="btn btn-outline-primary btn-sm">목록</a><br>
+</div>
 </div><!-- .container -->
 </body>
 </html>
