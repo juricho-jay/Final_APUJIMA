@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>쪽지함</title>
+  <title>쪽지보내기</title>
    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
   <script src="../node_modules/@popperjs/core//dist/umd/popper.js"></script>
@@ -21,14 +21,13 @@
 </head>
 <body>
 <div class="container">
-<h1>쪽지함</h1>
-<a href='MailBoxSend.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br>
+<h1>쪽지보내기</h1>
 <table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
     <th>보낸사람</th>
-    <th>내용</th>
+    <th>제목</th>
     <th>날짜</th>
   </tr>
 </thead>
@@ -37,12 +36,13 @@
 <tr>
   <td>${mailBox.no}</td>
   <td><a href='detail?no=${mailBox.no}'>${mailBox.receiver}</a></td> 
-  <td>${mailBox.content}</td>
+  <td>${mailBox.title}</td>
   <td>${mailBox.receivedTime}</td>
 </tr>
 </c:forEach>
 </tbody>
 </table>
+<a href='MailBoxAdd.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br>
 </div><!-- .container -->
 </body>
 </html>

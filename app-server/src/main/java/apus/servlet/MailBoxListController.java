@@ -18,16 +18,18 @@ public class MailBoxListController extends HttpServlet{
 
   private static final long serialVersionUID = 1L;
   MailBoxDao mailboxDao;
-
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     mailboxDao = (MailBoxDao) 웹애플리케이션공용저장소.getAttribute("mailboxDao");
   }
 
+
+
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
+
     try {
       // 클라이언트 요청을 처리하는데 필요한 데이터 준비
       Collection<MailBox> mailBoxList = mailboxDao.findAll();
