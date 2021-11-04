@@ -191,7 +191,7 @@ form fieldset a:hover { text-decoration: underline; }
   <p>
 
     <a class="facebook-before"><span class="fontawesome-facebook"></span></a>
-    <button class="facebook">Login Using Facbook</button>
+    <button class="facebook">Login Using Facebook</button>
 
   </p>
 

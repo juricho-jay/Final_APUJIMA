@@ -44,7 +44,7 @@
                         <td><img src="img/password.gif" /></td>
                         <td><input type="password" name=password value="onlyroot" size=15></td>
                         <td rowspan=2>
-                        <a href = "member/form">
+                        <a href = "/apus/member/MemberSignUp.jsp">
                         <input type="button" value="회원가입" onclick="MemberForm.jsp">
                         </td>
                         </a>
