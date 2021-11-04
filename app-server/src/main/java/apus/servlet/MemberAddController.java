@@ -1,6 +1,8 @@
 package apus.servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -74,7 +76,7 @@ public class MemberAddController extends HttpServlet {
     //        break;
     //      }
     //    }
-    //
+    //       
     //    while(true) {
     //
     //      member.setId(Prompt.inputString("아이디> "));
@@ -138,12 +140,19 @@ public class MemberAddController extends HttpServlet {
     //    System.out.println();
     //    System.out.println("회원가입 완료!");
     //    System.out.println("신규 회원가입 이벤트로 1000포인트가 지급되었습니다!");
+    String convertDate = request.getParameter("birthDay");
+    SimpleDateFormat convertDate2 = new SimpleDateFormat("yyyy-MM-dd");
 
+    Date bDate = convertDate2.parse(convertDate);
     member.setName(request.getParameter("name"));
-    member.setEmail(request.getParameter("email"));
+    member.setId(request.getParameter("id"));
     member.setPassword(request.getParameter("password"));
-    member.setPhoto(request.getParameter("photo"));
+    member.setEmail(request.getParameter("email"));
+    member.setBirthDay(bDate);
     member.setPhoneNum(request.getParameter("phoneNum"));
+    member.setPhoto(request.getParameter("photo"));
+
+
 
     try {
       memberDao.insert(member);

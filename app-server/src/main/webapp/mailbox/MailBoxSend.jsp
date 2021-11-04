@@ -14,7 +14,19 @@
   <style>
     .container {
     xborder: 1px solid red;
-    xwidth: 640px;
+    width: 640px;
+    }
+    .content {
+    border: 1px solid gray;
+    width: 640px;
+    height: 400px;
+    vertical-align: top;
+    text-align: left;
+    }
+    .sendbtn {
+    border: 1px solid red;
+    width: 640px;
+    text-align: center;
     }
   </style>
   
@@ -22,27 +34,18 @@
 <body>
 <div class="container">
 <h1>쪽지보내기</h1>
-<table class="table table-hover">
-<thead>
-  <tr>
-    <th>번호</th>
-    <th>보낸사람</th>
-    <th>제목</th>
-    <th>날짜</th>
-  </tr>
-</thead>
-<tbody>
-<c:forEach items="${mailBoxList}" var="mailBox">
-<tr>
-  <td>${mailBox.no}</td>
-  <td><a href='detail?no=${mailBox.no}'>${mailBox.receiver}</a></td> 
-  <td>${mailBox.title}</td>
-  <td>${mailBox.receivedTime}</td>
-</tr>
-</c:forEach>
-</tbody>
-</table>
+<div class="content">
+  <label for="box">제목</label>
+  <br>
+  <textarea id="box" name="box" rows=1 cols=74></textarea>
+  <br><br>
+  <label for="box">내용</label>
+  <br>
+  <textarea id="box" name="box" rows=10 cols=74></textarea>
+</div>
+<div class="sendbtn">
 <a href='MailBoxAdd.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br>
+</div>
 </div><!-- .container -->
 </body>
 </html>
