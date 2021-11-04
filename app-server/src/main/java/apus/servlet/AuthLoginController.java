@@ -1,15 +1,32 @@
-package apus.handler;
+package apus.servlet;
 
 
-import Menu.Menu;
+
+import java.io.IOException;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
 import apus.dao.MemberDao;
 import apus.domain.Member;
-import util.Prompt;
+import menu.Menu;
 
 
-public class AuthLoginHandler implements Command {
+public class AuthLoginController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
+  SqlSession sqlSession;
+
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+  }
 
   static Member loginUser;
   static int userAccessLevel = Menu.ACCESS_LOGOUT; // 기본은 로그아웃 된 상태이다.
@@ -25,13 +42,14 @@ public class AuthLoginHandler implements Command {
     return doctorUser;          //일반인은 1
   }
 
-  public AuthLoginHandler(MemberDao memberDao) {
+  public AuthLoginController(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
+  protected void service(HttpServletRequest request, HttpServletResponse response) 
+      throws  ServletException, IOException {
+    /*System.out.println();
     System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
     System.out.println("(취소: #)");
 
@@ -72,7 +90,7 @@ public class AuthLoginHandler implements Command {
       WiseSaying wise = new WiseSaying();
       wise.execute(request);
       return;
-    } 
+    } */
 
   }
 
