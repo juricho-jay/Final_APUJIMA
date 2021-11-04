@@ -17,16 +17,15 @@
     width: 640px;
     }
     .content {
-    border: 1px solid gray;
+    xborder: 1px solid gray;
     width: 640px;
-    height: 400px;
-    vertical-align: top;
     text-align: left;
     }
     .sendbtn {
-    border: 1px solid red;
+    xborder: 1px solid red;
     width: 640px;
     text-align: center;
+    margin-top: 20px;
     }
   </style>
   
@@ -35,6 +34,11 @@
 <div class="container">
 <h1>쪽지보내기</h1>
 <div class="content">
+  <br><br>
+  <label for="box">받는이</label>
+  <br>
+  <textarea id="box" name="box" rows=1 cols=73></textarea>
+  <br><br>
   <label for="box">제목</label>
   <br>
   <textarea id="box" name="box" rows=1 cols=73></textarea>
@@ -44,7 +48,7 @@
   <textarea id="box" name="box" rows=10 cols=73></textarea>
 </div>
 <div class="sendbtn">
-<a href='MailBoxAdd.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br>
+<a href='MailBoxList.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br>
 </div>
 </div><!-- .container -->
 </body>
