@@ -201,7 +201,7 @@ i {
                     <div style="position: static;" class="ps ps--active-y">
                         <div class="ps-content">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
+                                <!-- <li class="list-group-item">
                                     <div class="todo-indicator bg-warning"></div>
                                     <div class="widget-content p-0">
                                         <div class="widget-content-wrapper">
@@ -286,7 +286,7 @@ i {
                                              <i class="fa fa-trash"></i> </button> </div>
                                         </div>
                                     </div>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -318,7 +318,7 @@ i {
     
   <script type="text/javascript">
    async function addButton() {
-	   const { value: text } = await Swal.fire({
+	   const { value : text } = await Swal.fire({
 		   input: 'textarea',
 		   /* inputLabel: 'Message', */
 		   inputPlaceholder: '버킷리스트를 입력하세요...',
@@ -329,24 +329,21 @@ i {
 		 })
 		  
 		 if (text) {
-			 addList(text);
+			      
+	          
+	          const li = document.createElement("li");
+	          
+	          /* li.setAttribute('id', text); */
+	          
+	          const textNode = document.createTextNode(text);
+	          li.appendChild(textNode);
+	          
+	          console.log(li);
+	          const className = document.getElementsByClassName('list-group list-group-flush')[0];
+	          className.appendChild(li); 
+	          
 		 }
 		 
-	   function addList(text) {
-		      
-		      const addValue = text;
-		      
-		      const li = document.createElement("li");
-		      
-		      li.setAttribute('id', addValue);
-		      
-		      const textNode = document.createTextNode(addValue);
-		      li.appendChild(textNode);
-		      
-		      
-		      document.getElementById('list-group list-group-flush').appendChild(li);
-		      
-		    };
       };
     </script>
     
