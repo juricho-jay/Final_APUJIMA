@@ -123,7 +123,13 @@
 <div class="mb-3 row">
   <label for='f-photo' class="col-sm-2 col-form-label">성별</label>
   <div class="col-sm-6">
-    <input id='f-photo' type='text' name='sex' class="form-control">
+  
+    <select id='f-photo' name='sex' class="form-control">
+    <option value = "">성별</option>
+    <option value = "남성">남자</option>
+    <option value = "여성">여자</option>
+    </select>
+    
   </div>
 </div>
   <div class="col-12">

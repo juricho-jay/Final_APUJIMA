@@ -36,7 +36,7 @@
 <c:forEach items="${mailBoxList}" var="mailBox">
 <tr>
   <td>${mailBox.no}</td>
-  <td><a href='detail?no=${mailBox.no}'>${mailBox.receiver}</a></td> 
+  <td><a href='detail?no=${mailBox.no}'>${mailBox.receiver.id}</a></td> 
   <td>${mailBox.content}</td>
   <td>${mailBox.receivedTime}</td>
 </tr>

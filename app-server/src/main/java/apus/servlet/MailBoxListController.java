@@ -21,7 +21,7 @@ public class MailBoxListController extends HttpServlet{
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    mailboxDao = (MailBoxDao) 웹애플리케이션공용저장소.getAttribute("mailboxDao");
+    mailboxDao = (MailBoxDao) 웹애플리케이션공용저장소.getAttribute("mailBoxDao");
   }
 
 
@@ -43,6 +43,7 @@ public class MailBoxListController extends HttpServlet{
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
+      e.printStackTrace();
       request.setAttribute("error", e);
 
       // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
