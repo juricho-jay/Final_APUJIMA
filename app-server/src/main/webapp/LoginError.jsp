@@ -22,11 +22,11 @@
 
 <div class = "container">
     <h1> 에러 페이지입니다.</h1>
-    <p>잘못된 접근 방식입니다. 아래 버튼을 눌러 이동해주세요.</p>
+    <p>여긴 로그인 에러지롱~~.</p>
+    <p>아이디 비밀번호가 맞는게 읎다!! 돌아가라!!</p>
 <form>  
-  <a href='member/list' class="btn btn-primary">회원 목록</a>
-  <a href='board/list' class="btn btn-primary">게시글 목록</a>
-  <a href='/index.jsp' class="btn btn-primary">메인 페이지</a>
+  <a href='/apus/member/MemberSignUp.jsp' class="btn btn-primary">로그인 페이지</a>
+  <a href='/apus/index.jsp' class="btn btn-primary">메인 페이지</a>
 </form>
 </div> <!-- container -->
 

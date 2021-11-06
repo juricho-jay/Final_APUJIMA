@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Security</title>
+<title>로그아웃</title>
 </head>
 <body>
-  <p>인증 실패했습니다.
+  <p>정상적인.. 로그아웃.. 되겠지..?</p>
 </body>
 </html>

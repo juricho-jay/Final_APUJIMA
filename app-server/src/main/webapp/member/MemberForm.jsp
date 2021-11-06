@@ -125,7 +125,7 @@
   </div>
 </div>
 <div class="mb-3 row">
-  <label for='f-passwordcheck' class="col-sm-3 col-form-label">*비밀번호확인</label>
+  <label for='f-passwordcheck' class="col-sm-3 col-form-label">* 비밀번호확인</label>
   <div class="col-sm-6">
     <input id='f-passwordcheck' type='password' name='passwordcheck' class="form-control">
   </div>
