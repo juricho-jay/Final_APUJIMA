@@ -40,9 +40,8 @@
 </thead>
 <tbody>
 
-<c:if test='${not empty reviewList}'>
 
-</c:if>
+
 
 <c:forEach items="${memberList}" var="member">
 <tr>
@@ -54,7 +53,15 @@
     <td>${member.email}</td> 
     <td>${member.sex}</td> 
     <td>${member.point}</td> 
-    <td>${member.doctorOrNot}</td> 
+    <c:if test='${member.doctorOrNot == 1}'>
+    <td>일반회원</td> 
+    </c:if>
+    <c:if test='${member.doctorOrNot == 2}'>
+    <td>의사회원</td> 
+    </c:if>
+    <c:if test='${member.doctorOrNot == 3}'>
+    <td>관리자</td> 
+    </c:if>
     <td>${member.registeredDate}</td>
 </tr>
 </c:forEach>
