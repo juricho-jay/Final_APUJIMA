@@ -13,8 +13,9 @@ import org.apache.ibatis.session.SqlSession;
 import apus.dao.MailBoxDao;
 import apus.dao.MemberDao;
 import apus.domain.MailBox;
+import apus.domain.Member;
 
-@WebServlet("/mailBox/send")
+@WebServlet("/mailbox/send")
 public class MailBoxSendController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -35,6 +36,22 @@ public class MailBoxSendController extends HttpServlet {
       throws ServletException, IOException {
 
     MailBox mailBox = new MailBox();
+
+    String user = request.getParameter("receiver");
+    String user2 = request.getParameter("sender");
+    try {
+      Member member = memberDao.findById(user);
+      Member member2 = memberDao.findById(user2);
+      mailBox.setSender(member2);
+      mailBox.setReceiver(member);
+      //      System.out.println("존재하는 회원");
+      //      if (member == null) {
+      //        System.out.println("존재하지 않는 회원입니다.");
+      //        return;
+      //      }
+    } catch (Exception e1) {
+      e1.printStackTrace();
+    }
 
     mailBox.setTitle(request.getParameter("title"));
     mailBox.setContent(request.getParameter("content"));

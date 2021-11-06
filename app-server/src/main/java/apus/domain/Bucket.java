@@ -10,7 +10,7 @@ public class Bucket implements Serializable {
   private String content;
   private String check;
   private Member writer;
-  private boolean complete;
+  private int complete;
   private Date registeredDate;
   private Date completedDate;
   public int getNo() {
@@ -43,10 +43,11 @@ public class Bucket implements Serializable {
   public void setWriter(Member writer) {
     this.writer = writer;
   }
-  public boolean isComplete() {
+
+  public int getComplete() {
     return complete;
   }
-  public void setComplete(boolean complete) {
+  public void setComplete(int complete) {
     this.complete = complete;
   }
   public Date getRegisteredDate() {

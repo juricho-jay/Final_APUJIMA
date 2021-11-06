@@ -9,20 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
+import apus.dao.BucketDao;
 import apus.dao.MemberDao;
-import apus.domain.Member;
+import apus.domain.Bucket;
 
-@WebServlet("/member/update")
-public class MemberUpdateController extends HttpServlet {
+@WebServlet("/bucket/delete")
+public class BucketDeleteController extends HttpServlet{
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
   MemberDao memberDao;
+  BucketDao bucketDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    bucketDao = (BucketDao) 웹애플리케이션공용저장소.getAttribute("bucketDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
@@ -31,38 +34,23 @@ public class MemberUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
+      String stringNo = request.getParameter("no");
+      int no = Integer.parseInt(stringNo);
 
-      Member member = memberDao.findByNo(no);
+      Bucket bucket = bucketDao.findByNo(no);
+      if (bucket == null) {
+        throw new Exception("해당 아이디의 회원이 없습니다.");
+      }
 
-      if (member == null) {
-        throw new Exception("해당 번호의 회원이 없습니다.");
-      } 
-
-
-      member.setName(request.getParameter("name"));
-      member.setId(request.getParameter("id"));
-      member.setEmail(request.getParameter("email"));
-      member.setPassword(request.getParameter("password"));
-      member.setPhoto(request.getParameter("photo"));
-      member.setPhoneNum(request.getParameter("tel"));
-      member.setSex(request.getParameter("sex"));
-
-      memberDao.update2(member);
+      bucketDao.delete(no);
       sqlSession.commit();
 
       response.sendRedirect("list");
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
-
-
-
-
-
-
-

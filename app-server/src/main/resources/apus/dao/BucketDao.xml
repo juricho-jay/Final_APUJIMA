@@ -44,8 +44,8 @@
    
   <insert id="insert" parameterType="bucket" 
   useGeneratedKeys="true" keyColumn="bucket_no" keyProperty="no">
-    insert into apus_bucket(title,content,member_no,created_dt,completed_dt,complete)
-    values(#{title},#{content},#{writer.no},#{registeredDate},#{completedDate},#{complete})
+    insert into apus_bucket(title,content,member_no,complete)
+    values(#{title},#{content},#{writer.no},#{complete})
    </insert>
    
      <select id="findByNo" resultMap="BucketMap" parameterType="int">
@@ -98,6 +98,12 @@
       inner join apus_member m on t.member_no=m.member_no
     where t.title like(concat('%',#{keyword},'%')) or t.content like (concat('%',#{keyword},'%'));
   </select>
+  
+  <delete id="delete" parameterType="int">
+   delete from apus_bucket
+   where bucket_no=#{no}
+  </delete>
+  
 
 </mapper>
 

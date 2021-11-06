@@ -47,11 +47,13 @@ public class MemberAddController extends HttpServlet {
     member.setPassword(request.getParameter("password"));
     member.setEmail(request.getParameter("email"));
     member.setBirthDay(birthday);
-    member.setPhoneNum(request.getParameter("phoneNum"));
+    member.setPhoneNum(request.getParameter("tel"));
     member.setPhoto(request.getParameter("photo"));
     member.setSex(request.getParameter("sex"));
     member.setPoint(1000);
-    member.setDoctorOrNot(1);
+    String grade = request.getParameter("grade");
+    member.setDoctorOrNot(Integer.parseInt(grade));
+
 
 
 
