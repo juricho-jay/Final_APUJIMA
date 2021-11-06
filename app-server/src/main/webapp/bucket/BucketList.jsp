@@ -5,15 +5,19 @@
 <html>
 <head>
   <title>버킷리스트 등록</title>
- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+<!--  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
 
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   
-  
-  
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
   <style>
 body {
     margin: 0;
@@ -187,6 +191,10 @@ i {
 .card-footer {
     background-color: #fff
 }
+
+.bucket-title {
+  background-color: yellow;
+}
   </style>
 </head>
 <body>
@@ -196,7 +204,7 @@ i {
         <div class="card-hover-shadow-2x mb-3 card">
             <div class="card-header-tab card-header">
                 <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-                <i class="fa fa-tasks"></i>버킷리스트</div>
+                <i class="bi bi-card-checklist" style="font-size: 2rem; color: cornflowerblue; margin-right: 10%;"></i><b style="font-size: 1.5em;">버킷리스트</b></b></div>
             </div>
             <div class="scroll-area-sm">
                 <perfect-scrollbar class="ps-show-limits">
@@ -255,7 +263,7 @@ i {
                                         </div>
                                     </div>
                                 </li>
-                                <li class="list-group-item">
+                               <li class="list-group-item">
                                     <div class="todo-indicator bg-primary"></div>
                                     <div class="widget-content p-0">
                                         <div class="widget-content-wrapper">
@@ -334,22 +342,34 @@ i {
 
 <!-- 모달 영역 -->
 
-<div id="modalBox" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modalBox" class="modal fade" id="myModal" tabindex="-1" 
+role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> 
-        <h4 class="modal-title w-100 font-weight-bold" id="myModalLabel">버킷리스트 추가하기</h4>
-        <!-- <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
-         <span aria-hidden="true">X</span> -->
+        <h4 class="modal-title w-100 font-weight-bold">버킷리스트 추가</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body mx-3">
-      <div class="md-form mb-5">
+       <div class="modal-body mx-3">
+        <div class="md-form mb-5">
           <i class="fas fa-user prefix grey-text"></i>
           <input type="text" id="orangeForm-name" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label>
+          <label data-error="wrong" data-success="right" for="orangeForm-name">제목</label>
         </div>
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" id="orangeForm-email" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="orangeForm-email">내용</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="password" id="orangeForm-pass" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="orangeForm-pass">작성자</label>
+        </div>
+
       </div>
       <div class="modal-footer">
     <button type="button" class="btn btn-primary">확인</button>
@@ -362,7 +382,7 @@ i {
 
 
     
- <script type="text/javascript">
+ <!-- <script type="text/javascript">
    async function addButton() {
 	   const { value : text } = await Swal.fire({
 		   title: '버킷리스트 추가하기',
@@ -391,18 +411,20 @@ i {
 		 }
 		 
       };
-    </script>
+    </script> -->
     
 
 <script>
 // 모달 버튼에 이벤트를 건다.
 $('#openModalBtn').on('click', function(){
 $('#modalBox').modal('show');
+
 });
 // 모달 안의 취소 버튼에 이벤트를 건다.
 $('#closeModalBtn').on('click', function(){
 $('#modalBox').modal('hide');
 });
+//배경 클릭으로 꺼지는 것 방지
 </script>
 
     

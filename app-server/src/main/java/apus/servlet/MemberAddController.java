@@ -37,7 +37,7 @@ public class MemberAddController extends HttpServlet {
     Member member = new Member();
 
     String year = request.getParameter("birthyy");
-    Striintegrity undefiendng month = request.getParameter("birthmm");
+    String month = request.getParameter("birthmm");
     String day = request.getParameter("birthdd");
 
     Date birthday = Date.valueOf(year+"-"+month+"-"+day);
@@ -47,7 +47,7 @@ public class MemberAddController extends HttpServlet {
     member.setPassword(request.getParameter("password"));
     member.setEmail(request.getParameter("email"));
     member.setBirthDay(birthday);
-    member.setPhoneNum(request.getParameter("phoneNum"));
+    member.setPhoneNum(request.getParameter("tel"));
     member.setPhoto(request.getParameter("photo"));
     member.setSex(request.getParameter("sex"));
     member.setPoint(1000);
