@@ -22,21 +22,25 @@
 <body>
 <div class="container">
 <h1>쪽지함</h1>
-<a href='MailBoxSend.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br>
+<a href='MailBoxForm.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br>
 <table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
-    <th>보낸사람</th>
+    <th>보낸이</th>
+    <th>받는이</th>
     <th>제목</th>
     <th>날짜</th>
   </tr>
 </thead>
 <tbody>
+
 <c:forEach items="${mailBoxList}" var="mailBox">
 <tr>
   <td>${mailBox.no}</td>
-  <td><a href='detail?no=${mailBox.no}'>${mailBox.receiver.id}</a></td> 
+  <td>${mailBox.sender.id}</td> 
+  <td>${mailBox.receiver.id}</td>
+  <td><a href='detail?no=${mailBox.no}'>${mailBox.title}</a></td>
   <td>${mailBox.content}</td>
   <td>${mailBox.receivedTime}</td>
 </tr>

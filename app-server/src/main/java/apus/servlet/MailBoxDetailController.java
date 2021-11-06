@@ -15,11 +15,11 @@ import apus.domain.MailBox;
 public class MailBoxDetailController extends GenericServlet {
 
   private static final long serialVersionUID = 1L;
-  MailBoxDao mailboxDao;
+  MailBoxDao mailBoxDao;
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    mailboxDao = (MailBoxDao) 웹애플리케이션공용저장소.getAttribute("mailboxDao");
+    mailBoxDao = (MailBoxDao) 웹애플리케이션공용저장소.getAttribute("mailBoxDao");
   }
 
 
@@ -29,14 +29,14 @@ public class MailBoxDetailController extends GenericServlet {
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-      MailBox mailbox = mailboxDao.findByNo(no);
+      MailBox mailBox = mailBoxDao.findByNo(no);
 
-      if (mailbox == null) {
-        throw new Exception("해당 번호의 회원이 없습니다.");
+      if (mailBox == null) {
+        throw new Exception("해당 번호의 메일이 없습니다.");
       }
 
-      request.setAttribute("mailbox", mailbox);
-      request.getRequestDispatcher("/mailbox/MailBoxDetail.jsp").forward(request, response);
+      request.setAttribute("mailBox", mailBox);
+      request.getRequestDispatcher("MailBoxDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

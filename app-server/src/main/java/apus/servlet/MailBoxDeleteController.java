@@ -11,18 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.MailBoxDao;
 import apus.domain.MailBox;
+
 @WebServlet("/mailbox/delete")
 public class MailBoxDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
-  MailBoxDao mailboxDao;
+  MailBoxDao mailBoxDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    mailboxDao = (MailBoxDao) 웹애플리케이션공용저장소.getAttribute("mailboxDao");
+    mailBoxDao = (MailBoxDao) 웹애플리케이션공용저장소.getAttribute("mailBoxDao");
   }
 
   @Override
@@ -31,12 +32,12 @@ public class MailBoxDeleteController extends HttpServlet {
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-      MailBox mailBox = mailboxDao.findByNo(no);
+      MailBox mailBox = mailBoxDao.findByNo(no);
       if (mailBox == null) {
-        throw new Exception("해당 번호의 회원이 없습니다.");
+        throw new Exception("해당 번호의 메일이 없습니다.");
       }
 
-      mailboxDao.delete(no);
+      mailBoxDao.delete(no);
       sqlSession.commit();
 
       response.sendRedirect("list");
