@@ -6,25 +6,28 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
+import apus.dao.BucketDao;
 import apus.dao.MemberDao;
+import apus.domain.Bucket;
 import apus.domain.Member;
 
-@WebServlet("/member/add")
-public class MemberAddController extends HttpServlet {
+public class BucketAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  BucketDao bucketDao;
   MemberDao memberDao;
   SqlSession sqlSession;
+
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    bucketDao = (BucketDao) 웹애플리케이션공용저장소.getAttribute("bucketDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
@@ -32,35 +35,32 @@ public class MemberAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    //    System.out.println();
-    //    System.out.println("[회원가입] 페이지입니다.");
+    Bucket bucket = new Bucket();
     Member member = new Member();
 
-    String year = request.getParameter("birthyy");
-    String month = request.getParameter("birthmm");
-    String day = request.getParameter("birthdd");
-
-    Date birthday = Date.valueOf(year+"-"+month+"-"+day);
-
-    member.setName(request.getParameter("name"));
     member.setId(request.getParameter("id"));
-    member.setPassword(request.getParameter("password"));
-    member.setEmail(request.getParameter("email"));
-    member.setBirthDay(birthday);
-    member.setPhoneNum(request.getParameter("tel"));
-    member.setPhoto(request.getParameter("photo"));
-    member.setSex(request.getParameter("sex"));
-    member.setPoint(1000);
-    String grade = request.getParameter("grade");
-    member.setDoctorOrNot(Integer.parseInt(grade));
 
+    String year = request.getParameter("bucketRegisteredYear");
+    String month = request.getParameter("bucketRegisteredMonth");
+    String day = request.getParameter("bucketRegisteredDay");
+
+    Date bucketRegistered = Date.valueOf(year+"-"+month+"-"+day);
+
+
+    bucket.setNo(Integer.parseInt(request.getParameter("no")));
+    bucket.setTitle(request.getParameter("title"));
+    bucket.setContent(request.getParameter("content"));
+    bucket.setComplete(Integer.parseInt(request.getParameter("completedDate")));
+    bucket.setRegisteredDate(bucketRegistered);
+    bucket.setCompletedDate(null);
+    bucket.setWriter(member);
 
 
     try {
-      memberDao.insert(member);
+      bucketDao.insert(bucket);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("MemberAdd.jsp").forward(request, response);
+      //      response.setHeader("Refresh", "1;url=list");
+      request.getRequestDispatcher("BucketList.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

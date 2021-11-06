@@ -15,6 +15,17 @@
         // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
         function checkValue()
         {
+        	
+           if(!document.userInfo.grade.value){
+                alert("회원구분을 선택하세요.");
+                return false;
+            }
+          
+            if(!document.userInfo.name.value){
+                alert("이름을 입력하세요.");
+                return false;
+            } 
+            
             if(!document.userInfo.id.value){
                 alert("아이디를 입력하세요.");
                 return false;
@@ -30,6 +41,32 @@
                 alert("비밀번호를 동일하게 입력하세요.");
                 return false;
             }
+          
+            if(!document.userInfo.email.value){
+                alert("이메일을 입력하세요.");
+                return false;
+            }
+            
+            if(!document.userInfo.birthyy.value){
+                alert("생년월일을 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.birthmm.value){
+                alert("생년월일을 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.birthdd.value){
+                alert("생년월일을 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.tel.value){
+                alert("연락처를 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.sex.value){
+                alert("성별을 선택하세요.");
+                return false;
+            } 
         }
     </script>
 
@@ -57,34 +94,51 @@
   <label for="validationServer04" class="form-label">-일반회원 가입 페이지-</label>
  
 </div>
+
   <div class="mb-3 row">
-    <label for='f-name' class="col-sm-2 col-form-label">이름</label>
+    <label for='f-grade' class="col-sm-3 col-form-label">구분</label>
+    <div class="col-sm-6">
+      <input id='f-grade' type='radio' name='grade' value = "1">
+      <label>일반</label>
+      <input id='f-grade' type='radio' name='grade' value = "2">
+      <label>의사</label>
+    </div>
+</div>
+
+  <div class="mb-3 row">
+    <label for='f-name' class="col-sm-3 col-form-label">* 이름</label>
     <div class="col-sm-6">
       <input id='f-name' type='text' name='name' class="form-control">
     </div>
 </div>
 <div class="mb-3 row">
-    <label for='f-id' class="col-sm-2 col-form-label">아이디</label>
+    <label for='f-id' class="col-sm-3 col-form-label">* 아이디</label>
     <div class="col-sm-6">
       <input id='f-id' type='text' name='id' >
       <input type="button" name = 'idCheck' value="중복체크"> 
     </div>
 </div>
 <div class="mb-3 row">
-  <label for='f-password' class="col-sm-2 col-form-label">암호</label>
+  <label for='f-password' class="col-sm-3 col-form-label">* 비밀번호</label>
   <div class="col-sm-6">
     <input id='f-password' type='password' name='password' class="form-control">
   </div>
 </div>
 <div class="mb-3 row">
-    <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
+  <label for='f-passwordcheck' class="col-sm-3 col-form-label">* 비밀번호확인</label>
+  <div class="col-sm-6">
+    <input id='f-passwordcheck' type='password' name='passwordcheck' class="form-control">
+  </div>
+</div>
+<div class="mb-3 row">
+    <label for='f-email' class="col-sm-3 col-form-label">* 이메일</label>
     <div class="col-sm-6">
       <input id='f-email' type='email' name='email' class="form-control">
     </div>
 </div>
 
 <div class="mb-3 row">
-  <label for='f-phoneNum' class="col-sm-2 col-form-label">생일</label>
+  <label for='f-birth' class="col-sm-3 col-form-label">* 생일</label>
   <div class="col-sm-6">
       <input id = 'f-birth' type="text" name="birthyy"  maxlength="4" placeholder="년(4자)" size="6" >
           <select name="birthmm">
@@ -109,23 +163,41 @@
 
 
 <div class="mb-3 row">
-  <label for='f-phoneNum' class="col-sm-2 col-form-label">휴대전화</label>
+  <label for='f-tel' class="col-sm-3 col-form-label">* 휴대전화</label>
   <div class="col-sm-6">
-    <input id='f-phoneNum' type='text' name='phoneNum' class="form-control">
+    <input id='f-tel' type='tel' name='tel' placeholder ="010-0000-0000" class="form-control">
   </div>
 </div>
 <div class="mb-3 row">
-  <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
+  <label for='f-photo' class="col-sm-3 col-form-label">사진</label>
   <div class="col-sm-6">
     <input id='f-photo' type='text' name='photo' class="form-control">
   </div>
 </div>
-<div class="mb-3 row">
+
+  <div class="mb-3 row">
+    <label for='f-grade' class="col-sm-3 col-form-label">* 성별</label>
+    <div class="col-sm-6">
+      <input id='f-sex' type='radio' name='sex' value = "남">
+      <label>남자</label>
+      <input id='f-sex' type='radio' name='sex' value = "여">
+      <label>여자</label>
+    </div>
+</div>
+
+<!-- <div class="mb-3 row">
   <label for='f-photo' class="col-sm-2 col-form-label">성별</label>
   <div class="col-sm-6">
-    <input id='f-photo' type='text' name='sex' class="form-control">
+  
+    <select id='f-sex' name='sex' class="form-control">
+    <option value = "" placeholder="성별"></option>
+    <option value = "남성">남자</option>
+    <option value = "여성">여자</option>
+    </select>
+    
   </div>
-</div>
+</div> -->
+
   <div class="col-12">
     <button class="btn btn-primary btn-sm" >회원 가입</button>
   </div>

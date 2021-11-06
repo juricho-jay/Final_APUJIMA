@@ -41,6 +41,7 @@
   <td>${mailBox.sender.id}</td> 
   <td>${mailBox.receiver.id}</td>
   <td><a href='detail?no=${mailBox.no}'>${mailBox.title}</a></td>
+  <td>${mailBox.content}</td>
   <td>${mailBox.receivedTime}</td>
 </tr>
 </c:forEach>

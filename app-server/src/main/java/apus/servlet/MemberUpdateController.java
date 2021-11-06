@@ -46,6 +46,7 @@ public class MemberUpdateController extends HttpServlet {
       member.setPassword(request.getParameter("password"));
       member.setPhoto(request.getParameter("photo"));
       member.setPhoneNum(request.getParameter("tel"));
+      member.setSex(request.getParameter("sex"));
 
       memberDao.update2(member);
       sqlSession.commit();
