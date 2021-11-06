@@ -17,11 +17,11 @@ import apus.domain.MailBox;
 public class MailBoxListController extends HttpServlet{
 
   private static final long serialVersionUID = 1L;
-  MailBoxDao mailboxDao;
+  MailBoxDao mailBoxDao;
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    mailboxDao = (MailBoxDao) 웹애플리케이션공용저장소.getAttribute("mailboxDao");
+    mailBoxDao = (MailBoxDao) 웹애플리케이션공용저장소.getAttribute("mailBoxDao");
   }
 
 
@@ -32,7 +32,7 @@ public class MailBoxListController extends HttpServlet{
 
     try {
       // 클라이언트 요청을 처리하는데 필요한 데이터 준비
-      Collection<MailBox> mailBoxList = mailboxDao.findAll();
+      Collection<MailBox> mailBoxList = mailBoxDao.findAll();
 
       // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
       request.setAttribute("mailBoxList", mailBoxList);
