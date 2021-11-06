@@ -51,6 +51,7 @@ public class MemberAddController extends HttpServlet {
     member.setPhoto(request.getParameter("photo"));
     member.setSex(request.getParameter("sex"));
     member.setPoint(1000);
+    member.setDoctorOrNot(1);
 
 
 
