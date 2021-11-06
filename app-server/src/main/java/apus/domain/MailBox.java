@@ -13,6 +13,7 @@ public class MailBox implements Serializable {
   private Member receiver;
   private Date sentTime;
   private Date receivedTime;
+  //  private String senter;
 
 
   public int getNo() {
@@ -60,6 +61,12 @@ public class MailBox implements Serializable {
   public void setReceiver(Member receiver) {
     this.receiver = receiver;
   }
+  //  public String getSenter() {
+  //    return senter;
+  //  }
+  //  public void setSenter(String senter) {
+  //    this.senter = senter;
+  //  }
 
 
 
