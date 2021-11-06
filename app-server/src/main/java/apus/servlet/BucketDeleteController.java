@@ -34,7 +34,9 @@ public class BucketDeleteController extends HttpServlet{
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
+      String stringNo = request.getParameter("no");
+      int no = Integer.parseInt(stringNo);
+
       Bucket bucket = bucketDao.findByNo(no);
       if (bucket == null) {
         throw new Exception("해당 아이디의 회원이 없습니다.");
@@ -46,6 +48,7 @@ public class BucketDeleteController extends HttpServlet{
       response.sendRedirect("list");
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
