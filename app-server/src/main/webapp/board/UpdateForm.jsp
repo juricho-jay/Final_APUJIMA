@@ -41,6 +41,8 @@
          <tr>
            <td>글 번호</td>
            <td>${board.no}</td>
+       <td><input id = 'f-no' type ='hidden' class = "form-control"  name='no' maxlength="50" value ='${board.no}' ></td>
+
          </tr>
          
      <tr>
@@ -50,8 +52,10 @@
   
   <tr>
     <td>글 제목</td>
+    
     <td><input  id = 'f-title' type ='text' class = "form-control" placeholder ="글 제목" name='title' maxlength="50" value ='${board.title }' ></td>
- </tr>
+    
+  </tr>
   
    <tr>
       <td>내용</td>
@@ -59,10 +63,8 @@
      </tr>
         
   </tbody>
- 
 </table>
-  
-<a href = 'update?no=${board.no}' ><input class ="btn btn-primary pull-right" value="변경"></a>
+<a href = 'update?no=${board.no}' ><input type = "submit" class ="btn btn-primary pull-right" value="변경"></a>
 <!--  <input type ="submit" class ="btn btn-primary pull-right" value="변경"> -->
 <a href ='list'>목록</a>
 </form>

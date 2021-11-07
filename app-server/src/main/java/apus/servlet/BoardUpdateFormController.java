@@ -32,7 +32,8 @@ public class BoardUpdateFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
+      String no1 = request.getParameter("no");
+      int no = Integer.parseInt(no1);
       Board board = boardDao.findByNo(no);
 
       if (board == null) {
