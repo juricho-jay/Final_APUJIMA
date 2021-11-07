@@ -39,6 +39,10 @@
 <table>
 <tbody>
 <tr>
+  <td style = "width: 20%">번호</td>
+  <td colspan ="2">${mailBox.no}</td>
+</tr>
+<tr>
   <td style = "width: 20%">제목</td>
   <td colspan ="2">${mailBox.title}</td>
 </tr>
