@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
-import apus.domain.Board;
 
 @WebServlet("/board/update")
 public class BoardUpdateController extends HttpServlet {
@@ -30,7 +29,8 @@ public class BoardUpdateController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    Board board = new Board();
+
+
     String title = request.getParameter("title");
     String content = request.getParameter("content");
     board.setTitle(title);

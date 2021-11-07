@@ -50,22 +50,21 @@
   
   <tr>
     <td>글 제목</td>
-    <td><input  id = 'f-title' type ='text' class = "form-control" placeholder ="글 제목" name='title' maxlength="50" value ='${board.title }' ></td>
+    <td><input  id = 'f-title' type ='text' class = "form-control" placeholder ="글 제목" name='title' maxlength="50"  ></td>
  </tr>
   
    <tr>
       <td>내용</td>
-      <td><textarea id = 'f-content' class = "form-control" placeholder="글 내용" name='content' maxlength ="2048" style="height: 350px;" ></textarea></td>
+      <td><input type = 'text' id = 'f-content' class = "form-control" placeholder="글 내용" name='content' maxlength ="2048" style="height: 350px;" ></td>
      </tr>
         
   </tbody>
  
 </table>
   
-<a href = 'update?no=${board.no}' ><input class ="btn btn-primary pull-right" value="변경"></a>
-<!--  <input type ="submit" class ="btn btn-primary pull-right" value="변경"> -->
-<a href ='list'>목록</a>
+ <input type ="submit" class ="btn btn-primary pull-right" value="변경"> 
 </form>
+<a href ='list'>목록</a>
 
 
 </div><!-- .container -->
