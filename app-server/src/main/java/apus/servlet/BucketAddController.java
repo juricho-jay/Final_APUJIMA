@@ -65,7 +65,7 @@ public class BucketAddController extends HttpServlet {
       try {
         bucketDao.insert(bucket);
         sqlSession.commit();
-        response.setHeader("Refresh", "1;url=list");
+        response.setHeader("Refresh", "0;url=list");
         request.getRequestDispatcher("BucketList.jsp").forward(request, response);
 
       } catch (Exception e) {

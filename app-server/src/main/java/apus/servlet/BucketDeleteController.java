@@ -29,6 +29,8 @@ public class BucketDeleteController extends HttpServlet{
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
+
+
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {

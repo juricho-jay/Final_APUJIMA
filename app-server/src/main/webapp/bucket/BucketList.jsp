@@ -19,10 +19,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     
     
-    
-    
-    
-    
   <style>
 body {
     margin: 0;
@@ -306,6 +302,9 @@ input {
   display: inline-block;
   margin: 100px auto;
 }
+
+
+
   </style>
 </head>
 <body>
@@ -323,6 +322,7 @@ input {
                         <div class="ps-content">
                             <ul class="list-group list-group-flush">
                                 <c:forEach items="${bucketList}" var="bucket">
+                                  <c:if test='${loginUser.id eq bucket.writer.id}'>
                                 <li class="list-group-item">
                                     <div class="todo-indicator bg-primary"></div>
                                     <div class="widget-content p-0">
@@ -339,17 +339,20 @@ input {
                                                 <%-- <div class="widget-subheading">${bucket.registeredDate}</div> --%>
                                                 </div>
                                             </div>
-                                            <div class="widget-content-right">
-                                            <sub>${bucket.registeredDate}&nbsp;&nbsp;</sub> 
-                                            <button class="border-0 btn-transition btn btn-outline-success2"> 
-                                            <i style="font-size: 1em">${bucket.writer.id}</i></button> 
-                                            <button class="border-0 btn-transition btn btn-outline-success"> 
-                                            <i class="bi bi-check" style="font-size: 1.5em"></i></button> 
-                                            <button class="border-0 btn-transition btn btn-outline-danger"> 
-                                            <i class="bi bi-trash"></i> </button> </div>
+	                                            <div class="widget-content-right">
+	                                              <sub>${bucket.registeredDate}&nbsp;&nbsp;</sub> 
+				                                            <button class="border-0 btn-transition btn btn-outline-success2"> 
+				                                            <i style="font-size: 1em">${bucket.writer.id}</i></button> 
+				                                            <textarea id="sendB-no" name="no" style=display:none>${bucket.no}</textarea>
+				                                            <button class="border-0 btn-transition btn btn-outline-success">
+				                                            <i class="bi bi-check" style="font-size: 1.5em"></i></button> 
+				                                            <button class="border-0 btn-transition btn btn-outline-danger" id="deletebtn" name="d-btn" value="${bucket.no}" onclick="sendNo2()">
+				                                            <i class="bi bi-trash"></i> </button> 
+                                              </div>
                                         </div>
                                     </div>
                                 </li>
+                                </c:if>
                               </c:forEach>
                              <!--  <li class="list-group-item">
                                     <div class="todo-indicator bg-primary"></div>
@@ -420,7 +423,7 @@ input {
             </div>
                 
           <div class="d-block text-right card-footer">
-            <button class="mr-2 btn btn-link btn-sm" id="deletebtn" onclick="sendNo()">삭제</button>
+            <!-- <button class="mr-2 btn btn-link btn-sm" id="deletebtn" onclick="sendNo()">삭제</button> -->
             <!-- <button class="btn btn-primary" onclick="addButton();">버킷리스트 추가</button> -->
             <button class="btn btn-primary" id="openModalBtn">버킷리스트 추가</button>
             
@@ -429,8 +432,44 @@ input {
             </div>
             </div>
             
+<!-- 추가 모달 영역 -->        
 <form action='add'>
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" 
+		  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">버킷리스트 추가</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		          <div class="form-group">
+		            <input type="hidden" id="b-id" name="id" value="${loginUser.id}">
+		            <label for="bucket-title" class="col-form-label">제목</label>
+		            <input type="text" class="form-control" id="bucket-title" name="title">
+		          </div>
+		          <div class="form-group">
+		            <label for="bucket-content" class="col-form-label">내용</label>
+		            <textarea class="form-control" id="bucket-content" name="content"></textarea>
+		          </div>
+		          
+		          
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		        <input type="submit" value="확인">
+		      </div>
+		    </div>
+		  </div>
+		</div>
+</form> 
+
+            
+            
 <!-- 추가 모달 영역 -->
+ <!-- <form action='add'>
 <div id="addModal" class="modal fade" tabindex="-1" 
 role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog" role="document">
@@ -453,25 +492,29 @@ role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="f
           <label data-error="wrong" data-success="right" for="bucket-content">내용</label>
         </div>
 
-        <div class="md-form mb-4">
+          <div class="md-form mb-4">
           <i class="fas fa-lock prefix grey-text"></i>
           <input type="text" id="bucket-writer" name="id" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="orangeForm-pass">작성자</label>
+          <label data-error="wrong" data-success="right" for="bucket-writer">작성자</label>
         </div>
-
       </div>
       <div class="modal-footer">
-    <!-- <button type="button" id="bucketAddBtn" class="btn btn-primary">확인</button> -->
     <input type="submit" value="확인">
         <button type="button" class="btn btn-default" id="closeModalBtn">취소</button>
       </div>
     </div>
   </div>
 </div>
-</form>
+</form>  -->
 
-<form action='delete'>
+        <%-- <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="text" id="bucket-writer" name="id" class="form-control validate" readonly>
+          <label data-error="wrong" data-success="right" for="bucket-writer">${loginUser.id}</label>
+        </div> --%>
+    <!-- <button type="button" id="bucketAddBtn" class="btn btn-primary">확인</button> -->
 <!-- 삭제 모달 영역 -->
+<form action='delete'>
 <div id="deleteModal" class="modal fade" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-confirm">
     <div class="modal-content">
@@ -528,8 +571,20 @@ function sendNo() {
         });
         
         $("#b-no").val(select_obj);
-        // b-no 쪽으로 데이터 전달
+    
     };
+    
+    
+var select_obj2 = '';
+function sendNo2() {
+	  
+	select_obj2 = $('#sendB-no').val();
+
+	console.log(select_obj2);
+	
+	$("#b-no").val(select_obj2);
+}
+    
 
 
 // 모달 버튼에 이벤트를 건다.
@@ -542,15 +597,16 @@ $('#closeModalBtn').on('click', function(){
 $('#addModal').modal('hide');
 });
 
-$('#deletebtn').on('click', function(){
-$('#deleteModal').modal('show');
 
-});
+// id는 절대값이므로 중복될 수 없다 > name을 활용할 것 > id로 쓸 경우 아이콘 하나만 모달 창 실행
+$('button[name=d-btn]').on('click', function(){
+	$('#deleteModal').modal('show');
 
+	});
 
-$('#deletebtn').on('click', function(){
-$('#deleteModal').modal('hide');
-});
+	$('button[name=d-btn]').on('click', function(){
+	$('#deleteModal').modal('hide');
+	});
 
 
 </script>
