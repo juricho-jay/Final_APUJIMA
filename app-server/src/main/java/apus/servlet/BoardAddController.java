@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.dao.MemberDao;
@@ -37,9 +38,17 @@ public class BoardAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException { 
+
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/apus/index.jsp");
+      return;
+    }
+
     try {
-      String id = AuthLoginController.getLoginUser().getId();
-      Member writer = memberDao.findById(id);
+      Member writer = (Member) request.getSession(false).getAttribute("loginUser");
+
 
       if(writer == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
