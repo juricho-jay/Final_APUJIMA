@@ -66,7 +66,14 @@
 <form name = "mail" action='send' onsubmit="return checkValue()">
 <div class="content">
   <br><br>
+  <!-- <div class="mb-3 row">
+    <label for='f-receiver' class="col-sm-3 col-form-label">받는이</label>
+    <div class="col-sm-6">
+      <input id='f-receiver' type='text' name='receiver.id' class="form-control">
+    </div>
+</div> -->
   <label for="box1">보낸이</label>
+  <%-- <p>${loginUser.id}님 반갑습니다..</p> --%>
   <br>
   <div class="col-sm-4">
       <input id='f-sender' type='text' name='sender.id' class="form-control">
