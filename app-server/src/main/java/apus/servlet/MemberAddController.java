@@ -56,6 +56,7 @@ public class MemberAddController extends HttpServlet {
 
 
 
+
     try {
       memberDao.insert(member);
       sqlSession.commit();

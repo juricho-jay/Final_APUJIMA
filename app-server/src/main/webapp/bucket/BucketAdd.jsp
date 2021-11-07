@@ -4,12 +4,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>게시글 수정</title>
+  <title>버킷리스트 등록</title>
+  
+  
 </head>
 <body>
-<h1>게시글을 수정했습니다.</h1>
-<p>게시글을 수정했습니다.</p>
-
-<a href = 'list'>목록</a>
+<h1>버킷리스트 등록 결과</h1>
+<p>버킷리스트를 등록했습니다.</p>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

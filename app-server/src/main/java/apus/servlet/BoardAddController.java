@@ -1,6 +1,7 @@
 package apus.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -44,14 +45,17 @@ public class BoardAddController extends HttpServlet {
     //
     //    Date bDate = convertDate2.parse(convertDate);
 
+    String year = request.getParameter("birthyy");
+    String month = request.getParameter("birthmm");
+    String day = request.getParameter("birthdd");
+    Date birthday = Date.valueOf(year+"-"+month+"-"+day);
+
     board.setTitle(request.getParameter("title"));
     board.setWriter(writer);
     board.setContent(request.getParameter("content"));
     board.setWhichBoard(whichBoard);
-    /*
-    board.setRegisteredDate(request.getParameter("date"));
-     내일 질문하기.
-     */
+    board.setRegisteredDate(birthday);
+
 
     /*
      board.setComment/like.. detail에서 보여주는게 맞지않나../
