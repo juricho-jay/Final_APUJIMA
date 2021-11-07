@@ -52,11 +52,17 @@
   </select>
   
   
-	<insert id="insert" parameterType="mailbox"
+	<!-- <insert id="insert" parameterType="mailbox"
 	useGeneratedKeys="true" keyColumn="mail_no" keyProperty="no">
 	 insert into apus_mailbox(title,content,sender_no,receiver_no,sent_time,checked_time) 
 	 values(#{title},#{content},#{sender.no},#{receiver.no},#{sentTime},#{receivedTime})
-	</insert>
+	</insert> -->
+
+  <insert id="insert" parameterType="mailbox"
+  useGeneratedKeys="true" keyColumn="mail_no" keyProperty="no">
+   insert into apus_mailbox(title,content,sender_no,receiver_no,sent_time) 
+   values(#{title},#{content},#{sender.no},#{receiver.no},#{sentTime})
+  </insert>
 
 	<delete id="delete" parameterType="int">
 	 delete from apus_mailbox

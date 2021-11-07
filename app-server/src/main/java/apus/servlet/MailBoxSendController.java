@@ -75,4 +75,3 @@ public class MailBoxSendController extends HttpServlet {
     }
   }
 }
-
