@@ -31,16 +31,14 @@
 
    </table>
  </header>
-
             <h6>
-            <form action="/auth/logout" method = "get">
+            <form action= 'auth/logout' method = "get">
               <table align=right border=0 cellpadding=1 cellspacing="1" width=200 >
                      <tr align=left>
                         <td>${loginUser.id}님 반갑습니다..</td>
                         <td rowspan=10>
-                        <input type="button" value="로그아웃">
+                        <input type="submit" value="로그아웃">
                         </td>
-                        </a>
                      </tr>
                </table>
               </form>

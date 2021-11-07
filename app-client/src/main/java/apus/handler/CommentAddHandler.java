@@ -40,7 +40,9 @@ public class CommentAddHandler implements Command {
 
 
     comment.setCommentBoard(board);
+
     comment.setCommenter(loginUser);
+
     comment.setRegisteredDate(new Date(System.currentTimeMillis()));
     System.out.printf("-%s-\n", AuthLoginHandler.getLoginUser().getId());
     comment.setContent(Prompt.inputString("댓글 내용> "));

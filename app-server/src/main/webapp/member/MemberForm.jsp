@@ -68,7 +68,22 @@
                 return false;
             } 
         }
+        
+ 
+        
     </script>
+    
+ <script>
+function div_OnOff(v,id){
+ // 라디오 버튼 value 값 조건 비교
+ if(v == "2"){
+  document.getElementById(id).style.display = ""; // 보여줌
+ }else{
+  document.getElementById(id).style.display = "none"; // 숨김
+ }
+}
+</script>
+
 
   
   <style>
@@ -98,12 +113,13 @@
   <div class="mb-3 row">
     <label for='f-grade' class="col-sm-3 col-form-label">구분</label>
     <div class="col-sm-6">
-      <input id='f-grade' type='radio' name='grade' value = "1">
+      <input id='member' type='radio' name='grade' value = "1" onclick="div_OnOff(this.value,'con');">
       <label>일반</label>
-      <input id='f-grade' type='radio' name='grade' value = "2">
+      <input id='doctor' type='radio' name='grade' value = "2" onclick="div_OnOff(this.value,'con');">
       <label>의사</label>
     </div>
 </div>
+
 
   <div class="mb-3 row">
     <label for='f-name' class="col-sm-3 col-form-label">* 이름</label>
@@ -184,6 +200,42 @@
       <label>여자</label>
     </div>
 </div>
+
+<div id="con" style = "display:none">
+ <div class="mb-3 row" >
+    <label for='f-major' class="col-sm-3 col-form-label">* 전문분야</label>
+    <div class="col-sm-6">
+     <input id='f-major' type='text' name='major' class="form-control">
+    </div>
+</div>
+
+ <div class="mb-3 row" >
+    <label for='f-lisence' class="col-sm-3 col-form-label">* 의사 자격증</label>
+    <div class="col-sm-6">
+     <input id='f-lisence' type='text' name='lisence' >
+      <input type="button" name = 'idCheck' value="찾아보기"> 
+    </div>
+</div>
+
+ <div class="mb-3 row" >
+    <label for='f-page' class="col-sm-3 col-form-label">홈페이지</label>
+    <div class="col-sm-6">
+     <input id='f-page' type='text' name='homepage' class="form-control">
+    </div>
+</div>
+
+ <div class="mb-3 row" >
+    <label for='f-introduce' class="col-sm-3 col-form-label">인사말</label>
+    <div class="col-sm-6">
+     <input id='f-introduce' type='text' name='introduce' class="form-control">
+    </div>
+</div>
+
+
+</div>
+
+
+
 
 <!-- <div class="mb-3 row">
   <label for='f-photo' class="col-sm-2 col-form-label">성별</label>

@@ -39,13 +39,10 @@ public class BoardUpdateController extends HttpServlet {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
 
-      System.out.println(no);
       String title = request.getParameter("title");
       String content = request.getParameter("content");
-      System.out.println(title);
       board.setTitle(title);
       board.setContent(content);
-      System.out.println(content);
       boardDao.update(board);
       sqlSession.commit();
       request.getRequestDispatcher("/board/BoardUpdate.jsp").forward(request,response);
