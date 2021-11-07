@@ -54,6 +54,7 @@ public class MailBoxDetailController extends GenericServlet {
 
       mailBoxDao.update(mailBox);
       sqlSession.commit();
+      request.setAttribute("mailBox", mailBox);
       request.getRequestDispatcher("MailBoxDetail.jsp").forward(request, response);
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
