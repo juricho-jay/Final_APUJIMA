@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
+import apus.domain.Board;
 
 @WebServlet("/board/update")
 public class BoardUpdateController extends HttpServlet {
@@ -29,15 +30,19 @@ public class BoardUpdateController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
-
-    String title = request.getParameter("title");
-    String content = request.getParameter("content");
-    board.setTitle(title);
-    board.setContent(content);
-
-
     try {
+
+      int no = Integer.parseInt(request.getParameter("no"));
+      Board board = boardDao.findByNo(no);
+
+      if (board == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
+      }
+
+      String title = request.getParameter("title");
+      String content = request.getParameter("content");
+      board.setTitle(title);
+      board.setContent(content);
       boardDao.update(board);
       sqlSession.commit();
       request.getRequestDispatcher("/board/BoardUpdate.jsp").forward(request,response);
