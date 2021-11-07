@@ -71,7 +71,8 @@
 
 
 
-<a href= 'update' class="btn btn-primary">수정</a>
+
+<a href= 'updateForm?no=${board.no}' class="btn btn-primary">수정</a>
 <a href= 'delete?no=${board.no}' class="btn btn-primary">삭제</a>
 <a href= 'report' class= "btn btn-primary">신고</a>
 

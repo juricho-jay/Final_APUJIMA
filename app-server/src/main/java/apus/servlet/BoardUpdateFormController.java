@@ -10,47 +10,45 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
+import apus.dao.MemberDao;
 import apus.domain.Board;
 
-@WebServlet("/board/update")
-public class BoardUpdateController extends HttpServlet {
+@WebServlet("/board/updateForm")
+public class BoardUpdateFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
-
   BoardDao boardDao;
+  MemberDao memberDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     boardDao = (BoardDao) 웹애플리케이션공용저장소.getAttribute("boardDao");
 
   }
-
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    Board board = new Board();
-    String title = request.getParameter("title");
-    String content = request.getParameter("content");
-    board.setTitle(title);
-    board.setContent(content);
-
-
     try {
-      boardDao.update(board);
-      sqlSession.commit();
-      request.getRequestDispatcher("/board/BoardUpdate.jsp").forward(request,response);
-    } catch (Exception e) {
-      e.printStackTrace();
+      int no = Integer.parseInt(request.getParameter("no"));
+      Board board = boardDao.findByNo(no);
+
+      if (board == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
+      }
+
+      request.setAttribute("board", board);
+      request.getRequestDispatcher("/board/UpdateForm.jsp").forward(request,response);
+
+
+    }  catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
-
-
-
 
 
 

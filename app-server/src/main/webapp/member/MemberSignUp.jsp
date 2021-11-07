@@ -138,16 +138,13 @@ form{
             <h2>회원가입</h2>
           </div>
         <div class="row">
-           <b><a href='MemberForm.jsp' class="btn">일반 회원가입</a></b>
+           <b><a href='/apus/auth/LogIn.jsp' class="btn">로그인</a></b>
         </div>
         <div class="row">
-           <b><a href='DoctorForm.jsp' class="btn">의사 회원가입</a></b>
+           <b><a href='MemberForm.jsp' class="btn">회원가입</a></b>
         </div>
         </div>
-          <div class="row">
-            <!-- <p><a href="list">목록</a></p> -->
-            <p><a href="../auth/LogIn.jsp">로그인</a></p>
-          </div>
+    
         </div>
       </div>
     </div>

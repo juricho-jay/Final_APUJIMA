@@ -35,7 +35,7 @@
 <div class="container">
 <h1>쪽지함 상세보기</h1>
 <a href='MailBoxForm.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br>
- <table class="table table-hover">
+ <%-- <table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
@@ -58,10 +58,14 @@
   <td>${mailBox.receivedTime}</td>
 </tr>
 </tbody>
-</table>
+</table> --%>
 
 
-<%-- <form action='list'>
+<form action='delete'>
+<div class="mb-3 row no">
+<label for='f-sender' class="col-sm-2 col-form-label">번호</label>
+<div class="col-sm-6">${mailBox.no}</div>
+</div>
 <div class="mb-3 row sender">
 <label for='f-sender' class="col-sm-2 col-form-label">보낸이</label>
 <div class="col-sm-6">${mailBox.sender.id}</div>
@@ -70,11 +74,15 @@
 <label for='f-receiver' class="col-sm-2 col-form-label">받는이</label>
 <div class="col-sm-6">${mailBox.receiver.id}</div>
 </div>
-<div class="mb-3 row time">
-<label for='f-sentTime' class="col-sm-2 col-form-label">보낸 시간</label>
+<div class="mb-3 row sentTime">
+<label for='f-sentTime' class="col-sm-2 col-form-label">보낸 날짜</label>
 <div class="col-sm-6">${mailBox.sentTime}</div>
 </div>
-<div class="mb-3 row receiver">
+<div class="mb-3 row receivedTime">
+<label for='f-sentTime' class="col-sm-2 col-form-label">확인 날짜</label>
+<div class="col-sm-6">${mailBox.receivedTime}</div>
+</div>
+<div class="mb-3 row title">
 <label for='f-title' class="col-sm-2 col-form-label">제목</label>
 <div class="col-sm-6">${mailBox.title}</div>
 </div>
@@ -88,7 +96,7 @@
 </table>
 <button class="btn btn-primary btn-sm">목록</button>
 <a href='delete?no=${mailBox.no}' class="btn btn-outline-primary btn-sm">삭제</a> 
-</form> --%>
+</form>
 </div><!-- .container -->
 </body>
 </html>

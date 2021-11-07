@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Security</title>
+<title>로그아웃</title>
 </head>
 <body>
-  <p>로그인 성공!
+  <p>정상적인.. 로그아웃.. 되겠지..?</p>
 </body>
 </html>

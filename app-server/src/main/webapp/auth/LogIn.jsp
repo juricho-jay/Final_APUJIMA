@@ -170,13 +170,13 @@ form fieldset a:hover { text-decoration: underline; }
 
   <h1><strong>APUJIMA</strong> 로그인</h1>
 
-  <form action="#" method="get">
+  <form action="login" method="get">
 
     <fieldset>
 
-      <p><input type="text" required value="Username" placeholder="Username"></p>
+      <p><input type="text"  name = 'id' placeholder="UserId"></p>
 
-      <p><input type="password" required value="Password" placeholder="Password"></p>
+      <p><input type="password" name = 'password' placeholder="Password"></p>
 
       <p><a href="#">아이디/패스워드 찾기</a></p>
 

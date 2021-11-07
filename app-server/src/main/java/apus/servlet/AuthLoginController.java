@@ -6,15 +6,16 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.MemberDao;
 import apus.domain.Member;
-import menu.Menu;
 
-
+@WebServlet("/auth/login")
 public class AuthLoginController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -28,69 +29,42 @@ public class AuthLoginController extends HttpServlet {
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
-  static Member loginUser;
-  static int userAccessLevel = Menu.ACCESS_LOGOUT; // 기본은 로그아웃 된 상태이다.
-  static Member doctorUser;
+  public static Member loginUser;
 
   public static Member getLoginUser() {
     return loginUser;
-  }
-  public static int getUserAccessLevel() {
-    return userAccessLevel;
-  }
-  public static Member doctorUser() { // Member에서 doctorOrNot 변수 값이 2 - 의사
-    return doctorUser;          //일반인은 1
-  }
-
-  public AuthLoginController(MemberDao memberDao) {
-    this.memberDao = memberDao;
   }
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response) 
       throws  ServletException, IOException {
-    /*System.out.println();
-    System.out.println("[로그인]페이지입니다.\n아이디와 비밀번호를 입력하세요.");
-    System.out.println("(취소: #)");
 
-    String id = Prompt.inputString("아이디> ");
-    if (id.contains("#")) {
-      return;
+    try {
+
+      String id = request.getParameter("id");
+      String password = request.getParameter("password");
+      Member member = memberDao.findByIdPwd(id, password);
+
+      if (member == null) {
+        System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
+        request.getRequestDispatcher("/LoginError.jsp").forward(request, response);
+      }
+
+      else {
+        HttpSession session = request.getSession();
+        session.setAttribute("loginUser", member);
+
+        response.setHeader("Refresh", "2;url=/apus/loginindex.jsp");
+        request.getRequestDispatcher("LoginSuccess.jsp").forward(request, response);
+      }
+
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/LoginError.jsp").forward(request, response);
     }
-    String password = Prompt.inputString("비밀번호> ");
-    System.out.println();
 
-    Member member = memberDao.findByIdPwd(id, password);
-
-    //  Member member = loginTest(Id, password);
-    if (member == null) {
-      System.out.println("ID와 암호가 일치하지 않습니다.");
-      return;
-    }
-
-    if(member.getDoctorOrNot() == 3) {
-      System.out.println("관리자님, [APUJIMA]에 오신 것을 환영합니다.");
-      loginUser = member;
-      userAccessLevel = Menu.ACCESS_ADMIN;
-      return;
-    }
-
-    if(member.getDoctorOrNot() == 2) {
-      System.out.println(member.getName()+" 힐러님, [APUJIMA]에 오신 것을 환영합니다.");
-      loginUser = member;
-      userAccessLevel = Menu.ACCESS_DOCTOR;
-      WiseSaying wise = new WiseSaying();
-      wise.execute(request);
-      return;
-
-    } else if(member.getDoctorOrNot() == 1) {
-      System.out.println(member.getName()+"님, [APUJIMA]에 오신 것을 환영합니다.");
-      loginUser = member;
-      userAccessLevel = Menu.ACCESS_GENERAL;
-      WiseSaying wise = new WiseSaying();
-      wise.execute(request);
-      return;
-    } */
 
   }
 

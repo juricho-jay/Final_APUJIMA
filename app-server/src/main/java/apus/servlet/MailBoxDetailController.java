@@ -34,7 +34,7 @@ public class MailBoxDetailController extends GenericServlet {
 
     //    MailBox mailBox = new MailBox();
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
+      int no = Integer.parseInt(request.getParameter("mailBox.no"));
       MailBox mailBox = mailBoxDao.findByNo(no);
 
       if (mailBox == null) {
@@ -44,6 +44,7 @@ public class MailBoxDetailController extends GenericServlet {
 
       mailBoxDao.update(mailBox);
       sqlSession.commit();
+      request.setAttribute("mailBox", mailBox);
       request.getRequestDispatcher("MailBoxDateil.jsp").forward(request, response);
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.

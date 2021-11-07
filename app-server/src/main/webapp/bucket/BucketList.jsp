@@ -9,14 +9,19 @@
 
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  -->
+<script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>-->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    
+    
+    
+    
     
   <style>
 body {
@@ -28,6 +33,10 @@ body {
     color: #495057;
     text-align: left;
     background-color: skyblue;
+    display: flex;
+    align-items: center; /* 수직 정렬 */
+    flex-direction: row; /* default: row */
+    justify-content: center; /* flex direction에 대해서 정렬방식 선택 */
 }
 
 i {
@@ -91,7 +100,7 @@ i {
 }
 
 .scroll-area-sm {
-    height: 288px;
+    height: 400px;
     overflow-x: hidden
 }
 
@@ -175,6 +184,23 @@ i {
     border-color: #3ac47d
 }
 
+.btn-outline-success2 {
+    color: #82B3ED;
+    border-color: #82B3ED;
+}
+
+.btn-outline-success2:hover {
+    color: #fff;
+    background-color: #82B3ED;
+    border-color: #82B3ED
+}
+
+.btn-outline-success2:hover {
+    color: #fff;
+    background-color: #82B3ED;
+    border-color: #82B3ED
+}
+
 .btn-primary {
     color: #fff;
     background-color: #3f6ad8;
@@ -192,78 +218,140 @@ i {
     background-color: #fff
 }
 
-.bucket-title {
-  background-color: yellow;
+input {
+  border:none;
+  background-color: white;
+  /*border-radius:4px 가능 */
+}
+
+/* 삭제 모달 스타일 */
+.modal-confirm {    
+  color: #636363;
+  width: 400px;
+}
+.modal-confirm .modal-content {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+}
+.modal-confirm .modal-header {
+  border-bottom: none;   
+  position: relative;
+}
+.modal-confirm h4 {
+  text-align: center;
+  font-size: 26px;
+  margin: 30px 0 -10px;
+}
+.modal-confirm .close {
+  position: absolute;
+  top: -5px;
+  right: -2px;
+}
+.modal-confirm .modal-body {
+  color: #999;
+}
+.modal-confirm .modal-footer {
+  border: none;
+  text-align: center;   
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+  color: #999;
+}   
+.modal-confirm .icon-box {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 50%;
+  z-index: 9;
+  text-align: center;
+  border: 3px solid #f15e5e;
+}
+.modal-confirm .icon-box i {
+  color: #f15e5e;
+  font-size: 46px;
+  display: inline-block;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+  color: #fff;
+  border-radius: 4px;
+  background: #60c7c1;
+  text-decoration: none;
+  transition: all 0.4s;
+  line-height: normal;
+  min-width: 120px;
+  border: none;
+  min-height: 40px;
+  border-radius: 3px;
+  margin: 0 5px;
+}
+.modal-confirm .btn-secondary {
+  background: #c1c1c1;
+}
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+  background: #a8a8a8;
+}
+.modal-confirm .btn-danger {
+  background: #f15e5e;
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+  background: #ee3535;
+}
+.trigger-btn {
+  display: inline-block;
+  margin: 100px auto;
 }
   </style>
 </head>
 <body>
 
 <div class="row d-flex justify-content-center container">
-    <div class="col-md-8" style="margin-left: 20%; margin-top: 5%">
+    <div class="col-md-10">
         <div class="card-hover-shadow-2x mb-3 card">
             <div class="card-header-tab card-header">
                 <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-                <i class="bi bi-card-checklist" style="font-size: 2rem; color: cornflowerblue; margin-right: 10%;"></i><b style="font-size: 1.5em;">버킷리스트</b></b></div>
+                <i class="bi bi-card-checklist" style="font-size: 2rem; color: cornflowerblue; margin-right: 10%;"></i><b style="font-size: 1.5em;">버킷리스트</b></div>
             </div>
             <div class="scroll-area-sm">
                 <perfect-scrollbar class="ps-show-limits">
                     <div style="position: static;" class="ps ps--active-y">
                         <div class="ps-content">
                             <ul class="list-group list-group-flush">
-														<li>
-														<table class="table table-hover">
-														<thead>
-														  <tr>
-														    <th>번호</th>
-														    <th>제목</th>
-														    <th>내용</th>
-														    <th>달성 여부</th>
-														    <th>등록일</th>
-														    <th>달성일</th>
-														    <th>작성자</th>
-														  </tr>
-														</thead>
-														<tbody>
-														
-														  <c:forEach items="${bucketList}" var="bucket">
-														      <tr>
-														        <td>${bucket.no}</td>
-														        <td>${bucket.title}</td> 
-														        <td>${bucket.content}</td> 
-														        <td>${bucket.complete}</td> 
-														        <td>${bucket.registeredDate}</td>
-														        <td>${bucket.completedDate}</td>
-														        <td>${bucket.writer.id}</td> 
-														      </tr>
-														  </c:forEach>
-                            </table>
-                            </li>
-                                <!-- <li class="list-group-item">
-                                    <div class="todo-indicator bg-warning"></div>
+                                <c:forEach items="${bucketList}" var="bucket">
+                                <li class="list-group-item">
+                                    <div class="todo-indicator bg-primary"></div>
                                     <div class="widget-content p-0">
                                         <div class="widget-content-wrapper">
                                             <div class="widget-content-left mr-2">
-                                                <div class="custom-checkbox custom-control"> 
-                                                <input class="custom-control-input" id="exampleCustomCheckbox12" 
-                                                type="checkbox"><label class="custom-control-label"
-                                                 for="exampleCustomCheckbox12">&nbsp;</label> </div>
+                                                <div class="form-check" style="margin-left: 15px; margin-right: -8px; margin-bottom: 11px"> 
+                                                <input name="sendNo" class="form-check-input" type="checkbox" 
+                                                style="zoom: 1.5; margin-left: " id="send-b-no" onclick='checkOnlyOne(this)' value="${bucket.no}"><label class="form-check-label"
+                                                 for="send-b-no">&nbsp;</label></div>
                                             </div>
                                             <div class="widget-content-left">
-                                                <div class="widget-heading">태호한테 점심 뜯어내기 
-                                                <div class="badge badge-danger ml-2">Rejected</div>
+                                                <div class="widget-heading"><b>${bucket.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>${bucket.content}
+                                                <!-- <div class="badge badge-danger ml-2">Rejected</div> -->
+                                                <%-- <div class="widget-subheading">${bucket.registeredDate}</div> --%>
                                                 </div>
-                                                <div class="widget-subheading"><i>By 주리</i></div>
                                             </div>
-                                            <div class="widget-content-right"> 
+                                            <div class="widget-content-right">
+                                            <sub>${bucket.registeredDate}&nbsp;&nbsp;</sub> 
+                                            <button class="border-0 btn-transition btn btn-outline-success2"> 
+                                            <i style="font-size: 1em">${bucket.writer.id}</i></button> 
                                             <button class="border-0 btn-transition btn btn-outline-success"> 
-                                            <i class="fa fa-check"></i></button> 
+                                            <i class="bi bi-check" style="font-size: 1.5em"></i></button> 
                                             <button class="border-0 btn-transition btn btn-outline-danger"> 
-                                            <i class="fa fa-trash"></i> </button> </div>
+                                            <i class="bi bi-trash"></i> </button> </div>
                                         </div>
                                     </div>
                                 </li>
-                               <li class="list-group-item">
+                              </c:forEach>
+                             <!--  <li class="list-group-item">
                                     <div class="todo-indicator bg-primary"></div>
                                     <div class="widget-content p-0">
                                         <div class="widget-content-wrapper">
@@ -332,17 +420,18 @@ i {
             </div>
                 
           <div class="d-block text-right card-footer">
-            <button class="mr-2 btn btn-link btn-sm">취소</button>
+            <button class="mr-2 btn btn-link btn-sm" id="deletebtn" onclick="sendNo()">삭제</button>
             <!-- <button class="btn btn-primary" onclick="addButton();">버킷리스트 추가</button> -->
             <button class="btn btn-primary" id="openModalBtn">버킷리스트 추가</button>
             
             </div>
+            </div>
+            </div>
+            </div>
             
-<!-- 모달을 열기 위한 버튼 -->
-
-<!-- 모달 영역 -->
-
-<div id="modalBox" class="modal fade" id="myModal" tabindex="-1" 
+<form action='add'>
+<!-- 추가 모달 영역 -->
+<div id="addModal" class="modal fade" tabindex="-1" 
 role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -355,79 +444,117 @@ role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="f
        <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <i class="fas fa-user prefix grey-text"></i>
-          <input type="text" id="orangeForm-name" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="orangeForm-name">제목</label>
+          <input type="text" id="bucket-title" name="title" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="bucket-title">제목</label>
         </div>
         <div class="md-form mb-5">
           <i class="fas fa-envelope prefix grey-text"></i>
-          <input type="email" id="orangeForm-email" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="orangeForm-email">내용</label>
+          <input type="text" id="bucket-content" name="content" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="bucket-content">내용</label>
         </div>
 
         <div class="md-form mb-4">
           <i class="fas fa-lock prefix grey-text"></i>
-          <input type="password" id="orangeForm-pass" class="form-control validate">
+          <input type="text" id="bucket-writer" name="id" class="form-control validate">
           <label data-error="wrong" data-success="right" for="orangeForm-pass">작성자</label>
         </div>
 
       </div>
       <div class="modal-footer">
-    <button type="button" class="btn btn-primary">확인</button>
+    <!-- <button type="button" id="bucketAddBtn" class="btn btn-primary">확인</button> -->
+    <input type="submit" value="확인">
         <button type="button" class="btn btn-default" id="closeModalBtn">취소</button>
       </div>
     </div>
   </div>
 </div>
+</form>
 
+<form action='delete'>
+<!-- 삭제 모달 영역 -->
+<div id="deleteModal" class="modal fade" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="bi bi-x-lg"></i>
+        </div>            
+        <h4 class="modal-title w-100">정말 삭제하시겠습니까?</h4>  
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>삭제된 버킷리스트는 복구할 수 없습니다.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <div>
+        <input type="hidden" name="no" id="b-no">
+        <input type="submit" value="삭제">
+        </div>
+        <!-- <button id="confirmDelete" type="submit" class="btn btn-danger">삭제</button> -->
+      </div>
+    </div>
+  </div>
+</div>     
+</form>
 
+<script type="text/javascript">
+// 체크 박스 한 개만 선택하기
+   function checkOnlyOne(element) {
+  
+  const checkboxes 
+      = document.getElementsByName("sendNo");
+  
+  checkboxes.forEach((cb) => {
+    cb.checked = false;
+  })
+  
+  element.checked = true;
+  
+} 
 
-    
- <!-- <script type="text/javascript">
-   async function addButton() {
-	   const { value : text } = await Swal.fire({
-		   title: '버킷리스트 추가하기',
-		   input: 'textarea',
-		   inputPlaceholder: '버킷리스트를 입력하세요...',
-		   inputAttributes: {
-		     'aria-label': 'Type your message here'
-		   },
-		   showCancelButton: true
-		 })
-		  
-		 if (text) {
-			      
-	          
-	          const li = document.createElement("li");
-	          
-	          /* li.setAttribute('id', text); */
-	          
-	          const textNode = document.createTextNode(text);
-	          li.appendChild(textNode);
-	          
-	          console.log(li);
-	          const className = document.getElementsByClassName('list-group list-group-flush')[0];
-	          className.appendChild(li); 
-	          
-		 }
-		 
-      };
-    </script> -->
-    
+   
+</script>
+
 
 <script>
+
+//모달창으로 데이터 받기
+var select_obj = '';
+function sendNo() {
+  
+        $('input[type="checkbox"]:checked').each(function () {
+            select_obj= $(this).val();
+        });
+        
+        $("#b-no").val(select_obj);
+        // b-no 쪽으로 데이터 전달
+    };
+
+
 // 모달 버튼에 이벤트를 건다.
 $('#openModalBtn').on('click', function(){
-$('#modalBox').modal('show');
+$('#addModal').modal('show');
 
 });
 // 모달 안의 취소 버튼에 이벤트를 건다.
 $('#closeModalBtn').on('click', function(){
-$('#modalBox').modal('hide');
+$('#addModal').modal('hide');
 });
-//배경 클릭으로 꺼지는 것 방지
+
+$('#deletebtn').on('click', function(){
+$('#deleteModal').modal('show');
+
+});
+
+
+$('#deletebtn').on('click', function(){
+$('#deleteModal').modal('hide');
+});
+
+
 </script>
 
-    
 </body>
 </html>
 
