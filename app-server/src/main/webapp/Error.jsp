@@ -26,7 +26,7 @@
 <form>  
   <a href='member/list' class="btn btn-primary">회원 목록</a>
   <a href='board/list' class="btn btn-primary">게시글 목록</a>
-  <a href='/index.jsp' class="btn btn-primary">메인 페이지</a>
+  <a href='index.jsp' class="btn btn-primary">메인 페이지</a>
 </form>
 </div> <!-- container -->
 
