@@ -1,6 +1,7 @@
 package apus.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -37,8 +38,8 @@ public class MailBoxSendController extends HttpServlet {
 
     MailBox mailBox = new MailBox();
 
-    String user = request.getParameter("receiver");
-    String user2 = request.getParameter("sender");
+    String user = request.getParameter("receiver.id");
+    String user2 = request.getParameter("sender.id");
     try {
       Member member = memberDao.findById(user);
       Member member2 = memberDao.findById(user2);
@@ -55,6 +56,7 @@ public class MailBoxSendController extends HttpServlet {
 
     mailBox.setTitle(request.getParameter("title"));
     mailBox.setContent(request.getParameter("content"));
+    mailBox.setSentTime(new Date(System.currentTimeMillis()));
 
     try {
       mailBoxDao.insert(mailBox);

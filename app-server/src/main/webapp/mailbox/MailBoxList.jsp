@@ -30,6 +30,7 @@
     <th>보낸이</th>
     <th>받는이</th>
     <th>제목</th>
+    <th>내용</th>
     <th>날짜</th>
   </tr>
 </thead>
@@ -42,7 +43,7 @@
   <td>${mailBox.receiver.id}</td>
   <td><a href='detail?no=${mailBox.no}'>${mailBox.title}</a></td>
   <td>${mailBox.content}</td>
-  <td>${mailBox.receivedTime}</td>
+  <td>${mailBox.sentTime}</td>
 </tr>
 </c:forEach>
 </tbody>
