@@ -34,18 +34,18 @@ public class MailBoxDetailController extends GenericServlet {
 
     //    MailBox mailBox = new MailBox();
     try {
-      int no = Integer.parseInt(request.getParameter("mailBox.no"));
+      int no = Integer.parseInt(request.getParameter("no"));
       MailBox mailBox = mailBoxDao.findByNo(no);
 
       if (mailBox == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
+
       mailBox.setReceivedTime(new Date(System.currentTimeMillis()));
 
       mailBoxDao.update(mailBox);
       sqlSession.commit();
-      request.setAttribute("mailBox", mailBox);
-      request.getRequestDispatcher("MailBoxDateil.jsp").forward(request, response);
+      request.getRequestDispatcher("MailBoxDetail.jsp").forward(request, response);
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
