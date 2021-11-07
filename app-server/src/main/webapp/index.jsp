@@ -37,7 +37,6 @@
                      <tr align=left>
                         <td><img src="img/id.gif" /></td>
                         <td><input TYPE="text" NAME=id value="admin" size=15></td>
-                        <td rowspan=2><input type="submit" value="로그인"></td>
                      </tr>
                      <tr></tr>
                      <tr align=left>

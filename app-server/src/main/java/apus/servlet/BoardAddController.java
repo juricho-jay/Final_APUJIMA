@@ -37,11 +37,17 @@ public class BoardAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException { 
+
+
     HttpSession session = request.getSession(false);
+
+
     if (session.getAttribute("loginUser") == null) {
       response.sendRedirect("/apus/index.jsp");
       return;
     }
+
+
     try {
       Member writer = (Member) request.getSession(false).getAttribute("loginUser");
 

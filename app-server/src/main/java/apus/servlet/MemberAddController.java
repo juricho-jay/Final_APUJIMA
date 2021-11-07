@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.MemberDao;
+import apus.domain.Doctor;
 import apus.domain.Member;
 
 @WebServlet("/member/add")
@@ -54,11 +55,24 @@ public class MemberAddController extends HttpServlet {
     String grade = request.getParameter("grade");
     member.setDoctorOrNot(Integer.parseInt(grade));
 
+    if(member.getDoctorOrNot() == 2) {
+      Doctor doctor = new Doctor();
+      doctor.setLicense(request.getParameter("major"));
+      doctor.setMajor(request.getParameter("lisence"));
+      doctor.setHomepage(request.getParameter("homepage"));
+      doctor.setIntroduction(request.getParameter("introduce"));
+      member.setDoctor(doctor);
+    }
 
 
 
     try {
       memberDao.insert(member);
+
+      if(member.getDoctorOrNot() == 2) {
+        memberDao.insert2(member);
+      }
+
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
       request.getRequestDispatcher("MemberAdd.jsp").forward(request, response);
