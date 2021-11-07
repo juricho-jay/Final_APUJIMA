@@ -32,9 +32,12 @@ public class MailBoxDetailController extends GenericServlet {
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
 
+    System.out.println("---------");
     //    MailBox mailBox = new MailBox();
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
+      String num = request.getParameter("no");
+      int no = Integer.parseInt(num);
+      System.out.println("---> " + no);
       MailBox mailBox = mailBoxDao.findByNo(no);
 
       if (mailBox == null) {
@@ -49,6 +52,7 @@ public class MailBoxDetailController extends GenericServlet {
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
+      e.printStackTrace();
 
       // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
