@@ -37,33 +37,40 @@ public class BoardAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException { 
-    Member writer = memberDao.findById(AuthLoginController.getLoginUser().getId());
-    Board board = new Board();
-    int whichBoard = Integer.parseInt(request.getParameter("whichBoard"));
-    //    String convertDate = request.getParameter("birthDay");
-    //    SimpleDateFormat convertDate2 = new SimpleDateFormat("yyyy-MM-dd");
-    //
-    //    Date bDate = convertDate2.parse(convertDate);
-
-    String year = request.getParameter("birthyy");
-    String month = request.getParameter("birthmm");
-    String day = request.getParameter("birthdd");
-    Date birthday = Date.valueOf(year+"-"+month+"-"+day);
-
-    board.setTitle(request.getParameter("title"));
-    board.setWriter(writer);
-    board.setContent(request.getParameter("content"));
-    board.setWhichBoard(whichBoard);
-    board.setRegisteredDate(birthday);
-
-
-    /*
-     board.setComment/like.. detail에서 보여주는게 맞지않나../
-     */
-
-
-
     try {
+      String id = AuthLoginController.getLoginUser().getId();
+      Member writer = memberDao.findById(id);
+
+      if(writer == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
+      }
+
+      Board board = new Board();
+      int whichBoard = Integer.parseInt(request.getParameter("whichBoard"));
+      //    String convertDate = request.getParameter("birthDay");
+      //    SimpleDateFormat convertDate2 = new SimpleDateFormat("yyyy-MM-dd");
+      //
+      //    Date bDate = convertDate2.parse(convertDate);
+
+      String year = request.getParameter("birthyy");
+      String month = request.getParameter("birthmm");
+      String day = request.getParameter("birthdd");
+      Date birthday = Date.valueOf(year+"-"+month+"-"+day);
+
+      board.setTitle(request.getParameter("title"));
+      board.setWriter(writer);
+      board.setContent(request.getParameter("content"));
+      board.setWhichBoard(whichBoard);
+      board.setRegisteredDate(birthday);
+
+
+      /*
+     board.setComment/like.. detail에서 보여주는게 맞지않나../
+       */
+
+
+
+
       boardDao.insert(board);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");

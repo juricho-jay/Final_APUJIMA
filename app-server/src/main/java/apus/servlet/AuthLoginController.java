@@ -51,7 +51,7 @@ public class AuthLoginController extends HttpServlet {
       }
 
       else {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(); //멀티쓰레드
         session.setAttribute("loginUser", member);
 
         response.setHeader("Refresh", "2;url=/apus/loginindex.jsp");
