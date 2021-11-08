@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,22 +12,30 @@
   
   <script type="text/javascript">
     
-        // 필수 입력정보인 아이디 입력되었는지 확인하는 함수
+        // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
         function checkValue()
         {
-        	if(!document.userInfo.receiver.id.value){
+          
+           if(!document.usersend.sender.id.value){
                 alert("아이디를 입력하세요.");
                 return false;
             }
-        	// 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-            if(document.userInfo.receiver.id.value != document.userInfo.idcheck.value ){
-                alert("아이디를 다시 입력하세요.");
+          
+            if(!document.usersend.title.value){
+                alert("제목을 입력하세요.");
+                return false;
+            } 
+            
+            if(!document.usersend.content.value){
+                alert("내용을 입력하세요.");
                 return false;
             }
-           
-        }
+            
+        }  
     </script>
+ 
   <style>
+  
     .container {
     xborder: 1px solid red;
     width: 640px;
@@ -45,60 +52,50 @@
     margin-top: 20px;
     }
   </style>
-  
 </head>
+
 <body>
 <div class="container">
+
 <h1>쪽지보내기</h1>
-<!-- <form name = "userInfo" action="send" method="post" onsubmit="return checkValue()">
-보낸이 : <input type="text" name="sender.id" placeholder="abc"><br><p><p>
-받는이 : <input type="text" name="receiver.id" placeholder="abc"><br><p><p>
-제목 : <input type="text" name="title"><br><p><p>
-내용 : <textarea rows="5" cols="30" name="content"></textarea>
-<p>
-<input type="submit" class="sendbtn" value="쪽지 보내기">
-<div class="sendbtn">
-<button class="btn btn-primary btn-sm">보내기</button>
-</div>
-</form> -->
-
-
-<form name = "mail" action='send' onsubmit="return checkValue()">
-<div class="content">
+<form name = "usersend" action='send' method="post" onsubmit="return checkValue()">
+<div class="content1">
   <br><br>
-  <!-- <div class="mb-3 row">
-    <label for='f-receiver' class="col-sm-3 col-form-label">받는이</label>
-    <div class="col-sm-6">
-      <input id='f-receiver' type='text' name='receiver.id' class="form-control">
-    </div>
-</div> -->
   <label for="box1">보낸이</label>
-  <%-- <p>${loginUser.id}님 반갑습니다..</p> --%>
   <br>
   <div class="col-sm-4">
-      <input id='f-sender' type='text' name='sender.id' class="form-control">
+      <input id='f-sender' type='text' name='sender.id' class="form-control" value="${loginUser.id}" readOnly>
   </div>
   <br>
-  <label for="box2">받는이</label>
+</div>
+<div class="content2">
+  <label for="f-receiver">받는이</label>
   <br>
   <div class="col-sm-4">
       <input id='f-receiver' type='text' name='receiver.id' class="form-control">
+      <input type="button" name='findId' value="아이디확인">
+      
   </div>
   <!-- <textarea id="f-receiver" name="receiver" rows=1 cols=45></textarea>
   <input type="button" name = 'idCheck' value="존재하는 회원인지 체크">  -->
   <br><br>
-  <label for="box3">제목</label>
+</div>
+<div class="content3">
+  <label for="f-title">제목</label>
   <br>
   <textarea id="f-title"  name="title" rows=1 cols=73 class="form-control">
   </textarea>
   <br><br>
-  <label for="box4">내용</label>
+</div>
+<div class="content4">
+  <label for="f-content">내용</label>
   <br>
   <textarea id="f-content" name="content" rows=10 cols=73 class="form-control">
   </textarea>
 </div>
-<button class="btn btn-primary">보내기</button>
-  
+<div class="col-12">
+<button class="btn btn-primary btn-sm">보내기</button>
+  </div>
 </form>
 </div><!-- .container -->
 </body>

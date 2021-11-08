@@ -40,9 +40,6 @@
 </thead>
 <tbody>
 
-
-
-
 <c:forEach items="${memberList}" var="member">
 <tr>
     <td>${member.no}</td>
