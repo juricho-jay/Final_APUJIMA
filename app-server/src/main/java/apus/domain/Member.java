@@ -16,7 +16,7 @@ public class Member implements Serializable{
   private Date registeredDate;
   private int doctorOrNot;
   private int point;
-  private int active;
+  private int active; // 활성화 여부 => 1 : 활성화  0 : 비활성화
   private Doctor doctor;
 
 
