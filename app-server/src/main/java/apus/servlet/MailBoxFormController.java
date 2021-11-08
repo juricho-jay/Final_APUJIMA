@@ -15,7 +15,7 @@ public class MailBoxFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     // 출력을 담당할 뷰를 호출한다.
-    request.getRequestDispatcher("/mailbox/mailBoxForm.jsp").forward(request, response);
+    request.getRequestDispatcher("/mailbox/MailBoxForm.jsp").forward(request, response);
   }
 }
 

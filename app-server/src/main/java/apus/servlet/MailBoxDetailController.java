@@ -37,7 +37,7 @@ public class MailBoxDetailController extends GenericServlet {
     try {
       String num = request.getParameter("no");
       int no = Integer.parseInt(num);
-      System.out.println("---> " + no);
+      //      System.out.println("---> " + no);
       MailBox mailBox = mailBoxDao.findByNo(no);
 
       if (mailBox == null) {
