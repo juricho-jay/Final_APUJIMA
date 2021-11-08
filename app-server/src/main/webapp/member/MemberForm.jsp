@@ -120,7 +120,6 @@ function div_OnOff(v,id){
     </div>
 </div>
 
-
   <div class="mb-3 row">
     <label for='f-name' class="col-sm-3 col-form-label">* 이름</label>
     <div class="col-sm-6">
