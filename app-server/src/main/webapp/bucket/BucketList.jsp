@@ -368,11 +368,10 @@ input {
                 </perfect-scrollbar>
             </div>
           <div class="d-block card-footer">
-            <button class="mr-2 btn btn-link btn-sm" id="checkAll" style="color: deepskyblue; float: left" onclick="nono()"><i class="bi bi-check-all" style="zoom: 1.5"></i></button>
+            <button class="mr-2 btn btn-link btn-sm" id="checkAll" style="color: deepskyblue; float: left" onclick="selectAll()"><i class="bi bi-check-all" style="zoom: 1.5"></i></button>
             <div class="two">
             <button class="btn btn-primary" id="openModalBtn" style="margin-top: 2.5px; float: right">버킷리스트 추가</button>
             <button class="mr-2 btn btn-link btn-sm" id="deleteBtn2" onclick="sendNo()" style="float: right; margin-top: 5px;">삭제</button>
-            <!-- <button class="btn btn-primary" onclick="addButton();">버킷리스트 추가</button> -->
             </div>
             </div>
             </div>
@@ -414,52 +413,6 @@ input {
 </form> 
 
             
-            
-<!-- 추가 모달 영역 -->
- <!-- <form action='add'>
-<div id="addModal" class="modal fade" tabindex="-1" 
-role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">버킷리스트 추가</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-       <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <i class="fas fa-user prefix grey-text"></i>
-          <input type="text" id="bucket-title" name="title" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="bucket-title">제목</label>
-        </div>
-        <div class="md-form mb-5">
-          <i class="fas fa-envelope prefix grey-text"></i>
-          <input type="text" id="bucket-content" name="content" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="bucket-content">내용</label>
-        </div>
-
-          <div class="md-form mb-4">
-          <i class="fas fa-lock prefix grey-text"></i>
-          <input type="text" id="bucket-writer" name="id" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="bucket-writer">작성자</label>
-        </div>
-      </div>
-      <div class="modal-footer">
-    <input type="submit" value="확인">
-        <button type="button" class="btn btn-default" id="closeModalBtn">취소</button>
-      </div>
-    </div>
-  </div>
-</div>
-</form>  -->
-
-        <%-- <div class="md-form mb-4">
-          <i class="fas fa-lock prefix grey-text"></i>
-          <input type="text" id="bucket-writer" name="id" class="form-control validate" readonly>
-          <label data-error="wrong" data-success="right" for="bucket-writer">${loginUser.id}</label>
-        </div> --%>
-    <!-- <button type="button" id="bucketAddBtn" class="btn btn-primary">확인</button> -->
 <!-- 삭제 모달 영역 -->
 <form id="deleteForm" action='delete'>
 <div id="deleteModal" class="modal fade" aria-hidden="true" data-keyboard="false" data-backdrop="static">
@@ -478,8 +431,7 @@ role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="f
       <div class="modal-footer justify-content-center">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
         <div>
-        <input type="hidden" name="noList" id="b-no">
-        <!-- <input type="submit" value="삭제"> -->
+        <input type="hidden" name="no" id="b-no">
         <button id="confirmDelete" type="submit" class="btn btn-danger">삭제</button>
         </div>
       </div>
@@ -491,11 +443,28 @@ role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="f
 
 
 <script>
+
+// 인디케이터 바 랜덤 색상 부여
 window.onload = function() {
-	/* console.log(document.querySelectorAll(".todo-indicator")); */
 	document.querySelectorAll(".todo-indicator").forEach((tag) => {
 		tag.style["background-color"] = "#" + Math.floor(Math.random() * 16777215).toString(16);
 	});
+};
+
+
+
+// 체크 박스 - 모두 선택 -all true
+function selectAll() {
+	    var obj = document.getElementsByName("sendNo");
+	    if (obj[0].checked) {
+	        for (i=0;i<obj.length;i++) {
+	            obj[i].checked = false;
+	        }
+	    } else {
+	        for (i=0;i<obj.length;i++) {
+	            obj[i].checked = true;
+	        }
+	    } 
 };
 
 
@@ -506,13 +475,6 @@ window.onload = function() {
 var select_obj = '';
 function sendNo() {
   
-    /*    $('input[type="checkbox"]:checked').each(function () {
-            select_obj= $(this).val();
-        });
-        
-        $("#b-no").val(select_obj); */
-    
-        
         var deleteForm = $('#deleteForm');
         var chk_arr = $("input[name='sendNo']");
         var chk_data = []; 
@@ -542,38 +504,37 @@ function sendNo2() {
 
 
 
-// 모달 버튼에 이벤트를 건다.
+// 모달 버튼에 이벤트를 건다. (버킷 추가 모달)
 $('#openModalBtn').on('click', function(){
 $('#addModal').modal('show');
 
 });
-// 모달 안의 취소 버튼에 이벤트를 건다.
+// 모달 안의 취소 버튼에 이벤트를 건다. (버킷 추가 모달)
 $('#closeModalBtn').on('click', function(){
 $('#addModal').modal('hide');
 });
 
 
+
+// 버킷 삭제 모달 (휴지통: 1개) / 삭제 버튼 (체크박스 다수)
 // id는 절대값이므로 중복될 수 없다 > name을 활용할 것 > id로 쓸 경우 아이콘 하나만 모달 창 실행
 $('button[name=d-btn]').on('click', function(){
-	$('#deleteModal').modal('show');
+$('#deleteModal').modal('show');
+});
 
-	});
+$('button[name=d-btn]').on('click', function(){
+$('#deleteModal').modal('hide');
+});
 
-	$('button[name=d-btn]').on('click', function(){
-	$('#deleteModal').modal('hide');
-	});
-	deleteBtn2
-	
+// 모달 버튼에 이벤트를 건다.
+$('#deleteBtn2').on('click', function(){
+$('#deleteModal').modal('show');
 
-	// 모달 버튼에 이벤트를 건다.
-	$('#deleteBtn2').on('click', function(){
-	$('#deleteModal').modal('show');
-
-	});
-	// 모달 안의 취소 버튼에 이벤트를 건다.
-	$('#deleteBtn2').on('click', function(){
-	$('#deleteModal').modal('hide');
-	});
+});
+// 모달 안의 취소 버튼에 이벤트를 건다.
+$('#deleteBtn2').on('click', function(){
+$('#deleteModal').modal('hide');
+});
 
 </script>
 
