@@ -48,6 +48,8 @@
    
     <a href = ""><button class = "Header_intro" style = "font-size: 2.0em">소개</button></a>
     <a href = "board/list"><button class = "Header_community" style = "font-size: 2.0em">커뮤니티</button></a>
+    <a href = "mailbox/list"><button class = "Header_mailBoxForm" style = "font-size: 2.0em">쪽지함</button></a>
+    <a href = ""><button class = "Header_anything" style = "font-size: 2.0em">테스트 다 해봐</button></a>
     <a href = "bucket/list"><button class = "Header_anything" style = "font-size: 2.0em">버킷리스트</button></a>
    </div>
      <table align=center border="1" cellpadding="8" cellspacing="0" bordercolor="#999999">

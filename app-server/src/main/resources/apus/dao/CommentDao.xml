@@ -38,10 +38,11 @@
       inner join apus_board b on b.board_no=c.board_no
   </select>
   
-  <!-- <select id = "findBoardComment" resultMap ="CommentMap" parameterType="int">
+  <select id = "findBoardComment" resultMap ="CommentMap" parameterType="int">
     select
       c.comment_no,
       c.content,
+      c.created_dt,
       m.member_no,
       m.id
     from
@@ -49,7 +50,7 @@
       inner join apus_member m on m.member_no=c.member_no
     where 
     board_no=#{no}
-  </select> -->
+  </select> 
   
     <insert id="insert" parameterType="comment" 
   useGeneratedKeys="true" keyColumn="comment_no" keyProperty="no">

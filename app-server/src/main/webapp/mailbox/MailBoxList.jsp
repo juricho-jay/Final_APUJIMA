@@ -19,6 +19,9 @@
   </style>
   
 </head>
+
+
+    
 <body>
 <div class="container">
 <h1>쪽지함</h1>
@@ -26,6 +29,7 @@
 <table class="table table-hover">
 <thead>
   <tr>
+    <th scope="col"><input type="checkbox" name="select_all" id="select_all" value="select_all"></th>
     <th>번호</th>
     <th>보낸이</th>
     <th>받는이</th>
@@ -38,6 +42,7 @@
 
 <c:forEach items="${mailBoxList}" var="mailBox">
 <tr>
+  <td><input type="checkbox" name="select_tch" id="select_tch" value="${list.userno}"></td>
   <td>${mailBox.no}</td>
   <td>${mailBox.sender.id}</td> 
   <td>${mailBox.receiver.id}</td>
