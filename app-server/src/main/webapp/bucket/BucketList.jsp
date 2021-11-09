@@ -386,6 +386,7 @@ input {
             <div class="two">
             <button class="btn btn-primary" id="openModalBtn" style="margin-top: 2.5px; float: right">버킷리스트 추가</button>
             <button class="mr-2 btn btn-link btn-sm" id="deleteBtn" style="float: right; margin-top: 5px;">삭제</button>
+            <a href=""></a><button class="mr-2 btn btn-link btn-sm" id="deleteBtn" style="float: right; margin-top: 5px;" onclick="moveHome()">취소</button>
             </div>
             </div>
             </div>
@@ -502,6 +503,13 @@ window.onload = function() {
 	  
 		
 };
+
+// 돌아가기
+function moveHome(){
+     location.href = "../loginindex.jsp";
+};
+
+
 
 
 
