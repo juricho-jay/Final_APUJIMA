@@ -363,11 +363,9 @@ input {
 	                                                  <input type="hidden" name="no" value="${bucket.no}"></input>
 				                                            <button class="border-0 btn-transition btn btn-outline-success2"> 
 				                                            <i style="font-size: 1em">${bucket.writer.id}</i></button> 
-				                                            <%-- <textarea id="sendB-no" name="no" style=display:none>${bucket.no}</textarea> --%>
 				                                            <button class="btn-outline-success" id="completeBtn" name="complete" value="${bucket.complete}" type="submit">
 				                                            <i class="bi bi-check" style="font-size: 1.5em"></i></button> 
 				                                            <button class="border-0 btn-transition btn btn-outline-danger" name="b-trashBtn" onclick="trashDelete(${bucket.no})" type="button">
-				                                            <%-- <i id="hiddenNo" style="display:none" data-value="${bucket.no}"></i> --%>
 				                                            <i class="bi bi-trash"></i> </button> 
 				                                        </form>
                                               </div>
@@ -386,7 +384,7 @@ input {
             <div class="two">
             <button class="btn btn-primary" id="openModalBtn" style="margin-top: 2.5px; float: right">버킷리스트 추가</button>
             <button class="mr-2 btn btn-link btn-sm" id="deleteBtn" style="float: right; margin-top: 5px;">삭제</button>
-            <a href=""></a><button class="mr-2 btn btn-link btn-sm" id="deleteBtn" style="float: right; margin-top: 5px;" onclick="moveHome()">취소</button>
+            <button class="mr-2 btn btn-link btn-sm" id="homeBtn" style="float: right; margin-top: 5px;" onclick="moveHome()">취소</button>
             </div>
             </div>
             </div>
