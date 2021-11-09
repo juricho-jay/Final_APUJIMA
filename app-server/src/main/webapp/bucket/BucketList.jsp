@@ -344,17 +344,17 @@ input {
                                             <div class="widget-content-left">
                                                 <div class="widget-heading"><b>${bucket.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>${bucket.content}
                                                 <!-- <div class="badge badge-danger ml-2">Rejected</div> -->
-                                                <%-- <div class="widget-subheading">${bucket.registeredDate}</div> --%>
                                                 </div>
                                             </div>
 	                                            <div class="widget-content-right">
 	                                              <sub>${bucket.registeredDate}&nbsp;&nbsp;</sub> 
 				                                            <button class="border-0 btn-transition btn btn-outline-success2"> 
 				                                            <i style="font-size: 1em">${bucket.writer.id}</i></button> 
-				                                            <textarea id="sendB-no" name="no" style=display:none>${bucket.no}</textarea>
-				                                            <button class="border-0 btn-transition btn btn-outline-success">
+				                                            <%-- <textarea id="sendB-no" name="no" style=display:none>${bucket.no}</textarea> --%>
+				                                            <button class="border-0 btn-transition btn btn-outline-success" id="completeBtn" onclick="complete()" type="submit">
 				                                            <i class="bi bi-check" style="font-size: 1.5em"></i></button> 
-				                                            <button class="border-0 btn-transition btn btn-outline-danger" id="deletebtn" name="d-btn" value="${bucket.no}" onclick="sendNo2()">
+				                                            <button class="border-0 btn-transition btn btn-outline-danger" id="trashBtn" name="b-trashBtn" onclick="trashDelete(${bucket.no})">
+				                                            <%-- <i id="hiddenNo" style="display:none" data-value="${bucket.no}"></i> --%>
 				                                            <i class="bi bi-trash"></i> </button> 
                                               </div>
                                         </div>
@@ -371,7 +371,7 @@ input {
             <button class="mr-2 btn btn-link btn-sm" id="checkAll" style="color: deepskyblue; float: left" onclick="selectAll()"><i class="bi bi-check-all" style="zoom: 1.5"></i></button>
             <div class="two">
             <button class="btn btn-primary" id="openModalBtn" style="margin-top: 2.5px; float: right">버킷리스트 추가</button>
-            <button class="mr-2 btn btn-link btn-sm" id="deleteBtn2" onclick="sendNo()" style="float: right; margin-top: 5px;">삭제</button>
+            <button class="mr-2 btn btn-link btn-sm" id="deleteBtn" style="float: right; margin-top: 5px;">삭제</button>
             </div>
             </div>
             </div>
@@ -404,7 +404,7 @@ input {
 		          
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		        <button type="button" id="a-cancelBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
 		        <button type="submit" id="bucketAddBtn" class="btn btn-primary">확인</button>
 		      </div>
 		    </div>
@@ -412,7 +412,7 @@ input {
 		</div>
 </form> 
 
-            
+           
 <!-- 삭제 모달 영역 -->
 <form id="deleteForm" action='delete'>
 <div id="deleteModal" class="modal fade" aria-hidden="true" data-keyboard="false" data-backdrop="static">
@@ -423,15 +423,14 @@ input {
           <i class="bi bi-x-lg"></i>
         </div>            
         <h4 class="modal-title w-100">정말 삭제하시겠습니까?</h4>  
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
       </div>
       <div class="modal-body">
         <p>삭제된 버킷리스트는 복구할 수 없습니다.</p>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" id="d-cancelBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
         <div>
-        <input type="hidden" name="no" id="b-no">
         <button id="confirmDelete" type="submit" class="btn btn-danger">삭제</button>
         </div>
       </div>
@@ -467,72 +466,59 @@ function selectAll() {
 	    } 
 };
 
-
-
-
-
-//모달창으로 데이터 받기 - 체크박스 - 삭제 버튼
-var select_obj = '';
-function sendNo() {
+// 체크박스 중복 체크 > 삭제 눌렀을 때 form으로 넘어갈 데이터들 추가
+$('#deleteBtn').click(function() {
+	var deleteForm = $('#deleteForm');
+  var chk_arr = $("input[name='sendNo']");
+  var chk_data = []; 
   
-        var deleteForm = $('#deleteForm');
-        var chk_arr = $("input[name='sendNo']");
-        var chk_data = []; 
-        
-        for( var i=0; i<chk_arr.length; i++ ) { 
-          if( chk_arr[i].checked == true ) {
-            $('<input>').attr('type','hidden').attr('value', chk_arr[i].value).attr('name','no').appendTo(deleteForm);
-          }
-        }
+  console.log(chk_arr);
 
-        
-          
-    };
-    
-  //모달창으로 데이터 받기 - 휴지통 아이콘
-var select_obj2 = '';
-function sendNo2() {
-	  
-	select_obj2 = $('#sendB-no').val();
+  for( var i=0; i<chk_arr.length; i++ ) { 
+    if(chk_arr[i].checked == true ) {
+     $('<input>').attr('type','hidden').attr('value', chk_arr[i].value).attr('name','no').appendTo(deleteForm); 
+    }
+  };
+});
 
-	console.log(select_obj2);
-	
-	$("#b-no").val(select_obj2);
-};
+// 휴지통 버튼 눌렀을 때 form으로 넘어갈 데이터 하나 추가  //누른 애만 해야 해서 onclick 씀
+function trashDelete(no) {
+  var deleteForm = $('#deleteForm');
+  $('<input>').attr('type','hidden').attr('value', no).attr('name','no').appendTo(deleteForm);
+  }; 
 
 
-
-
-
-// 모달 버튼에 이벤트를 건다. (버킷 추가 모달)
+// 추가 모달 버튼에 이벤트를 건다. 
 $('#openModalBtn').on('click', function(){
 $('#addModal').modal('show');
 
 });
-// 모달 안의 취소 버튼에 이벤트를 건다. (버킷 추가 모달)
-$('#closeModalBtn').on('click', function(){
+// 추가 모달 안의 취소 버튼에 이벤트를 건다. 
+$('#a-cancelBtn').on('click', function(){
+// >>>취소할 때 데이터 초기화하는 식 필요 <<<<
 $('#addModal').modal('hide');
 });
 
+// 모달 데이터 입력-취소
 
 
-// 버킷 삭제 모달 (휴지통: 1개) / 삭제 버튼 (체크박스 다수)
+	
+	
+// 휴지통 삭제 모달 오픈
 // id는 절대값이므로 중복될 수 없다 > name을 활용할 것 > id로 쓸 경우 아이콘 하나만 모달 창 실행
-$('button[name=d-btn]').on('click', function(){
+$('button[name=b-trashBtn]').on('click', function(){
 $('#deleteModal').modal('show');
 });
 
-$('button[name=d-btn]').on('click', function(){
-$('#deleteModal').modal('hide');
-});
 
-// 모달 버튼에 이벤트를 건다.
-$('#deleteBtn2').on('click', function(){
+// 삭제 모달 버튼에 이벤트를 건다.
+$('#deleteBtn').on('click', function(){
 $('#deleteModal').modal('show');
 
 });
 // 모달 안의 취소 버튼에 이벤트를 건다.
-$('#deleteBtn2').on('click', function(){
+$('#d-cancelBtn').on('click', function(){
+$('#deleteForm > input').remove();
 $('#deleteModal').modal('hide');
 });
 

@@ -48,16 +48,26 @@ public class BucketDeleteController extends HttpServlet{
       //      sqlSession.commit();
       //
       //      response.sendRedirect("list");
+
+
       Bucket bucket = null;
       String stringNo = "";
       int no = 0;
       String[] noList = request.getParameterValues("no");
 
+
+      if (noList.length == 0) { 
+        response.sendRedirect("list");
+      }
+
+
       for(int i=0;i<noList.length;i++) {
-        //        System.out.println(noList[i]);
         stringNo = noList[i];
+        if (stringNo == "") {
+          // 혹시라도 빈 문자열 있으면 에러나지 않게 패스
+          continue;
+        }
         no = Integer.parseInt(stringNo);
-        System.out.println(no);
         bucket = bucketDao.findByNo(no);
 
         if (bucket == null) {
