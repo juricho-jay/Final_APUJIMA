@@ -33,7 +33,16 @@
           
         <tr>
             <td>게시판 분류</td>
-             <td>${board.whichBoard}</td>
+             <c:if test='${board.whichBoard == 1}'>
+             <td>자유게시판</td> 
+             </c:if>
+             <c:if test='${board.whichBoard == 2}'>
+             <td>Healer지식in</td> 
+            </c:if>
+            <c:if test='${board.whichBoard == 3}'>
+            <td>공지사항</td> 
+            </c:if>
+    
         </tr>    
          <tr>
   
@@ -65,6 +74,7 @@
    <tr>
       <td>내용</td>
       <td colspan="2" style ="min-height: 200px; text-align: left;" >${board.content}</td>
+      
    </tr>
    <tr>
    <td>
