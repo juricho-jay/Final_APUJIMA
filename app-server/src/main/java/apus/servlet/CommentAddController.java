@@ -16,9 +16,10 @@ import apus.dao.CommentDao;
 import apus.dao.MemberDao;
 import apus.domain.Board;
 import apus.domain.Comment;
+import apus.domain.Member;
 
-@WebServlet("/board/detail")
-public class BoardDetailController extends HttpServlet {
+@WebServlet("/comment/add")
+public class CommentAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   BoardDao boardDao;
   MemberDao memberDao;
@@ -49,14 +50,12 @@ public class BoardDetailController extends HttpServlet {
 
 
 
-    //    try {
-    //      Member writer = (Member) request.getSession(false).getAttribute("loginUser");
-    //
-    //      if(writer == null) {
-    //        throw new Exception("해당 번호의 회원이 없습니다.");
-    //      }
-
     try {
+      Member writer = (Member) request.getSession(false).getAttribute("loginUser");
+
+      if(writer == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
+      }
       int no = Integer.parseInt(request.getParameter("no"));
       Board board = boardDao.findByNo(no);
 
@@ -67,19 +66,18 @@ public class BoardDetailController extends HttpServlet {
       Collection<Comment> commentList = commentDao.findBoardComment(board.getNo());
 
 
-      //Comment comment = new Comment();
+      Comment comment = new Comment();
 
 
-      //      comment.setCommenter(writer);
-      //      comment.setCommentBoard(board); //어캐처리하지..
-      //      comment.setContent(request.getParameter("content"));
-      //      commentDao.update(comment);
+      comment.setCommenter(writer);
+      comment.setCommentBoard(board); //어캐처리하지..
+      comment.setContent(request.getParameter("content"));
+      commentDao.insert(comment);
       sqlSession.commit();
 
       request.setAttribute("commentList", commentList);
-      request.setAttribute("board", board);
-
-      request.getRequestDispatcher("/board/BoardDetail.jsp").forward(request, response);
+      request.setAttribute("comment", comment);
+      response.sendRedirect("../board/detail?no=" + board.getNo());
 
     }  
     catch (Exception e) {

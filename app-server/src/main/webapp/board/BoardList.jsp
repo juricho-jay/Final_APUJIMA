@@ -40,12 +40,21 @@
 <c:forEach items="${boardList}" var="board">
 <tr>
     <td>${board.no}</td>
-    <td>${board.whichBoard}</td>
+     <c:if test='${board.whichBoard == 1}'>
+    <td>자유게시판</td> 
+    </c:if>
+    <c:if test='${board.whichBoard == 2}'>
+    <td>Healer지식in</td> 
+    </c:if>
+    <c:if test='${board.whichBoard == 3}'>
+    <td>공지사항</td> 
+    </c:if>
     <td><a href='detail?no=${board.no}'>${board.title}</a></td> 
     <td>${board.content}</td> 
     <td>${board.writer.id}</td> 
     <td>${board.registeredDate}</td> 
     <td>${board.viewCount}</td> 
+   
 </tr>
 </c:forEach>
 </tbody>
