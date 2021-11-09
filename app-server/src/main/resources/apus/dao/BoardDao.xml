@@ -30,14 +30,18 @@
        b.created_dt,
        b.view_cnt,
        b.type,
+       b.active,
        m.member_no,
        m.id writer_id,
        m.name writer_name
     from
       apus_board b
       inner join apus_member m on b.member_no=m.member_no
+    where
+      b.active = 1
     order by
       b.board_no desc
+    
   </select>
   
   <!-- <select id="findComment" parameterType="int">
@@ -77,7 +81,8 @@
 	 <update id="updateCount" parameterType="int">
     update apus_board set
       view_cnt = view_cnt + 1
-    where board_no=#{no}
+    where 
+      board_no=#{no}
    </update>
 	
 	
@@ -89,8 +94,10 @@
 	</update>
 	
 	<delete id="delete" parameterType="int">
-	 delete from apus_board
-	 where board_no=#{no}
+	 update apus_board set
+	   acitve = 0
+	 where 
+	   board_no=#{no}
 	</delete>
 
 
