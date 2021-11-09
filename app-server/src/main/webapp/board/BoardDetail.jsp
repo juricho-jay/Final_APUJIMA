@@ -108,21 +108,7 @@
   </div><!-- .container -->
   
   <div class = "commentContainer">
-     <form id = "commentForm">
-     <table>
-      <tbody>
-      <tr>
-       <td>
-        <div>
-          <textarea name ="content" rows = "4" cols="70"></textarea>
-        </div>
-       </td>
-     </tr>
-        </tbody>
-    </table>
-     </form>
-    
-  <div class ="commentList">
+    <div class ="commentList">
     <form id = "commentListForm">
  <table class="table table-hover">
       <thead>
@@ -148,6 +134,32 @@
       </table>
    </form>
 </div>   
+     <form id = "commentForm" action= "../comment/add">
+    <!--   action ='detail?no=${board.no}'> -->
+    <table class="table table-hover" >
+      <tbody>
+      <tr>
+      <td><input id="f-board" type ="hidden" name = "no" placeholder = "${board.no}" value = "${board.no}"></td>
+      </tr>
+      <tr>
+         <td style = "width: 20%">작성자</td>
+        <td><input id ="f-writer" type='text' name = "writer"  placeholder ="${loginUser.id}"  value = "${loginUser.id }" readonly></td>
+      </tr>
+      <tr>
+      <td style = "width: 20%">내용</td>
+       <td>
+        <div>
+          <textarea  rows = "4" cols="70" name = "content"></textarea>
+        <input id = "f-content" style = "margin-left: 50px;" type = "submit" class="btn btn-primary btn-sm"  value = "등록">
+        </div>
+       </td>
+       
+     </tr>
+        </tbody>
+    </table>
+     </form>
+    
+
 </div> <!-- commentcontainer -->
 
 
