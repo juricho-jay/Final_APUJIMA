@@ -54,13 +54,13 @@ i {
 }
 
 .card-header {
-    display: flex;
+    display: flex; 
     align-items: center;
     border-bottom-width: 1px;
     padding-top: 0;
     padding-bottom: 0;
     padding-right: 0.625rem;
-    height: 3.5rem;
+    height: 5.0rem;
     background-color: #fff
 }
 
@@ -118,13 +118,14 @@ i {
 
 .todo-indicator {
     position: absolute;
-    width: 4px;
+    width: 6px;
     height: 60%;
     border-radius: 0.3rem;
     left: 0.625rem;
     top: 20%;
     opacity: .6;
-    transition: opacity .2s
+    transition: opacity .2s;
+    border: 0.5px solid lightgrey;
 }
 
 .bg-warning {
@@ -303,7 +304,14 @@ input {
   margin: 100px auto;
 }
 
+.d-block {
+  padding-right: 20px !important;
+  padding-left: 13px !important;
+}
 
+.two {
+  /* margin-left: 70%; */
+}
 
   </style>
 </head>
@@ -314,7 +322,7 @@ input {
         <div class="card-hover-shadow-2x mb-3 card">
             <div class="card-header-tab card-header">
                 <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-                <i class="bi bi-card-checklist" style="font-size: 2rem; color: cornflowerblue; margin-right: 10%;"></i><b style="font-size: 1.5em;">버킷리스트</b></div>
+                <i class="bi bi-card-checklist" style="font-size: 2rem; color: cornflowerblue; margin-right: 10%;"></i><b style="font-size: 1.5em">버킷리스트</b></div>
             </div>
             <div class="scroll-area-sm">
                 <perfect-scrollbar class="ps-show-limits">
@@ -324,13 +332,13 @@ input {
                                 <c:forEach items="${bucketList}" var="bucket">
                                   <c:if test='${loginUser.id eq bucket.writer.id}'>
                                 <li class="list-group-item">
-                                    <div class="todo-indicator bg-primary"></div>
+                                    <div class="todo-indicator" id="indicator-bar"></div>
                                     <div class="widget-content p-0">
                                         <div class="widget-content-wrapper">
                                             <div class="widget-content-left mr-2">
                                                 <div class="form-check" style="margin-left: 15px; margin-right: -8px; margin-bottom: 11px"> 
                                                 <input name="sendNo" class="form-check-input" type="checkbox" 
-                                                style="zoom: 1.5; margin-left: " id="send-b-no" onclick='checkOnlyOne(this)' value="${bucket.no}"><label class="form-check-label"
+                                                style="zoom: 1.5; margin-left: " id="send-b-no" value="${bucket.no}"><label class="form-check-label"
                                                  for="send-b-no">&nbsp;</label></div>
                                             </div>
                                             <div class="widget-content-left">
@@ -354,79 +362,17 @@ input {
                                 </li>
                                 </c:if>
                               </c:forEach>
-                             <!--  <li class="list-group-item">
-                                    <div class="todo-indicator bg-primary"></div>
-                                    <div class="widget-content p-0">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left mr-2">
-                                                <div class="custom-checkbox custom-control">
-                                                <input class="custom-control-input" id="exampleCustomCheckbox4" 
-                                                type="checkbox"><label class="custom-control-label" for="exampleCustomCheckbox4">&nbsp;</label></div>
-                                            </div>
-                                            <div class="widget-content-left flex2">
-                                                <div class="widget-heading">현지한테 찡찡거리기</div>
-                                                <div class="widget-subheading">By 주리!!</div>
-                                            </div>
-                                            <div class="widget-content-right"> 
-                                            <button class="border-0 btn-transition btn btn-outline-success">
-                                             <i class="fa fa-check"></i></button> 
-                                             <button class="border-0 btn-transition btn btn-outline-danger">
-                                              <i class="fa fa-trash"></i> </button> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="todo-indicator bg-info"></div>
-                                    <div class="widget-content p-0">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left mr-2">
-                                                <div class="custom-checkbox custom-control">
-                                                <input class="custom-control-input" id="exampleCustomCheckbox2"
-                                                 type="checkbox"><label class="custom-control-label" for="exampleCustomCheckbox2">&nbsp;</label></div>
-                                            </div>
-                                            <div class="widget-content-left">
-                                                <div class="widget-heading">자바스크립트 공부하기</div>
-                                                <div class="widget-subheading">By 주리,태호,현지,진현</div>
-                                            </div>
-                                            <div class="widget-content-right">
-                                             <button class="border-0 btn-transition btn btn-outline-success">
-                                              <i class="fa fa-check"></i></button> 
-                                              <button class="border-0 btn-transition btn btn-outline-danger"> 
-                                              <i class="fa fa-trash"></i> </button> </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="todo-indicator bg-success"></div>
-                                    <div class="widget-content p-0">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left mr-2">
-                                                <div class="custom-checkbox custom-control">
-                                                <input class="custom-control-input" id="exampleCustomCheckbox3" 
-                                                type="checkbox"><label class="custom-control-label" for="exampleCustomCheckbox3">&nbsp;</label></div>
-                                            </div>
-                                            <div class="widget-content-left flex2">
-                                                <div class="widget-heading">점심 메뉴 정하기</div>
-                                                <div class="widget-subheading">By 김태호 대리</div>
-                                            </div>
-                                            <div class="widget-content-right"> 
-                                            <button class="border-0 btn-transition btn btn-outline-success"> 
-                                            <i class="fa fa-check"></i></button> <button class="border-0 btn-transition btn btn-outline-danger">
-                                             <i class="fa fa-trash"></i> </button> </div>
-                                        </div>
-                                    </div>
-                                </li> -->
                             </ul>
                         </div>
                     </div>
                 </perfect-scrollbar>
             </div>
-                
-          <div class="d-block text-right card-footer">
-            <!-- <button class="mr-2 btn btn-link btn-sm" id="deletebtn" onclick="sendNo()">삭제</button> -->
-            <!-- <button class="btn btn-primary" onclick="addButton();">버킷리스트 추가</button> -->
-            <button class="btn btn-primary" id="openModalBtn">버킷리스트 추가</button>
-            
+          <div class="d-block card-footer">
+            <button class="mr-2 btn btn-link btn-sm" id="checkAll" style="color: deepskyblue; float: left" onclick="selectAll()"><i class="bi bi-check-all" style="zoom: 1.5"></i></button>
+            <div class="two">
+            <button class="btn btn-primary" id="openModalBtn" style="margin-top: 2.5px; float: right">버킷리스트 추가</button>
+            <button class="mr-2 btn btn-link btn-sm" id="deleteBtn2" onclick="sendNo()" style="float: right; margin-top: 5px;">삭제</button>
+            </div>
             </div>
             </div>
             </div>
@@ -459,7 +405,7 @@ input {
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-		        <input type="submit" value="확인">
+		        <button type="submit" id="bucketAddBtn" class="btn btn-primary">확인</button>
 		      </div>
 		    </div>
 		  </div>
@@ -467,54 +413,8 @@ input {
 </form> 
 
             
-            
-<!-- 추가 모달 영역 -->
- <!-- <form action='add'>
-<div id="addModal" class="modal fade" tabindex="-1" 
-role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">버킷리스트 추가</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-       <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <i class="fas fa-user prefix grey-text"></i>
-          <input type="text" id="bucket-title" name="title" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="bucket-title">제목</label>
-        </div>
-        <div class="md-form mb-5">
-          <i class="fas fa-envelope prefix grey-text"></i>
-          <input type="text" id="bucket-content" name="content" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="bucket-content">내용</label>
-        </div>
-
-          <div class="md-form mb-4">
-          <i class="fas fa-lock prefix grey-text"></i>
-          <input type="text" id="bucket-writer" name="id" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="bucket-writer">작성자</label>
-        </div>
-      </div>
-      <div class="modal-footer">
-    <input type="submit" value="확인">
-        <button type="button" class="btn btn-default" id="closeModalBtn">취소</button>
-      </div>
-    </div>
-  </div>
-</div>
-</form>  -->
-
-        <%-- <div class="md-form mb-4">
-          <i class="fas fa-lock prefix grey-text"></i>
-          <input type="text" id="bucket-writer" name="id" class="form-control validate" readonly>
-          <label data-error="wrong" data-success="right" for="bucket-writer">${loginUser.id}</label>
-        </div> --%>
-    <!-- <button type="button" id="bucketAddBtn" class="btn btn-primary">확인</button> -->
 <!-- 삭제 모달 영역 -->
-<form action='delete'>
+<form id="deleteForm" action='delete'>
 <div id="deleteModal" class="modal fade" aria-hidden="true" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog modal-confirm">
     <div class="modal-content">
@@ -532,49 +432,64 @@ role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="f
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
         <div>
         <input type="hidden" name="no" id="b-no">
-        <input type="submit" value="삭제">
+        <button id="confirmDelete" type="submit" class="btn btn-danger">삭제</button>
         </div>
-        <!-- <button id="confirmDelete" type="submit" class="btn btn-danger">삭제</button> -->
       </div>
     </div>
   </div>
 </div>     
 </form>
 
-<script type="text/javascript">
-// 체크 박스 한 개만 선택하기
-   function checkOnlyOne(element) {
-  
-  const checkboxes 
-      = document.getElementsByName("sendNo");
-  
-  checkboxes.forEach((cb) => {
-    cb.checked = false;
-  })
-  
-  element.checked = true;
-  
-} 
-
-   
-</script>
 
 
 <script>
 
-//모달창으로 데이터 받기
+// 인디케이터 바 랜덤 색상 부여
+window.onload = function() {
+	document.querySelectorAll(".todo-indicator").forEach((tag) => {
+		tag.style["background-color"] = "#" + Math.floor(Math.random() * 16777215).toString(16);
+	});
+};
+
+
+
+// 체크 박스 - 모두 선택 -all true
+function selectAll() {
+	    var obj = document.getElementsByName("sendNo");
+	    if (obj[0].checked) {
+	        for (i=0;i<obj.length;i++) {
+	            obj[i].checked = false;
+	        }
+	    } else {
+	        for (i=0;i<obj.length;i++) {
+	            obj[i].checked = true;
+	        }
+	    } 
+};
+
+
+
+
+
+//모달창으로 데이터 받기 - 체크박스 - 삭제 버튼
 var select_obj = '';
 function sendNo() {
   
-        $('input[type="checkbox"]:checked').each(function () {
-            select_obj= $(this).val();
-        });
+        var deleteForm = $('#deleteForm');
+        var chk_arr = $("input[name='sendNo']");
+        var chk_data = []; 
         
-        $("#b-no").val(select_obj);
-    
+        for( var i=0; i<chk_arr.length; i++ ) { 
+          if( chk_arr[i].checked == true ) {
+            $('<input>').attr('type','hidden').attr('value', chk_arr[i].value).attr('name','no').appendTo(deleteForm);
+          }
+        }
+
+        
+          
     };
     
-    
+  //모달창으로 데이터 받기 - 휴지통 아이콘
 var select_obj2 = '';
 function sendNo2() {
 	  
@@ -583,31 +498,43 @@ function sendNo2() {
 	console.log(select_obj2);
 	
 	$("#b-no").val(select_obj2);
-}
-    
+};
 
 
-// 모달 버튼에 이벤트를 건다.
+
+
+
+// 모달 버튼에 이벤트를 건다. (버킷 추가 모달)
 $('#openModalBtn').on('click', function(){
 $('#addModal').modal('show');
 
 });
-// 모달 안의 취소 버튼에 이벤트를 건다.
+// 모달 안의 취소 버튼에 이벤트를 건다. (버킷 추가 모달)
 $('#closeModalBtn').on('click', function(){
 $('#addModal').modal('hide');
 });
 
 
+
+// 버킷 삭제 모달 (휴지통: 1개) / 삭제 버튼 (체크박스 다수)
 // id는 절대값이므로 중복될 수 없다 > name을 활용할 것 > id로 쓸 경우 아이콘 하나만 모달 창 실행
 $('button[name=d-btn]').on('click', function(){
-	$('#deleteModal').modal('show');
+$('#deleteModal').modal('show');
+});
 
-	});
+$('button[name=d-btn]').on('click', function(){
+$('#deleteModal').modal('hide');
+});
 
-	$('button[name=d-btn]').on('click', function(){
-	$('#deleteModal').modal('hide');
-	});
+// 모달 버튼에 이벤트를 건다.
+$('#deleteBtn2').on('click', function(){
+$('#deleteModal').modal('show');
 
+});
+// 모달 안의 취소 버튼에 이벤트를 건다.
+$('#deleteBtn2').on('click', function(){
+$('#deleteModal').modal('hide');
+});
 
 </script>
 
