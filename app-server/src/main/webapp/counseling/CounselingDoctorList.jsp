@@ -14,14 +14,13 @@
 </head>
 <body>
 <div class="container">
-<h1>${loginUser.id}님의 상담신청리스트</h1>
-<a href='CounselingForm.jsp' class="btn btn-outline-primary btn-sm">상담신청하기</a><br>
+<h1>${loginUser.id}님의 상담신청이력</h1>
 <table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
-    <th>상담내용</th>
-    <th>상담사 이름</th>
+    <th>상담신청자</th>
+    <th>질병여부</th>
     <th>날짜</th>
   </tr>
 </thead>
@@ -31,8 +30,8 @@
 <%-- <c:if test ="${counseling.client.id eq loginUser.id} ">  --%>
 <tr>
   <td>${counseling.no}</td>
-  <td><a href='detail?no=${counseling.no}'>${counseling.content}</a></td> 
-  <td>${counseling.counselor.name} 선생님</td>
+  <td><a href='detail?no=${counseling.no}'>${counseling.client.name}</a></td> 
+  <td>${counseling.disease}</td>
   <td>${counseling.registeredDate}</td>
 </tr>
 <%-- </c:if>   --%>

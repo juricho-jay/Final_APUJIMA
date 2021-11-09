@@ -1,7 +1,7 @@
 package apus.servlet;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -10,39 +10,29 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import apus.dao.CounselingDao;
 import apus.dao.MemberDao;
-import apus.domain.Counseling;
 import apus.domain.Member;
 
-@WebServlet("/counseling/list")
-public class CounselingMemberMyListController extends HttpServlet{
-
+@WebServlet("/doctorinfo/list")
+public class DoctorMemberListController extends HttpServlet{
   private static final long serialVersionUID = 1L;
-  CounselingDao counselingDao;
   MemberDao memberDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    counselingDao = (CounselingDao) 웹애플리케이션공용저장소.getAttribute("counselingDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
-
     try {
-      Collection<Member> memberList = memberDao.findAll();
-      // 클라이언트 요청을 처리하는데 필요한 데이터 준비
-      Collection<Counseling> counselingList = counselingDao.findAll();
-
-      // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
-      request.setAttribute("counselingList", counselingList);
+      List<Member> memberList = memberDao.findAll();
       request.setAttribute("memberList", memberList);
+
       // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/counseling/CounselingList.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/counseling/DoctorInfo.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {
@@ -57,3 +47,4 @@ public class CounselingMemberMyListController extends HttpServlet{
   }
 
 }
+

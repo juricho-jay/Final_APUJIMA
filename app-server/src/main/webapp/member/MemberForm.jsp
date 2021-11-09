@@ -106,7 +106,7 @@ function div_OnOff(v,id){
 <form name = "userInfo" action='add' onsubmit="return checkValue()">
 
 <div class="col-md-6">
-  <label for="validationServer04" class="form-label">-일반회원 가입 페이지-</label>
+  <label for="validationServer04" class="form-label">-APUJIMA에 오신 것을 환영합니다-</label>
  
 </div>
 

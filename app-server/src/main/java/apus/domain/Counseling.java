@@ -12,9 +12,6 @@ public class Counseling implements Serializable {
   private Member client;
   private Date registeredDate;
 
-
-
-
   public int getNo() {
     return no;
   }

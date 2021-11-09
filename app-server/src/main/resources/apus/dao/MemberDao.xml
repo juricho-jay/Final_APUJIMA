@@ -123,7 +123,8 @@
       active
     from
       apus_member
-    where id=#{param1} and password=password(#{param2})
+    where 
+      id=#{param1} and password=password(#{param2})
   </select>
   
   <insert id="insert" parameterType="member" 
@@ -169,11 +170,14 @@
       role=#{doctorOrNot}
     where member_no=#{no}
    </update>
+  
     
-   <delete id="delete" parameterType="string">
-    delete from apus_member
-    where id=#{id}
-   </delete>
+   <update id="delete" parameterType="string">
+    update apus_member set
+      active = 0
+    where 
+      id=#{id}
+   </update>
    
    <select id="findById" resultMap="MemberMap" parameterType="string">
     select

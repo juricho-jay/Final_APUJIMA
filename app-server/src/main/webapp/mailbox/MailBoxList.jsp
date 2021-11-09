@@ -41,8 +41,6 @@
 <tbody>
 
 <c:forEach items="${mailBoxList}" var="mailBox">
-<%-- <c:if test= "${loginUser.id !=null}"> </c:if> --%>
-<c:if test ="${mailBox.receiver.id eq loginUser.id} "> 
 <tr>
   <td><input type="checkbox" name="select_tch" id="select_tch" value="${list.userno}"></td>
   <td>${mailBox.no}</td>
@@ -52,7 +50,7 @@
   <td>${mailBox.content}</td>
   <td>${mailBox.sentTime}</td>
 </tr>
-</c:if>  
+
 </c:forEach>
 </tbody>
 </table>

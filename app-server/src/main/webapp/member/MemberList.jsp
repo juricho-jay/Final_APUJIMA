@@ -15,6 +15,7 @@
     .container {
     xborder: 1px solid red;
     xwidth: 640px;
+    xheight : 100px;
     }
   </style>
   
@@ -36,6 +37,8 @@
     <th>포인트</th>
     <th>회원등급</th>
     <th>등록일</th>
+    <th>활동여부</th>
+    
   </tr>
 </thead>
 <tbody>
@@ -60,6 +63,12 @@
     <td>관리자</td> 
     </c:if>
     <td>${member.registeredDate}</td>
+     <c:if test='${member.active == 1}'>
+    <td>활동중</td> 
+    </c:if>
+      <c:if test='${member.active == 0}'>
+    <td>회원탈퇴</td> 
+    </c:if>
 </tr>
 </c:forEach>
 </tbody>
