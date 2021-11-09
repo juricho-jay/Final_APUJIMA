@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="apus.dao.CounselingDao">
+  
+  <resultMap type="Counseling" id="CounselingMap">
+    <id column="counsel_no" property="no"/> 
+    <result column="disease" property="disease"/>
+    <result column="content" property="content"/>
+    <result column="created_dt" property="registeredDate"/>
+    
+    <association property="client" javaType="member">
+      <id column="client_no" property="no"/>
+      <result column="client_id" property="id"/>
+      <result column="client_name" property="name"/>
+      <result column="client_email" property="email"/>
+      <result column="client_tel" property="phoneNum"/>
+      <result column="client_sex" property="sex"/>
+    </association>
+    
+    <association property="counselor" javaType="member">
+      <id column="counselor_no" property="no"/>
+      <result column="counselor_id" property="id"/>
+      <result column="counselor_name" property="name"/>
+      <result column="counselor_email" property="email"/>
+    </association>
+    
+  </resultMap>
+  
+      <insert id="insert" parameterType="counseling" 
+  useGeneratedKeys="true" keyColumn="counsel_no" keyProperty="no">
+    insert into apus_counseling(disease,content,member_no,doctor_no)
+    values(#{disease},#{content},#{client.no},#{counselor.no})
+   </insert>
+   
+  <select id="findAll" resultMap="CounselingMap">
+    select
+       c.counsel_no,
+       c.disease,
+       c.content,
+       c.created_dt,
+       m.id client_id,
+       m.name client_name,
+       m.member_no client_no,
+       m.email client_email,
+       m.tel client_tel,
+       m.sex client_sex,
+       m.role client_role,
+       m2.member_no counselor_no,
+       m2.name counselor_name,
+       m2.id counselor_id,
+       m2.tel counselor_tel,
+       m2.email counselor_email,
+       m2.sex counselor_sex
+    from
+      apus_counseling c
+      inner join apus_member m on c.member_no=m.member_no
+      inner join apus_member m2 on c.doctor_no=m2.member_no
+
+  </select>
+  
+  <!--  
+
+  
+    <select id="check" resultMap="MemberMap" parameterType="member">
+    select
+      id
+    from
+      apus_member
+    where id=#{id}
+  </select>
+   
+  <select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
+    select
+      member_no,
+      name,
+      id,
+      password,
+      birth,
+      tel,
+      email,
+      photo,
+      sex,
+      created_dt,
+      point,
+      role,
+      active
+    from
+      apus_member
+    where id=#{param1} and password=password(#{param2})
+  </select>
+  
+
+   
+   <insert id="insert2" parameterType="member">
+   insert into apus_doctor(doctor_no,major,license,homepage,introduction)
+   values(#{no},#{doctor.major},#{doctor.license},#{doctor.homepage},#{doctor.introduction})
+  </insert>
+   
+   <update id="update" parameterType="member">
+    update apus_member set
+      name=#{name},
+      id=#{id},
+      password=password(#{password}),
+      birth=#{birthDay},
+      tel=#{phoneNum},
+      email=#{email},
+      photo=#{photo},
+      sex=#{sex},
+      point=#{point},
+      role=#{doctorOrNot}
+    where member_no=#{values}
+   </update>
+   
+    
+   <update id="update2" parameterType="member">
+    update apus_member set
+      name=#{name},
+      id=#{id},
+      birth=#{birthDay},
+      tel=#{phoneNum},
+      email=#{email},
+      photo=#{photo},
+      sex=#{sex},
+      point=#{point},
+      role=#{doctorOrNot}
+    where member_no=#{no}
+   </update>
+    
+   <delete id="delete" parameterType="string">
+    delete from apus_member
+    where id=#{id}
+   </delete>
+   
+   <select id="findById" resultMap="MemberMap" parameterType="string">
+    select
+      member_no,
+      name,
+      id,
+      password,
+      birth,
+      tel,
+      email,
+      photo,
+      sex,
+      created_dt,
+      point,
+      role,
+      active
+    from
+      apus_member
+    where id=#{id}
+   </select>
+   
+   <select id="findByName" resultMap="MemberMap" parameterType="string">
+   select
+      member_no,
+      name,
+      id,
+      password,
+      birth,
+      tel,
+      email,
+      photo,
+      sex,
+      created_dt,
+      point,
+      role,
+      active
+    from
+      apus_member
+    where name=#{name}
+  </select>
+  -->
+</mapper>
+
+
+
+
+
+
