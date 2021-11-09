@@ -66,14 +66,7 @@ public class BoardDetailController extends HttpServlet {
 
       Collection<Comment> commentList = commentDao.findBoardComment(board.getNo());
 
-
-      //Comment comment = new Comment();
-
-
-      //      comment.setCommenter(writer);
-      //      comment.setCommentBoard(board); //어캐처리하지..
-      //      comment.setContent(request.getParameter("content"));
-      //      commentDao.update(comment);
+      boardDao.updateCount(board.getNo());
       sqlSession.commit();
 
       request.setAttribute("commentList", commentList);
