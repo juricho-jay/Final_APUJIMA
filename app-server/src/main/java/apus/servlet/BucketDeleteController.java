@@ -36,16 +36,37 @@ public class BucketDeleteController extends HttpServlet{
       throws ServletException, IOException {
 
     try {
-      String stringNo = request.getParameter("no");
-      int no = Integer.parseInt(stringNo);
+      //      String stringNo = request.getParameter("no");
+      //      int no = Integer.parseInt(stringNo);
+      //
+      //      Bucket bucket = bucketDao.findByNo(no);
+      //      if (bucket == null) {
+      //        throw new Exception("해당 아이디의 회원이 없습니다.");
+      //      }
+      //
+      //      bucketDao.delete(no);
+      //      sqlSession.commit();
+      //
+      //      response.sendRedirect("list");
+      Bucket bucket = null;
+      String stringNo = "";
+      int no = 0;
+      String[] noList = request.getParameterValues("no");
 
-      Bucket bucket = bucketDao.findByNo(no);
-      if (bucket == null) {
-        throw new Exception("해당 아이디의 회원이 없습니다.");
+      for(int i=0;i<noList.length;i++) {
+        //        System.out.println(noList[i]);
+        stringNo = noList[i];
+        no = Integer.parseInt(stringNo);
+        System.out.println(no);
+        bucket = bucketDao.findByNo(no);
+
+        if (bucket == null) {
+          throw new Exception("해당 아이디의 회원이 없습니다.");
+        }
+
+        bucketDao.delete(no);
+        sqlSession.commit();
       }
-
-      bucketDao.delete(no);
-      sqlSession.commit();
 
       response.sendRedirect("list");
 
