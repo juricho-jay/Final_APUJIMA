@@ -65,7 +65,7 @@
     where bucket_no=#{no}
   </select>
   
-  <update id="update" parameterType="bucket">
+  <update id="completeUpdate" parameterType="bucket">
     update apus_bucket set
       completed_dt=now(),
       complete=1
@@ -74,13 +74,14 @@
   </update>
   
    
-  <update id="failupdate" parameterType="bucket">
+  <update id="cancelCompleteUpdate" parameterType="bucket">
     update apus_bucket set
       completed_dt=null,
       complete=0
     where 
       bucket_no=#{no}
   </update>
+  
   
   <select id="findByKeyword" resultMap="BucketMap" parameterType="string">
      select

@@ -8,7 +8,7 @@ public interface BucketDao {
   List<Bucket> findAll() throws Exception;
   List<Bucket> findByKeyword(String keyword) throws Exception;
   Bucket findByNo(int no) throws Exception;
-  void update(Bucket bucket) throws Exception;
-  void failupdate(Bucket bucket) throws Exception;
+  void completeUpdate(Bucket bucket) throws Exception;
+  void cancelCompleteUpdate(Bucket bucket) throws Exception;
   void delete(int no) throws Exception;
 }

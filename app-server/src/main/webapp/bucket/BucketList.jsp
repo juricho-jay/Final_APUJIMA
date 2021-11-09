@@ -164,22 +164,33 @@ i {
     transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s
 }
 
-.btn-outline-success {
+ .btn-outline-success {
     color: #3ac47d;
-    border-color: #3ac47d
-}
-
-.btn-outline-success:hover {
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+} 
+ 
+ .btn-outline-success:hover {
     color: #fff;
     background-color: #3ac47d;
-    border-color: #3ac47d
-}
-
-.btn-outline-success:hover {
-    color: #fff;
+    border-color: black;
+    user-select: none;
     background-color: #3ac47d;
-    border-color: #3ac47d
-}
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+}  
+
+
+
+
 
 .btn-outline-success2 {
     color: #82B3ED;
@@ -347,15 +358,18 @@ input {
                                                 </div>
                                             </div>
 	                                            <div class="widget-content-right">
+	                                              <form id="complete" action="update">
 	                                              <sub>${bucket.registeredDate}&nbsp;&nbsp;</sub> 
+	                                                  <input type="hidden" name="no" value="${bucket.no}"></input>
 				                                            <button class="border-0 btn-transition btn btn-outline-success2"> 
 				                                            <i style="font-size: 1em">${bucket.writer.id}</i></button> 
 				                                            <%-- <textarea id="sendB-no" name="no" style=display:none>${bucket.no}</textarea> --%>
-				                                            <button class="border-0 btn-transition btn btn-outline-success" id="completeBtn" onclick="complete()" type="submit">
+				                                            <button class="btn-outline-success" id="completeBtn" name="complete" value="${bucket.complete}" type="submit">
 				                                            <i class="bi bi-check" style="font-size: 1.5em"></i></button> 
-				                                            <button class="border-0 btn-transition btn btn-outline-danger" id="trashBtn" name="b-trashBtn" onclick="trashDelete(${bucket.no})">
+				                                            <button class="border-0 btn-transition btn btn-outline-danger" name="b-trashBtn" onclick="trashDelete(${bucket.no})" type="button">
 				                                            <%-- <i id="hiddenNo" style="display:none" data-value="${bucket.no}"></i> --%>
 				                                            <i class="bi bi-trash"></i> </button> 
+				                                        </form>
                                               </div>
                                         </div>
                                     </div>
@@ -448,7 +462,47 @@ window.onload = function() {
 	document.querySelectorAll(".todo-indicator").forEach((tag) => {
 		tag.style["background-color"] = "#" + Math.floor(Math.random() * 16777215).toString(16);
 	});
+		
+// 달성 버튼 색상 부여
+	document.querySelectorAll(".btn-outline-success").forEach((tag) => {
+  if (tag.getAttribute("value") == 0) {
+    tag.style["color"] = "#3ac47d";
+    tag.style["background-color"] = "white";
+    
+    // hover 설정 - mouseover
+    tag.addEventListener('mouseover', function() {
+  	tag.style["color"] = "white";
+    tag.style["background-color"] = "#3ac47d";
+    });
+    
+    // hover 설정 - mouseout
+    tag.addEventListener('mouseout', function() {
+    tag.style["color"] = "#3ac47d";
+    tag.style["background-color"] = "white";
+    });
+    
+  } else {
+    tag.style["color"] = "white";
+    tag.style["background-color"] = "#3ac47d";
+    
+    // hover 설정 - mouseover
+    tag.addEventListener('mouseover', function() {
+    tag.style["color"] = "#3ac47d";
+    tag.style["background-color"] = "white";
+    });
+    
+    // hover 설정 - mouseout
+    tag.addEventListener('mouseout', function() {
+    tag.style["color"] = "white";
+    tag.style["background-color"] = "#3ac47d";
+    });
+    
+  }
+  }); 
+	  
+		
 };
+
 
 
 
@@ -487,6 +541,7 @@ function trashDelete(no) {
   $('<input>').attr('type','hidden').attr('value', no).attr('name','no').appendTo(deleteForm);
   }; 
 
+  
 
 // 추가 모달 버튼에 이벤트를 건다. 
 $('#openModalBtn').on('click', function(){
@@ -499,7 +554,7 @@ $('#a-cancelBtn').on('click', function(){
 $('#addModal').modal('hide');
 });
 
-// 모달 데이터 입력-취소
+
 
 
 	
