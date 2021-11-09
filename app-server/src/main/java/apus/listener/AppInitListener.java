@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import apus.dao.BoardDao;
 import apus.dao.BucketDao;
 import apus.dao.CommentDao;
+import apus.dao.CounselingDao;
 import apus.dao.MailBoxDao;
 import apus.dao.MemberDao;
 
@@ -33,6 +34,7 @@ public class AppInitListener implements ServletContextListener {
       BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
       BucketDao bucketDao = sqlSession.getMapper(BucketDao.class);
       MailBoxDao mailBoxDao = sqlSession.getMapper(MailBoxDao.class);
+      CounselingDao counselingDao = sqlSession.getMapper(CounselingDao.class);
       CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
 
 
@@ -46,6 +48,7 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("boardDao", boardDao);
       웹애플리케이션공용저장소.setAttribute("bucketDao", bucketDao);
       웹애플리케이션공용저장소.setAttribute("mailBoxDao", mailBoxDao);
+      웹애플리케이션공용저장소.setAttribute("counselingDao", counselingDao);
       웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 

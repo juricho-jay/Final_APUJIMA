@@ -24,7 +24,7 @@
     
 <body>
 <div class="container">
-<h1>쪽지함</h1>
+<h1>${loginUser.id}님의 쪽지함</h1>
 <a href='MailBoxForm.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br>
 <table class="table table-hover">
 <thead>
@@ -32,7 +32,7 @@
     <th scope="col"><input type="checkbox" name="select_all" id="select_all" value="select_all"></th>
     <th>번호</th>
     <th>보낸이</th>
-    <th>받는이</th>
+    <!-- <th>받는이</th> -->
     <th>제목</th>
     <th>내용</th>
     <th>날짜</th>
@@ -45,11 +45,12 @@
   <td><input type="checkbox" name="select_tch" id="select_tch" value="${list.userno}"></td>
   <td>${mailBox.no}</td>
   <td>${mailBox.sender.id}</td> 
-  <td>${mailBox.receiver.id}</td>
+  <%-- <td>${mailBox.receiver.id}</td> --%>
   <td><a href='detail?no=${mailBox.no}'>${mailBox.title}</a></td>
   <td>${mailBox.content}</td>
   <td>${mailBox.sentTime}</td>
 </tr>
+
 </c:forEach>
 </tbody>
 </table>
