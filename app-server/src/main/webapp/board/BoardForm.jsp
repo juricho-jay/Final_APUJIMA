@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>회원가입</title>
+  <title>게시글 작성</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
 
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>

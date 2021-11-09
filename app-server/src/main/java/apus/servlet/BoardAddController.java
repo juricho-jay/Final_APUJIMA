@@ -56,7 +56,10 @@ public class BoardAddController extends HttpServlet {
       }
 
       Board board = new Board();
+
       int whichBoard = Integer.parseInt(request.getParameter("whichBoard"));
+
+
       board.setTitle(request.getParameter("title"));
       board.setWriter(writer);
       board.setContent(request.getParameter("content"));
@@ -68,10 +71,17 @@ public class BoardAddController extends HttpServlet {
        */
 
 
-      boardDao.insert(board);
+      if ( board.getWhichBoard() == 1) {
+        boardDao.insert(board);
+      } else if ( board.getWhichBoard() == 2) {
+        boardDao.insert2(board);
+      } else if ( board.getWhichBoard() == 3) {
+        boardDao.insert3(board);
+      }
+
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("MemberAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("BoardAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.

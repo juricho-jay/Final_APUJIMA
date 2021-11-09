@@ -21,6 +21,18 @@
   </style>
 </head>
 <body>
+   <script>
+   //console.log(document.boardDetialInfo.writer.value)
+  console.log(${loginUser.id})
+  console.log(${board.writer.id})
+  function checkVaild(){
+    if (${board.writer.id} != ${loginUser.id}){
+      alert("본인 게시글이 아니어 할 수 없습니다.")
+      return false;
+    }
+  }
+  
+  </script>
 <div class="container">
 <form name ="boardDetailInfo">
   <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
@@ -30,10 +42,20 @@
       </tr>
     </thead>
     <tbody>
-          
+ 
+     
         <tr>
             <td>게시판 분류</td>
-             <td>${board.whichBoard}</td>
+             <c:if test='${board.whichBoard == 1}'>
+             <td>자유게시판</td> 
+             </c:if>
+             <c:if test='${board.whichBoard == 2}'>
+             <td>Healer지식in</td> 
+            </c:if>
+            <c:if test='${board.whichBoard == 3}'>
+            <td>공지사항</td> 
+            </c:if>
+    
         </tr>    
          <tr>
   
@@ -48,6 +70,7 @@
   <tr>
       <td>작성자</td>
       <td>${board.writer.id}</td>
+      <td><input id = "writer"  type ="hidden" name = "writer" value ="${board.writer.id}"></td>
   </tr>
   <tr>
   
@@ -65,6 +88,7 @@
    <tr>
       <td>내용</td>
       <td colspan="2" style ="min-height: 200px; text-align: left;" >${board.content}</td>
+      
    </tr>
    <tr>
    <td>
@@ -108,21 +132,7 @@
   </div><!-- .container -->
   
   <div class = "commentContainer">
-     <form id = "commentForm">
-     <table>
-      <tbody>
-      <tr>
-       <td>
-        <div>
-          <textarea name ="content" rows = "4" cols="70"></textarea>
-        </div>
-       </td>
-     </tr>
-        </tbody>
-    </table>
-     </form>
-    
-  <div class ="commentList">
+    <div class ="commentList">
     <form id = "commentListForm">
  <table class="table table-hover">
       <thead>
@@ -148,6 +158,32 @@
       </table>
    </form>
 </div>   
+     <form id = "commentForm" action= "../comment/add">
+    <!--   action ='detail?no=${board.no}'> -->
+    <table class="table table-hover" >
+      <tbody>
+      <tr>
+      <td><input id="f-board" type ="hidden" name = "no" placeholder = "${board.no}" value = "${board.no}"></td>
+      </tr>
+      <tr>
+         <td style = "width: 20%">작성자</td>
+        <td><input id ="f-writer" type='text' name = "writer"  placeholder ="${loginUser.id}"  value = "${loginUser.id }" readonly></td>
+      </tr>
+      <tr>
+      <td style = "width: 20%">내용</td>
+       <td>
+        <div>
+          <textarea  rows = "4" cols="70" name = "content"></textarea>
+        <input id = "f-content" style = "margin-left: 50px;" type = "submit" class="btn btn-primary btn-sm"  value = "등록">
+        </div>
+       </td>
+       
+     </tr>
+        </tbody>
+    </table>
+     </form>
+    
+
 </div> <!-- commentcontainer -->
 
 
@@ -157,15 +193,6 @@
 
 
 
-<script>
-  function checkVaild(){
-    if(!document.boardDetailInfo.id.value){
-      alert("본인 게시글이 아니어 할 수 없습니다.")
-      return false;
-    }
-    
-  }
-  
-  </script>
+
 </body>
 </html>
