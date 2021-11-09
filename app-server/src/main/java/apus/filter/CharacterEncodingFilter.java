@@ -22,3 +22,4 @@ public class CharacterEncodingFilter implements Filter {
     chain.doFilter(request, response);
   }
 }
+

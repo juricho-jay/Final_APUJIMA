@@ -51,11 +51,12 @@
     where 
     board_no=#{no}
   </select> 
+ 
   
     <insert id="insert" parameterType="comment" 
   useGeneratedKeys="true" keyColumn="comment_no" keyProperty="no">
-    insert into apus_comment(content,created_dt,member_no,board_no)
-    values(#{content},#{registeredDate},#{commenter.no},#{commentBoard.no})
+    insert into apus_comment(content,member_no,board_no)
+    values(#{content},#{commenter.no},#{commentBoard.no})
    </insert>
   
   <delete id ="delete" parameterType="int">
