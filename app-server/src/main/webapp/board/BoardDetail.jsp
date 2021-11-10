@@ -154,6 +154,16 @@
       <td> ${comment.registeredDate}</td>
     </tr>
       </c:forEach>
+      
+  
+      <tr>
+      
+        <td style ="width : 80%">좋아요</td>
+        <td><input type = "button" value ="❤" ></td>
+     
+      </tr> 
+      
+      
       </tbody>
       </table>
    </form>
