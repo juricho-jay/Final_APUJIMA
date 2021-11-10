@@ -43,8 +43,8 @@ public class MailBoxSendController extends HttpServlet {
     try {
       Member member = memberDao.findById(user);
       Member member2 = memberDao.findById(user2);
-      mailBox.setSender(member2);
       mailBox.setReceiver(member);
+      mailBox.setSender(member2);
       //      System.out.println("존재하는 회원");
       //      if (member == null) {
       //        System.out.println("존재하지 않는 회원입니다.");
