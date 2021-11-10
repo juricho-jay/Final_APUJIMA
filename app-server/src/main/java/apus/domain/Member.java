@@ -8,9 +8,9 @@ public class Member implements Serializable{
   private String name;
   private String id;
   private String password;
-  private Date birthDay;
+  private Date birthday;
   private String email;
-  private String phoneNum;
+  private String tel;
   private String photo;
   private String sex;
   private Date registeredDate;
@@ -56,11 +56,11 @@ public class Member implements Serializable{
   public void setPassword(String password) {
     this.password = password;
   }
-  public Date getBirthDay() {
-    return birthDay;
+  public Date getBirthday() {
+    return birthday;
   }
-  public void setBirthDay(Date birthDay) {
-    this.birthDay = birthDay;
+  public void setBirthday(Date birthday) {
+    this.birthday = birthday;
   }
   public String getEmail() {
     return email;
@@ -68,11 +68,11 @@ public class Member implements Serializable{
   public void setEmail(String email) {
     this.email = email;
   }
-  public String getPhoneNum() {
-    return phoneNum;
+  public String getTel() {
+    return tel;
   }
-  public void setPhoneNum(String phoneNum) {
-    this.phoneNum = phoneNum;
+  public void setTel(String tel) {
+    this.tel = tel;
   }
   public String getPhoto() {
     return photo;
