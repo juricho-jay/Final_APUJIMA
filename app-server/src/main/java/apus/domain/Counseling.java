@@ -9,7 +9,10 @@ public class Counseling implements Serializable {
   private String disease;
   private String content;
   private Member counselor; // 상담사(의사)
+  private Member counselorGender; // 상담사(의사)
   private Member client;
+  private Member clientTel;
+  private String gender;
   private Date registeredDate;
 
   public int getNo() {
@@ -47,6 +50,24 @@ public class Counseling implements Serializable {
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+  }
+  public String getGender() {
+    return gender;
+  }
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+  public Member getClientTel() {
+    return clientTel;
+  }
+  public void setClientTel(Member clientTel) {
+    this.clientTel = clientTel;
+  }
+  public Member getCounselorGender() {
+    return counselorGender;
+  }
+  public void setCounselorGender(Member counselorGender) {
+    this.counselorGender = counselorGender;
   }
 
 

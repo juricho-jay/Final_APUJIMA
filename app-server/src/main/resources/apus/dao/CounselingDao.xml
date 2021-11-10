@@ -9,6 +9,7 @@
     <id column="counsel_no" property="no"/> 
     <result column="disease" property="disease"/>
     <result column="content" property="content"/>
+    <!-- <result column="gender" property="gender"/> -->
     <result column="created_dt" property="registeredDate"/>
     
     <association property="client" javaType="member">
@@ -25,14 +26,15 @@
       <result column="counselor_id" property="id"/>
       <result column="counselor_name" property="name"/>
       <result column="counselor_email" property="email"/>
+      <result column="counselor_sex" property="sex"/>
     </association>
     
   </resultMap>
   
       <insert id="insert" parameterType="counseling" 
   useGeneratedKeys="true" keyColumn="counsel_no" keyProperty="no">
-    insert into apus_counseling(disease,content,client_no,counselor_no)
-    values(#{disease},#{content},#{client.no},#{counselor.no})
+    insert into apus_counseling(disease,content,client_name,client_tel,counselor_sex,counselor_name)
+    values(#{disease},#{content},#{client.name},#{client.phoneNum},#{counselor.sex},#{counselor.name})
    </insert>
    
   <select id="findAll" resultMap="CounselingMap">
@@ -60,6 +62,13 @@
       inner join apus_member m2 on c.doctor_no=m2.member_no
 
   </select>
+  
+  <update id="update" parameterType="counseling">
+    update apus_counseling set
+      counselor_name=?????????
+    where 
+      counsel_no=#{no}
+   </update>
   
   <!--  
 
