@@ -50,9 +50,6 @@ public class BucketUpdateController extends HttpServlet {
       bucket = bucketDao.findByNo(no);
 
 
-      System.out.println(complete);
-      System.out.println(no);
-
 
       if (bucket == null) {
         System.out.println("번호 없음");
