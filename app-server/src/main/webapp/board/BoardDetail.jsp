@@ -196,7 +196,6 @@
 
 </div> <!-- commentcontainer -->
 
-<<<<<<< HEAD
 <script>
   function checkVaild(){
     if(document.boardDetailInfo.writer.id.value != $){
@@ -207,15 +206,5 @@
   }
   
   </script>
-=======
-
-
-
-
-
-
-
-
->>>>>>> 2cd60294fc53c9e0a327224f59a0f620452a5472
 </body>
 </html>
