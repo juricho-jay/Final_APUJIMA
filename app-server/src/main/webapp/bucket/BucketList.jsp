@@ -436,7 +436,6 @@ input {
           <i class="bi bi-x-lg"></i>
         </div>            
         <h4 class="modal-title w-100">정말 삭제하시겠습니까?</h4>  
-      <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
       </div>
       <div class="modal-body">
         <p>삭제된 버킷리스트는 복구할 수 없습니다.</p>
