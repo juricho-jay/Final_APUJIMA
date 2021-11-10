@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
     <%@ page import="apus.domain.Board" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html>
@@ -35,7 +36,15 @@
           
         <tr>
             <td>게시판 분류</td>
-            <td>${board.whichBoard}</td>
+            <c:if test='${board.whichBoard == 1}'>
+            <td>자유게시판</td> 
+             </c:if>
+              <c:if test='${board.whichBoard == 2}'>
+               <td>Healer지식in</td> 
+               </c:if>
+                <c:if test='${board.whichBoard == 3}'>
+                 <td>공지사항</td> 
+             </c:if>
         </tr>    
          
          <tr>
@@ -52,13 +61,13 @@
   
   <tr>
     <td>글 제목</td>
-    <td><input  id = 'f-title' type ='text' class = "form-control" placeholder ="글 제목" name='title' maxlength="50"  ></td>
+    <td><input  id = 'f-title' type ='text' class = "form-control" value ="${board.title}" name='title' maxlength="50"  ></td>
  </tr>
     
   
    <tr>
       <td>내용</td>
-      <td><input type = 'text' id = 'f-content' class = "form-control" placeholder="글 내용" name='content' maxlength ="2048" style="height: 350px;" ></td>
+      <td><input type = 'text' id = 'f-content' class = "form-control" value= "${board.content} " name='content' maxlength ="2048" style="height: 350px;" ></td>
      </tr>
         
   </tbody>

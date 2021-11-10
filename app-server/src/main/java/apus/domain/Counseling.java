@@ -12,9 +12,12 @@ public class Counseling implements Serializable {
   private Member client;
   private Date registeredDate;
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 2cd60294fc53c9e0a327224f59a0f620452a5472
   public int getNo() {
     return no;
   }
@@ -45,6 +48,15 @@ public class Counseling implements Serializable {
   public void setContent(String content) {
     this.content = content;
   }
+<<<<<<< HEAD
+=======
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
+  }
+>>>>>>> 2cd60294fc53c9e0a327224f59a0f620452a5472
 
 
 

@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import apus.dao.BoardDao;
 import apus.dao.BucketDao;
 import apus.dao.CommentDao;
+import apus.dao.CounselingDao;
 import apus.dao.MailBoxDao;
 import apus.dao.MedicineDao;
 import apus.dao.MemberDao;
@@ -34,7 +35,11 @@ public class AppInitListener implements ServletContextListener {
       BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
       BucketDao bucketDao = sqlSession.getMapper(BucketDao.class);
       MailBoxDao mailBoxDao = sqlSession.getMapper(MailBoxDao.class);
+<<<<<<< HEAD
       MedicineDao medicineDao = sqlSession.getMapper(MedicineDao.class);
+=======
+      CounselingDao counselingDao = sqlSession.getMapper(CounselingDao.class);
+>>>>>>> 2cd60294fc53c9e0a327224f59a0f620452a5472
       CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
 
 
@@ -48,7 +53,11 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("boardDao", boardDao);
       웹애플리케이션공용저장소.setAttribute("bucketDao", bucketDao);
       웹애플리케이션공용저장소.setAttribute("mailBoxDao", mailBoxDao);
+<<<<<<< HEAD
       웹애플리케이션공용저장소.setAttribute("medicineDao", medicineDao);
+=======
+      웹애플리케이션공용저장소.setAttribute("counselingDao", counselingDao);
+>>>>>>> 2cd60294fc53c9e0a327224f59a0f620452a5472
       웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 

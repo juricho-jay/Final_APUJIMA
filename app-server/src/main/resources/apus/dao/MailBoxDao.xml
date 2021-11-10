@@ -51,6 +51,24 @@
       x.sent_time desc
   </select>
   
+  <!-- <select id="findReceiver">
+    select
+      x.mail_no,
+      x.title,
+      x.content,
+      x.sent_time,
+      x.checked_time,
+      m2.member_no receiver_no,
+      m2.id receiver_id,
+      m2.name receiver_name,
+      m2.email receiver_email
+    from
+      apus_mailbox x
+      inner join apus_member m2 on x.receiver_no=m2.member_no
+    order by
+      x.sent_time desc
+  </select> -->
+  
   
 	<!-- <insert id="insert" parameterType="mailbox"
 	useGeneratedKeys="true" keyColumn="mail_no" keyProperty="no">
@@ -82,9 +100,10 @@
 
   <insert id="insert" parameterType="mailbox"
   useGeneratedKeys="true" keyColumn="mail_no" keyProperty="no">
-   insert into apus_mailbox(title,content,sender_no,receiver_no,sent_time) 
-   values(#{title},#{content},#{sender.no},#{receiver.no},#{sentTime})
+   insert into apus_mailbox(title,content,sender_no,receiver_no) 
+   values(#{title},#{content},#{sender.no},#{receiver.no})
   </insert>
+  
 
 	<delete id="delete" parameterType="int">
 	 delete from apus_mailbox

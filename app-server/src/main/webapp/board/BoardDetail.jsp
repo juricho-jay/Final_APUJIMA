@@ -21,6 +21,18 @@
   </style>
 </head>
 <body>
+   <script>
+   //console.log(document.boardDetialInfo.writer.value)
+  console.log(${loginUser.id})
+  console.log(${board.writer.id})
+  function checkVaild(){
+    if (${board.writer.id} != ${loginUser.id}){
+      alert("본인 게시글이 아니어 할 수 없습니다.")
+      return false;
+    }
+  }
+  
+  </script>
 <div class="container">
 <form name ="boardDetailInfo" onsubmit="return checkValue()">
   <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
@@ -30,7 +42,8 @@
       </tr>
     </thead>
     <tbody>
-          
+ 
+     
         <tr>
             <td>게시판 분류</td>
              <c:if test='${board.whichBoard == 1}'>
@@ -57,6 +70,7 @@
   <tr>
       <td>작성자</td>
       <td>${board.writer.id}</td>
+      <td><input id = "writer"  type ="hidden" name = "writer" value ="${board.writer.id}"></td>
   </tr>
   <tr>
   
@@ -140,6 +154,16 @@
       <td> ${comment.registeredDate}</td>
     </tr>
       </c:forEach>
+      
+  
+      <tr>
+      
+        <td style ="width : 80%">좋아요</td>
+        <td><input type = "button" value ="❤" ></td>
+     
+      </tr> 
+      
+      
       </tbody>
       </table>
    </form>
@@ -172,6 +196,7 @@
 
 </div> <!-- commentcontainer -->
 
+<<<<<<< HEAD
 <script>
   function checkVaild(){
     if(document.boardDetailInfo.writer.id.value != $){
@@ -182,5 +207,15 @@
   }
   
   </script>
+=======
+
+
+
+
+
+
+
+
+>>>>>>> 2cd60294fc53c9e0a327224f59a0f620452a5472
 </body>
 </html>
