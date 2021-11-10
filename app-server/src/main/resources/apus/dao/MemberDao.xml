@@ -10,15 +10,16 @@
     <result column="name" property="name"/>
     <result column="id" property="id"/>
     <result column="password" property="password"/>
-    <result column="birth" property="birthDay"/>
+    <result column="birth" property="birthday"/>
     <result column="email" property="email"/>
-    <result column="tel" property="phoneNum"/>
+    <result column="tel" property="tel"/>
     <result column="photo" property="photo"/>
     <result column="sex" property="sex"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="role" property="doctorOrNot"/>
     <result column="point" property="point"/>
     <result column="active" property="active"/>
+    <result column="nicName" property="nicName"/>
     
     <association property="doctor" javaType="Doctor">
       <id column="doctor_no" property="no"/>
@@ -46,6 +47,7 @@
        m.point,
        m.role,
        m.active,
+       m.nicName,
        d.doctor_no,
        d.major,
        d.license,
@@ -99,7 +101,8 @@
       created_dt,
       point,
       role,
-      active
+      active,
+      nicName
     from
       apus_member
     where 
@@ -120,7 +123,8 @@
       created_dt,
       point,
       role,
-      active
+      active,
+      nicName
     from
       apus_member
     where 
@@ -129,9 +133,9 @@
   
   <insert id="insert" parameterType="member" 
   useGeneratedKeys="true" keyColumn="member_no" keyProperty="no">
-    insert into apus_member(name,id,password,birth,tel,email,photo,sex,point,role)
-    values(#{name},#{id},password(#{password}),#{birthDay},#{phoneNum},#{email},
-     #{photo},#{sex},#{point},#{doctorOrNot})
+    insert into apus_member(name,id,password,birth,tel,email,photo,sex,point,role,active,nicName)
+    values(#{name},#{id},password(#{password}),#{birthday},#{tel},#{email},
+     #{photo},#{sex},#{point},#{doctorOrNot},#{active},#{nicName})
    </insert>
    
    <insert id="insert2" parameterType="member">
@@ -144,13 +148,14 @@
       name=#{name},
       id=#{id},
       password=password(#{password}),
-      birth=#{birthDay},
-      tel=#{phoneNum},
+      birth=#{birthday},
+      tel=#{tel},
       email=#{email},
       photo=#{photo},
       sex=#{sex},
       point=#{point},
-      role=#{doctorOrNot}
+      role=#{doctorOrNot},
+      nicName=#{nicName}
     where 
       member_no=#{values}
    </update>
@@ -161,13 +166,14 @@
     update apus_member set
       name=#{name},
       id=#{id},
-      birth=#{birthDay},
+      birth=#{birthday},
       tel=#{phoneNum},
       email=#{email},
       photo=#{photo},
       sex=#{sex},
       point=#{point},
-      role=#{doctorOrNot}
+      role=#{doctorOrNot},
+      nicName=#{nicName}
     where member_no=#{no}
    </update>
   
@@ -193,7 +199,8 @@
       created_dt,
       point,
       role,
-      active
+      active,
+      nicName
     from
       apus_member
     where id=#{id}
@@ -213,7 +220,8 @@
       created_dt,
       point,
       role,
-      active
+      active,
+      nicName
     from
       apus_member
     where name=#{name}

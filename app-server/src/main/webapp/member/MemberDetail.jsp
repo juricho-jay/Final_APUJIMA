@@ -36,6 +36,13 @@
 </div>
 
   <div class="mb-3 row">
+  <label for='f-nicName' class="col-sm-2 col-form-label">별명</label>
+  <div class="col-sm-6">
+    <input id='f-nicName' type='text' name='nicName' class="form-control" value="${member.nicName}">
+  </div>
+</div>
+
+  <div class="mb-3 row">
   <label for='f-id' class="col-sm-2 col-form-label">아이디</label>
   <div class="col-sm-6">
     <input id='f-id' type='text' name='id' class="form-control" value="${member.id}">
@@ -52,7 +59,7 @@
 <div class="mb-3 row">
   <label for='f-birthDay' class="col-sm-2 col-form-label">생년월일</label>
   <div class="col-sm-6">
-     <input id='f-ibirthDay' type='text' name='birthDay' class="form-control" value='${member.birthDay}'>
+     <input id='f-ibirthDay' type='text' name='birthDay' class="form-control" value='${member.birthday}'>
   </div>
 </div>
 
@@ -66,7 +73,7 @@
 <div class="mb-3 row">
   <label for='f-tel' class="col-sm-2 col-form-label">전화</label>
   <div class="col-sm-6">
-      <input id='f-tel' type='tel' name='tel' class="form-control" value='${member.phoneNum}'>
+      <input id='f-tel' type='tel' name='tel' class="form-control" value='${member.tel}'>
   </div>
 </div>
 
