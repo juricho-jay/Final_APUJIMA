@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="apus.dao.LikeDao">
+  
+  <resultMap type="Like" id="LikeMap">
+    
+    <association property="likeBoard" javaType="board">
+    <id column="likeBoard_no" property="no"/> 
+    </association>
+    
+    <association property="liker" javaType="member">
+    <id column="liker_no" property="no"/> 
+    <result column="liker_id" property="id"/>
+    </association>
+    
+  </resultMap>
+  
+   <select id = "findBoardLike" resultMap ="LikeMap" parameterType="int">
+    select
+     b.board_no likeBoard_no,
+     m.member_no liker_no,
+     m.id liker_id
+    from
+     apus_like l
+     inner join apus_member m on l.member_no=m.member_no
+    where 
+    board_no=#{no}
+  </select> 
+ 
+  
+    <select id="findAll" resultMap="LikeMap">
+   select
+     b.board_no likeBoard_no,
+     m.member_no liker_no,
+     m.id liker_id
+   from
+     apus_like l
+     inner join apus_member m on l.member_no=m.member_no
+     inner join apus_board b on l.board_no=b.board_no
+  </select>
+  
+  
+  <insert id="insert" parameterType="board">
+   insert into apus_like(member_no,board_no) 
+   values(#{liker.no},#{likeBoard.no})
+  </insert>
+  
+  <delete id="delete">
+   delete from apus_like
+   where board_no=#{param1}
+   and member_no=#{param2}
+  </delete>
+  
+  <delete id="autoDelete" parameterType="int">
+   delete from apus_like
+   where board_no=#{no}
+  </delete>
+</mapper>
+
+
+
+
+
+
+
