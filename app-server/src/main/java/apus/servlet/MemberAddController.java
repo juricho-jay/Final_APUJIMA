@@ -47,13 +47,15 @@ public class MemberAddController extends HttpServlet {
     member.setId(request.getParameter("id"));
     member.setPassword(request.getParameter("password"));
     member.setEmail(request.getParameter("email"));
-    member.setBirthDay(birthday);
-    member.setPhoneNum(request.getParameter("tel"));
+    member.setBirthday(birthday);
+    member.setTel(request.getParameter("tel"));
     member.setPhoto(request.getParameter("photo"));
     member.setSex(request.getParameter("sex"));
     member.setPoint(1000);
     String grade = request.getParameter("grade");
     member.setDoctorOrNot(Integer.parseInt(grade));
+    member.setNicName(request.getParameter("nicName"));
+    member.setActive(1);
 
     if(member.getDoctorOrNot() == 2) {
       Doctor doctor = new Doctor();

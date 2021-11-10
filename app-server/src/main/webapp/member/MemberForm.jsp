@@ -26,6 +26,11 @@
                 return false;
             } 
             
+            if(!document.userInfo.nicName.value){
+                alert("별명을 입력하세요.");
+                return false;
+            } 
+            
             if(!document.userInfo.id.value){
                 alert("아이디를 입력하세요.");
                 return false;
@@ -124,6 +129,12 @@ function div_OnOff(v,id){
     <label for='f-name' class="col-sm-3 col-form-label">* 이름</label>
     <div class="col-sm-6">
       <input id='f-name' type='text' name='name' class="form-control">
+    </div>
+</div>
+  <div class="mb-3 row">
+    <label for='f-nicName' class="col-sm-3 col-form-label">* 별명</label>
+    <div class="col-sm-6">
+      <input id='f-nicName' type='text' name='nicName' class="form-control">
     </div>
 </div>
 <div class="mb-3 row">
