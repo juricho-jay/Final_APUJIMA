@@ -40,17 +40,21 @@
    member_no asc
   </select>
   
+  <select id="findByMemberAndDate" resultMap = "DateCheckMap" parameterType="int">
+  select
+   a.attendance_no,
+   a.attendance_dt,
+   m.member_no,
+   m.id
+  from
+   apus_attendance a
+   inner join apus_member m on a.attendee=m.member_no
+  where date_format(attendance_dt, "%Y-%m-%d") = CURDATE()
+   and member_no=#{no}
+  </select> 
   
-  <!--  
-  <select id ="delete" resultMap ="DateCheckMap">
-   delete 
-    attendance_dt
-    from 
-     apus_attendance
-    where 
-    attendance_dt &gt; date_add(date_format( now(), '%Y-%m-%d'), interval -3 day))
-  </select>
-  -->
+  
+  
 
 </mapper>
 

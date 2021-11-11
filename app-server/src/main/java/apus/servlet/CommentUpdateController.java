@@ -62,7 +62,8 @@ public class CommentUpdateController extends HttpServlet {
       if(board == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
-
+      //코멘트 목록 중에 수정할 코멘트의 번호를 찾아서 바꿔야댐//
+      //Comment.no가 필요//
       Collection<Comment> commentList = commentDao.findBoardComment(board.getNo());
 
       //해당 코멘트 하나만 찾아야함.

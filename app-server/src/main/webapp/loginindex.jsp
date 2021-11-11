@@ -54,6 +54,7 @@
     <a href = "bucket/list"><button class = "Header_anything" style = "font-size: 2.0em">버킷리스트</button></a>
     <a href = "doctorinfo/list"><button class = "Header_counselingDoctorList" style = "font-size: 2.0em">HEALER</button></a>
     <a href = "counseling/list"><button class = "Header_counselingList" style = "font-size: 2.0em">상담신청리스트</button></a>
+     <a href = "plant/list"><button class = "Header_anything" style = "font-size: 2.0em">화분</button></a>
    </div>
      <table align=center border="1" cellpadding="8" cellspacing="0" bordercolor="#999999">
       <tr>
