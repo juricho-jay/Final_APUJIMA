@@ -14,7 +14,7 @@ public class Member implements Serializable{
   private String photo;
   private String sex;
   private Date registeredDate;
-  private String nicName;
+  private String nickname;
   private int doctorOrNot;
   private int point;
   private int active; // 활성화 여부 => 1 : 활성화  0 : 비활성화
@@ -34,11 +34,11 @@ public class Member implements Serializable{
   public void setTel(String tel) {
     this.tel = tel;
   }
-  public String getNicName() {
-    return nicName;
+  public String getNickname() {
+    return nickname;
   }
-  public void setNicName(String nicName) {
-    this.nicName = nicName;
+  public void setNickname(String nicName) {
+    this.nickname = nicName;
   }
   public int getNo() {
     return no;
