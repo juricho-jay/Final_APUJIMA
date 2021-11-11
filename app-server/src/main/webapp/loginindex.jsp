@@ -35,8 +35,9 @@
             <form action= 'auth/logout' method = "get">
               <table align=right border=0 cellpadding=1 cellspacing="1" width=200 >
                      <tr align=left>
-                        <td>${loginUser.id}님 반갑습니다..</td>
+                        <td>${loginUser.nickname}님 반갑습니다..</td>
                         <td rowspan=10>
+                        <a href="auth/userInfoList" class="button">내 정보</a>
                         <input type="submit" value="로그아웃">
                         </td>
                      </tr>
@@ -49,7 +50,7 @@
     <a href = ""><button class = "Header_intro" style = "font-size: 2.0em">소개</button></a>
     <a href = "board/list"><button class = "Header_community" style = "font-size: 2.0em">커뮤니티</button></a>
     <a href = "mailbox/list"><button class = "Header_mailBoxForm" style = "font-size: 2.0em">쪽지함</button></a>
-    <a href = ""><button class = "Header_anything" style = "font-size: 2.0em">테스트 다 해봐</button></a>
+    <a href = "medicine/list"><button class = "Header_medicine" style = "font-size: 2.0em">약품으로 해볼까</button></a>
     <a href = "bucket/list"><button class = "Header_anything" style = "font-size: 2.0em">버킷리스트</button></a>
     <a href = "doctorinfo/list"><button class = "Header_counselingDoctorList" style = "font-size: 2.0em">HEALER</button></a>
     <a href = "counseling/list"><button class = "Header_counselingList" style = "font-size: 2.0em">상담신청리스트</button></a>

@@ -8,18 +8,39 @@ public class Member implements Serializable{
   private String name;
   private String id;
   private String password;
-  private Date birthDay;
+  private Date birthday;
   private String email;
-  private String phoneNum;
+  private String tel;
   private String photo;
   private String sex;
   private Date registeredDate;
+  private String nickname;
   private int doctorOrNot;
   private int point;
   private int active; // 활성화 여부 => 1 : 활성화  0 : 비활성화
   private Doctor doctor;
 
 
+
+  public Date getBirthday() {
+    return birthday;
+  }
+  public void setBirthday(Date birthday) {
+    this.birthday = birthday;
+  }
+  public String getTel() {
+    return tel;
+  }
+  public void setTel(String tel) {
+    this.tel = tel;
+  }
+  public String getNickname() {
+    return nickname;
+  }
+
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
+  }
   public int getNo() {
     return no;
   }
@@ -56,23 +77,11 @@ public class Member implements Serializable{
   public void setPassword(String password) {
     this.password = password;
   }
-  public Date getBirthDay() {
-    return birthDay;
-  }
-  public void setBirthDay(Date birthDay) {
-    this.birthDay = birthDay;
-  }
   public String getEmail() {
     return email;
   }
   public void setEmail(String email) {
     this.email = email;
-  }
-  public String getPhoneNum() {
-    return phoneNum;
-  }
-  public void setPhoneNum(String phoneNum) {
-    this.phoneNum = phoneNum;
   }
   public String getPhoto() {
     return photo;

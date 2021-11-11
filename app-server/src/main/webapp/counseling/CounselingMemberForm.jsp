@@ -95,8 +95,13 @@
                 <option>${item}</option>
               </c:forEach>
               --%>
-				      <option>조주리 상담사</option>
-				      <option>신현지 상담사</option>
+              <c:forEach var="counseling" items="${memberList}" begin="0" end="5" step="1">
+                <c:if test="${counseling.counselor.doctor.sex eq '여'}">
+                  <option>${counseling.counselor.name}</option>
+                </c:if>
+              </c:forEach>
+				      <!-- <option>조주리 상담사</option>
+				      <option>신현지 상담사</option> -->
 				  </select>
 				</div>
 				

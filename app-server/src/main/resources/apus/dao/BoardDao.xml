@@ -12,6 +12,7 @@
     <result column="created_dt" property="registeredDate"/>
     <result column="view_cnt" property="viewCount"/>
     <result column="type" property="whichBoard"/>
+    <result column= "active" property = "active"/>
     
     <association property="writer" javaType="member">
       <id column="member_no" property="no"/>
@@ -30,14 +31,18 @@
        b.created_dt,
        b.view_cnt,
        b.type,
+       b.active,
        m.member_no,
        m.id writer_id,
        m.name writer_name
     from
       apus_board b
       inner join apus_member m on b.member_no=m.member_no
+    where
+      b.active = 1
     order by
       b.board_no desc
+    
   </select>
   
   <!-- <select id="findComment" parameterType="int">
@@ -56,28 +61,29 @@
   <!-- freeboard -->
 	<insert id="insert" parameterType="board"
 	useGeneratedKeys="true" keyColumn="board_no" keyProperty="no">
-	 insert into apus_board(title,content,type,member_no) 
-	 values(#{title},#{content},'1',#{writer.no})
+	 insert into apus_board(title,content,type,member_no,active) 
+	 values(#{title},#{content},'1',#{writer.no},'1')
 	</insert>
 	
 	<!-- doctorboard -->
 	<insert id="insert2" parameterType="board" 
 	useGeneratedKeys="true" keyColumn="board_no" keyProperty="no">
-  insert into apus_board(title,content,type,member_no) 
-   values(#{title},#{content},'2',#{writer.no})
+  insert into apus_board(title,content,type,member_no,active) 
+   values(#{title},#{content},'2',#{writer.no},'1')
   </insert>
   
   <!-- noticeboard -->
   <insert id="insert3" parameterType="board" 
   useGeneratedKeys="true" keyColumn="board_no" keyProperty="no">
-  insert into apus_board(title,content,type,member_no) 
-   values(#{title},#{content},'3',#{writer.no})
+  insert into apus_board(title,content,type,member_no,active) 
+   values(#{title},#{content},'3',#{writer.no},'1')
   </insert>
   
 	 <update id="updateCount" parameterType="int">
     update apus_board set
       view_cnt = view_cnt + 1
-    where board_no=#{no}
+    where 
+      board_no=#{no}
    </update>
 	
 	
@@ -89,8 +95,10 @@
 	</update>
 	
 	<delete id="delete" parameterType="int">
-	 delete from apus_board
-	 where board_no=#{no}
+	 update apus_board set
+	   active = 0
+	 where 
+	   board_no=#{no}
 	</delete>
 
 

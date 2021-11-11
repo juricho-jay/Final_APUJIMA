@@ -29,6 +29,7 @@
   <tr>
     <th>번호</th>
     <th>이름</th>
+    <th>별명</th>
     <th>아이디</th>
     <th>생년월일</th>
     <th>연락처</th>
@@ -47,9 +48,10 @@
 <tr>
     <td>${member.no}</td>
     <td><a href='detail?no=${member.no}'>${member.name}</a></td> 
+    <td>${member.nickname}</td> 
     <td>${member.id}</td> 
-    <td>${member.birthDay}</td> 
-    <td>${member.phoneNum}</td> 
+    <td>${member.birthday}</td> 
+    <td>${member.tel}</td> 
     <td>${member.email}</td> 
     <td>${member.sex}</td> 
     <td>${member.point}</td> 

@@ -1,6 +1,7 @@
 package apus.servlet;
 
 import java.io.IOException;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -11,33 +12,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
-import apus.dao.BoardDao;
+import apus.dao.DateCheckDao;
 import apus.dao.MemberDao;
-import apus.domain.Board;
+import apus.domain.DateCheck;
 import apus.domain.Member;
 
-@WebServlet("/board/add")
-public class BoardAddController extends HttpServlet {
+@WebServlet("/auth/attendanceCheck")
+public class DateCheckAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  BoardDao boardDao;
+  DateCheckDao dateCheckDao;
   MemberDao memberDao;
   SqlSession sqlSession;
+
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    dateCheckDao = (DateCheckDao) 웹애플리케이션공용저장소.getAttribute("dateCheckDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    boardDao = (BoardDao) 웹애플리케이션공용저장소.getAttribute("boardDao");
-
   }
-
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException { 
-
+      throws ServletException, IOException {
 
     HttpSession session = request.getSession(false);
 
@@ -48,43 +46,29 @@ public class BoardAddController extends HttpServlet {
     }
 
 
+    //출석 체크 하는 사람.(LoginUser)
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
+    DateCheck dateCheck = new DateCheck();
+    Date today = new Date();
+
+    member.setPoint(member.getPoint() + 30);
+
+    dateCheck.setAttendee(member);
+    dateCheck.setDate(today);
+
+
     try {
-      Member writer = (Member) request.getSession(false).getAttribute("loginUser");
+      memberDao.insert(member);
+      dateCheckDao.insert(dateCheck);
 
-      if(writer == null) {
-        throw new Exception("해당 번호의 회원이 없습니다.");
-      }
-
-      Board board = new Board();
-
-      int whichBoard = Integer.parseInt(request.getParameter("whichBoard"));
-
-
-      board.setTitle(request.getParameter("title"));
-      board.setWriter(writer);
-      board.setContent(request.getParameter("content"));
-      board.setWhichBoard(whichBoard);
-      board.setActive(1);   
-
-
-      /*
-     board.setComment/like.. detail에서 보여주는게 맞지않나../
-       */
-
-
-      if ( board.getWhichBoard() == 1) {
-        boardDao.insert(board);
-      } else if ( board.getWhichBoard() == 2) {
-        boardDao.insert2(board);
-      } else if ( board.getWhichBoard() == 3) {
-        boardDao.insert3(board);
-      }
 
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("BoardAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("MemberAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
+      e.printStackTrace();
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
 
@@ -92,12 +76,7 @@ public class BoardAddController extends HttpServlet {
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
       요청배달자.forward(request, response);
 
-
-
-
-
-
-
     }
   }
 }
+

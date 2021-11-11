@@ -47,13 +47,15 @@ public class MemberAddController extends HttpServlet {
     member.setId(request.getParameter("id"));
     member.setPassword(request.getParameter("password"));
     member.setEmail(request.getParameter("email"));
-    member.setBirthDay(birthday);
-    member.setPhoneNum(request.getParameter("tel"));
+    member.setBirthday(birthday);
+    member.setTel(request.getParameter("tel"));
     member.setPhoto(request.getParameter("photo"));
     member.setSex(request.getParameter("sex"));
     member.setPoint(1000);
     String grade = request.getParameter("grade");
     member.setDoctorOrNot(Integer.parseInt(grade));
+    member.setNickname(request.getParameter("nickname"));
+    member.setActive(1);
 
     if(member.getDoctorOrNot() == 2) {
       Doctor doctor = new Doctor();
@@ -74,7 +76,7 @@ public class MemberAddController extends HttpServlet {
       }
 
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
+      response.setHeader("Refresh", "1;url=../index.jsp");
       request.getRequestDispatcher("MemberAdd.jsp").forward(request, response);
 
     } catch (Exception e) {

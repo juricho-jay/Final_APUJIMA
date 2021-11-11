@@ -34,7 +34,7 @@
   
   </script>
 <div class="container">
-<form name ="boardDetailInfo">
+<form name ="boardDetailInfo" onsubmit="return checkValue()">
   <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
     <thead>
       <tr>
@@ -92,8 +92,8 @@
    </tr>
    <tr>
    <td>
-     <a href= 'updateForm?no=${board.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
-<a href= 'delete?no=${board.no}' class="btn btn-primary" onclick = "return checkVaild()" >삭제</a>
+<a href= 'updateForm?no=${board.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
+<a href= 'delete?no=${board.no}' class="btn btn-primary" >삭제</a>
 <a href= 'report' class= "btn btn-primary">신고</a>
    </td>
    </tr>
@@ -177,7 +177,7 @@
       </tr>
       <tr>
          <td style = "width: 20%">작성자</td>
-        <td><input id ="f-writer" type='text' name = "writer"  placeholder ="${loginUser.id}"  value = "${loginUser.id }" readonly></td>
+        <td><input id ="f-writer" type='text' name = "writer"  placeholder ="${loginUser.id}"  value = "${loginUser.id}" readonly></td>
       </tr>
       <tr>
       <td style = "width: 20%">내용</td>
@@ -196,13 +196,15 @@
 
 </div> <!-- commentcontainer -->
 
-
-
-
-
-
-
-
-
+<script>
+  function checkVaild(){
+    if(document.boardDetailInfo.writer.id.value != $){
+      alert("본인 게시글이 아니어 할 수 없습니다.")
+      return false;
+    }
+    
+  }
+  
+  </script>
 </body>
 </html>

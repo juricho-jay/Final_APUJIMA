@@ -10,17 +10,18 @@
     <result column="name" property="name"/>
     <result column="id" property="id"/>
     <result column="password" property="password"/>
-    <result column="birth" property="birthDay"/>
+    <result column="birth" property="birthday"/>
     <result column="email" property="email"/>
-    <result column="tel" property="phoneNum"/>
+    <result column="tel" property="tel"/>
     <result column="photo" property="photo"/>
     <result column="sex" property="sex"/>
     <result column="created_dt" property="registeredDate"/>
     <result column="role" property="doctorOrNot"/>
     <result column="point" property="point"/>
     <result column="active" property="active"/>
+    <result column="nickname" property="nickname"/>
     
-    <association property="doctor" javaType="Doctor">
+    <association property="doctor" javaType="doctor">
       <id column="doctor_no" property="no"/>
       <result column="major" property="major"/>
       <result column="license" property="license"/>
@@ -46,6 +47,7 @@
        m.point,
        m.role,
        m.active,
+       m.nickname,
        d.doctor_no,
        d.major,
        d.license,
@@ -56,6 +58,35 @@
       left outer join apus_doctor d on m.member_no=d.doctor_no
   </select>
   
+   <select id="findByNo" resultMap="MemberMap" parameterType ="int">
+    select
+       m.member_no,
+       m.name,
+       m.id,
+       m.password,
+       m.birth,
+       m.email,
+       m.tel,
+       m.photo,
+       m.sex,
+       m.created_dt,
+       m.point,
+       m.role,
+       m.active,
+       m.nickname,
+       d.doctor_no,
+       d.major,
+       d.license,
+       d.homepage,
+       d.introduction
+    from
+      apus_member m
+      left outer join apus_doctor d on m.member_no=d.doctor_no
+    where 
+    m.member_no =#{no}
+  </select>
+  
+
     <select id="findDoctor" resultMap="MemberMap">
     select * from apus_member where role = 2;
   </select>
@@ -85,53 +116,39 @@
     where id=#{id}
   </select>
   
-    <select id="findByNo" resultMap="MemberMap" parameterType="int">
-    select
-      member_no,
-      name,
-      id,
-      password,
-      birth,
-      tel,
-      email,
-      photo,
-      sex,
-      created_dt,
-      point,
-      role,
-      active
-    from
-      apus_member
-    where 
-      member_no=#{no}
-  </select>
-   
   <select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
-    select
-      member_no,
-      name,
-      id,
-      password,
-      birth,
-      tel,
-      email,
-      photo,
-      sex,
-      created_dt,
-      point,
-      role,
-      active
+   select
+       m.member_no,
+       m.name,
+       m.id,
+       m.password,
+       m.birth,
+       m.email,
+       m.tel,
+       m.photo,
+       m.sex,
+       m.created_dt,
+       m.point,
+       m.role,
+       m.active,
+       m.nickname,
+       d.doctor_no,
+       d.major,
+       d.license,
+       d.homepage,
+       d.introduction
     from
-      apus_member
+      apus_member m
+      left outer join apus_doctor d on m.member_no=d.doctor_no
     where 
-      id=#{param1} and password=password(#{param2})
+      m.id=#{param1} and m.password=password(#{param2})
   </select>
   
   <insert id="insert" parameterType="member" 
   useGeneratedKeys="true" keyColumn="member_no" keyProperty="no">
-    insert into apus_member(name,id,password,birth,tel,email,photo,sex,point,role)
-    values(#{name},#{id},password(#{password}),#{birthDay},#{phoneNum},#{email},
-     #{photo},#{sex},#{point},#{doctorOrNot})
+    insert into apus_member(name,id,password,birth,tel,email,photo,sex,point,role,active,nickname)
+    values(#{name},#{id},password(#{password}),#{birthday},#{tel},#{email},
+     #{photo},#{sex},#{point},#{doctorOrNot},#{active},#{nickname})
    </insert>
    
    <insert id="insert2" parameterType="member">
@@ -144,13 +161,14 @@
       name=#{name},
       id=#{id},
       password=password(#{password}),
-      birth=#{birthDay},
-      tel=#{phoneNum},
+      birth=#{birthday},
+      tel=#{tel},
       email=#{email},
       photo=#{photo},
       sex=#{sex},
       point=#{point},
-      role=#{doctorOrNot}
+      role=#{doctorOrNot},
+      nickname=#{nickname}
     where 
       member_no=#{values}
    </update>
@@ -161,13 +179,14 @@
     update apus_member set
       name=#{name},
       id=#{id},
-      birth=#{birthDay},
+      birth=#{birthday},
       tel=#{phoneNum},
       email=#{email},
       photo=#{photo},
       sex=#{sex},
       point=#{point},
-      role=#{doctorOrNot}
+      role=#{doctorOrNot},
+      nickname=#{nickname}
     where member_no=#{no}
    </update>
   
@@ -193,7 +212,8 @@
       created_dt,
       point,
       role,
-      active
+      active,
+      nickname
     from
       apus_member
     where id=#{id}
@@ -213,7 +233,8 @@
       created_dt,
       point,
       role,
-      active
+      active,
+      nickname
     from
       apus_member
     where name=#{name}

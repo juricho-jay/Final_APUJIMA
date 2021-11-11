@@ -13,6 +13,7 @@ public class Board implements Serializable{
   private String content;
   private Date registeredDate;
   private int viewCount;
+  private int active; // 활성화 여부 => 1 : 활성화  0 : 비활성화
   private List<Comment> comments = new ArrayList<>();
   private List<Like> likes = new ArrayList<>();
 
@@ -70,6 +71,12 @@ public class Board implements Serializable{
   }
   public void setLikes(List<Like> likes) {
     this.likes = likes;
+  }
+  public int getActive() {
+    return active;
+  }
+  public void setActive(int active) {
+    this.active = active;
   }
 
 

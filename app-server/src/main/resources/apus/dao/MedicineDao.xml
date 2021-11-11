@@ -44,6 +44,23 @@
       c.name asc
   </select>
   
+  <select id="findActive" resultMap="MedicineMap">
+    select
+       c.medicine_no,
+       c.name,
+       c.age,
+       c.shape,
+       c.color,
+       c.effect,
+       c.active
+    from
+      apus_medicine c
+    where
+      c.active = 1
+    order by
+      c.name asc
+  </select>
+  
   <select id="findRequest" resultMap="MedicineMap">
     select
        c.medicine_no,
