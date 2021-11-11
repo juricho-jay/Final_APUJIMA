@@ -36,7 +36,7 @@
 </div>
 
   <div class="mb-3 row">
-  <label for='f-nicName' class="col-sm-2 col-form-label">별명</label>
+  <label for='f-nickname' class="col-sm-2 col-form-label">별명</label>
   <div class="col-sm-6">
     <input id='f-nickname' type='text' name='nickname' class="form-control" value="${member.nickname}">
   </div>
