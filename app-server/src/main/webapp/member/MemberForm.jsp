@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +16,100 @@
  
 function idCheck(){
   
-  alert("아니 왜 안되는건데 ㅡㅡ");
+  window.open("idCheckForm.jsp", "idwin", "width=400 height = 350")
   
 }
 </script>
+
+<script type="text/javascript">
+    
+        // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
+        function checkValue()
+        {
+          
+           if(!document.userInfo.grade.value){
+                alert("회원구분을 선택하세요.");
+                return false;
+            }
+          
+            if(!document.userInfo.name.value){
+                alert("이름을 입력하세요.");
+                return false;
+            } 
+            
+            if(!document.userInfo.nickname.value){
+                alert("별명을 입력하세요.");
+                return false;
+            } 
+            
+         /*  if(!document.userInfo.nicNameDuplication.value != "nicNameCheck"){
+                alert("별명 중복체크를 해주세요.");
+                return false;
+            } 
+         */
+            
+            if(!document.userInfo.id.value){
+                alert("아이디를 입력하세요.");
+                return false;
+            }
+            
+            if(!document.userInfo.idDuplication.value != "idCheck"){
+                alert("아이디 중복체크를 해주세요.");
+                return false;
+            } 
+            
+            if(!document.userInfo.password.value){
+                alert("비밀번호를 입력하세요.");
+                return false;
+            }
+            
+            // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+            if(document.userInfo.password.value != document.userInfo.passwordcheck.value ){
+                alert("비밀번호를 동일하게 입력하세요.");
+                return false;
+            }
+          
+            if(!document.userInfo.email.value){
+                alert("이메일을 입력하세요.");
+                return false;
+            }
+            
+            if(!document.userInfo.birthyy.value){
+                alert("생년월일을 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.birthmm.value){
+                alert("생년월일을 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.birthdd.value){
+                alert("생년월일을 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.tel.value){
+                alert("연락처를 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.sex.value){
+                alert("성별을 선택하세요.");
+                return false;
+            } 
+        }
+    </script>
+    
+ <script>
+function div_OnOff(v,id){
+ // 라디오 버튼 value 값 조건 비교
+ if(v == "2"){
+  document.getElementById(id).style.display = ""; // 보여줌
+ }else{
+  document.getElementById(id).style.display = "none"; // 숨김
+ }
+}
+</script>
+
+
+
 
   
   <style>
@@ -62,18 +153,17 @@ function idCheck(){
     </div>
 </div>
   <div class="mb-3 row">
-    <label for='f-nicName' class="col-sm-3 col-form-label">* 별명</label>
+    <label for='f-f-nickname' class="col-sm-3 col-form-label">* 별명</label>
     <div class="col-sm-6">
-      <input id='f-nicName' type='text' name='nicName' onkeydown="inputIdCheck()">
-      <input type="button"value="중복체크" onclick='openNicNameCheck()'>
-      <input type='hidden' name ='nicNameDuplication' value ='nicNameUncheck'> 
+      <input id='f-nickname' type='text' name='nickname'>
+      <input type="button"value="중복체크">
     </div>
 </div>
 <div class="mb-3 row">
     <label for='f-id' class="col-sm-3 col-form-label">* 아이디</label>
     <div class="col-sm-6">
-      <input id='f-id' type='text' name='id' >
-      <input type="button" value="중복체크" onclick="idCheck()"> 
+      <input id='f-id' type='text' name='id' placeholder = "ID">
+       <input type="button" value="중복체크" onclick= "idCheck()">  
     </div>
 </div>
 <div class="mb-3 row">
@@ -193,92 +283,7 @@ function idCheck(){
 <button>등록</button><br>
 </form>  -->
 
- <script type="text/javascript">
-    
-        // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
-        function checkValue()
-        {
-          
-           if(!document.userInfo.grade.value){
-                alert("회원구분을 선택하세요.");
-                return false;
-            }
-          
-            if(!document.userInfo.name.value){
-                alert("이름을 입력하세요.");
-                return false;
-            } 
-            
-            if(!document.userInfo.nicName.value){
-                alert("별명을 입력하세요.");
-                return false;
-            } 
-            
-         /*  if(!document.userInfo.nicNameDuplication.value != "nicNameCheck"){
-                alert("별명 중복체크를 해주세요.");
-                return false;
-            } 
-         */
-            
-            if(!document.userInfo.id.value){
-                alert("아이디를 입력하세요.");
-                return false;
-            }
-            
-            if(!document.userInfo.idDuplication.value != "idCheck"){
-                alert("아이디 중복체크를 해주세요.");
-                return false;
-            } 
-            
-            if(!document.userInfo.password.value){
-                alert("비밀번호를 입력하세요.");
-                return false;
-            }
-            
-            // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-            if(document.userInfo.password.value != document.userInfo.passwordcheck.value ){
-                alert("비밀번호를 동일하게 입력하세요.");
-                return false;
-            }
-          
-            if(!document.userInfo.email.value){
-                alert("이메일을 입력하세요.");
-                return false;
-            }
-            
-            if(!document.userInfo.birthyy.value){
-                alert("생년월일을 입력하세요.");
-                return false;
-            }
-            if(!document.userInfo.birthmm.value){
-                alert("생년월일을 입력하세요.");
-                return false;
-            }
-            if(!document.userInfo.birthdd.value){
-                alert("생년월일을 입력하세요.");
-                return false;
-            }
-            if(!document.userInfo.tel.value){
-                alert("연락처를 입력하세요.");
-                return false;
-            }
-            if(!document.userInfo.sex.value){
-                alert("성별을 선택하세요.");
-                return false;
-            } 
-        }
-    </script>
-    
- <script>
-function div_OnOff(v,id){
- // 라디오 버튼 value 값 조건 비교
- if(v == "2"){
-  document.getElementById(id).style.display = ""; // 보여줌
- }else{
-  document.getElementById(id).style.display = "none"; // 숨김
- }
-}
-</script>
+ 
 
 
 
