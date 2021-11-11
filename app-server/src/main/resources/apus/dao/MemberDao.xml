@@ -58,6 +58,7 @@
       left outer join apus_doctor d on m.member_no=d.doctor_no
   </select>
   
+  
    <select id="findByNo" resultMap="MemberMap" parameterType ="int">
     select
        m.member_no,
@@ -189,6 +190,13 @@
       nickname=#{nickname}
     where member_no=#{no}
    </update>
+   
+   <update id ="pointUpdate" parameterType="int">
+    update apus_member set
+       point=point-30
+    where
+     member_no=#{no} 
+   </update>
   
     
    <update id="delete" parameterType="string">
@@ -238,6 +246,27 @@
     from
       apus_member
     where name=#{name}
+  </select>
+  
+  <select id="findByTel" resultMap="MemberMap" parameterType="string">
+   select
+      member_no,
+      name,
+      id,
+      password,
+      birth,
+      tel,
+      email,
+      photo,
+      sex,
+      created_dt,
+      point,
+      role,
+      active,
+      nickname
+    from
+      apus_member
+    where tel=#{tel}
   </select>
   
 </mapper>

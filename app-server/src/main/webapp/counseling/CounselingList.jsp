@@ -28,13 +28,15 @@
 
 <tbody>
 <c:forEach items="${counselingList}" var="counseling">
+<c:if test='${loginUser.id eq counseling.client.id}'>
 <%-- <c:if test ="${counseling.client.id eq loginUser.id} ">  --%>
 <tr>
   <td>${counseling.no}</td>
   <td><a href='detail?no=${counseling.no}'>${counseling.disease}</a></td> 
-  <td>${counseling.content} 선생님</td>
+  <td>${counseling.content}</td>
   <td>${counseling.registeredDate}</td>
 </tr>
+</c:if>
 <%-- </c:if>   --%>
 </c:forEach>
 </tbody>

@@ -10,30 +10,30 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import apus.dao.MemberDao;
-import apus.domain.Member;
+import apus.dao.CounselingDao;
+import apus.domain.Counseling;
 
-@WebServlet("/doctorinfo/list")
-public class DoctorMemberListController extends HttpServlet{
+@WebServlet("/counselingdoctor/detail")
+public class CounselingMemberDoctorDetailController extends HttpServlet{
+
   private static final long serialVersionUID = 1L;
-  MemberDao memberDao;
+  CounselingDao counselingDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+    counselingDao = (CounselingDao) 웹애플리케이션공용저장소.getAttribute("counselingDao");
   }
 
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
     try {
-
-      List<Member> memberList = memberDao.findAll();
-      request.setAttribute("memberList", memberList);
+      List<Counseling> counselingList= counselingDao.findAll();
+      request.setAttribute("counselingList", counselingList);
 
       // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/counseling/DoctorInfo.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/counseling/CounselingDoctorList.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {
@@ -48,4 +48,3 @@ public class DoctorMemberListController extends HttpServlet{
   }
 
 }
-
