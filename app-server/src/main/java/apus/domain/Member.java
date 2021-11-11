@@ -37,8 +37,9 @@ public class Member implements Serializable{
   public String getNickname() {
     return nickname;
   }
-  public void setNickname(String nicName) {
-    this.nickname = nicName;
+
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
   }
   public int getNo() {
     return no;
@@ -76,14 +77,12 @@ public class Member implements Serializable{
   public void setPassword(String password) {
     this.password = password;
   }
-
   public String getEmail() {
     return email;
   }
   public void setEmail(String email) {
     this.email = email;
   }
-
   public String getPhoto() {
     return photo;
   }
