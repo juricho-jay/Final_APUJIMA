@@ -95,7 +95,7 @@
 	
 	<delete id="delete" parameterType="int">
 	 update apus_board set
-	   acitve = 0
+	   active = 0
 	 where 
 	   board_no=#{no}
 	</delete>

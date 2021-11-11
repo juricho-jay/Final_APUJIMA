@@ -10,85 +10,15 @@
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../bootstrap/dist/bootstrap.css"></script>
   
-   <script type="text/javascript">
-    
-        // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
-        function checkValue()
-        {
-        	
-           if(!document.userInfo.grade.value){
-                alert("회원구분을 선택하세요.");
-                return false;
-            }
-          
-            if(!document.userInfo.name.value){
-                alert("이름을 입력하세요.");
-                return false;
-            } 
-            
-            if(!document.userInfo.nicName.value){
-                alert("별명을 입력하세요.");
-                return false;
-            } 
-            
-            if(!document.userInfo.id.value){
-                alert("아이디를 입력하세요.");
-                return false;
-            }
-            
-            if(!document.userInfo.password.value){
-                alert("비밀번호를 입력하세요.");
-                return false;
-            }
-            
-            // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-            if(document.userInfo.password.value != document.userInfo.passwordcheck.value ){
-                alert("비밀번호를 동일하게 입력하세요.");
-                return false;
-            }
-          
-            if(!document.userInfo.email.value){
-                alert("이메일을 입력하세요.");
-                return false;
-            }
-            
-            if(!document.userInfo.birthyy.value){
-                alert("생년월일을 입력하세요.");
-                return false;
-            }
-            if(!document.userInfo.birthmm.value){
-                alert("생년월일을 입력하세요.");
-                return false;
-            }
-            if(!document.userInfo.birthdd.value){
-                alert("생년월일을 입력하세요.");
-                return false;
-            }
-            if(!document.userInfo.tel.value){
-                alert("연락처를 입력하세요.");
-                return false;
-            }
-            if(!document.userInfo.sex.value){
-                alert("성별을 선택하세요.");
-                return false;
-            } 
-        }
-        
+
+<script>
  
-        
-    </script>
-    
- <script>
-function div_OnOff(v,id){
- // 라디오 버튼 value 값 조건 비교
- if(v == "2"){
-  document.getElementById(id).style.display = ""; // 보여줌
- }else{
-  document.getElementById(id).style.display = "none"; // 숨김
- }
+function idCheck(){
+  
+  alert("아니 왜 안되는건데 ㅡㅡ");
+  
 }
 </script>
-
 
   
   <style>
@@ -134,14 +64,16 @@ function div_OnOff(v,id){
   <div class="mb-3 row">
     <label for='f-nicName' class="col-sm-3 col-form-label">* 별명</label>
     <div class="col-sm-6">
-      <input id='f-nicName' type='text' name='nicName' class="form-control">
+      <input id='f-nicName' type='text' name='nicName' onkeydown="inputIdCheck()">
+      <input type="button"value="중복체크" onclick='openNicNameCheck()'>
+      <input type='hidden' name ='nicNameDuplication' value ='nicNameUncheck'> 
     </div>
 </div>
 <div class="mb-3 row">
     <label for='f-id' class="col-sm-3 col-form-label">* 아이디</label>
     <div class="col-sm-6">
       <input id='f-id' type='text' name='id' >
-      <input type="button" name = 'idCheck' value="중복체크"> 
+      <input type="button" value="중복체크" onclick="idCheck()"> 
     </div>
 </div>
 <div class="mb-3 row">
@@ -223,7 +155,7 @@ function div_OnOff(v,id){
     <label for='f-lisence' class="col-sm-3 col-form-label">* 의사 자격증</label>
     <div class="col-sm-6">
      <input id='f-lisence' type='text' name='lisence' >
-      <input type="button" name = 'idCheck' value="찾아보기"> 
+      <input type="button" name = 'lisence' value="찾아보기"> 
     </div>
 </div>
 
@@ -247,18 +179,6 @@ function div_OnOff(v,id){
 
 
 
-<!-- <div class="mb-3 row">
-  <label for='f-photo' class="col-sm-2 col-form-label">성별</label>
-  <div class="col-sm-6">
-  
-    <select id='f-sex' name='sex' class="form-control">
-    <option value = "" placeholder="성별"></option>
-    <option value = "남성">남자</option>
-    <option value = "여성">여자</option>
-    </select>
-    
-  </div>
-</div> -->
 
   <div class="col-12">
     <button class="btn btn-primary btn-sm" >회원 가입</button>
@@ -272,6 +192,97 @@ function div_OnOff(v,id){
 <label for='f-tel'>전화</label> <input id='f-tel' type='tel' name='tel'><br>
 <button>등록</button><br>
 </form>  -->
+
+ <script type="text/javascript">
+    
+        // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
+        function checkValue()
+        {
+          
+           if(!document.userInfo.grade.value){
+                alert("회원구분을 선택하세요.");
+                return false;
+            }
+          
+            if(!document.userInfo.name.value){
+                alert("이름을 입력하세요.");
+                return false;
+            } 
+            
+            if(!document.userInfo.nicName.value){
+                alert("별명을 입력하세요.");
+                return false;
+            } 
+            
+         /*  if(!document.userInfo.nicNameDuplication.value != "nicNameCheck"){
+                alert("별명 중복체크를 해주세요.");
+                return false;
+            } 
+         */
+            
+            if(!document.userInfo.id.value){
+                alert("아이디를 입력하세요.");
+                return false;
+            }
+            
+            if(!document.userInfo.idDuplication.value != "idCheck"){
+                alert("아이디 중복체크를 해주세요.");
+                return false;
+            } 
+            
+            if(!document.userInfo.password.value){
+                alert("비밀번호를 입력하세요.");
+                return false;
+            }
+            
+            // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+            if(document.userInfo.password.value != document.userInfo.passwordcheck.value ){
+                alert("비밀번호를 동일하게 입력하세요.");
+                return false;
+            }
+          
+            if(!document.userInfo.email.value){
+                alert("이메일을 입력하세요.");
+                return false;
+            }
+            
+            if(!document.userInfo.birthyy.value){
+                alert("생년월일을 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.birthmm.value){
+                alert("생년월일을 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.birthdd.value){
+                alert("생년월일을 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.tel.value){
+                alert("연락처를 입력하세요.");
+                return false;
+            }
+            if(!document.userInfo.sex.value){
+                alert("성별을 선택하세요.");
+                return false;
+            } 
+        }
+    </script>
+    
+ <script>
+function div_OnOff(v,id){
+ // 라디오 버튼 value 값 조건 비교
+ if(v == "2"){
+  document.getElementById(id).style.display = ""; // 보여줌
+ }else{
+  document.getElementById(id).style.display = "none"; // 숨김
+ }
+}
+</script>
+
+
+
+
 </body>
 </html>
 

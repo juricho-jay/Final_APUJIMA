@@ -35,7 +35,7 @@
             <form action= 'auth/logout' method = "get">
               <table align=right border=0 cellpadding=1 cellspacing="1" width=200 >
                      <tr align=left>
-                        <td>${loginUser.id}님 반갑습니다..</td>
+                        <td>${loginUser.nicName}님 반갑습니다..</td>
                         <td rowspan=10>
                         <input type="submit" value="로그아웃">
                         </td>
