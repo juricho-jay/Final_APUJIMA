@@ -177,7 +177,7 @@
       </tr>
       <tr>
          <td style = "width: 20%">작성자</td>
-        <td><input id ="f-writer" type='text' name = "writer"  placeholder ="${loginUser.id}"  value = "${loginUser.id }" readonly></td>
+        <td><input id ="f-writer" type='text' name = "writer"  placeholder ="${loginUser.id}"  value = "${loginUser.id}" readonly></td>
       </tr>
       <tr>
       <td style = "width: 20%">내용</td>

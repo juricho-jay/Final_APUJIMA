@@ -137,7 +137,7 @@ function div_OnOff(v,id){
 </div>
 
   <div class="mb-3 row">
-    <label for='f-grade' class="col-sm-3 col-form-label">구분</label>
+    <label for='f-grade' class="col-sm-3 col-form-label">* 구분</label>
     <div class="col-sm-6">
       <input id='member' type='radio' name='grade' value = "1" onclick="div_OnOff(this.value,'con');">
       <label>일반</label>
