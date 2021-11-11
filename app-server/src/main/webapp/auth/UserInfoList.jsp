@@ -2223,7 +2223,7 @@ col-lg-4 > form-group > gender-middle {
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="u-username">이름</label>
-                        <input type="text" id="u-username" name="name" class="form-control form-control-alternative" value="${loginUser.name}">
+                        <input type="text" id="u-username" name="name" class="form-control form-control-alternative" value="${loginUser.name}" readonly>
                       </div>
                     </div>
                       <div class="col-lg-4">
@@ -2312,15 +2312,15 @@ col-lg-4 > form-group > gender-middle {
                 <div class="pl-lg-4">
                   <div class="form-group focused">
                     <label class="form-control-label" for="u-license">면허</label>
-                    <textarea rows="1" class="form-control form-control-alternative">${loginUser.doctor.license}</textarea>
+                    <textarea rows="1" class="form-control form-control-alternative">${member.doctor.license}</textarea>
                   </div>
                   <div class="form-group focused">
                     <label class="form-control-label" for="u-license">전공</label>
-                    <textarea rows="1" class="form-control form-control-alternative">${loginUser.doctor.major}</textarea>
+                    <textarea rows="1" class="form-control form-control-alternative">${member.doctor.major}</textarea>
                   </div>
                   <div class="form-group focused">
                     <label class="form-control-label" for="u-license">홈페이지</label>
-                    <textarea rows="1" class="form-control form-control-alternative">${loginUser.doctor.homepage}</textarea>
+                    <textarea rows="1" class="form-control form-control-alternative">${member.doctor.homepage}</textarea>
                   </div>
                   <div class="form-group focused">
                     <label class="form-control-label" for="u-license">소개</label>
