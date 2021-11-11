@@ -1,14 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>회원상세</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <title>내 정보</title>
+ <!--  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
   
 <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
  -->
@@ -1404,9 +1414,6 @@ button.bg-white:focus {
   background: linear-gradient(87deg, #172b4d 0, #1a174d 100%) !important;
 }
 
-.bg-gradient-default {
-  background: linear-gradient(87deg, #172b4d 0, #1a174d 100%) !important;
-}
 
 @keyframes floating-lg {
   0% {
@@ -1568,7 +1575,8 @@ a.text-white:focus {
 }
 
 .card-profile-stats>div {
-  margin-right: 1rem;
+ /*  margin-right: 1.5rem; */
+  width: 100px;
   padding: .875rem;
   text-align: center;
 }
@@ -2051,6 +2059,10 @@ p {
     position: relative;
     top: 50px;
 }
+col-lg-4 > form-group > gender-middle {
+  position: relative;
+  top: 38px;
+}
   </style>
 </head>
 <body>
@@ -2083,7 +2095,7 @@ p {
                   <img alt="Image placeholder" src="../img/ruby.jpg">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <p class="mb-0 text-sm font-weight-bold">${loginUser.id}</p>
+                  <p class="mb-0 text-sm font-weight-bold">${loginUser.nickname}</p>
                 </div>
               </div>
             </a>
@@ -2118,16 +2130,16 @@ p {
       </div>
     </nav>
     <!-- Header -->
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image:); background-size: cover; background-position: center top;">
       <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
       <!-- Header container -->
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Hello Jesse</h1>
-            <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-            <a href="#!" class="btn btn-info">Edit profile</a>
+            <h1 class="display-2 text-white">Hello <b>${loginUser.nickname}</b></h1>
+            <p class="text-white mt-0 mb-5">개인 정보 페이지입니다. 개인 정보를 수정하거나 쪽지, 게시글, 화분을 확인할 수 있습니다.</p>
+            <a href="#!" class="btn btn-info">정보 수정</a>
           </div>
         </div>
       </div>
@@ -2148,16 +2160,16 @@ p {
             </div>
             <div class="card-header text-center border-0">
               <div class="justify-content-between">
-                <a href="#" class="btn btn-sm btn-info mr-4" style="float: left">쪽지함</a>
+                <a href="../mailbox/list" class="btn btn-sm btn-info mr-4" style="float: left">쪽지함</a>
                 <a href="#" class="btn btn-sm btn-default" style="float: middle; margin-top: 80px;">수정</a>
               </div>
             </div>
             <div class="card-body pt-0 pt-md-4">
-              <div class="row">
+              <div style="float: middle !important">
                 <div>
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5" style="float: top !important">
                     <div>
-                      <span class="heading">1</span>
+                      <span class="heading">${loginUser.point}</span>
                       <span class="description">Plants</span>
                     </div>
                     <div>
@@ -2173,19 +2185,19 @@ p {
               </div>
               <div class="text-center">
                 <h3>
-                  <span class="font-weight-light"><b>${loginUser.name}</b></span>
+                  <span class="font-weight-light"><b>${loginUser.nickname}</b></span>
                 </h3>
                 <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                  <i class="ni location_pin mr-2"></i>${loginUser.nickname}님의 화분은 총 -개입니다.
                 </div>
-                <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
-                </div>
+                <!-- <div class="h5 mt-4">
+                  <i class="ni business_briefcase-24 mr-2"></i>나의 정원
+                </div> -->
                 <div>
-                  <i class="ni education_hat mr-2"></i>University of Computer Science
+                  <i class="ni education_hat mr-2"></i>나의 정원
                 </div>
                 <hr class="my-4">
-                <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
+                <p>여기에는 뭘 써야할까요. 알아맞춰 보세요. 뚱땅뚱땅</p>
                 <a href="#">Show more</a>
               </div>
             </div>
@@ -2204,7 +2216,7 @@ p {
               </div>
             </div>
             <div class="card-body">
-              <form>
+              <form class="supposedToSubmitForm">
                 <h6 class="heading-small text-muted mb-4">내 정보</h6>
                 <div class="pl-lg-4">
                   <div class="row">
@@ -2214,6 +2226,22 @@ p {
                         <input type="text" id="u-username" name="name" class="form-control form-control-alternative" value="${loginUser.name}">
                       </div>
                     </div>
+                      <div class="col-lg-4">
+                      <div class="form-group">
+                      <label class="form-control-label"></label>
+                      <div class="gender-middle">
+                      <c:choose>
+                      <c:when test='${loginUser.sex eq "남"}'>
+                      <i class="bi bi-gender-male" style="color: purple; zoom: 1.5"></i>
+                      </c:when>
+                      <c:when test='${loginUser.sex eq "여"}'>
+                      <i class="bi bi-gender-female" style="color: purple; zoom: 1.5"></i>
+                      </c:when>
+                      <c:otherwise><i class="bi bi-gender-ambiguous" style="color: purple; zoom: 1.5"></i></c:otherwise>
+                      </c:choose>
+                      </div>
+                     </div>
+                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-4">
@@ -2227,7 +2255,7 @@ p {
                     <div class="col-lg-5">
                       <div class="form-group focused">
                         <label class="form-control-label" for="u-birthday">생일</label>
-                        <input type="text" id="u-birthday" name="birthday" class="form-control form-control-alternative" value="${loginUser.nickname}">
+                        <input type="text" id="u-birthday" name="birthday" class="form-control form-control-alternative" value="${loginUser.birthday}">
                       </div>
                     </div>
                     <div class="col-lg-6">
@@ -2277,15 +2305,29 @@ p {
                     </div>
                   </div>
                 </div>
+                <c:if test='${loginUser.doctorOrNot eq "2"}'>
                 <hr class="my-4">
                 <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">About me</h6>
+                <h6 class="heading-small text-muted mb-4">의사 정보</h6>
                 <div class="pl-lg-4">
                   <div class="form-group focused">
-                    <label>About Me</label>
-                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                    <label class="form-control-label" for="u-license">면허</label>
+                    <textarea rows="1" class="form-control form-control-alternative">${loginUser.doctor.license}</textarea>
+                  </div>
+                  <div class="form-group focused">
+                    <label class="form-control-label" for="u-license">전공</label>
+                    <textarea rows="1" class="form-control form-control-alternative">${loginUser.doctor.major}</textarea>
+                  </div>
+                  <div class="form-group focused">
+                    <label class="form-control-label" for="u-license">홈페이지</label>
+                    <textarea rows="1" class="form-control form-control-alternative">${loginUser.doctor.homepage}</textarea>
+                  </div>
+                  <div class="form-group focused">
+                    <label class="form-control-label" for="u-license">소개</label>
+                    <textarea rows="4" class="form-control form-control-alternative">${loginUser.doctor.introduction}</textarea>
                   </div>
                 </div>
+                </c:if>
               </form>
             </div>
           </div>
@@ -2297,7 +2339,7 @@ p {
     <div class="row align-items-center justify-content-xl-between">
       <div class="col-xl-6 m-auto text-center">
         <div class="copyright">
-          <p>Made with <a href="https://www.creative-tim.com/product/argon-dashboard" target="_blank">Argon Dashboard</a> by Creative Tim</p>
+          <p>Made by <a href="../loginindex.jsp" target="_blank">APUJIMA </a>team</p>
         </div>
       </div>
     </div>

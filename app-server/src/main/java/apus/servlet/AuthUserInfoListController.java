@@ -15,7 +15,7 @@ import apus.dao.MemberDao;
 import apus.domain.Member;
 
 @WebServlet("/auth/userInfoList")
-public class AuthUserInfoController extends HttpServlet {
+public class AuthUserInfoListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   MemberDao memberDao;
   DateCheckDao dateCheckDao;
@@ -34,7 +34,6 @@ public class AuthUserInfoController extends HttpServlet {
     try {
       // 클라이언트 요청을 처리하는데 필요한 데이터 준비
       Collection<Member> memberList = memberDao.findAll();
-
 
       // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
       request.setAttribute("memberList", memberList);
