@@ -64,7 +64,7 @@ public class BoardAddController extends HttpServlet {
       board.setWriter(writer);
       board.setContent(request.getParameter("content"));
       board.setWhichBoard(whichBoard);
-      board.setActive(1);
+      board.setActive(1);   
 
 
       /*
