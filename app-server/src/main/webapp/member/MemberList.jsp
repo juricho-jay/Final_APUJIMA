@@ -48,7 +48,7 @@
 <tr>
     <td>${member.no}</td>
     <td><a href='detail?no=${member.no}'>${member.name}</a></td> 
-    <td>${member.nicName}</td> 
+    <td>${member.nickname}</td> 
     <td>${member.id}</td> 
     <td>${member.birthday}</td> 
     <td>${member.tel}</td> 
