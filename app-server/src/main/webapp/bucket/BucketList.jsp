@@ -362,7 +362,7 @@ input {
 	                                              <sub>${bucket.registeredDate}&nbsp;&nbsp;</sub> 
 	                                                  <input type="hidden" name="no" value="${bucket.no}"></input>
 				                                            <button class="border-0 btn-transition btn btn-outline-success2"> 
-				                                            <i style="font-size: 1em">${bucket.writer.id}</i></button> 
+				                                            <i>${bucket.completedDate}</i></button> 
 				                                            <button class="btn-outline-success" id="completeBtn" name="complete" value="${bucket.complete}" type="submit">
 				                                            <i class="bi bi-check" style="font-size: 1.5em"></i></button> 
 				                                            <button class="border-0 btn-transition btn btn-outline-danger" name="b-trashBtn" onclick="trashDelete(${bucket.no})" type="button">
