@@ -55,7 +55,7 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("medicineDao", medicineDao);
       웹애플리케이션공용저장소.setAttribute("counselingDao", counselingDao);
       웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
-      웹애플리케이션공용저장소.setAttribute("plantDao", commentDao);
+      웹애플리케이션공용저장소.setAttribute("plantDao", plantDao);
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
 

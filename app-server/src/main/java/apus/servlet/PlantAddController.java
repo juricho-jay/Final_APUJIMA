@@ -1,7 +1,6 @@
 package apus.servlet;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -43,6 +42,7 @@ public class PlantAddController extends HttpServlet {
       return;
     }
 
+
     try {
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
@@ -50,36 +50,30 @@ public class PlantAddController extends HttpServlet {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
 
-      String input = request.getParameter("name");
-      int count = 0;
-      List<Plant> plantList = plantDao.findAll();
-      for (int i = 0; i < plantList.size(); i++) {
-        if (plantList.get(i).getOwnerName().getId().equals(member.getId())) {
-          if(input.equals(plantList.get(i).getPlantName())) {
-            System.out.println("화분 이름이 중복되어 만들 수 없습니다. 다시 입력해 주세요");
-            count++;
-          }
-        }
-      }
-      if (count == 0) {
-
-        Plant plant = new Plant();
-        plant.setOwnerName(member);
-        plant.setPlantName(input);
-        plant.setLevel(0);
-        plant.setExp(0);
-        plant.setShape("🌱");
-
-        member.setPoint(member.getPoint()-30);
-
-
-        plantDao.insert(plant);
-        memberDao.update2(member);
-        sqlSession.commit();
+      if (member.getPoint() < 30) {
         response.setHeader("Refresh", "1;url=list");
-        request.getRequestDispatcher("PlantAdd.jsp").forward(request, response);
+        request.getRequestDispatcher("PlantError.jsp").forward(request, response);
       }
-      count = 0;
+
+
+
+      Plant plant = new Plant();
+      plant.setOwnerName(member);
+      plant.setPlantName(request.getParameter("name"));
+      plant.setLevel(0);
+      plant.setExp(0);
+      plant.setShape("C:\\Users\\Jinhyeon\\Desktop\\git\\Final_APUJIMA\\app-server\\src\\main\\webapp\\img\\saessak.png");
+
+      member.setPoint(member.getPoint()-30);
+
+
+      plantDao.insert(plant);
+      memberDao.pointUpdate(member.getNo());
+      sqlSession.commit();
+      response.setHeader("Refresh", "1;url=list");
+      request.getRequestDispatcher("PlantAdd.jsp").forward(request, response);
+
+
     }catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);

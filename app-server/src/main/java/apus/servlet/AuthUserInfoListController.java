@@ -55,6 +55,7 @@ public class AuthUserInfoListController extends HttpServlet {
       // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
       request.setAttribute("member", member);
 
+
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/auth/UserInfoList.jsp");
       요청배달자.forward(request, response);
     } catch (Exception e) {

@@ -6,6 +6,7 @@ import apus.domain.Plant;
 public interface PlantDao {
   void insert(Plant plant) throws Exception;
   List<Plant> findAll() throws Exception;
+  List<Plant> findMyPlant(int no) throws Exception;
   //  List<Plant> findByKeyword(String keyword) throws Exception;
   //  Plant findByName(String name) throws Exception;
   void update(Plant plant) throws Exception;
