@@ -122,7 +122,7 @@
 <div class="mb-3 row">
   <label for='f-introduce' class="col-sm-2 col-form-label">소개</label>
   <div class="col-sm-6">
-     <input id='f-introduce' type='text' name='introduce' class="form-control" value='${member.doctor.introduce}'>
+     <input id='f-introduce' type='text' name='introduce' class="form-control" value='${member.doctor.introduction}'>
   </div>
 </div>
 
