@@ -2057,6 +2057,7 @@ p {
 
 <body>
   <div class="main-content">
+   <%-- <c:forEach items="${memberList}" var="member"> --%>
     <!-- Top navbar -->
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
@@ -2082,7 +2083,7 @@ p {
                   <img alt="Image placeholder" src="../img/ruby.jpg">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                  <p class="mb-0 text-sm font-weight-bold">${loginUser.id}</p>
                 </div>
               </div>
             </a>
@@ -2156,15 +2157,15 @@ p {
                 <div>
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5" style="float: top !important">
                     <div>
-                      <span class="heading">22</span>
-                      <span class="description">Friends</span>
+                      <span class="heading">1</span>
+                      <span class="description">Plants</span>
                     </div>
                     <div>
                       <span class="heading">10</span>
-                      <span class="description">Photos</span>
+                      <span class="description">Posts</span>
                     </div>
                     <div>
-                      <span class="heading">89</span>
+                      <span class="heading">35</span>
                       <span class="description">Comments</span>
                     </div>
                   </div>
@@ -2172,7 +2173,7 @@ p {
               </div>
               <div class="text-center">
                 <h3>
-                  Jessica Jones<span class="font-weight-light">, 27</span>
+                  <span class="font-weight-light"><b>${member.name}</b></span>
                 </h3>
                 <div class="h5 font-weight-300">
                   <i class="ni location_pin mr-2"></i>Bucharest, Romania
