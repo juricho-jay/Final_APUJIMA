@@ -49,9 +49,9 @@ public class CounselingMemberAddController extends HttpServlet{
     String user3 = request.getParameter("counseling.name");
 
     try {
-      Member member = memberDao.findByName(user);
-      Member member2 = memberDao.findByTel(user2);
-      Member member3 = memberDao.findByName(user3);
+      Member member = memberDao.findById(user);
+      Member member2 = memberDao.findById(user2);
+      Member member3 = memberDao.findById(user3);
       counseling.setClient(member);
       counseling.setClientTel(member2);
       counseling.setCounselor(member3);

@@ -69,7 +69,7 @@
     <div class="col-sm-6">
       <input id='f-tel' type='text' name='client.tel' class="form-control" value="${loginUser.tel}" readOnly>
     </div>
-  </div>
+  </div> 
   <div class="mb-3 row">
     <label for='f-tel' class="col-sm-3 col-form-label">상담사</label>
     <div class="col-sm-4">
@@ -86,7 +86,7 @@
   </div>
   <div class="mb-3">
     <label for="f-content" class="col-sm-3 col-form-label">상담내용</label>
-    <textarea class="form-control " id="f-content" required></textarea>
+    <textarea class="form-control" id="f-content" name='content' required></textarea>
   </div>
   
   <%-- <div class="mb-4 row box">
