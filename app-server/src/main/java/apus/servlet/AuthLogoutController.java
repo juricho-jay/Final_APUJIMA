@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet("/auth/logout")
 public class AuthLogoutController extends HttpServlet {
@@ -19,10 +18,9 @@ public class AuthLogoutController extends HttpServlet {
       throws  ServletException, IOException {
     System.out.println("-------------------");
 
-    HttpSession session = request.getSession();
-    session.invalidate();
+    request.getSession().invalidate();
 
-    response.setHeader("Refresh", "2;url=/apus/index.jsp");
+    response.setHeader("Refresh", "1;url=/apus/index.jsp");
     request.getRequestDispatcher("Logout.jsp").forward(request, response);
 
     //    HttpSession session = request.getSession(false);

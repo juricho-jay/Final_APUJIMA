@@ -1,8 +1,15 @@
 package apus.servlet;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.DateCheckDao;
 import apus.dao.MemberDao;
@@ -10,30 +17,31 @@ import apus.domain.DateCheck;
 import apus.domain.Member;
 import util.Prompt;
 
-public class AttendanceCheckHandler implements Command {
+@WebServlet("/auth/attendanceCheck")
+public class DateCheckAddController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
   DateCheckDao dateCheckDao;
   MemberDao memberDao;
   SqlSession sqlSession;
 
-  public AttendanceCheckHandler(DateCheckDao dateCheckDao, MemberDao memberDao,SqlSession sqlSession) {
-    this.dateCheckDao = dateCheckDao;
-    this.memberDao = memberDao;
-    this.sqlSession = sqlSession;
-  }
-
-
   @Override
-  public void execute(CommandRequest request) throws Exception {
+  public void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    System.out.println();
-    System.out.println("[출석체크] 페이지입니다.");
-    System.out.println();
-    Member member = new Member();
-    DateCheck dateCheck = new DateCheck();
+    HttpSession session = request.getSession(false);
+
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/apus/index.jsp");
+      return;
+    }
+
+
     //출석 체크 하는 사람.(LoginUser)
-    Member loginUser = memberDao.findById(AuthLoginHandler.getLoginUser().getId());
-    String loginUser1 = AuthLoginHandler.getLoginUser().getId();
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
+    DateCheck dateCheck = new DateCheck();
 
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     Date today = new Date();

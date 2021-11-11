@@ -21,9 +21,8 @@
 <body>
 
 <div class = "container">
-    <h1> 에러 페이지입니다.</h1>
-    <p>여긴 로그인 에러지롱~~.</p>
-    <p>아이디 비밀번호가 맞는게 읎다!! 돌아가라!!</p>
+    <h1>로그인 실패!</h1>
+    <p>아이디나 암호가 일치하지 않습니다!</p>
 <form>  
   <a href='/apus/member/MemberSignUp.jsp' class="btn btn-primary">로그인 페이지</a>
   <a href='/apus/index.jsp' class="btn btn-primary">메인 페이지</a>

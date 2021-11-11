@@ -45,14 +45,13 @@ public class AuthLoginController extends HttpServlet {
       if (member == null) {
         System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
         request.getRequestDispatcher("/LoginError.jsp").forward(request, response);
-      }
 
-      else {
+      } else {
         HttpSession session = request.getSession(); //멀티쓰레드
         session.setAttribute("loginUser", member);
-
-        response.setHeader("Refresh", "2;url=/apus/loginindex.jsp");
-        request.getRequestDispatcher("LoginSuccess.jsp").forward(request, response);
+        response.sendRedirect("/apus/loginindex.jsp");
+        //        response.setHeader("Refresh", "1;url=/apus/loginindex.jsp");
+        //        request.getRequestDispatcher("LoginSuccess.jsp").forward(request, response);
       }
 
 
