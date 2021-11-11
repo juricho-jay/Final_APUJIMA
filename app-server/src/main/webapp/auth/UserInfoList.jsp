@@ -1696,7 +1696,6 @@ col-lg-4 > form-group > gender-middle {
 }
   </style>
 </head>
-<body>
 
 <body>
   <div class="main-content">
@@ -1828,10 +1827,13 @@ col-lg-4 > form-group > gender-middle {
                   <i class="ni education_hat mr-2"></i>나의 정원
                 </div>
                 <hr class="my-4">
-                <c:forEach items="${dateCheckList}" var="member">
-
+                <form id="autoDateFinder" action="dateCheckFinder">
+                <button id="autoDateCheck">출석체크</button>
+                </form>
+                  <%-- <c:if test='${not empty dateCheck}'>
+                  alert()
+                  </c:if> --%>
                 <p>여기에는 뭘 써야할까요. 알아맞춰 보세요. 뚱땅뚱땅</p>
-                </c:forEach>
                 <a href="#">Show more</a>
               </div>
             </div>
@@ -1978,6 +1980,20 @@ col-lg-4 > form-group > gender-middle {
       </div>
     </div>
   </footer>
-</body>
+  
+  
+  
+  
+  <script>
+  
+  
+  
+  </script>
+  
+  
+  
+  
+  
+  
 </body>
 </html>

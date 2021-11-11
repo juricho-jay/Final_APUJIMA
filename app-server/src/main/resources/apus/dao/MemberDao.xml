@@ -58,6 +58,7 @@
       left outer join apus_doctor d on m.member_no=d.doctor_no
   </select>
   
+  
    <select id="findByNo" resultMap="MemberMap" parameterType ="int">
     select
        m.member_no,
@@ -188,6 +189,13 @@
       role=#{doctorOrNot},
       nickname=#{nickname}
     where member_no=#{no}
+   </update>
+   
+   <update id ="pointUpdate" parameterType="int">
+    update apus_member set
+       point=point-30
+    where
+     member_no=#{no} 
    </update>
   
     

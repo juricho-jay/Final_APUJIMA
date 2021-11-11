@@ -64,8 +64,8 @@ public class DateCheckAddController extends HttpServlet {
 
 
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("MemberAdd.jsp").forward(request, response);
+      response.setHeader("Refresh", "1;url=/auth/userInfo");
+      request.getRequestDispatcher("UserInfoList.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -74,6 +74,7 @@ public class DateCheckAddController extends HttpServlet {
 
       // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
+      e.printStackTrace();
       요청배달자.forward(request, response);
 
     }
