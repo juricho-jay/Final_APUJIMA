@@ -37,6 +37,7 @@
                      <tr align=left>
                         <td>${loginUser.nicName}님 반갑습니다..</td>
                         <td rowspan=10>
+                        <a href="auth/userInfoList" class="button">내 정보</a>
                         <input type="submit" value="로그아웃">
                         </td>
                      </tr>

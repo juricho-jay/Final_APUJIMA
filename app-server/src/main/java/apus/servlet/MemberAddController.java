@@ -54,7 +54,7 @@ public class MemberAddController extends HttpServlet {
     member.setPoint(1000);
     String grade = request.getParameter("grade");
     member.setDoctorOrNot(Integer.parseInt(grade));
-    member.setNicName(request.getParameter("nicName"));
+    member.setNickname(request.getParameter("nicName"));
     member.setActive(1);
 
     if(member.getDoctorOrNot() == 2) {
