@@ -50,18 +50,18 @@ public class DateCheckFinderController extends HttpServlet{
       } 
 
       int memberNo = member.getNo();
-      System.out.println(memberNo);
       DateCheck dateCheck = dateCheckDao.findByMemberAndDate(memberNo);
+
 
       if (dateCheck == null) {
         request.getRequestDispatcher("/auth/attendanceCheck").forward(request, response);
-      } else {
 
+      } else if (dateCheck != null) {
 
-        //request.setAttribute("dateCheck", dateCheck);
+        request.setAttribute("dateCheck", dateCheck);
 
         // 출력을 담당할 뷰를 호출한다.
-        RequestDispatcher 요청배달자 = request.getRequestDispatcher("/auth/UserInfoList.jsp");
+        RequestDispatcher 요청배달자 = request.getRequestDispatcher("/auth/dateCheckPro.jsp");
         요청배달자.forward(request, response);
       }
     } catch (Exception e) {

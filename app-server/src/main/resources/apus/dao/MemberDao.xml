@@ -180,7 +180,7 @@
       name=#{name},
       id=#{id},
       birth=#{birthday},
-      tel=#{phoneNum},
+      tel=#{tel},
       email=#{email},
       photo=#{photo},
       sex=#{sex},

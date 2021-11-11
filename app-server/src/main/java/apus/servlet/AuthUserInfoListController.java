@@ -1,6 +1,7 @@
 package apus.servlet;
 
 import java.io.IOException;
+import java.util.Collection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import apus.dao.DateCheckDao;
 import apus.dao.MemberDao;
+import apus.domain.DateCheck;
 import apus.domain.Member;
 
 
@@ -41,18 +43,20 @@ public class AuthUserInfoListController extends HttpServlet {
       return;
     }
 
-
-
     try {
+
+      // 클라이언트 요청을 처리하는데 필요한 데이터 준비
+      Collection<DateCheck> dateCheckList = dateCheckDao.findAll();
+
+
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
       if(member == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       } 
-      // 클라이언트 요청을 처리하는데 필요한 데이터 준비
-
 
       // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
+      request.setAttribute("dateCheckList", dateCheckList);
       request.setAttribute("member", member);
 
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/auth/UserInfoList.jsp");
