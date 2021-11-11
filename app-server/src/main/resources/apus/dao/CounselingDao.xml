@@ -33,8 +33,8 @@
   
       <insert id="insert" parameterType="counseling" 
   useGeneratedKeys="true" keyColumn="counsel_no" keyProperty="no">
-    insert into apus_counseling(disease,content,client_name,client_tel,counselor_sex,counselor_name)
-    values(#{disease},#{content},#{client.name},#{client.phoneNum},#{counselor.sex},#{counselor.name})
+    insert into apus_counseling(disease,content,client_name,client_tel,counselor_name)
+    values(#{disease},#{content},#{client.name},#{client.tel},#{counselor.name})
    </insert>
    
   <select id="findAll" resultMap="CounselingMap">

@@ -61,13 +61,21 @@
   <div class="mb-3 row">
     <label for='f-client' class="col-sm-3 col-form-label">이름</label>
     <div class="col-sm-6">
-      <input id='f-client' type='text' name='client.id' class="form-control" value="${loginUser.id}" readOnly>
+      <input id='f-client' type='text' name='client.name' class="form-control" value="${loginUser.name}" readOnly>
     </div>
   </div>
   <div class="mb-3 row">
     <label for='f-tel' class="col-sm-3 col-form-label">휴대번호</label>
     <div class="col-sm-6">
-      <input id='f-tel' type='text' name='tel' class="form-control" value="${loginUser.phoneNum}" readOnly>
+      <input id='f-tel' type='text' name='client.tel' class="form-control" value="${loginUser.tel}" readOnly>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for='f-tel' class="col-sm-3 col-form-label">상담사</label>
+    <div class="col-sm-4">
+      
+        <input id='f-tel' type='text' name='counseling.name' class="form-control" value="${member.name}">선생님
+      
     </div>
   </div>
   <div class="mb-3 row">
@@ -81,7 +89,7 @@
     <textarea class="form-control " id="f-content" required></textarea>
   </div>
   
-  <div class="mb-4 row box">
+  <%-- <div class="mb-4 row box">
     <label for='f-choice' class="col-sm-2 col-form-label box2">상담사 선택</label>
       <div class="box3">
 				  <input type="radio" id="inlineRadio1" name="counselor.name" value="1" checked> 여성
@@ -89,19 +97,10 @@
 				
 				<div id="women">
 				  <select class="form-select women">
+				      <c:forEach items="${counselingList}" var="counseling">
 				      <option>선택하세요</option>
-				      <%-- 
-				      <c:forEach var="item" items="${eltest.getProductList()}" begin="0" end="5" step="1">
-                <option>${item}</option>
-              </c:forEach>
-              --%>
-              <c:forEach var="counseling" items="${memberList}" begin="0" end="5" step="1">
-                <c:if test="${counseling.counselor.doctor.sex eq '여'}">
-                  <option>${counseling.counselor.name}</option>
-                </c:if>
-              </c:forEach>
-				      <!-- <option>조주리 상담사</option>
-				      <option>신현지 상담사</option> -->
+				      <option>${counseling.counselor.name}</option>
+				      </c:forEach>
 				  </select>
 				</div>
 				
@@ -113,7 +112,7 @@
 				  </select>
 				</div>
       </div>
-  </div>
+  </div> --%>
   
   <div class="col-12 box4">
     <button class="btn btn-primary btn-sm" >상담 신청하기</button>
