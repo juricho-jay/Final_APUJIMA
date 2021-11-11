@@ -21,7 +21,7 @@
     <result column="active" property="active"/>
     <result column="nickname" property="nickname"/>
     
-    <association property="doctor" javaType="Doctor">
+    <association property="doctor" javaType="doctor">
       <id column="doctor_no" property="no"/>
       <result column="major" property="major"/>
       <result column="license" property="license"/>
@@ -58,6 +58,35 @@
       left outer join apus_doctor d on m.member_no=d.doctor_no
   </select>
   
+   <select id="findDoctorByMemberNo" resultMap="MemberMap" parameterType ="int">
+    select
+       m.member_no,
+       m.name,
+       m.id,
+       m.password,
+       m.birth,
+       m.email,
+       m.tel,
+       m.photo,
+       m.sex,
+       m.created_dt,
+       m.point,
+       m.role,
+       m.active,
+       m.nickname,
+       d.doctor_no,
+       d.major,
+       d.license,
+       d.homepage,
+       d.introduction
+    from
+      apus_member m
+      left outer join apus_doctor d on m.member_no=d.doctor_no
+    where 
+    m.member_no =#{no}
+  </select>
+  
+
     <select id="findDoctor" resultMap="MemberMap">
     select * from apus_member where role = 2;
   </select>
