@@ -1,9 +1,10 @@
 package apus.servlet;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +16,6 @@ import apus.dao.DateCheckDao;
 import apus.dao.MemberDao;
 import apus.domain.DateCheck;
 import apus.domain.Member;
-import util.Prompt;
 
 @WebServlet("/auth/attendanceCheck")
 public class DateCheckAddController extends HttpServlet {
@@ -25,8 +25,16 @@ public class DateCheckAddController extends HttpServlet {
   MemberDao memberDao;
   SqlSession sqlSession;
 
+
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    dateCheckDao = (DateCheckDao) 웹애플리케이션공용저장소.getAttribute("dateCheckDao");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+  }
+
+  @Override
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     HttpSession session = request.getSession(false);
@@ -42,85 +50,33 @@ public class DateCheckAddController extends HttpServlet {
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
     DateCheck dateCheck = new DateCheck();
-
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     Date today = new Date();
 
-    String input = Prompt.inputString("출석체크(C) / 뒤로가기(0) > ");
-    if(input.equals("0")) {
-      return;
-    } else if(input.equalsIgnoreCase("c")) {
+    member.setPoint(member.getPoint() + 30);
 
-      List<DateCheck> dateCheckList = dateCheckDao.findAll();
+    dateCheck.setAttendee(member);
+    dateCheck.setDate(today);
 
 
-
-      // 만약에 오늘 처음 출석이면
-      // dateList에 오늘 날짜가 없으면 or dateList에 날짜가 있는데 내 아이디가 없을 때
-
-
-      if (dateCheckList.size() == 0) {
-        // (member)로그인 유저 포인트 적립 > 데이터에 저장
+    try {
+      memberDao.insert(member);
+      dateCheckDao.insert(dateCheck);
 
 
-        loginUser.setPoint(loginUser.getPoint() + 30);
-        memberDao.update2(loginUser);
-        sqlSession.commit();
+      sqlSession.commit();
+      response.setHeader("Refresh", "1;url=list");
+      request.getRequestDispatcher("MemberAdd.jsp").forward(request, response);
 
-        System.out.println("금일 첫 출석체크로 30포인트가 적립되었습니다.");
+    } catch (Exception e) {
+      e.printStackTrace();
+      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
+      request.setAttribute("error", e);
 
+      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
+      요청배달자.forward(request, response);
 
-
-        dateCheck = new DateCheck();
-        dateCheck.setDate(today);
-        dateCheck.setAttendee(loginUser);
-
-        dateCheckDao.insert(dateCheck);
-        sqlSession.commit();
-
-
-        //        // 3일 지난 데이터 정리
-        //        dateCheckDao.delete();
-        //        sqlSession.commit();
-        return;
-
-      } else { // dateCheckList != 0
-        String time2 = format.format(today);
-        for(int i = 0; i < dateCheckList.size(); i++) {
-          String time1 = format.format(dateCheckList.get(i).getDate());
-          if(time1.equals(time2) && dateCheckList.get(i).getAttendee().getId().equals(loginUser1)) {
-            System.out.println("이미 출석체크 포인트를 받으셨습니다.");
-            //dateCheckDao.delete();
-            return;
-
-            //끝까지 돌렸는데 없을 때
-          } else if (i == dateCheckList.size() -1)  { 
-
-
-            loginUser.setPoint(loginUser.getPoint() + 30);
-            memberDao.update2(loginUser);
-            sqlSession.commit();
-
-            System.out.println("금일 첫 출석체크로 30포인트가 적립되었습니다.");
-
-            dateCheck = new DateCheck();
-            dateCheck.setDate(today);
-            dateCheck.setAttendee(loginUser);
-
-            dateCheckDao.insert(dateCheck);
-            sqlSession.commit();
-
-            //            // 3일 지난 데이터 정리
-            //            dateCheckDao.delete();
-            //            sqlSession.commit();
-
-            return;
-
-          }
-        }
-      }
     }
   }
 }
-
 

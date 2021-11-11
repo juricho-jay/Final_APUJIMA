@@ -1828,7 +1828,10 @@ col-lg-4 > form-group > gender-middle {
                   <i class="ni education_hat mr-2"></i>나의 정원
                 </div>
                 <hr class="my-4">
+                <c:forEach items="${dateCheckList}" var="member">
+
                 <p>여기에는 뭘 써야할까요. 알아맞춰 보세요. 뚱땅뚱땅</p>
+                </c:forEach>
                 <a href="#">Show more</a>
               </div>
             </div>
