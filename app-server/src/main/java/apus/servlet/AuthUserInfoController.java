@@ -36,7 +36,6 @@ public class AuthUserInfoController extends HttpServlet {
       Collection<Member> memberList = memberDao.findAll();
 
 
-
       // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
       request.setAttribute("memberList", memberList);
 
