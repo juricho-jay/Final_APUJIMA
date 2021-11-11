@@ -2173,7 +2173,7 @@ p {
               </div>
               <div class="text-center">
                 <h3>
-                  <span class="font-weight-light"><b>${member.name}</b></span>
+                  <span class="font-weight-light"><b>${loginUser.name}</b></span>
                 </h3>
                 <div class="h5 font-weight-300">
                   <i class="ni location_pin mr-2"></i>Bucharest, Romania
@@ -2211,7 +2211,7 @@ p {
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="u-username">이름</label>
-                        <input type="text" id="u-username" name="name" class="form-control form-control-alternative" value="${member.name}">
+                        <input type="text" id="u-username" name="name" class="form-control form-control-alternative" value="${loginUser.name}">
                       </div>
                     </div>
                   </div>
@@ -2219,7 +2219,7 @@ p {
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="u-nickname">별명</label>
-                        <input type="text" id="u-nickname" name="nickname" class="form-control form-control-alternative" value="${member.nickname}">
+                        <input type="text" id="u-nickname" name="nickname" class="form-control form-control-alternative" value="${loginUser.nickname}">
                       </div>
                     </div>
                   </div>
@@ -2227,19 +2227,19 @@ p {
                     <div class="col-lg-5">
                       <div class="form-group focused">
                         <label class="form-control-label" for="u-birthday">생일</label>
-                        <input type="text" id="u-birthday" name="birthday" class="form-control form-control-alternative" value="${member.nickname}">
+                        <input type="text" id="u-birthday" name="birthday" class="form-control form-control-alternative" value="${loginUser.nickname}">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="u-email">이메일</label>
-                        <input type="text" id="u-email" name="email" class="form-control form-control-alternative" value="${member.email}">
+                        <input type="text" id="u-email" name="email" class="form-control form-control-alternative" value="${loginUser.email}">
                       </div>
                     </div>
                     <div class="col-lg-5">
                       <div class="form-group focused">
                         <label class="form-control-label" for="u-tel">번호</label>
-                        <input type="text" id="u-tel" name="tel" class="form-control form-control-alternative" value="${member.tel}">
+                        <input type="text" id="u-tel" name="tel" class="form-control form-control-alternative" value="${loginUser.tel}">
                       </div>
                     </div>
                   </div>

@@ -19,7 +19,7 @@
     <result column="role" property="doctorOrNot"/>
     <result column="point" property="point"/>
     <result column="active" property="active"/>
-    <result column="nicName" property="nicName"/>
+    <result column="nickname" property="nickname"/>
     
     <association property="doctor" javaType="Doctor">
       <id column="doctor_no" property="no"/>
@@ -47,7 +47,7 @@
        m.point,
        m.role,
        m.active,
-       m.nicName,
+       m.nickname,
        d.doctor_no,
        d.major,
        d.license,
@@ -102,7 +102,7 @@
       point,
       role,
       active,
-      nicName
+      nickname
     from
       apus_member
     where 
@@ -124,7 +124,7 @@
       point,
       role,
       active,
-      nicName
+      nickname
     from
       apus_member
     where 
@@ -133,9 +133,9 @@
   
   <insert id="insert" parameterType="member" 
   useGeneratedKeys="true" keyColumn="member_no" keyProperty="no">
-    insert into apus_member(name,id,password,birth,tel,email,photo,sex,point,role,active,nicName)
+    insert into apus_member(name,id,password,birth,tel,email,photo,sex,point,role,active,nickname)
     values(#{name},#{id},password(#{password}),#{birthday},#{tel},#{email},
-     #{photo},#{sex},#{point},#{doctorOrNot},#{active},#{nicName})
+     #{photo},#{sex},#{point},#{doctorOrNot},#{active},#{nickname})
    </insert>
    
    <insert id="insert2" parameterType="member">
@@ -155,7 +155,7 @@
       sex=#{sex},
       point=#{point},
       role=#{doctorOrNot},
-      nicName=#{nicName}
+      nickname=#{nickname}
     where 
       member_no=#{values}
    </update>
@@ -173,7 +173,7 @@
       sex=#{sex},
       point=#{point},
       role=#{doctorOrNot},
-      nicName=#{nicName}
+      nickname=#{nickname}
     where member_no=#{no}
    </update>
   
@@ -200,7 +200,7 @@
       point,
       role,
       active,
-      nicName
+      nickname
     from
       apus_member
     where id=#{id}
@@ -221,7 +221,7 @@
       point,
       role,
       active,
-      nicName
+      nickname
     from
       apus_member
     where name=#{name}
