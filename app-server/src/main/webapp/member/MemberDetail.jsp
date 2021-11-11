@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,6 +97,36 @@
     <input id='f-registeredDate' type="text" readonly class="form-control-plaintext" value="${member.registeredDate}">
   </div>
 </div>
+<c:if test= "${member.doctorOrNot == 2}">
+<div class="mb-3 row">
+  <label for='f-license' class="col-sm-2 col-form-label">자격증</label>
+  <div class="col-sm-6">
+     <input id='f-license' type='text' name='license' class="form-control" value='${member.doctor.license}'>
+  </div>
+</div>
+
+<div class="mb-3 row">
+  <label for='f-major' class="col-sm-2 col-form-label">전공</label>
+  <div class="col-sm-6">
+     <input id='f-major' type='text' name='major' class="form-control" value='${member.doctor.major}'>
+  </div>
+</div>
+
+<div class="mb-3 row">
+  <label for='f-homepage' class="col-sm-2 col-form-label">홈페이지</label>
+  <div class="col-sm-6">
+     <input id='f-homepage' type='text' name='homepage' class="form-control" value='${member.doctor.homepage}'>
+  </div>
+</div>
+
+<div class="mb-3 row">
+  <label for='f-introduce' class="col-sm-2 col-form-label">소개</label>
+  <div class="col-sm-6">
+     <input id='f-introduce' type='text' name='introduce' class="form-control" value='${member.doctor.introduce}'>
+  </div>
+</div>
+
+</c:if>
 <button class="btn btn-primary">변경</button>
 <a href='delete?id=${member.id}' class="btn btn-primary">삭제</a> 
 <a href='list' class="btn btn-primary">목록</a><br>

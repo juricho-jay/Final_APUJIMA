@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +11,22 @@
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../bootstrap/dist/bootstrap.css"></script>
   
-   <script type="text/javascript">
+
+<script>
+ 
+function idCheck(){
+  
+  window.open("idCheckForm.jsp", "idwin", "width=400 height = 350")
+  
+}
+</script>
+
+<script type="text/javascript">
     
         // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
         function checkValue()
         {
-        	
+          
            if(!document.userInfo.grade.value){
                 alert("회원구분을 선택하세요.");
                 return false;
@@ -31,10 +42,21 @@
                 return false;
             } 
             
+         /*  if(!document.userInfo.nicNameDuplication.value != "nicNameCheck"){
+                alert("별명 중복체크를 해주세요.");
+                return false;
+            } 
+         */
+            
             if(!document.userInfo.id.value){
                 alert("아이디를 입력하세요.");
                 return false;
             }
+            
+            if(!document.userInfo.idDuplication.value != "idCheck"){
+                alert("아이디 중복체크를 해주세요.");
+                return false;
+            } 
             
             if(!document.userInfo.password.value){
                 alert("비밀번호를 입력하세요.");
@@ -73,9 +95,6 @@
                 return false;
             } 
         }
-        
- 
-        
     </script>
     
  <script>
@@ -88,6 +107,8 @@ function div_OnOff(v,id){
  }
 }
 </script>
+
+
 
 
   
@@ -116,7 +137,7 @@ function div_OnOff(v,id){
 </div>
 
   <div class="mb-3 row">
-    <label for='f-grade' class="col-sm-3 col-form-label">구분</label>
+    <label for='f-grade' class="col-sm-3 col-form-label">* 구분</label>
     <div class="col-sm-6">
       <input id='member' type='radio' name='grade' value = "1" onclick="div_OnOff(this.value,'con');">
       <label>일반</label>
@@ -132,16 +153,17 @@ function div_OnOff(v,id){
     </div>
 </div>
   <div class="mb-3 row">
-    <label for='f-nickname' class="col-sm-3 col-form-label">* 별명</label>
+    <label for='f-f-nickname' class="col-sm-3 col-form-label">* 별명</label>
     <div class="col-sm-6">
-      <input id='f-nickname' type='text' name='nickname' class="form-control">
+      <input id='f-nickname' type='text' name='nickname'>
+      <input type="button"value="중복체크">
     </div>
 </div>
 <div class="mb-3 row">
     <label for='f-id' class="col-sm-3 col-form-label">* 아이디</label>
     <div class="col-sm-6">
-      <input id='f-id' type='text' name='id' >
-      <input type="button" name = 'idCheck' value="중복체크"> 
+      <input id='f-id' type='text' name='id' placeholder = "ID">
+       <input type="button" value="중복체크" onclick= "idCheck()">  
     </div>
 </div>
 <div class="mb-3 row">
@@ -223,7 +245,7 @@ function div_OnOff(v,id){
     <label for='f-lisence' class="col-sm-3 col-form-label">* 의사 자격증</label>
     <div class="col-sm-6">
      <input id='f-lisence' type='text' name='lisence' >
-      <input type="button" name = 'idCheck' value="찾아보기"> 
+      <input type="button" name = 'lisence' value="찾아보기"> 
     </div>
 </div>
 
@@ -247,18 +269,6 @@ function div_OnOff(v,id){
 
 
 
-<!-- <div class="mb-3 row">
-  <label for='f-photo' class="col-sm-2 col-form-label">성별</label>
-  <div class="col-sm-6">
-  
-    <select id='f-sex' name='sex' class="form-control">
-    <option value = "" placeholder="성별"></option>
-    <option value = "남성">남자</option>
-    <option value = "여성">여자</option>
-    </select>
-    
-  </div>
-</div> -->
 
   <div class="col-12">
     <button class="btn btn-primary btn-sm" >회원 가입</button>
@@ -272,6 +282,12 @@ function div_OnOff(v,id){
 <label for='f-tel'>전화</label> <input id='f-tel' type='tel' name='tel'><br>
 <button>등록</button><br>
 </form>  -->
+
+ 
+
+
+
+
 </body>
 </html>
 
