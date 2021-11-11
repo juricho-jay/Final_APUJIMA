@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-<h1>${loginUser.id}님의 상담신청이력</h1>
+<h1>${loginUser.id}님의 상담신청</h1>
 <table class="table table-hover">
 <thead>
   <tr>
@@ -27,6 +27,7 @@
 
 <tbody>
 <c:forEach items="${counselingList}" var="counseling">
+<c:if test='${loginUser.id eq counseling.counselor.id}'>
 <%-- <c:if test ="${counseling.client.id eq loginUser.id} ">  --%>
 <tr>
   <td>${counseling.no}</td>
@@ -34,6 +35,7 @@
   <td>${counseling.disease}</td>
   <td>${counseling.registeredDate}</td>
 </tr>
+</c:if>
 <%-- </c:if>   --%>
 </c:forEach>
 </tbody>

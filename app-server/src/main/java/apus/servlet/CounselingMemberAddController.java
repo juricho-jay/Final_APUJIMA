@@ -38,30 +38,25 @@ public class CounselingMemberAddController extends HttpServlet{
 
     Counseling counseling = new Counseling();
 
-
-
-    //    String user = request.getParameter("client.name");
-    //    String user2 = request.getParameter("client.phoneNum");
-    //    try {
-    //      Member member = memberDao.findByName(user);
-    //      Member member2 = memberDao.findByTel(user2);
-    //      counseling.setClient(member);
-    //      counseling.setClientTel(member2);
-    //    } catch (Exception e1) {
-    //      // TODO Auto-generated catch block
-    //      e1.printStackTrace();
-    //    }
+    String user = request.getParameter("client.name");
+    String user2 = request.getParameter("client.phoneNum");
+    try {
+      Member member = memberDao.findByName(user);
+      Member member2 = memberDao.findByTel(user2);
+      counseling.setClient(member);
+      counseling.setClientTel(member2);
+    } catch (Exception e1) {
+      e1.printStackTrace();
+    }
     counseling.setDisease(request.getParameter("disease"));
     counseling.setContent(request.getParameter("content"));
 
-    String userGender = request.getParameter("counselor.sex");
     try {
       Collection<Member> memberList1 = memberDao.findDoctor();
-      Collection<Member> memberList2 = memberDao.findWoman();
-      Collection<Member> memberList3 = memberDao.findMan();
       request.setAttribute("memberList", memberList1);
-      request.setAttribute("memberList", memberList2);
-      request.setAttribute("memberList", memberList3);
+      String user1 = request.getParameter("content");
+
+      counseling.setCounselor(user1);
     } catch (Exception e1) {
       e1.printStackTrace();
     }

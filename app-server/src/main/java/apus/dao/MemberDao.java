@@ -15,6 +15,7 @@ public interface MemberDao {
   Member findById(String id) throws Exception;
   Member findByIdPwd(String id, String password) throws Exception;
   Member findByGender(String sex) throws Exception;
+  Member findByTel(String phoneNum) throws Exception;
   void update(Member member) throws Exception;
   void update2(Member member) throws Exception;
   void delete(String id) throws Exception;
