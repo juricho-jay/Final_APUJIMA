@@ -1801,7 +1801,7 @@ col-lg-4 > form-group > gender-middle {
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5" style="float: top !important">
                     <div>
                       <span class="heading">${loginUser.point}</span>
-                      <span class="description">Plants</span>
+                      <span class="description">Points</span>
                     </div>
                     <div>
                       <span class="heading">10</span>
@@ -1854,7 +1854,7 @@ col-lg-4 > form-group > gender-middle {
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="u-username">이름</label>
-                        <input type="text" id="u-username" name="name" class="form-control form-control-alternative" value="${loginUser.name}" readonly>
+                        <input type="text" id="u-username" name="name" class="form-control form-control-alternative" value="${loginUser.name}" style="background-color: white;" readonly >
                       </div>
                     </div>
                       <div class="col-lg-4">
@@ -1906,7 +1906,7 @@ col-lg-4 > form-group > gender-middle {
                 <!-- <hr class="my-4"> -->
                 <!-- Address -->
                 <!-- <h6 class="heading-small text-muted mb-4">Contact information</h6> -->
-                <div class="pl-lg-4">
+                <!-- <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group focused">
@@ -1935,7 +1935,7 @@ col-lg-4 > form-group > gender-middle {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!--<c:if test='${loginUser.doctorOrNot eq "2"}'> -->
                 <hr class="my-4">
                 <!-- Description -->
