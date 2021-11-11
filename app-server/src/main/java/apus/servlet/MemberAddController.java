@@ -76,7 +76,7 @@ public class MemberAddController extends HttpServlet {
       }
 
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
+      response.setHeader("Refresh", "1;url=../index.jsp");
       request.getRequestDispatcher("MemberAdd.jsp").forward(request, response);
 
     } catch (Exception e) {

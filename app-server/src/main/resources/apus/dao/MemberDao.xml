@@ -58,7 +58,7 @@
       left outer join apus_doctor d on m.member_no=d.doctor_no
   </select>
   
-   <select id="findDoctorByMemberNo" resultMap="MemberMap" parameterType ="int">
+   <select id="findByNo" resultMap="MemberMap" parameterType ="int">
     select
        m.member_no,
        m.name,
@@ -116,48 +116,32 @@
     where id=#{id}
   </select>
   
-    <select id="findByNo" resultMap="MemberMap" parameterType="int">
-    select
-      member_no,
-      name,
-      id,
-      password,
-      birth,
-      tel,
-      email,
-      photo,
-      sex,
-      created_dt,
-      point,
-      role,
-      active,
-      nickname
-    from
-      apus_member
-    where 
-      member_no=#{no}
-  </select>
-   
   <select id="findByIdPwd" resultMap="MemberMap" parameterType="map">
-    select
-      member_no,
-      name,
-      id,
-      password,
-      birth,
-      tel,
-      email,
-      photo,
-      sex,
-      created_dt,
-      point,
-      role,
-      active,
-      nickname
+   select
+       m.member_no,
+       m.name,
+       m.id,
+       m.password,
+       m.birth,
+       m.email,
+       m.tel,
+       m.photo,
+       m.sex,
+       m.created_dt,
+       m.point,
+       m.role,
+       m.active,
+       m.nickname,
+       d.doctor_no,
+       d.major,
+       d.license,
+       d.homepage,
+       d.introduction
     from
-      apus_member
+      apus_member m
+      left outer join apus_doctor d on m.member_no=d.doctor_no
     where 
-      id=#{param1} and password=password(#{param2})
+      m.id=#{param1} and m.password=password(#{param2})
   </select>
   
   <insert id="insert" parameterType="member" 
