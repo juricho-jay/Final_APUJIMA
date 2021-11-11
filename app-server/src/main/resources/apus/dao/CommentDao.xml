@@ -37,7 +37,7 @@
       inner join apus_member m on m.member_no=c.member_no
       inner join apus_board b on b.board_no=c.board_no
   </select>
-  
+  <!-- 해당 게시물의 전체 글 목록 -->
   <select id = "findBoardComment" resultMap ="CommentMap" parameterType="int">
     select
       c.comment_no,
@@ -51,6 +51,21 @@
     where 
     board_no=#{no}
   </select> 
+  <!--  수정할 게시물의 "댓글 하나" 만 불러옴. -->
+  <select id = "findOneComment" parameterType="int">
+    select
+      c.comment_no,
+      c.content,
+      c.created_dt,
+      m.member_no,
+      m.id
+    from
+      apus_comment c
+      inner join apus_member m on m.member_no=c.member_no
+    where 
+    board_no=#{no} and c.comment_no=#{no}
+  
+  </select>
  
   
     <insert id="insert" parameterType="comment" 
