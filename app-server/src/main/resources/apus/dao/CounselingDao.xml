@@ -64,13 +64,39 @@
       c.created_dt desc
   </select>
   
-  <update id="update" parameterType="counseling">
+  
+   
+   <select id="findByNo" resultMap="CounselingMap" parameterType="int">
+	  select
+       c.counsel_no,
+       c.disease,
+       c.content,
+       c.created_dt,
+       m.id client_id,
+       m.name client_name,
+       m.member_no client_no,
+       m.email client_email,
+       m.tel client_tel,
+       m.sex client_sex,
+       m.role client_role,
+       m2.member_no counselor_no,
+       m2.name counselor_name,
+       m2.id counselor_id,
+       m2.tel counselor_tel,
+       m2.email counselor_email,
+       m2.sex counselor_sex
+	  from
+	    apus_counseling c
+	    inner join apus_member m on c.client_no=m.member_no
+      inner join apus_member m2 on c.counselor_no=m2.member_no
+	  where counsel_no=#{no}
+  </select>
+  <!-- <update id="update" parameterType="counseling">
     update apus_counseling set
       counselor_name=?????????
     where 
       counsel_no=#{no}
-   </update>
-  
+   </update> -->
   <!--  
 
   

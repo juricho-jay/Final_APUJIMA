@@ -31,7 +31,7 @@
 <%-- <c:if test ="${counseling.client.id eq loginUser.id} ">  --%>
 <tr>
   <td>${counseling.no}</td>
-  <td><a href='detail?no=${counseling.no}'>${counseling.client.name}</a></td> 
+  <td><a href='doctordetail?no=${counseling.no}'>${counseling.client.name}</a></td> 
   <td>${counseling.disease}</td>
   <td>${counseling.registeredDate}</td>
 </tr>
