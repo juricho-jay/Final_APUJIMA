@@ -30,8 +30,6 @@
     <th>화분 이름</th>
     <th>화분 주인</th>
     <th>화분 레벨</th>
-    <th>화분 경험치</th>
-    <th>화분 모양</th>
     <th>화분 생성일</th>
   </tr>
 </thead>
@@ -42,8 +40,6 @@
     <td>${plant.plantName}</td>
     <td><a href='detail?no=${plant.no}'>${plant.ownerName.nickname}</a></td> 
     <td>${plant.level}</td> 
-    <td>${plant.exp}</td> 
-    <td>${plant.shape}</td>
     <td>${plant.registeredDate}</td> 
    
 </tr>

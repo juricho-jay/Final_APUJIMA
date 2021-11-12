@@ -16,8 +16,8 @@ import apus.dao.PlantDao;
 import apus.domain.Member;
 import apus.domain.Plant;
 
-@WebServlet("/plant/delete")
-public class PlantDeleteController extends HttpServlet {
+@WebServlet("/plant/update")
+public class PlantUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   PlantDao plantDao;
@@ -52,6 +52,9 @@ public class PlantDeleteController extends HttpServlet {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
 
+
+
+
       int no = Integer.parseInt(request.getParameter("no"));
       Plant plant = plantDao.findByNo(no);
 
@@ -59,9 +62,13 @@ public class PlantDeleteController extends HttpServlet {
         throw new Exception("해당 식물이 없습니다.");
       }
 
-      plantDao.delete(no);
+
+      String plantName = request.getParameter("plantName");
+
+      plant.setPlantName(plantName);
+      plantDao.update(plant);
       sqlSession.commit();
-      response.sendRedirect("list");
+      request.getRequestDispatcher("/plant/PlantUpdate.jsp").forward(request, response);
 
     }catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
@@ -74,5 +81,3 @@ public class PlantDeleteController extends HttpServlet {
     }
   }
 }
-
-

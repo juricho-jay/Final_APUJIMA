@@ -191,7 +191,7 @@
     where member_no=#{no}
    </update>
    
-   <update id ="pointUpdate" parameterType="int">
+   <update id ="pointUpdate"  parameterType="int">
     update apus_member set
        point=point-30
     where

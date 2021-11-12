@@ -20,6 +20,6 @@ public interface MemberDao {
   void delete(String id) throws Exception;
   Member check(Member member) throws Exception;
   Member findDoctorMajor(Member member) throws Exception;
-  Member pointUpdate(int no) throws Exception;
+  void pointUpdate(int no) throws Exception;
 
 } 

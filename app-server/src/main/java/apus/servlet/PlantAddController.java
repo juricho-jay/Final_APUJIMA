@@ -62,9 +62,9 @@ public class PlantAddController extends HttpServlet {
       plant.setPlantName(request.getParameter("name"));
       plant.setLevel(0);
       plant.setExp(0);
-      plant.setShape("C:\\Users\\Jinhyeon\\Desktop\\git\\Final_APUJIMA\\app-server\\src\\main\\webapp\\img\\saessak.png");
+      plant.setShape("saessak.png");
 
-      member.setPoint(member.getPoint()-30);
+
 
 
       plantDao.insert(plant);
