@@ -17,7 +17,7 @@ import apus.domain.DateCheck;
 import apus.domain.Member;
 
 @WebServlet("/auth/dateCheckList")
-public class DateCheckListController extends HttpServlet{
+public class DateCheckListController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
   DateCheckDao dateCheckDao;
@@ -60,7 +60,7 @@ public class DateCheckListController extends HttpServlet{
       request.setAttribute("dateCheckList", dateCheckList);
 
       // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/auth/UserInfoList.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/auth/dateCheckForm.jsp");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {
