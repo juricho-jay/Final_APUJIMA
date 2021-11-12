@@ -50,31 +50,34 @@
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       backdrop-filter: blur(1.5px);
       -webkit-backdrop-filter: blur(1.5px);
-      border-radius: 10px;
+      border-radius: 3px;
       border: 1px solid rgba(255, 255, 255, 0.18);
     }
     
     #modal .modal-window {
-      background: rgba( 69, 139, 197, 0.70 );
+      background: rgba( 167, 201, 210, 0.70 );
       box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
       backdrop-filter: blur( 13.5px );
       -webkit-backdrop-filter: blur( 13.5px );
-      border-radius: 10px;
+      border-radius: 3px;
       border: 1px solid rgba( 255, 255, 255, 0.18 );
       width: 750px;
       height: 650px;
       position: relative;
       top: -100px;
-      padding: 10px;
+      xpadding: 20px;
     }
     
     #modal .title {
-      padding-left: 10px;
-      display: inline;
-      text-shadow: 1px 1px 2px gray;
-      color: white;
+      xborder: 1px solid gray;
+      padding-left: 20px;
+      padding-top: 20px;
+      height: 50px;
+      xdisplay: inline;
+      xtext-shadow: 1px 1px 2px gray;
+      color: black;
       font-size:20px;
-      
+      float:left;
     }
     
     /* #modal .title h2 {
@@ -86,27 +89,33 @@
     #modal .close-area {
       display: inline;
       float: right;
-      padding-right: 10px;
+      padding-right: 30px;
+      padding-top: 30px;
       cursor: pointer;
-      text-shadow: 1px 1px 2px gray;
-      color: white;
+      xtext-shadow: 1px 1px 2px gray;
+      color: black;
     }
         
      #modal .content {
-      margin-top: 20px;
+     
+      margin-top: 40px;
       padding: 0px 10px;
       text-shadow: 1px 1px 2px gray;
       color: white;
      }
         
       /* 쪽지함 모달안 디자인 */
-      .content {
+      .content-in {
 	    xborder: 1px solid gray;
-	    width: 640px;
+	    width: 700px;
+	    padding:0 20 20 20;
+	    margin: 0 auto;
+	    margin-top:50px;
     }
     .sendbtn {
 	    xborder: 1px solid red;
-	    width: 640px;
+	    xwidth: 640px;
+	    margin-top: 35px;
 	    text-align: center;
 	    
     }
@@ -127,11 +136,13 @@
 	<!-- <a href='MailBoxForm.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br> -->
 <div id="modal" class="modal-overlay">
     <div class="modal-window">
-        <div class="title">
-            쪽지함
+        <div class="box">
+	        <div class="title">
+	            쪽지함
+	        </div>
+	        <div class="close-area">X</div>
         </div>
-        <div class="close-area">X</div>
-        <div class="content">
+        <div class="content-in">
             <form name = "usersend" action='send' method="post" onsubmit="return checkValue()">
 							<div class="content1">
 							  <br>
@@ -147,7 +158,7 @@
 							  <br>
 							  <div class="col-sm-4">
 							      <input id='f-receiver' type='text' name='receiver.id' class="form-control">
-							      <input type="button" name='findId' value="아이디확인">
+							      <!-- <input type="button" name='findId' value="아이디확인"> -->
 							      
 							  </div>
 							  <!-- <textarea id="f-receiver" name="receiver" rows=1 cols=45></textarea>
@@ -166,10 +177,10 @@
 							  <br>
 							  <textarea id="f-content" name="content" rows=5 cols=73 class="form-control">
 							  </textarea>
-							  <br>
+							  <br><hr>
 							</div>
 							<div class="col-12 sendbtn">
-							<button type="submit" class="btn btn-primary btn-sm">보내기</button>
+							<button type="submit" class="btn btn-outline-secondary">보내기</button>
 							  </div>
 							</form>
 							            
