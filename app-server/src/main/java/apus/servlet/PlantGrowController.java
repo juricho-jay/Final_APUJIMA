@@ -89,7 +89,7 @@ public class PlantGrowController extends HttpServlet {
       plantDao.update(plant);
       sqlSession.commit();
 
-      response.sendRedirect("../plant/detail?no =" + plant.getNo());
+      response.sendRedirect("../plant/list");
 
     }catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
