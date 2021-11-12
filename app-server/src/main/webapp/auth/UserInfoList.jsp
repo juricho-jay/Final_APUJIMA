@@ -1827,9 +1827,13 @@ col-lg-4 > form-group > gender-middle {
                   <i class="ni education_hat mr-2"></i>나의 정원
                 </div>
                 <hr class="my-4">
-                <form id="autoDateFinder" action="dateCheckFinder">
-                <button id="autoDateCheck">출석체크</button>
-                </form>
+                
+                
+                <!-- <form id="autoDateFinder" action="dateCheckFinder">
+                <button type="button" onclick="clickDateCheck()">출석 체크지롱ㅇㅅㅇ</button>
+                </form> -->
+                
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#checkModal" style="background-color: #5e72e4 !important;">출석 체크</button>
                   <%-- <c:if test='${not empty dateCheck}'>
                   alert()
                   </c:if> --%>
@@ -1981,13 +1985,43 @@ col-lg-4 > form-group > gender-middle {
     </div>
   </footer>
   
-  
+<!--Modal: 출첵 모달-->
+<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Body-->
+      <div class="modal-body mb-0 p-0">
+        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+          <iframe class="embed-responsive-item" src="dateCheckList"></iframe>
+        </div>
+      </div>
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <!-- <span class="mr-4">Spread the word!</span> -->
+        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Name-->
   
   
   <script>
-  
-  
-  
+
+/*   function clickDateCheck(){
+	  
+	  window.open("dateCheckForm.jsp", "datewin", "width=400 height = 350")
+	  
+	}; */
+	
+	// 추가 모달 버튼에 이벤트를 건다. 
+	$('#openModalBtn').on('click', function(){
+	$('#checkModal').modal('show');
+
+	});
+
   </script>
   
   

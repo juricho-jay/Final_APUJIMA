@@ -11,6 +11,7 @@ import apus.dao.BoardDao;
 import apus.dao.BucketDao;
 import apus.dao.CommentDao;
 import apus.dao.CounselingDao;
+import apus.dao.DateCheckDao;
 import apus.dao.MailBoxDao;
 import apus.dao.MedicineDao;
 import apus.dao.MemberDao;
@@ -39,6 +40,7 @@ public class AppInitListener implements ServletContextListener {
       MedicineDao medicineDao = sqlSession.getMapper(MedicineDao.class);
       CounselingDao counselingDao = sqlSession.getMapper(CounselingDao.class);
       CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
+      DateCheckDao dateCheckDao = sqlSession.getMapper(DateCheckDao.class);
       PlantDao plantDao = sqlSession.getMapper(PlantDao.class);
 
 
@@ -55,6 +57,7 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("medicineDao", medicineDao);
       웹애플리케이션공용저장소.setAttribute("counselingDao", counselingDao);
       웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
+      웹애플리케이션공용저장소.setAttribute("dateCheckDao", dateCheckDao);      
       웹애플리케이션공용저장소.setAttribute("plantDao", plantDao);
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
