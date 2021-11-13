@@ -39,22 +39,56 @@ public class MemberUpdateController extends HttpServlet {
         throw new Exception("해당 번호의 회원이 없습니다.");
       } 
 
+      if (member.getDoctorOrNot() == 1) {
 
-      member.setName(request.getParameter("name"));
-      member.setId(request.getParameter("id"));
-      member.setEmail(request.getParameter("email"));
-      member.setPassword(request.getParameter("password"));
-      member.setPhoto(request.getParameter("photo"));
-      member.setTel(request.getParameter("tel"));
-      member.setSex(request.getParameter("sex"));
+        member.setName(request.getParameter("name"));
+        member.setId(request.getParameter("id"));
+        member.setEmail(request.getParameter("email"));
+        member.setNickname(request.getParameter("nickname"));
+        member.setPhoto(request.getParameter("photo"));
+        member.setTel(request.getParameter("tel"));
+        member.setSex(request.getParameter("sex"));
+        String password = request.getParameter("password");
+        if (password.length() == 0) {
+          memberDao.update2(member);
+          sqlSession.commit();
+        } else {
+          member.setPassword(request.getParameter("password"));
+          memberDao.update(member);
+          sqlSession.commit();
+        }
 
-      memberDao.update2(member);
-      sqlSession.commit();
+      } else if (member.getDoctorOrNot() == 2) {
+
+        member.getDoctor().setMajor(request.getParameter("major"));
+        member.getDoctor().setLicense(request.getParameter("license"));
+        member.getDoctor().setIntroduction(request.getParameter("introduce"));
+        member.getDoctor().setHomepage(request.getParameter("homepage"));
+        member.setName(request.getParameter("name"));
+        member.setId(request.getParameter("id"));
+        member.setEmail(request.getParameter("email"));
+        member.setNickname(request.getParameter("nickname"));
+        member.setPhoto(request.getParameter("photo"));
+        member.setTel(request.getParameter("tel"));
+        member.setSex(request.getParameter("sex"));
+        String password = request.getParameter("password");
+        if (password.length() == 0) {
+          memberDao.doctorUpdate2(member);
+          sqlSession.commit();
+        } else {
+          member.setPassword(request.getParameter("password"));
+          memberDao.doctorUpdate(member);
+          sqlSession.commit();
+        }
+
+
+      }
 
       response.sendRedirect("list");
 
     } catch (Exception e) {
       request.setAttribute("error", e);
+      e.printStackTrace();
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }

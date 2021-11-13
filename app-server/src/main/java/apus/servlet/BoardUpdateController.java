@@ -36,7 +36,7 @@ public class BoardUpdateController extends HttpServlet {
       Board board = boardDao.findByNo(no);
 
       if (board == null) {
-        throw new Exception("해당 번호의 회원이 없습니다.");
+        throw new Exception("해당 번호의 게시글이 없습니다.");
       }
 
       String title = request.getParameter("title");

@@ -14,6 +14,7 @@
     <association property="commenter" javaType="Member">
       <id column="member_no" property="no"/>
       <result column="id" property="id"/>
+      <result column="nickname" property="nickname"/>
     </association>
     
     <association property="commentBoard" javaType="Board">
@@ -31,6 +32,7 @@
       c.created_dt,
       m.member_no,
       m.id,
+      m.nickname,
       b.board_no commentBoard_no
     from
       apus_comment c
@@ -44,7 +46,8 @@
       c.content,
       c.created_dt,
       m.member_no,
-      m.id
+      m.id,
+      m.nickname
     from
       apus_comment c
       inner join apus_member m on m.member_no=c.member_no
@@ -58,7 +61,8 @@
       c.content,
       c.created_dt,
       m.member_no,
-      m.id
+      m.id,
+      m.nickname
     from
       apus_comment c
       inner join apus_member m on m.member_no=c.member_no
@@ -66,6 +70,7 @@
     board_no=#{no} and c.comment_no=#{no}
   
   </select>
+  
  
   
     <insert id="insert" parameterType="comment" 
@@ -82,7 +87,7 @@
   <update id ="update" parameterType="Comment">
 	  update apus_comment set
 	  content=#{content}
-	  where 
+ 	  where 
 	  comment_no=#{no}
   </update>
   

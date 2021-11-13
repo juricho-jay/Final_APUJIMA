@@ -55,6 +55,9 @@
     <a href = "counseling/list"><button class = "Header_counselingList" style = "font-size: 2.0em">상담신청리스트</button></a>
     <a href = "counseling/doctorlist"><button class = "Header_counselingList" style = "font-size: 2.0em">상담요청리스트</button></a>
      <a href = "plant/list"><button class = "Header_anything" style = "font-size: 2.0em">화분</button></a>
+    <c:if test = "${loginUser.doctorOrNot eq 3}">
+     <a href = "admin/AdminList.jsp"><button class = "Header_anything" style = "font-size: 2.0em">관리자</button></a>
+    </c:if>
    </div>
      <table align=center border="1" cellpadding="8" cellspacing="0" bordercolor="#999999">
       <tr>

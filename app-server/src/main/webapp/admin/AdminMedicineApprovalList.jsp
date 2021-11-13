@@ -21,7 +21,7 @@
 </head>
 <body>
 <div class="container">
-<h1>약품 목록</h1>
+<h1>승인 대기 약품 목록</h1>
 <!--  <a href='form' class="btn btn-outline-primary btn-sm">분류</a><br>-->
 <table class="table table-hover">
 <thead>
@@ -32,11 +32,12 @@
     <th>약품 모양</th>
     <th>약품 색상</th>
     <th>약품 효능</th>
+    <th  style = 'text-align: right'>승인관리</th>
   </tr>
 </thead>
 <tbody>
 
-<c:forEach items="${medicineList}" var="medicine">
+<c:forEach items="${medicineApprovalList}" var="medicine">
 <tr>
     <td>${medicine.no}</td>
     <td><a href='detail?no=${medicine.no}'>${medicine.name}</a></td>
@@ -44,26 +45,16 @@
     <td>${medicine.shape}</td> 
     <td>${medicine.color}</td> 
     <td>${medicine.effect}</td> 
+    <td><input type ="button" value ="승인" onclick ="/admin/confirm" ></td>
+    <td><input type ="button" value ="거절" onclick = ""></td>
+    
 </tr>
 </c:forEach>
 </tbody>
 </table>
-<c:if test = "${loginUser.doctorOrNot eq 2}">
-
 <a href='MedicineRequestForm.jsp' class="btn btn-outline-primary btn-sm">약품 등룍 요청</a>
-</c:if>
 </div><!-- .container -->
 
- <script>
-function div_OnOff(v,id){
- // 라디오 버튼 value 값 조건 비교
- if(v == "2"){
-  document.getElementById(id).style.display = ""; // 보여줌
- }else{
-  document.getElementById(id).style.display = "none"; // 숨김
- }
-}
-</script>
 
 </body>
 </html>
