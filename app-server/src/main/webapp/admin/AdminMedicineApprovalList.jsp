@@ -22,6 +22,7 @@
 <body>
 <div class="container">
 <h1>승인 대기 약품 목록</h1>
+
 <!--  <a href='form' class="btn btn-outline-primary btn-sm">분류</a><br>-->
 <table class="table table-hover">
 <thead>
@@ -36,25 +37,35 @@
   </tr>
 </thead>
 <tbody>
-
 <c:forEach items="${medicineApprovalList}" var="medicine">
+<form action = 'confirm'>
 <tr>
     <td>${medicine.no}</td>
-    <td><a href='detail?no=${medicine.no}'>${medicine.name}</a></td>
+    <td>${medicine.name}</td>
+    <input type = "hidden" name = "name" value = "${medicine.name}">
     <td>${medicine.ageLimit}</td> 
     <td>${medicine.shape}</td> 
     <td>${medicine.color}</td> 
     <td>${medicine.effect}</td> 
-    <td><input type ="button" value ="승인" onclick ="/admin/confirm" ></td>
-    <td><input type ="button" value ="거절" onclick = ""></td>
+    <td><input type = "submit" value ='승인'></td>
+    <td><input type = "button" value = "거절"  onclick = "reject(this.form);"></td>
     
 </tr>
+</form>
 </c:forEach>
 </tbody>
 </table>
-<a href='MedicineRequestForm.jsp' class="btn btn-outline-primary btn-sm">약품 등룍 요청</a>
 </div><!-- .container -->
 
+<script>
+
+function reject(frm) {
+	frm.action = "reject";
+	frm.submit();
+	return true;
+}
+
+</script>
 
 </body>
 </html>
