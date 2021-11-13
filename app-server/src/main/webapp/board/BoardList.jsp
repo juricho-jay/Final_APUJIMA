@@ -51,7 +51,7 @@
     </c:if>
     <td><a href='detail?no=${board.no}'>${board.title}</a></td> 
     <td>${board.content}</td> 
-    <td>${board.writer.id}</td> 
+    <td>${board.writer.nickname}</td> 
     <td>${board.registeredDate}</td> 
     <td>${board.viewCount}</td> 
    
