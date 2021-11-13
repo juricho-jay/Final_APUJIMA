@@ -62,9 +62,10 @@
       border-radius: 3px;
       border: 1px solid rgba( 255, 255, 255, 0.18 );
       width: 750px;
-      height: 650px;
       position: relative;
-      top: -100px;
+	    overflow-y: auto;
+	    max-height: 500px;
+      top: 50px;
       xpadding: 20px;
     }
     
@@ -126,29 +127,63 @@
     }
     
     .mail-box {
-      border: 1px solid red;
+      xborder: 1px solid red;
       width: 700px;
       height: 100px;
       margin: 0 auto;
       margin-top:50px;
+      border-left: 0.5em;
+      border-left-style:solid;
+      border-left-color: lightgray;
+      xborder-bottom: 0.1em solid gray;
     }
     
     .box-photo{
-      border: 1px solid blue;
-      width: 50px;
+      xborder: 1px solid blue;
+      width: 100px;
+      height: 100px;
       float: left;
+      padding-left: 20px;
+      padding-top: 20px;
+    }
+    
+    .box-img{
+      xborder: 1px solid blue;
+      width: 60px;
+      height: 60px;
+      float: left;
+      line-height:100px;
+      background:darkgray;
+      border-radius:50%;
+      vertical-align: middle;
+    }
+    
+    .box-id{
+      xborder: 1px solid gray;
+      padding-top: 35px;
+      float: left;
+      margin-left: 35px;
+      font-size: 16px;
     }
     
     .box-title{
-      border: 1px solid gray;
+      xborder: 1px solid skyblue;
+      padding-top: 35px;
       float: left;
+      margin-left: 35px;
+      color:darkgray;
     }
     
     .box-time{
-      border: 1px solid green;
+      xborder: 1px solid green;
       float:right;
       padding-right: 20px;
       padding-top: 35px;
+      
+    }
+    .hr{
+      width: 700px;
+      margin: 0 auto;
     }
     
   </style>
@@ -159,7 +194,7 @@
     
 <body>
 <div class="container">
-	<h1>${loginUser.id}님의 쪽지함</h1>
+	<h1>${loginUser.id}님의 쪽지</h1>
 	<!-- <a href='MailBoxForm.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br> -->
 <div id="modal" class="modal-overlay">
     <div class="modal-window">
@@ -220,17 +255,20 @@
 		  <c:forEach items="${mailBoxList}" var="mailBox">
         <c:if test='${loginUser.id eq mailBox.receiver.id}'>
           <div class="mail-box">
-            <span class="box-photo">${mailBox.receiver.photo}</span> <!-- 이게 될까? -->
-              <div class="box-title">
-                <span class="box-id">${mailBox.sender.id}</span>
-                <a href='detail?no=${mailBox.no}'>${mailBox.title}</a>
-              </div>
+	          <div class="box-photo">
+	            <span class="box-img">${mailBox.receiver.photo}</span> <!-- 이게 될까? -->
+	          </div>
+             <b class="box-id">${mailBox.sender.id}</b>
+             <div class="box-title">
+               <a href='detail?no=${mailBox.no}'>${mailBox.title}</a>
+             </div>
             <span class="box-time">${mailBox.sentTime}</span>
           </div>
+         
         </c:if>
       </c:forEach>
 		</div>
-	<table class="table table-hover">
+	<%-- <table class="table table-hover">
 		<thead>
 		  <tr>
 		    
@@ -250,7 +288,7 @@
 					  
 					  <td>${mailBox.no}</td>
 					  <td>${mailBox.sender.id}</td> 
-					  <%-- <td>${mailBox.receiver.id}</td> --%>
+					  <td>${mailBox.receiver.id}</td>
 					  <td><a href='detail?no=${mailBox.no}'>${mailBox.title}</a></td>
 					  <td>${mailBox.content}</td>
 					  <td>${mailBox.sentTime}</td>
@@ -258,7 +296,7 @@
 				</c:if>
 			</c:forEach>
 		</tbody>
-	</table>
+	</table> --%>
 </div><!-- .container -->
 
 

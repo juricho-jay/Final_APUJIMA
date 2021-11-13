@@ -16,8 +16,9 @@ import apus.dao.MemberDao;
 import apus.domain.Comment;
 import apus.domain.Member;
 
-@WebServlet("/comment/update")
-public class CommentUpdateController extends HttpServlet {
+
+@WebServlet("/board/CommentUpdateForm")
+public class CommentUpdateFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   BoardDao boardDao;
   MemberDao memberDao;
@@ -61,12 +62,12 @@ public class CommentUpdateController extends HttpServlet {
       //해당 코멘트 하나만 찾아야함.
 
       Comment comment = commentDao.findByNo(no);
-      comment.setContent(request.getParameter("content"));
-      commentDao.update(comment);
-      sqlSession.commit();
+      if (comment == null) {
+        throw new Exception("해당 댓글이 없습니다.");
+      }
 
       request.setAttribute("comment", comment);
-      response.sendRedirect("../board/list");
+      request.getRequestDispatcher("/board/CommentUpdateForm.jsp").forward(request, response);
 
     }  
     catch (Exception e) {

@@ -77,7 +77,7 @@
 <div class="mb-3 row">
     <label for='f-content' class="col-sm-3 col-form-label">작성자</label>
     <div class="col-sm-6">
-     <input id='f-id' type='text' name='writer' class="form-control" placeholder='${loginUser.id}' readonly>
+     <input id='f-id' type='text' name='writer' class="form-control" placeholder='${member.writer.nickname}' readonly>
     </div>
 </div>
 

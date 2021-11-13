@@ -69,8 +69,8 @@
  </tr>
   <tr>
       <td>작성자</td>
-      <td>${board.writer.id}</td>
-      <td><input id = "writer"  type ="hidden" name = "writer" value ="${board.writer.id}"></td>
+      <td>${board.writer.nickname}</td>
+      <td><input id = "writer"  type ="hidden" name = "writer" value ="${board.writer.nickname}"></td>
   </tr>
   <tr>
   
@@ -92,38 +92,15 @@
    </tr>
    <tr>
    <td>
-<a href= 'updateForm?no=${board.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
-<a href= 'delete?no=${board.no}' class="btn btn-primary" >삭제</a>
+   <c:if test = "${board.writer.id == loginUser.id}">
+   <a href= 'updateForm?no=${board.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
+   <a href= 'delete?no=${board.no}' class="btn btn-primary" >삭제</a>
+   </c:if>
+
 <a href= 'report' class= "btn btn-primary">신고</a>
    </td>
    </tr>
-      <!--  
-      <tr>
-      <!-- 아이디, 작성날짜 -- >
-      <td width = "150">
-      <div>
-        ${comment.commenter}<br>
-        <font size = "2" color ="lightgray">${comment.registeredDate}</font>
-      </div>
-      </td>
-      
-      <!-- 본문내용 -- >
-      <td width ="550">
-        <div class="text_wrapper">
-          ${comment.content}
-        </div>
-       </td>
-       
-       <!-- 버튼 -- >
-       <td width ="100">
-        <div id ="btn" style ="text-align:center;">
-          <a href ="#">[답변]</a><br>
-        <c:if test ="${comment.commenter == loginUser.id} ">   
-          <a href ="#">[수정]</a><br>
-          <a href= "#">[삭제]]</a>
-          </c:if> 
-          </div>
-          -->
+    
           
   </tbody>
 
@@ -149,21 +126,30 @@
     <tbody>
       <c:forEach items ="${commentList}" var= "comment">
     <tr>
-       <td> ${comment.commenter.id }</td>
+       <td> ${comment.commenter.nickname}</td>
       <td> ${comment.content}</td>
       <td> ${comment.registeredDate}</td>
     </tr>
-      </c:forEach>
-      
-  
+     
+        <tr>
+      <c:if test ="${comment.commenter.id == loginUser.id}">
+     
+   <td>
+   <div align="right">
+   <a href= 'CommentUpdateForm?no=${comment.no}' class="btn btn-primary right" onclick = "return checkVaild()">댓글 수정</a>
+   <a href= 'comment/delete?no=${comment.no}' class="btn btn-primary right"  >댓글 삭제</a>
+      </div>
+      </td>
+      </c:if>
+      </tr>
+   </c:forEach>
       <tr>
       
         <td style ="width : 80%">좋아요</td>
         <td><input type = "button" value ="❤" ></td>
      
       </tr> 
-      
-      
+
       </tbody>
       </table>
    </form>
