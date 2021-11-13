@@ -22,6 +22,16 @@
 <body>
 <div class="container">
 <h1>약품 목록</h1>
+<c:if test = "${loginUser.doctorOrNot eq 2}">
+
+<a href='MedicineRequestForm.jsp' class="btn btn-outline-primary btn-sm">약품 등룍 요청</a>
+</c:if>
+
+<c:if test = "${loginUser.doctorOrNot eq 3}">
+
+<a href='MedicineForm.jsp' class="btn btn-outline-primary btn-sm">약품 등록</a>
+</c:if>
+
 <!--  <a href='form' class="btn btn-outline-primary btn-sm">분류</a><br>-->
 <table class="table table-hover">
 <thead>
@@ -48,22 +58,8 @@
 </c:forEach>
 </tbody>
 </table>
-<c:if test = "${loginUser.doctorOrNot eq 2}">
 
-<a href='MedicineRequestForm.jsp' class="btn btn-outline-primary btn-sm">약품 등룍 요청</a>
-</c:if>
 </div><!-- .container -->
-
- <script>
-function div_OnOff(v,id){
- // 라디오 버튼 value 값 조건 비교
- if(v == "2"){
-  document.getElementById(id).style.display = ""; // 보여줌
- }else{
-  document.getElementById(id).style.display = "none"; // 숨김
- }
-}
-</script>
 
 </body>
 </html>

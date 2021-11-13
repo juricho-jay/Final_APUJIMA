@@ -41,7 +41,7 @@
       apus_medicine c
       left outer join apus_member m on c.member_no=m.member_no
     order by
-      c.name asc
+      c.medicine_no asc
   </select>
   
   <select id="findActive" resultMap="MedicineMap">
@@ -58,7 +58,7 @@
     where
       c.active = 1
     order by
-      c.name asc
+      c.medicine_no asc
   </select>
   
   <select id="findRequest" resultMap="MedicineMap">
@@ -83,8 +83,8 @@
   
 	<insert id="insert" parameterType="medicine"
 	useGeneratedKeys="true" keyColumn="medicine_no" keyProperty="no">
-	 insert into apus_medicine(name,age,shape,color,effect,active,confirm,member_no) 
-	 values(#{name},#{ageLimit},#{shape},#{color},#{effect},#{active},#{check},#{requester.no})
+	 insert into apus_medicine(name,age,shape,color,effect,active,confirm) 
+	 values(#{name},#{ageLimit},#{shape},#{color},#{effect},#{active},#{check})
 	</insert>
 
 	 <delete id="delete" parameterType="string">
@@ -140,6 +140,20 @@
     apus_medicine
   where 
     name=#{name}
+  </select>
+  
+  <select id="findByNo" resultMap="MedicineMap" parameterType="int">
+  select
+    medicine_no,
+    name,
+    age,
+    shape,
+    color,
+    effect
+  from 
+    apus_medicine
+  where 
+    medicine_no=#{no}
   </select>
   
   <select id="findByKeyword" resultMap="MedicineMap" parameterType="string">

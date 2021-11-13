@@ -1,20 +1,19 @@
 package apus.servlet;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.MedicineDao;
 import apus.domain.Medicine;
 
-@WebServlet("/admin/confirm")
-public class AdminMedicineConfirmController extends HttpServlet {
+@WebServlet("/medicine/delete")
+public class MedicineDeleteController extends HttpServlet{
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
@@ -28,30 +27,24 @@ public class AdminMedicineConfirmController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    try {
 
+    try {
       String name = request.getParameter("name");
       Medicine medicine = medicineDao.findByName(name);
+      if (medicine == null) {
+        throw new Exception("해당 아이디의 회원이 없습니다.");
+      }
 
-      medicineDao.requestApprove(medicine);
+      medicineDao.delete(name);
       sqlSession.commit();
 
-
-      // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("approvalMedicine");
-      요청배달자.forward(request, response);
+      response.sendRedirect("list");
 
     } catch (Exception e) {
-      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
-      e.printStackTrace();
-
-      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
-
 }

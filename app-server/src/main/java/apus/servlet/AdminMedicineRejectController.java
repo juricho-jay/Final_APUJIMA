@@ -13,8 +13,8 @@ import org.apache.ibatis.session.SqlSession;
 import apus.dao.MedicineDao;
 import apus.domain.Medicine;
 
-@WebServlet("/admin/confirm")
-public class AdminMedicineConfirmController extends HttpServlet {
+@WebServlet("/admin/reject")
+public class AdminMedicineRejectController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
@@ -32,10 +32,12 @@ public class AdminMedicineConfirmController extends HttpServlet {
       throws ServletException, IOException {
     try {
 
+      System.out.println("실행됨");
       String name = request.getParameter("name");
+      System.out.println(name);
       Medicine medicine = medicineDao.findByName(name);
 
-      medicineDao.requestApprove(medicine);
+      medicineDao.requestCancle(medicine);
       sqlSession.commit();
 
 
