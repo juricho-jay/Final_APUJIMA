@@ -179,9 +179,21 @@ form fieldset a:hover { text-decoration: underline; }
 
       <p><input type="password" name = 'password' placeholder="Password"></p>
 
+		    <div class="mb-3">
+		      <div class="form-check">
+		        <input type="checkbox" class="form-check-input" id="dropdownCheck">
+		        <label class="form-check-label" for="dropdownCheck">
+		          Remember me
+		        </label>
+		      </div>
+		    </div>
+
+
       <p><a href="#">아이디/패스워드 찾기</a></p>
 
       <p><input type="submit" value="Login"></p>
+      
+    
      
     </fieldset>
 

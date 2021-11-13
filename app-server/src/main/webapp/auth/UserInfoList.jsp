@@ -1612,7 +1612,7 @@ textarea[resize='horizontal'] {
       opacity: 0;
     }
   }
-}
+/* } */
 @media (max-width: 767.98px) {
   .navbar-nav .nav-link {
     padding: .625rem 0;
@@ -1719,17 +1719,18 @@ col-lg-4 > form-group > gender-middle {
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
           <li class="nav-item dropdown">
-            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link pr-0" role="button" data-toggle="dropdown" >
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
                   <img alt="Image placeholder" src="../img/ruby.jpg">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <p class="mb-0 text-sm font-weight-bold">${loginUser.nickname}</p>
+                  <button type="button" id="dropdownBtn1" class="btn btn-secondary dropdown-toggle" style="background-color: transparent;"
+                  data-bs-toggle="dropdown" aria-expanded="false">${loginUser.nickname}</button>
                 </div>
               </div>
             </a>
-            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" aria-labelledby="dropdownBtn1">
               <div class=" dropdown-header noti-title">
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
@@ -1760,7 +1761,7 @@ col-lg-4 > form-group > gender-middle {
       </div>
     </nav>
     <!-- Form : member update -->
-  
+    <form id="member-detail" action="userUpdate">
     <input type="hidden" name="no" value="${loginUser.no}">
     <!-- Header -->
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image:); background-size: cover; background-position: center top;">
@@ -1772,7 +1773,7 @@ col-lg-4 > form-group > gender-middle {
           <div class="col-lg-7 col-md-10">
             <h1 class="display-2 text-white">Hello <b>${loginUser.nickname}</b></h1>
             <p class="text-white mt-0 mb-5">개인 정보 페이지입니다. 개인 정보를 수정하거나 쪽지, 게시글, 화분을 확인할 수 있습니다.</p>
-            <button type="button" class="btn btn-info" onclick="$(#submitBtn).trigger('click');">정보 수정</button>
+            <button type="submit" class="btn btn-info">정보 수정</button>
           </div>
         </div>
       </div>
@@ -1793,8 +1794,8 @@ col-lg-4 > form-group > gender-middle {
             </div>
             <div class="card-header text-center border-0">
               <div class="justify-content-between">
-                <!-- <a href="../mailbox/list" class="btn btn-sm btn-info mr-4" style="float: left">쪽지함</a> -->
-                <!-- <a href="#" class="btn btn-sm btn-default" style="float: middle; margin-top: 80px;">수정</a> -->
+                <a href="../mailbox/list" class="btn btn-sm btn-info mr-4" style="float: left">쪽지함</a>
+                <a href="#" class="btn btn-sm btn-default" style="float: middle; margin-top: 80px;">수정</a>
               </div>
             </div>
             <div class="card-body pt-0 pt-md-4">
@@ -1847,14 +1848,13 @@ col-lg-4 > form-group > gender-middle {
             <div class="card-header bg-white border-0">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">My account</h3>
+                  <h3 class="mb-0">${loginUser.nickname} 계정</h3>
                 </div>
                 <div class="col-4 text-right">
                   <!-- <a href="#!" class="btn btn-sm btn-primary">Settings</a> -->
                 </div>
               </div>
             </div>
-            <form id="member-detail" action="userUpdate">
             <div class="card-body">
                 <h6 class="heading-small text-muted mb-4">내 정보</h6>
                 <div class="pl-lg-4">
@@ -1952,6 +1952,7 @@ col-lg-4 > form-group > gender-middle {
                 <hr class="my-4">
                 <!-- Description -->
                 <h6 class="heading-small text-muted mb-4">의사 정보</h6>
+                <div class="pl-lg-4" style="padding-right: 24px">
                   <div class="form-group focused">
                     <label class="form-control-label" for="u-license">면허</label>
                     <input name="license" class="form-control form-control-alternative" value="${member.doctor.license}">
@@ -1959,6 +1960,7 @@ col-lg-4 > form-group > gender-middle {
                   <div class="form-group focused">
                     <label class="form-control-label" for="u-major">전공</label>
                     <input name="major" class="form-control form-control-alternative" value="${member.doctor.major}">
+                  </div>
                   <div class="form-group focused">
                     <label class="form-control-label" for="u-homepage">홈페이지</label>
                     <input name="homepage" class="form-control form-control-alternative" value="${member.doctor.homepage}">
@@ -1966,16 +1968,15 @@ col-lg-4 > form-group > gender-middle {
                   <div class="form-group focused">
                     <label class="form-control-label" for="u-introduction">소개</label>
                     <input name="introduction" class="form-control form-control-alternative" value="${member.doctor.introduction}">
-                    <button type="submit" id= "submitBtn">form 서브밋</button>
                   </div>
                 </div>
                 </c:if>
             </div>
-          </form> <!-- form id:member detail -->
           </div>
         </div>
       </div>
     </div>
+          </form> <!-- form id:member detail -->
   </div> <!--  main content  -->
   <footer class="footer">
     <div class="row align-items-center justify-content-xl-between">
@@ -1989,7 +1990,7 @@ col-lg-4 > form-group > gender-middle {
   
 <!--Modal: 출첵 모달-->
 <div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-md" role="document">
     <!--Content-->
     <div class="modal-content">
       <!--Body-->

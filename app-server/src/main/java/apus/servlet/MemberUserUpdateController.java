@@ -53,7 +53,7 @@ public class MemberUserUpdateController extends HttpServlet {
       member.setTel(request.getParameter("tel"));
 
       if (member.getDoctorOrNot() == 2) {
-        //        doctor.setMajor(request.getParameter("major"));
+        doctor.setMajor(request.getParameter("major"));
         doctor.setHomepage(request.getParameter("homepage"));
         doctor.setLicense(request.getParameter("license"));
         doctor.setIntroduction(request.getParameter("introduction"));
