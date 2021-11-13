@@ -82,11 +82,6 @@ public class MemberUpdateController extends HttpServlet {
         }
 
 
-
-
-        memberDao.update(member);
-        sqlSession.commit();
-
       }
 
       response.sendRedirect("list");

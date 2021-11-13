@@ -20,26 +20,32 @@
                 alert("약품 이름을 작성해 주세요.");
                 return false;
             }
+           
+           if(!document.medicineRequest.age.value){
+               alert("권장 연령을 작성해 주세요.");
+               return false;
+           }
+           
+           
+           if(!document.medicineRequest.shape.value){
+               alert("약품 모양을 작성해 주세요.");
+               return false;
+           }
+           
+           if(!document.medicineRequest.color.value){
+               alert("약품 색상을 작성해 주세요.");
+               return false;
+           }
+           
+           if(!document.medicineRequest.effect.value){
+               alert("약품 효능을 작성해 주세요.");
+               return false;
+           }
           
         }
         
- 
-        
     </script>
-    
- <script>
-function div_OnOff(v,id){
- // 라디오 버튼 value 값 조건 비교
- if(v == "2"){
-  document.getElementById(id).style.display = ""; // 보여줌
- }else{
-  document.getElementById(id).style.display = "none"; // 숨김
- }
-}
-</script>
 
-
-  
   <style>
   .container {
     xborder: 1px solid red;
@@ -72,27 +78,28 @@ function div_OnOff(v,id){
     </div>
 </div>
 
+
 <div class="mb-3 row">
-    <label for='m-age' class="col-sm-3 col-form-label">권장 연령</label>
+    <label for='m-age' class="col-sm-3 col-form-label">* 권장 연령</label>
     <div class="col-sm-6">
-      <input id='m-age' type='text' name='age' >
-      <input type="button" name = 'idCheck' value="중복체크"> 
+      <input id='m-age' type='text' name='age' class="form-control" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');"/>
     </div>
 </div>
+
 <div class="mb-3 row">
-  <label for='m-shape' class="col-sm-3 col-form-label">약품 모양</label>
+  <label for='m-shape' class="col-sm-3 col-form-label">* 약품 모양</label>
   <div class="col-sm-6">
     <input id='m-shape' type='text' name='shape' class="form-control">
   </div>
 </div>
 <div class="mb-3 row">
-  <label for='m-color' class="col-sm-3 col-form-label">약품 색상</label>
+  <label for='m-color' class="col-sm-3 col-form-label">* 약품 색상</label>
   <div class="col-sm-6">
     <input id='m-color' type='text' name='color' class="form-control">
   </div>
 </div>
 <div class="mb-3 row">
-    <label for='m-effect' class="col-sm-3 col-form-label">약품 효능</label>
+    <label for='m-effect' class="col-sm-3 col-form-label">* 약품 효능</label>
     <div class="col-sm-6">
       <input id='m-effect' type='text' name='effect' class="form-control">
     </div>
@@ -121,13 +128,23 @@ function div_OnOff(v,id){
 
 </form>
 </div><!-- .container -->
-<!-- <label for='f-name'>이름</label> <input id='f-name' type='text' name='name'><br>
-<label for='f-email'>이메일</label> <input id='f-email' type='email' name='email'><br>
-<label for='f-password'>암호</label> <input id='f-password' type='password' name='password'><br>
-<label for='f-photo'>사진</label> <input id='f-photo' type='text' name='photo'><br>
-<label for='f-tel'>전화</label> <input id='f-tel' type='tel' name='tel'><br>
-<button>등록</button><br>
-</form>  -->
+
+<!--  
+<script>
+$(document).on("keyup", "input[age]", function() {
+    var val= $(this).val();
+    if(val.replace(/[0-9]/g, "").length > 0) {
+        alert("숫자만 입력해 주십시오.");
+        $(this).val('');
+    }
+    if(val < 1 || val > 100) {
+        alert("1~100 범위로 입력해 주십시오.");
+        $(this).val('');
+    }
+});
+</script>
+-->
+
 </body>
 </html>
 

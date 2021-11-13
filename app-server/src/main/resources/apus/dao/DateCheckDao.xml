@@ -37,7 +37,7 @@
    apus_attendance a
    inner join apus_member m on a.attendee=m.member_no
   order by
-   member_no asc
+   m.member_no asc
   </select>
   
   <select id="findByMemberAndDate" resultMap = "DateCheckMap" parameterType="int">
@@ -50,7 +50,7 @@
    apus_attendance a
    inner join apus_member m on a.attendee=m.member_no
   where date_format(attendance_dt, "%Y-%m-%d") = CURDATE()
-   and member_no=#{no}
+   and m.member_no=#{attendanceNo}
   </select> 
   
   

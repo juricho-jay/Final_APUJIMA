@@ -74,7 +74,6 @@ public class DateCheckAddController extends HttpServlet {
 
       // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      e.printStackTrace();
       요청배달자.forward(request, response);
 
     }
