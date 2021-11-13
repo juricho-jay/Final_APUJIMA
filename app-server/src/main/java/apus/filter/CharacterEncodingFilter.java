@@ -20,6 +20,6 @@ public class CharacterEncodingFilter implements Filter {
 
     // 다음 필터 또는 서블릿 실행
     chain.doFilter(request, response);
+
   }
 }
-
