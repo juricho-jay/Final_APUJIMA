@@ -1759,6 +1759,9 @@ col-lg-4 > form-group > gender-middle {
         </ul>
       </div>
     </nav>
+    <!-- Form : member update -->
+  
+    <input type="hidden" name="no" value="${loginUser.no}">
     <!-- Header -->
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image:); background-size: cover; background-position: center top;">
       <!-- Mask -->
@@ -1769,7 +1772,7 @@ col-lg-4 > form-group > gender-middle {
           <div class="col-lg-7 col-md-10">
             <h1 class="display-2 text-white">Hello <b>${loginUser.nickname}</b></h1>
             <p class="text-white mt-0 mb-5">개인 정보 페이지입니다. 개인 정보를 수정하거나 쪽지, 게시글, 화분을 확인할 수 있습니다.</p>
-            <a href="#!" class="btn btn-info">정보 수정</a>
+            <button type="button" class="btn btn-info" onclick="$(#submitBtn).trigger('click');">정보 수정</button>
           </div>
         </div>
       </div>
@@ -1790,8 +1793,8 @@ col-lg-4 > form-group > gender-middle {
             </div>
             <div class="card-header text-center border-0">
               <div class="justify-content-between">
-                <a href="../mailbox/list" class="btn btn-sm btn-info mr-4" style="float: left">쪽지함</a>
-                <a href="#" class="btn btn-sm btn-default" style="float: middle; margin-top: 80px;">수정</a>
+                <!-- <a href="../mailbox/list" class="btn btn-sm btn-info mr-4" style="float: left">쪽지함</a> -->
+                <!-- <a href="#" class="btn btn-sm btn-default" style="float: middle; margin-top: 80px;">수정</a> -->
               </div>
             </div>
             <div class="card-body pt-0 pt-md-4">
@@ -1829,10 +1832,6 @@ col-lg-4 > form-group > gender-middle {
                 <hr class="my-4">
                 
                 
-                <!-- <form id="autoDateFinder" action="dateCheckFinder">
-                <button type="button" onclick="clickDateCheck()">출석 체크지롱ㅇㅅㅇ</button>
-                </form> -->
-                
                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#checkModal" style="background-color: #5e72e4 !important;">출석 체크</button>
                   <%-- <c:if test='${not empty dateCheck}'>
                   alert()
@@ -1855,15 +1854,19 @@ col-lg-4 > form-group > gender-middle {
                 </div>
               </div>
             </div>
+            <form id="member-detail" action="userUpdate">
             <div class="card-body">
-              <form class="supposedToSubmitForm">
                 <h6 class="heading-small text-muted mb-4">내 정보</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="u-username">이름</label>
-                        <input type="text" id="u-username" name="name" class="form-control form-control-alternative" value="${loginUser.name}" style="background-color: white;" readonly >
+                        <input type="text" id="u-username" name="name" class="form-control form-control-alternative" value="${loginUser.name}" style="background-color: #f7f7f7;" readonly >
+                      </div>
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="u-username">아이디</label>
+                        <input type="text" id="u-id" name="id" class="form-control form-control-alternative" value="${loginUser.id}" style="background-color: #f7f7f7;" readonly >
                       </div>
                     </div>
                       <div class="col-lg-4">
@@ -1895,7 +1898,7 @@ col-lg-4 > form-group > gender-middle {
                     <div class="col-lg-5">
                       <div class="form-group focused">
                         <label class="form-control-label" for="u-birthday">생일</label>
-                        <input type="text" id="u-birthday" name="birthday" class="form-control form-control-alternative" value="${loginUser.birthday}">
+                        <input type="text" id="u-birthday" name="birthday" class="form-control form-control-alternative" value="${loginUser.birthday}" style="background-color: #f7f7f7;" readonly>
                       </div>
                     </div>
                     <div class="col-lg-6">
@@ -1945,36 +1948,35 @@ col-lg-4 > form-group > gender-middle {
                     </div>
                   </div>
                 </div> -->
-                <!--<c:if test='${loginUser.doctorOrNot eq "2"}'> -->
+                <c:if test='${loginUser.doctorOrNot eq "2"}'>
                 <hr class="my-4">
                 <!-- Description -->
                 <h6 class="heading-small text-muted mb-4">의사 정보</h6>
-                <div class="pl-lg-4">
                   <div class="form-group focused">
                     <label class="form-control-label" for="u-license">면허</label>
-                    <textarea rows="1" class="form-control form-control-alternative">${member.doctor.license}</textarea>
+                    <input name="license" class="form-control form-control-alternative" value="${member.doctor.license}">
                   </div>
                   <div class="form-group focused">
-                    <label class="form-control-label" for="u-license">전공</label>
-                    <textarea rows="1" class="form-control form-control-alternative">${member.doctor.major}</textarea>
+                    <label class="form-control-label" for="u-major">전공</label>
+                    <input name="major" class="form-control form-control-alternative" value="${member.doctor.major}">
+                  <div class="form-group focused">
+                    <label class="form-control-label" for="u-homepage">홈페이지</label>
+                    <input name="homepage" class="form-control form-control-alternative" value="${member.doctor.homepage}">
                   </div>
                   <div class="form-group focused">
-                    <label class="form-control-label" for="u-license">홈페이지</label>
-                    <textarea rows="1" class="form-control form-control-alternative">${member.doctor.homepage}</textarea>
-                  </div>
-                  <div class="form-group focused">
-                    <label class="form-control-label" for="u-license">소개</label>
-                    <textarea rows="4" class="form-control form-control-alternative">${member.doctor.introduction}</textarea>
+                    <label class="form-control-label" for="u-introduction">소개</label>
+                    <input name="introduction" class="form-control form-control-alternative" value="${member.doctor.introduction}">
+                    <button type="submit" id= "submitBtn">form 서브밋</button>
                   </div>
                 </div>
-                 <!-- </c:if> -->
-              </form>
+                </c:if>
             </div>
+          </form> <!-- form id:member detail -->
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </div> <!--  main content  -->
   <footer class="footer">
     <div class="row align-items-center justify-content-xl-between">
       <div class="col-xl-6 m-auto text-center">
@@ -1987,7 +1989,7 @@ col-lg-4 > form-group > gender-middle {
   
 <!--Modal: 출첵 모달-->
 <div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <!--Content-->
     <div class="modal-content">
       <!--Body-->

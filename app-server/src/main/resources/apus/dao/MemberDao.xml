@@ -88,7 +88,7 @@
   </select>
   
 
-    <select id="findDoctor" resultMap="MemberMap">
+  <select id="findDoctor" resultMap="MemberMap">
     select * from apus_member where role = 2;
   </select>
   
@@ -98,9 +98,8 @@
       left outer join apus_doctor d on m.member_no=d.doctor_no
     where
       name=#{name};
-    
   </select>
- 
+
   <select id="findMan" resultMap="MemberMap">
     select * from apus_member where role = 2 and sex = '남';
   </select>
@@ -176,19 +175,25 @@
    
       <!-- 멤버 정보 변경하는 일 외에는 update2를 써야
    비밀번호가 변경되지 않음!! -->
-   <update id="update2" parameterType="member">
-    update apus_member set
-      name=#{name},
-      id=#{id},
-      birth=#{birthday},
-      tel=#{tel},
-      email=#{email},
-      photo=#{photo},
-      sex=#{sex},
-      point=#{point},
-      role=#{doctorOrNot},
-      nickname=#{nickname}
-    where member_no=#{no}
+ <update id="update2" parameterType="member">
+    update apus_member m
+     left join apus_doctor d on m.member_no=d.doctor_no set
+      m.name=#{name},
+      m.id=#{id},
+      m.birth=#{birthday},
+      m.tel=#{tel},
+      m.email=#{email},
+      m.photo=#{photo},
+      m.sex=#{sex},
+      m.point=#{point},
+      m.role=#{doctorOrNot},
+      m.nickname=#{nickname},
+      d.major=#{doctor.major},
+      d.license=#{doctor.license},
+      d.homepage=#{doctor.homepage},
+      d.introduction=#{doctor.introduction}
+    where
+      m.member_no=#{no}
    </update>
    
    <update id ="pointUpdate"  parameterType="int">
