@@ -4,31 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>상담신청보내기</title>
-  
-  
+  <title>화분 이름 수정</title>
 </head>
 <body>
-<h1>상담신청보내기결과(MVC)</h1>
-<p>상담신청서를 전송했습니다.</p>
+<h1>화분 이름을 수정했습니다.</h1>
+<p>화분 이름을 수정했습니다.</p>
+
+<a href = 'list'>목록</a>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

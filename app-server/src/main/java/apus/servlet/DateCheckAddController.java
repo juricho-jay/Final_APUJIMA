@@ -1,7 +1,6 @@
 package apus.servlet;
 
 import java.io.IOException;
-import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -29,6 +28,7 @@ public class DateCheckAddController extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     dateCheckDao = (DateCheckDao) 웹애플리케이션공용저장소.getAttribute("dateCheckDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
@@ -50,22 +50,18 @@ public class DateCheckAddController extends HttpServlet {
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
     DateCheck dateCheck = new DateCheck();
-    Date today = new Date();
 
     member.setPoint(member.getPoint() + 30);
 
     dateCheck.setAttendee(member);
-    dateCheck.setDate(today);
-
 
     try {
-      memberDao.insert(member);
+      memberDao.update2(member);
       dateCheckDao.insert(dateCheck);
 
-
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=/auth/userInfo");
-      request.getRequestDispatcher("UserInfoList.jsp").forward(request, response);
+      //      response.setHeader("Refresh", "1;url=userInfoList");
+      request.getRequestDispatcher("dateCheckPro.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

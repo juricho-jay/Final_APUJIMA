@@ -1,169 +1,104 @@
 package apus.servlet;
 
-import java.util.List;
+import java.io.IOException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.MemberDao;
 import apus.dao.PlantDao;
 import apus.domain.Member;
 import apus.domain.Plant;
-import util.Prompt;
 // Line 61 : null.
-public class PlantGrowController implements Command {
+
+@WebServlet("/plant/grow")
+public class PlantGrowController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
+
   PlantDao plantDao;
   MemberDao memberDao;
   SqlSession sqlSession;
 
 
-  public PlantGrowController(PlantDao plantDao , MemberDao memberDao, SqlSession sqlSession) {
-    this.plantDao = plantDao;
-    this.memberDao = memberDao;
-    this.sqlSession = sqlSession;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+    plantDao = (PlantDao) 웹애플리케이션공용저장소.getAttribute("plantDao");
   }
 
-  @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("[화분 물주기] 페이지입니다.");
-    int count = 0;
-    int plusExp = 130;
-    String loginUser = AuthLoginHandler.getLoginUser().getId();
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    Member member = memberDao.findById(loginUser);
+    HttpSession session = request.getSession(false);
 
-    if(member.getPoint() < 30) {
-      System.out.println("포인트가 부족하여 물을 줄 수 없습니다.");
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/apus/index.jsp");
       return;
     }
 
-    List<Plant> plantList = plantDao.findAll();
 
-    if (plantList == null) {
-      System.out.println("화분이 존재하지 않습니다.");
-      return;
-    }
+    try {
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
-    for (Plant plant : plantList) {
-      if(plant.getOwnerName().getId().equals(loginUser)) {
-        System.out.printf("화분 이름: %s\n", plant.getPlantName());
-        System.out.printf("화분 누적 경험치: %d\n", plant.getExp());
-        System.out.printf("화분 레벨: %d\n", plant.getLevel());
-        System.out.printf("화분 모양: %s\n", plant.getShape());
-        System.out.printf("화분 생성일: %s\n", plant.getRegisteredDate());
-        System.out.println();
-        count++;
-      }
-    }
-
-    if (count == 0) {
-      System.out.println("화분이 존재하지 않습니다.");
-    }
-
-    int count2 = 0;
-    String name = "";
-    Plant growPlant = null;
-    while (true) {
-      name = Prompt.inputString("물을 줄 화분의 이름> ");
-
-      for (int i = 0; i < plantList.size(); i++) {
-        if (plantList.get(i).getOwnerName().getId().equals(loginUser) &&
-            plantList.get(i).getPlantName().equals(name)) {
-          growPlant = plantList.get(i);
-          count2++;
-          break;
-        }
+      if(member == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
       }
 
-      if (count2 == 0) {
-        System.out.println("해당 이름의 화분을 찾을 수 없습니다.");
-        return;
-      }
-      break;
-    }
-
-    String input = Prompt.inputString("화분에 물을 주시겠습니까? 30포인트가 차감됩니다. (y/N)> ");
-
-    if(input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("화분 물주기를 취소하였습니다.");
-      return;
-
-    } else if (growPlant.getExp() >= 500 ) {
-      System.out.println("화분의 경험치가 가득 차서 물을 줄 수 없습니다.");
-      return;
-
-    } else if ((growPlant.getExp() + plusExp >= 500)) {
-      String check = Prompt.inputString( "화분에 물을 주어도 " + (500 - growPlant.getExp()) 
-          + " 밖에 경험치가 오르지 않습니다.\n"
-          + " 그래도 화분에 물을 주시겠습니까? 30포인트가 차감됩니다. (y/N)> ");
-
-      if (check.equalsIgnoreCase("n") || check.length() == 0) {
-        System.out.println("화분 물주기를 취소하였습니다.");
-
-      } else if (check.equalsIgnoreCase("y") || check.length() == 0) {
-        System.out.println("화분에 물을 주었습니다.");
-        growPlant.setExp(500);
-        plantDao.update(growPlant);
-        System.out.println("최대 경험치량 도달! 경험치가 500으로 고정됩니다.");
-        member.setPoint(member.getPoint()-30);
-        memberDao.update2(member);
-        System.out.println("식물에 물을 주어 30포인트가 사용되었습니다.");
-        sqlSession.commit();
-        return;
+      if (member.getPoint() < 30) {
+        response.setHeader("Refresh", "1;url=list");
+        request.getRequestDispatcher("PlantError.jsp").forward(request, response);
       }
 
-    } else {
-      System.out.println();
-      System.out.println(growPlant.getPlantName() +" 화분에 물을 주었습니다");
-      growPlant.setExp(growPlant.getExp() + plusExp);
-      plantDao.update(growPlant);
-      member.setPoint(member.getPoint()-30);
-      memberDao.update2(member);
-      System.out.println("식물에 물을 주어 30포인트가 사용되었습니다.");
-      System.out.println();
+
+      int no = Integer.parseInt(request.getParameter("no"));
+      Plant plant = plantDao.findByNo(no);
+
+      if(plant == null) {
+        throw new Exception("해당 식물이 없습니다.");
+      }
+
+
+      int plusExp = 130;
+
+
+      plant.setExp(plant.getExp() + plusExp);
+
+      if (plant.getExp() > 150 && plant.getExp() < 260) {
+        plant.setShape("leaf.png");
+        plant.setLevel(1);
+      } else if ( plant.getExp() > 260 && plant.getExp() < 500) {
+        plant.setShape("blossom.jpg");
+        plant.setLevel(2);
+      }else if (plant.getExp() >501 && plant.getExp() < 1000) {
+        plant.setShape("Tree.jpg");
+        plant.setLevel(3);
+      } else if (plant.getExp() > 1000) {
+        plant.setExp(1000);
+        plant.setShape("Tree.jpg");
+      }
+
+      plantDao.update(plant);
       sqlSession.commit();
+
+      response.sendRedirect("../plant/list");
+
+    }catch (Exception e) {
+      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
+      request.setAttribute("error", e);
+      e.printStackTrace();
+
+      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
+      요청배달자.forward(request, response);
     }
-
-    if(growPlant.getExp() >= 100 && growPlant.getExp() < 200) {
-      System.out.println();
-      System.out.println("레벨 업! 1단계 화분으로 성장했습니다!");
-      growPlant.setShape("☘️");
-      growPlant.setLevel(1);
-      plantDao.update(growPlant);
-      sqlSession.commit();
-    }
-
-    else if(growPlant.getExp() >= 200  && growPlant.getExp() < 300) {
-      System.out.println();
-      System.out.println("레벨 업! 2단계 화분으로 성장했습니다!");
-      growPlant.setShape("🌳");
-      growPlant.setLevel(2);
-      plantDao.update(growPlant);
-      sqlSession.commit();
-    }
-
-    else if(growPlant.getExp() >= 300) {
-      System.out.println();
-      System.out.println("레벨 업! 3단계 화분으로 성장했습니다!");
-      growPlant.setShape("💐");
-      growPlant.setLevel(3);
-      plantDao.update(growPlant);
-      sqlSession.commit();
-    }
-
-    plantDao.update(growPlant);
-    sqlSession.commit();
-
-
-    if (growPlant.getLevel() == 0) {
-      System.out.println("1단계까지 필요한 경험치의 양 " + (100 - growPlant.getExp()));
-
-    } else if (growPlant.getLevel() == 1) {
-      System.out.println("2단계까지 필요한 경험치의 양 " + (200 - growPlant.getExp()));
-
-    } else if (growPlant.getLevel() == 2 ) {
-      System.out.println("3단계까지 필요한 경험치의 양 " + (300 - growPlant.getExp()));
-    }
-
-    System.out.println("현재까지의 경험치의 양 " + growPlant.getExp());
-
-  } 
+  }
 }

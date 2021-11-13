@@ -10,60 +10,64 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import apus.dao.DateCheckDao;
+import org.apache.ibatis.session.SqlSession;
 import apus.dao.MemberDao;
-import apus.domain.DateCheck;
+import apus.dao.PlantDao;
 import apus.domain.Member;
+import apus.domain.Plant;
 
-@WebServlet("/auth/dateCheckFinder")
-public class DateCheckFinderController extends HttpServlet{
-
+@WebServlet("/plant/updateForm")
+public class PlantUpdateFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  PlantDao plantDao;
   MemberDao memberDao;
-  DateCheckDao dateCheckDao;
+  SqlSession sqlSession;
+
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    dateCheckDao = (DateCheckDao) 웹애플리케이션공용저장소.getAttribute("dateCheckDao");
-
+    plantDao = (PlantDao) 웹애플리케이션공용저장소.getAttribute("plantDao");
   }
 
-  @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
+    HttpSession session = request.getSession(false);
+
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/apus/index.jsp");
+      return;
+    }
+
+
     try {
-
-      HttpSession session = request.getSession(false);
-
-      if (session.getAttribute("loginUser") == null) {
-        response.sendRedirect("/apus/index.jsp");
-        return;
-      }
-
-      //출석 체크 하는 사람.(LoginUser)
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
       if(member == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
-      } 
-
-      int memberNo = member.getNo();
-      DateCheck dateCheck = dateCheckDao.findByMemberAndDate(memberNo);
-
-
-      if (dateCheck == null) {
-        request.getRequestDispatcher("/auth/attendanceCheck").forward(request, response);
-
-      } else if (dateCheck != null) {
-
-        request.setAttribute("dateCheck", dateCheck);
-
-        // 출력을 담당할 뷰를 호출한다.
-        RequestDispatcher 요청배달자 = request.getRequestDispatcher("/auth/dateCheckPro.jsp");
-        요청배달자.forward(request, response);
       }
+
+      if (member.getPoint() < 30) {
+        response.setHeader("Refresh", "1;url=list");
+        request.getRequestDispatcher("PlantError.jsp").forward(request, response);
+      }
+
+
+      int no = Integer.parseInt(request.getParameter("no"));
+      Plant plant = plantDao.findByNo(no);
+
+      if(plant == null) {
+        throw new Exception("해당 식물이 없습니다.");
+      }
+
+      request.setAttribute("plant", plant);
+      request.getRequestDispatcher("/plant/UpdateForm.jsp").forward(request, response);
+
+
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);
@@ -74,5 +78,4 @@ public class DateCheckFinderController extends HttpServlet{
       요청배달자.forward(request, response);
     }
   }
-
 }

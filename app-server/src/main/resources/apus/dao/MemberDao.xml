@@ -181,7 +181,7 @@
       name=#{name},
       id=#{id},
       birth=#{birthday},
-      tel=#{phoneNum},
+      tel=#{tel},
       email=#{email},
       photo=#{photo},
       sex=#{sex},
@@ -191,7 +191,7 @@
     where member_no=#{no}
    </update>
    
-   <update id ="pointUpdate" parameterType="int">
+   <update id ="pointUpdate"  parameterType="int">
     update apus_member set
        point=point-30
     where
@@ -288,6 +288,27 @@
     from
       apus_member
     where name=#{name}
+  </select>
+  
+  <select id="findByTel" resultMap="MemberMap" parameterType="string">
+   select
+      member_no,
+      name,
+      id,
+      password,
+      birth,
+      tel,
+      email,
+      photo,
+      sex,
+      created_dt,
+      point,
+      role,
+      active,
+      nickname
+    from
+      apus_member
+    where tel=#{tel}
   </select>
   
 </mapper>

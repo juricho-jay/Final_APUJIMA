@@ -43,7 +43,6 @@
   </select>
    <!--  화분 주인의 화분 전체 목록 -->
   <select id = "findMyPlant" resultMap ="PlantMap" parameterType = "int">
-  
      select
        p.plant_no,
        p.level,
@@ -62,10 +61,30 @@
       m.member_no = #{no}
   </select>
   
+
+  <select id ="findByNo"  resultMap ="PlantMap" parameterType = "int">
+    select
+       p.plant_no,
+       p.level,
+       p.name,
+       p.experience,
+       p.shape,
+       p.created_dt,
+       m.member_no,
+       m.id,
+       m.name,
+       m.nickname
+    from
+      apus_plant p
+      inner join apus_member m on p.member_no=m.member_no
+    where 
+      p.plant_no = #{no}
+  
+  </select>
 	<insert id="insert" parameterType="plant"
 	useGeneratedKeys="true" keyColumn="plant_no" keyProperty="no">
-	 insert into apus_plant(level,name,experience,shape,created_dt,member_no) 
-	 values(#{level},#{plantName},#{exp},#{shape},#{registeredDate},#{ownerName.no})
+	 insert into apus_plant(level,name,experience,shape,member_no) 
+	 values(#{level},#{plantName},#{exp},#{shape},#{ownerName.no})
 	</insert>
 	
 	

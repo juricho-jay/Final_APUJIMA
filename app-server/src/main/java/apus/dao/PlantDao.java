@@ -11,4 +11,5 @@ public interface PlantDao {
   //  Plant findByName(String name) throws Exception;
   void update(Plant plant) throws Exception;
   void delete(int no) throws Exception;
+  Plant findByNo(int no) throws Exception;
 }

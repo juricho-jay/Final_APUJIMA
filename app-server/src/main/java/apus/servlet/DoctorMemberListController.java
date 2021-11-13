@@ -28,6 +28,7 @@ public class DoctorMemberListController extends HttpServlet{
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
     try {
+
       List<Member> memberList = memberDao.findAll();
       request.setAttribute("memberList", memberList);
 

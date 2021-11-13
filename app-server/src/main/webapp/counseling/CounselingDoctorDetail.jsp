@@ -27,7 +27,7 @@
 </div>
 <div class="mb-3 row counsel">
 <label for='f-tel' class="col-sm-2 col-form-label p">휴대번호</label>
-<div class="col-sm-6 pp">${counseling.client.phoneNum}</div>
+<div class="col-sm-6 pp">${counseling.client.tel}</div>
 </div>
 <div class="mb-3 row counsel">
 <label for='f-disease' class="col-sm-2 col-form-label p">질병여부</label>

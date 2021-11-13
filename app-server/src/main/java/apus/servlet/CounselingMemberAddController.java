@@ -1,7 +1,6 @@
 package apus.servlet;
 
 import java.io.IOException;
-import java.util.Collection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -38,33 +37,42 @@ public class CounselingMemberAddController extends HttpServlet{
 
     Counseling counseling = new Counseling();
 
-
-
-    //    String user = request.getParameter("client.name");
-    //    String user2 = request.getParameter("client.phoneNum");
     //    try {
-    //      Member member = memberDao.findByName(user);
-    //      Member member2 = memberDao.findByTel(user2);
-    //      counseling.setClient(member);
-    //      counseling.setClientTel(member2);
-    //    } catch (Exception e1) {
-    //      // TODO Auto-generated catch block
-    //      e1.printStackTrace();
+    //      Collection<Member> memberList = memberDao.findAll();
+    //      request.setAttribute("memberList", memberList); // 다 불러와서 jsp파일에 이름이랑 번호 불러오기
+    //    } catch (Exception e2) {
+    //      e2.printStackTrace();
     //    }
-    counseling.setDisease(request.getParameter("disease"));
-    counseling.setContent(request.getParameter("content"));
 
-    String userGender = request.getParameter("counselor.sex");
+    String user = request.getParameter("client.name");
+    String user2 = request.getParameter("client.tel");
+    String user3 = request.getParameter("counseling.name");
+
     try {
-      Collection<Member> memberList1 = memberDao.findDoctor();
-      Collection<Member> memberList2 = memberDao.findWoman();
-      Collection<Member> memberList3 = memberDao.findMan();
-      request.setAttribute("memberList", memberList1);
-      request.setAttribute("memberList", memberList2);
-      request.setAttribute("memberList", memberList3);
+      Member member = memberDao.findById(user);
+      Member member2 = memberDao.findById(user2);
+      Member member3 = memberDao.findById(user3);
+      counseling.setClient(member);
+      counseling.setClientTel(member2);
+      counseling.setCounselor(member3);
     } catch (Exception e1) {
       e1.printStackTrace();
     }
+
+
+
+    counseling.setDisease(request.getParameter("disease"));
+    counseling.setContent(request.getParameter("content"));
+
+    //    try {
+    //      Collection<Member> memberList1 = memberDao.findDoctor();
+    //      request.setAttribute("memberList", memberList1);
+    //      String user1 = request.getParameter("counselor.member.name");
+    //      Member member3 = memberDao.findById(user1);
+    //      counseling.setCounselor(member3);
+    //    } catch (Exception e1) {
+    //      e1.printStackTrace();
+    //    }
 
     //    String userGender = request.getParameter("counselor.sex");
     //    try {
