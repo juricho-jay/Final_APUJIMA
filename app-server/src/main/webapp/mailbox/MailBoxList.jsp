@@ -124,6 +124,33 @@
     .th{
       font-size:13px;
     }
+    
+    .mail-box {
+      border: 1px solid red;
+      width: 700px;
+      height: 100px;
+      margin: 0 auto;
+      margin-top:50px;
+    }
+    
+    .box-photo{
+      border: 1px solid blue;
+      width: 50px;
+      float: left;
+    }
+    
+    .box-title{
+      border: 1px solid gray;
+      float: left;
+    }
+    
+    .box-time{
+      border: 1px solid green;
+      float:right;
+      padding-right: 20px;
+      padding-top: 35px;
+    }
+    
   </style>
   
 </head>
@@ -188,10 +215,25 @@
 		    </div>
 		</div>
 		<button id="btn-modal" class="btn btn-outline-primary btn-sm">보내기</button>
+		<hr>
+		<div>
+		  <c:forEach items="${mailBoxList}" var="mailBox">
+        <c:if test='${loginUser.id eq mailBox.receiver.id}'>
+          <div class="mail-box">
+            <span class="box-photo">${mailBox.receiver.photo}</span> <!-- 이게 될까? -->
+              <div class="box-title">
+                <span class="box-id">${mailBox.sender.id}</span>
+                <a href='detail?no=${mailBox.no}'>${mailBox.title}</a>
+              </div>
+            <span class="box-time">${mailBox.sentTime}</span>
+          </div>
+        </c:if>
+      </c:forEach>
+		</div>
 	<table class="table table-hover">
 		<thead>
 		  <tr>
-		    <th scope="col"><input type="checkbox" name="select_all" id="select_all" value="select_all"></th>
+		    
 		    <th>번호</th>
 		    <th>보낸이</th>
 		    <!-- <th>받는이</th> -->
@@ -205,7 +247,7 @@
 			<c:forEach items="${mailBoxList}" var="mailBox">
 				<c:if test='${loginUser.id eq mailBox.receiver.id}'>
 					<tr>
-					  <td><input type="checkbox" name="select_tch" id="select_tch" value="${list.userno}"></td>
+					  
 					  <td>${mailBox.no}</td>
 					  <td>${mailBox.sender.id}</td> 
 					  <%-- <td>${mailBox.receiver.id}</td> --%>
