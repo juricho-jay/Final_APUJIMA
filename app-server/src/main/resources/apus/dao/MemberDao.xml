@@ -171,7 +171,7 @@
       role=#{doctorOrNot},
       nickname=#{nickname}
     where 
-      member_no=#{values}
+      member_no=#{no}
    </update>
    
       <!-- 멤버 정보 변경하는 일 외에는 update2를 써야
@@ -198,6 +198,48 @@
      member_no=#{no} 
    </update>
   
+   <update id="doctorUpdate" parameterType="member">
+    update apus_member m left outer join apus_doctor d on m.member_no=d.doctor_no
+      set
+      m.name=#{name},
+      m.id=#{id},
+      m.password=password(#{password}),
+      m.birth=#{birthday},
+      m.tel=#{tel},
+      m.email=#{email},
+      m.photo=#{photo},
+      m.sex=#{sex},
+      m.point=#{point},
+      m.role=#{doctorOrNot},
+      m.nickname=#{nickname},
+      d.major=#{major},
+      d.license=#{license},
+      d.homepage=#{homepage},
+      d.introduction=#{introduction}
+    where 
+      m.member_no=#{no}
+   </update>
+   
+     <update id="doctorUpdate2" parameterType="member">
+    update apus_member m left outer join apus_doctor d on m.member_no=d.doctor_no
+      set
+      m.name=#{name},
+      m.id=#{id},
+      m.birth=#{birthday},
+      m.tel=#{tel},
+      m.email=#{email},
+      m.photo=#{photo},
+      m.sex=#{sex},
+      m.point=#{point},
+      m.role=#{doctorOrNot},
+      m.nickname=#{nickname},
+      d.major=#{major},
+      d.license=#{license},
+      d.homepage=#{homepage},
+      d.introduction=#{introduction}
+    where 
+      m.member_no=#{no}
+   </update>
     
    <update id="delete" parameterType="string">
     update apus_member set
