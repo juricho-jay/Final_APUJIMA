@@ -88,14 +88,14 @@
 	    String name = request.getParameter("name");
     %>
       <a><%= name %></a> --%>
-      <input id='f-name' type='hidden' name='counselor.name' class="form-control" value="${member.name}">
+      <input id='f-name' type='hidden' name='counselor.name' class="form-control" value="${counseling.counselor.name}">
        <input id='f-name' type='text' name='counselor.name' class="form-control" value="<%
            request.setCharacterEncoding("euc-kr"); 
 
            String name = request.getParameter("member.name");
            out.println(name);
        %>
-    " readOnly>
+    ${counseling.counselor.name}" readOnly>
     </div>
   </div>
   

@@ -52,9 +52,13 @@
     <a href = "medicine/list"><button class = "Header_medicine" style = "font-size: 2.0em">약품으로 해볼까</button></a>
     <a href = "bucket/list"><button class = "Header_anything" style = "font-size: 2.0em">버킷리스트</button></a>
     <a href = "doctorinfo/list"><button class = "Header_counselingDoctorList" style = "font-size: 2.0em">HEALER</button></a>
+    <c:if test = "${loginUser.doctorOrNot eq 1}">
     <a href = "counseling/list"><button class = "Header_counselingList" style = "font-size: 2.0em">상담신청리스트</button></a>
+    </c:if>
+    <c:if test = "${loginUser.doctorOrNot eq 2}">
     <a href = "counseling/doctorlist"><button class = "Header_counselingList" style = "font-size: 2.0em">상담요청리스트</button></a>
-     <a href = "plant/list"><button class = "Header_anything" style = "font-size: 2.0em">화분</button></a>
+    </c:if>
+    <a href = "plant/list"><button class = "Header_anything" style = "font-size: 2.0em">화분</button></a>
     <c:if test = "${loginUser.doctorOrNot eq 3}">
      <a href = "admin/AdminList.jsp"><button class = "Header_anything" style = "font-size: 2.0em">관리자</button></a>
     </c:if>

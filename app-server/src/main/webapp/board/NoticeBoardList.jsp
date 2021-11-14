@@ -3,7 +3,6 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="../BoardLayout.jsp" flush="false" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +22,7 @@
   
 </head>
 <body>
-<div class="col-lg-9 my-4 mb-4">
-<div class="container">
-<h1>공지사항 목록</h1>
+<div class="container" style = "margin-left : 120px"><h1>공지사항 목록</h1>
 <table class="table table-hover">
 <thead>
   <tr>
@@ -57,7 +54,6 @@
 <a href='BoardForm.jsp' class="btn btn-outline-primary btn-sm">글 작성</a><br>
 
 </div><!-- .container -->
-</div>
 </body>
 </html>
 

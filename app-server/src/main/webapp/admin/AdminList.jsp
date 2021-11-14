@@ -138,7 +138,7 @@ form{
             <h2>관리자 승인 요청건</h2>
           </div>
         <div class="row">
-           <b><a href='' class="btn">게시판 신고 승인</a></b>
+           <b><a href='approvalReport' class="btn">게시판 신고 승인</a></b>
         </div>
         <div class="row">
            <b><a href='approvalMedicine' class="btn">약품 승인</a></b>
