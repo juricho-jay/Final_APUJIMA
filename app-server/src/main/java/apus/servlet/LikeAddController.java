@@ -54,6 +54,7 @@ public class LikeAddController extends HttpServlet {
       if(liker == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
+
       int no = Integer.parseInt(request.getParameter("no"));
       Board board = boardDao.findByNo(no);
 
