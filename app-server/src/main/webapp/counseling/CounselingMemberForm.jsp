@@ -62,6 +62,15 @@
 </head>
 
 <body>
+
+
+<% 
+        // 한글 깨짐을 방지하기 위한 인코딩 처리
+        request.setCharacterEncoding("euc-kr"); 
+        String name = request.getParameter("member.name");  
+ 
+%>
+
 <div class="container">
 <h1>상담신청하기</h1>
 
@@ -88,14 +97,8 @@
 	    String name = request.getParameter("name");
     %>
       <a><%= name %></a> --%>
-      <input id='f-name' type='hidden' name='counselor.name' class="form-control" value="${counseling.counselor.name}">
-       <input id='f-name' type='text' name='counselor.name' class="form-control" value="<%
-           request.setCharacterEncoding("euc-kr"); 
-
-           String name = request.getParameter("member.name");
-           out.println(name);
-       %>
-    ${counseling.counselor.name}" readOnly>
+      <input id='f-name' type='hidden' name='counselor.name' class="form-control" value="${member.name}">
+       <input id='f-name' type='text' name='counselor.name' class="form-control" value="<%=name %>" readOnly>
     </div>
   </div>
   
