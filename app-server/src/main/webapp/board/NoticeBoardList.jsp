@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="col-lg-9 my-4 mb-4">
-<div class="container" style = "margin-right : -10px"><h1>공지사항 목록</h1>
+<div class="container" style = "margin-left : 120px"><h1>공지사항 목록</h1>
 <table class="table table-hover">
 <thead>
   <tr>
