@@ -31,10 +31,15 @@
       return false;
     }
   }
+   
+  function boardReport(){
+	    
+	    window.open("../board/report?no=${board.no}", "report", "width=600 height = 450");
+	  }
   
   </script>
 <div class="container">
-<form name ="boardDetailInfo" onsubmit="return checkValue()">
+<form name ="boardDetailInfo" action = 'report' onsubmit="return checkValue()">
   <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
     <thead>
       <tr>
@@ -42,8 +47,6 @@
       </tr>
     </thead>
     <tbody>
- 
-     
         <tr>
             <td>게시판 분류</td>
              <c:if test='${board.whichBoard == 1}'>
@@ -55,17 +58,18 @@
             <c:if test='${board.whichBoard == 3}'>
             <td>공지사항</td> 
             </c:if>
-    
         </tr>    
+        
          <tr>
-  
          <td>글 번호</td>
          <td>${board.no}</td>
+         <input type ="hidden" name = "no" value ="${board.no}">
          </tr>
   
   <tr>
       <td style = "width: 20%"> 글 제목</td>
       <td colspan ="2">${board.title}</td>
+      <input type = "hidden" id = 'okok'>
  </tr>
   <tr>
       <td>작성자</td>
@@ -96,7 +100,8 @@
    <a href= 'updateForm?no=${board.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
    <a href= 'delete?no=${board.no}' class="btn btn-primary" >삭제</a>
    </c:if>
- <input type="button" value="신고" onclick= "boardReport()"class="btn btn-primary">  
+    <input type="button" value="신고" onclick= "boardReport()" class="btn btn-primary">  
+ <!--  <input type="submit" value="신고" class="btn btn-primary" onclick = "boardReport()">  -->
    </td>
    </tr>
     
@@ -181,20 +186,5 @@
 
 </div> <!-- commentcontainer -->
 
-<script>
-  function checkVaild(){
-    if(document.boardDetailInfo.writer.id.value != $){
-      alert("본인 게시글이 아니어 할 수 없습니다.")
-      return false;
-    }
-  }
-  
-  function boardReport(){
-	  
-	  window.open("BoardReport.jsp", "report", "width=600 height = 450")
-	  
-	}
-  
-  </script>
 </body>
 </html>
