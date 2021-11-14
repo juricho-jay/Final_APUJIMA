@@ -40,7 +40,8 @@
       <input type = 'text' name = 'reason2' class='form-control'>
     </div>
   <hr>
-    <input type ="submit" class="btn btn-primary" value = '신고하기' onclick="back2()">
+   <!--   <input type ="submit" class="btn btn-primary" value = '신고하기' onclick="back2()">-->
+    <input type ="submit" class="btn btn-primary" value = '신고하기' >
   &nbsp;&nbsp;
    <button class="btn btn-primary" onclick = "back()">취소</button>
   </form>

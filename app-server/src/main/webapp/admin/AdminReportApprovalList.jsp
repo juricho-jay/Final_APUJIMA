@@ -27,24 +27,33 @@
 <table class="table table-hover">
 <thead>
   <tr>
+    <th>게시글 번호</th>
     <th>게시판 종류</th>
     <th>제목</th>
-    <th>작성자</th>
     <th>신고자</th>
     <th>신고 사유</th>
-    <th  style = 'text-align: right'>승인관리</th>
+    <th  style = 'text-align: center'>승인관리</th>
   </tr>
 </thead>
 <tbody>
-<c:forEach items="${medicineApprovalList}" var="medicine">
-<form action = 'confirm'>
+<c:forEach items="${reportApprovalList}" var="report">
+<form action = 'medicineConfirm'>
 <tr>
-    <td>${medicine.no}</td>
-    <td>${medicine.name}</td>
-    <input type = "hidden" name = "name" value = "${medicine.name}">
-    <td>${medicine.ageLimit}</td> 
-    <td>${medicine.shape}</td> 
-    <td>${medicine.color}</td> 
+  <td>${report.requestBoard.no}</td>
+  <input type = 'hidden' name = 'no' value = '${report.requestBoard.no}'>
+ <c:if test='${report.requestBoard.whichBoard == 1}'>
+    <td>자유게시판</td> 
+  </c:if>
+  <c:if test='${report.requestBoard.whichBoard == 2}'>
+    <td>Healer지식in</td> 
+  </c:if>
+  <c:if test='${report.requestBoard.whichBoard == 3}'>
+    <td>공지사항</td> 
+  </c:if>
+    <td>${report.requestBoard.title}</td>
+    <td>${report.requester.id}</td> 
+    <input type = 'hidden' name = 'id' value = '${report.requester.id}'>
+    <td>${report.reason}</td> 
     <td><input type = "submit" value ='승인'></td>
     <td><input type = "button" value = "거절"  onclick = "reject(this.form);"></td>
     
@@ -58,7 +67,7 @@
 <script>
 
 function reject(frm) {
-	frm.action = "reject";
+	frm.action = "reportReject";
 	frm.submit();
 	return true;
 }

@@ -5,6 +5,7 @@
 
 header {
   position: relative;
+  min-width: 1228px;
 }
 
 	li {
@@ -110,7 +111,9 @@ input.img-button {
 		textarea::-webkit-input-placeholder {color:#ccc;}
 		textarea:-ms-input-placeholder {color:#ccc;}
 
-    
+    .no-italics {
+    font-style: normal;   
+    }
 </style> 
 </head>
 <header>
@@ -152,13 +155,14 @@ input.img-button {
 					    </div>
 				</li>
 				<li>
-				<a href="/apus/auth/LogIn.jsp" class="btn4" style="color: white;">
-			   로그인
-			  </a>
-			  <a href="/apus/member/MemberForm.jsp" class="btn4" style="color: white;">
-         회원가입
-        </a>
+				<a href="auth/userInfoList" class="button" style="color: white">${loginUser.nickname}</a>
+				<i class="no-italics" style="color: darkgrey">&nbsp;님 <br>환영합니다!</i>
 			  </li>
+			  <li>
+				<form name="logout" action= 'auth/logout' method = "get">
+				<a class="btn4 "href="javascript:logout.submit();" style="color: white">로그아웃</a>
+				</form>
+				</li>
 				<!-- <li>
 				<a href = "/apus/member/MemberSignUp.jsp">
         <input class="btn btn-primary" type="button" value="회원가입" onclick="MemberForm.jsp" style="background-color: transparent; color: grey; border-color: white;">
