@@ -190,8 +190,6 @@
 
 </div> <!-- commentcontainer -->
 
-<<<<<<< HEAD
-=======
 <script>
  function changeColor(){
 
@@ -211,6 +209,5 @@
 	}
   
   </script>
->>>>>>> c3206c5d1221e4bb0d466e5dba1e966710df6bc5
 </body>
 </html>
