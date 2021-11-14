@@ -18,8 +18,8 @@ import apus.domain.Board;
 import apus.domain.Like;
 import apus.domain.Member;
 
-@WebServlet("/like/add")
-public class LikeAddController extends HttpServlet {
+@WebServlet("/like/delete")
+public class LikeDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   BoardDao boardDao;
   MemberDao memberDao;
@@ -62,21 +62,16 @@ public class LikeAddController extends HttpServlet {
       }
 
       Collection<Like> likeList = likeDao.findBoardLike(board.getNo());
-
-
       Like like = new Like();
 
 
-
-      like.setLiker(liker);
-      like.setLikeBoard(board);
-      likeDao.insert(like);
+      likeDao.delete(board.getNo(), liker.getNo());
       sqlSession.commit();
 
       request.setAttribute("likeList", likeList);
       request.setAttribute("like", like);
-      //  response.sendRedirect("../board/detail?no=" + board.getNo());
-      response.sendRedirect("list");
+      response.sendRedirect("../board/detail?no=" + board.getNo());
+
     }  
     catch (Exception e) {
       e.printStackTrace();

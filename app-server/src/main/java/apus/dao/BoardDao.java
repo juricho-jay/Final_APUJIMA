@@ -20,4 +20,8 @@ public interface BoardDao {
   //  void insertLike(int boardNo) throws Exception;
   //  void deleteLike(int boardNo) throws Exception;
 
+  List<Board> findFreeBoard() throws Exception;
+  List<Board> findDoctorBoard() throws Exception;
+  List<Board> findNoticeBoard() throws Exception;
+
 }
