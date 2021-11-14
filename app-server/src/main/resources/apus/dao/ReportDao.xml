@@ -55,7 +55,7 @@
    report_no=#{no}
   </delete>
   
-  <select id="findByReport" resultMap="ReportMap" parameterType="map">
+  <select id="findByReport" resultMap="ReportMap" >
     select 
       r.report_no,
       r.reason,

@@ -19,8 +19,9 @@
     <input type = 'hidden' name = "no" value = "${report.requestBoard.no }">
     <p> 제  목 : ${report.requestBoard.title} </p>
     <input type = 'hidden' name = "title" value = "${report.requestBoard.title}">
-    <p> 작성자 : ${report.requester.id} </p>
+    <p> 작성자 : ${report.requestBoard.writer.id} </p>
     <input type = 'hidden' name = "id" value = "${report.requester.id}">
+    <input type = 'hidden' name = "reportId" value = "${loginUser.id}">
   
     <p> 사유선택 : 여러 사유에 해당되는 경우, 대표적인 사유 1개를 선택해 주세요.</p>
 
@@ -35,6 +36,15 @@
       <label>불법촬영물등 신고</label><br>
       <input id='doctor' type='radio'  name='reason'value = "0" onclick="div_OnOff(this.value,'con');">
       <label>기타</label><br>
+      <!--  
+        <c:if test= "${not empty report}">
+    <p style='color:red'> 이미 등록된 약품 이름 입니다. 약품 리스트를 확인해주세요.</p>
+    
+    </c:if>
+      <c:if test= "${empty report}">
+   <p> 등록이 가능한 의약품 이름 입니다. </p>
+    </c:if>
+    -->
       </div>
     <div id="con" style = "display:none">
       <input type = 'text' name = 'reason2' class='form-control'>

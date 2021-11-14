@@ -39,13 +39,9 @@ public class AdminReportRejectController extends HttpServlet {
     try {
 
       int no = Integer.parseInt(request.getParameter("no"));
-      System.out.println("게시판 no => " + no);
       String id = request.getParameter("id");
-      System.out.println("신고한 사람 아이디 => " + id);
+
       Report report = reportDao.findByReport(no, id);
-      System.out.println("신고 번호 => " + report.getNo());
-
-
 
       reportDao.delete(report.getNo());
       sqlSession.commit();
