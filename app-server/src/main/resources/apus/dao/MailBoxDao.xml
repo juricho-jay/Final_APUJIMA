@@ -17,6 +17,7 @@
       <result column="sender_id" property="id"/>
       <result column="sender_name" property="name"/>
       <result column="sender_email" property="email"/>
+      <result column="sender_nickname" property="nickname"/>
     </association>
     
     <association property="receiver" javaType="member">
@@ -24,6 +25,7 @@
       <result column="receiver_id" property="id"/>
       <result column="receiver_name" property="name"/>
       <result column="receiver_email" property="email"/>
+      <result column="receiver_nickname" property="nickname"/>
     </association>
      
   </resultMap>
@@ -39,10 +41,12 @@
        m.id sender_id,
        m.name sender_name,
        m.email sender_email,
+       m.nickname sender_nickname,
        m2.member_no receiver_no,
        m2.id receiver_id,
        m2.name receiver_name,
        m2.email receiver_email
+       m2.nickname receiver_nickname
     from
       apus_mailbox x
       inner join apus_member m on x.sender_no=m.member_no
@@ -87,10 +91,12 @@
        m.id sender_id,
        m.name sender_name,
        m.email sender_email,
+       m.nickname sender_nickname,
        m2.member_no receiver_no,
        m2.id receiver_id,
        m2.name receiver_name,
-       m2.email receiver_email
+       m2.email receiver_email,
+       m2.nickname receiver_nickname
 	from
     apus_mailbox x
     inner join apus_member m on x.sender_no=m.member_no

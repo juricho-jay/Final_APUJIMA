@@ -19,6 +19,7 @@
       <result column="client_email" property="email"/>
       <result column="client_tel" property="tel"/>
       <result column="client_sex" property="sex"/>
+      <result column="client_sex" property="sex"/>
     </association>
     
     <association property="counselor" javaType="member">
