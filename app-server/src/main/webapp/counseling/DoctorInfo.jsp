@@ -23,7 +23,7 @@
     text-align: center;
   }
  .doctorjpg {
-    border: 1px solid red;
+    xborder: 1px solid red;
     float:left;
     width:300px;
     height:400px; 
@@ -31,9 +31,10 @@
  .doctorinfo {
 	  display:inline-block; 
 	  width:200px; 
-	  height:100px; 
+	  height:300px; 
 	  margin-left:100px;
 	  margin-top: 100px;
+	  margin-bottom: 100px;
   }  
   .title {
     font-size: 20px;
@@ -41,6 +42,8 @@
     font-style: italic;
     font-family: 'Nanum Myeongjo', serif;
   }
+  
+  
 </style>
 
 
@@ -51,25 +54,25 @@
 		<c:forEach items="${memberList}" var="member">
 		 <c:if test="${member.doctorOrNot eq '2'}">
 			<div class='doctor'>
-				<div class='doctorjpg'>
-				  <img src="img/doctorinfo.jpeg" width="100" height="200">
-				</div>
-				<div class='doctorinfo'>
-					<p class='title'>"${member.doctor.introduction}"</p>
-					<p>이름 : ${member.name}</p>
-					<p>전문분야 : ${member.doctor.major}</p>
-					<p>메일 : ${member.email}</p>
-					<p>연락처 : ${member.tel}</p>
-				</div>
-				<a href="../counseling/CounselingMemberForm.jsp?name='${member.name}'"></a>
 				<form action='../counseling/CounselingMemberForm.jsp' >
-					<div class="col-12 box4">
-		        <button type="submit" class="btn btn-primary btn-sm" >상담 신청하기</button>
-		      </div>
+					<div class='doctorjpg'>
+					  <img src="../img/doctor/doctor1.jpg" width="auto" height="400">
+					</div>
+					<div class='doctorinfo'>
+						<p class='title'>"${member.doctor.introduction}"</p>
+						<input type="hidden" name="member.name" value="${member.name}">
+						<p>이름 : ${member.name}</p>
+						<p>전문분야 : ${member.doctor.major}</p>
+						<p>메일 : ${member.email}</p>
+						<p>연락처 : ${member.tel}</p>
+			        <button type="submit" class="btn btn-primary btn-sm" >상담 신청하기</button>
+					</div>
+					
 	      </form>
 			</div>
 			</c:if>
 		</c:forEach>
 </div><!-- .container -->
+
 </body>
 </html>

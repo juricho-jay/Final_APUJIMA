@@ -27,14 +27,19 @@
 	  xborder: 1px solid red;
 	  margin-top: 5px;
 	  }
+	  
+	  .total {
+	   margin-top: 50px;
+	  }
+	  
 	   .box{
      xborder: 1px solid red;
      width:600px;
      xheight:200px; 
 /*   resize:none; */
 /*   resize: horizontal; */
- xresize: vertical;
-}
+      xresize: vertical;
+      }
 	 
      }
     .box3 {
@@ -46,9 +51,10 @@
 	    margin-top: 100px;
      }  
      .box4 {
+     xborder: 1px solid red;
      width:200px; 
      height:100px; 
-     text-align: center;
+     margin: 0 auto;
      }
     
   </style>
@@ -58,7 +64,9 @@
 <body>
 <div class="container">
 <h1>상담신청하기</h1>
-<form name = "counselingmember" action='add' >
+
+
+<form class="total" name = "counselingmember" action='add' >
   <div class="mb-3 row">
     <label for='f-client' class="col-sm-3 col-form-label">이름</label>
     <div class="col-sm-6">
@@ -72,19 +80,27 @@
     </div>
   </div> 
   <div class="mb-3 row">
-    <label for='f-tel' class="col-sm-3 col-form-label">상담사</label>
+    <label for='f-name' class="col-sm-3 col-form-label">상담사</label>
     <div class="col-sm-4">
-    <%    
+  
+    <%-- <%    
 	    request.setCharacterEncoding("UTF-8");
 	    String name = request.getParameter("name");
     %>
-      <a><%= name %></a>
-      
-       <%--  <input id='f-tel' type='text' name='counseling.name' class="form-control" value="${member.name}">선생님 --%>
-      
+      <a><%= name %></a> --%>
+      <input id='f-name' type='hidden' name='counselor.name' class="form-control" value="${member.name}">
+       <input id='f-name' type='text' name='counselor.name' class="form-control" value="<%
+           request.setCharacterEncoding("euc-kr"); 
+
+           String name = request.getParameter("member.name");
+           out.println(name);
+       %>
+    " readOnly>
     </div>
   </div>
-  <div class="mb-3 row">
+  
+  <hr style="margin-top:50px;">
+  <div class="mb-3 row" style="margin-top:50px;">
     <label for='f-disease' class="col-sm-3 col-form-label">질병여부</label>
     <div class="col-sm-6">
       <input id='f-disease' type='text' name='disease' class="form-control"required>
@@ -117,7 +133,9 @@ $("#inlineRadio2").click(function(){
 
 
 
+
 </script>
+
 </body>
 </html>
 
