@@ -6,11 +6,9 @@
 <mapper namespace="apus.dao.LikeDao">
   
   <resultMap type="Like" id="LikeMap">
-  <association property="like" javaType="like">
-    <id column="like_no" property="no"/> 
-    </association>
+    <id column="like_no" property="no"/>
+    <result column="likeOrNot" property="likeOrNot"/> 
   
-    
     <association property="likeBoard" javaType="board">
     <id column="likeBoard_no" property="no"/> 
     </association>
@@ -22,21 +20,41 @@
     
   </resultMap>
   
-   <select id = "findBoardLike" resultMap ="LikeMap" parameterType="int">
+   <select id = "findBoardLike" resultMap ="LikeMap">
     select
+     l.like_no,
+     l.likeOrNot,
      b.board_no likeBoard_no,
      m.member_no liker_no,
      m.id liker_id
     from
      apus_like l
      inner join apus_member m on l.member_no=m.member_no
+     inner join apus_board b on l.board_no=b.board_no
     where 
-    board_no=#{no}
-  </select> 
+     l.board_no=#{param1} and
+     l.member_no=#{param2}
+  </select>
+  
+  <select id = "findBoardCount" resultMap ="LikeMap">
+    select
+     l.like_no,
+     l.likeOrNot,
+     b.board_no likeBoard_no,
+     m.member_no liker_no,
+     m.id liker_id
+    from
+     apus_like l
+     inner join apus_member m on l.member_no=m.member_no
+     inner join apus_board b on l.board_no=b.board_no
+    where 
+     l.board_no=#{param1}
+  </select>  
  
   
     <select id="findAll" resultMap="LikeMap">
    select
+     l.likeOrNot,
      b.board_no likeBoard_no,
      m.member_no liker_no,
      m.id liker_id
@@ -48,8 +66,8 @@
   
   
   <insert id="insert" parameterType="board">
-   insert into apus_like(member_no,board_no) 
-   values(#{liker.no},#{likeBoard.no})
+   insert into apus_like(member_no,board_no, likeOrNot) 
+   values(#{liker.no},#{likeBoard.no},'1')
   </insert>
   
     <delete id="delete">

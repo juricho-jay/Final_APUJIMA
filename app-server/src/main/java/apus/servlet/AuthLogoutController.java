@@ -20,8 +20,11 @@ public class AuthLogoutController extends HttpServlet {
 
     request.getSession().invalidate();
 
-    response.setHeader("Refresh", "1;url=/apus/index.jsp");
-    request.getRequestDispatcher("Logout.jsp").forward(request, response);
+    //    response.setHeader("Refresh", "1;url=/apus/index.jsp");
+    //    request.getRequestDispatcher("Logout.jsp").forward(request, response);
+
+    response.sendRedirect("/apus/home");
+
 
     //    HttpSession session = request.getSession(false);
     //

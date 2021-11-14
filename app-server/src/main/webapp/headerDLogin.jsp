@@ -13,7 +13,7 @@ header {
 	
 	.btn4 {
   padding: 10px;
-  color: #fff;
+  color: #2c473e;
   font-family: sans-serif;
   text-transform: uppercase;
   text-align: center;
@@ -29,7 +29,7 @@ header {
   left: 0px;
   width: 100%;
   height: 1px;
-  background: white;
+  background: #2c473e;
   display: block;
   -webkit-transform-origin: right top;
   -ms-transform-origin: right top;
@@ -51,7 +51,7 @@ header {
 }
 
 input.img-button {
-        background: url("/apus/img/header/white_logo.svg") no-repeat;
+        background: url("/apus/img/header/green_logo.svg") no-repeat;
         border: none;
         width: 185px;
         height: 31px;
@@ -68,12 +68,12 @@ input.img-button {
     }
 
     .search_input{
-    color: white;
+    color: #2c473e;
     border: 0;
     outline: 0;
     background: none;
     width: 0;
-    caret-color:transparent;
+    caret-color: white;
     line-height: 8px;
     transition: width 0.4s linear;
     }
@@ -102,19 +102,19 @@ input.img-button {
     text-decoration:none;
     }
     
-    input::placeholder {color:#ccc;}
-		input::-webkit-input-placeholder {color:#ccc;}
-		input:-ms-input-placeholder {color:#ccc;}
+    input::placeholder {color:#2c473e;}
+		input::-webkit-input-placeholder {color:#2c473e;}
+		input:-ms-input-placeholder {color:#c2c473ecc;}
 		 
-		textarea::placeholder {color:#ccc;}
-		textarea::-webkit-input-placeholder {color:#ccc;}
-		textarea:-ms-input-placeholder {color:#ccc;}
+		textarea::placeholder {color:#2c473e;}
+		textarea::-webkit-input-placeholder {color:#2c473e;}
+		textarea:-ms-input-placeholder {color:#2c473e;}
 
     
-</style> 
+</style>
 </head>
 <header>
-<nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="height: 120px; border-bottom: solid 1px rgba(252, 246, 246, 0.438); margin-bottom: 30px;">
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="height: 120px; border-bottom: solid 1px #25362977; margin-bottom: 30px;">
   <div class="container-fluid">
     <a class="navbar-brand" href="/apus/home">
     <input type="button" class="img-button"></a>
@@ -124,16 +124,16 @@ input.img-button {
     <div id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="btn4" href="#" style="color: white">소개</a>
+          <a href="#" class="btn4" style="color: #2c473e;">소개</a>
         </li>
         <li class="nav-item">
-          <a class="btn4" href="/apus/medicine/list" style="color: white">약국</a>
+          <a class="btn4" href="/apus/medicine/list" style="color: #2c473e">약국</a>
         </li>
         <li class="nav-item">
-          <a class="btn4" href="/apus/doctorinfo/list" style="color: white">HEALER</a>
+          <a class="btn4" href="/apus/doctorinfo/list" style="color: #2c473e">HEALER</a>
         </li>
         <li class="nav-item">
-          <a class="btn4" href="/apus/board/list" style="color: white">커뮤니티</a>
+          <a class="btn4" href="/apus/board/list" style="color: #2c473e">커뮤니티</a>
         </li>
         <li>
 				    <!-- <form class="d-flex">
@@ -152,10 +152,10 @@ input.img-button {
 					    </div>
 				</li>
 				<li>
-				<a href="/apus/auth/LogIn.jsp" class="btn4" style="color: white;">
+				<a href="/apus/auth/LogIn.jsp" class="btn4" style="color: 25362977;">
 			   로그인
 			  </a>
-			  <a href="/apus/member/MemberForm.jsp" class="btn4" style="color: white;">
+			  <a href="/apus/member/MemberForm.jsp" class="btn4" style="color: 25362977;">
          회원가입
         </a>
 			  </li>

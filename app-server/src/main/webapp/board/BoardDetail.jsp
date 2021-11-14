@@ -7,24 +7,39 @@
 <head>
   <title>게시글 상세</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
   <style>
-
- 
-    .container {
-        xborder: 1px solid red;
-        xwidth: 640px;
+    
+    .no-italics {
+    font-style: normal;   
+  }
+  
+    .u-d-rBtn {
+    float: right;
     }
+    
+    .3Btn {
+    width: 100%;
+    }
+    
+    #likeContainer {
+    margin-top: 3%;
+    }
+    
+    
   </style>
 </head>
 <body>
    <script>
+   // 자기글만 수정/삭제가 떠서 쓸 일 없긴 한데...
   function checkVaild(){
     if (${board.writer.id} != ${loginUser.id}){
-      alert("본인 게시글이 아니어 할 수 없습니다.")
+      alert("본인 게시글만 변경/삭제할 수 있습니다.")
       return false;
     }
   }
@@ -92,24 +107,34 @@
       
    </tr>
    <tr>
-   <td>
+   </tr>
+  </tbody>
+  </table>
+  </form>
+  </div><!-- .container -->
+   <div class="container">
+   <div class="u-d-rBtn">
    <c:if test = "${board.writer.id == loginUser.id}">
    <a href= 'updateForm?no=${board.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
    <a href= 'delete?no=${board.no}' class="btn btn-primary" >삭제</a>
    </c:if>
-    <input type="button" value="신고" onclick= "boardReport()" class="btn btn-primary">  
- <!--  <input type="submit" value="신고" class="btn btn-primary" onclick = "boardReport()">  -->
-   </td>
-   </tr>
-    
-          
-  </tbody>
-
-  </table>
-  </form>
-  </div><!-- .container -->
+   <input type="button" value="신고" onclick= "boardReport()"class="btn btn-primary"> 
+   </div> 
+   </div> 
   
-  <div class = "commentContainer">
+  <!-- likeContainer -->
+  <div class="container" id="likeContainer">
+      <form id="likeAddCancel" action="../like/update">
+      <input type="hidden" name="no" value="${board.no}">
+      <button id="heartBtn" style="border: 0; background-color: white; outline:0;" type="submit" value="${likeOrNot}">
+      <i class="bi bi-heart" id="heartIcon"style="color: red" data-like="${likeOrNot}"></i>
+      &nbsp;좋아요&nbsp;${likeNo}&nbsp;&nbsp;</button><i class="bi bi-chat-square-dots"></i>&nbsp;댓글&nbsp;${commentNo}</form>
+      <hr size="5px" color="black"> <!-- hr 템플릿 설정되어있음 black > opacity -->
+  </div>
+  <!-- .likeContainer -->
+  
+  <!-- commentContainer -->
+  <div class="container" id="commentContainer">
     <div class ="commentList">
     <form id = "commentListForm">
  <table class="table table-hover">
@@ -145,7 +170,7 @@
       </tr>
    </c:forEach>
       <tr>
-      <c:choose>
+      <%-- <c:choose>
       <c:when test = "${like.liker.no == null && like.likeBoard.no == null}">
         <td style ="width : 80%"><a href ="like/add">좋아요</a></td>
         <td><input type = "button" id = "buttonChange1" value ="❤"  onclick ="colorChange()"></td>
@@ -155,7 +180,7 @@
        <td style ="width : 80%"><a href = "like/delete" >좋아요</a></td>
         <td><input type = "button" id = "buttonChange2" value ="♡"  onclick ="colorChange()"></td>
       </c:otherwise>  
-     </c:choose>
+     </c:choose> --%>
       </tr> 
 
       </tbody>
@@ -191,14 +216,55 @@
 </div> <!-- commentcontainer -->
 
 <script>
- function changeColor(){
 
+<<<<<<< HEAD
 	 var a = document.getElementById("buttonChange1")
 	 var b = document.getElementById("buttonChange2")
 	 
 	 a.style.backgroundColor = "red";
 	 b.style.backgroundColor = "white";
  }
+=======
+// 좋아요 여부에 따라 하트 
+
+document.querySelectorAll("#heartBtn").forEach((tag) => {
+if (tag.getAttribute("value") == 1) {
+  $("#heartIcon").attr('class', 'bi bi-heart-fill');
+  
+} else {
+	$("#heartIcon").attr('class', 'bi bi-heart');
+
+	  }
+});
+
+
+// 좋아요 버튼 ajax
+
+/* 
+ $("#heartBtn").click(function(){
+    $.ajax({
+        type:"POST",   >> or get
+        url:"../like/update",
+        data : {
+        	no: ${board.no}
+        	},
+       
+        success: function(data){
+            $(#heartBtn).attr("value", '1');
+            좋아요 여부에 따른 하트 > function으로 만들어서 실행
+        }
+    })
+});  */
+
+
+
+  
+  function boardReport(){
+	  
+	  window.open("BoardReport.jsp", "report", "width=600 height = 450")
+	  
+	}
+>>>>>>> 30a90532b8eb3f92021d0d0774e3b0617f11833d
   
   </script>
 </body>

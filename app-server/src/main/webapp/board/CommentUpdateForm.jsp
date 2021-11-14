@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>화분 이름 수정</title>
+  <title>댓글 수정</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
