@@ -65,7 +65,7 @@
   <label for="box1">보낸이</label>
   <br>
   <div class="col-sm-4">
-      <input id='f-sender' type='text' name='sender.id' class="form-control" value="${loginUser.id}" readOnly>
+      <input id='f-sender' type='text' name='sender.id' class="form-control" value="${loginUser.nickname}" readOnly>
   </div>
   <br>
 </div>

@@ -295,7 +295,7 @@
     where name=#{name}
   </select>
   
-  <select id="findByTel" resultMap="MemberMap" parameterType="string">
+  <select id="findByNickname" resultMap="MemberMap" parameterType="string">
    select
       member_no,
       name,
@@ -313,7 +313,7 @@
       nickname
     from
       apus_member
-    where tel=#{tel}
+    where nickname=#{nickname}
   </select>
   
 </mapper>

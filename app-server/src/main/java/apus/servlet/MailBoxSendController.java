@@ -38,11 +38,11 @@ public class MailBoxSendController extends HttpServlet {
 
     MailBox mailBox = new MailBox();
 
-    String user = request.getParameter("receiver.id");
-    String user2 = request.getParameter("sender.id");
+    String user = request.getParameter("receiver.nickname");
+    String user2 = request.getParameter("sender.nickname");
     try {
-      Member member = memberDao.findById(user);
-      Member member2 = memberDao.findById(user2);
+      Member member = memberDao.findByNickname(user);
+      Member member2 = memberDao.findByNickname(user2);
       mailBox.setReceiver(member);
       mailBox.setSender(member2);
       //      System.out.println("존재하는 회원");

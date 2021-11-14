@@ -6,6 +6,10 @@
 <mapper namespace="apus.dao.LikeDao">
   
   <resultMap type="Like" id="LikeMap">
+  <association property="like" javaType="like">
+    <id column="like_no" property="no"/> 
+    </association>
+  
     
     <association property="likeBoard" javaType="board">
     <id column="likeBoard_no" property="no"/> 
@@ -48,7 +52,7 @@
    values(#{liker.no},#{likeBoard.no})
   </insert>
   
-  <delete id="delete">
+    <delete id="delete">
    delete from apus_like
    where board_no=#{param1}
    and member_no=#{param2}

@@ -54,6 +54,7 @@
   </style>
   
 </head>
+
 <body>
 <div class="container">
 <h1>상담신청하기</h1>
@@ -73,8 +74,13 @@
   <div class="mb-3 row">
     <label for='f-tel' class="col-sm-3 col-form-label">상담사</label>
     <div class="col-sm-4">
+    <%    
+	    request.setCharacterEncoding("UTF-8");
+	    String name = request.getParameter("name");
+    %>
+      <a><%= name %></a>
       
-        <input id='f-tel' type='text' name='counseling.name' class="form-control" value="${member.name}">선생님
+       <%--  <input id='f-tel' type='text' name='counseling.name' class="form-control" value="${member.name}">선생님 --%>
       
     </div>
   </div>
@@ -89,30 +95,7 @@
     <textarea class="form-control" id="f-content" name='content' required></textarea>
   </div>
   
-  <%-- <div class="mb-4 row box">
-    <label for='f-choice' class="col-sm-2 col-form-label box2">상담사 선택</label>
-      <div class="box3">
-				  <input type="radio" id="inlineRadio1" name="counselor.name" value="1" checked> 여성
-				  <input type="radio" id="inlineRadio2" name="counselor.name" value="2"> 남성
-				
-				<div id="women">
-				  <select class="form-select women">
-				      <c:forEach items="${counselingList}" var="counseling">
-				      <option>선택하세요</option>
-				      <option>${counseling.counselor.name}</option>
-				      </c:forEach>
-				  </select>
-				</div>
-				
-				<div id="men">
-				  <select class="form-select men">
-				      <option>선택하세요</option>
-				      <option>김태호 상담사</option>
-				      <option>김진현 상담사</option>
-				  </select>
-				</div>
-      </div>
-  </div> --%>
+  
   
   <div class="col-12 box4">
     <button class="btn btn-primary btn-sm" >상담 신청하기</button>
@@ -137,3 +120,29 @@ $("#inlineRadio2").click(function(){
 </script>
 </body>
 </html>
+
+
+ <%-- <div class="mb-4 row box">
+    <label for='f-choice' class="col-sm-2 col-form-label box2">상담사 선택</label>
+      <div class="box3">
+          <input type="radio" id="inlineRadio1" name="counselor.name" value="1" checked> 여성
+          <input type="radio" id="inlineRadio2" name="counselor.name" value="2"> 남성
+        
+        <div id="women">
+          <select class="form-select women">
+              <c:forEach items="${counselingList}" var="counseling">
+              <option>선택하세요</option>
+              <option>${counseling.counselor.name}</option>
+              </c:forEach>
+          </select>
+        </div>
+        
+        <div id="men">
+          <select class="form-select men">
+              <option>선택하세요</option>
+              <option>김태호 상담사</option>
+              <option>김진현 상담사</option>
+          </select>
+        </div>
+      </div>
+  </div>  --%>

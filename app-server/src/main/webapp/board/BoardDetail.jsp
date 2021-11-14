@@ -22,9 +22,6 @@
 </head>
 <body>
    <script>
-   //console.log(document.boardDetialInfo.writer.value)
-  console.log(${loginUser.id})
-  console.log(${board.writer.id})
   function checkVaild(){
     if (${board.writer.id} != ${loginUser.id}){
       alert("본인 게시글이 아니어 할 수 없습니다.")
@@ -148,10 +145,17 @@
       </tr>
    </c:forEach>
       <tr>
+      <c:choose>
+      <c:when test = "${like.liker.no == null && like.likeBoard.no == null}">
+        <td style ="width : 80%"><a href ="like/add">좋아요</a></td>
+        <td><input type = "button" id = "buttonChange1" value ="❤"  onclick ="colorChange()"></td>
+      </c:when>
       
-        <td style ="width : 80%">좋아요</td>
-        <td><input type = "button" value ="❤" ></td>
-     
+      <c:otherwise>
+       <td style ="width : 80%"><a href = "like/delete" >좋아요</a></td>
+        <td><input type = "button" id = "buttonChange2" value ="♡"  onclick ="colorChange()"></td>
+      </c:otherwise>  
+     </c:choose>
       </tr> 
 
       </tbody>
@@ -186,5 +190,27 @@
 
 </div> <!-- commentcontainer -->
 
+<<<<<<< HEAD
+=======
+<script>
+ function changeColor(){
+
+	 var a = document.getElementById("buttonChange1")
+	 var b = document.getElementById("buttonChange2")
+	 
+	 a.style.backgroundColor = "red";
+	 b.style.backgroundColor = "white";
+ }
+
+
+  
+  function boardReport(){
+	  
+	  window.open("BoardReport.jsp", "report", "width=600 height = 450")
+	  
+	}
+  
+  </script>
+>>>>>>> c3206c5d1221e4bb0d466e5dba1e966710df6bc5
 </body>
 </html>
