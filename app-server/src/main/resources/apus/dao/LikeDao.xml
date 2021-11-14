@@ -6,6 +6,10 @@
 <mapper namespace="apus.dao.LikeDao">
   
   <resultMap type="Like" id="LikeMap">
+  <association property="like" javaType="like">
+    <id column="like_no" property="no"/> 
+    </association>
+  
     
     <association property="likeBoard" javaType="board">
     <id column="likeBoard_no" property="no"/> 
