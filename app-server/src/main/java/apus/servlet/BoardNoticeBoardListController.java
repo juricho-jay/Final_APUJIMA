@@ -39,7 +39,7 @@ public class BoardNoticeBoardListController extends HttpServlet {
       //      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/board/BoardList.jsp");
       //      요청배달자.forward(request, response);
       request.setAttribute("contentUrl", "/board/NoticeBoardList.jsp");
-      request.getRequestDispatcher("/template2.jsp").forward(request, response);
+      request.getRequestDispatcher("/template3.jsp").forward(request, response);
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.

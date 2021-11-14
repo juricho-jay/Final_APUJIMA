@@ -3,7 +3,6 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="../BoardLayout.jsp" flush="false" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,8 +23,7 @@
 </head>
 <body>
 <div class="col-lg-9 my-4 mb-4">
-<div class="container">
-<h1>공지사항 목록</h1>
+<div class="container" style = "margin-right : -10px"><h1>공지사항 목록</h1>
 <table class="table table-hover">
 <thead>
   <tr>

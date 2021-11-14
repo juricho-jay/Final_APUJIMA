@@ -3,7 +3,6 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="../BoardLayout.jsp" flush="false" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,8 +23,7 @@
 </head>
 <body>
 <div class="col-lg-9 my-4 mb-4">
-<div class="container">
-<h1>Healer지식in 목록</h1>
+<div class="container"><h1>Healer지식in 목록</h1>
 <table class="table table-hover">
 <thead>
   <tr>
@@ -43,7 +41,7 @@
 <c:forEach items="${boardList}" var="board">
 <tr>
     <td style= "width: 10%" class="text-center">${board.no}</td>
-     <td style= "width: 10%" class="text-center">Healer지식in</td> 
+     <td style= "width: 18%" class="text-center">Healer지식in</td> 
      <td style= "width: 10%" class="text-center"><a href='detail?no=${board.no}'>${board.title}</a></td> 
      <td style= "width: 10%" class="text-center">${board.content}</td> 
      <td style= "width: 10%" class="text-center">${board.writer.nickname}</td> 
