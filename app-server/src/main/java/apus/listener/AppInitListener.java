@@ -17,6 +17,7 @@ import apus.dao.MailBoxDao;
 import apus.dao.MedicineDao;
 import apus.dao.MemberDao;
 import apus.dao.PlantDao;
+import apus.dao.ReportDao;
 
 @WebListener
 public class AppInitListener implements ServletContextListener {
@@ -44,7 +45,7 @@ public class AppInitListener implements ServletContextListener {
       DateCheckDao dateCheckDao = sqlSession.getMapper(DateCheckDao.class);
       PlantDao plantDao = sqlSession.getMapper(PlantDao.class);
       LikeDao likeDao = sqlSession.getMapper(LikeDao.class);
-
+      ReportDao reportDao = sqlSession.getMapper(ReportDao.class);
 
       // 모든 웹 애플리케이션의 컴포넌트(서블릿, 리스너, 필터)가 공유할 객체를 두는 저장소
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
@@ -62,6 +63,7 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("dateCheckDao", dateCheckDao);      
       웹애플리케이션공용저장소.setAttribute("plantDao", plantDao);
       웹애플리케이션공용저장소.setAttribute("likeDao", likeDao);
+      웹애플리케이션공용저장소.setAttribute("reportDao", reportDao);
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
 

@@ -22,8 +22,9 @@
   
 </head>
 <body>
-<div class="col-lg-9 my-4 mb-4">
-<div class="container">
+<div>
+
+<div class="container" style = "margin-left : 120px">
 <h1>게시판 목록</h1>
 <table class="table table-hover">
 <thead>

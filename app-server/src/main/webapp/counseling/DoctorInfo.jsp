@@ -61,9 +61,10 @@
 					<p>메일 : ${member.email}</p>
 					<p>연락처 : ${member.tel}</p>
 				</div>
+				<a href="../counseling/CounselingMemberForm.jsp?name='${member.name}'"></a>
 				<form action='../counseling/CounselingMemberForm.jsp' >
 					<div class="col-12 box4">
-		        <button class="btn btn-primary btn-sm" >상담 신청하기</button>
+		        <button type="submit" class="btn btn-primary btn-sm" >상담 신청하기</button>
 		      </div>
 	      </form>
 			</div>

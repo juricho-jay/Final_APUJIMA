@@ -70,7 +70,7 @@
    values(#{liker.no},#{likeBoard.no},'1')
   </insert>
   
-  <delete id="delete">
+    <delete id="delete">
    delete from apus_like
    where board_no=#{param1}
    and member_no=#{param2}

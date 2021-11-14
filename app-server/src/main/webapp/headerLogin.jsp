@@ -4,7 +4,7 @@
 <style>
 
 header {
-  /* position: relative; */
+  position: relative;
   min-width: 1228px;
 }
 

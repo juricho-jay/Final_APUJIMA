@@ -18,8 +18,8 @@ import apus.domain.Board;
 import apus.domain.Member;
 import apus.domain.Report;
 
-@WebServlet("/board/report")
-public class BoardReportController extends HttpServlet {
+@WebServlet("/board/reportAdd")
+public class BoardReportAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   BoardDao boardDao;
   MemberDao memberDao;
@@ -49,29 +49,43 @@ public class BoardReportController extends HttpServlet {
 
     try {
 
+      // 신고리스트 가져와서 중복 신고 못하게 해야하는데 일단 지금 테스트중
+
       Report report = new Report();
+
+      int no = Integer.parseInt(request.getParameter("no"));
+      Board requestBoard = boardDao.findByNo(no);
 
       Member requester = (Member) request.getSession(false).getAttribute("loginUser");
 
       if(requester == null) {
         throw new Exception("로그인 되어 있지 않습니다.");
       }
+      String reason = request.getParameter("reason");
+      System.out.println("reason => " + reason);
+      String reason2 = request.getParameter("reason2");
+      System.out.println("reason2 => " + reason2);
 
-      int no = Integer.parseInt(request.getParameter("no"));
-      Board requestBoard = boardDao.findByNo(no);
+      if(reason2.length() == 0) {
+        report.setRequester(requester);
+        report.setRequestBoard(requestBoard);
+        report.setReason(reason);
+        report.setCheck(0);
+        reportDao.insert(report);
+        sqlSession.commit();
 
-      if(requestBoard == null) {
-        throw new Exception("해당 번호의 게시글이 없습니다.");
+      } else {
+        report.setRequester(requester);
+        report.setRequestBoard(requestBoard);
+        report.setReason(reason2);
+        report.setCheck(0);
+        reportDao.insert(report);
+        sqlSession.commit();
       }
-      report.setRequester(requester);
-      report.setRequestBoard(requestBoard);
 
       request.setAttribute("report", report);
 
-      // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/board/BoardReport.jsp");
-      요청배달자.forward(request, response);
-
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.

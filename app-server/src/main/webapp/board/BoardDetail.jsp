@@ -43,10 +43,15 @@
       return false;
     }
   }
+   
+  function boardReport(){
+	    
+	    window.open("../board/report?no=${board.no}", "report", "width=600 height = 450");
+	  }
   
   </script>
 <div class="container">
-<form name ="boardDetailInfo" onsubmit="return checkValue()">
+<form name ="boardDetailInfo" action = 'report' onsubmit="return checkValue()">
   <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
     <thead>
       <tr>
@@ -54,8 +59,6 @@
       </tr>
     </thead>
     <tbody>
- 
-     
         <tr>
             <td>게시판 분류</td>
              <c:if test='${board.whichBoard == 1}'>
@@ -67,17 +70,18 @@
             <c:if test='${board.whichBoard == 3}'>
             <td>공지사항</td> 
             </c:if>
-    
         </tr>    
+        
          <tr>
-  
          <td>글 번호</td>
          <td>${board.no}</td>
+         <input type ="hidden" name = "no" value ="${board.no}">
          </tr>
   
   <tr>
       <td style = "width: 20%"> 글 제목</td>
       <td colspan ="2">${board.title}</td>
+      <input type = "hidden" id = 'okok'>
  </tr>
   <tr>
       <td>작성자</td>

@@ -39,10 +39,11 @@
     #modal.modal-overlay {
       width: 100%;
       height: 100%;
-      position: absolute;
+      position: fixed;
       left: 0;
       top: 0;
       display: none;
+      overflow: hidden;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -62,10 +63,11 @@
       border-radius: 3px;
       border: 1px solid rgba( 255, 255, 255, 0.18 );
       width: 750px;
-      position: relative;
+      position: absolute;
 	    overflow-y: auto;
-	    max-height: 500px;
-      top: 50px;
+	    overflow: hidden;
+	    max-height: 700px;
+      top: 100px;
       xpadding: 20px;
     }
     
@@ -194,7 +196,7 @@
     
 <body>
 <div class="container">
-	<h1>${loginUser.id}님의 쪽지</h1>
+	<h1>${loginUser.nickname}님의 쪽지</h1>
 	<!-- <a href='MailBoxForm.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br> -->
 <div id="modal" class="modal-overlay">
     <div class="modal-window">
@@ -211,7 +213,7 @@
 							  <label for="box1">보낸이</label>
 							  <br>
 							  <div class="col-sm-4">
-							      <input id='f-sender' type='text' name='sender.id' class="form-control" value="${loginUser.id}" readOnly>
+							      <input id='f-sender' type='text' name='sender.nickname' class="form-control" value="${loginUser.nickname}" readOnly>
 							  </div>
 							  <br>
 							</div>
@@ -219,7 +221,7 @@
 							  <label for="f-receiver">받는이</label>
 							  <br>
 							  <div class="col-sm-4">
-							      <input id='f-receiver' type='text' name='receiver.id' class="form-control">
+							      <input id='f-receiver' type='text' name='receiver.nickname' class="form-control">
 							      <!-- <input type="button" name='findId' value="아이디확인"> -->
 							      
 							  </div>
@@ -230,15 +232,13 @@
 							<div class="content3">
 							  <label for="f-title">제목</label>
 							  <br>
-							  <textarea id="f-title"  name="title" rows=1 cols=73 class="form-control">
-							  </textarea>
+							  <textarea id="f-title"  name="title" rows=1 cols=73 class="form-control"></textarea>
 							  <br>
 							</div>
 							<div class="content4">
 							  <label for="f-content">내용</label>
 							  <br>
-							  <textarea id="f-content" name="content" rows=5 cols=73 class="form-control">
-							  </textarea>
+							  <textarea id="f-content" name="content" rows=5 cols=73 class="form-control"></textarea>
 							  <br><hr>
 							</div>
 							<div class="col-12 sendbtn">
@@ -253,12 +253,12 @@
 		<hr>
 		<div>
 		  <c:forEach items="${mailBoxList}" var="mailBox">
-        <c:if test='${loginUser.id eq mailBox.receiver.id}'>
+        <c:if test='${loginUser.nickname eq mailBox.receiver.nickname}'>
           <div class="mail-box">
 	          <div class="box-photo">
 	            <span class="box-img">${mailBox.receiver.photo}</span> <!-- 이게 될까? -->
 	          </div>
-             <b class="box-id">${mailBox.sender.id}</b>
+             <b class="box-id">${mailBox.sender.nickname}</b>
              <div class="box-title">
                <a href='detail?no=${mailBox.no}'>${mailBox.title}</a>
              </div>
@@ -268,6 +268,10 @@
         </c:if>
       </c:forEach>
 		</div>
+		
+		
+		
+		
 	<%-- <table class="table table-hover">
 		<thead>
 		  <tr>
