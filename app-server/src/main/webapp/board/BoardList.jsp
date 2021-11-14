@@ -3,7 +3,6 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="../BoardLayout.jsp" flush="false" />
 <!DOCTYPE html>
 <html>
 <head>

@@ -18,8 +18,8 @@ import apus.domain.Board;
 import apus.domain.Like;
 import apus.domain.Member;
 
-@WebServlet("/like/delete")
-public class LikeDeleteController extends HttpServlet {
+@WebServlet("/like/autoDelete")
+public class LikeAutoDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   BoardDao boardDao;
   MemberDao memberDao;
@@ -49,9 +49,9 @@ public class LikeDeleteController extends HttpServlet {
       return;
     }
     try {
-      Member liker = (Member) request.getSession(false).getAttribute("loginUser");
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
-      if(liker == null) {
+      if(member == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
       int no = Integer.parseInt(request.getParameter("no"));
