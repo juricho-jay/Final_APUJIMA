@@ -47,6 +47,73 @@
     
   </select>
   
+  <select id ="findFreeBoard" resultMap="BoardMap">
+  select
+       b.board_no,
+       b.title,
+       b.content,
+       b.created_dt,
+       b.view_cnt,
+       b.type,
+       b.active,
+       m.member_no,
+       m.id writer_id,
+       m.nickname ,
+       m.name writer_name
+    from
+      apus_board b
+      inner join apus_member m on b.member_no=m.member_no
+    where
+      b.active = 1 and b.type = 1
+  
+  </select>
+  
+  
+  
+  <select id ="findDoctorBoard" resultMap="BoardMap">
+  select
+       b.board_no,
+       b.title,
+       b.content,
+       b.created_dt,
+       b.view_cnt,
+       b.type,
+       b.active,
+       m.member_no,
+       m.id writer_id,
+       m.nickname ,
+       m.name writer_name
+    from
+      apus_board b
+      inner join apus_member m on b.member_no=m.member_no
+    where
+      b.active = 1 and b.type = 2
+  
+  </select>
+  
+  
+  
+  <select id ="findNoticeBoard" resultMap="BoardMap">
+  select
+       b.board_no,
+       b.title,
+       b.content,
+       b.created_dt,
+       b.view_cnt,
+       b.type,
+       b.active,
+       m.member_no,
+       m.id writer_id,
+       m.nickname,
+       m.name writer_name
+    from
+      apus_board b
+      inner join apus_member m on b.member_no=m.member_no
+    where
+      b.active = 1 and b.type = 3
+  
+  </select>
+  
   <!-- <select id="findComment" parameterType="int">
     select
 	    c.coment_no,

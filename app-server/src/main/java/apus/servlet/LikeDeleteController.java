@@ -12,25 +12,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
-import apus.dao.CommentDao;
+import apus.dao.LikeDao;
 import apus.dao.MemberDao;
 import apus.domain.Board;
-import apus.domain.Comment;
+import apus.domain.Like;
+import apus.domain.Member;
 
-@WebServlet("/board/detail")
-public class BoardDetailController extends HttpServlet {
+@WebServlet("/like/delete")
+public class LikeDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   BoardDao boardDao;
   MemberDao memberDao;
-  CommentDao commentDao;
+  LikeDao likeDao;
   SqlSession sqlSession;
+
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     boardDao = (BoardDao) 웹애플리케이션공용저장소.getAttribute("boardDao");
-    commentDao = (CommentDao)웹애플리케이션공용저장소.getAttribute("commentDao");
+    likeDao = (LikeDao)웹애플리케이션공용저장소.getAttribute("likeDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
 
   }
@@ -46,9 +48,12 @@ public class BoardDetailController extends HttpServlet {
       response.sendRedirect("/apus/index.jsp");
       return;
     }
-
-
     try {
+      Member liker = (Member) request.getSession(false).getAttribute("loginUser");
+
+      if(liker == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
+      }
       int no = Integer.parseInt(request.getParameter("no"));
       Board board = boardDao.findByNo(no);
 
@@ -56,15 +61,16 @@ public class BoardDetailController extends HttpServlet {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
 
-      Collection<Comment> commentList = commentDao.findBoardComment(board.getNo());
+      Collection<Like> likeList = likeDao.findBoardLike(board.getNo());
+      Like like = new Like();
 
-      boardDao.updateCount(board.getNo());
+
+      likeDao.delete(board.getNo(), liker.getNo());
       sqlSession.commit();
 
-      request.setAttribute("commentList", commentList);
-      request.setAttribute("board", board);
-
-      request.getRequestDispatcher("/board/BoardDetail.jsp").forward(request, response);
+      request.setAttribute("likeList", likeList);
+      request.setAttribute("like", like);
+      response.sendRedirect("../board/detail?no=" + board.getNo());
 
     }  
     catch (Exception e) {

@@ -65,32 +65,19 @@ public class LikeAddController extends HttpServlet {
       Collection<Like> likeList = likeDao.findBoardLike(board.getNo());
 
 
-      int count = likeList.size()+1;
-
       Like like = new Like();
 
 
-      String likedUser = null;
-      if (request.getParameter("liker")!= null) {
-        likedUser = request.getParameter("liker"); 
-      }
-
-      String likedBoard = null;
-      if (request.getParameter("likeBoard") != null) {
-        likedBoard = request.getParameter("likeBoard");
-      }
 
       like.setLiker(liker);
       like.setLikeBoard(board);
-
-
       likeDao.insert(like);
       sqlSession.commit();
 
       request.setAttribute("likeList", likeList);
       request.setAttribute("like", like);
-      response.sendRedirect("../board/detail?no=" + board.getNo());
-
+      //  response.sendRedirect("../board/detail?no=" + board.getNo());
+      response.sendRedirect("list");
     }  
     catch (Exception e) {
       e.printStackTrace();
