@@ -1,6 +1,7 @@
 package apus.servlet;
 
 import java.io.IOException;
+import java.util.Collection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -50,6 +51,8 @@ public class BoardReportAddController extends HttpServlet {
     try {
 
       // 신고리스트 가져와서 중복 신고 못하게 해야하는데 일단 지금 테스트중
+
+      Collection<Report> reportList = reportDao.findAll();
 
       Report report = new Report();
 

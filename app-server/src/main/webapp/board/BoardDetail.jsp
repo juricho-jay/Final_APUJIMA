@@ -190,8 +190,6 @@
 
 </div> <!-- commentcontainer -->
 
-<<<<<<< HEAD
-=======
 <script>
  function changeColor(){
 
@@ -201,16 +199,7 @@
 	 a.style.backgroundColor = "red";
 	 b.style.backgroundColor = "white";
  }
-
-
-  
-  function boardReport(){
-	  
-	  window.open("BoardReport.jsp", "report", "width=600 height = 450")
-	  
-	}
   
   </script>
->>>>>>> c3206c5d1221e4bb0d466e5dba1e966710df6bc5
 </body>
 </html>

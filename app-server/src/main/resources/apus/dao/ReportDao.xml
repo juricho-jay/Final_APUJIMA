@@ -51,8 +51,28 @@
    
    <delete id="delete" parameterType="int">
    delete from apus_report
-   where board_no=#{no}
+   where 
+   report_no=#{no}
   </delete>
+  
+  <select id="findByReport" resultMap="ReportMap" parameterType="map">
+    select 
+      r.report_no,
+      r.reason,
+      m.id requester_id,
+      m.name requester_name,
+      m.email requester_email,
+      b.board_no requestBoard_no,
+      b.title requestBoard_title,
+      b.content requestBoard_content,
+      b.type requestBoard_type
+    from
+      apus_report r
+      inner join apus_member m on r.member_no=m.member_no
+      inner join apus_board b on r.board_no=b.board_no
+    where 
+      b.board_no=#{param1} and m.id=#{param2}
+  </select>
   
   
   <!-- <select id="findReport" resultMap="ReportMap">

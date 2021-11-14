@@ -13,7 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import apus.dao.MedicineDao;
 import apus.domain.Medicine;
 
-@WebServlet("/admin/confirm")
+@WebServlet("/admin/medicineConfirm")
 public class AdminMedicineConfirmController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
