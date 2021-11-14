@@ -45,7 +45,7 @@
        m2.member_no receiver_no,
        m2.id receiver_id,
        m2.name receiver_name,
-       m2.email receiver_email
+       m2.email receiver_email,
        m2.nickname receiver_nickname
     from
       apus_mailbox x
@@ -90,12 +90,10 @@
        m.member_no sender_no,
        m.id sender_id,
        m.name sender_name,
-       m.email sender_email,
        m.nickname sender_nickname,
        m2.member_no receiver_no,
        m2.id receiver_id,
        m2.name receiver_name,
-       m2.email receiver_email,
        m2.nickname receiver_nickname
 	from
     apus_mailbox x

@@ -68,7 +68,7 @@
    <tr>
   
       <td>화분 모양</td>
-      <td><img src = ../img/${plant.shape}></td>
+      <td><img src = ../img/${plant.shape} width ="150" height="150"></td>
   </tr>
  
    <tr>
@@ -76,6 +76,7 @@
 <a href= 'updateForm?no=${plant.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
 <a href= 'delete?no=${plant.no}' class="btn btn-primary" >삭제</a>
 <a href= 'grow?no=${plant.no}' class= "btn btn-primary">물 주기</a>
+<a href = 'list'  class= "btn btn-primary">목록</a>
    </td>
    </tr>
      </tbody>

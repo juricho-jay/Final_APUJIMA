@@ -32,7 +32,6 @@ public class AdminMedicineConfirmController extends HttpServlet {
       throws ServletException, IOException {
     try {
 
-      System.out.println("실행됨");
       String name = request.getParameter("name");
       Medicine medicine = medicineDao.findByName(name);
 
@@ -41,7 +40,7 @@ public class AdminMedicineConfirmController extends HttpServlet {
 
 
       // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/admin/AdminMedicineApprovalList.jsp");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("approvalMedicine");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {

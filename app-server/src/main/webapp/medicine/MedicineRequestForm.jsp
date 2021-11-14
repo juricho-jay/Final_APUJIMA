@@ -61,7 +61,6 @@
 </head>
 <body>
 <div class="container">
-<div class=""></div>
 <h1>약품 등록 요청</h1>
 <form name = "medicineRequest" action='request' onsubmit="return checkValue()">
 
@@ -74,7 +73,7 @@
   <div class="mb-3 row">
     <label for='m-name' class="col-sm-3 col-form-label">* 약품명</label>
     <div class="col-sm-6">
-      <input id='m-name' type='text' name='name' class="form-control">
+      <input id='m-name' type='text' name='mname' class="form-control">
     </div>
 </div>
 
@@ -108,26 +107,10 @@
     <button class="btn btn-primary btn-sm" >약품 등록 신청</button>
   </div>
 
+</form>
 </div>
 
 
-
-
-<!-- <div class="mb-3 row">
-  <label for='f-photo' class="col-sm-2 col-form-label">성별</label>
-  <div class="col-sm-6">
-  
-    <select id='f-sex' name='sex' class="form-control">
-    <option value = "" placeholder="성별"></option>
-    <option value = "남성">남자</option>
-    <option value = "여성">여자</option>
-    </select>
-    
-  </div>
-</div> -->
-
-</form>
-</div><!-- .container -->
 
 <!--  
 <script>
