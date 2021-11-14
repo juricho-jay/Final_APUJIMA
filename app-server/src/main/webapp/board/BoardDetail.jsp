@@ -96,8 +96,7 @@
    <a href= 'updateForm?no=${board.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
    <a href= 'delete?no=${board.no}' class="btn btn-primary" >삭제</a>
    </c:if>
-
-<a href= 'report' class= "btn btn-primary">신고</a>
+ <input type="button" value="신고" onclick= "boardReport()"class="btn btn-primary">  
    </td>
    </tr>
     
@@ -188,8 +187,13 @@
       alert("본인 게시글이 아니어 할 수 없습니다.")
       return false;
     }
-    
   }
+  
+  function boardReport(){
+	  
+	  window.open("BoardReport.jsp", "report", "width=600 height = 450")
+	  
+	}
   
   </script>
 </body>

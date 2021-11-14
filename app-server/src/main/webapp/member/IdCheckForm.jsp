@@ -5,7 +5,7 @@ pageEncoding="UTF-8"
 <html> 
 <head> 
 <meta charset="UTF-8"> 
-<title>idCheckForm.jsp</title>
+<title>IdCheckForm.jsp</title>
  </head> 
  <body> 
  <div style="text-align: center">
