@@ -64,18 +64,13 @@
 <body>
 
 
-<% 
-        // 한글 깨짐을 방지하기 위한 인코딩 처리
-        request.setCharacterEncoding("euc-kr"); 
-        String name = request.getParameter("member.name");  
- 
-%>
+
 
 <div class="container">
 <h1>상담신청하기</h1>
 
 
-<form class="total" name = "counselingmember" action='add' >
+<form class="total" name = "counselingmember" action='add' method='post' >
   <div class="mb-3 row">
     <label for='f-client' class="col-sm-3 col-form-label">이름</label>
     <div class="col-sm-6">
@@ -97,8 +92,14 @@
 	    String name = request.getParameter("name");
     %>
       <a><%= name %></a> --%>
-      <input id='f-name' type='hidden' name='counselor.name' class="form-control" value="${member.name}">
-       <input id='f-name' type='text' name='counselor.name' class="form-control" value="<%=name %>" readOnly>
+      <%-- <input id='f-name' type='hidden' name='counselor.name' class="form-control" value="${member.name}"> --%>
+       <input id='f-name' type='text' name='counselor.name' class="form-control" value="<% 
+        // 한글 깨짐을 방지하기 위한 인코딩 처리
+        request.setCharacterEncoding("UTF-8"); 
+        String name = request.getParameter("member.name");  
+        out.println(name);
+%>
+       " readOnly>
     </div>
   </div>
   
@@ -117,7 +118,7 @@
   
   
   <div class="col-12 box4">
-    <button class="btn btn-primary btn-sm" >상담 신청하기</button>
+    <button type="submit" class="btn btn-primary btn-sm" >상담 신청하기</button>
   </div>
 </form>
 </div><!-- .container -->
