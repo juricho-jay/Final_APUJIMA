@@ -93,7 +93,8 @@
    <tr>
    <td>
    <c:if test = "${board.writer.id == loginUser.id}">
-   <a href= 'updateForm?no=${board.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
+  <!--   <a href= 'updateForm?no=${board.no}' class="btn btn-primary" onclick="javascript: form.action='updateform';">수정</a>-->
+  <input type ="submit" value ="수정" class ="btn btn-primary" onclick ="javascript: form.action = 'updateForm';"/>   
    <a href= 'delete?no=${board.no}' class="btn btn-primary" >삭제</a>
    </c:if>
     <input type="button" value="신고" onclick= "boardReport()" class="btn btn-primary">  
