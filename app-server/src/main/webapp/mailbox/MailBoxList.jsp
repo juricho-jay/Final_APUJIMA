@@ -2,29 +2,10 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>쪽지함</title>
-   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-   <link rel="stylesheet" href="/spring/resources/css/style.css" />
 
-  <script src="../node_modules/@popperjs/core//dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<link rel="stylesheet" href="/apus/css/MailBoxList.css">
   
-  <style type="text/css">
-  @font-face {
-      font-family: 'IBMPlexSansKR-Regular';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-    } 
-    
-    body{
-      font-family:IBMPlexSansKR-Regular;
 
-    }
-  </style>
   
   <style>
   
@@ -271,7 +252,7 @@
       </c:forEach>
 		</div>
 		
-		
+		</div>
 		
 		
 	<%-- <table class="table table-hover">
@@ -303,13 +284,10 @@
 			</c:forEach>
 		</tbody>
 	</table> --%>
-</div><!-- .container -->
-
+<!-- .container -->
 
 
 <!-- <a href='MailBoxForm.jsp' id="btn-modal" class="btn btn-outline-primary btn-sm">보내기</a><br> -->
-
-
 
 
 <script>
@@ -333,9 +311,6 @@
     })
 </script>
 
-
-</body>
-</html>
 
 
 

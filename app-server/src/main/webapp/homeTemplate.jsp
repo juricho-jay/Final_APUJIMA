@@ -31,9 +31,6 @@
    height:100% 
    }
    
-   
-   
-
    @media (min-width: 768px) {
 		  .container {
 		    width: 750px;

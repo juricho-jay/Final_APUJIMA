@@ -16,7 +16,7 @@
  
 function idCheck(){
   
-  window.open("IdCheckForm.jsp", "idwin", "width=400 height = 350")
+  window.open("/apus/member/idCheckForm.jsp", "idwin", "width=400 height = 350")
   
 }
 </script>
@@ -53,10 +53,10 @@ function idCheck(){
                 return false;
             }
             
-            if(!document.userInfo.idDuplication.value != "idCheck"){
+      /*       if(!document.userInfo.idDuplication.value != "idCheck"){
                 alert("아이디 중복체크를 해주세요.");
                 return false;
-            } 
+            }  */
             
             if(!document.userInfo.password.value){
                 alert("비밀번호를 입력하세요.");
@@ -129,7 +129,7 @@ function div_OnOff(v,id){
 <div class="container">
 <div class=""></div>
 <h1>회원가입</h1>
-<form name = "userInfo" action='add' onsubmit="return checkValue()">
+<form name = "userInfo" action='add' method='post'  enctype="multipart/form-data" onsubmit="return checkValue()" >
 
 <div class="col-md-6">
   <label for="validationServer04" class="form-label">-APUJIMA에 오신 것을 환영합니다-</label>
@@ -219,7 +219,7 @@ function div_OnOff(v,id){
 <div class="mb-3 row">
   <label for='f-photo' class="col-sm-3 col-form-label">사진</label>
   <div class="col-sm-6">
-    <input id='f-photo' type='text' name='photo' class="form-control">
+    <input id='f-photo' type='file' name='photo' class="form-control">
   </div>
 </div>
 
@@ -244,8 +244,7 @@ function div_OnOff(v,id){
  <div class="mb-3 row" >
     <label for='f-lisence' class="col-sm-3 col-form-label">* 의사 자격증</label>
     <div class="col-sm-6">
-     <input id='f-lisence' type='text' name='lisence' >
-      <input type="button" name = 'lisence' value="찾아보기"> 
+     <input id='f-lisence' type='file' name='lisence' class="form-control">
     </div>
 </div>
 
@@ -263,15 +262,9 @@ function div_OnOff(v,id){
     </div>
 </div>
 
-
 </div>
-
-
-
-
-
   <div class="col-12">
-    <button class="btn btn-primary btn-sm" >회원 가입</button>
+    <input type = 'submit' value = '회원가입' class="btn btn-primary btn-sm" >
   </div>
 </form>
 </div><!-- .container -->

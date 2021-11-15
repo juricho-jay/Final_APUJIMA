@@ -32,93 +32,7 @@
     margin-top: 3%;
     }
     
-    /* 모달창 디자인 */
-    #modal.modal-overlay {
-      width: 100%;
-      height: 100%;
-      position: fixed;
-      left: 0;
-      top: 0;
-      display: none;
-      overflow: hidden;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-      backdrop-filter: blur(1.5px);
-      -webkit-backdrop-filter: blur(1.5px);
-      border-radius: 3px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-    }
     
-    #modal .modal-window {
-      background: rgba( 167, 201, 210, 0.70 );
-      box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-      backdrop-filter: blur( 13.5px );
-      -webkit-backdrop-filter: blur( 13.5px );
-      border-radius: 3px;
-      border: 1px solid rgba( 255, 255, 255, 0.18 );
-      width: 750px;
-      position: absolute;
-      overflow-y: auto;
-      overflow: hidden;
-      max-height: 700px;
-      top: 100px;
-      xpadding: 20px;
-    }
-    
-    #modal .title {
-      xborder: 1px solid gray;
-      padding-left: 20px;
-      padding-top: 20px;
-      height: 50px;
-      xdisplay: inline;
-      xtext-shadow: 1px 1px 2px gray;
-      color: black;
-      font-size:20px;
-      float:left;
-    }
-    
-    /* #modal .title h2 {
-      display: inline;
-      
-      
-    } */
-    
-    #modal .close-area {
-      display: inline;
-      float: right;
-      padding-right: 30px;
-      padding-top: 30px;
-      cursor: pointer;
-      xtext-shadow: 1px 1px 2px gray;
-      color: black;
-    }
-        
-     #modal .content {
-     
-      margin-top: 40px;
-      padding: 0px 10px;
-      text-shadow: 1px 1px 2px gray;
-      color: white;
-     }
-        
-      /* 댓글수정 모달안 디자인 */
-      .content-in {
-      xborder: 1px solid gray;
-      width: 700px;
-      padding:0 20 20 20;
-      margin: 0 auto;
-      margin-top:50px;
-    }
-    .sendbtn {
-      xborder: 1px solid red;
-      xwidth: 640px;
-      margin-top: 35px;
-      text-align: center;
-      
-    }
     
   </style>
 </head>
@@ -165,7 +79,6 @@
             <td>공지사항</td> 
             </c:if>
         </tr>    
-        
          <tr>
          <td>글 번호</td>
          <td>${board.no}</td>
@@ -409,6 +322,12 @@
 
 <script>
 
+	 var a = document.getElementById("buttonChange1")
+	 var b = document.getElementById("buttonChange2")
+	 
+	 a.style.backgroundColor = "red";
+	 b.style.backgroundColor = "white";
+ }
 // 좋아요 여부에 따라 하트 
 /*
 function modalOn(){
@@ -452,14 +371,6 @@ if (tag.getAttribute("value") == 1) {
 });  */
 
 
-
-  
-  function boardReport(){
-	  
-	  window.open("BoardReport.jsp", "report", "width=600 height = 450")
-	  
-	}
-  
   </script>
 </body>
 </html>
