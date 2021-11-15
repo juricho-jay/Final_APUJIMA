@@ -17,7 +17,9 @@ public class BoardFormController extends HttpServlet {
       throws ServletException, IOException {
 
     // 출력을 담당할 뷰를 호출한다.
-    request.getRequestDispatcher("/board/BoardForm.jsp").forward(request, response);
+    //    request.getRequestDispatcher("/board/BoardForm.jsp").forward(request, response);
 
+    request.setAttribute("contentUrl", "/board/BoardForm.jsp");
+    request.getRequestDispatcher("/template3.jsp").forward(request, response);
   }
 }

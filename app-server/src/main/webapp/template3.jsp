@@ -51,7 +51,7 @@
 </head>
 <body>
 
-<jsp:include page="/headerD.jsp"/>
+<jsp:include page="/darkHeader.jsp"/>
  <jsp:include page="/boardSidebar.jsp"/>
 <div class="container" >
 <div id="content">

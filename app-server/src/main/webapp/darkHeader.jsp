@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <head>
 <style>
 
@@ -110,7 +111,10 @@ input.img-button {
 		textarea::-webkit-input-placeholder {color:#2c473e;}
 		textarea:-ms-input-placeholder {color:#2c473e;}
 
-    
+    .no-italics {
+    font-style: normal;   
+}
+
 </style>
 </head>
 <header>
@@ -151,19 +155,29 @@ input.img-button {
 					      </div>
 					    </div>
 				</li>
-				<li>
-				<a href="/apus/auth/LogIn.jsp" class="btn4" style="color: 25362977;">
-			   로그인
-			  </a>
-			  <a href="/apus/member/MemberForm.jsp" class="btn4" style="color: 25362977;">
+				  <!-- 로그인 x -->
+        <c:if test="${empty sessionScope.loginUser}">
+        <li>
+        <a href="/apus/auth/LogIn.jsp" class="btn4" style="color: #2c473e;">
+         로그인
+        </a>
+        <a href="/apus/member/MemberForm.jsp" class="btn4" style="color: #2c473e;">
          회원가입
         </a>
-			  </li>
-				<!-- <li>
-				<a href = "/apus/member/MemberSignUp.jsp">
-        <input class="btn btn-primary" type="button" value="회원가입" onclick="MemberForm.jsp" style="background-color: transparent; color: grey; border-color: white;">
-        </a>
-        </li> -->
+        </li>
+        </c:if>
+        <!-- 로그인 o -->
+        <c:if test="${not empty sessionScope.loginUser}">
+        <li>
+        <a href="/apus/auth/userInfoList" class="button" style="color:#2c473e"><b>${loginUser.nickname}</b></a>
+        <i class="no-italics" style="color: #2c473e">&nbsp;님 <br>환영합니다!</i>
+        </li>
+        <li>
+        <form name="logout" action='/apus/auth/logout' method = "get">
+        <a class="btn4 "href="javascript:logout.submit();" style="color: #2c473e">로그아웃</a>
+        </form>
+        </li>
+        </c:if>
       </ul>
     </div>
   </div>

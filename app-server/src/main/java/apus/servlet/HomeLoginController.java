@@ -17,6 +17,6 @@ public class HomeLoginController extends HttpServlet {
       throws ServletException, IOException {
     request.setAttribute("pageTitle", "메인화면-회원");
     request.setAttribute("contentUrl", "/index2.jsp");
-    request.getRequestDispatcher("/templateLogin.jsp").forward(request, response);
+    request.getRequestDispatcher("/homeTemplate.jsp").forward(request, response);
   }
 }

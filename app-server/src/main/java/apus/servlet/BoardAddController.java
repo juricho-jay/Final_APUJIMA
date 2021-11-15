@@ -81,8 +81,10 @@ public class BoardAddController extends HttpServlet {
       }
 
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("BoardAdd.jsp").forward(request, response);
+      //      response.setHeader("Refresh", "1;url=list");
+      //      request.getRequestDispatcher("BoardAdd.jsp").forward(request, response);
+
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
@@ -91,12 +93,6 @@ public class BoardAddController extends HttpServlet {
       // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
       요청배달자.forward(request, response);
-
-
-
-
-
-
 
     }
   }

@@ -65,7 +65,7 @@
       <span class="box-content">${mailBox.content}</span>
   </div>
 </div>
-<button class="btn btn-outline-secondary btn-sm">목록</button>
+<button class="btn btn-outline-secondary btn-sm" onclick="location.href='list'">목록</button>
   <a href='delete?no=${mailBox.no}' class="btn btn-outline-secondary btn-sm">삭제</a> 
 
  <%-- <form action='list'>

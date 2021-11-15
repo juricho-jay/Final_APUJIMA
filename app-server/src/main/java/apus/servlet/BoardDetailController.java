@@ -83,7 +83,7 @@ public class BoardDetailController extends HttpServlet {
       request.setAttribute("commentNo", commentNo);
 
       request.setAttribute("contentUrl", "/board/BoardDetail.jsp");
-      request.getRequestDispatcher("/template2.jsp").forward(request, response);
+      request.getRequestDispatcher("/darkTemplate.jsp").forward(request, response);
     }  
     catch (Exception e) {
       e.printStackTrace();

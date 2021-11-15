@@ -52,6 +52,7 @@
   </script>
 <div class="container">
 <form name ="boardDetailInfo" action = 'report' onsubmit="return checkValue()">
+   <input type ="hidden" name = "no" value ="${board.no}">
   <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
     <thead>
       <tr>
@@ -75,13 +76,12 @@
          <tr>
          <td>글 번호</td>
          <td>${board.no}</td>
-         <input type ="hidden" name = "no" value ="${board.no}">
+      
          </tr>
   
   <tr>
       <td style = "width: 20%"> 글 제목</td>
       <td colspan ="2">${board.title}</td>
-      <input type = "hidden" id = 'okok'>
  </tr>
   <tr>
       <td>작성자</td>
@@ -217,14 +217,6 @@
 
 <script>
 
-<<<<<<< HEAD
-	 var a = document.getElementById("buttonChange1")
-	 var b = document.getElementById("buttonChange2")
-	 
-	 a.style.backgroundColor = "red";
-	 b.style.backgroundColor = "white";
- }
-=======
 // 좋아요 여부에 따라 하트 
 
 document.querySelectorAll("#heartBtn").forEach((tag) => {
@@ -264,7 +256,6 @@ if (tag.getAttribute("value") == 1) {
 	  window.open("BoardReport.jsp", "report", "width=600 height = 450")
 	  
 	}
->>>>>>> 30a90532b8eb3f92021d0d0774e3b0617f11833d
   
   </script>
 </body>
