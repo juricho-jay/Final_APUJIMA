@@ -29,21 +29,68 @@
     max-width: 1140px;
   }
 }
+
+#box1 {
+  height:300px;
   
-  .doctor {
-    width: 640px;
-    height:500px; 
-    margin-top: 100px;
+}
+
+  .text-one { 
+    width:300px;
+    height:100px;
+    border: 1px solid gray;
+    border-radius:10px;
+    font-size:18px;
+    text-align:center;
+    line-height: 100px;
+    xborder: 1px solid red;
+    float: left;
+    width:30%;
+    box-sizing: border-box;
+  }
+  
+  .text-two { 
+    width:300px;
+    height:100px;
+    border: 1px solid gray;
+    border-radius:10px;
+    font-size:18px;
+    text-align:center;
+    line-height: 100px;
+    float: left;
+    margin-left: 5%;
+    width:30%;
+    box-sizing: border-box;
+  }
+  
+  .text-three { 
+    width:300px;
+    height:100px;
+    border: 1px solid gray;
+    border-radius:10px;
+    font-size:18px;
+    text-align:center;
+    line-height: 100px;
+    float: right;
+    width:30%;
+    box-sizing: border-box;
+  }
+  
+  #doctor {
+    xwidth: 640px;
+    height:500px;
+    display: grid;
+    place-content:center; 
   }
   
  .doctorjpg {
     float:left;
-    width:300px;
-    height:400px; 
+    
   }
+  
  .doctorinfo {
     display:inline-block; 
-    width:200px; 
+    width:300px; 
     height:300px; 
     margin-left:100px;
     margin-top: 100px;
@@ -55,4 +102,6 @@
     font-style: italic;
     font-family: 'Nanum Myeongjo', serif;
   }
+  
+  
   

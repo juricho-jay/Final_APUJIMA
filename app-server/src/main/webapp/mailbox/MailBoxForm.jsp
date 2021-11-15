@@ -95,7 +95,7 @@
   </textarea>
 </div>
 <div class="col-12">
-<button class="btn btn-primary btn-sm">보내기</button>
+<button type="submit"  class="btn btn-primary btn-sm">보내기</button>
   </div>
 </form>
 </div><!-- .container -->

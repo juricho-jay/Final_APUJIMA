@@ -220,10 +220,10 @@
 							  <label for="f-content">내용</label>
 							  <br>
 							  <textarea id="f-content" name="content" rows=5 cols=73 class="form-control"></textarea>
-							  <br><hr>
+							  <br>
 							</div>
-							<div class="col-12 sendbtn">
-							<button type="submit" class="btn btn-outline-secondary">보내기</button>
+							<div>
+							<button type="submit" class="btn btn-outline-secondary" onclick="getData()">보내기</button>
 							  </div>
 							</form>
 		        </div>
@@ -253,6 +253,7 @@
 		</div>
 		
 		</div>
+		
 		
 		
 	<%-- <table class="table table-hover">
@@ -309,6 +310,10 @@
 		        modal.style.display = "none"
 		    }
     })
+    
+    $(document).on(selector, event, function() {
+
+}); 
 </script>
 
 

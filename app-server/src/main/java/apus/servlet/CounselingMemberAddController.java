@@ -95,8 +95,9 @@ public class CounselingMemberAddController extends HttpServlet{
 
       counselingDao.insert(counseling);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("CounselingMemberAdd.jsp").forward(request, response);
+      //      response.setHeader("Refresh", "1;url=list");
+      //      request.getRequestDispatcher("CounselingMemberAdd.jsp").forward(request, response);
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
