@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 aside#left{
+    border: 1px solid red;
     float: left;
-    width: 10em;
+    width: 300px;
     margin-right: 1em;
 }
  
@@ -30,16 +31,14 @@ aside#main{
 }
 </style>
 <aside id = "left"> 
-<div id = "container">
-<h4 style= "margin-left :30px"> 게시판 선택</h4>
+<h4> 게시판 선택</h4>
 
 
-  <ul style = "width : 260px; height : 100px">
+  <ul>
   <li><a href ="list"class="list-group-item list-group-item-action text-center font-weight-bold">전체 목록</a></li>
   <li><a href ="freeBoardList"class="list-group-item list-group-item-action text-center font-weight-bold">자유게시판 목록</a></li>
   <li><a href="doctorBoardList" class="list-group-item list-group-item-action text-center font-weight-bold">Healer지식in</a></li>
   <li> <a href="noticeBoardList" class="list-group-item list-group-item-action text-center font-weight-bold">공지사항</a></li>
 </ul>
-</div>     
  
 </aside>

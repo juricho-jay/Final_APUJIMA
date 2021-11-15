@@ -22,7 +22,8 @@
 	/* 전체 높이  */
 	.wrapper{ 
 	  display: flex; 
-	  min-height: 100vh; 
+	  min-height: 100vh;
+	  min-width: 1000px; 
 	  flex-direction: column; 
 	  }
 	  

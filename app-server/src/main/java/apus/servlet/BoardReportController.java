@@ -66,6 +66,8 @@ public class BoardReportController extends HttpServlet {
       report.setRequester(requester);
       report.setRequestBoard(requestBoard);
 
+      //신고 검사
+
       request.setAttribute("report", report);
 
       // 출력을 담당할 뷰를 호출한다.
