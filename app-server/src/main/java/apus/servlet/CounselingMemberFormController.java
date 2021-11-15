@@ -14,8 +14,12 @@ public class CounselingMemberFormController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
+    request.setAttribute("contentUrl", "/counseling/CounselingMemberForm.jsp");
+    request.getRequestDispatcher("/darkTemplate.jsp").forward(request, response);      
+
     // 출력을 담당할 뷰를 호출한다.
-    request.getRequestDispatcher("/counseling/CounselingMemberForm.jsp").forward(request, response);
+    //    request.getRequestDispatcher("/counseling/CounselingMemberForm.jsp").forward(request, response);
   }
 }
 

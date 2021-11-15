@@ -66,7 +66,8 @@
       position: absolute;
 	    overflow-y: auto;
 	    overflow: hidden;
-	    max-height: 700px;
+	    xmax-height: 700px;
+	    height:700px;
       top: 100px;
       xpadding: 20px;
     }
@@ -111,6 +112,7 @@
       .content-in {
 	    xborder: 1px solid gray;
 	    width: 700px;
+	    height: auto;
 	    padding:0 20 20 20;
 	    margin: 0 auto;
 	    margin-top:50px;
@@ -239,10 +241,10 @@
 							  <label for="f-content">내용</label>
 							  <br>
 							  <textarea id="f-content" name="content" rows=5 cols=73 class="form-control"></textarea>
-							  <br><hr>
+							  <br>
 							</div>
-							<div class="col-12 sendbtn">
-							<button type="submit" class="btn btn-outline-secondary">보내기</button>
+							<div>
+							<button type="submit" class="btn btn-outline-secondary" onclick="getData()">보내기</button>
 							  </div>
 							</form>
 							            
@@ -329,6 +331,10 @@
 		        modal.style.display = "none"
 		    }
     })
+    
+    $(document).on(selector, event, function() {
+
+}); 
 </script>
 
 
