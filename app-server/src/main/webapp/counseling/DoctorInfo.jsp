@@ -21,7 +21,7 @@
 		 <c:if test="${member.doctorOrNot eq '2'}">
 			 <div id='doctor'> 
 				<!-- <form action='../counseling/CounselingMemberForm.jsp' method='post' > -->
-				  <div class="container">
+				  <div class="containerBox">
 						<div class='doctorjpg'>
 						  <img src="../img/doctor/doctor1.jpg" width="auto" height="400">
 					  </div>

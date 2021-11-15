@@ -281,6 +281,8 @@ function trashDelete(no) {
   $('<input>').attr('type','hidden').attr('value', no).attr('name','no').appendTo(deleteForm);
   }; 
 
+
+
   
 
 // 추가 모달 버튼에 이벤트를 건다. 

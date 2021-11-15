@@ -32,8 +32,8 @@
    height:100% 
    }
    #content{
-   border: 1px solid red;
-   margin-left : 300px;
+   /* border: 1px solid red; */
+   margin-left : 180px;
    min-heigth: 600px;
    }
    
@@ -56,7 +56,7 @@
 </head>
 <jsp:include page="/darkHeader.jsp"/>
 <body>
-<div class="container" style ="min-height: 800px; ">
+<div class="container" style ="min-height: 800px; float:middle;">
 
 
  <jsp:include page="/boardSidebar.jsp"/>
