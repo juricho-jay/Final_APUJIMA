@@ -10,5 +10,6 @@ public interface BucketDao {
   Bucket findByNo(int no) throws Exception;
   void completeUpdate(Bucket bucket) throws Exception;
   void cancelCompleteUpdate(Bucket bucket) throws Exception;
+  void update(Bucket bucket) throws Exception;
   void delete(int no) throws Exception;
 }

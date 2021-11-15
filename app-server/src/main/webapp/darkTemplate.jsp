@@ -27,13 +27,16 @@
 	  flex-direction: column; 
 	  }
 	  
+	  
+	  
+	  
 	</style>
   
 </head>
 
 <body>
 	<jsp:include page="/darkHeader.jsp"/>
-	<%-- <jsp:include page="/sidebar.jsp"/> --%>
+	<jsp:include page="/sidebar.jsp"/>
 	
 		<div class="container wrapper"> <!-- container(양옆) + wrapper (높이) -->
 		
