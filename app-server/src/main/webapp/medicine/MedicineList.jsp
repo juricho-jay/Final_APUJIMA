@@ -2,25 +2,11 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>약품 목록</title>
-   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core//dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <style>
-    .container {
-    xborder: 1px solid red;
-    xwidth: 640px;
-    }
-  </style>
-  
-</head>
-<body>
-<div class="container">
+
+<link rel="stylesheet" href="/apus/css/MedicineList.css">
+
+<title>약품 목록</title>
+<div>
 <h1>약품 목록</h1>
 <c:if test = "${loginUser.doctorOrNot eq 2}">
 
@@ -58,12 +44,7 @@
 </c:forEach>
 </tbody>
 </table>
-
-</div><!-- .container -->
-
-</body>
-</html>
-
+</div>
 
 
 

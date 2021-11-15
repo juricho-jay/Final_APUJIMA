@@ -3,6 +3,7 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="userInfo.css">
+  <link rel="stylesheet" href="/apus/css/UserInfo.css">
   
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
@@ -135,8 +136,8 @@
                 <hr class="my-4">
                 
                 
-                <button type="button" id="openModalBtn" class="btn btn-secondary" data-toggle="modal" data-target="#checkModal" style="background-color: #5e72e4 !important;">출석 체크</button>
-                <button type="button" id="openModalBtn2" class="btn btn-secondary" data-toggle="modal" data-target="#checkModal2" style="background-color: #5e72e4 !important;">버킷리스트</button>
+                <button type="button" id="openModalBtn" class="btn btn-secondary" style="background-color: #5e72e4 !important;">출석 체크</button>
+                <button type="button" id="openModalBtn2" class="btn btn-secondary" style="background-color: #5e72e4 !important;">버킷리스트</button>
                 
                   <%-- <c:if test='${not empty dateCheck}'>
                   alert()
@@ -306,7 +307,7 @@
       <!--Footer-->
       <div class="modal-footer justify-content-center">
         <!-- <span class="mr-4">Spread the word!</span> -->
-        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">닫기</button>
+        <button type="button" id="closeCModal" class="btn btn-outline-primary btn-rounded btn-md ml-4">닫기</button>
       </div>
     </div>
     <!--/.Content-->
@@ -315,7 +316,7 @@
 <!--Modal: Name-->
 
 <!--Modal: 버킷 리스트 모달-->
-<div class="modal fade" id="checkModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="bucketModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <!--Content-->
     <div class="modal-content">
@@ -328,7 +329,7 @@
       <!--Footer-->
       <div class="modal-footer justify-content-center">
         <!-- <span class="mr-4">Spread the word!</span> -->
-        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">닫기</button>
+        <button type="button" id="closeBModal" class="btn btn-outline-primary btn-rounded btn-md ml-4">닫기</button>
       </div>
     </div>
     <!--/.Content-->
@@ -339,17 +340,29 @@
   
   <script>
 
+  // 내 정보의 모달은 iFrame
 	
-	// 추가 모달 버튼에 이벤트를 건다. 
+	// 출석체크 버튼에 이벤트를 건다. 
 	$('#openModalBtn').on('click', function(){
 	$('#checkModal').modal('show');
 
 	});
 	
-	$('#openModalBtn2').on('click', function(){
-		  $('#checkModal2').modal('show');
+	// 출석체크 안의 취소 버튼에 이벤트를 건다. 
+	$('#closeCModal').on('click', function(){
+	$('#checkModal').modal('hide');
+	});
 
-		  });
+	// 버킷 리스트 버튼에 이벤트를 건다. 
+	$('#openModalBtn2').on('click', function(){
+		  $('#bucketModal').modal('show');
+	});
+	
+	// 버킷 리스트 안의 취소 버튼에 이벤트를 건다. 
+	$('#closeBModal').on('click', function(){
+	$('#bucketModal').modal('hide');
+	});
+
 	
 	
 	// 드롭다운 메뉴
