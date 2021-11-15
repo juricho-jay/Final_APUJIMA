@@ -70,7 +70,7 @@
 <h1>상담신청하기</h1>
 
 
-<form class="total" name = "counselingmember" action='add' method='post' >
+<form class="total" name = "counselingmember" action='add'>
   <div class="mb-3 row">
     <label for='f-client' class="col-sm-3 col-form-label">이름</label>
     <div class="col-sm-6">
