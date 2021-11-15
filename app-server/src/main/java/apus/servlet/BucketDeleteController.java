@@ -55,9 +55,9 @@ public class BucketDeleteController extends HttpServlet{
       int no = 0;
       String[] noList = request.getParameterValues("no");
 
-
-      if (noList.length == 0) { 
+      if (noList == null) { 
         response.sendRedirect("list");
+        return;
       }
 
 

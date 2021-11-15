@@ -104,7 +104,15 @@
    delete from apus_bucket
    where bucket_no=#{no}
   </delete>
-  
+
+  <update id="update" parameterType="bucket">
+   update apus_bucket set
+     title=#{title},
+     content=#{content}
+   where 
+     bucket_no=#{no}
+  </update>
+
 
 </mapper>
 

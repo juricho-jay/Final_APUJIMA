@@ -39,9 +39,11 @@ public class CounselingMemberDoctorListController extends HttpServlet{
       request.setAttribute("counselingList", counselingList);
       request.setAttribute("memberList", memberList);
 
-      // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/counseling/CounselingDoctorList.jsp");
-      요청배달자.forward(request, response);
+
+      request.setAttribute("contentUrl", "/counseling/CounselingDoctorList.jsp");
+      request.getRequestDispatcher("/darkTemplate.jsp").forward(request, response);      
+      //      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/counseling/CounselingDoctorList.jsp");
+      //      요청배달자.forward(request, response);
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.

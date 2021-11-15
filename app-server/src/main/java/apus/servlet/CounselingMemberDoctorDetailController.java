@@ -46,7 +46,9 @@ public class CounselingMemberDoctorDetailController extends HttpServlet{
       counseling.getRegisteredDate();
 
       request.setAttribute("counseling", counseling);
-      request.getRequestDispatcher("CounselingDoctorDetail.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/counseling/CounselingDoctorDetail.jsp");
+      request.getRequestDispatcher("/darkTemplate.jsp").forward(request, response);
+      //      request.getRequestDispatcher("CounselingDoctorDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
