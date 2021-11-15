@@ -15,7 +15,7 @@
 <body>
 <div class="container">
 <h1>${loginUser.id}님의 상담신청리스트</h1>
-<a href='CounselingForm.jsp' class="btn btn-outline-primary btn-sm">상담신청하기</a><br>
+<!-- <a href='CounselingForm.jsp' class="btn btn-outline-primary btn-sm">상담신청하기</a><br> -->
 <table class="table table-hover">
 <thead>
   <tr>

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
+import apus.dao.CommentDao;
+import apus.dao.LikeDao;
 import apus.domain.Board;
 
 @WebServlet("/board/delete")
@@ -18,12 +20,17 @@ public class BoardDeleteController extends HttpServlet{
 
   SqlSession sqlSession;
   BoardDao boardDao;
+  CommentDao commentDao;
+  LikeDao likeDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     boardDao = (BoardDao) 웹애플리케이션공용저장소.getAttribute("boardDao");
+    commentDao = (CommentDao) 웹애플리케이션공용저장소.getAttribute("commentDao");
+    likeDao = (LikeDao) 웹애플리케이션공용저장소.getAttribute("likeDao");
+
   }
 
   @Override
@@ -43,6 +50,7 @@ public class BoardDeleteController extends HttpServlet{
       sqlSession.commit();
 
       response.sendRedirect("list");
+
 
     } catch (Exception e) {
       request.setAttribute("error", e);

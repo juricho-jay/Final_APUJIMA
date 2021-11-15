@@ -10,21 +10,27 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import org.apache.ibatis.session.SqlSession;
-import apus.dao.MedicineDao;
-import apus.domain.Medicine;
+import apus.dao.BoardDao;
+import apus.dao.MemberDao;
+import apus.dao.ReportDao;
+import apus.domain.Report;
 
-@WebServlet("/admin/medicineReject")
-public class AdminMedicineRejectController extends HttpServlet {
+@WebServlet("/admin/reportReject")
+public class AdminReportRejectController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  BoardDao boardDao;
+  MemberDao memberDao;
   SqlSession sqlSession;
-  MedicineDao medicineDao;
+  ReportDao reportDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    medicineDao = (MedicineDao) 웹애플리케이션공용저장소.getAttribute("medicineDao");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+    reportDao = (ReportDao) 웹애플리케이션공용저장소.getAttribute("reportDao");
+    boardDao = (BoardDao) 웹애플리케이션공용저장소.getAttribute("boardDao");
   }
 
   @Override
@@ -32,15 +38,17 @@ public class AdminMedicineRejectController extends HttpServlet {
       throws ServletException, IOException {
     try {
 
-      String name = request.getParameter("name");
-      Medicine medicine = medicineDao.findByName(name);
+      int no = Integer.parseInt(request.getParameter("no"));
+      String id = request.getParameter("id");
 
-      medicineDao.requestCancle(medicine);
+      Report report = reportDao.findByReport(no, id);
+
+      reportDao.delete(report.getNo());
       sqlSession.commit();
 
 
       // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("approvalMedicine");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("approvalReport");
       요청배달자.forward(request, response);
 
     } catch (Exception e) {

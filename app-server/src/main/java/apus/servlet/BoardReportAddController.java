@@ -40,52 +40,51 @@ public class BoardReportAddController extends HttpServlet {
       throws ServletException, IOException {
 
     HttpSession session = request.getSession(false);
-
-
     if (session.getAttribute("loginUser") == null) {
       response.sendRedirect("/apus/index.jsp");
       return;
     }
-
     try {
-
-      // 신고리스트 가져와서 중복 신고 못하게 해야하는데 일단 지금 테스트중
-
-      Report report = new Report();
 
       int no = Integer.parseInt(request.getParameter("no"));
       Board requestBoard = boardDao.findByNo(no);
+      String id = request.getParameter("reportId");
+      Member requester = memberDao.findById(id);
 
-      Member requester = (Member) request.getSession(false).getAttribute("loginUser");
+      Report report = reportDao.findByReport(no, id);
 
-      if(requester == null) {
-        throw new Exception("로그인 되어 있지 않습니다.");
-      }
       String reason = request.getParameter("reason");
-      System.out.println("reason => " + reason);
       String reason2 = request.getParameter("reason2");
-      System.out.println("reason2 => " + reason2);
 
-      if(reason2.length() == 0) {
-        report.setRequester(requester);
-        report.setRequestBoard(requestBoard);
-        report.setReason(reason);
-        report.setCheck(0);
-        reportDao.insert(report);
-        sqlSession.commit();
+      if (report == null) {
+        Report adminReport = new Report();
 
-      } else {
-        report.setRequester(requester);
-        report.setRequestBoard(requestBoard);
-        report.setReason(reason2);
-        report.setCheck(0);
-        reportDao.insert(report);
-        sqlSession.commit();
-      }
+        if(reason2.length() == 0) {
+          adminReport.setRequester(requester);
+          adminReport.setRequestBoard(requestBoard);
+          adminReport.setReason(reason);
+          adminReport.setCheck(0);
+          reportDao.insert(adminReport);
+          sqlSession.commit();
+          request.setAttribute("report", adminReport);
 
-      request.setAttribute("report", report);
+        } else {
+          adminReport.setRequester(requester);
+          adminReport.setRequestBoard(requestBoard);
+          adminReport.setReason(reason2);
+          adminReport.setCheck(0);
+          reportDao.insert(adminReport);
+          sqlSession.commit();
+          request.setAttribute("report", adminReport);
+        }
 
-      response.sendRedirect("list");
+      } 
+      // 신고한 적이 있으면..? 이미 신고하셨습니다 어떻게 띄우지..?
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/board/BoardReport.jsp");
+      요청배달자.forward(request, response);
+
+      // request.setAttribute("report", report);
+      //      response.sendRedirect("list");
 
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.

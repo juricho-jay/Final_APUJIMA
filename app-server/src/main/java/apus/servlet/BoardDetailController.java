@@ -13,9 +13,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.dao.CommentDao;
+import apus.dao.LikeDao;
 import apus.dao.MemberDao;
 import apus.domain.Board;
 import apus.domain.Comment;
+import apus.domain.Like;
+import apus.domain.Member;
 
 @WebServlet("/board/detail")
 public class BoardDetailController extends HttpServlet {
@@ -23,6 +26,7 @@ public class BoardDetailController extends HttpServlet {
   BoardDao boardDao;
   MemberDao memberDao;
   CommentDao commentDao;
+  LikeDao likeDao;
   SqlSession sqlSession;
 
   @Override
@@ -31,6 +35,7 @@ public class BoardDetailController extends HttpServlet {
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     boardDao = (BoardDao) 웹애플리케이션공용저장소.getAttribute("boardDao");
     commentDao = (CommentDao)웹애플리케이션공용저장소.getAttribute("commentDao");
+    likeDao = (LikeDao)웹애플리케이션공용저장소.getAttribute("likeDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
 
   }
@@ -40,32 +45,45 @@ public class BoardDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     HttpSession session = request.getSession(false);
-
-
     if (session.getAttribute("loginUser") == null) {
       response.sendRedirect("/apus/index.jsp");
       return;
     }
-
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       Board board = boardDao.findByNo(no);
+      Like like = likeDao.findBoardLike(no, member.getNo());
 
-      if(board == null) {
+      if (board == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
 
+      //누른 적 없음
+      if (like == null) {
+        request.setAttribute("likeOrNot", "0");
+      } else if (like != null) {
+        request.setAttribute("likeOrNot", like.getLikeOrNot());
+      }
+
       Collection<Comment> commentList = commentDao.findBoardComment(board.getNo());
+      Collection<Like> likeList = likeDao.findBoardCount(board.getNo());
+
+      //해당 게시물의 좋아요/댓글 갯수
+      int likeNo = likeList.size();
+      int commentNo = commentList.size();
 
       boardDao.updateCount(board.getNo());
       sqlSession.commit();
 
       request.setAttribute("commentList", commentList);
       request.setAttribute("board", board);
+      request.setAttribute("likeNo", likeNo);
+      request.setAttribute("commentNo", commentNo);
 
-      request.getRequestDispatcher("/board/BoardDetail.jsp").forward(request, response);
-
+      request.setAttribute("contentUrl", "/board/BoardDetail.jsp");
+      request.getRequestDispatcher("/darkTemplate.jsp").forward(request, response);
     }  
     catch (Exception e) {
       e.printStackTrace();
