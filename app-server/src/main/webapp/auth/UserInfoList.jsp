@@ -136,7 +136,9 @@
                 <hr class="my-4">
                 
                 
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#checkModal" style="background-color: #5e72e4 !important;">출석 체크</button>
+                <button type="button" id="openModalBtn" class="btn btn-secondary" data-toggle="modal" data-target="#checkModal" style="background-color: #5e72e4 !important;">출석 체크</button>
+                <button type="button" id="openModalBtn2" class="btn btn-secondary" data-toggle="modal" data-target="#checkModal2" style="background-color: #5e72e4 !important;">버킷리스트</button>
+                
                   <%-- <c:if test='${not empty dateCheck}'>
                   alert()
                   </c:if> --%>
@@ -312,6 +314,28 @@
   </div>
 </div>
 <!--Modal: Name-->
+
+<!--Modal: 버킷 리스트 모달-->
+<div class="modal fade" id="checkModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Body-->
+      <div class="modal-body mb-0 p-0">
+        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+          <iframe class="embed-responsive-item" src="/apus/bucket/list"></iframe>
+        </div>
+      </div>
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <!-- <span class="mr-4">Spread the word!</span> -->
+        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Name-->
   
   
   <script>
@@ -322,6 +346,11 @@
 	$('#checkModal').modal('show');
 
 	});
+	
+	$('#openModalBtn2').on('click', function(){
+		  $('#checkModal2').modal('show');
+
+		  });
 	
 	
 	// 드롭다운 메뉴
