@@ -14,13 +14,13 @@
   .container {
     xborder: 1px solid red;
     width: 640px;
-    text-align: left;
+    xtext-align: left;
   }
   .doctor {
     width: 640px;
     height:500px; 
     margin-top: 100px;
-    text-align: center;
+    xtext-align: center;
   }
  .doctorjpg {
     xborder: 1px solid red;
@@ -53,11 +53,11 @@
 	<h1>APUJIMA 의사</h1>
 		<c:forEach items="${memberList}" var="member">
 		 <c:if test="${member.doctorOrNot eq '2'}">
-			<div class='doctor'>
+			<!-- <div class='doctor'> -->
 				<form action='../counseling/CounselingMemberForm.jsp' method='post' >
 					<div class='doctorjpg'>
 					  <img src="../img/doctor/doctor1.jpg" width="auto" height="400">
-					</div>
+				</div>
 					<div class='doctorinfo'>
 						<p class='title'>"${member.doctor.introduction}"</p>
 						<input type="hidden" name="member.name" value="${member.name}">
@@ -71,7 +71,7 @@
 					</div>
 					
 	      </form>
-			</div>
+			<!-- </div> -->
 		<hr>
 			</c:if>
 		</c:forEach>
