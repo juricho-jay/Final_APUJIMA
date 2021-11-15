@@ -54,20 +54,22 @@
    
     
 </head>
-<body>
-<div class="container" >
-
 <jsp:include page="/darkHeader.jsp"/>
+<body>
+<div class="container" style ="min-height: 800px; ">
+
+
  <jsp:include page="/boardSidebar.jsp"/>
 <div id="content" >
-<jsp:include page="${contentUrl}"/>
+<jsp:include page="${contentUrl}" />
 
 </div><!-- #content --> 
-<jsp:include page="/footer.jsp"/>
+
 
 
 </div><!-- .container -->
 </body>
+<jsp:include page="/footer.jsp"/>
 
 </html>
 
