@@ -129,7 +129,7 @@ function div_OnOff(v,id){
 <div class="container">
 <div class=""></div>
 <h1>회원가입</h1>
-<form name = "userInfo" action='add' onsubmit="return checkValue()">
+<form name = "userInfo" action='add' onsubmit="return checkValue()" method='post' enctype="multipart/form-data">
 
 <div class="col-md-6">
   <label for="validationServer04" class="form-label">-APUJIMA에 오신 것을 환영합니다-</label>
@@ -219,7 +219,7 @@ function div_OnOff(v,id){
 <div class="mb-3 row">
   <label for='f-photo' class="col-sm-3 col-form-label">사진</label>
   <div class="col-sm-6">
-    <input id='f-photo' type='text' name='photo' class="form-control">
+    <input id='f-photo' type='file' name='photo' class="form-control">
   </div>
 </div>
 
