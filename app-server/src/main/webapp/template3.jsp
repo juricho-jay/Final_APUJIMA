@@ -31,6 +31,11 @@
    width:100%; 
    height:100% 
    }
+   #content{
+   border: 1px solid red;
+   margin-left : 300px;
+   min-heigth: 600px;
+   }
    
    @media (min-width: 768px) {
 		  .container {
@@ -50,19 +55,20 @@
     
 </head>
 <body>
+<div class="container" >
 
 <jsp:include page="/darkHeader.jsp"/>
  <jsp:include page="/boardSidebar.jsp"/>
-<div class="container" >
-<div id="content">
+<div id="content" >
 <jsp:include page="${contentUrl}"/>
+
 </div><!-- #content --> 
+<jsp:include page="/footer.jsp"/>
 
 
 </div><!-- .container -->
-
 </body>
-<jsp:include page="/footer.jsp"/>
+
 </html>
 
 
