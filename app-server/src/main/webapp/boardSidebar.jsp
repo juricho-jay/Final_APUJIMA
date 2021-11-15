@@ -6,7 +6,6 @@ aside#left{
     border: 1px solid red;
     float: left;
     width: 300px;
-    margin-right: 1em;
 }
  
 aside#left ul{ list-style: none}

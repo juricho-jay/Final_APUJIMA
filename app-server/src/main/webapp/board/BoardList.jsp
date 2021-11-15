@@ -3,9 +3,7 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
+
   <title>게시판 목록</title>
    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
@@ -20,11 +18,10 @@
     }
   </style>
   
-</head>
-<body>
+
 <div>
 
-<div class="container" style = "margin-left : 120px">
+<div class="container" >
 <h1>게시판 목록</h1>
 <table class="table table-hover">
 <thead>
@@ -66,8 +63,7 @@
 
 </div><!-- .container -->
 </div>
-</body>
-</html>
+
 
 
 
