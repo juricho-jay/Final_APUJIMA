@@ -13,7 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="bucketList.css">
+  <link rel="stylesheet" href="/apus/css/BucketList.css">
   
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -53,17 +53,17 @@
                                                 <!-- <div class="badge badge-danger ml-2">Rejected</div> -->
                                                 </div>
                                             </div>
-	                                            <div class="widget-content-right">
-	                                              <form id="complete" action="update">
-	                                              <sub>${bucket.registeredDate}&nbsp;&nbsp;</sub> 
-	                                                  <input type="hidden" name="no" value="${bucket.no}"></input>
-				                                            <button class="border-0 btn-transition btn btn-outline-success2"> 
-				                                            <i>${bucket.completedDate}</i></button> 
-				                                            <button class="btn-outline-success" id="completeBtn" name="complete" value="${bucket.complete}" type="submit">
-				                                            <i class="bi bi-check" style="font-size: 1.5em"></i></button> 
-				                                            <button class="border-0 btn-transition btn btn-outline-danger" name="b-trashBtn" onclick="trashDelete(${bucket.no})" type="button">
-				                                            <i class="bi bi-trash"></i> </button> 
-				                                        </form>
+                                              <div class="widget-content-right">
+                                                <form id="complete" action="update">
+                                                <sub>${bucket.registeredDate}&nbsp;&nbsp;</sub> 
+                                                    <input type="hidden" name="no" value="${bucket.no}"></input>
+                                                    <button class="border-0 btn-transition btn btn-outline-success2"> 
+                                                    <i>${bucket.completedDate}</i></button> 
+                                                    <button class="btn-outline-success" id="completeBtn" name="complete" value="${bucket.complete}" type="submit">
+                                                    <i class="bi bi-check" style="font-size: 1.5em"></i></button> 
+                                                    <button class="border-0 btn-transition btn btn-outline-danger" name="b-trashBtn" onclick="trashDelete(${bucket.no})" type="button">
+                                                    <i class="bi bi-trash"></i> </button> 
+                                                </form>
                                               </div>
                                         </div>
                                     </div>
@@ -80,7 +80,7 @@
             <div class="two">
             <button class="btn btn-primary" id="openModalBtn" style="margin-top: 2.5px; float: right">버킷리스트 추가</button>
             <button class="mr-2 btn btn-link btn-sm" id="deleteBtn" style="float: right; margin-top: 5px;">삭제</button>
-            <button class="mr-2 btn btn-link btn-sm" id="homeBtn" style="float: right; margin-top: 5px;" onclick="moveHome()">취소</button>
+            <!-- <button class="mr-2 btn btn-link btn-sm" id="homeBtn" style="float: right; margin-top: 5px;" onclick="moveHome()">취소</button> -->
             </div>
             </div>
             </div>
@@ -89,36 +89,36 @@
             
 <!-- 추가 모달 영역 -->        
 <form action='add'>
-		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" 
-		  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">버킷리스트 추가</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		          <div class="form-group">
-		            <input type="hidden" id="b-id" name="id" value="${loginUser.id}">
-		            <label for="bucket-title" class="col-form-label">제목</label>
-		            <input type="text" class="form-control" id="bucket-title" name="title">
-		          </div>
-		          <div class="form-group">
-		            <label for="bucket-content" class="col-form-label">내용</label>
-		            <textarea class="form-control" id="bucket-content" name="content"></textarea>
-		          </div>
-		          
-		          
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" id="a-cancelBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
-		        <button type="submit" id="bucketAddBtn" class="btn btn-primary">확인</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" 
+      aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">버킷리스트 추가</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <input type="hidden" id="b-id" name="id" value="${loginUser.id}">
+                <label for="bucket-title" class="col-form-label">제목</label>
+                <input type="text" class="form-control" id="bucket-title" name="title">
+              </div>
+              <div class="form-group">
+                <label for="bucket-content" class="col-form-label">내용</label>
+                <textarea class="form-control" id="bucket-content" name="content"></textarea>
+              </div>
+              
+              
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="a-cancelBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            <button type="submit" id="bucketAddBtn" class="btn btn-primary">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
 </form> 
 
            
@@ -153,19 +153,19 @@
 
 // 인디케이터 바 랜덤 색상 부여
 window.onload = function() {
-	document.querySelectorAll(".todo-indicator").forEach((tag) => {
-		tag.style["background-color"] = "#" + Math.floor(Math.random() * 16777215).toString(16);
-	});
-		
+  document.querySelectorAll(".todo-indicator").forEach((tag) => {
+    tag.style["background-color"] = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  });
+    
 // 달성 버튼 색상 부여
-	document.querySelectorAll(".btn-outline-success").forEach((tag) => {
+  document.querySelectorAll(".btn-outline-success").forEach((tag) => {
   if (tag.getAttribute("value") == 0) {
     tag.style["color"] = "#3ac47d";
     tag.style["background-color"] = "white";
     
     // hover 설정 - mouseover
     tag.addEventListener('mouseover', function() {
-  	tag.style["color"] = "white";
+    tag.style["color"] = "white";
     tag.style["background-color"] = "#3ac47d";
     });
     
@@ -193,8 +193,8 @@ window.onload = function() {
     
   }
   }); 
-	  
-		
+    
+    
 };
 
 // 돌아가기
@@ -209,21 +209,21 @@ function moveHome(){
 
 // 체크 박스 - 모두 선택 -all true
 function selectAll() {
-	    var obj = document.getElementsByName("sendNo");
-	    if (obj[0].checked) {
-	        for (i=0;i<obj.length;i++) {
-	            obj[i].checked = false;
-	        }
-	    } else {
-	        for (i=0;i<obj.length;i++) {
-	            obj[i].checked = true;
-	        }
-	    } 
+      var obj = document.getElementsByName("sendNo");
+      if (obj[0].checked) {
+          for (i=0;i<obj.length;i++) {
+              obj[i].checked = false;
+          }
+      } else {
+          for (i=0;i<obj.length;i++) {
+              obj[i].checked = true;
+          }
+      } 
 };
 
 // 체크박스 중복 체크 > 삭제 눌렀을 때 form으로 넘어갈 데이터들 추가
 $('#deleteBtn').click(function() {
-	var deleteForm = $('#deleteForm');
+  var deleteForm = $('#deleteForm');
   var chk_arr = $("input[name='sendNo']");
   var chk_data = []; 
   
@@ -258,8 +258,8 @@ $('#addModal').modal('hide');
 
 
 
-	
-	
+  
+  
 // 휴지통 삭제 모달 오픈
 // id는 절대값이므로 중복될 수 없다 > name을 활용할 것 > id로 쓸 경우 아이콘 하나만 모달 창 실행
 $('button[name=b-trashBtn]').on('click', function(){
