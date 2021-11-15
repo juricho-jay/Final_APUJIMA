@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.UUID;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -31,8 +30,8 @@ public class MemberAddController extends HttpServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
@@ -43,71 +42,81 @@ public class MemberAddController extends HttpServlet {
       throws ServletException, IOException {
     //    System.out.println();
     //    System.out.println("[회원가입] 페이지입니다.");
-    Member member = new Member();
+    try { 
+      request.setCharacterEncoding("UTF-8");
 
-    String year = request.getParameter("birthyy");
-    String month = request.getParameter("birthmm");
-    String day = request.getParameter("birthdd");
+      Member member = new Member();
+      member.setId(request.getParameter("id"));
+      System.out.println("id => " + member.getId());
 
-    Date birthday = Date.valueOf(year+"-"+month+"-"+day);
+      String year = request.getParameter("birthyy");
+      System.out.println("생년 => " + year);
+      String month = request.getParameter("birthmm");
+      String day = request.getParameter("birthdd");
 
-    Part photoPart = request.getPart("photo");
-    if (photoPart.getSize() > 0) {
-      String filename = UUID.randomUUID().toString();
-      photoPart.write(getServletContext().getRealPath("/upload/member") + "/" + filename);
-      member.setPhoto(filename);
+      Date birthday = Date.valueOf(year+"-"+month+"-"+day);
+      System.out.println("생일 => " + birthday);
 
-      Thumbnails.of(getServletContext().getRealPath("/upload/member") + "/" + filename)
-      .size(20, 20)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_20x20";
-        }
-      });
+      member.setName(request.getParameter("name"));
 
-      Thumbnails.of(getServletContext().getRealPath("/upload/member") + "/" + filename)
-      .size(100, 100)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_100x100";
-        }
-      });
-    }
+      member.setPassword(request.getParameter("password"));
+      member.setEmail(request.getParameter("email"));
+      member.setBirthday(birthday);
+      member.setTel(request.getParameter("tel"));
+      member.setSex(request.getParameter("sex"));
+      member.setPoint(1000);
+      String grade = request.getParameter("grade");
+      member.setDoctorOrNot(Integer.parseInt(grade));
+      member.setNickname(request.getParameter("nickname"));
+      member.setActive(1);
 
+      Part photoPart = request.getPart("photo");
+      System.out.println("photo => " + photoPart);
+      if (photoPart.getSize() > 0) {
+        String filename = UUID.randomUUID().toString();
+        System.out.println("filename => " + filename);
+        System.out.println("헬로헬로");
+        System.out.println("주소 =>" + getServletContext());
+        photoPart.write(getServletContext().getRealPath("/upload/member") + "/" + filename);
+        member.setPhoto(filename);
+        System.out.println("파일이름 => " + filename);
 
+        Thumbnails.of(getServletContext().getRealPath("/upload/member") + "/" + filename)
+        .size(20, 20)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_20x20";
+          }
+        });
 
-    member.setName(request.getParameter("name"));
-    member.setId(request.getParameter("id"));
-    member.setPassword(request.getParameter("password"));
-    member.setEmail(request.getParameter("email"));
-    member.setBirthday(birthday);
-    member.setTel(request.getParameter("tel"));
-    member.setPhoto(request.getParameter("photo"));
-    member.setSex(request.getParameter("sex"));
-    member.setPoint(1000);
-    String grade = request.getParameter("grade");
-    member.setDoctorOrNot(Integer.parseInt(grade));
-    member.setNickname(request.getParameter("nickname"));
-    member.setActive(1);
-
-    if(member.getDoctorOrNot() == 2) {
-      Doctor doctor = new Doctor();
-      doctor.setLicense(request.getParameter("major"));
-      doctor.setMajor(request.getParameter("lisence"));
-      doctor.setHomepage(request.getParameter("homepage"));
-      doctor.setIntroduction(request.getParameter("introduce"));
-      member.setDoctor(doctor);
-    }
-
+        Thumbnails.of(getServletContext().getRealPath("/upload/member") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
+      }
 
 
-    try {
+      if(member.getDoctorOrNot() == 2) {
+        Doctor doctor = new Doctor();
+        doctor.setLicense(request.getParameter("major"));
+        doctor.setMajor(request.getParameter("lisence"));
+        doctor.setHomepage(request.getParameter("homepage"));
+        doctor.setIntroduction(request.getParameter("introduce"));
+        member.setDoctor(doctor);
+      }
+
+
+
+
       memberDao.insert(member);
 
       if(member.getDoctorOrNot() == 2) {

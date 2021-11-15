@@ -21,7 +21,7 @@
 <body>
 <div class="container">
 <h1>회원 정보 변경</h1>
-<form action='update'>
+<form action='update' method='post' enctype="multipart/form-data">
   <div class="mb-3 row">
   <label for='f-no' class="col-sm-2 col-form-label">번호</label>
   <div class="col-sm-6">
@@ -81,7 +81,10 @@
 <div class="mb-3 row">
   <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
   <div class="col-sm-6">
-     <input id='f-photo' type='text' name='photo' class="form-control" value='${member.photo}'>
+      <a href="${contextPath}/upload/member/${member.photo}" >
+        <img id="f-photo-image" src="${contextPath}/upload/member/${member.photo}_100x100.jpg">
+    </a>
+     <input id='f-photo' type='file' name='photo' class="form-control">
   </div>
 </div>
 

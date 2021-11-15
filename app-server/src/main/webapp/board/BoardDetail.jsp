@@ -52,11 +52,7 @@
   </script>
 <div class="container">
 <form name ="boardDetailInfo" action = 'report' onsubmit="return checkValue()">
-<<<<<<< HEAD
-    <input type ="hidden" name = "no" value ="${board.no}">
-=======
    <input type ="hidden" name = "no" value ="${board.no}">
->>>>>>> 1744644a20a9821589947ee6a60937f43911bda3
   <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
     <thead>
       <tr>
@@ -230,15 +226,12 @@
 
 <script>
 
-<<<<<<< HEAD
 	 var a = document.getElementById("buttonChange1")
 	 var b = document.getElementById("buttonChange2")
 	 
 	 a.style.backgroundColor = "red";
 	 b.style.backgroundColor = "white";
  }
-=======
->>>>>>> 1744644a20a9821589947ee6a60937f43911bda3
 // 좋아요 여부에 따라 하트 
 
 document.querySelectorAll("#heartBtn").forEach((tag) => {
