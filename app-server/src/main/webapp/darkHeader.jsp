@@ -5,14 +5,13 @@
 <link rel="stylesheet" href="/apus/css/darkHeader.css">
 
 <header>
+<div class="wrapperH">
 <nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="height: 120px; border-bottom: solid 1px #25362977; margin-bottom: 30px;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/apus/home">
-    <input type="button" class="img-button"></a>
+    <a class="navbar-brand" href="/apus/home"><input type="button" class="img-button"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a href="#" class="btn4" style="color: #2c473e;">소개</a>
@@ -26,13 +25,7 @@
         <li class="nav-item">
           <a class="btn4" href="/apus/board/list" style="color: #2c473e">커뮤니티</a>
         </li>
-        <li>
-				    <!-- <form class="d-flex">
-				      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-				      <button type="button" class="btn" style="color: white">search</button>
-				    </form>
-				     -->
-				     
+        <li class="nav-item">
 				     <div class="container h-100">
 					      <div class="d-flex justify-content-center h-100">
 					        <div class="searchbar">
@@ -66,7 +59,7 @@
         </li>
         </c:if>
       </ul>
-    </div>
   </div>
 </nav>
+</div>
 </header>
