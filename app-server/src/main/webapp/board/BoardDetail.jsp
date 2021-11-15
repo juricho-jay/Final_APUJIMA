@@ -60,13 +60,12 @@
          <tr>
          <td>글 번호</td>
          <td>${board.no}</td>
-         <input type ="hidden" name = "no" value ="${board.no}">
+         <td><input type ="hidden" name = "no" value ="${board.no}"></td>
          </tr>
   
   <tr>
       <td style = "width: 20%"> 글 제목</td>
       <td colspan ="2">${board.title}</td>
-      <input type = "hidden" id = 'okok'>
  </tr>
   <tr>
       <td>작성자</td>
