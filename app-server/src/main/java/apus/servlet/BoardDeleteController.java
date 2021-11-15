@@ -51,6 +51,7 @@ public class BoardDeleteController extends HttpServlet{
 
       response.sendRedirect("list");
 
+
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);

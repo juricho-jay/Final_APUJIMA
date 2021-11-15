@@ -11,7 +11,7 @@ aside#left{
 aside#left ul{ list-style: none}
  
 aside#left ul li{
-    background-color: #3f3f3f;
+    background-color: gray;
     padding: 5px 10px;
     border-bottom: 1px solid black;
 }
@@ -29,7 +29,8 @@ aside#main{
     float: left;
 }
 </style>
-<aside id = "left">
+<aside id = "left"> 
+<div id = "container">
 <h4 style= "margin-left :30px"> 게시판 선택</h4>
 
 
@@ -39,6 +40,6 @@ aside#main{
   <li><a href="doctorBoardList" class="list-group-item list-group-item-action text-center font-weight-bold">Healer지식in</a></li>
   <li> <a href="noticeBoardList" class="list-group-item list-group-item-action text-center font-weight-bold">공지사항</a></li>
 </ul>
-     
+</div>     
  
 </aside>

@@ -52,7 +52,11 @@
   </script>
 <div class="container">
 <form name ="boardDetailInfo" action = 'report' onsubmit="return checkValue()">
+<<<<<<< HEAD
     <input type ="hidden" name = "no" value ="${board.no}">
+=======
+   <input type ="hidden" name = "no" value ="${board.no}">
+>>>>>>> 1744644a20a9821589947ee6a60937f43911bda3
   <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
     <thead>
       <tr>
@@ -104,19 +108,30 @@
       <td colspan="2" style ="min-height: 200px; text-align: left;" >${board.content}</td>
       
    </tr>
-   <tr>
-   </tr>
   </tbody>
   </table>
   </form>
+  
+  
   </div><!-- .container -->
-   <div class="container">
+   <div class="container" id = UDRContainer>
    <div class="u-d-rBtn">
+    <form>
    <c:if test = "${board.writer.id == loginUser.id}">
-   <a href= 'updateForm?no=${board.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
-   <a href= 'delete?no=${board.no}' class="btn btn-primary" >삭제</a>
+   <input type="hidden" name= "no" value="${board.no}">
+  <input type ="submit" value ="수정" class ="btn btn-primary" onclick ="javascript: form.action = 'updateForm';"/>   
    </c:if>
-   <input type="button" value="신고" onclick= "boardReport()"class="btn btn-primary"> 
+   </form>
+   
+    <form>
+   <c:if test = "${board.writer.id == loginUser.id}">
+      <input type="hidden" name= "no" value="${board.no}">
+  <input type ="submit" value ="삭제" class ="btn btn-primary" onclick ="javascript: form.action = 'delete';"/>   
+   </c:if>
+   </form>
+   
+      <input type="hidden" name= "no" value="${board.no}">
+      <input type="button" value="신고" onclick= "boardReport()"class="btn btn-primary"> -->
    </div> 
    </div> 
   
@@ -215,12 +230,15 @@
 
 <script>
 
+<<<<<<< HEAD
 	 var a = document.getElementById("buttonChange1")
 	 var b = document.getElementById("buttonChange2")
 	 
 	 a.style.backgroundColor = "red";
 	 b.style.backgroundColor = "white";
  }
+=======
+>>>>>>> 1744644a20a9821589947ee6a60937f43911bda3
 // 좋아요 여부에 따라 하트 
 
 document.querySelectorAll("#heartBtn").forEach((tag) => {

@@ -42,11 +42,11 @@ public class MailBoxListController extends HttpServlet{
       request.setAttribute("mailBoxList", mailBoxList);
       request.setAttribute("memberList", memberList);
       // 출력을 담당할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/mailbox/MailBoxList.jsp");
-      요청배달자.forward(request, response);
+      //      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/mailbox/MailBoxList.jsp");
+      //      요청배달자.forward(request, response);
 
-      //      request.setAttribute("contentUrl", "/mailbox/MailBoxList.jsp");
-      //      request.getRequestDispatcher("/template2.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/mailbox/MailBoxList.jsp");
+      request.getRequestDispatcher("/darkTemplate.jsp").forward(request, response);
 
 
     } catch (Exception e) {

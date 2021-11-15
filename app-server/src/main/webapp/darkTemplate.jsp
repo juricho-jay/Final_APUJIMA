@@ -2,20 +2,20 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>${pageTitle}</title>
- <%--  <link rel="stylesheet" href="${contextPath}/node_modules/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="${contextPath}/node_modules/sweetalert2/dist/sweetalert2.css">
-  <link rel="stylesheet" href="${contextPath}/css/common.css">
+  <title>내 정보</title>
+ <!--  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
-  <script src="${contextPath}/node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="${contextPath}/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="${contextPath}/node_modules/sweetalert2/dist/sweetalert2.js"></script> --%>
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="userInfo.css">
   
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
@@ -31,9 +31,6 @@
    height:100% 
    }
    
-   
-   
-
    @media (min-width: 768px) {
 		  .container {
 		    width: 750px;
@@ -50,10 +47,12 @@
     
 </head>
 <body>
-
-<jsp:include page="/headerD.jsp"/>
+<jsp:include page="/darkHeader.jsp"/>
 <%-- <jsp:include page="/sidebar.jsp"/> --%>
+
 <div class="container">
+
+
 <div id="content">
 <jsp:include page="${contentUrl}"/>
 </div><!-- #content --> 
@@ -61,8 +60,8 @@
 
 </div><!-- .container -->
 
-</body>
 <jsp:include page="/footer.jsp"/>
+</body>
 </html>
 
 
