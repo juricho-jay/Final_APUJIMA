@@ -17,35 +17,38 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-	<style>
-	
-	/* 전체 높이  */
-	.wrapper{ 
-	  display: flex; 
-	  min-height: 100vh;
-	  min-width: 1000px; 
-	  flex-direction: column; 
-	  }
-	  
-	</style>
+  <style>
+  
+  /* 전체 높이  */
+  .wrapper{ 
+    display: flex; 
+    min-height: 100vh;
+    min-width: 1000px; 
+    flex-direction: column; 
+    }
+    
+    
+    
+    
+  </style>
   
 </head>
 
 <body>
-	<jsp:include page="/darkHeader.jsp"/>
-	<%-- <jsp:include page="/sidebar.jsp"/> --%>
-	
-		<div class="container wrapper"> <!-- container(양옆) + wrapper (높이) -->
-		
-			
-			<div id="content">
-			 <jsp:include page="${contentUrl}"/>
-			</div><!-- #content --> 
-		
-		
-		</div><!-- .container -->
-	
-	<jsp:include page="/footer.jsp"/>
+  <jsp:include page="/darkHeader.jsp"/>
+  
+    <div class="container wrapper"> <!-- container(양옆) + wrapper (높이) -->
+ <%--  <jsp:include page="/sidebar.jsp"/> --%>
+    
+      
+      <div id="content">
+       <jsp:include page="${contentUrl}"/>
+      </div><!-- #content --> 
+    
+    
+    </div><!-- .container -->
+  
+  <jsp:include page="/footer.jsp"/>
 
 </body>
 

@@ -156,21 +156,28 @@
    values(#{no},#{doctor.major},#{doctor.license},#{doctor.homepage},#{doctor.introduction})
   </insert>
    
+   <!-- 멤버의 모든 정보 변경 -->
    <update id="update" parameterType="member">
-    update apus_member set
-      name=#{name},
-      id=#{id},
-      password=password(#{password}),
-      birth=#{birthday},
-      tel=#{tel},
-      email=#{email},
-      photo=#{photo},
-      sex=#{sex},
-      point=#{point},
-      role=#{doctorOrNot},
-      nickname=#{nickname}
-    where 
-      member_no=#{no}
+    update apus_member m
+     left join apus_doctor d on m.member_no=d.doctor_no set
+      m.name=#{name},
+      m.id=#{id},
+      m.birth=#{birthday},
+      m.tel=#{tel},
+      m.password=password(#{password}),
+      m.email=#{email},
+      m.photo=#{photo},
+      m.sex=#{sex},
+      m.point=#{point},
+      m.role=#{doctorOrNot},
+      m.nickname=#{nickname},
+      d.major=#{doctor.major},
+      d.license=#{doctor.license},
+      d.homepage=#{doctor.homepage},
+      d.introduction=#{doctor.introduction}
+    where
+      m.member_no=#{no}
+   
    </update>
    
       <!-- 멤버 정보 변경하는 일 외에는 update2를 써야
@@ -195,6 +202,7 @@
     where
       m.member_no=#{no}
    </update>
+
    
    <update id ="pointUpdate"  parameterType="int">
     update apus_member set

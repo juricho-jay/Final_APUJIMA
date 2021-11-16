@@ -49,15 +49,19 @@
                                                  for="send-b-no">&nbsp;</label></div>
                                             </div>
                                             <div class="widget-content-left">
-                                                <div class="widget-heading"><b>${bucket.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>${bucket.content}
+                                                <div class="widget-heading"><b>${bucket.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
                                                 <!-- <div class="badge badge-danger ml-2">Rejected</div> -->
                                                 </div>
+                                            </div>
+                                            <div class="widget-content-left">
+                                            <button type="button" name="updateBtn" style="border: 0; outline=0; background-color: white;" 
+                                            value="${bucket.no}" data-title="${bucket.title}" data-content="${bucket.content}"><span>${bucket.content}</span></button>
                                             </div>
                                               <div class="widget-content-right">
                                                 <form id="complete" action="update">
                                                 <sub>${bucket.registeredDate}&nbsp;&nbsp;</sub> 
                                                     <input type="hidden" name="no" value="${bucket.no}"></input>
-                                                    <button class="border-0 btn-transition btn btn-outline-success2"> 
+                                                    <button type="button" class="border-0 btn-transition btn btn-outline-success2"> 
                                                     <i>${bucket.completedDate}</i></button> 
                                                     <button class="btn-outline-success" id="completeBtn" name="complete" value="${bucket.complete}" type="submit">
                                                     <i class="bi bi-check" style="font-size: 1.5em"></i></button> 
@@ -115,6 +119,40 @@
           <div class="modal-footer">
             <button type="button" id="a-cancelBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
             <button type="submit" id="bucketAddBtn" class="btn btn-primary">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</form> 
+
+<!-- 내용 변경 업데이트 모달 영역 -->        
+<form action='contentUpdate'>
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" 
+      aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">버킷리스트 변경</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <input type="hidden" id="b-id" name="id" value="${loginUser.id}">
+                <label for="bucket-title" class="col-form-label">제목</label>
+                <input type="text" class="form-control" id="bucket-title" name="title" placeholder="${content.title}">
+              </div>
+              <div class="form-group">
+                <label for="bucket-content" class="col-form-label">내용</label>
+                <textarea class="form-control" id="bucket-content" name="content"></textarea>
+              </div>
+              
+              
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="u-cancelBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            <button type="submit" id="bucketUpdateBtn" class="btn btn-primary">확인</button>
           </div>
         </div>
       </div>
@@ -207,6 +245,7 @@ function moveHome(){
 
 
 
+
 // 체크 박스 - 모두 선택 -all true
 function selectAll() {
       var obj = document.getElementsByName("sendNo");
@@ -242,6 +281,8 @@ function trashDelete(no) {
   $('<input>').attr('type','hidden').attr('value', no).attr('name','no').appendTo(deleteForm);
   }; 
 
+
+
   
 
 // 추가 모달 버튼에 이벤트를 건다. 
@@ -255,9 +296,6 @@ $('#a-cancelBtn').on('click', function(){
 $('#addModal').modal('hide');
 });
 
-
-
-
   
   
 // 휴지통 삭제 모달 오픈
@@ -265,6 +303,21 @@ $('#addModal').modal('hide');
 $('button[name=b-trashBtn]').on('click', function(){
 $('#deleteModal').modal('show');
 });
+
+
+
+//내용 업데이트 모달 오픈
+$('button[name=updateBtn]').on('click', function(){
+$('#updateModal').modal('show');
+});
+
+
+//내용 업데이트 모달 안의 취소 버튼
+$('#u-cancelBtn').on('click', function(){
+$('#updateModal').modal('hide');
+});
+
+
 
 
 // 삭제 모달 버튼에 이벤트를 건다.

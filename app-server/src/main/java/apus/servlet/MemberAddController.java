@@ -43,19 +43,15 @@ public class MemberAddController extends HttpServlet {
     //    System.out.println();
     //    System.out.println("[회원가입] 페이지입니다.");
     try { 
-      request.setCharacterEncoding("UTF-8");
 
       Member member = new Member();
       member.setId(request.getParameter("id"));
-      System.out.println("id => " + member.getId());
 
       String year = request.getParameter("birthyy");
-      System.out.println("생년 => " + year);
       String month = request.getParameter("birthmm");
       String day = request.getParameter("birthdd");
 
       Date birthday = Date.valueOf(year+"-"+month+"-"+day);
-      System.out.println("생일 => " + birthday);
 
       member.setName(request.getParameter("name"));
 
@@ -107,15 +103,12 @@ public class MemberAddController extends HttpServlet {
 
       if(member.getDoctorOrNot() == 2) {
         Doctor doctor = new Doctor();
-        doctor.setLicense(request.getParameter("major"));
-        doctor.setMajor(request.getParameter("lisence"));
+        doctor.setLicense(request.getParameter("license"));
+        doctor.setMajor(request.getParameter("major"));
         doctor.setHomepage(request.getParameter("homepage"));
         doctor.setIntroduction(request.getParameter("introduce"));
         member.setDoctor(doctor);
       }
-
-
-
 
       memberDao.insert(member);
 

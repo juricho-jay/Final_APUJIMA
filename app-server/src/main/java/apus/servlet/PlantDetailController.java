@@ -30,6 +30,7 @@ public class PlantDetailController extends HttpServlet {
     plantDao = (PlantDao) 웹애플리케이션공용저장소.getAttribute("plantDao");
   }
 
+  @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
@@ -42,7 +43,6 @@ public class PlantDetailController extends HttpServlet {
     }
 
 
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       Plant plant = plantDao.findByNo(no);
@@ -52,11 +52,11 @@ public class PlantDetailController extends HttpServlet {
       }
 
 
-
       request.setAttribute("plant", plant);
 
-      request.getRequestDispatcher("/plant/PlantDetail.jsp").forward(request, response);
-
+      /* request.getRequestDispatcher("/plant/PlantDetail.jsp").forward(request, response); */
+      request.setAttribute("contentUrl", "/plant/PlantDetail.jsp");
+      request.getRequestDispatcher("/darkTemplate.jsp").forward(request, response);
     }  
     catch (Exception e) {
       e.printStackTrace();

@@ -10,10 +10,10 @@
 </div>
   <div class="footer-basic">
         <div class="social">
-        <a href="#"><i class="bi bi-instagram"></i></a>
-        <a href="#"><i class="bi bi-facebook"></i></a>
-        <a href="#"><i class="bi bi-twitter"></i></a>
-        <a href="#"><i class="bi bi-github"></i></a>
+        <a href="https://www.instagram.com/?hl=ko"><i class="bi bi-instagram"></i></a>
+        <a href="https://ko-kr.facebook.com/"><i class="bi bi-facebook"></i></a>
+        <a href="https://twitter.com/?lang=ko"><i class="bi bi-twitter"></i></a>
+        <a href="https://github.com/"><i class="bi bi-github"></i></a>
         </div>
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="/apus/home">Home</a></li>
