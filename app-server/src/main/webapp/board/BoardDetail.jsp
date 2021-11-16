@@ -104,6 +104,7 @@
     <tr>
       <th class="active">작성자</th>
       <td>${board.writer.nickname}</td>
+      
     </tr>
     
        <tr>
@@ -190,7 +191,21 @@
      <div class="card-footer"> 
      <ul id="replies">
          <c:forEach items ="${commentList}" var= "comment">
-   <p> 작성자: ${comment.commenter.nickname}</p>
+   
+   
+	   <p style="float:left;"> 작성자: ${comment.commenter.nickname}&nbsp;</p>
+	   <div class="dropdown" >
+		  <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style="dropdown-border-color: rgba($black, .15);">
+		    더보기
+		  </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+		    <li><button class="dropdown-item" type="button">쪽지보내기</button></li>
+		    <!-- <li><button class="dropdown-item" type="button">Another action</button></li>
+		    <li><button class="dropdown-item" type="button">Something else here</button></li> -->
+		  </ul>
+		</div>
+<br>
+   
    <p> 내용 : ${comment.content} </p>
    <p> 댓글 작성날짜 : ${comment.registeredDate}</p>
    
