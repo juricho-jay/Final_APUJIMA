@@ -46,15 +46,15 @@ public class CounselingMemberAddController extends HttpServlet{
 
     String user = request.getParameter("client.name");
     String user2 = request.getParameter("client.tel");
-    String user3 = request.getParameter("counselor.name");
+    String counselorNo = request.getParameter("counselor.no");
 
     try {
       Member member = memberDao.findById(user);
       Member member2 = memberDao.findById(user2);
-      Member member3 = memberDao.findById(user3);
+      Member counselor = memberDao.findById(counselorNo);
       counseling.setClient(member);
       counseling.setClientTel(member2);
-      counseling.setCounselor(member3);
+      counseling.setCounselor(counselor);
     } catch (Exception e1) {
       e1.printStackTrace();
     }
