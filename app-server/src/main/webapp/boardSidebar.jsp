@@ -76,7 +76,7 @@ aside#main{
 }
 </style>
 <aside id = "left"> 
-<h5>게시판 선택</h5>
+<!-- <h5>게시판 선택</h5> -->
 
 
   <ul>
