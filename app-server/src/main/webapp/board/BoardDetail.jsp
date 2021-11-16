@@ -190,10 +190,7 @@
     
      <div class="card-footer"> 
      <ul id="replies">
-<<<<<<< HEAD
-   <c:forEach items ="${commentList}" var= "comment">
-   <p> 작성자: ${comment.commenter.nickname}</p>
-=======
+
          <c:forEach items ="${commentList}" var= "comment">
    
    
@@ -210,7 +207,6 @@
 		</div>
 <br>
    
->>>>>>> b097a40bc5bd929935c0a08f699fd64096cc0d76
    <p> 내용 : ${comment.content} </p>
    <p> 댓글 작성날짜 : ${comment.registeredDate}</p>
    
@@ -243,19 +239,15 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">댓글 수정</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
           <div class="modal-body">
               <div class="form-group">
-                <input type="hidden" id="c-no" name="no" value="${comment.no}">
                 <label for="bucket-title" class="col-form-label">작성자</label>
-                <input type="text" class="form-control" id="commenter" name="commenter" value ="${comment.commenter}"readonly>
+                <input type="text" class="form-control" id="commenter" name="commenter" value ="${loginUser.nickname}"readonly>
               </div>
               <div class="form-group">
-                <label for="bucket-content" class="col-form-label">내용</label>
-                <textarea class="form-control" id="Commentcontent" name="content" placeholder="${comment.content}" ></textarea>
+                <label for="comment-content" class="col-form-label">내용</label>
+                <textarea class="form-control" id="Commentcontent" name="content" >${comment.content}</textarea>
               </div>
               
               
@@ -283,6 +275,8 @@ if (tag.getAttribute("value") == 1) {
 
 	  }
 });
+var m
+console.log()
 /*
  
  var modifyModal = document.querySelector("#modifyModal");
@@ -291,13 +285,20 @@ modifyModal.addEventListener("show.bs.modal", () => {
 	console.log("===============>222")
 });
 */
+//휴지통 삭제 모달 오픈
+//id는 절대값이므로 중복될 수 없다 > name을 활용할 것 > id로 쓸 경우 아이콘 하나만 모달 창 실행
+$('button[name=updateButton]').on('click', function(){
+$('#updateModal').modal('show');
 
 
+});
+
+/*
 $('#updateButton').on('click', function(){
 	$('#updateModal').modal('show');
 
 	});
-
+*/
 	// 모달 안의 취소 버튼에 이벤트를 건다.
 	  $('#a-cancelBtn').on('click', function(){
 	  $('#updateForm > input').remove();
@@ -311,6 +312,7 @@ function updateComment(no,content) {
 	  var updateForm= $('#updateForm');
 	  $('<input>').attr('type','hidden').attr('value', no).attr('name','no').appendTo(updateForm);
 	  $('<input>').attr('type','hidden').attr('value', content).attr('name','content').appendTo(updateForm);
+	  console.log(no,content)
 	  }; 
 
   </script>
