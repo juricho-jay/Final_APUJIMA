@@ -2,6 +2,15 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<%@page import="java.util.*"%>
+<%
+ 
+    request.setCharacterEncoding("UTF-8");
+ 
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,44 +79,33 @@
 <h1>상담신청하기</h1>
 
 
-<form class="total" name = "counselingmember" action='add'>
   <div class="mb-3 row">
     <label for='f-client' class="col-sm-3 col-form-label">이름</label>
     <div class="col-sm-6">
-      <input id='f-client' type='text' name='client.name' class="form-control" value="${loginUser.name}" readOnly>
+      <input id='f-client' type='text' name="client.name"class="form-control" value="${loginUser.name}" readOnly>
     </div>
   </div>
   <div class="mb-3 row">
     <label for='f-tel' class="col-sm-3 col-form-label">휴대번호</label>
     <div class="col-sm-6">
-      <input id='f-tel' type='text' name='client.tel' class="form-control" value="${loginUser.tel}" readOnly>
+      <input id='f-tel' type='text'  name="client.tel" class="form-control" value="${loginUser.tel}" readOnly>
     </div>
   </div> 
+<form class="total" name="counselingmember" action='add' method="get" accept-charset="utf-8">
   <div class="mb-3 row">
     <label for='f-name' class="col-sm-3 col-form-label">상담사</label>
     <div class="col-sm-4">
-  
-    <%-- <%    
-	    request.setCharacterEncoding("UTF-8");
-	    String name = request.getParameter("name");
-    %>
-      <a><%= name %></a> --%>
-      <%-- <input id='f-name' type='hidden' name='counselor.name' class="form-control" value="${member.name}"> --%>
-       <input id='f-name' type='text' name='counselor.name' class="form-control" value="<% 
-        // 한글 깨짐을 방지하기 위한 인코딩 처리
-        request.setCharacterEncoding("UTF-8"); 
-        String name = request.getParameter("member.name");  
-        out.println(name);
-%>
-       " readOnly>
-    </div>
+    
+       <input id='f-counselor-no' type='hidden' name="no" class="form-control" value="${counselor.no}">
+       <input id='f-name' type='text'  name="counselor.name" class="form-control" value="${counselor.name}" readOnly>
+     </div>
   </div>
   
   <hr style="margin-top:50px;">
   <div class="mb-3 row" style="margin-top:50px;">
     <label for='f-disease' class="col-sm-3 col-form-label">질병여부</label>
     <div class="col-sm-6">
-      <input id='f-disease' type='text' name='disease' class="form-control"required>
+      <input id='f-disease' type='text' name='disease' class="form-control" required>
     </div>
   </div>
   <div class="mb-3">

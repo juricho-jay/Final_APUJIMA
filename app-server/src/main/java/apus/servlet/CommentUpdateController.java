@@ -62,7 +62,6 @@ public class CommentUpdateController extends HttpServlet {
 
       Comment comment = commentDao.findByNo(no);
       comment.setContent(request.getParameter("content"));
-      //comment.setRegisteredDate(new Date(System.currentTimeMillis()));
       commentDao.update(comment);
       sqlSession.commit();
 

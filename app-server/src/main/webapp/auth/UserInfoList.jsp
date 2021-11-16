@@ -52,7 +52,7 @@
 						  aria-expanded="false" style="border-color:transparent; background-color: transparent;">
 						    ${loginUser.nickname}
 						  </button>
-						  <ul class="dropdown-menu">
+						  <ul class="dropdown-menu" id="dropdownItems">
 						    <li><a class="dropdown-item" href="#">왜 안바뀌는거야</a></li>
 						    <li><a class="dropdown-item" href="#">Another action</a></li>
 						    <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -131,7 +131,10 @@
                   <i class="ni business_briefcase-24 mr-2"></i>나의 정원
                 </div> -->
                 <div>
-                  <i class="ni education_hat mr-2"></i>나의 정원
+                  <a href="/apus/plant/list">
+                  <i class="bi bi-flower1"></i><br>
+                  <span>나의 정원</span>
+                  </a>
                 </div>
                 <hr class="my-4">
                 

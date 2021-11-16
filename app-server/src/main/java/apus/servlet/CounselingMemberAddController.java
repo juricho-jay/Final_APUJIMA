@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.CounselingDao;
 import apus.dao.MemberDao;
@@ -37,77 +38,48 @@ public class CounselingMemberAddController extends HttpServlet{
 
     Counseling counseling = new Counseling();
 
-    //    try {
-    //      Collection<Member> memberList = memberDao.findAll();
-    //      request.setAttribute("memberList", memberList); // 다 불러와서 jsp파일에 이름이랑 번호 불러오기
-    //    } catch (Exception e2) {
-    //      e2.printStackTrace();
-    //    }
+    HttpSession session = request.getSession(false);
 
-    String user = request.getParameter("client.name");
-    String user2 = request.getParameter("client.tel");
-    String user3 = request.getParameter("counselor.name");
-
-    try {
-      Member member = memberDao.findById(user);
-      Member member2 = memberDao.findById(user2);
-      Member member3 = memberDao.findById(user3);
-      counseling.setClient(member);
-      counseling.setClientTel(member2);
-      counseling.setCounselor(member3);
-    } catch (Exception e1) {
-      e1.printStackTrace();
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/apus/index.jsp");
+      return;
     }
-
-
-
-    counseling.setDisease(request.getParameter("disease"));
-    counseling.setContent(request.getParameter("content"));
-
-    //    try {
-    //      Collection<Member> memberList1 = memberDao.findDoctor();
-    //      request.setAttribute("memberList", memberList1);
-    //      String user1 = request.getParameter("counselor.member.name");
-    //      Member member3 = memberDao.findById(user1);
-    //      counseling.setCounselor(member3);
-    //    } catch (Exception e1) {
-    //      e1.printStackTrace();
-    //    }
-
-    //    String userGender = request.getParameter("counselor.sex");
-    //    try {
-    //      Member member3 = memberDao.findByGender(userGender);
-    //      counseling.setCounselorGender(member3);
-    //    } catch (Exception e1) {
-    //      e1.printStackTrace();
-    //    }
-
-    // 이건 디테일에 추가
-    //    String userName = request.getParameter("counselor.name");
-    //    try {
-    //      Member member4 = memberDao.findByName(userName);
-    //      counseling.setCounselor(member4);
-    //    } catch (Exception e1) {
-    //      e1.printStackTrace();
-    //    }
+    int no = Integer.parseInt(request.getParameter("no")); // counselor.no
 
     try {
+      Member client = (Member) request.getSession(false).getAttribute("loginUser");
+
+      if(client == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
+      }
+
+      Member doctor = memberDao.findByNo(no);
+
+      counseling.setClient(client);
+      counseling.setClientTel(client.getTel());
+      counseling.setCounselor(doctor);
+      counseling.setDisease(request.getParameter("disease"));
+      counseling.setContent(request.getParameter("content"));
 
       counselingDao.insert(counseling);
       sqlSession.commit();
-      //      response.setHeader("Refresh", "1;url=list");
-      //      request.getRequestDispatcher("CounselingMemberAdd.jsp").forward(request, response);
       response.sendRedirect("list");
 
-    } catch (Exception e) {
+    } catch (Exception e1) {
+
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
-      e.printStackTrace();
-      request.setAttribute("error", e);
+      e1.printStackTrace();
+      request.setAttribute("error", e1);
 
       // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
       요청배달자.forward(request, response);
+
     }
+
+
+
+
   }
 }
 
