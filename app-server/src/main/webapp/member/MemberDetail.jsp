@@ -104,7 +104,10 @@
 <div class="mb-3 row">
   <label for='f-license' class="col-sm-2 col-form-label">자격증</label>
   <div class="col-sm-6">
-     <input id='f-license' type='text' name='license' class="form-control" value='${member.doctor.license}'>
+       <a href="${contextPath}/upload/member/${member.doctor.license}" >
+        <img id="f-license-image" src="${contextPath}/upload/member/${member.doctor.license}_100x100.jpg">
+        </a>
+         <input id='f-license' type='file' name='license' class="form-control">
   </div>
 </div>
 
