@@ -61,7 +61,7 @@ public class MailBoxSendController extends HttpServlet {
     try {
       mailBoxDao.insert(mailBox);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
+      response.setHeader("Refresh", "2;url=list");
       request.getRequestDispatcher("MailBoxSend.jsp").forward(request, response);
 
     } catch (Exception e) {
