@@ -64,16 +64,19 @@ public class LikeUpdateController extends HttpServlet {
 
         likeDao.insert(like);
         sqlSession.commit();
-        request.setAttribute("contentUrl", "/board/detail");
-        request.getRequestDispatcher("/board/detail").forward(request, response);
+        //        request.setAttribute("contentUrl", "/board/detail");
+        //        request.getRequestDispatcher("/board/detail").forward(request, response);
+
+        response.sendRedirect("../board/detail?no=" + board.getNo());
 
         // 누른 적 있음 - 리스트에서 삭제
       } else if (likeCheck != null) {
 
         likeDao.delete(boardNo, member.getNo());
         sqlSession.commit();
-        request.setAttribute("contentUrl", "/board/detail");
-        request.getRequestDispatcher("/board/detail").forward(request, response);
+        //        request.setAttribute("contentUrl", "/board/detail");
+        //        request.getRequestDispatcher("/board/detail").forward(request, response);
+        response.sendRedirect("../board/detail?no=" + board.getNo());
       }
 
     } catch (Exception e) {

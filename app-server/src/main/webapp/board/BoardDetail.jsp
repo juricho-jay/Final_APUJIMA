@@ -321,13 +321,6 @@
 
 
 <script>
-
-	 var a = document.getElementById("buttonChange1")
-	 var b = document.getElementById("buttonChange2")
-	 
-	 a.style.backgroundColor = "red";
-	 b.style.backgroundColor = "white";
- }
 // 좋아요 여부에 따라 하트 
 /*
 function modalOn(){
@@ -350,26 +343,6 @@ if (tag.getAttribute("value") == 1) {
 
 	  }
 });
-
-
-// 좋아요 버튼 ajax
-
-/* 
- $("#heartBtn").click(function(){
-    $.ajax({
-        type:"POST",   >> or get
-        url:"../like/update",
-        data : {
-        	no: ${board.no}
-        	},
-       
-        success: function(data){
-            $(#heartBtn).attr("value", '1');
-            좋아요 여부에 따른 하트 > function으로 만들어서 실행
-        }
-    })
-});  */
-
 
   </script>
 </body>
