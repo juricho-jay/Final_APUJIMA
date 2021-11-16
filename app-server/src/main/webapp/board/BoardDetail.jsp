@@ -3,19 +3,38 @@
     trimDirectiveWhitespaces="true" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>board</title>
 <head>
   <title>게시글 상세</title>
+
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <!--  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
   <style>
     
-   
+    .UDRContainer{
+    width: 90%;
+    }
+    
+    .Ubutton {
+    float: right;
+}
+
+.Dbutton{
+    float: right;
+}
+
+
+.RLbutton{
+    float: right;
+}
     .no-italics {
     font-style: normal;   
   }
@@ -38,13 +57,6 @@
 </head>
 <body>
    <script>
-   // 자기글만 수정/삭제가 떠서 쓸 일 없긴 한데...
-  function checkVaild(){
-    if (${board.writer.id} != ${loginUser.id}){
-      alert("본인 게시글만 변경/삭제할 수 있습니다.")
-      return false;
-    }
-  }
    
   function boardReport(){
 	    
@@ -57,16 +69,21 @@
   }
   
   </script>
-<div class="container">
+
+  <!-- detail new  -->
+  
+  <div class ="container1212">
 <form name ="boardDetailInfo" action = 'report' onsubmit="return checkValue()">
    <input type ="hidden" name = "no" value ="${board.no}">
-  <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
-    <thead>
-      <tr>
-         <th colspan ="3" style = "background-color: #eeeeee; text-align: center;">게시판 글 보기</th> 
-      </tr>
-    </thead>
-    <tbody>
+   <input id = "writer"  type ="hidden" name = "writer" value ="${board.writer.nickname}">
+    <h2>${board.title}</h2>
+    <table id="datatable-scroller"
+  class="table table-bordered tbl_Form">
+  <colgroup>
+    <col width="250px" />
+    <col />
+  </colgroup>
+  <tbody>
         <tr>
             <td>게시판 분류</td>
              <c:if test='${board.whichBoard == 1}'>
@@ -79,66 +96,58 @@
             <td>공지사항</td> 
             </c:if>
         </tr>    
-         <tr>
-         <td>글 번호</td>
-         <td>${board.no}</td>
-         </tr>
   
-  <tr>
-      <td style = "width: 20%"> 글 제목</td>
-      <td colspan ="2">${board.title}</td>
- </tr>
-  <tr>
-      <td>작성자</td>
+  
+    <tr>
+    
+    </tr>
+    <tr>
+      <th class="active">작성자</th>
       <td>${board.writer.nickname}</td>
-      <td><input id = "writer"  type ="hidden" name = "writer" value ="${board.writer.nickname}"></td>
-  </tr>
-  <tr>
-  
-      <td>작성일자</td>
-      <td>${board.registeredDate}</td>
-      
-  </tr>
-  
-   <tr>
-  
+    </tr>
+    
+       <tr>
       <td>조회수</td>
       <td>${board.viewCount}</td>
   </tr>
-  
-   <tr>
-      <td>내용</td>
-      <td colspan="2" style ="min-height: 200px; text-align: left;" >${board.content}</td>
-      
-   </tr>
+    <tr>
+      <th class="active" >내용</th>
+      <td width = 800px height = 500px;>
+        ${board.content }
+      </td>
+    </tr>
   </tbody>
   </table>
-  </form>
-  
-  
-  </div><!-- .container -->
-   <div class="container" id = UDRContainer>
-   <div class="u-d-rBtn">
+     </form>
+     <div class="container" id = UDRContainer >
+      <div class = "Ubutton">
     <form>
    <c:if test = "${board.writer.id == loginUser.id}">
    <input type="hidden" name= "no" value="${board.no}">
   <input type ="submit" value ="수정" class ="btn btn-primary" onclick ="javascript: form.action = 'updateForm';"/>   
    </c:if>
    </form>
+   </div>
    
+   <div class = "Dbutton">
     <form>
    <c:if test = "${board.writer.id == loginUser.id}">
       <input type="hidden" name= "no" value="${board.no}">
   <input type ="submit" value ="삭제" class ="btn btn-primary" onclick ="javascript: form.action = 'delete';"/>   
    </c:if>
    </form>
+   </div>
    
+    <div class = "RLbutton">
       <input type="hidden" name= "no" value="${board.no}">
       <input type="button" value="신고" onclick= "boardReport()"class="btn btn-primary">
      <a href= "list"> <input type="button" value="목록" class="btn btn-primary"></a>
-      
+     </div>
    </div> 
-   </div> 
+  </div>
+  
+  
+   
   
   <!-- likeContainer -->
   <div class="container" id="likeContainer">
@@ -227,7 +236,7 @@
       </div>
       <div class="form-group"> 
       <label for="reply_text">댓글 내용</label> 
-      <input class="form-control" id="reply_text" name="content" value="${comment.content}" placeholder="${comment.content }"> 
+      <input class="form-control" id="content" name="content" value="${comment.content}" placeholder="${comment.content }"> 
      </div>
      
      </div>
@@ -321,6 +330,11 @@
 
 
 <script>
+<<<<<<< HEAD
+=======
+
+	
+>>>>>>> d0975b66e54d72079532cbe567ef48dbf9a705a9
 // 좋아요 여부에 따라 하트 
 /*
 function modalOn(){
