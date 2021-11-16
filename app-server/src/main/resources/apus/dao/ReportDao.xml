@@ -8,6 +8,7 @@
   <resultMap type="Report" id="ReportMap">
     <id column="report_no" property="no"/> 
     <result column="reason" property="reason"/>
+    <result column="confirm" property="check"/>
     
     <association property="requestBoard" javaType="board">
       <id column="requestBoard_no" property="no"/>
@@ -37,6 +38,8 @@
       apus_report r
       inner join apus_member m on r.member_no=m.member_no
       inner join apus_board b on r.board_no=b.board_no
+    where
+      r.confirm = 0
     order by
       r.report_no desc    
 
@@ -73,6 +76,13 @@
     where 
       b.board_no=#{param1} and m.id=#{param2}
   </select>
+  
+    <update id="confirmReport" parameterType="int">
+    update apus_report set
+      confirm = 1
+    where 
+      report_no=#{no}
+  </update>
   
   
   <!-- <select id="findReport" resultMap="ReportMap">

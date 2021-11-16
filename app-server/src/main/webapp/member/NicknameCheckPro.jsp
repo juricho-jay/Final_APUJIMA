@@ -5,22 +5,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>IdCheckForm.jsp</title>
+<title>NickNameCheckForm.jsp</title>
 </head>
 <body>
   <div style="text-align: center;">
-    <h3>*아이디 중복확인 결과* </h3>
+    <h3>*닉네임 중복확인 결과* </h3>
     
-    <p>입력 ID : ${inputId} </p>
+    <p>입력 닉네임 : ${inputNickname} </p>
   
   
     <c:if test= "${not empty member}">
-    <p style='color:red'> 이미 등록된 아이디 입니다. 다른 아이디로 회원가입 해주세요.</p>
+    <p style='color:red'> 이미 등록된 닉네임 입니다. 다른 닉네임으로 회원가입 해주세요.</p>
     
     </c:if>
     
      <c:if test= "${empty member}">
-   <p> 회원가입이 가능한 아이디 입니다. </p>
+   <p> 회원가입이 가능한 닉네임 입니다. </p>
    <input type="button" value="[적용]" onclick= "sendCheckValue()">  
     </c:if>
     
@@ -35,9 +35,8 @@
 
   
   function sendCheckValue() {
-	   opener.document.userInfo.id.value = "${inputId}";
+	   opener.document.userInfo.nickname.value = "${inputNickname}";
 	   window.close();
-
 	  
   }
   
