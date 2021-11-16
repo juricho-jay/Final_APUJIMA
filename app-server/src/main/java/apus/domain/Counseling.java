@@ -11,7 +11,7 @@ public class Counseling implements Serializable {
   private Member counselor; // 상담사(의사)
   //  private Member counselorGender; // 상담사(의사)
   private Member client;
-  private Member clientTel;
+  private String clientTel;
   //  private String gender;
   private Date registeredDate;
 
@@ -57,12 +57,13 @@ public class Counseling implements Serializable {
   //  public void setGender(String gender) {
   //    this.gender = gender;
   //  }
-  public Member getClientTel() {
+  public String getClientTel() {
     return clientTel;
   }
-  public void setClientTel(Member clientTel) {
+  public void setClientTel(String clientTel) {
     this.clientTel = clientTel;
   }
+
   //  public Member getCounselorGender() {
   //    return counselorGender;
   //  }
