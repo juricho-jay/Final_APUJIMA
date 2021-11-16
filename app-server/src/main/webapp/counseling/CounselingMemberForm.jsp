@@ -79,7 +79,6 @@
 <h1>상담신청하기</h1>
 
 
-<form class="total" name="counselingmember" action='add' method="get" accept-charset="utf-8">
   <div class="mb-3 row">
     <label for='f-client' class="col-sm-3 col-form-label">이름</label>
     <div class="col-sm-6">
@@ -92,12 +91,13 @@
       <input id='f-tel' type='text'  name="client.tel" class="form-control" value="${loginUser.tel}" readOnly>
     </div>
   </div> 
+<form class="total" name="counselingmember" action='add' method="get" accept-charset="utf-8">
   <div class="mb-3 row">
     <label for='f-name' class="col-sm-3 col-form-label">상담사</label>
     <div class="col-sm-4">
     
-       <input id='f-counselor-no' type='hidden'  class="form-control" value="${counselor.no}">
-       <input id='f-name' type='text'  name="counselor.no" class="form-control" value="${counselor.name}" readOnly>
+       <input id='f-counselor-no' type='hidden' name="no" class="form-control" value="${counselor.no}">
+       <input id='f-name' type='text'  name="counselor.name" class="form-control" value="${counselor.name}" readOnly>
      </div>
   </div>
   
@@ -105,7 +105,7 @@
   <div class="mb-3 row" style="margin-top:50px;">
     <label for='f-disease' class="col-sm-3 col-form-label">질병여부</label>
     <div class="col-sm-6">
-      <input id='f-disease' type='text' name='disease' class="form-control"required>
+      <input id='f-disease' type='text' name='disease' class="form-control" required>
     </div>
   </div>
   <div class="mb-3">
