@@ -8,56 +8,92 @@
 <html>
 <head>
   <title>내 정보</title>
- <!--  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script> -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="/apus/css/UserInfo.css">
   
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <!-- <scrip src="https://code.jquery.com/jquery-3.4.1.slim.min.js"> -->
-  <!-- <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ <link rel="stylesheet" href="/apus/css/UserInfo.css">
+ <link rel="sytlesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+ 
+ 
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <style>
   
-   .logoBtn {
-   color: white;
-   }
   
   </style>
 </head>
 
 <body>
-  <div class="main-content">
-  <div class="main-content logo" style="background-color: #8ba989; height: 80px;">
-  <a class="logoBtn" href="/apus/home">APUJIMA</a>
-    <div class="main-content logo righ" style="float: right; margin-top: 10px;">
-	     <div class="dropdown">
-	     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	       Dropdown button
-	     </button>
-	     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-	       <a class="dropdown-item" href="#">Action</a>
-	       <a class="dropdown-item" href="#">Another action</a>
-	       <a class="dropdown-item" href="#">Something else here</a>
-	     </div>
-     </div>
-    </div>
-  </div>
+   <div class="main-content">
+    <!-- Top navbar -->
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="/apus/home">APUJIMA</a>
+        <!-- Form -->
+        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+          <div class="form-group mb-0">
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="bi bi-search"></i></span>
+              </div>
+              <input class="form-control" placeholder="Search" type="text">
+            </div>
+          </div>
+        </form>
+        <!-- User -->
+         <ul class="navbar-nav align-items-center d-none d-md-flex">
+          <li class="nav-item dropdown">
+            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <!-- <div class="media align-items-center">
+                <span class="avatar avatar-sm rounded-circle">
+                  <img alt="Image placeholder" src="https://demos.creative-tim.com/argon-dashboard/assets/img/theme/team-4.jpg">
+                </span>
+                <div class="media-body ml-2 d-none d-lg-block">
+                  <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                </div>
+              </div> -->
+              <span>${loginUser.nickname}님</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+              <div class=" dropdown-header noti-title">
+                <h6 class="text-overflow m-0">Welcome!</h6>
+              </div>
+              <a href="./examples/profile.html" class="dropdown-item">
+                <i class="ni ni-single-02"></i>
+                <span>My profile</span>
+              </a>
+              <a href="./examples/profile.html" class="dropdown-item">
+                <i class="ni ni-settings-gear-65"></i>
+                <span>Settings</span>
+              </a>
+              <a href="./examples/profile.html" class="dropdown-item">
+                <i class="ni ni-calendar-grid-58"></i>
+                <span>Activity</span>
+              </a>
+              <a href="./examples/profile.html" class="dropdown-item">
+                <i class="ni ni-support-16"></i>
+                <span>Support</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#!" class="dropdown-item">
+                <i class="ni ni-user-run"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <!-- Form : member update -->
-    <form id="member-detail" action="userUpdate">
+     <form id="member-detail" action="userUpdate">
     <input type="hidden" name="no" value="${loginUser.no}">
     <!-- Header -->
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image:); background-size: cover; background-position: center top;">
       <!-- Mask -->
-      <span class="mask" style="background-color: #8ba989"></span>
+      <span class="mask bg-gradient-default opacity-8"></span>
       <!-- Header container -->
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
@@ -65,13 +101,9 @@
             <h1 class="display-2 text-white">Hello <b>${loginUser.nickname}</b></h1>
             <p class="text-white mt-0 mb-5">개인 정보 페이지입니다. 개인 정보를 수정하거나 쪽지, 게시글, 화분을 확인할 수 있습니다.</p>
             <button type="submit" class="btn btn-info">정보 수정</button>
-            
           </div>
-          
-        </div>
         </div>
       </div>
-    </form>
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--7">
@@ -127,16 +159,6 @@
                   <i class="bi bi-flower1"></i><br>
                   <span>나의 정원</span>
                   </a>
-                  <div class="dropdown">
-										  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										    Dropdown button
-										  </button>
-										  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										    <a class="dropdown-item" href="#">Action</a>
-										    <a class="dropdown-item" href="#">Another action</a>
-										    <a class="dropdown-item" href="#">Something else here</a>
-										  </div>
-									  </div>
                 </div>
                 <hr class="my-4">
                 
@@ -292,7 +314,7 @@
     <div class="row align-items-center justify-content-xl-between">
       <div class="col-xl-6 m-auto text-center">
         <div class="copyright">
-          <p>Made by <a href="../loginindex.jsp" target="_blank">APUJIMA </a>team</p>
+          <p>Made by <a href="/apus/home">APUJIMA </a>team</p>
         </div>
       </div>
     </div>

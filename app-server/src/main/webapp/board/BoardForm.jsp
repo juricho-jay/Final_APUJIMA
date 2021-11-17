@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,8 +76,10 @@
       <label>자유게시판</label>
       <input id='f-whichBoard' type='radio' name='whichBoard' value = "2">
       <label>Healer 지식in </label>
+      <c:if test = "${loginUser.doctorOrNot == 3}" >
       <input id='f-whichBoard' type='radio' name='whichBoard' value = "3">
       <label>공지사항</label>
+      </c:if>
     </div>
 </div>
 

@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-  <!--  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
@@ -190,6 +190,7 @@
     
      <div class="card-footer"> 
      <ul id="replies">
+
          <c:forEach items ="${commentList}" var= "comment">
    
    
@@ -199,6 +200,7 @@
 		    더보기
 		  </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+		    <li><a class="dropdown-item" href="#">쪽지보내기</a></li>
 		    <li><button class="dropdown-item" type="button">쪽지보내기</button></li>
 		    <!-- <li><button class="dropdown-item" type="button">Another action</button></li>
 		    <li><button class="dropdown-item" type="button">Something else here</button></li> -->
@@ -210,14 +212,14 @@
    <p> 댓글 작성날짜 : ${comment.registeredDate}</p>
    
    <div id = "UDbutton" style ="margin-left : 960px"> 
-   <button type='button' class='btn btn-xs btn-success' data-toggle="modal" data-target='#modifyModal' data-commentNo = "${comment.no}">댓글 수정</button>
-  <!--  data toggle = id  -->
+   <c:if test = "${loginUser.id == comment.commenter.id }">
+   <button class="btn btn-xs btn-success" name="updateButton" onclick="updateComment('${comment.no}', '${comment.content}')" type="button">댓글 수정</button>
+      
+      <!--  data toggle = id  -->
    <a href= 'comment/delete?no=${comment.no}' class="btn btn-primary right"  >댓글 삭제</a>
+   </c:if>
   </div>
-  
 <hr>
-     
-     
      </c:forEach>
      
      </ul> 
@@ -230,126 +232,41 @@
      </div>
     
 
-  
-  
-  <div class="modal fade" id="modifyModal" role="dialog"> 
-  <form action = "../comment/update">
-  <c:forEach items ="${commentList}" var ="comment">
-  
-  
-  <div class="modal-dialog" id ="${comment.no}"> 
-    <div class="modal-content"> 
-      <div class="modal-header"> 
-          <h4 class="modal-title">댓글 수정창</h4> 
-            <button type="button" class="close" data-dismiss="modal">&times;</button> 
-     </div> 
-     <div class="modal-body"> 
-
-       <div class="form-group"> 
-        <label for="reply_writer">댓글 작성자</label> 
-          <input class="form-control" id="commenter" name="commenter" value="${comment.commenter.nickname}" readonly>
+  <!--  댓글 수정 모달. -->
+ <form  id = "updateForm" action='/apus/comment/update'>
+ <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" 
+      aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">댓글 수정</h5>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="bucket-title" class="col-form-label">작성자</label>
+                <input type="text" class="form-control" id="commenter" name="commenter" value ="${loginUser.nickname}"readonly>
+              </div>
+              <div class="form-group">
+                <label for="comment-content" class="col-form-label">내용</label>
+                <textarea class="form-control" id="Commentcontent" name="content" >${comment.content}</textarea>
+              </div>
+              
+              
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="a-cancelBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            <button type="submit" id="bucketAddBtn" class="btn btn-primary">확인</button>
+          </div>
+        </div>
       </div>
-      <div class="form-group"> 
-      <label for="reply_text">댓글 내용</label> 
-      <input class="form-control" id="content" name="content" value="${comment.content}" placeholder="${comment.content }"> 
-     </div>
-     
-     </div>
-     
-      <div class="modal-footer"> 
-       <input type ="hidden" name ="content" value ="${comment.content}">
-      <input type ="hidden"  id ="commentNo" name = "no" value ="${comment.no}">
-      <button type="submit" class="btn btn-success modalModBtn">수정</button> 
-     
-      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button> 
-      
-      </div>
-     </div>
     </div>
-    </c:forEach>
    </form>
-  </div>
 
   
-  
-  <!-- test -->
-  <!-- 
- <div class="container2">
-   <div id="modal" class="modal-overlay">
-     <div class="modal-window">
-        <div class="box">
-          <div class="title">
-              댓글 수정
-          </div>
-          <div class="close-area">X</div>
-        </div>
-        <div class="content-in">
-            <form name = "updateComment" action='/apus/comment/update2' >
-             <input type ="hidden" value ="${comment.no}" name = "no">
-             <div class="content4">
-                <label for="f-content">내용</label>
-                <br>
-                <textarea id="f-content" name="content" rows=5 cols=73 class="form-control"></textarea>
-               <br><hr>
-              </div>
-              <div class="col-12 sendbtn">
-              <button type="submit" class="btn btn-outline-secondary">수정하기</button>
-                </div>
-              </form>
-            </div>
-        </div>
-    </div>
-    </div>
-    <button id="btn-modal" class="btn btn-outline-primary btn-sm">수정하기</button>
-
-  
-   -->
-
-
-<!--  댓글 수정 모달  -->
-<!--  
-<div class="container2">
-  <!-- <a href='MailBoxForm.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br> 
-<div id="modal" class="modal-overlay">
-    <div class="modal-window">
-        <div class="box">
-          <div class="title">
-              댓글 수정
-          </div>
-          <div class="close-area">X</div>
-        </div>
-        <div class="content-in">
-            <form name = "updateComment" action='/apus/comment/update2' >
-             <input type ="hidden" value ="${comment.no}" name = "no">
-             <div class="content4">
-                <label for="f-content">내용</label>
-                <br>
-                <textarea id="f-content" name="content" rows=5 cols=73 class="form-control"></textarea>
-               <br><hr>
-              </div>
-              <div class="col-12 sendbtn">
-              <button type="submit" class="btn btn-outline-secondary">수정하기</button>
-                </div>
-              </form>
-            </div>
-        </div>
-    </div>
-    </div>
-    <button id="btn-modal" class="btn btn-outline-primary btn-sm">수정하기</button>
--->
-
-   
-     
     
 
 
-
 <script>
-<<<<<<< HEAD
-=======
-
-	
->>>>>>> d0975b66e54d72079532cbe567ef48dbf9a705a9
 // 좋아요 여부에 따라 하트 
 /*
 function modalOn(){
@@ -372,6 +289,44 @@ if (tag.getAttribute("value") == 1) {
 
 	  }
 });
+var m
+console.log()
+/*
+ 
+ var modifyModal = document.querySelector("#modifyModal");
+console.log(modifyModal)
+modifyModal.addEventListener("show.bs.modal", () => {
+	console.log("===============>222")
+});
+*/
+//휴지통 삭제 모달 오픈
+//id는 절대값이므로 중복될 수 없다 > name을 활용할 것 > id로 쓸 경우 아이콘 하나만 모달 창 실행
+$('button[name=updateButton]').on('click', function(){
+$('#updateModal').modal('show');
+
+});
+
+/*
+$('#updateButton').on('click', function(){
+	$('#updateModal').modal('show');
+
+	});
+*/
+	// 모달 안의 취소 버튼에 이벤트를 건다.
+	  $('#a-cancelBtn').on('click', function(){
+	  $('#updateForm > input').remove();
+	  $('#updateModal').modal('hide');
+	  });
+
+	
+
+//데이터 모달에 넘기기 
+function updateComment(no,content) {
+	  var updateForm= $('#updateForm');
+	  $('<input>').attr('type','hidden').attr('value', no).attr('name','no').appendTo(updateForm);
+	  $('<input>').attr('type','hidden').attr('value', content).attr('name','content').appendTo(updateForm);
+	  console.log(no,content)
+	  }; 
 
   </script>
 </body>

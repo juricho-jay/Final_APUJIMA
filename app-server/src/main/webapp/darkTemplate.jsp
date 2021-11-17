@@ -27,14 +27,20 @@
     flex-direction: column; 
     }
     
+    .container2 {
+    min-width: 1200px;
+    }
     
-    
+    header {
+    min-width: 1200px;
+    }
     
   </style>
   
 </head>
 
 <body>
+ <div class="container2">
   <jsp:include page="/darkHeader.jsp"/>
   
     <div class="container wrapper"> <!-- container(양옆) + wrapper (높이) -->
@@ -50,6 +56,7 @@
   
   <jsp:include page="/footer.jsp"/>
 
+</div>
 </body>
 
 
