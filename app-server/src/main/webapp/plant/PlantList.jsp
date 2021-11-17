@@ -32,7 +32,7 @@
           <p>화분 주인: ${loginUser.nickname}</p>
           <p>화분 레벨 : ${plant.level}</p>
         </div>
-       
+       <hr>
       </div>
     </c:forEach>
  <a href='PlantForm.jsp' class="btn btn-outline-primary btn-sm">화분 생성</a><br>   

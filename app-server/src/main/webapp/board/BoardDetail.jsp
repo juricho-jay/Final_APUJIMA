@@ -247,7 +247,7 @@
               </div>
               <div class="form-group">
                 <label for="comment-content" class="col-form-label">내용</label>
-                <textarea class="form-control" id="Commentcontent" name="content" >${comment.content}</textarea>
+         <textarea class="form-control" id="Commentcontent" name="content" >${comment.content}</textarea>
               </div>
               
               
@@ -305,14 +305,17 @@ $('#updateButton').on('click', function(){
 	  $('#updateModal').modal('hide');
 	  });
 
-	
+
 
 //데이터 모달에 넘기기 
 function updateComment(no,content) {
 	  var updateForm= $('#updateForm');
 	  $('<input>').attr('type','hidden').attr('value', no).attr('name','no').appendTo(updateForm);
 	  $('<input>').attr('type','hidden').attr('value', content).attr('name','content').appendTo(updateForm);
-	  console.log(no,content)
+
+	 //   $('<input>').attr('type','text').attr('value', content).attr('name','content').attr('placeholder','content').appendTo(.child1);
+
+	 console.log(no,content)
 	  }; 
 
   </script>

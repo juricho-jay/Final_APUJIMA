@@ -20,10 +20,14 @@
     }
   </style>
 </head>
-<body>
+<body >
 <div class="container">
+ 
 <form name ="PlantInfo" onsubmit="return checkValue()">
-  <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
+<input id = "f-no" type ="hidden" name = "no"  value ="${plant.no}">
+ <input id = "ownerName"  type ="hidden" name = "ownerName" value ="${board.owner.id}">
+  <table id="datatable-scroller"
+  class="table table-bordered tbl_Form">
     <thead>
       <tr>
          <th colspan ="3" style = "background-color: #eeeeee; text-align: center;">화분 보기</th> 
@@ -34,7 +38,7 @@
  <tr>
    <td>apus 화분 번호</td>
    <td>${plant.no}</td>
-   <td><input id = "f-no" type ="hidden" name = "no"  value ="${plant.no}"></td>
+  
  </tr>
      
         <tr>
@@ -45,7 +49,6 @@
       <tr>
         <td>화분 주인</td>
         <td>${loginUser.nickname}</td>
-        <td><input id = "ownerName"  type ="hidden" name = "ownerName" value ="${board.owner.id}"></td>
      </tr>
   
   <tr>
@@ -75,7 +78,7 @@
    <td>
 <a href= 'updateForm?no=${plant.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
 <a href= 'delete?no=${plant.no}' class="btn btn-primary" >삭제</a>
-<a href= 'grow?no=${plant.no}' class= "btn btn-primary">물 주기</a>
+<a href= 'grow?no=${plant.no}' onclick ="growalert()" class= "btn btn-primary">물 주기</a>
 <a href = 'list'  class= "btn btn-primary">목록</a>
    </td>
    </tr>
@@ -84,5 +87,11 @@
   </table>
   </form>
   </div><!-- .container -->
+
+<script>
+function growalert(){
+	alert("물주기에 성공했습니다!")
+}
+</script>  
 </body>
 </html>
