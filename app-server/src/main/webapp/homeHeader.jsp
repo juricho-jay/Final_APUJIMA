@@ -169,7 +169,7 @@ input.img-button {
 			  <!-- 로그인 o -->
 			  <c:if test="${not empty sessionScope.loginUser}">
 			  <li>
-        <a href="auth/userInfoList" class="button" style="color: white"><b>${loginUser.nickname}</b></a>
+        <a href="${contextPath}/auth/userInfoList" class="button" style="color: white"><b>${loginUser.nickname}</b></a>
         <i class="no-italics" style="color: darkgrey">&nbsp;님 <br>환영합니다!</i>
         </li>
         <li>

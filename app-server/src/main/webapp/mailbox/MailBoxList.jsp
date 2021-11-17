@@ -60,6 +60,7 @@
 		        </div>
 		    </div>
 		</div>
+		
 		<button id="btn-modal" class="btn btn-outline-primary btn-sm">보내기</button>
 		
 		
@@ -116,16 +117,11 @@
 </script>
 
 <script >
-$(document).ready(function(){
-	$('#btnsub').click(function() {
-		var result = confirm('정말 쪽지를 보내시겠습니까?');
-		if(result) {//yes
-			location.replace('/mailbox/MailBoxList.jsp');
-		} else { //no
-			}
-		});
+$("#modal").on("show", function () {
+	  $("body").addClass("modal-open");
+	}).on("hidden", function () {
+	  $("body").removeClass("modal-open")
 	});
-
 </script>
 
 
