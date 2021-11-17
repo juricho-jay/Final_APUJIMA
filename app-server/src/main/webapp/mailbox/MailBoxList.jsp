@@ -72,6 +72,12 @@
           <div class="mail-box">
 	          <div class="box-photo">
 	            <span class="box-img">${mailBox.receiver.photo}</span> <!-- 이게 될까? -->
+	                <%-- <img
+            src="${contextPath}/upload/member/${mailBox.sender.photo}_100x100.jpg"
+            class="rounded-circle"
+            height="80"
+            alt=""
+          /> --%>
 	          </div>
              <b class="box-id">${mailBox.sender.nickname}</b>
              <div class="box-title">
