@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.dao.CommentDao;
 import apus.dao.MemberDao;
+import apus.domain.Board;
 import apus.domain.Comment;
 import apus.domain.Member;
 
@@ -55,18 +56,20 @@ public class CommentUpdateController extends HttpServlet {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
       int no = Integer.parseInt(request.getParameter("no"));
+      int no1 = Integer.parseInt(request.getParameter("board_no"));
 
       //코멘트 목록 중에 수정할 코멘트의 번호를 찾아서 바꿔야댐//
       //Comment.no가 필요//
       //해당 코멘트 하나만 찾아야함.
 
       Comment comment = commentDao.findByNo(no);
+      Board board = boardDao.findByNo(no1);
       comment.setContent(request.getParameter("content"));
       commentDao.update(comment);
       sqlSession.commit();
 
       request.setAttribute("comment", comment);
-      response.sendRedirect("../board/list");
+      response.sendRedirect("../board/detail?no=" +board.getNo());
 
     }  
     catch (Exception e) {

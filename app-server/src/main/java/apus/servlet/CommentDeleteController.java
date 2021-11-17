@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.dao.CommentDao;
 import apus.dao.MemberDao;
+import apus.domain.Board;
 import apus.domain.Comment;
 import apus.domain.Member;
 
@@ -56,8 +57,9 @@ public class CommentDeleteController extends HttpServlet {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
       int no = Integer.parseInt(request.getParameter("no"));
+      int no1 = Integer.parseInt(request.getParameter("board_no"));
 
-
+      Board board = boardDao.findByNo(no1);
       Comment comment = commentDao.findByNo(no);
       if (comment == null) {
         throw new Exception("해당 댓글이 없습니다.");
@@ -65,8 +67,7 @@ public class CommentDeleteController extends HttpServlet {
 
       commentDao.delete(no);
       sqlSession.commit();
-      response.sendRedirect("../list");
-
+      response.sendRedirect("../../board/detail?no=" +board.getNo());
     }  
     catch (Exception e) {
       e.printStackTrace();

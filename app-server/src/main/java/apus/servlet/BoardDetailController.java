@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.dao.CommentDao;
@@ -44,11 +43,7 @@ public class BoardDetailController extends HttpServlet {
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    HttpSession session = request.getSession(false);
-    if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/apus/index.jsp");
-      return;
-    }
+
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
     try {
@@ -60,11 +55,16 @@ public class BoardDetailController extends HttpServlet {
       if (board == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
+      Like like = null;
+      if (member != null) {
+        like = likeDao.findBoardLike(no, member.getNo());
+      }
+
 
       //누른 적 없음
       if (like == null) {
         request.setAttribute("likeOrNot", "0");
-      } else if (like != null) {
+      } else{
         request.setAttribute("likeOrNot", like.getLikeOrNot());
       }
 

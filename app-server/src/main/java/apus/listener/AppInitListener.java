@@ -66,8 +66,7 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("reportDao", reportDao);
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);     
 
-      ServletContext sc = sce.getServletContext();
-      sc.setAttribute("contextPath", sc.getContextPath());
+
 
     } catch (Exception e) {
       System.out.println("DAO 객체 준비 중 오류 발생!");

@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.dao.LikeDao;
@@ -40,11 +39,7 @@ public class LikeUpdateController extends HttpServlet {
       throws ServletException, IOException {
     try {
 
-      HttpSession session = request.getSession(false);
-      if (session.getAttribute("loginUser") == null) {
-        response.sendRedirect("/apus/index.jsp");
-        return;
-      }
+
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
       int boardNo = Integer.parseInt(request.getParameter("no"));
       Board board = boardDao.findByNo(boardNo);

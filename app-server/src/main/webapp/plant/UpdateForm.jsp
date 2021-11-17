@@ -24,7 +24,8 @@
 <body>
 <div class="container">
 <form action = "update">
-  <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
+  <table  id="datatable-scroller"
+  class="table table-bordered tbl_Form">
     <thead>
       <tr>
          <th colspan ="3" style = "background-color: #eeeeee; text-align: center;">게시판 글 수정</th> 
@@ -53,14 +54,13 @@
          <tr>
   
   
-      <tr>
-     <td> <input type ="submit" class ="btn btn-primary pull-right" value="변경">
-    <a href ='list' class ="btn btn-primary pull-right">목록</a></td>
-      </tr>
+    
   </tbody>
 </table>
-  
- 
+ <div class ="buttonForm">
+   <input type ="submit" class ="btn btn-primary pull-right" value="변경">
+    <a href ='list' class ="btn btn-primary pull-right">목록</a>
+ </div>
 <!--  <input type ="submit" class ="btn btn-primary pull-right" value="변경"> -->
 </form>
 </div>
