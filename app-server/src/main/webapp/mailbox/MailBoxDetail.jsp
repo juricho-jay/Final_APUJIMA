@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/apus/css/MailBoxDetail.css">
 
 
-<style>
+<!-- <style>
  /* 모달창 디자인 */
     #modal.modal-overlay {
       width: 100%;
@@ -93,12 +93,12 @@
       text-align: center;
       
     }
-</style>
+</style> -->
 
 <div class="container">
 <h1>쪽지함 상세보기</h1>
 
-<div id="modal" class="modal-overlay">
+<%-- <div id="modal" class="modal-overlay">
     <div class="modal-window">
         <div class="box">
           <div class="title">
@@ -154,7 +154,7 @@
 <form action='../mailbox/resend' method="get">
 	<input type="hidden" name="senderNo" value="${mailBox.sender.no}">
 	<button id="btn-modal" class="btn btn-outline-primary btn-sm">답장</button>
-</form>
+</form> --%>
 
 <div class="big-box">
   <div class="box2">

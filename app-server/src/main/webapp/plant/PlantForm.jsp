@@ -10,25 +10,7 @@
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../bootstrap/dist/bootstrap.css"></script>
   
-   <script type="text/javascript">
-   
-    
-   function idCheck(){
-	   
-	   window.open("idCheckForm.jsp", "idwin", "width=400 height = 350")
-	   
-	 }
-   
- 
-   
-   function checkValue(){
-	   if(!document.plantInfo.plantNameDuplication.value != "idCheck"){
-		   alert("화분 이름 중복체크 해주세요!")
-	   }
-   }
-   
-   )
-    </script>
+  
 
   <style>
   .container {
@@ -68,7 +50,6 @@
     <label for='f-title' class="col-sm-3 col-form-label">화분 이름</label>
     <div class="col-sm-6">
       <input id='f-plantName' type='text' name='name' class="form-control">
-      <input type="button" value="중복체크" onclick= "idCheck()"> 
     </div>
 </div>
 

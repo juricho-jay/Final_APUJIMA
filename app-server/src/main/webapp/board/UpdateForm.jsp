@@ -56,7 +56,7 @@
          
      <tr>
       <td>작성자</td>
-      <td>${board.writer.id}</td>
+      <td>${board.writer.nickname}</td>
      </tr>     
   
   <tr>
@@ -74,9 +74,8 @@
 </table>
   
  <input type ="submit" class ="btn btn-primary pull-right" value="변경"> 
-<!--  <input type ="submit" class ="btn btn-primary pull-right" value="변경"> -->
+ <a href ='list' class ="btn btn-primary pull-right">목록</a>
 </form>
-<a href ='list'>목록</a>
 
 
 </div><!-- .container -->

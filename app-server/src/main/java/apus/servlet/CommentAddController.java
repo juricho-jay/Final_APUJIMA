@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.BoardDao;
 import apus.dao.CommentDao;
@@ -40,13 +39,9 @@ public class CommentAddController extends HttpServlet {
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    HttpSession session = request.getSession(false);
 
 
-    if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/apus/index.jsp");
-      return;
-    }
+
 
 
 
@@ -56,7 +51,7 @@ public class CommentAddController extends HttpServlet {
       if(writer == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
-      int no = Integer.parseInt(request.getParameter("no"));
+      int no = Integer.parseInt(request.getParameter("board_no"));
       Board board = boardDao.findByNo(no);
 
       if(board == null) {
