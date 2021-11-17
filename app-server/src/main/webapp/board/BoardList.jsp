@@ -19,6 +19,21 @@
   </style>
   
 
+<!--  boardSearch -->
+  <div class="container">
+    <div class="row">
+      <form  name="searchForm" action="search">
+        <table class="pull-right">
+          <tr>
+            <td><input type="text" class="form-control"
+              placeholder="검색어 입력" name="search" maxlength="100"></td>
+            <td><button type="submit" class="btn btn-success">검색</button></td>
+          </tr>
+
+        </table>
+      </form>
+    </div>
+  </div>
 <div>
 
 <div class="container" >

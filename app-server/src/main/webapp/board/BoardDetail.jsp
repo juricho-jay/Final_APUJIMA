@@ -70,8 +70,7 @@
   
   </script>
 
-  <!-- detail new  -->
-  
+    <!-- detail new  -->
   <div class ="container1212">
 <form name ="boardDetailInfo" action = 'report' >
    <input type ="hidden" name = "no" value ="${board.no}">

@@ -70,17 +70,18 @@
       <td><img src = ../img/${plant.shape} width ="150" height="150"></td>
   </tr>
  
-   <tr>
-   <td>
-<a href= 'updateForm?no=${plant.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
-<a href= 'delete?no=${plant.no}' class="btn btn-primary" >삭제</a>
-<a href= 'grow?no=${plant.no}' onclick ="return growalert()" class= "btn btn-primary">물 주기</a>
-<a href = 'list'  class= "btn btn-primary">목록</a>
-   </td>
-   </tr>
+   
      </tbody>
 
   </table>
+  
+  <div>
+<a href= 'updateForm?no=${plant.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
+<a href= 'delete?no=${plant.no}' class="btn btn-primary" >삭제</a>
+
+<a href= 'grow?no=${plant.no}' onclick ="return growalert()" class= "btn btn-primary">물 주기</a>
+<a href = 'list'  class= "btn btn-primary">목록</a>
+  </div>
   </form>
   </div><!-- .container -->
 
@@ -96,17 +97,19 @@ function growalert(){
 	 if (${plant.exp+130 > 1000}){
 		    var check = confirm("화분에 물을 주어도 경험치가 1000 이상으로 증가하지 않습니다. 그래도 주시겠습니까?")
 		    
-		    if(check){
-		      alert("화분에 물을 주었습니다.");
-		    }else {
+		    if(!check){
 		      alert("화분에 물을 주지 않았습니다.");
 		      return false;
 		    }
 		  }
 	
 	 alert("화분에 물을 주었습니다!")
+	 
 
 }
 </script>  
+<iframe src="/" style="width:100%; height:300px">
+
+</iframe>
 </body>
 </html>
