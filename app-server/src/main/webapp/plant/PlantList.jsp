@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="/apus/css/PlantList.css">
   
+     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   
   <script src="../node_modules/@popperjs/core//dist/umd/popper.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
@@ -16,7 +17,7 @@
     width: 640px;
     text-align: left;
   } */
-  
+ 
 </style>
 
 <title>화분 목록</title>
@@ -38,7 +39,6 @@
  <a href='PlantForm.jsp' class="btn btn-outline-primary btn-sm">화분 생성</a><br>   
  <a href= "/apus/home" class ="btn btn-outline-primary btn-sm">메인 페이지</a>
 <!-- </div> --><!-- .container -->
-
 
 
 

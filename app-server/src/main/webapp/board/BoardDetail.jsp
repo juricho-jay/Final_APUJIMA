@@ -73,7 +73,7 @@
   <!-- detail new  -->
   
   <div class ="container1212">
-<form name ="boardDetailInfo" action = 'report' onsubmit="return checkValue()">
+<form name ="boardDetailInfo" action = 'report' >
    <input type ="hidden" name = "no" value ="${board.no}">
    <input id = "writer"  type ="hidden" name = "writer" value ="${board.writer.nickname}">
     <h2>${board.title}</h2>
@@ -141,7 +141,9 @@
    
     <div class = "RLbutton">
       <input type="hidden" name= "no" value="${board.no}">
+      <c:if test = "${not empty loginUser.id}">
       <input type="button" value="신고" onclick= "boardReport()"class="btn btn-primary">
+     </c:if>
      <a href= "list"> <input type="button" value="목록" class="btn btn-primary"></a>
      </div>
    </div> 
@@ -154,7 +156,7 @@
   <div class="container" id="likeContainer">
       <form id="likeAddCancel" action="../like/update">
       <input type="hidden" name="no" value="${board.no}">
-      <button id="heartBtn" style="border: 0; background-color: white; outline:0;" type="submit" value="${likeOrNot}">
+      <button id="heartBtn" style="border: 0; background-color: white; outline:0;" type="submit" value="${likeOrNot}" onclick ="return checkValue()">
       <i class="bi bi-heart" id="heartIcon"style="color: red" data-like="${likeOrNot}"></i>
       &nbsp;좋아요&nbsp;${likeNo}&nbsp;&nbsp;</button><i class="bi bi-chat-square-dots"></i>&nbsp;댓글&nbsp;${commentNo}</form>
       <hr size="5px" color="black"> <!-- hr 템플릿 설정되어있음 black > opacity -->
@@ -171,6 +173,7 @@
   <!-- commentContainer ver2 -->
  <div class="col-lg-12"> 
  <form action= "../comment/add">
+  <input type ="hidden" name ="board_no"  value ="${board.no}">
   <div class="card">
    <div class="card-header with-border"> 
     <h3 class="card-title">댓글 작성</h3> 
@@ -181,8 +184,8 @@
       <input class="form-control input-sm" id="newReplyText" name = "content" type="text" placeholder="댓글 입력...">
        </div> <div class="form-group col-sm-2">
         <input class="form-control input-sm" id="newReplyWriter" type="text" name ="commenter" value="${loginUser.nickname}" readonly> 
-        <input id = "f-content" style = "margin-left: 320px;" type = "submit" class="btn btn-primary btn-sm"  value = "등록">
-         <input id="f-board" type ="hidden" name = "no" placeholder = "${board.no}" value = "${board.no}">
+        <input id = "f-content" style = "margin-left: 320px;" type = "submit" class="btn btn-primary btn-sm"  value = "등록" onclick = "return checkValue()">
+         <input type ="hidden" name ="board_no"  value ="${board.no}">         
          </div> 
     </div>
    
@@ -213,10 +216,10 @@
    
    <div id = "UDbutton" style ="margin-left : 960px"> 
    <c:if test = "${loginUser.id == comment.commenter.id }">
+   
    <button class="btn btn-xs btn-success" name="updateButton" onclick="updateComment('${comment.no}', '${comment.content}')" type="button">댓글 수정</button>
-      
-      <!--  data toggle = id  -->
-   <a href= 'comment/delete?no=${comment.no}' class="btn btn-primary right"  >댓글 삭제</a>
+  <a href= 'comment/delete?no=${comment.no}&board_no=${board.no}' class="btn btn-primary right" >댓글 삭제</a>
+  
    </c:if>
   </div>
 <hr>
@@ -234,6 +237,7 @@
 
   <!--  댓글 수정 모달. -->
  <form  id = "updateForm" action='/apus/comment/update'>
+ <input type ="hidden" name ="board_no"  value ="${board.no}">
  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" 
       aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
       <div class="modal-dialog" role="document">
@@ -267,6 +271,13 @@
 
 
 <script>
+function checkValue(){
+	if (${loginUser == null}){
+		alert("로그인 해주세요!");
+		return false;
+	}
+}
+
 document.querySelectorAll("#heartBtn").forEach((tag) => {
 if (tag.getAttribute("value") == 1) {
   $("#heartIcon").attr('class', 'bi bi-heart-fill');

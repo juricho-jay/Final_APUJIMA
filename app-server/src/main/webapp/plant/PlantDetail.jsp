@@ -35,11 +35,7 @@
     </thead>
     <tbody>
  
- <tr>
-   <td>apus 화분 번호</td>
-   <td>${plant.no}</td>
-  
- </tr>
+
      
         <tr>
            <td>화분 이름</td>
@@ -78,7 +74,7 @@
    <td>
 <a href= 'updateForm?no=${plant.no}' class="btn btn-primary" onclick = "return checkVaild()">수정</a>
 <a href= 'delete?no=${plant.no}' class="btn btn-primary" >삭제</a>
-<a href= 'grow?no=${plant.no}' onclick ="growalert()" class= "btn btn-primary">물 주기</a>
+<a href= 'grow?no=${plant.no}' onclick ="return growalert()" class= "btn btn-primary">물 주기</a>
 <a href = 'list'  class= "btn btn-primary">목록</a>
    </td>
    </tr>
@@ -90,7 +86,26 @@
 
 <script>
 function growalert(){
-	alert("물주기에 성공했습니다!")
+	
+	var check0 = confirm("화분에 물을 주시겠습니까?");
+	 if(!check0){
+		 alert ("화분에 물을 주지 않았습니다.");
+		 return false;
+	 }
+	
+	 if (${plant.exp+130 > 1000}){
+		    var check = confirm("화분에 물을 주어도 경험치가 1000 이상으로 증가하지 않습니다. 그래도 주시겠습니까?")
+		    
+		    if(check){
+		      alert("화분에 물을 주었습니다.");
+		    }else {
+		      alert("화분에 물을 주지 않았습니다.");
+		      return false;
+		    }
+		  }
+	
+	 alert("화분에 물을 주었습니다!")
+
 }
 </script>  
 </body>
