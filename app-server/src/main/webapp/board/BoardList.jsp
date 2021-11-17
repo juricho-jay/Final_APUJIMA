@@ -19,22 +19,7 @@
   </style>
   
 
-<!--  boardSearch -->
-  <div class="container">
-    <div class="row">
-      <form  name="searchForm" action="search">
-        <table class="pull-right">
-          <tr>
-            <td><input type="text" class="form-control"
-              placeholder="검색어 입력" name="search" maxlength="100"></td>
-            <td><button type="submit" class="btn btn-success">검색</button></td>
-          </tr>
 
-        </table>
-      </form>
-    </div>
-  </div>
-<div>
 
 <div class="container" >
 <h1>게시판 목록</h1>
@@ -74,8 +59,25 @@
 </c:forEach>
 </tbody>
 </table>
-<a href='form' class="btn btn-outline-primary btn-sm">글 작성</a><br>
 
+<!--  boardSearch -->
+  <div class="container1">
+    <div class="row">
+      <form  name="searchForm" action="search" >
+        <table class="pull-right">
+          <tr>
+          <td><a href='form' class="btn btn-outline-primary btn-sm">글 작성</a></td>
+         <td style="width: 700px;"> </td>
+            <td><input type="text" class="form-control"
+              placeholder="검색어 입력" name="search" maxlength="300"></td>
+            <td><button type="submit" class="btn btn-success">검색</button></td>
+          </tr>
+
+        </table>
+      </form>
+    </div>
+  </div>
+<div>
 </div><!-- .container -->
 </div>
 
