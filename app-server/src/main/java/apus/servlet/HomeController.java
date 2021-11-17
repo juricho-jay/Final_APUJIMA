@@ -40,45 +40,52 @@ public class HomeController extends HttpServlet {
 
   }
 
-
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
       HttpSession session = request.getSession(false);
 
+      if (session.getAttribute("loginUser") != null) {
+        Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
-      if (session.getAttribute("loginUser") == null) {
+        Collection<Board> boardList = boardDao.findAll();
+
+
+        //안읽은 메일 체크
+        List<MailBox> mailBoxList = mailBoxDao.findAll();
+        int count = 0;
+        for (int i = 0; i < mailBoxList.size(); i++) {
+          if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+            if (mailBoxList.get(i).getReceivedTime() == null) {
+              count++;
+            }
+          }
+        }
+        request.setAttribute("uncheckedMail", count);
+
+
+        request.setAttribute("boardList", boardList);
+        request.setAttribute("member", member);
+
+
+        request.setAttribute("pageTitle", "메인화면");
         request.setAttribute("contentUrl", "/index2.jsp");
         request.getRequestDispatcher("/homeTemplate.jsp").forward(request, response);
         return;
       }
 
-      Member member = (Member) request.getSession(false).getAttribute("loginUser");
-
       Collection<Board> boardList = boardDao.findAll();
 
-
-      //안읽은 메일 체크
-      List<MailBox> mailBoxList = mailBoxDao.findAll();
-      int count = 0;
-      for (int i = 0; i < mailBoxList.size(); i++) {
-        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
-          if (mailBoxList.get(i).getReceivedTime() == null) {
-            count++;
-          }
-        }
-      }
-      request.setAttribute("uncheckedMail", count);
-
-
       request.setAttribute("boardList", boardList);
-      request.setAttribute("member", member);
-
-
       request.setAttribute("pageTitle", "메인화면");
       request.setAttribute("contentUrl", "/index2.jsp");
-      request.getRequestDispatcher("/homeTemplate2.jsp").forward(request, response);
+      request.getRequestDispatcher("/homeTemplate.jsp").forward(request, response);
+
+
+
+
+
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);

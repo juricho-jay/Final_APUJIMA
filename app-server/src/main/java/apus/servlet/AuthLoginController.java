@@ -49,7 +49,7 @@ public class AuthLoginController extends HttpServlet {
       } else {
         HttpSession session = request.getSession(); //멀티쓰레드
         session.setAttribute("loginUser", member);
-        response.sendRedirect("/apus/home");
+        response.sendRedirect("/apus/homeLogin");
         //        response.setHeader("Refresh", "1;url=/apus/loginindex.jsp");
         //        request.getRequestDispatcher("LoginSuccess.jsp").forward(request, response);
       }
