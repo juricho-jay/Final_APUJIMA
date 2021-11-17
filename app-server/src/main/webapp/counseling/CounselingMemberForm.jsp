@@ -4,12 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<%@page import="java.util.*"%>
-<%
- 
-    request.setCharacterEncoding("UTF-8");
- 
-%>
 
 <!DOCTYPE html>
 <html>
@@ -64,6 +58,13 @@
      width:200px; 
      height:100px; 
      margin: 0 auto;
+     margin-top: 50px;
+     }
+     .context{
+     text-indent: -0.9em;
+     }
+     .text1{
+     font-size:14px;
      }
     
   </style>
@@ -76,7 +77,12 @@
 
 
 <div class="container">
-<h1>상담신청하기</h1>
+ <h5>상담신청하기
+ <button class="btn btn-outline-secondary btn-sm" onclick="location.href='list'">나의상담리스트</button>
+ </h5>
+ <br><br>
+  
+
 
 
   <div class="mb-3 row">
@@ -91,9 +97,13 @@
       <input id='f-tel' type='text'  name="client.tel" class="form-control" value="${loginUser.tel}" readOnly>
     </div>
   </div> 
+  
+  <span class="text1">*상담신청시 이름과 휴대번호는 필수입니다.</span>
+  <hr>
+  
 <form class="total" name="counselingmember" action='add' method="get" accept-charset="utf-8">
   <div class="mb-3 row">
-    <label for='f-name' class="col-sm-3 col-form-label">상담사</label>
+    <label for='f-name' class="col-sm-3 col-form-label">상담사 선생님</label>
     <div class="col-sm-4">
     
        <input id='f-counselor-no' type='hidden' name="no" class="form-control" value="${counselor.no}">
@@ -102,20 +112,26 @@
   </div>
   
   <hr style="margin-top:50px;">
+  
+ 
+  
   <div class="mb-3 row" style="margin-top:50px;">
     <label for='f-disease' class="col-sm-3 col-form-label">질병여부</label>
     <div class="col-sm-6">
       <input id='f-disease' type='text' name='disease' class="form-control" required>
     </div>
   </div>
+
   <div class="mb-3">
-    <label for="f-content" class="col-sm-3 col-form-label">상담내용</label>
+    <label for="f-content" class="col-sm-3 col-form-label context">상담내용</label>
+    <br>
     <textarea class="form-control" id="f-content" name='content' required></textarea>
   </div>
-  
+   <span class="text1">*자세하게 기입해주시면 상담시 많은 도움이 됩니다.</span>
   
   
   <div class="col-12 box4">
+    <button class="btn btn-outline-secondary btn-sm" onclick="history.back()">뒤로가기</button>
     <button type="submit" class="btn btn-primary btn-sm" >상담 신청하기</button>
   </div>
 </form>

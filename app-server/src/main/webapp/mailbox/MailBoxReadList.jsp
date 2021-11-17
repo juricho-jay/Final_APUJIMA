@@ -66,27 +66,29 @@
 		
 		<hr>
 		<div>
-		  <c:forEach items="${mailBoxList}" var="mailBox">
-        <c:if test='${loginUser.nickname eq mailBox.receiver.nickname}'>
-          <div class="mail-box">
-	          <div class="box-photo">
-	            <span class="box-img">${mailBox.receiver.photo}</span> <!-- 이게 될까? -->
-	          </div>
-             <b class="box-id">${mailBox.sender.nickname}</b>
-             <div class="box-title">
-               <a href='detail?no=${mailBox.no}'>${mailBox.title}</a>
-             </div>
-            <span class="box-time">${mailBox.sentTime}</span>
-          </div>
-         
-        </c:if>
+      <c:forEach items="${mailBoxList}" var="mailBox">
+	      <c:if test='${loginUser.nickname eq mailBox.receiver.nickname}'>
+	          <c:if test='${mailBox.receivedTime != null}'>
+	            <div class="mail-box">
+	              <div class="box-photo">
+	                <span class="box-img">${mailBox.receiver.photo}</span> 
+	              </div>
+	               <b class="box-id">${mailBox.sender.nickname}</b>
+	               <div class="box-title">
+	                 <a href='detail?no=${mailBox.no}'>${mailBox.title}</a>
+	               </div>
+	              <span class="box-time">${mailBox.sentTime}</span>
+	            </div>
+	           </c:if>
+	        </c:if>
       </c:forEach>
-		</div>
+    </div>
 		
 		</div>
 		
 		
 		
+    
 	
 
 

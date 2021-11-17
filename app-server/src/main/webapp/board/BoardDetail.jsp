@@ -200,6 +200,7 @@
 		    더보기
 		  </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+		    <li><a class="dropdown-item" href="#">쪽지보내기</a></li>
 		    <li><button class="dropdown-item" type="button">쪽지보내기</button></li>
 		    <!-- <li><button class="dropdown-item" type="button">Another action</button></li>
 		    <li><button class="dropdown-item" type="button">Something else here</button></li> -->

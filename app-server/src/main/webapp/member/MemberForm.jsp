@@ -16,9 +16,15 @@
  
 function idCheck(){
   
-  window.open("/apus/member/idCheckForm.jsp", "idwin", "width=400 height = 350")
+  window.open("/apus/member/idCheckForm.jsp", "IdCheck", "width=400 height = 350")
   
 }
+
+function nicknameCheck(){
+	  
+	  window.open("/apus/member/NicknameCheckForm.jsp", "NicknameCheck", "width=400 height = 350")
+	  
+	}
 </script>
 
 <script type="text/javascript">
@@ -156,7 +162,7 @@ function div_OnOff(v,id){
     <label for='f-f-nickname' class="col-sm-3 col-form-label">* 별명</label>
     <div class="col-sm-6">
       <input id='f-nickname' type='text' name='nickname'>
-      <input type="button"value="중복체크">
+      <input type="button"value="중복체크" onclick= "nicknameCheck()">
     </div>
 </div>
 <div class="mb-3 row">

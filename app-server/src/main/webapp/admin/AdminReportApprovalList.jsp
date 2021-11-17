@@ -37,10 +37,11 @@
 </thead>
 <tbody>
 <c:forEach items="${reportApprovalList}" var="report">
-<form action = 'medicineConfirm'>
+<form action = 'reportConfirm'>
+ <input type = 'hidden' name = 'id' value = '${report.requester.id}'>
+  <input type = 'hidden' name = 'no' value = '${report.requestBoard.no}'>
 <tr>
   <td>${report.requestBoard.no}</td>
-  <input type = 'hidden' name = 'no' value = '${report.requestBoard.no}'>
  <c:if test='${report.requestBoard.whichBoard == 1}'>
     <td>자유게시판</td> 
   </c:if>
@@ -52,10 +53,11 @@
   </c:if>
     <td>${report.requestBoard.title}</td>
     <td>${report.requester.id}</td> 
-    <input type = 'hidden' name = 'id' value = '${report.requester.id}'>
+   
     <td>${report.reason}</td> 
     <td><input type = "submit" value ='승인'></td>
-    <td><input type = "button" value = "거절"  onclick = "reject(this.form);"></td>
+ <td><input type = "button" value = "거절"  onclick = "reject(this.form);"></td>
+   <!--  <td><input type = "button" value = "거절"  onclick = "javascript: form.action = 'reportReject';"></td> -->
     
 </tr>
 </form>
