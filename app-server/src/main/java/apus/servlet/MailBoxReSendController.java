@@ -17,8 +17,8 @@ import apus.dao.MemberDao;
 import apus.domain.MailBox;
 import apus.domain.Member;
 
-@WebServlet("/mailbox/send")
-public class MailBoxSendController extends HttpServlet {
+@WebServlet("/mailbox/resend")
+public class MailBoxReSendController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MailBoxDao mailBoxDao;
@@ -45,30 +45,24 @@ public class MailBoxSendController extends HttpServlet {
       response.sendRedirect("/apus/index.jsp");
       return;
     }
+    int senderNo = Integer.parseInt(request.getParameter("no")); // receiver.no
+
 
     try {
-
       Member sender = (Member) request.getSession(false).getAttribute("loginUser");
 
       if(sender == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
 
-      String receiver = request.getParameter("receiver.nickname");
-      //String user2 = request.getParameter("sender.nickname");
-      Member member = memberDao.findByNickname(receiver);
-      //Member member2 = memberDao.findByNickname(user2);
-      mailBox.setReceiver(member);
+      Member receiver = memberDao.findByNo(senderNo);
+
       mailBox.setSender(sender);
-    } catch (Exception e1) {
-      e1.printStackTrace();
-    }
+      mailBox.setReceiver(receiver);
+      mailBox.setTitle(request.getParameter("title"));
+      mailBox.setContent(request.getParameter("content"));
+      mailBox.setSentTime(new Date(System.currentTimeMillis()));
 
-    mailBox.setTitle(request.getParameter("title"));
-    mailBox.setContent(request.getParameter("content"));
-    mailBox.setSentTime(new Date(System.currentTimeMillis()));
-
-    try {
       mailBoxDao.insert(mailBox);
       sqlSession.commit();
       response.setHeader("Refresh", "2;url=list");
@@ -83,5 +77,7 @@ public class MailBoxSendController extends HttpServlet {
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
       요청배달자.forward(request, response);
     }
+
+
   }
 }

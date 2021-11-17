@@ -60,6 +60,7 @@
 		        </div>
 		    </div>
 		</div>
+		
 		<button id="btn-modal" class="btn btn-outline-primary btn-sm">보내기</button>
 		
 		
