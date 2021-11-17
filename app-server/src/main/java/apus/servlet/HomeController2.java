@@ -14,8 +14,8 @@ import apus.dao.BoardDao;
 import apus.domain.Board;
 
 
-@WebServlet("/home")
-public class HomeController extends HttpServlet {
+@WebServlet("/home2")
+public class HomeController2 extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   BoardDao boardDao;
@@ -39,7 +39,7 @@ public class HomeController extends HttpServlet {
 
       request.setAttribute("pageTitle", "메인화면");
       request.setAttribute("contentUrl", "/index2.jsp");
-      request.getRequestDispatcher("/homeTemplate.jsp").forward(request, response);
+      request.getRequestDispatcher("/homeTemplate2.jsp").forward(request, response);
     } catch (Exception e) {
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
       request.setAttribute("error", e);

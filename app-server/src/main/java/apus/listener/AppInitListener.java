@@ -69,9 +69,6 @@ public class AppInitListener implements ServletContextListener {
       ServletContext sc = sce.getServletContext();
       sc.setAttribute("contextPath", sc.getContextPath());
 
-      ServletContext sc = sce.getServletContext();
-      sc.setAttribute("contextPath", sc.getContextPath());
-
     } catch (Exception e) {
       System.out.println("DAO 객체 준비 중 오류 발생!");
     }

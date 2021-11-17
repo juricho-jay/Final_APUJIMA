@@ -13,7 +13,7 @@
    <script type="text/javascript">
     
         // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
-        function checkValue()
+       /*  function checkValue()
         {
         	
            if(!document.medicineRequest.name.value){
@@ -42,7 +42,7 @@
                return false;
            }
           
-        }
+        } */
         
     </script>
 
@@ -73,7 +73,7 @@
   <div class="mb-3 row">
     <label for='m-name' class="col-sm-3 col-form-label">* 약품명</label>
     <div class="col-sm-6">
-      <input id='m-name' type='text' name='mname' class="form-control">
+      <input id='m-name' type='text' name='name' class="form-control">
     </div>
 </div>
 
