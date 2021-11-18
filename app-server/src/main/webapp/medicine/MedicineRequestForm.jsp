@@ -73,7 +73,7 @@
   <div class="mb-3 row">
     <label for='m-name' class="col-sm-3 col-form-label">* 약품명</label>
     <div class="col-sm-6">
-      <input id='m-name' type='text' name='mname' class="form-control">
+      <input id='m-name' type='text' name='name' class="form-control">
     </div>
 </div>
 
