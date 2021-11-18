@@ -20,46 +20,41 @@
   <style>
   
   /* 전체 높이  */
-  .wrapper{ 
-    display: flex; 
-    min-height: 100vh;
-    min-width: 1000px; 
-    flex-direction: column; 
+   html,body { 
+   margin:0;
+   padding:0; 
+   width:100%; 
+   height:100% 
+   }
+   
+   @media (min-width: 768px) {
+      .container {
+        width: 750px;
+      }
     }
     
-    .container2 {
-    min-width: 1200px;
+    @media (min-width: 992px) {
+      .container {
+        width: 940px;
+      }
     }
-    
-    header {
-    min-width: 1200px;
-    }
-    
-  </style>
+   </style>
   
 </head>
 
 <body>
- <div class="container2">
-  <jsp:include page="/darkHeader.jsp"/>
-  
-    <div class="container wrapper"> <!-- container(양옆) + wrapper (높이) -->
- <%--  <jsp:include page="/sidebar.jsp"/> --%>
-    
-      
-      <div id="content">
-       <jsp:include page="${contentUrl}"/>
-      </div><!-- #content --> 
-    
-    
-    </div><!-- .container -->
-  
-  <jsp:include page="/footer.jsp"/>
+<jsp:include page="/darkHeader.jsp"/>
+<%-- <jsp:include page="/sidebar.jsp"/> --%>
+<div class="container">
+<div id="content">
+<jsp:include page="${contentUrl}"/>
+</div><!-- #content --> 
 
-</div>
+
+</div><!-- .container -->
+
+<jsp:include page="/footer.jsp"/>
 </body>
-
-
 </html>
 
 
