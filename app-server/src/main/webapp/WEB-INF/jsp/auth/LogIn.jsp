@@ -171,11 +171,11 @@ form fieldset a:hover { text-decoration: underline; }
 
   <h1><strong>APUJIMA</strong> 로그인</h1>
 
-  <form action="login" method="post">
+  <form action="login" method=post>
 
     <fieldset>
 
-      <p><input type="text"  name = 'id' placeholder="UserId"></p>
+      <p><input type="text"  name = 'id' placeholder="UserId" value = "${cookie.email.value}"></p>
 
       <p><input type="password" name = 'password' placeholder="Password"></p>
 
@@ -187,6 +187,8 @@ form fieldset a:hover { text-decoration: underline; }
     <label class="form-check-label" for="flexCheckDefault"> Remember me</label>
   </div>
   </div>
+
+
 		<!--     <div class="mb-3">
 		      <div class="form-check">
 		        <input type="checkbox" class="form-check-input" id="dropdownCheck">

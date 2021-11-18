@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- board 옆쪽 sidebar 이용하는 것 -->
   <title>${pageTitle}</title>
  <%--  <link rel="stylesheet" href="${contextPath}/node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="${contextPath}/node_modules/sweetalert2/dist/sweetalert2.css">
@@ -31,11 +30,6 @@
    width:100%; 
    height:100% 
    }
-   #content{
-   /* border: 1px solid red; */
-   margin-left : 180px;
-   min-heigth: 600px;
-   }
    
    @media (min-width: 768px) {
 		  .container {
@@ -48,29 +42,24 @@
 		    width: 940px;
 		  }
 		}
-		
-		
    </style>
    
     
 </head>
-<jsp:include page="/darkHeader.jsp"/>
 <body>
-<div class="container" style ="min-height: 800px; float:middle;">
 
-
- <jsp:include page="/boardSidebar.jsp"/>
-<div id="content" >
-<jsp:include page="${contentUrl}" />
-
+<jsp:include page="homeHeader.jsp"/>
+<%-- <jsp:include page="/sidebar.jsp"/> --%>
+<div class="container">
+<div id="content">
+<jsp:include page="${contentUrl}"/>
 </div><!-- #content --> 
 
 
-
 </div><!-- .container -->
-</body>
-<jsp:include page="/footer.jsp"/>
 
+<jsp:include page="footer.jsp"/>
+</body>
 </html>
 
 

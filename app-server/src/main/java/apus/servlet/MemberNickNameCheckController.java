@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import apus.dao.MemberDao;
 import apus.domain.Member;
 
-@WebServlet("/member/nicknamecheck")
+@WebServlet("/member/nicknameCheck")
 public class MemberNickNameCheckController extends HttpServlet{
 
   private static final long serialVersionUID = 1L;

@@ -131,13 +131,13 @@ input.img-button {
           <a class="btn4" href="#" style="color: white">소개</a>
         </li>
         <li class="nav-item">
-          <a class="btn4" href="/apus/medicine/list" style="color: white">약국</a>
+          <a class="btn4" href="${contextPath}/app/medicine/list" style="color: white">약국</a>
         </li>
         <li class="nav-item">
-          <a class="btn4" href="/apus/doctorinfo/list" style="color: white">HEALER</a>
+          <a class="btn4" href="${contextPath}/app/doctorinfo/list" style="color: white">HEALER</a>
         </li>
         <li class="nav-item">
-          <a class="btn4" href="/apus/board/list" style="color: white">커뮤니티</a>
+          <a class="btn4" href="${contextPath}/app/board/list" style="color: white">커뮤니티</a>
         </li>
         <li>
 				    <!-- <form class="d-flex">
@@ -158,10 +158,10 @@ input.img-button {
 				<!-- 로그인 x -->
 				<c:if test="${empty sessionScope.loginUser}">
 				<li>
-				<a href="/apus/auth/LogIn.jsp" class="btn4" style="color: white;">
+				<a href="${contextPath}/app/auth/loginForm" class="btn4" style="color: white;">
 			   로그인
 			  </a>
-			  <a href="/apus/member/MemberForm.jsp" class="btn4" style="color: white;">
+			  <a href="${contextPath}/app/member/form" class="btn4" style="color: white;">
          회원가입
         </a>
 			  </li>
