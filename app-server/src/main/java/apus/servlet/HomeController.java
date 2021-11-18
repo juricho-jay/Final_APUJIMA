@@ -47,7 +47,7 @@ public class HomeController extends HttpServlet {
       HttpSession session = request.getSession();
 
       if (session.getAttribute("loginUser") != null) {
-        Member member = (Member) request.getSession(false).getAttribute("loginUser");
+        Member member = (Member) request.getSession().getAttribute("loginUser");
 
         Collection<Board> boardList = boardDao.findAll();
 

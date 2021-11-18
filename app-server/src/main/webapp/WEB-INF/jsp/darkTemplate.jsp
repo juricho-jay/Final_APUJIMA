@@ -43,7 +43,11 @@
 </head>
 
 <body>
+<<<<<<< HEAD:app-server/src/main/webapp/WEB-INF/jsp/darkTemplate.jsp
 <jsp:include page="darkHeader.jsp"/>
+=======
+<jsp:include page="/darkHeader.jsp"/>
+>>>>>>> 160fb69be6a25e342f5fc938078f99fd6a690d10:app-server/src/main/webapp/darkTemplate.jsp
 <%-- <jsp:include page="/sidebar.jsp"/> --%>
 <div class="container">
 <div id="content">
@@ -53,7 +57,11 @@
 
 </div><!-- .container -->
 
+<<<<<<< HEAD:app-server/src/main/webapp/WEB-INF/jsp/darkTemplate.jsp
 <jsp:include page="footer.jsp"/>
+=======
+<jsp:include page="/footer.jsp"/>
+>>>>>>> 160fb69be6a25e342f5fc938078f99fd6a690d10:app-server/src/main/webapp/darkTemplate.jsp
 </body>
 </html>
 
