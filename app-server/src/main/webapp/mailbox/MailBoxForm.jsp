@@ -73,7 +73,7 @@
   <label for="f-receiver">받는이</label>
   <br>
   <div class="col-sm-4">
-      <input id='f-receiver' type='hidden' name='receiver' class="form-control" value="${receiver.no}">
+      <input id='f-receiver2' type='hidden' name='receiver' class="form-control" value="${receiver.no}">
       <input id='f-receiver' type='text' name='receiver.id' class="form-control" value="${receiver.nickname}" readOnly>
       <!-- <input type="button" name='findId' value="아이디확인"> -->
       

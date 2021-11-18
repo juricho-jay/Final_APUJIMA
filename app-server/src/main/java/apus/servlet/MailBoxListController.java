@@ -3,7 +3,6 @@ package apus.servlet;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -33,17 +32,7 @@ public class MailBoxListController extends HttpServlet{
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    //    HttpSession session = request.getSession(false);
-    //
-    //
-    //    if (session.getAttribute("loginUser") == null) {
-    //      request.setAttribute("contentUrl", "/index2.jsp");
-    //      request.getRequestDispatcher("/homeTemplate2.jsp").forward(request, response);
-    //      return;
-    //    }
     try {
-
-      //      Member loginMember = (Member) request.getSession(false).getAttribute("loginUser");
 
       Collection<Member> memberList = memberDao.findAll();
 
@@ -60,18 +49,14 @@ public class MailBoxListController extends HttpServlet{
       //      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/mailbox/MailBoxList.jsp");
       //      요청배달자.forward(request, response);
 
+      request.setAttribute("pageTitle", "전체 쪽지함 목록");
       request.setAttribute("contentUrl", "/mailbox/MailBoxList.jsp");
       request.getRequestDispatcher("/template4.jsp").forward(request, response);
 
 
     } catch (Exception e) {
-      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
-      e.printStackTrace();
       request.setAttribute("error", e);
-
-      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 
