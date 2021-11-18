@@ -67,9 +67,9 @@
         <table class="pull-right">
           <tr>
           <td><a href='form' class="btn btn-outline-primary btn-sm">글 작성</a></td>
-         <td style="width: 700px;"> </td>
+         <td style="width: 600px;"> </td>
             <td><input type="text" class="form-control"
-              placeholder="검색어 입력" name="search" maxlength="300"></td>
+              placeholder="검색어 입력" name="search" maxlength="300" style="width: 340px;height: 33px;"></td>
             <td><button type="submit" class="btn btn-success">검색</button></td>
           </tr>
 
