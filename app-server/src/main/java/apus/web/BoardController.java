@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import apus.dao.BoardDao;
+import apus.dao.CommentDao;
+import apus.dao.LikeDao;
 import apus.dao.MemberDao;
 import apus.domain.Board;
+import apus.domain.Comment;
+import apus.domain.Like;
 import apus.domain.Member;
 
 @Controller
@@ -19,6 +23,8 @@ public class BoardController {
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired BoardDao boardDao;
   @Autowired MemberDao memberDao;
+  @Autowired CommentDao commentDao;
+  @Autowired LikeDao likeDao;
 
   @GetMapping("/board/form")
   public ModelAndView form() {
@@ -34,12 +40,6 @@ public class BoardController {
   public ModelAndView add(Board board, HttpSession session) throws Exception {
 
     board.setWriter((Member) session.getAttribute("loginUser"));
-
-    System.out.println("-------------hello----------------");
-    System.out.println("작성자 => " + board.getWriter().getNickname());
-    System.out.println("----------------------------");
-    System.out.println("board의 타입 =>" + board.getWhichBoard());
-    System.out.println("----------------------------");
 
     // String writer => 로그인 유저의 닉네임
 
@@ -77,12 +77,23 @@ public class BoardController {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
 
+    Collection<Comment> commentList = commentDao.findBoardComment(board.getNo());
+    Collection<Like> likeList = likeDao.findBoardCount(board.getNo());
+
+    //해당 게시물의 좋아요/댓글 갯수
+    int likeNo = likeList.size();
+    int commentNo = commentList.size();
+
     boardDao.updateCount(no);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("board", board);
     mv.addObject("pageTitle", "게시글");
+    mv.addObject("board", board);
+    mv.addObject("commentList", commentList);
+    mv.addObject("likeList", likeList);
+    mv.addObject("likeNo", likeNo);
+    mv.addObject("commentNo", commentNo);
     mv.addObject("contentUrl", "board/BoardDetail.jsp");
     mv.setViewName("template3");
     return mv;

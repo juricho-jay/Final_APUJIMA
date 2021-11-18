@@ -25,22 +25,15 @@ public class CommentController {
   @Autowired ServletContext sc;
 
   @GetMapping("/comment/add")
-  public ModelAndView add(String content, String commenter, String no, HttpSession session) {
-    System.out.println("-------------comment Add----------------");
+  public ModelAndView add(String content, String commenter, String board_no, HttpSession session) {
 
     Member Commenter = (Member)session.getAttribute("loginUser");
 
     try {
-      Board board = boardDao.findByNo(Integer.parseInt(no));
-      System.out.println("------------------------------------");
-
-      System.out.println("넘어간 보드의 숫자 => " + board.getNo());
+      Board board = boardDao.findByNo(Integer.parseInt(board_no));
 
       Collection<Comment> commentList = commentDao.findBoardComment(board.getNo());
 
-      System.out.println("------------------------------------");
-      System.out.println("commentList size => " + commentList.size());
-      System.out.println("------------------------------------");
       Comment comment = new Comment();
       comment.setContent(content);
       comment.setCommenter(Commenter);
@@ -51,11 +44,7 @@ public class CommentController {
       // 데이터는 잘 넘어감
 
       ModelAndView mv = new ModelAndView();
-      mv.addObject("pageTitle", "댓글추가");
-      mv.addObject("commentList", commentList);
-      mv.addObject("comment", comment);
-      mv.addObject("contentUrl", "board/detail?no=" + board.getNo());
-      mv.setViewName("board/detail?no="+board.getNo());
+      mv.setViewName("redirect:../board/detail?no="+board.getNo());
       // mv.setViewName("board/detail?no="+board.getNo());
       return mv;
     } catch (Exception e) {

@@ -19,7 +19,7 @@ public interface BoardDao {
   void deleteComment(int boardNo) throws Exception;
   //  void insertLike(int boardNo) throws Exception;
   //  void deleteLike(int boardNo) throws Exception;
-
+  List<Board> searchByKeyWord(String name) throws Exception;
   List<Board> findFreeBoard() throws Exception;
   List<Board> findDoctorBoard() throws Exception;
   List<Board> findNoticeBoard() throws Exception;

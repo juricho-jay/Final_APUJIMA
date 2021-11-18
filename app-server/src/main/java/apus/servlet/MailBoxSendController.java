@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import apus.dao.MailBoxDao;
 import apus.dao.MemberDao;
@@ -38,18 +39,27 @@ public class MailBoxSendController extends HttpServlet {
 
     MailBox mailBox = new MailBox();
 
-    String user = request.getParameter("receiver.nickname");
-    String user2 = request.getParameter("sender.nickname");
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/apus/index.jsp");
+      return;
+    }
+
     try {
-      Member member = memberDao.findByNickname(user);
-      Member member2 = memberDao.findByNickname(user2);
+
+      Member sender = (Member) request.getSession(false).getAttribute("loginUser");
+
+      if(sender == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
+      }
+
+      String receiver = request.getParameter("receiver.nickname");
+      //String user2 = request.getParameter("sender.nickname");
+      Member member = memberDao.findByNickname(receiver);
+      //Member member2 = memberDao.findByNickname(user2);
       mailBox.setReceiver(member);
-      mailBox.setSender(member2);
-      //      System.out.println("존재하는 회원");
-      //      if (member == null) {
-      //        System.out.println("존재하지 않는 회원입니다.");
-      //        return;
-      //      }
+      mailBox.setSender(sender);
     } catch (Exception e1) {
       e1.printStackTrace();
     }

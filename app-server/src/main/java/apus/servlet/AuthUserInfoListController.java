@@ -39,7 +39,7 @@ public class AuthUserInfoListController extends HttpServlet {
 
 
     if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/apus/index.jsp");
+      response.sendRedirect("/apus/home");
       return;
     }
 

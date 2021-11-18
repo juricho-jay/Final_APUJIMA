@@ -45,7 +45,7 @@ public class BoardUpdateController extends HttpServlet {
       board.setContent(content);
       boardDao.update(board);
       sqlSession.commit();
-      request.getRequestDispatcher("/board/BoardUpdate.jsp").forward(request,response);
+      response.sendRedirect("../board/detail?no=" +board.getNo());
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);

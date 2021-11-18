@@ -38,7 +38,7 @@
 </thead>
 <tbody>
 <c:forEach items="${medicineApprovalList}" var="medicine">
-<form action = 'confirm'>
+<form action = 'medicineConfirm'>
 <tr>
     <td>${medicine.no}</td>
     <td>${medicine.name}</td>

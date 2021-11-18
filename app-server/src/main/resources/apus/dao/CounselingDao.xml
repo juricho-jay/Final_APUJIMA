@@ -32,7 +32,7 @@
     
   </resultMap>
   
-      <insert id="insert" parameterType="counseling" 
+  <insert id="insert" parameterType="counseling" 
   useGeneratedKeys="true" keyColumn="counsel_no" keyProperty="no">
     insert into apus_counseling(disease,content,client_no,counselor_no)
     values(#{disease},#{content},#{client.no},#{counselor.no})

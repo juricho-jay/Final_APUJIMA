@@ -60,6 +60,7 @@
 		        </div>
 		    </div>
 		</div>
+		
 		<button id="btn-modal" class="btn btn-outline-primary btn-sm">보내기</button>
 		
 		
@@ -71,6 +72,12 @@
           <div class="mail-box">
 	          <div class="box-photo">
 	            <span class="box-img">${mailBox.receiver.photo}</span> <!-- 이게 될까? -->
+	                <%-- <img
+            src="${contextPath}/upload/member/${mailBox.sender.photo}_100x100.jpg"
+            class="rounded-circle"
+            height="80"
+            alt=""
+          /> --%>
 	          </div>
              <b class="box-id">${mailBox.sender.nickname}</b>
              <div class="box-title">
@@ -87,43 +94,7 @@
 		
 		
 		
-	<%-- <table class="table table-hover">
-		<thead>
-		  <tr>
-		    
-		    <th>번호</th>
-		    <th>보낸이</th>
-		    <!-- <th>받는이</th> -->
-		    <th>제목</th>
-		    <th>내용</th>
-		    <th>날짜</th>
-		  </tr>
-		</thead>
-		
-		<tbody>
-			<c:forEach items="${mailBoxList}" var="mailBox">
-				<c:if test='${loginUser.id eq mailBox.receiver.id}'>
-					<tr>
-					  
-					  <td>${mailBox.no}</td>
-					  <td>${mailBox.sender.id}</td> 
-					  <td>${mailBox.receiver.id}</td>
-					  <td><a href='detail?no=${mailBox.no}'>${mailBox.title}</a></td>
-					  <td>${mailBox.content}</td>
-					  <td>${mailBox.sentTime}</td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</tbody>
-	</table> --%>
-<!-- .container -->
-
-
-<!-- <a href='MailBoxForm.jsp' id="btn-modal" class="btn btn-outline-primary btn-sm">보내기</a><br> -->
-
-
-
-
+	
 
 
 <script>
@@ -152,16 +123,11 @@
 </script>
 
 <script >
-$(document).ready(function(){
-	$('#btnsub').click(function() {
-		var result = confirm('정말 쪽지를 보내시겠습니까?');
-		if(result) {//yes
-			location.replace('/mailbox/MailBoxList.jsp');
-		} else { //no
-			}
-		});
+$("#modal").on("show", function () {
+	  $("body").addClass("modal-open");
+	}).on("hidden", function () {
+	  $("body").removeClass("modal-open")
 	});
-
 </script>
 
 

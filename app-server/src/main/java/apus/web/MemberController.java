@@ -117,11 +117,8 @@ public class MemberController {
   }
 
   @PostMapping("/member/update")
-  public ModelAndView update(Member member, Part photoPart, Date birthDay, String password) throws Exception {
+  public ModelAndView update(Member member, Part photoPart) throws Exception {
     Member oldMember = memberDao.findByNo(member.getNo());
-    System.out.println("-----------------------------------");
-    System.out.println(member.getNo());
-    System.out.println("-----------------------------------");
 
     if (oldMember == null) {
       throw new Exception("해당 번호의 회원이 없습니다.");
@@ -129,9 +126,6 @@ public class MemberController {
 
     member.setPhoto(oldMember.getPhoto());
     member.setRegisteredDate(oldMember.getRegisteredDate());
-    int grade = member.getDoctorOrNot();
-    System.out.println("이사람 등급은 => " + grade);
-
 
     if (photoPart.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
@@ -162,15 +156,13 @@ public class MemberController {
 
       member.setPhoto(filename);
     }
+    member.setBirthday(oldMember.getBirthday());
+    member.setActive(1);
 
-
-
-
-    System.out.println("넘어온 password => " + password);
-    if (password.length() == 0) {
-      memberDao.update2(oldMember);
+    if (member.getPassword().length() == 0) {
+      memberDao.update2(member);
     } else {
-      memberDao.update(oldMember);
+      memberDao.update(member);
     }
 
 
