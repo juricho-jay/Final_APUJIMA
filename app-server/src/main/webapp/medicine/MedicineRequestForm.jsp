@@ -13,7 +13,7 @@
    <script type="text/javascript">
     
         // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
-        function checkValue()
+       /*  function checkValue()
         {
         	
            if(!document.medicineRequest.name.value){
@@ -42,7 +42,7 @@
                return false;
            }
           
-        }
+        } */
         
     </script>
 

@@ -7,6 +7,8 @@ public interface MailBoxDao {
 
   void insert (MailBox mailbox) throws Exception;
   List<MailBox> findAll() throws Exception;
+  List<MailBox> findByTime() throws Exception;
+  List<MailBox> findByCheckedTime() throws Exception;
   MailBox findByNo(int no) throws Exception;
   //  MailBox findById(String id) throws Exception;
   //MailBox findByName(String name) throws Exception;

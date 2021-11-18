@@ -70,8 +70,7 @@
   
   </script>
 
-  <!-- detail new  -->
-  
+    <!-- detail new  -->
   <div class ="container1212">
 <form name ="boardDetailInfo" action = 'report' >
    <input type ="hidden" name = "no" value ="${board.no}">
@@ -271,12 +270,27 @@
 
 
 <script>
+<<<<<<< HEAD
+// 좋아요 여부에 따라 하트 
+/*
+function modalOn(){
+	/*  	console.log(event.target);
+	  console.log(event.target.dataset.commentno);
+	  console.log();
+	  
+	  document.getElementById(event.target.dataset.commentno).style.display = "block;
+	  
+}
+*/
+
+=======
 function checkValue(){
 	if (${loginUser == null}){
 		alert("로그인 해주세요!");
 		return false;
 	}
 }
+>>>>>>> c84caac6823976a97b15ca936351de662f1cc33b
 
 document.querySelectorAll("#heartBtn").forEach((tag) => {
 if (tag.getAttribute("value") == 1) {
@@ -301,7 +315,6 @@ modifyModal.addEventListener("show.bs.modal", () => {
 //id는 절대값이므로 중복될 수 없다 > name을 활용할 것 > id로 쓸 경우 아이콘 하나만 모달 창 실행
 $('button[name=updateButton]').on('click', function(){
 $('#updateModal').modal('show');
-
 
 });
 

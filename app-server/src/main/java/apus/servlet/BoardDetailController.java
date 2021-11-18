@@ -49,10 +49,12 @@ public class BoardDetailController extends HttpServlet {
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       Board board = boardDao.findByNo(no);
+      Like like = likeDao.findBoardLike(no, member.getNo());
+
+
       if (board == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
-      Like like = null;
       if (member != null) {
         like = likeDao.findBoardLike(no, member.getNo());
       }
@@ -76,6 +78,7 @@ public class BoardDetailController extends HttpServlet {
       sqlSession.commit();
 
       request.setAttribute("commentList", commentList);
+      request.setAttribute("likeList", likeList);
       request.setAttribute("board", board);
       request.setAttribute("likeNo", likeNo);
       request.setAttribute("commentNo", commentNo);

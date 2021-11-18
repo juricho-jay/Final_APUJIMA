@@ -46,6 +46,23 @@
       b.board_no desc
     
   </select>
+  <sql id ="select1">
+      select
+       b.board_no,
+       b.title,
+       b.content,
+       b.created_dt,
+       b.view_cnt,
+       b.type,
+       b.active,
+       m.member_no,
+       m.id writer_id,
+       m.nickname ,
+       m.name writer_name
+    from
+      apus_board b
+      inner join apus_member m on b.member_no=m.member_no
+  </sql>
   
   <select id ="findFreeBoard" resultMap="BoardMap">
   select
@@ -188,28 +205,18 @@
       inner join apus_member m on b.member_no=m.member_no
     where board_no=#{no}
 	</select>
-  <!--
 	
-	<select id="findByName" resultMap="MemberMap" parameterType="string">
-   select
-      member_no,
-      name,
-      id,
-      password,
-      birth,
-      tel,
-      email,
-      photo,
-      sex,
-      created_dt,
-      point,
-      role,
-      active
-    from
-      apus_member
-    where name=#{name}
+	
+  <select id ="searchByKeyWord" resultMap ="BoardMap" parameterType="string">
+  <include refid ="select1"/>
+  where
+      b.active = 1 
+      and b.title like CONCAT('%', #{keyword}, '%')
+      or b.content like CONCAT('%', #{keyword}, '%')
+      or m.nickname like CONCAT('%', #{keyword}, '%')
+
+  
   </select>
-  -->
 </mapper>
 
 

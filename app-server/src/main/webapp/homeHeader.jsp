@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<head>
+<!-- <link rel="stylesheet" href="/apus/css/darkHeader.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
+<link rel="stylesheet" href="/apus/node_modules/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<!-- <link rel="stylesheet" href="/apus/css/darkHeader.css"> -->
+  
+  <script src="/apus/node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="/apus/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+
 <style>
 
-header {
-  position: relative;
-}
 
-	li {
-		margin-left: 40px;
-	}
-	
-	.btn4 {
+.btn4 {
   padding: 10px;
   color: #fff;
   font-family: sans-serif;
@@ -23,7 +26,7 @@ header {
   display:inline-block;
 }
 
-	.btn4::before {
+  .btn4::before {
   content: '';
   position: absolute;
   bottom: 0%;
@@ -104,81 +107,151 @@ input.img-button {
     }
     
     input::placeholder {color:#ccc;}
-		input::-webkit-input-placeholder {color:#ccc;}
-		input:-ms-input-placeholder {color:#ccc;}
-		 
-		textarea::placeholder {color:#ccc;}
-		textarea::-webkit-input-placeholder {color:#ccc;}
-		textarea:-ms-input-placeholder {color:#ccc;}
+    input::-webkit-input-placeholder {color:#ccc;}
+    input:-ms-input-placeholder {color:#ccc;}
+     
+    textarea::placeholder {color:#ccc;}
+    textarea::-webkit-input-placeholder {color:#ccc;}
+    textarea:-ms-input-placeholder {color:#ccc;}
 
     .no-italics {
     font-style: normal;   
 }
 
-</style> 
-</head>
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown-menu {
+display: none;
+position: absolute;
+width: 100%;
+overflow: auto;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown:hover .dropdown-menu {
+display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  color: #000000;
+  padding: 5px;
+  text-decoration: none;
+}
+.dropdown-menu a:hover {
+  color: #FFFFFF;
+  background-color: #dcdcdc;
+}
+
+</style>
+
 <header>
-<nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="height: 120px; border-bottom: solid 1px rgba(252, 246, 246, 0.438); margin-bottom: 30px;">
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="border-bottom: solid 1px #ffffff61; margin-bottom: 30px; padding: 33px 16px;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/apus/home">
+    <a class="navbar-brand" href="${contextPath}/home">
     <input type="button" class="img-button"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="btn4" href="#" style="color: white">소개</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item" style="margin-left: 20px;">
+          <a class="btn4 text-white" aria-current="page" href="#">소개</a>
         </li>
-        <li class="nav-item">
-          <a class="btn4" href="/apus/medicine/list" style="color: white">약국</a>
+        <li class="nav-item" style="margin-left: 20px;">
+          <a class="btn4 text-white" aria-current="page" href="${contextPath}/medicine/list">약국</a>
         </li>
-        <li class="nav-item">
-          <a class="btn4" href="/apus/doctorinfo/list" style="color: white">HEALER</a>
+        <li class="nav-item" style="margin-left: 20px;">
+          <a class="btn4 text-white" aria-current="page" href="${contextPath}/doctorinfo/list">HEALER</a>
         </li>
-        <li class="nav-item">
-          <a class="btn4" href="/apus/board/list" style="color: white">커뮤니티</a>
+        <li class="nav-item dropdown" style="margin-left: 20px;">
+          <a class="btn4 text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            커뮤니티
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="${contextPath}/board/freeBoardList">자유게시판</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/board/doctorBoardList">HEALER 지식in</a></li>
+            <!-- <li><hr class="dropdown-divider"></li> -->
+            <li><a class="dropdown-item" href="${contextPath}/board/noticeBoardList">공지사항</a></li>
+          </ul>
         </li>
-        <li>
-				    <!-- <form class="d-flex">
-				      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-				      <button type="button" class="btn" style="color: white">search</button>
-				    </form>
-				     -->
-				     
-				     <div class="container h-100">
-					      <div class="d-flex justify-content-center h-100">
-					        <div class="searchbar">
-					          <input class="search_input" type="text" placeholder="Search...">
-					          <a href="#" class="s_icon"><i class="bi bi-search" style="margin-bottom: 10px;"></i></a>
-					        </div>
-					      </div>
-					    </div>
-				</li>
-				<!-- 로그인 x -->
-				<c:if test="${empty sessionScope.loginUser}">
-				<li>
-				<a href="/apus/auth/LogIn.jsp" class="btn4" style="color: white;">
-			   로그인
-			  </a>
-			  <a href="/apus/member/MemberForm.jsp" class="btn4" style="color: white;">
+      </ul>
+		      <div style="margin-left: 20px; margin-right: 20px;">
+		         <div class="d-flex justify-content-center h-50">
+		           <div class="searchbar">
+		             <input class="search_input" type="text" placeholder="Search...">
+		             <a href="#" class="s_icon"><i class="bi bi-search" style="margin-bottom: 10px;"></i></a>
+		           </div>
+		         </div>
+		      </div>
+      <!-- 로그인 x -->
+        <c:if test="${empty sessionScope.loginUser}">
+        <div>
+        <a href="/apus/auth/LogIn.jsp" class="btn4" style="color: white;">
+         로그인
+        </a>
+        <a href="/apus/member/MemberForm.jsp" class="btn4" style="color: white;">
          회원가입
         </a>
-			  </li>
-			  </c:if>
-			  <!-- 로그인 o -->
-			  <c:if test="${not empty sessionScope.loginUser}">
-			  <li>
-        <a href="auth/userInfoList" class="button" style="color: white"><b>${loginUser.nickname}</b></a>
-        <i class="no-italics" style="color: darkgrey">&nbsp;님 <br>환영합니다!</i>
+        </div>
+        </c:if>
+        <!-- 로그인 o -->
+        <c:if test="${not empty sessionScope.loginUser}">
+        <div>
+        <c:if test="${uncheckedMail != 0}">
+        <%-- <i class="bi bi-envelope" style="color: white; zoom: 1.5">
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+           ${uncheckedMail}
+        </span>
+        </i> --%>
+        <a type="button" class="position-relative" 
+        style="outline: 0; background-color: transparent; border:0; color: white; padding:0; margin-left: 5px"
+        href="${contextPath}/mailbox/list">
+				  <i class="bi bi-envelope" style="zoom: 1.8"></i>
+				  <span class="position-absolute top-0 start-100 translate-middle-x badge rounded-pill bg-danger"
+				  style="">
+				    ${uncheckedMail}
+				  </span>
+				</a>
+        </c:if>
+        <c:if test="${uncheckedMail eq 0}">
+        <a type="button" class="position-relative" style="outline: 0; background-color: transparent; border:0; color: white;"
+        href="${contextPath}/mailbox/list">
+          <i class="bi bi-envelope" style="zoom: 1.8"></i>
+        </a>
+        </c:if>
+        </div> 
+        <!-- 내 정보 아이콘 -->
+        <li class="nav-item dropdown" style="margin-left: 30px">
+          <a class="nav-item d-sm-flex align-items-sm-center text-white" href="${contextPath}/auth/userInfoList"
+        style="text-decoration-line: none;">
+        <img
+            src="${contextPath}/upload/member/${member.photo}_20x20.jpg"
+            class="rounded-circle"
+            height="30"
+            alt=""
+          />
+          <b style="color: white; text-size: 1.4em">&nbsp;${loginUser.nickname}</b>
+        </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="${contextPath}/auth/userInfoList">내 정보</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/bucket/list">버킷 리스트</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/plant/list">나의 정원</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><form name="logout2" action= '${contextPath}/auth/logout' method = "get">
+            <a class="dropdown-item" href="javascript:logout.submit();">로그아웃</a>
+              </form></li>
+          </ul>
         </li>
-        <li>
-        <form name="logout" action= 'auth/logout' method = "get">
-        <a class="btn4 "href="javascript:logout.submit();" style="color: white">로그아웃</a>
+        <div>
+        <form name="logout" action= '${contextPath}/auth/logout' method = "get">
+        <a class="btn4" href="javascript:logout.submit();" style="color: white; margin-left:10px;">로그아웃</a>
         </form>
-        </li>
-			  </c:if>
-      </ul>
+        </div>
+        </c:if>
     </div>
   </div>
 </nav>
