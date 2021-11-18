@@ -8,7 +8,7 @@
 <title>쪽지함</title>
 
 <div class="container2">
-	<h1>${loginUser.nickname}님의 쪽지</h1>
+	<h1>${loginUser.nickname}님의 안읽은쪽지</h1>
 	<!-- <a href='MailBoxForm.jsp' class="btn btn-outline-primary btn-sm">보내기</a><br> -->
 <div id="modal" class="modal-overlay">
     <div class="modal-window">
@@ -64,11 +64,12 @@
 		<button id="btn-modal" class="btn btn-outline-primary btn-sm">보내기</button>
 		
 		
-		<a harf="/mailbox/MailBoxListNotResd.jsp">목록</a>
+		
 		<hr>
 		<div>
 		  <c:forEach items="${mailBoxList}" var="mailBox">
         <c:if test='${loginUser.nickname eq mailBox.receiver.nickname}'>
+          <c:if test='${mailBox.receivedTime eq null}'>
 		        <div class="mail-box">
 		            <div class="box-photo">
 		              <span class="box-img">${mailBox.receiver.photo}</span> <!-- 이게 될까? -->
@@ -85,6 +86,7 @@
 		             </div>
 		            <span class="box-time">${mailBox.sentTime}</span>
 	          </div>
+          </c:if>
         </c:if>
       </c:forEach>
 		</div>

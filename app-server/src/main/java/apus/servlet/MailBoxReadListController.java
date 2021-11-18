@@ -16,8 +16,8 @@ import apus.dao.MemberDao;
 import apus.domain.MailBox;
 import apus.domain.Member;
 
-@WebServlet("/mailbox/list")
-public class MailBoxListController extends HttpServlet{
+@WebServlet("/mailbox/readlist")
+public class MailBoxReadListController extends HttpServlet{
 
   private static final long serialVersionUID = 1L;
   MailBoxDao mailBoxDao;
@@ -49,7 +49,7 @@ public class MailBoxListController extends HttpServlet{
 
 
       // 클라이언트 요청을 처리하는데 필요한 데이터 준비
-      List<MailBox> mailBoxList = mailBoxDao.findAll();
+      List<MailBox> mailBoxList = mailBoxDao.findByCheckedTime();
 
 
 
@@ -60,7 +60,7 @@ public class MailBoxListController extends HttpServlet{
       //      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/mailbox/MailBoxList.jsp");
       //      요청배달자.forward(request, response);
 
-      request.setAttribute("contentUrl", "/mailbox/MailBoxList.jsp");
+      request.setAttribute("contentUrl", "/mailbox/MailBoxReadList.jsp");
       request.getRequestDispatcher("/template4.jsp").forward(request, response);
 
 

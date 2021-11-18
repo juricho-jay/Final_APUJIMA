@@ -49,12 +49,13 @@ public class BoardDetailController extends HttpServlet {
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       Board board = boardDao.findByNo(no);
-      Like like = likeDao.findBoardLike(no, member.getNo());
+
 
 
       if (board == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
+      Like like = null;
       if (member != null) {
         like = likeDao.findBoardLike(no, member.getNo());
       }
