@@ -44,10 +44,10 @@ public class HomeController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      HttpSession session = request.getSession(false);
+      HttpSession session = request.getSession();
 
       if (session.getAttribute("loginUser") != null) {
-        Member member = (Member) request.getSession(false).getAttribute("loginUser");
+        Member member = (Member) request.getSession().getAttribute("loginUser");
 
         Collection<Board> boardList = boardDao.findAll();
 
