@@ -156,6 +156,7 @@ public class MemberController {
 
       member.setPhoto(filename);
     }
+    member.setDoctorOrNot(oldMember.getDoctorOrNot());
     member.setBirthday(oldMember.getBirthday());
     member.setActive(1);
 
