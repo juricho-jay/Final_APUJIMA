@@ -207,7 +207,6 @@
           <li><button class="dropdown-item" type="button">Something else here</button></li> -->
         </ul>
       </div>
-<br>
    
    <p> 내용 : ${comment.content} </p>
    <p> 댓글 작성날짜 : ${comment.registeredDate}</p>

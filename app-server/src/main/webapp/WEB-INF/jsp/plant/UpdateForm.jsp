@@ -23,12 +23,12 @@
 </head>
 <body>
 <div class="container">
-<form action = "update">
+<form action = "update" >
   <table  id="datatable-scroller"
   class="table table-bordered tbl_Form">
     <thead>
       <tr>
-         <th colspan ="3" style = "background-color: #eeeeee; text-align: center;">게시판 글 수정</th> 
+         <th colspan ="3" style = "background-color: #eeeeee; text-align: center;">화분 이름 수정</th> 
       </tr>
     </thead>
     <tbody>
