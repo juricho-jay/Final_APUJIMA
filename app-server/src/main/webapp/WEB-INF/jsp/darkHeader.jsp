@@ -156,7 +156,7 @@ display: block;
           <a class="btn4" aria-current="page" href="${contextPath}/medicine/list" style="color: #2c473e;">약국</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
-          <a class="btn4" aria-current="page" href="${contextPath}/doctorinfo/list" style="color: #2c473e;">HEALER</a>
+          <a class="btn4" aria-current="page" href="${contextPath}/app/doctorinfo/list" style="color: #2c473e;">HEALER</a>
         </li>
         <li class="nav-item dropdown" style="margin-left: 20px;">
           <a class="btn4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

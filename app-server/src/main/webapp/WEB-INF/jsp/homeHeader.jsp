@@ -165,7 +165,7 @@ display: block;
           <a class="btn4 text-white" aria-current="page" href="${contextPath}/medicine/list">약국</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
-          <a class="btn4 text-white" aria-current="page" href="${contextPath}/doctorinfo/list">HEALER</a>
+          <a class="btn4 text-white" aria-current="page" href="${contextPath}/app/doctorinfo/list">HEALER</a>
         </li>
         <li class="nav-item dropdown" style="margin-left: 20px;">
           <a class="btn4 text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

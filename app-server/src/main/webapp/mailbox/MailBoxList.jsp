@@ -19,7 +19,7 @@
 	        <div class="close-area">X</div>
         </div>
         <div class="content-in">
-            <form name = "usersend" action='send' method="post" onsubmit="return checkValue()">
+            <form  name = "usersend" action='send' method="post" onsubmit="return checkValue()">
 							<div class="content1">
 							  <br>
 							  <label for="box1">보낸이</label>
@@ -33,7 +33,7 @@
 							  <label for="f-receiver">받는이</label>
 							  <br>
 							  <div class="col-sm-4">
-							      <input id='f-receiver' type='text' name='receiver.nickname' class="form-control">
+							      <input id='f-receiver' type='text' name='receiver.nickname' class="form-control" required>
 							      <!-- <input type="button" name='findId' value="아이디확인"> -->
 							      
 							  </div>
@@ -44,13 +44,13 @@
 							<div class="content3">
 							  <label for="f-title">제목</label>
 							  <br>
-							  <textarea id="f-title"  name="title" rows=1 cols=73 class="form-control"></textarea>
+							  <textarea id="f-title"  name="title" rows=1 cols=73 class="form-control" required></textarea>
 							  <br>
 							</div>
 							<div class="content4">
 							  <label for="f-content">내용</label>
 							  <br>
-							  <textarea id="f-content" name="content" rows=5 cols=73 class="form-control"></textarea>
+							  <textarea id="f-content" name="content" rows=5 cols=73 class="form-control" required></textarea>
 							  <br>
 							</div>
 							<div>
