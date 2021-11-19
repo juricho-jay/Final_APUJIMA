@@ -54,12 +54,18 @@
    
     
 </head>
-<jsp:include page="/darkHeader.jsp"/>
+<jsp:include page="darkHeader.jsp"/>
 <body>
 <div class="container" style ="min-height: 800px; float:middle;">
 
+<<<<<<< HEAD
 
  <jsp:include page="mailboxSidebar.jsp"/>
+=======
+<c:if test = "${loginUser}">
+ <jsp:include page="counselingSidebar.jsp"/>
+</c:if>
+>>>>>>> 4c24e66c7a83d133881530dc04ab4c476c0847f4
 <div id="content" >
 <jsp:include page="${contentUrl}" />
 

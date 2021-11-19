@@ -270,7 +270,6 @@
 
 
 <script>
-<<<<<<< HEAD
 // 좋아요 여부에 따라 하트 
 /*
 function modalOn(){

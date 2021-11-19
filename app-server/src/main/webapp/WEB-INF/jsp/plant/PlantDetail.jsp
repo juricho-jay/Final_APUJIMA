@@ -3,8 +3,7 @@
     trimDirectiveWhitespaces="true" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head>
+
   <title>화분 상세</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
@@ -19,8 +18,7 @@
         xwidth: 640px;
     }
   </style>
-</head>
-<body >
+
 <div class="container">
  
 <form name ="PlantInfo" onsubmit="return checkValue()">
@@ -67,7 +65,7 @@
    <tr>
   
       <td>화분 모양</td>
-      <td><img src = ../img/${plant.shape} width ="150" height="150"></td>
+      <td><img src = ../../img/${plant.shape} width ="150" height="150"></td>
   </tr>
  
    
@@ -110,5 +108,3 @@ function growalert(){
 </script>  
 
 
-</body>
-</html>

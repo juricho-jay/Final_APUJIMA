@@ -13,7 +13,7 @@
 			  <div class="text-step"> 
 			    <p class="text-one">간편한 상담신청</p>
 			    <p class="text-two">모든 정보는 보호</p>
-			    <p class="text-three">안심하고 상담진행 GO</p>
+			    <p class="text-three">안심하고 상담진행</p>
 			    </div> 
 		  </div>
 		  
@@ -24,7 +24,10 @@
 								<!-- <form action='../counseling/CounselingMemberForm.jsp' method='post' > -->
 								  <div class="containerBox">
 											<div class='doctorjpg'>
-											  <img src="../img/doctor/doctor1.jpg" width="auto" height="400">
+											   <a href="${contextPath}/upload/member/${member.photo}" >
+										        <img id="f-photo-image" src="${contextPath}/upload/member/${member.photo}_100x100.jpg">
+										     </a>
+											  <!-- <img src="../img/doctor/doctor1.jpg" width="auto" height="400"> -->
 										  </div>
 											<div class='doctorinfo'>
 												<p class='title'>"${member.doctor.introduction}"</p>
