@@ -101,12 +101,12 @@
   <span class="text1">*상담신청시 이름과 휴대번호는 필수입니다.</span>
   <hr>
   
-<form class="total" name="counselingmember" action='add' method="post" accept-charset="utf-8">
+<form class="total" name="counselingmember" action='add' method="post">
   <div class="mb-3 row">
     <label for='f-name' class="col-sm-3 col-form-label">상담사 선생님</label>
     <div class="col-sm-4">
     
-       <input id='f-counselor-no' type='hidden' name="no" class="form-control" value="${counselor.no}">
+       <input id='f-counselor-no' type='hidden' name="counselorNo" class="form-control" value="${counselor.no}">
        <input id='f-name' type='text'  name="counselor.name" class="form-control" value="${counselor.name}" readOnly>
      </div>
   </div>

@@ -165,35 +165,35 @@ display: block;
           <a class="btn4 text-white" aria-current="page" href="${contextPath}/medicine/list">약국</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
-          <a class="btn4 text-white" aria-current="page" href="${contextPath}/doctorinfo/list">HEALER</a>
+          <a class="btn4 text-white" aria-current="page" href="${contextPath}/app/doctorinfo/list">HEALER</a>
         </li>
         <li class="nav-item dropdown" style="margin-left: 20px;">
           <a class="btn4 text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             커뮤니티
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="${contextPath}/board/freeBoardList">자유게시판</a></li>
-            <li><a class="dropdown-item" href="${contextPath}/board/doctorBoardList">HEALER 지식in</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/board/freeBoardList">자유게시판</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/board/doctorBoardList">HEALER 지식in</a></li>
             <!-- <li><hr class="dropdown-divider"></li> -->
-            <li><a class="dropdown-item" href="${contextPath}/board/noticeBoardList">공지사항</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/board/noticeBoardList">공지사항</a></li>
           </ul>
         </li>
       </ul>
-		      <div style="margin-left: 20px; margin-right: 20px;">
-		         <div class="d-flex justify-content-center h-50">
-		           <div class="searchbar">
-		             <input class="search_input" type="text" placeholder="Search...">
-		             <a href="#" class="s_icon"><i class="bi bi-search" style="margin-bottom: 10px;"></i></a>
-		           </div>
-		         </div>
-		      </div>
+            <div style="margin-left: 20px; margin-right: 20px;">
+               <div class="d-flex justify-content-center h-50">
+                 <div class="searchbar">
+                   <input class="search_input" type="text" placeholder="Search...">
+                   <a href="#" class="s_icon"><i class="bi bi-search" style="margin-bottom: 10px;"></i></a>
+                 </div>
+               </div>
+            </div>
       <!-- 로그인 x -->
         <c:if test="${empty sessionScope.loginUser}">
         <div>
-        <a href="/apus/auth/LogIn.jsp" class="btn4" style="color: white;">
+        <a href="${contextPath}/app/auth/loginForm" class="btn4" style="color: white;">
          로그인
         </a>
-        <a href="/apus/member/MemberForm.jsp" class="btn4" style="color: white;">
+        <a href="${contextPath}/app/member/form" class="btn4" style="color: white;">
          회원가입
         </a>
         </div>
@@ -210,12 +210,12 @@ display: block;
         <a type="button" class="position-relative" 
         style="outline: 0; background-color: transparent; border:0; color: white; padding:0; margin-left: 5px"
         href="${contextPath}/mailbox/list">
-				  <i class="bi bi-envelope" style="zoom: 1.8"></i>
-				  <span class="position-absolute top-0 start-100 translate-middle-x badge rounded-pill bg-danger"
-				  style="">
-				    ${uncheckedMail}
-				  </span>
-				</a>
+              <i class="bi bi-envelope" style="zoom: 1.8"></i>
+              <span class="position-absolute top-0 start-100 translate-middle-x badge rounded-pill bg-danger"
+              style="">
+                ${uncheckedMail}
+              </span>
+            </a>
         </c:if>
         <c:if test="${uncheckedMail eq 0}">
         <a type="button" class="position-relative" style="outline: 0; background-color: transparent; border:0; color: white;"

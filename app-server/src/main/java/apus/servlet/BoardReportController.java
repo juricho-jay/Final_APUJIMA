@@ -49,8 +49,6 @@ public class BoardReportController extends HttpServlet {
 
     try {
 
-      Report report = new Report();
-
       Member requester = (Member) request.getSession(false).getAttribute("loginUser");
 
       if(requester == null) {
@@ -60,15 +58,25 @@ public class BoardReportController extends HttpServlet {
       int no = Integer.parseInt(request.getParameter("no"));
       Board requestBoard = boardDao.findByNo(no);
 
-      if(requestBoard == null) {
-        throw new Exception("해당 번호의 게시글이 없습니다.");
-      }
-      report.setRequester(requester);
-      report.setRequestBoard(requestBoard);
+      Report report = reportDao.findByReport(no, requester.getId());
 
-      //신고 검사
 
-      request.setAttribute("report", report);
+      //      if(report == null) {
+      //        report.setRequester(requester);
+      //        report.setRequestBoard(requestBoard);
+      //        request.setAttribute("report", report);
+      //      }
+
+
+      if(report != null) {
+        report = null;
+        System.out.println("신고 한 적이 있기에 이게 실행됨");
+        request.setAttribute("report", report);
+      } 
+
+
+
+
 
       // 출력을 담당할 뷰를 호출한다.
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/board/BoardReport.jsp");

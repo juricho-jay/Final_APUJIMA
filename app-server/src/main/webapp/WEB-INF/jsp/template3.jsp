@@ -54,12 +54,12 @@
    
     
 </head>
-<jsp:include page="/darkHeader.jsp"/>
+<jsp:include page="darkHeader.jsp"/>
 <body>
 <div class="container" style ="min-height: 800px; float:middle;">
 
 
- <jsp:include page="/boardSidebar.jsp"/>
+ <jsp:include page="boardSidebar.jsp"/>
 <div id="content" >
 <jsp:include page="${contentUrl}" />
 
@@ -69,7 +69,7 @@
 
 </div><!-- .container -->
 </body>
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>
 
 </html>
 

@@ -136,10 +136,10 @@ form{
 <a href='DoctorForm.jsp' class="btn btn-outline-primary" style="margin-left: 30px;">의사</a>
 </div> -->
 
-  <!-- <div class="container-fluid">
+  <div class="container-fluid">
     <div class="row main-content bg-success text-center">
       <div class="col-md-4 text-center company__info">
-        <span class="company__logo"><h2><span class="fa fa-android"></span></h2></span>
+        <!-- <span class="company__logo"><h2><span class="fa fa-android"></span></h2></span> -->
         <h4 class="company_title">APUJIMA</h4>
       </div>
       <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
@@ -157,11 +157,179 @@ form{
     
       </div>
     </div>
-  </div> -->
+  </div>
     
     
     
     
+    
+    
+    <div class="container-scroller">
+    
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      
+      
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/documentation/documentation.html">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Documentation</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/documentation/documentation.html">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Documentation</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/documentation/documentation.html">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Documentation</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="row">
+                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                  <h3 class="font-weight-bold">안녕하세요 관리자님!</h3>
+                  <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card tale-bg">
+                <div class="card-people mt-auto">
+                  <img src="images/dashboard/people.svg" alt="people">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 grid-margin transparent">
+              <div class="row">
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                  <div class="card card-tale">
+                    <div class="card-body">
+                      <p class="mb-4">총 회원수</p>
+                      <p class="fs-30 mb-2">4006</p>
+                      <p>10.00% (30 days)</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                  <div class="card card-dark-blue">
+                    <div class="card-body">
+                      <p class="mb-4">약품 수</p>
+                      <p class="fs-30 mb-2">61344</p>
+                      <p>22.00% (30 days)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                  <div class="card card-light-blue">
+                    <div class="card-body">
+                      <p class="mb-4">하루 방문자</p>
+                      <p class="fs-30 mb-2">34040</p>
+                      <p>2.00% (30 days)</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 stretch-card transparent">
+                  <div class="card card-light-danger">
+                    <div class="card-body">
+                      <p class="mb-4">탈퇴회원수</p>
+                      <p class="fs-30 mb-2">47033</p>
+                      <p>0.22% (30 days)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <p class="card-title">게시판 신고 목록</p>
+                    <a href="#" class="text-info">View all</a>
+                   </div>
+                    <p class="font-weight-500">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
+                    <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
+                    
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                 <div class="d-flex justify-content-between">
+                  <p class="card-title">약품 요청 목록</p>
+                  <a href="#" class="text-info">View all</a>
+                 </div>
+                  <p class="font-weight-500">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
+                  <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+ 
+          
+          </div>
+          
+          
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>   
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <!-- <script src="vendors/js/vendor.bundle.base.js"></script> -->
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <!-- <script src="vendors/chart.js/Chart.min.js"></script> -->
+  <!-- <script src="vendors/datatables.net/jquery.dataTables.js"></script> -->
+  <!-- <script src="/apus/js/dataTables.bootstrap4.js"></script> -->
+  <!-- <script src="js/dataTables.select.min.js"></script> -->
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <!-- <script src="js/off-canvas.js"></script> -->
+  <!-- <script src="js/hoverable-collapse.js"></script> -->
+  <!-- <script src="/apus/js/template.js"></script> -->
+  <!-- <script src="js/settings.js"></script> -->
+  <!-- <script src="js/todolist.js"></script> -->
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <!-- <script src="/apus/js/dashboard.js"></script> -->
+  <!-- <script src="js/Chart.roundedBarCharts.js"></script> -->
+  <!-- End custom js for this page-->
     
     
     
