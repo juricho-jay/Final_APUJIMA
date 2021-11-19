@@ -190,10 +190,10 @@ display: block;
       <!-- 로그인 x -->
         <c:if test="${empty sessionScope.loginUser}">
         <div>
-        <a href="${contextPath}/app/auth/loginForm" class="btn4" style="color: #2C473E;">
+        <a href="${contextPath}/app/auth/loginForm" class="btn4" style="color: white;">
          로그인
         </a>
-        <a href="${contextPath}/app/member/form" class="btn4" style="color: #2C473E;">
+        <a href="${contextPath}/app/member/form" class="btn4" style="color: white;">
          회원가입
         </a>
         </div>

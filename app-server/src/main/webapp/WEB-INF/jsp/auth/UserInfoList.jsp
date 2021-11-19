@@ -90,7 +90,7 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="../img/ruby.jpg" class="rounded-circle">
+                    <img src="${contextPath}/upload/member/${member.photo}" class="rounded-circle">
                   </a>
                 </div>
               </div>
