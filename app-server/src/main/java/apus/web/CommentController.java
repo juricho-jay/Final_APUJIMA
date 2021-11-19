@@ -25,7 +25,7 @@ public class CommentController {
   @Autowired ServletContext sc;
 
   @GetMapping("/comment/add")
-  public ModelAndView add(String content, String commenter, String board_no, HttpSession session) {
+  public ModelAndView add(String content, String board_no, HttpSession session) {
 
     Member Commenter = (Member)session.getAttribute("loginUser");
 
@@ -55,21 +55,37 @@ public class CommentController {
 
 
   @GetMapping("/comment/delete")
-  public ModelAndView delete(String no) throws Exception {
+  public ModelAndView delete(String no, String board_no) throws Exception {
     Comment comment = commentDao.findByNo(Integer.parseInt(no));
-
-    if (comment == null) {
-      throw new Exception("해당 번호의 댓글이 없습니다.");
-    }
 
     commentDao.delete(comment.getNo());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:list");
+    mv.setViewName("redirect:../board/detail?no="+board_no);
     return mv;
   }
 
+
+
+  @GetMapping("/comment/update")
+  public ModelAndView update(String no, String board_no, HttpSession session, String content) throws Exception {
+
+    //   Member Commenter = (Member)session.getAttribute("loginUser");
+
+
+    Comment comment = commentDao.findByNo(Integer.parseInt(no));
+    Board board = boardDao.findByNo(Integer.parseInt(board_no));
+    comment.setContent(content);
+    commentDao.update(comment);
+    boardDao.update(board);
+    sqlSessionFactory.openSession().commit();
+
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../board/detail?no="+board_no);
+    return mv;
+  }
 
 
 }

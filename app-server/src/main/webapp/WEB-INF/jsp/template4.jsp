@@ -59,7 +59,7 @@
 <div class="container" style ="min-height: 800px; float:middle;">
 
 
- <jsp:include page="/mailboxSidebar.jsp"/>
+ <jsp:include page="mailboxSidebar.jsp"/>
 <div id="content" >
 <jsp:include page="${contentUrl}" />
 
@@ -69,7 +69,7 @@
 
 </div><!-- .container -->
 </body>
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>
 
 </html>
 

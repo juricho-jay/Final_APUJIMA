@@ -215,8 +215,8 @@
    <div id = "UDbutton" style ="margin-left : 0px"> 
    <c:if test = "${loginUser.nickname == comment.commenter.nickname }">
    
-   <button class="btn btn-xs btn-success" name="updateButton" onclick="updateComment('${comment.no}', '${comment.content}')" type="button">댓글 수정</button>
-  <a href= 'comment/delete?no=${comment.no}&board_no=${board.no}' class="btn btn-primary right" >댓글 삭제</a>
+  <button class="btn btn-xs btn-success" name="updateButton" onclick="updateComment('${comment.no}')" type="button">댓글 수정</button>
+  <a href= '../comment/delete?no=${comment.no}&board_no=${board.no}' class="btn btn-primary right" >댓글 삭제</a>
   
    </c:if>
   </div>
@@ -234,7 +234,7 @@
     
 
   <!--  댓글 수정 모달. -->
- <form  id = "updateForm" action='/apus/comment/update'>
+ <form  id = "updateForm" action='${contextPath}/app/comment/update'>
  <input type ="hidden" name ="board_no"  value ="${board.no}">
  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" 
       aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
@@ -246,11 +246,11 @@
           <div class="modal-body">
               <div class="form-group">
                 <label for="bucket-title" class="col-form-label">작성자</label>
-                <input type="text" class="form-control" id="commenter" name="commenter" value ="${loginUser.nickname}"readonly>
+                <input type="text" class="form-control" id="commenter" value ="${loginUser.nickname}"readonly>
               </div>
               <div class="form-group">
                 <label for="comment-content" class="col-form-label">내용</label>
-         <textarea class="form-control" id="Commentcontent" name="content" >${comment.content}</textarea>
+         <textarea class="form-control" id="Commentcontent" name="content" ></textarea>
               </div>
               
               
@@ -314,13 +314,6 @@ $('#updateModal').modal('show');
 
 });
 
-/*
-$('#updateButton').on('click', function(){
-   $('#updateModal').modal('show');
-
-   });
-*/
-   // 모달 안의 취소 버튼에 이벤트를 건다.
      $('#a-cancelBtn').on('click', function(){
      $('#updateForm > input').remove();
      $('#updateModal').modal('hide');
@@ -329,14 +322,9 @@ $('#updateButton').on('click', function(){
 
 
 //데이터 모달에 넘기기 
-function updateComment(no,content) {
+function updateComment(no) {
      var updateForm= $('#updateForm');
      $('<input>').attr('type','hidden').attr('value', no).attr('name','no').appendTo(updateForm);
-     $('<input>').attr('type','hidden').attr('value', content).attr('name','content').appendTo(updateForm);
-
-    //   $('<input>').attr('type','text').attr('value', content).attr('name','content').attr('placeholder','content').appendTo(.child1);
-
-    console.log(no,content)
      }; 
 
   </script>

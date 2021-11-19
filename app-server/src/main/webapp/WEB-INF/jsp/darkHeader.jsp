@@ -142,7 +142,7 @@ display: block;
 <header>
 <nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="border-bottom: solid 1px #25362977; margin-bottom: 30px; padding: 33px 16px;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="${contextPath}/home">
+    <a class="navbar-brand" href="${contextPath}/app/home">
     <input type="button" class="img-button"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -153,7 +153,7 @@ display: block;
           <a class="btn4" aria-current="page" href="#" style="color: #2c473e;">소개</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
-          <a class="btn4" aria-current="page" href="${contextPath}/medicine/list" style="color: #2c473e;">약국</a>
+          <a class="btn4" aria-current="page" href="${contextPath}/app/medicine/list" style="color: #2c473e;">약국</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
           <a class="btn4" aria-current="page" href="${contextPath}/app/doctorinfo/list" style="color: #2c473e;">HEALER</a>
@@ -163,10 +163,10 @@ display: block;
             커뮤니티
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="${contextPath}/board/freeBoardList">자유게시판</a></li>
-            <li><a class="dropdown-item" href="${contextPath}/board/doctorBoardList">HEALER 지식in</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/board/freeBoardList">자유게시판</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/board/doctorBoardList">HEALER 지식in</a></li>
             <!-- <li><hr class="dropdown-divider"></li> -->
-            <li><a class="dropdown-item" href="${contextPath}/board/noticeBoardList">공지사항</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/board/noticeBoardList">공지사항</a></li>
           </ul>
         </li>
       </ul>
@@ -181,10 +181,10 @@ display: block;
       <!-- 로그인 x -->
         <c:if test="${empty sessionScope.loginUser}">
         <div>
-        <a href="/${contextPath}/auth/LogIn.jsp" class="btn4" style="color: #2C473E;">
+        <a href="${contextPath}/app/auth/loginForm" class="btn4" style="color: #2C473E;">
          로그인
         </a>
-        <a href="/${contextPath}/member/MemberForm.jsp" class="btn4" style="color: #2C473E;">
+        <a href="${contextPath}/app/member/form" class="btn4" style="color: #2C473E;">
          회원가입
         </a>
         </div>
@@ -228,9 +228,9 @@ display: block;
           <b style="color: #2c473e;; text-size: 1.4em">&nbsp;${loginUser.nickname}</b>
         </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="${contextPath}/auth/userInfoList">내 정보</a></li>
-            <li><a class="dropdown-item" href="${contextPath}/bucket/list">버킷 리스트</a></li>
-            <li><a class="dropdown-item" href="${contextPath}/plant/list">나의 정원</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/auth/userInfoList">내 정보</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/bucket/list">버킷 리스트</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/plant/list">나의 정원</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><form name="logout2" action= '${contextPath}/auth/logout' method = "get">
             <a class="dropdown-item" href="javascript:logout.submit();">로그아웃</a>
