@@ -25,7 +25,7 @@ pageEncoding="UTF-8"
 
   <h3 style="margin-top: 15%;">출석 체크!</h3>
    <!-- <input type='date' id='currentDate'/> -->
-   <form method="post" action="dateCheckFinder">
+   <form action="dateCheckFinder">
    <button class="btn btn-primary" type="submit">출석체크</button>
    </form>
     </div> 

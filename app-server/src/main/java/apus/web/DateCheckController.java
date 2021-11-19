@@ -29,26 +29,7 @@ public class DateCheckController {
 
     mv.addObject("dateCheckList", dateCheckList);
     mv.addObject("pageTitle", "출석체크 페이지");
-    mv.addObject("contentUrl", "auth/dateCheckForm.jsp");
-    return mv;
-  }
-
-
-  @GetMapping("/auth/attendanceCheck")
-  public ModelAndView add(DateCheck dateCheck, HttpSession session) throws Exception {
-    ModelAndView mv = new ModelAndView();
-
-    Member member = (Member) session.getAttribute("loginUser");
-
-    member.setPoint(member.getPoint() + 30);
-
-    dateCheck.setAttendee(member);
-
-    memberDao.update2(member);
-    dateCheckDao.insert(dateCheck);
-    sqlSessionFactory.openSession().commit();
-
-    mv.addObject("contentUrl", "auth/dateCheckForm.jsp");
+    mv.setViewName("auth/DateCheckForm");
     return mv;
   }
 
@@ -65,13 +46,37 @@ public class DateCheckController {
     DateCheck dateCheck = dateCheckDao.findByMemberAndDate(memberNo);
 
     if (dateCheck == null) {
-      mv.addObject("contentUrl", "auth/attendanceCheck");
+      //출석체크 기록 없으면 DateCheckAddController 역할
+      //attendanceCheck로 보냄
+      mv.setViewName("redirect:attendanceCheck");
       return mv;
     } else if (dateCheck != null) {
+      //출석체크를 이미 한 경우에는 DateCheckPro로 바로 이동
       mv.addObject("dateCheck", dateCheck);
-      mv.addObject("contentUrl", "auth/dateCheckPro.jsp");
+      mv.setViewName("auth/DateCheckPro");
     }
     return mv;
   }
+
+
+  @GetMapping("/auth/attendanceCheck")
+  public ModelAndView add(HttpSession session) throws Exception {
+    ModelAndView mv = new ModelAndView();
+    Member member = (Member) session.getAttribute("loginUser");
+
+    member.setPoint(member.getPoint() + 30);
+
+    DateCheck dateCheck = new DateCheck();
+    dateCheck.setAttendee(member);
+
+    memberDao.update2(member);
+    dateCheckDao.insert(dateCheck);
+    sqlSessionFactory.openSession().commit();
+
+    mv.setViewName("auth/DateCheckPro");
+    return mv;
+  }
+
+
 
 }
