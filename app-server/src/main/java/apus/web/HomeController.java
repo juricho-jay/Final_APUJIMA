@@ -17,25 +17,27 @@ public class HomeController {
 
   @GetMapping("/home")
   public ModelAndView home(HttpSession session) throws Exception {
+    ModelAndView mv = new ModelAndView();
 
     Member member = ((Member) session.getAttribute("loginUser"));
 
     //안읽은 메일 체크
 
-    List<MailBox> mailBoxList = mailBoxDao.findAll();
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
 
-    int count = 0;
-    for (int i = 0; i < mailBoxList.size(); i++) {
-      if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
-        if (mailBoxList.get(i).getReceivedTime() == null) {
-          count++;
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
         }
       }
+
+      mv.addObject("uncheckedMail", count);
     }
 
-
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("uncheckedMail", count);
     mv.addObject("pageTitle", "메인화면");
     mv.addObject("contentUrl", "index2.jsp");
     mv.setViewName("homeTemplate");
