@@ -58,8 +58,9 @@
 <body>
 <div class="container" style ="min-height: 800px; float:middle;">
 
-
- <jsp:include page="/mailboxSidebar.jsp"/>
+<c:if test = "${loginUser}">
+ <jsp:include page="counselingSidebar.jsp"/>
+</c:if>
 <div id="content" >
 <jsp:include page="${contentUrl}" />
 
@@ -69,7 +70,7 @@
 
 </div><!-- .container -->
 </body>
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>
 
 </html>
 

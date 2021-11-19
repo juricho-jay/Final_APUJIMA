@@ -43,7 +43,7 @@ public class CounselingController {
     mv.addObject("pageTitle", "힐러상담사");
     mv.addObject("contentUrl", "/counseling/DoctorInfo.jsp");
     //mv.setViewName("board/BoardList");
-    mv.setViewName("darkTemplate");
+    mv.setViewName("template5");
     // mv.setViewName("template1");
     return mv;
   }
@@ -59,7 +59,7 @@ public class CounselingController {
     mv.addObject("pageTitle", "나의상담신청목록");
     mv.addObject("contentUrl", "/counseling/CounselingList.jsp");
     //mv.setViewName("board/BoardList");
-    mv.setViewName("darkTemplate");
+    mv.setViewName("template5");
     // mv.setViewName("template1");
     return mv;
   }
@@ -94,7 +94,7 @@ public class CounselingController {
     mv.addObject("pageTitle", "상담신청상세");
     mv.addObject("counseling", counseling);
     mv.addObject("contentUrl", "/counseling/CounselingMemberDetail.jsp");
-    mv.setViewName("darkTemplate");
+    mv.setViewName("template5");
     return mv;
   }
 
@@ -109,7 +109,7 @@ public class CounselingController {
     mv.addObject("pageTitle", "나의상담요청목록");
     mv.addObject("contentUrl", "/counseling/CounselingDoctorList.jsp");
     //mv.setViewName("board/BoardList");
-    mv.setViewName("darkTemplate");
+    mv.setViewName("template5");
     // mv.setViewName("template1");
     return mv;
   }
@@ -126,7 +126,7 @@ public class CounselingController {
     mv.addObject("pageTitle", "상담요청상세");
     mv.addObject("counseling", counseling);
     mv.addObject("contentUrl", "/counseling/CounselingDoctorDetail.jsp");
-    mv.setViewName("darkTemplate");
+    mv.setViewName("template5");
     return mv;
   }
 

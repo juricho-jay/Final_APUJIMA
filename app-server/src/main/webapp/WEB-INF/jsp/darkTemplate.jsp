@@ -43,7 +43,7 @@
 </head>
 
 <body>
-<jsp:include page="darkHeader.jsp"/>
+<jsp:include page="/darkHeader.jsp"/>
 <%-- <jsp:include page="/sidebar.jsp"/> --%>
 <div class="container">
 <div id="content">

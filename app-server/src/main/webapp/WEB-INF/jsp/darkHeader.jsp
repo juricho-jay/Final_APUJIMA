@@ -153,7 +153,7 @@ display: block;
           <a class="btn4" aria-current="page" href="#" style="color: #2c473e;">소개</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
-          <a class="btn4" aria-current="page" href="${contextPath}/medicine/list" style="color: #2c473e;">약국</a>
+          <a class="btn4" aria-current="page" href="${contextPath}/app/medicine/list" style="color: #2c473e;">약국</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
           <a class="btn4" aria-current="page" href="${contextPath}/app/doctorinfo/list" style="color: #2c473e;">HEALER</a>
@@ -163,10 +163,10 @@ display: block;
             커뮤니티
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="${contextPath}/board/freeBoardList">자유게시판</a></li>
-            <li><a class="dropdown-item" href="${contextPath}/board/doctorBoardList">HEALER 지식in</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/board/freeBoardList">자유게시판</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/board/doctorBoardList">HEALER 지식in</a></li>
             <!-- <li><hr class="dropdown-divider"></li> -->
-            <li><a class="dropdown-item" href="${contextPath}/board/noticeBoardList">공지사항</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/board/noticeBoardList">공지사항</a></li>
           </ul>
         </li>
       </ul>
@@ -181,10 +181,10 @@ display: block;
       <!-- 로그인 x -->
         <c:if test="${empty sessionScope.loginUser}">
         <div>
-        <a href="/${contextPath}/auth/LogIn.jsp" class="btn4" style="color: #2C473E;">
+        <a href="/${contextPath}/app/auth/LogIn.jsp" class="btn4" style="color: #2C473E;">
          로그인
         </a>
-        <a href="/${contextPath}/member/MemberForm.jsp" class="btn4" style="color: #2C473E;">
+        <a href="/${contextPath}/app/member/MemberForm.jsp" class="btn4" style="color: #2C473E;">
          회원가입
         </a>
         </div>
@@ -200,7 +200,7 @@ display: block;
         </i> --%>
         <a type="button" class="position-relative" 
         style="outline: 0; background-color: transparent; border:0; color: #2C473E; padding:0; margin-left: 5px"
-        href="${contextPath}/mailbox/list">
+        href="${contextPath}/app/mailbox/list">
           <i class="bi bi-envelope" style="zoom: 1.8; color: #2c473e;"></i>
           <span class="position-absolute top-0 start-100 translate-middle-x badge rounded-pill bg-danger"
           style="">
@@ -210,7 +210,7 @@ display: block;
         </c:if>
         <c:if test="${uncheckedMail eq 0}">
         <a type="button" class="position-relative" style="outline: 0; background-color: transparent; border:0; color: white;"
-        href="${contextPath}/mailbox/list">
+        href="${contextPath}/app/mailbox/list">
           <i class="bi bi-envelope" style="zoom: 1.8; color: #2c473e;"></i>
         </a>
         </c:if>
@@ -228,17 +228,17 @@ display: block;
           <b style="color: #2c473e;; text-size: 1.4em">&nbsp;${loginUser.nickname}</b>
         </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="${contextPath}/auth/userInfoList">내 정보</a></li>
-            <li><a class="dropdown-item" href="${contextPath}/bucket/list">버킷 리스트</a></li>
-            <li><a class="dropdown-item" href="${contextPath}/plant/list">나의 정원</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/auth/userInfoList">내 정보</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/bucket/list">버킷 리스트</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/plant/list">나의 정원</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><form name="logout2" action= '${contextPath}/auth/logout' method = "get">
+            <li><form name="logout2" action= '${contextPath}/app/auth/logout' method = "get">
             <a class="dropdown-item" href="javascript:logout.submit();">로그아웃</a>
               </form></li>
           </ul>
         </li>
         <div>
-        <form name="logout" action= '${contextPath}/auth/logout' method = "get">
+        <form name="logout" action= '${contextPath}/app/auth/logout' method = "get">
         <a class="btn4" href="javascript:logout.submit();" style="color: #2c473e;; margin-left:10px;">로그아웃</a>
         </form>
         </div>

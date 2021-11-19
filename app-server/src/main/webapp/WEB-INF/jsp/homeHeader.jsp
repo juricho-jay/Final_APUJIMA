@@ -151,7 +151,7 @@ display: block;
 <header>
 <nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="border-bottom: solid 1px #ffffff61; margin-bottom: 30px; padding: 33px 16px;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="${contextPath}/home">
+    <a class="navbar-brand" href="${contextPath}/app/home">
     <input type="button" class="img-button"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -162,7 +162,7 @@ display: block;
           <a class="btn4 text-white" aria-current="page" href="#">소개</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
-          <a class="btn4 text-white" aria-current="page" href="${contextPath}/medicine/list">약국</a>
+          <a class="btn4 text-white" aria-current="page" href="${contextPath}/app/medicine/list">약국</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
           <a class="btn4 text-white" aria-current="page" href="${contextPath}/app/doctorinfo/list">HEALER</a>
@@ -209,7 +209,7 @@ display: block;
         </i> --%>
         <a type="button" class="position-relative" 
         style="outline: 0; background-color: transparent; border:0; color: white; padding:0; margin-left: 5px"
-        href="${contextPath}/mailbox/list">
+        href="${contextPath}/app/mailbox/list">
               <i class="bi bi-envelope" style="zoom: 1.8"></i>
               <span class="position-absolute top-0 start-100 translate-middle-x badge rounded-pill bg-danger"
               style="">
@@ -219,14 +219,14 @@ display: block;
         </c:if>
         <c:if test="${uncheckedMail eq 0}">
         <a type="button" class="position-relative" style="outline: 0; background-color: transparent; border:0; color: white;"
-        href="${contextPath}/mailbox/list">
+        href="${contextPath}/app/mailbox/list">
           <i class="bi bi-envelope" style="zoom: 1.8"></i>
         </a>
         </c:if>
         </div> 
         <!-- 내 정보 아이콘 -->
         <li class="nav-item dropdown" style="margin-left: 30px">
-          <a class="nav-item d-sm-flex align-items-sm-center text-white" href="${contextPath}/auth/userInfoList"
+          <a class="nav-item d-sm-flex align-items-sm-center text-white" href="${contextPath}/app/auth/userInfoList"
         style="text-decoration-line: none;">
         <img
             src="${contextPath}/upload/member/${member.photo}_20x20.jpg"
@@ -237,17 +237,17 @@ display: block;
           <b style="color: white; text-size: 1.4em">&nbsp;${loginUser.nickname}</b>
         </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="${contextPath}/auth/userInfoList">내 정보</a></li>
-            <li><a class="dropdown-item" href="${contextPath}/bucket/list">버킷 리스트</a></li>
-            <li><a class="dropdown-item" href="${contextPath}/plant/list">나의 정원</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/auth/userInfoList">내 정보</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/bucket/list">버킷 리스트</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/plant/list">나의 정원</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><form name="logout2" action= '${contextPath}/auth/logout' method = "get">
+            <li><form name="logout2" action= '${contextPath}/app/auth/logout' method = "get">
             <a class="dropdown-item" href="javascript:logout.submit();">로그아웃</a>
               </form></li>
           </ul>
         </li>
         <div>
-        <form name="logout" action= '${contextPath}/auth/logout' method = "get">
+        <form name="logout" action= '${contextPath}/app/auth/logout' method = "get">
         <a class="btn4" href="javascript:logout.submit();" style="color: white; margin-left:10px;">로그아웃</a>
         </form>
         </div>

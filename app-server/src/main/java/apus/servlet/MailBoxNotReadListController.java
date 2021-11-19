@@ -34,31 +34,20 @@ public class MailBoxNotReadListController extends HttpServlet{
       throws ServletException, IOException {
     try {
 
-
       Collection<Member> memberList = memberDao.findAll();
 
-
-      // 클라이언트 요청을 처리하는데 필요한 데이터 준비
       List<MailBox> mailBoxList = mailBoxDao.findByTime();
 
-
-
-      // 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
       request.setAttribute("mailBoxList", mailBoxList);
       request.setAttribute("memberList", memberList);
-      // 출력을 담당할 뷰를 호출한다.
-      //      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/mailbox/MailBoxList.jsp");
-      //      요청배달자.forward(request, response);
 
       request.setAttribute("pageTitle", "안읽은 쪽지함 목록");
       request.setAttribute("contentUrl", "/mailbox/MailBoxNotReadList.jsp");
       request.getRequestDispatcher("/template4.jsp").forward(request, response);
-
 
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
-
 }
