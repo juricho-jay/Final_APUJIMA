@@ -74,22 +74,31 @@ public class AuthController {
   }
 
   @GetMapping("/auth/userInfoList")
-  public ModelAndView list(HttpSession session) throws Exception {
+  public ModelAndView userInfoList(HttpSession session) throws Exception {
+    System.out.println("------------------");
+    System.out.println("------------------");
+    System.out.println("------------------");
     Collection<DateCheck> dateCheckList = dateCheckDao.findAll();
-    ModelAndView mv = new ModelAndView();
-
+    System.out.println("------------------");
+    System.out.println("사이즈 ===== > " + dateCheckList.size());
+    System.out.println("------------------");
     Member member = (Member) session.getAttribute("loginUser");
 
+
+    ModelAndView mv = new ModelAndView();
     if(member == null) {
-      throw new Exception("해당 번호의 회원이 없습니다.");
+      mv.setViewName("redirect:../home");
+      return mv;
     } 
 
     mv.addObject("dateCheckList", dateCheckList);
     mv.addObject("member", member);
     mv.addObject("pageTitle", "내 정보");
     mv.addObject("contentUrl", "auth/UserInfoList.jsp");
+    mv.setViewName("redirect:auth/UserInfoList.jsp");
     return mv;
   }
+
 
 }
 
