@@ -283,14 +283,12 @@ function modalOn(){
 }
 */
 
-=======
 function checkValue(){
 	if (${loginUser == null}){
 		alert("로그인 해주세요!");
 		return false;
 	}
 }
->>>>>>> c84caac6823976a97b15ca936351de662f1cc33b
 
 document.querySelectorAll("#heartBtn").forEach((tag) => {
 if (tag.getAttribute("value") == 1) {
