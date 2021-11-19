@@ -181,17 +181,10 @@ display: block;
       <!-- 로그인 x -->
         <c:if test="${empty sessionScope.loginUser}">
         <div>
-<<<<<<< HEAD
         <a href="${contextPath}/app/auth/loginForm" class="btn4" style="color: #2C473E;">
          로그인
         </a>
         <a href="${contextPath}/app/member/form" class="btn4" style="color: #2C473E;">
-=======
-        <a href="/${contextPath}/app/auth/LogIn.jsp" class="btn4" style="color: #2C473E;">
-         로그인
-        </a>
-        <a href="/${contextPath}/app/member/MemberForm.jsp" class="btn4" style="color: #2C473E;">
->>>>>>> 4c24e66c7a83d133881530dc04ab4c476c0847f4
          회원가입
         </a>
         </div>

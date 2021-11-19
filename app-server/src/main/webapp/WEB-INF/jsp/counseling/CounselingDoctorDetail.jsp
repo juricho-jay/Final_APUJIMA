@@ -19,7 +19,6 @@
 <body>
 <div class="container">
 <h1>상담 상세보기</h1>
-<form action='list'>
 
 <div class="mb-3 row counsel">
 <label for='f-name' class="col-sm-2 col-form-label p">이름</label>
@@ -42,8 +41,8 @@
 <div class="col-sm-6 pp">${counseling.registeredDate}</div>
 </div>
 
-<button class="btn btn-primary btn-sm">목록</button>
-</form> 
+<a href='${contextPath}/app/counseling/doctorlist' class="btn btn-primary">목록</a><br>
+
 </div><!-- .container -->
 </body>
 </html>

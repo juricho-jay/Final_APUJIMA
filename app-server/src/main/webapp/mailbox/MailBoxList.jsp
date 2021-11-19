@@ -19,7 +19,7 @@
 	        <div class="close-area">X</div>
         </div>
         <div class="content-in">
-            <form  name = "usersend" action='send' method="post" onsubmit="return checkValue()">
+            <form  name = "usersend" action='send' method="post">
 							<div class="content1">
 							  <br>
 							  <label for="box1">보낸이</label>
@@ -33,7 +33,7 @@
 							  <label for="f-receiver">받는이</label>
 							  <br>
 							  <div class="col-sm-4">
-							      <input id='f-receiver' type='text' name='receiver.nickname' class="form-control" required>
+							      <input id='f-receiver' type='text' name='nickname' class="form-control" required>
 							      <!-- <input type="button" name='findId' value="아이디확인"> -->
 							      
 							  </div>
@@ -54,7 +54,7 @@
 							  <br>
 							</div>
 							<div>
-							<button id="btnsub" type="submit" class="btn btn-outline-secondary" onclick="getData()">보내기</button>
+							<button id="btnsub" type="submit" class="btn btn-outline-secondary">보내기</button>
 							  </div>
 							</form>
 		        </div>
@@ -121,13 +121,7 @@
 }); 
 </script>
 
-<script >
-$("#modal").on("show", function () {
-	  $("body").addClass("modal-open");
-	}).on("hidden", function () {
-	  $("body").removeClass("modal-open")
-	});
-</script>
+
 
 
 

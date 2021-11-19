@@ -57,7 +57,7 @@ public class CounselingController {
     mv.addObject("counselingList", counselingList);
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "나의상담신청목록");
-    mv.addObject("contentUrl", "/counseling/CounselingList.jsp");
+    mv.addObject("contentUrl", "counseling/CounselingList.jsp");
     //mv.setViewName("board/BoardList");
     mv.setViewName("template5");
     // mv.setViewName("template1");
@@ -65,14 +65,15 @@ public class CounselingController {
   }
 
   @PostMapping("/counseling/add")
-  public ModelAndView add(Counseling counseling, int counselorNo, HttpSession session) throws Exception {
+  public ModelAndView add(Counseling counseling, int counselorNo, HttpSession session
+      , String disease, String content) throws Exception {
 
     Member doctor = memberDao.findByNo(counselorNo);
-    //int no = Integer.parseInt(request.getParameter("no")); // counselor.no
-
 
     counseling.setClient((Member) session.getAttribute("loginUser"));
     counseling.setCounselor(doctor);
+    counseling.setDisease(disease);
+    counseling.setContent(content);
 
     counselingDao.insert(counseling);
     sqlSessionFactory.openSession().commit();
@@ -83,31 +84,34 @@ public class CounselingController {
   }
 
   @GetMapping("/counseling/detail")
-  public ModelAndView detail(int no) throws Exception {
-    Counseling counseling = counselingDao.findByNo(no);
+  public ModelAndView detail(String no) throws Exception {
+    Counseling counseling = counselingDao.findByNo(Integer.parseInt(no));
 
-    if (counseling == null) {
-      throw new Exception("해당 번호의 상담이 없습니다.");
-    }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "상담신청상세");
     mv.addObject("counseling", counseling);
-    mv.addObject("contentUrl", "/counseling/CounselingMemberDetail.jsp");
+    mv.addObject("contentUrl", "counseling/CounselingMemberDetail.jsp");
     mv.setViewName("template5");
     return mv;
   }
 
   @GetMapping("/counseling/doctorlist")
   public ModelAndView doctorlist() throws Exception {
+    System.out.println("-------------------");
+    System.out.println("-------------------");
+    System.out.println("-------------------");
     Collection<Member> memberList = memberDao.findAll();
     List<Counseling> counselingList= counselingDao.findAll();
+    System.out.println("-------------------");
+    System.out.println("-------------------");
+    System.out.println("리스트 숫자는 =====> " + counselingList.size());
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("counselingList", counselingList);
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "나의상담요청목록");
-    mv.addObject("contentUrl", "/counseling/CounselingDoctorList.jsp");
+    mv.addObject("contentUrl", "counseling/CounselingDoctorList.jsp");
     //mv.setViewName("board/BoardList");
     mv.setViewName("template5");
     // mv.setViewName("template1");
@@ -115,17 +119,14 @@ public class CounselingController {
   }
 
   @GetMapping("/counseling/doctordetail")
-  public ModelAndView doctordetail(int no) throws Exception {
-    Counseling counseling = counselingDao.findByNo(no);
+  public ModelAndView doctordetail(String no) throws Exception {
+    Counseling counseling = counselingDao.findByNo(Integer.parseInt(no));
 
-    if (counseling == null) {
-      throw new Exception("해당 번호의 상담이 없습니다.");
-    }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "상담요청상세");
     mv.addObject("counseling", counseling);
-    mv.addObject("contentUrl", "/counseling/CounselingDoctorDetail.jsp");
+    mv.addObject("contentUrl", "counseling/CounselingDoctorDetail.jsp");
     mv.setViewName("template5");
     return mv;
   }

@@ -2,10 +2,12 @@ package apus.web;
 
 import java.util.Collection;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import apus.dao.MailBoxDao;
 import apus.dao.MemberDao;
@@ -19,19 +21,13 @@ public class MailBoxController {
   @Autowired MailBoxDao mailBoxDao;
   @Autowired MemberDao memberDao;
 
-  @GetMapping("/mailbox/form")
-  public ModelAndView form() {
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("pageTitle", "쪽지함");
-    mv.addObject("contentUrl", "mailbox/MailBoxForm.jsp");
-    mv.setViewName("template4");
-    return mv;
-  }
+
 
   @GetMapping("/mailbox/list")
   public ModelAndView list() throws Exception {
     List<Member> memberList = memberDao.findAll();
     List<MailBox> mailBoxList = mailBoxDao.findAll();
+
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("mailBoxList", mailBoxList);
@@ -83,6 +79,25 @@ public class MailBoxController {
     mv.addObject("pageTitle", "읽은쪽지함");
     mv.addObject("contentUrl", "/mailbox/MailBoxReadList.jsp");
     mv.setViewName("template4");
+    return mv;
+  }
+
+  @PostMapping("/mailbox/send")
+  public ModelAndView send(MailBox mailBox, String nickname, HttpSession session,
+      String title, String content) throws Exception {
+
+    Member member = memberDao.findByNickname(nickname);
+    mailBox.setSender((Member) session.getAttribute("loginUser"));
+    mailBox.setReceiver(member);
+    mailBox.setTitle(title);
+    mailBox.setContent(content);
+
+
+    mailBoxDao.insert(mailBox);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:list");
     return mv;
   }
 
