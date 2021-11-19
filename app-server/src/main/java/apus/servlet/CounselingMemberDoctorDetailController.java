@@ -1,14 +1,12 @@
 package apus.servlet;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import apus.dao.CounselingDao;
 import apus.dao.MemberDao;
 import apus.domain.Counseling;
@@ -21,18 +19,18 @@ public class CounselingMemberDoctorDetailController extends HttpServlet{
   MemberDao memberDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     counselingDao = (CounselingDao) 웹애플리케이션공용저장소.getAttribute("counselingDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    int no = Integer.parseInt(request.getParameter("no"));
     try {
+      int no = Integer.parseInt(request.getParameter("no"));
       Counseling counseling = counselingDao.findByNo(no);
 
       if (counseling == null) {
@@ -48,39 +46,13 @@ public class CounselingMemberDoctorDetailController extends HttpServlet{
       request.setAttribute("counseling", counseling);
       request.setAttribute("contentUrl", "/counseling/CounselingDoctorDetail.jsp");
       request.getRequestDispatcher("/darkTemplate.jsp").forward(request, response);
-      //      request.getRequestDispatcher("CounselingDoctorDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
-      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
-      e.printStackTrace();
       request.setAttribute("error", e);
-
-      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
 
 
-
-    //    try {
-    //      Collection<Member> memberList = memberDao.findAll();
-    //      List<Counseling> counselingList= counselingDao.findAll();
-    //      request.setAttribute("memberList", memberList);
-    //      request.setAttribute("counselingList", counselingList);
-    //
-    //      // 출력을 담당할 뷰를 호출한다.
-    //      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/counseling/CounselingDoctorDetail.jsp");
-    //      요청배달자.forward(request, response);
-    //
-    //    } catch (Exception e) {
-    //      // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
-    //      e.printStackTrace();
-    //      request.setAttribute("error", e);
-    //
-    //      // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
-    //      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-    //      요청배달자.forward(request, response);
-    //    }
   }
 
 }

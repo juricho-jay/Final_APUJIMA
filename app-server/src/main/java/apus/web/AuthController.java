@@ -1,5 +1,6 @@
 package apus.web;
 
+import java.util.Collection;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -9,14 +10,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import apus.dao.DateCheckDao;
 import apus.dao.MemberDao;
+import apus.domain.DateCheck;
 import apus.domain.Member;
 
 @Controller
 public class AuthController {
 
   @Autowired MemberDao memberDao;
+  @Autowired DateCheckDao dateCheckDao;
   @Autowired ServletContext sc;
+
 
   @GetMapping("/auth/loginForm")
   public ModelAndView loginForm() {
@@ -65,6 +70,24 @@ public class AuthController {
     session.invalidate();
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:../home");
+    return mv;
+  }
+
+  @GetMapping("/auth/userInfoList")
+  public ModelAndView list(HttpSession session) throws Exception {
+    Collection<DateCheck> dateCheckList = dateCheckDao.findAll();
+    ModelAndView mv = new ModelAndView();
+
+    Member member = (Member) session.getAttribute("loginUser");
+
+    if(member == null) {
+      throw new Exception("해당 번호의 회원이 없습니다.");
+    } 
+
+    mv.addObject("dateCheckList", dateCheckList);
+    mv.addObject("member", member);
+    mv.addObject("pageTitle", "내 정보");
+    mv.addObject("contentUrl", "auth/UserInfoList.jsp");
     return mv;
   }
 

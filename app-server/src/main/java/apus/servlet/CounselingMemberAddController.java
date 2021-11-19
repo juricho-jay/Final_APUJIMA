@@ -1,8 +1,6 @@
 package apus.servlet;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,28 +23,28 @@ public class CounselingMemberAddController extends HttpServlet{
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     counselingDao = (CounselingDao) 웹애플리케이션공용저장소.getAttribute("counselingDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    Counseling counseling = new Counseling();
-
-    HttpSession session = request.getSession(false);
-
-    if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/apus/index.jsp");
-      return;
-    }
-    int no = Integer.parseInt(request.getParameter("no")); // counselor.no
-
     try {
+      Counseling counseling = new Counseling();
+
+      HttpSession session = request.getSession(false);
+
+      if (session.getAttribute("loginUser") == null) {
+        response.sendRedirect("/apus/index.jsp");
+        return;
+      }
+
+      int no = Integer.parseInt(request.getParameter("no")); // counselor.no
       Member client = (Member) request.getSession(false).getAttribute("loginUser");
 
       if(client == null) {
@@ -65,15 +63,13 @@ public class CounselingMemberAddController extends HttpServlet{
       sqlSession.commit();
       response.sendRedirect("list");
 
-    } catch (Exception e1) {
+    } catch (Exception e) {
 
       // 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
-      e1.printStackTrace();
-      request.setAttribute("error", e1);
+      request.setAttribute("error", e);
 
       // 오류가 발생하면, 오류 내용을 출력할 뷰를 호출한다.
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
 
     }
 

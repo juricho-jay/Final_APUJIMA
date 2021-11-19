@@ -158,10 +158,10 @@ input.img-button {
 				<!-- 로그인 x -->
 				<c:if test="${empty sessionScope.loginUser}">
 				<li>
-				<a href="/apus/auth/LogIn.jsp" class="btn4" style="color: white;">
+				<a href="${contextPath}/app/apus/auth/LogIn.jsp" class="btn4" style="color: white;">
 			   로그인
 			  </a>
-			  <a href="/apus/member/MemberForm.jsp" class="btn4" style="color: white;">
+			  <a href="${contextPath}/app/apus/member/MemberForm.jsp" class="btn4" style="color: white;">
          회원가입
         </a>
 			  </li>
