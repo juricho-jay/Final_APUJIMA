@@ -75,20 +75,20 @@ aside#main{
     float: left;
 }
 </style>
-<c:if test = "${loginUser}">
 <aside id = "left"> 
 <!-- <h5>게시판 선택</h5> -->
 
 
+
   <ul>
-  <li><a href ="list"class="btn4" style="color: #2c473e;">HEALER</a></li>
+  <li><a href ="${contextPath}/app/doctorinfo/list"class="btn4" style="color: #2c473e;">HEALER</a></li>
   <c:if test = "${loginUser.doctorOrNot eq 1}">
-  <li><a href="list2" class="btn4" style="color: #2c473e;">My 상담신청리스트</a></li>
+  <li><a href="${contextPath}/app/counseling/list" class="btn4" style="color: #2c473e;">My 상담신청리스트</a></li>
   </c:if>
   <c:if test = "${loginUser.doctorOrNot eq 2}">
-  <li><a href="doctorlist" class="btn4" style="color: #2c473e;">상담요청리스트</a></li>
+  <li><a href="${contextPath}/app/counseling/doctorlist" class="btn4" style="color: #2c473e;">상담요청리스트</a></li>
   </c:if>
 </ul>
+
  
 </aside>
-</c:if>

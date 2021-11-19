@@ -59,7 +59,6 @@
 <div class="container">
 
 <h1>쪽지보내기</h1>
-<form name = "usersend" action='send' method="post" onsubmit="return checkValue()">
 <div class="content1">
   <br><br>
   <label for="box1">보낸이</label>
@@ -69,6 +68,7 @@
   </div>
   <br>
 </div>
+<form name = "usersend" action='send' method="post" onsubmit="return checkValue()">
 <div class="content2">
   <label for="f-receiver">받는이</label>
   <br>
