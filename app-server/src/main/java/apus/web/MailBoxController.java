@@ -1,5 +1,6 @@
 package apus.web;
 
+import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -24,14 +25,26 @@ public class MailBoxController {
 
 
   @GetMapping("/mailbox/list")
-  public ModelAndView list() throws Exception {
+  public ModelAndView list(HttpSession session) throws Exception {
     List<Member> memberList = memberDao.findAll();
     List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+    Member member = ((Member) session.getAttribute("loginUser"));
+
+    int count = 0;
+    for (int i = 0; i < mailBoxList.size(); i++) {
+      if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+        if (mailBoxList.get(i).getReceivedTime() == null) {
+          count++;
+        }
+      }
+    }
 
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("mailBoxList", mailBoxList);
     mv.addObject("memberList", memberList);
+    mv.addObject("uncheckedMail", count);
     mv.addObject("pageTitle", "쪽지함목록");
     mv.addObject("contentUrl", "/mailbox/MailBoxList.jsp");
     mv.setViewName("template4");
@@ -41,10 +54,9 @@ public class MailBoxController {
   @GetMapping("/mailbox/detail")
   public ModelAndView detail(int no) throws Exception {
     MailBox mailBox = mailBoxDao.findByNo(no);
-
-    if (mailBox == null) {
-      throw new Exception("해당 번호의 회원이 없습니다.");
-    }
+    mailBox.setReceivedTime(new Date(System.currentTimeMillis()));
+    mailBoxDao.update(mailBox);
+    sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "쪽지함상세");
