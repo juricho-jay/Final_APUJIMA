@@ -28,23 +28,25 @@ public class MailBoxController {
   public ModelAndView list(HttpSession session) throws Exception {
     List<Member> memberList = memberDao.findAll();
     List<MailBox> mailBoxList = mailBoxDao.findAll();
+    ModelAndView mv = new ModelAndView();
 
     Member member = ((Member) session.getAttribute("loginUser"));
 
     int count = 0;
-    for (int i = 0; i < mailBoxList.size(); i++) {
-      if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
-        if (mailBoxList.get(i).getReceivedTime() == null) {
-          count++;
+    if (member != null) {
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
         }
       }
+      mv.addObject("uncheckedMail", count);
     }
 
 
-    ModelAndView mv = new ModelAndView();
     mv.addObject("mailBoxList", mailBoxList);
     mv.addObject("memberList", memberList);
-    mv.addObject("uncheckedMail", count);
     mv.addObject("pageTitle", "쪽지함목록");
     mv.addObject("contentUrl", "/mailbox/MailBoxList.jsp");
     mv.setViewName("template4");
@@ -52,13 +54,30 @@ public class MailBoxController {
   }
 
   @GetMapping("/mailbox/detail")
-  public ModelAndView detail(int no) throws Exception {
+  public ModelAndView detail(int no, HttpSession session) throws Exception {
     MailBox mailBox = mailBoxDao.findByNo(no);
+    List<MailBox> mailBoxList = mailBoxDao.findAll();
+    ModelAndView mv = new ModelAndView();
+
     mailBox.setReceivedTime(new Date(System.currentTimeMillis()));
     mailBoxDao.update(mailBox);
     sqlSessionFactory.openSession().commit();
 
-    ModelAndView mv = new ModelAndView();
+    Member member = ((Member) session.getAttribute("loginUser"));
+
+    int count = 0;
+    if (member != null) {
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }
+
+
     mv.addObject("pageTitle", "쪽지함상세");
     mv.addObject("mailBox", mailBox);
     mv.addObject("contentUrl", "/mailbox/MailBoxDetail.jsp");
@@ -67,11 +86,25 @@ public class MailBoxController {
   }
 
   @GetMapping("/mailbox/readlist")
-  public ModelAndView readlist() throws Exception {
+  public ModelAndView readlist(HttpSession session) throws Exception {
     Collection<Member> memberList = memberDao.findAll();
     List<MailBox> mailBoxList = mailBoxDao.findByCheckedTime();
-
     ModelAndView mv = new ModelAndView();
+
+    Member member = ((Member) session.getAttribute("loginUser"));
+
+    int count = 0;
+    if (member != null) {
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }
+
     mv.addObject("mailBoxList", mailBoxList);
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "읽은쪽지함");
@@ -81,15 +114,29 @@ public class MailBoxController {
   }
 
   @GetMapping("/mailbox/notreadlist")
-  public ModelAndView notreadlist() throws Exception {
+  public ModelAndView notreadlist(HttpSession session) throws Exception {
     Collection<Member> memberList = memberDao.findAll();
     List<MailBox> mailBoxList = mailBoxDao.findByTime();
-
     ModelAndView mv = new ModelAndView();
+
+    Member member = ((Member) session.getAttribute("loginUser"));
+
+    int count = 0;
+    if (member != null) {
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }
+
     mv.addObject("mailBoxList", mailBoxList);
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "읽은쪽지함");
-    mv.addObject("contentUrl", "/mailbox/MailBoxReadList.jsp");
+    mv.addObject("contentUrl", "/mailbox/MailBoxNotReadList.jsp");
     mv.setViewName("template4");
     return mv;
   }
@@ -108,7 +155,21 @@ public class MailBoxController {
     mailBoxDao.insert(mailBox);
     sqlSessionFactory.openSession().commit();
 
+    List<MailBox> mailBoxList = mailBoxDao.findByTime();
     ModelAndView mv = new ModelAndView();
+
+    int count = 0;
+    if (member != null) {
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }
+
     mv.setViewName("redirect:list");
     return mv;
   }
