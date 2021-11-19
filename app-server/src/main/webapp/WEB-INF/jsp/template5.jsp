@@ -54,7 +54,7 @@
    
     
 </head>
-<jsp:include page="/darkHeader.jsp"/>
+<jsp:include page="darkHeader.jsp"/>
 <body>
 <div class="container" style ="min-height: 800px; float:middle;">
 

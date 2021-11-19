@@ -61,7 +61,7 @@
 
  <jsp:include page="boardSidebar.jsp"/>
 <div id="content" >
-<jsp:include page="/${contentUrl}" />
+<jsp:include page="${contentUrl}" />
 
 </div><!-- #content --> 
 
