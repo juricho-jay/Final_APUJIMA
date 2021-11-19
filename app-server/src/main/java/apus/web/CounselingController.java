@@ -24,13 +24,12 @@ public class CounselingController {
 
   @GetMapping("/counseling/form")
   public ModelAndView form(int counselorNo) throws Exception {
-    //    System.out.println("form");
 
     Member counselor = memberDao.findByNo(counselorNo);
     ModelAndView mv = new ModelAndView();
     mv.addObject("counselor", counselor);
     mv.addObject("contentUrl", "/counseling/CounselingMemberForm.jsp");
-    mv.setViewName("counseling/CounselingMemberForm");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -42,9 +41,7 @@ public class CounselingController {
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "힐러상담사");
     mv.addObject("contentUrl", "/counseling/DoctorInfo.jsp");
-    //mv.setViewName("board/BoardList");
-    mv.setViewName("template5");
-    // mv.setViewName("template1");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -58,9 +55,7 @@ public class CounselingController {
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "나의상담신청목록");
     mv.addObject("contentUrl", "counseling/CounselingList.jsp");
-    //mv.setViewName("board/BoardList");
-    mv.setViewName("template5");
-    // mv.setViewName("template1");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -92,29 +87,21 @@ public class CounselingController {
     mv.addObject("pageTitle", "상담신청상세");
     mv.addObject("counseling", counseling);
     mv.addObject("contentUrl", "counseling/CounselingMemberDetail.jsp");
-    mv.setViewName("template5");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
   @GetMapping("/counseling/doctorlist")
   public ModelAndView doctorlist() throws Exception {
-    System.out.println("-------------------");
-    System.out.println("-------------------");
-    System.out.println("-------------------");
     Collection<Member> memberList = memberDao.findAll();
     List<Counseling> counselingList= counselingDao.findAll();
-    System.out.println("-------------------");
-    System.out.println("-------------------");
-    System.out.println("리스트 숫자는 =====> " + counselingList.size());
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("counselingList", counselingList);
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "나의상담요청목록");
     mv.addObject("contentUrl", "counseling/CounselingDoctorList.jsp");
-    //mv.setViewName("board/BoardList");
-    mv.setViewName("template5");
-    // mv.setViewName("template1");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -122,12 +109,11 @@ public class CounselingController {
   public ModelAndView doctordetail(String no) throws Exception {
     Counseling counseling = counselingDao.findByNo(Integer.parseInt(no));
 
-
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "상담요청상세");
     mv.addObject("counseling", counseling);
     mv.addObject("contentUrl", "counseling/CounselingDoctorDetail.jsp");
-    mv.setViewName("template5");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
