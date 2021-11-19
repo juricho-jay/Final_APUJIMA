@@ -141,9 +141,6 @@ function addMedicine(frm){
 <button>등록</button><br>
 </form>  -->
 
- 
-
-
 
 
 </body>
