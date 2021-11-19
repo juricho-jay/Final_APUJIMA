@@ -61,15 +61,16 @@
 
  <jsp:include page="boardSidebar.jsp"/>
 <div id="content" >
-<jsp:include page="${contentUrl}" />
+<jsp:include page="/${contentUrl}" />
 
 </div><!-- #content --> 
 
 
 
 </div><!-- .container -->
-</body>
 <jsp:include page="footer.jsp"/>
+</body>
+
 
 </html>
 

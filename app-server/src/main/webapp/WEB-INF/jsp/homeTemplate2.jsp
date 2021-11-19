@@ -48,7 +48,7 @@
 </head>
 <body>
 
-<jsp:include page="/homeHeader3.jsp"/>
+<jsp:include page="homeHeader3.jsp"/>
 <%-- <jsp:include page="/sidebar.jsp"/> --%>
 <div class="container">
 <div id="content">
