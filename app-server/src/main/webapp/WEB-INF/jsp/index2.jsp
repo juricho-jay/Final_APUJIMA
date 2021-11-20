@@ -10,11 +10,21 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="${contextPath}/css/main/owl.carousel.min.css">
-  <link rel="stylesheet" href="${contextPath}/css/main/owl.theme.default.min.css">
+  <link rel="stylesheet" href="${contextPath}/css/main/ftco-section/owl.carousel.min.css">
+  <link rel="stylesheet" href="${contextPath}/css/main/ftco-section/owl.theme.default.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
-  <link rel="stylesheet" href="${contextPath}/css/main/style.css">
+  <link rel="stylesheet" href="${contextPath}/css/main/ftco-section/style.css">
   
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="${contextPath}/css/main/select/owl.carousel.min.css">
+  <link rel="stylesheet" href="${contextPath}/css/main/select/animate.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="${contextPath}/css/main/select/bootstrap.min.css">
+  <!-- Style -->
+  <link rel="stylesheet" href="${contextPath}/css/main/select/style.css">
   
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -30,135 +40,209 @@
   body {
     background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${contextPath}/img/header/main_bg1.png);
     /* background-image: url('/apus/img/header/opacity.svg'), url('/apus/img/header/main_bg.png'); */
+    
     background-repeat: no-repeat;
     background-size : cover;
-
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    
   }
   
-  p {
-  color: white;
-  margin-top: 40px;
+  .sed-body{
   }
+  
+  /* text-center {
+  color: white;
+  margin:0 auto;
+  margin-top: 40px;
+  text-align:center;
+  } */
+  
   
   </style>
   
+			<!-- <div class="text" style="margin-bottom:500px;">
+			      <span class="text-center fs-1">We are here for friends in need.</span><br>
+			      <span class="text-center fs-2">We are here for friends in need.</span><br>
+			      <span class="text-center fs-3">We are here for friends in need.</span><br>
+			      <span class="text-center fs-4">We are here for friends in need.</span><br>
+			      <span class="text-center fs-5">We are here for friends in need.</span><br>
+			</div> -->
+			         
+			         
+			  <!-- <div style="width: 85%; height:500px; margin-top: 100px; background-color: #2C473E; position:absolute;">
+			  </div> -->
+			  
+			  
+<div class="content" style="margin-top:800px;">
+    
+    <div class="container">
+      <!-- <h2 class="my-5 text-center">Carousel #8</h2> -->
 
-<div class="text" style="margin-bottom:500px;">
-      <p class="text-center fs-1">We are here for friends in need.</p>
-      <p class="text-center fs-2">We are here for friends in need.</p>
-      <p class="text-center fs-3">We are here for friends in need.</p>
-      <p class="text-center fs-4">We are here for friends in need.</p>
-      <p class="text-center fs-5">We are here for friends in need.</p>
-</div>
-         
-         
-  <!-- <div style="width: 85%; height:500px; margin-top: 100px; background-color: #2C473E; position:absolute;">
-  </div> -->
-         
-         
-<!-- carausel -->    
-<section class="ftco-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <!-- <h2 class="heading-section mb-5">Carousel #03</h2> -->
-          </div>
-          <div class="col-md-12">
-            <div class="featured-carousel owl-carousel">
-              <div class="item">
-                <div class="work">
-                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_1.jpg);">
-                    <div class="text w-100">
-                      <span class="cat">김사사 상담사</span>
-                      <h3><a href="#">안녕하세요 APUJIMA입니다.</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="work">
-                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_4.jpg);">
-                    <div class="text w-100">
-                      <span class="cat">조주리 상담사</span>
-                      <h3><a href="#">정신건강에 도움을..</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="work">
-                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_3.jpg);">
-                    <div class="text w-100">
-                      <span class="cat">김태호 상담사</span>
-                      <h3><a href="#">오늘날 4명중에 1명이 마음병이 생깁니다.</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="work">
-                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_2.jpg);">
-                    <div class="text w-100">
-                      <span class="cat">김진현 상담사</span>
-                      <h3><a href="#">APUJIMA가 도와드리겠습니다.</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="work">
-                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_4.jpg);">
-                    <div class="text w-100">
-                      <span class="cat">신현지 상담사</span>
-                      <h3><a href="#">감사합니다.</a></h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="d-flex carousel-nav">
+        <a href="#" class="col active">APUJIMA</a>
+        <a href="#" class="col">무료자가진단</a>
+        <a href="#" class="col">상담을빠르게</a>
       </div>
-    </section>
-<!--Carousel Wrapper-->
-
-<div class="noticeBoardTab" style="margin-top: 300px;">
-<h4 style="margin-left:18%; color: #2C473E;">공지사항</h4>
-<table class="table table-sm" style="margin-left: 18%; width: 850px; color: #2C473E">
-  <thead>
-  </thead>
-  <tbody>
-  <c:forEach items="${boardList}" var="board">
-    <c:if test='${board.whichBoard == 3}'>
-    <tr>
-      <%-- <td style= "width: 10%" class="text-center">${board.no}</td> 
-   <c:if test='${board.whichBoard == 1}'>
-    <td style= "width: 10%" class="text-center">자유게시판</td> 
-    </c:if>
-    <c:if test='${board.whichBoard == 2}'>
-     <td style= "width: 10%" class="text-center">Healer지식in</td> 
-    </c:if> --%>
-     <td style= "width: 10%" class="text-center">공지사항</td> 
-     <td style= "width: 20%" class="text-center"><a href='detail?no=${board.no}'>${board.title}</a></td> 
-     <td style= "width: 40%" class="text-center">${board.content}</td> 
-     <td style= "width: 10%" class="text-center">${board.writer.nickname}</td> 
-     <td style= "width: 20%" class="text-center">${board.registeredDate}</td> 
-    </tr>
-    </c:if>
-    </c:forEach>
-  </tbody>
-</table>
-</div>
 
 
-<div class="homebottombtn" style="margin-left: 45%; border-color: #2C473E">
+      <div class="owl-carousel owl-1">
+
+        <div class="media-29101 d-md-flex w-100">
+          <div class="img">
+            <img src="${contextPath}/img/open.jpg" alt="Image" class="img-fluid">
+          </div>
+          <div class="text">
+            <a class="category d-block mb-4" href="#">Travel &mdash; First Tab</a>
+            <h2><a href="#">APUJIMA OPEN</a></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+          </div>
+        </div> <!-- .item -->
+
+        <div class="media-29101 d-md-flex w-100">
+          <div class="img">
+            <img src="${contextPath}/img/teb1.jpg" alt="Image" class="img-fluid">
+          </div>
+          <div class="text">
+            <a class="category d-block mb-4" href="#">Travel &mdash; Second Tab</a>
+            <h2><a href="#">심리검사를 무료로 진단받아보세요.</a></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+          </div>
+        </div> <!-- .item -->
+
+        <div class="media-29101 d-md-flex w-100">
+          <div class="img">
+            <img src="${contextPath}/img/teb2.jpg" alt="Image" class="img-fluid">
+          </div>
+          <div class="text">
+            <a class="category d-block mb-4" href="#">Travel &mdash; Third Tab</a>
+            <h2><a href="#">빠르게 상담 받는 꿀팁</a></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+          </div>
+        </div> <!-- .item -->
+
+        
+
+      </div>
+    </div>
+  </div>
+			  
+			  
+			         
+
+			         
+			<!-- carausel -->    
+			<section class="ftco-section">
+			      <div class="container">
+			        <div class="row">
+			          <div class="col-md-12 text-center">
+			             <h2 class="heading-section mb-5">심리상담사</h2> 
+			          </div>
+			          <div class="col-md-12">
+			            <div class="featured-carousel owl-carousel">
+			              <div class="item">
+			                <div class="work">
+			                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_1.jpg);">
+			                    <div class="text w-100">
+			                      <span class="cat">김사사 상담사</span>
+			                      <h3><a href="#">안녕하세요 APUJIMA입니다.</a></h3>
+			                    </div>
+			                  </div>
+			                </div>
+			              </div>
+			              <div class="item">
+			                <div class="work">
+			                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_4.jpg);">
+			                    <div class="text w-100">
+			                      <span class="cat">조주리 상담사</span>
+			                      <h3><a href="#">정신건강에 도움을..</a></h3>
+			                    </div>
+			                  </div>
+			                </div>
+			              </div>
+			              <div class="item">
+			                <div class="work">
+			                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_3.jpg);">
+			                    <div class="text w-100">
+			                      <span class="cat">김태호 상담사</span>
+			                      <h3><a href="#">오늘날 4명중에 1명이 마음병이 생깁니다.</a></h3>
+			                    </div>
+			                  </div>
+			                </div>
+			              </div>
+			              <div class="item">
+			                <div class="work">
+			                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_2.jpg);">
+			                    <div class="text w-100">
+			                      <span class="cat">김진현 상담사</span>
+			                      <h3><a href="#">APUJIMA가 도와드리겠습니다.</a></h3>
+			                    </div>
+			                  </div>
+			                </div>
+			              </div>
+			              <div class="item">
+			                <div class="work">
+			                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_4.jpg);">
+			                    <div class="text w-100">
+			                      <span class="cat">신현지 상담사</span>
+			                      <h3><a href="#">감사합니다.</a></h3>
+			                    </div>
+			                  </div>
+			                </div>
+			              </div>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			    </section>
+			<!--Carousel Wrapper-->
+			
+			<div class="noticeBoardTab" style="margin-top: 100px;">
+					<div class="board-view">
+					    <h4 style="margin-left:13%; color: #2C473E;">공지사항</h4>
+					    <a href="#" class="text-info" style="text-align:right;">View all</a>
+					</div>
+					<table class="table table-sm" style="margin: 0 auto; width: 850px; color: #2C473E">
+					  <thead>
+					  </thead>
+					  <tbody>
+					  <c:forEach items="${boardList}" var="board">
+					    <c:if test='${board.whichBoard == 3}'>
+					    <tr>
+					      <%-- <td style= "width: 10%" class="text-center">${board.no}</td> 
+					   <c:if test='${board.whichBoard == 1}'>
+					    <td style= "width: 10%" class="text-center">자유게시판</td> 
+					    </c:if>
+					    <c:if test='${board.whichBoard == 2}'>
+					     <td style= "width: 10%" class="text-center">Healer지식in</td> 
+					    </c:if> --%>
+					     <!-- <td style= "width: 10%" class="text-center">공지사항</td>  -->
+					     <td style= "width: 60%" class="text-center"><a href='detail?no=${board.no}'>${board.title}</a></td> 
+					     <%-- <td style= "width: 40%" class="text-center">${board.content}</td> 
+					     <td style= "width: 10%" class="text-center">${board.writer.nickname}</td>  --%>
+					     <td style= "width: 20%" class="text-center">${board.registeredDate}</td> 
+					    </tr>
+					    </c:if>
+					    </c:forEach>
+					  </tbody>
+					</table>
+			</div>
+
+
+<!-- <div class="homebottombtn" style="margin-left: 45%; border-color: #2C473E">
 
 <a class="btn btn-light" href="/apus/board/list" role="button">자세히 보기&nbsp;&nbsp;<i class="bi bi-arrow-bar-right"></i></a>
-</div>
+</div> -->
 
-    <script src="${contextPath}/js/jquery.min.js"></script>
-    <script src="${contextPath}/js/popper.js"></script>
-    <script src="${contextPath}/js/bootstrap.min.js"></script>
-    <script src="${contextPath}/js/owl.carousel.min.js"></script>
-    <script src="${contextPath}/js/main.js"></script>
+    <script src="${contextPath}/js/main/ftco-section/jquery.min.js"></script>
+    <script src="${contextPath}/js/main/ftco-section/popper.js"></script>
+    <script src="${contextPath}/js/main/ftco-section/bootstrap.min.js"></script>
+    <script src="${contextPath}/js/main/ftco-section/owl.carousel.min.js"></script>
+    <script src="${contextPath}/js/main/ftco-section/main.js"></script>
 
+    <script src="${contextPath}/js/main/select/jquery-3.3.1.min.js"></script>
+    <script src="${contextPath}/js/main/select/popper.min.js"></script>
+    <script src="${contextPath}/js/main/select/bootstrap.min.js"></script>
+    <script src="${contextPath}/js/main/select/owl.carousel.min.js"></script>
+    <script src="${contextPath}/js/main/select/main.js"></script>
