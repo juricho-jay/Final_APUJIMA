@@ -60,7 +60,7 @@
    
   function boardReport(){
        
-       window.open("../board/report?no=${board.no}", "report", "width=600 height = 450");
+       window.open("../board/report?no=${board.no}&title=${board.title}&writer=${board.writer.nickname}", "report", "width=600 height = 450");
      }
   function cmUpdateOpen(comment_no){
     window.name = "parentForm"
@@ -141,6 +141,8 @@
    
     <div class = "RLbutton">
       <input type="hidden" name= "no" value="${board.no}">
+      <input type="hidden" name = "title" value = "${board.title}">
+      
       <c:if test = "${not empty loginUser.id}">
       <input type="button" value="신고" onclick= "boardReport()"class="btn btn-primary">
      </c:if>
