@@ -157,7 +157,7 @@ transform: translate(-50%, 0);}
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item" style="margin-left: 20px;">
-          <a class="btn4" aria-current="page" href="#" style="color: #2c473e;">소개</a>
+          <a class="btn4" aria-current="page" href="${contextPath}/app/introduce" style="color: #2c473e;">소개</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
           <a class="btn4" aria-current="page" href="${contextPath}/app/medicine/list" style="color: #2c473e;">약국</a>
