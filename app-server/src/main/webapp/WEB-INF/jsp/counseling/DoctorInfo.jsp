@@ -9,7 +9,10 @@
 	<!-- <h1>APUJIMA 의사</h1> -->
 	<div id="big-box">
 			<div class="box1">
-				<h1 style=" height: 100px;text-align: center; margin-top:50px;"><img src="../img/doctor/logo1.png" width="50px;">  나에게 딱 맞는 HEALER</h1> 
+				<!-- <h1 style=" height: 100px;text-align: center; margin-top:50px;"><img src="../img/doctor/logo1.png" width="50px;">  나에게 딱 맞는 HEALER</h1> --> 
+			  <h1 style=" height: 100px;text-align: center; margin-top:50px;">
+			   <img src="${contextPath}/img/doctor/logo1.png" class="rounded-circle">
+			    나에게 딱 맞는 HEALER</h1>
 			  <div class="text-step"> 
 			    <p class="text-one">간편한 상담신청</p>
 			    <p class="text-two">모든 정보는 보호</p>
@@ -25,6 +28,7 @@
 								  <div class="containerBox">
 											<div class='doctorjpg'>
 											   <a href="${contextPath}/upload/member/${member.photo}" >
+											     <img src="${contextPath}/upload/${member.photo}" class="rounded-circle">
 										        <img id="f-photo-image" src="${contextPath}/upload/member/${member.photo}_100x100.jpg">
 										     </a>
 											  <!-- <img src="../img/doctor/doctor1.jpg" width="auto" height="400"> -->

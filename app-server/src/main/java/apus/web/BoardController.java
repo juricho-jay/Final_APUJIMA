@@ -14,11 +14,13 @@ import apus.dao.CommentDao;
 import apus.dao.LikeDao;
 import apus.dao.MailBoxDao;
 import apus.dao.MemberDao;
+import apus.dao.ReportDao;
 import apus.domain.Board;
 import apus.domain.Comment;
 import apus.domain.Like;
 import apus.domain.MailBox;
 import apus.domain.Member;
+import apus.domain.Report;
 
 @Controller
 public class BoardController {
@@ -29,6 +31,7 @@ public class BoardController {
   @Autowired CommentDao commentDao;
   @Autowired LikeDao likeDao;
   @Autowired MailBoxDao mailBoxDao;
+  @Autowired ReportDao reportDao;
 
   @GetMapping("/board/form")
   public ModelAndView form() {
@@ -231,6 +234,77 @@ public class BoardController {
     return mv;
   }
 
+  @GetMapping("/board/report")
+  public ModelAndView report(String no,HttpSession session) throws Exception {
+    Member requester = ((Member) session.getAttribute("loginUser"));
+    ModelAndView mv = new ModelAndView();
+
+
+
+    int no1 = Integer.parseInt(no);
+    Board board = boardDao.findByNo(no1);
+    if(requester == null) {
+      throw new Exception("로그인 되어 있지 않습니다.");
+    }
+    if (board == null) {
+      throw new Exception("해당 번호의 게시글이 없습니다.");
+    }
+
+    Report report = reportDao.findByReport(no1, requester.getId());
+
+    if(report != null) {
+      report = null;
+      System.out.println("신고 한 적이 있기에 이게 실행됨");
+      mv.addObject("report",report);
+    } 
+    mv.addObject("report",report);
+    mv.addObject("contentUrl","/board/BoardReport.jsp");
+    mv.setViewName("/board/BoardReport");
+    return mv;
+  }
+
+  @GetMapping("/board/reportAdd")
+  public ModelAndView reportAdd(int no,HttpSession session,String reportId,String reason,String reason2) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+    Board requestBoard = boardDao.findByNo(no);
+
+    if (requestBoard == null) {
+      throw new Exception("해당 번호의 게시글이 없습니다.");
+    }
+
+    Member requester = memberDao.findById(reportId);
+
+    Report report = reportDao.findByReport(no, reportId);
+
+    if (report == null) {
+      Report adminReport = new Report();
+
+      if(reason2.length() == 0) {
+        adminReport.setRequester(requester);
+        adminReport.setRequestBoard(requestBoard);
+        adminReport.setReason(reason);
+        adminReport.setCheck(0);
+        reportDao.insert(adminReport);
+        sqlSessionFactory.openSession().commit();
+        mv.addObject("report",adminReport);
+      }
+      else {
+        adminReport.setRequester(requester);
+        adminReport.setRequestBoard(requestBoard);
+        adminReport.setReason(reason2);
+        adminReport.setCheck(0);
+        reportDao.insert(adminReport);
+        sqlSessionFactory.openSession().commit();
+        mv.addObject("report",adminReport);
+      }
+    }
+
+    mv.addObject("report",report);
+    mv.addObject("contentUrl","/board/BoardReport.jsp");
+    mv.setViewName("/board/BoardReport");
+    return mv;
+  }
   @GetMapping("/board/freeBoardList")
   public ModelAndView freeBoardList(HttpSession session) throws Exception {
     Collection<Board> boardList = boardDao.findFreeBoard();
@@ -327,5 +401,37 @@ public class BoardController {
     return mv;
   }
 
+
+  @GetMapping("/board/search")
+  public ModelAndView search(String keyword, HttpSession session) throws Exception {
+    ModelAndView mv = new ModelAndView();
+
+    Member member = ((Member) session.getAttribute("loginUser"));
+    System.out.println(keyword);
+    Collection<Board> boardList = boardDao.searchByKeyWord(keyword);
+
+    System.out.println(boardList.size());
+
+    //안읽은 메일 체크
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }   
+
+    mv.addObject("boardList", boardList);
+    mv.addObject("searchKeyword", keyword);
+    mv.addObject("contentUrl", "board/BoardSearchList.jsp");
+    mv.setViewName("darkTemplate");
+    return mv;
+  }
 
 }

@@ -46,7 +46,7 @@ public class CounselingController {
       mv.addObject("uncheckedMail", count);
     }
     mv.addObject("counselor", counselor);
-    mv.addObject("contentUrl", "/counseling/CounselingMemberForm.jsp");
+    mv.addObject("contentUrl", "counseling/CounselingMemberForm.jsp");
     mv.setViewName("darkTemplate");
     return mv;
   }

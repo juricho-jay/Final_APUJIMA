@@ -105,17 +105,20 @@ input.img-button {
     color: #2C473E;
     }
 
-    .searchbar> .s_icon {
+     .searchbar> .s_icon {
     height: 28px;
     width: 28px;
     float: right;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    color:#525F7F;
+    border-radius: none;
+    border-color: transparent;
+    color: #525F7F;
     text-decoration:none;
+    background-color: transparent;
     }
+    
     
     input::placeholder {color:#2C473E;}
     input::-webkit-input-placeholder {color:#2C473E;}
@@ -199,14 +202,16 @@ transform: translate(-50%, 0);}
           </ul>
         </li>
       </ul>
-          <div style="margin-left: 20px; margin-right: 20px;">
-             <div class="d-flex justify-content-center h-50">
-               <div class="searchbar">
-                 <input class="search_input" type="text" placeholder="Search...">
-                 <a href="#" class="s_icon"><i class="bi bi-search" style="margin-bottom: 10px;"></i></a>
+          <form action="${contextPath}/app/board/search">
+            <div style="margin-left: 20px; margin-right: 20px;">
+               <div class="d-flex justify-content-center h-50">
+                 <div class="searchbar">
+                   <input class="search_input" name="keyword" type="text" placeholder="Search...">
+                   <button type="submit"class="s_icon"><i class="bi bi-search" style="margin-bottom: 10px;"></i></button>
+                 </div>
                </div>
-             </div>
-          </div>
+            </div>
+            </form>
       <!-- 로그인 x -->
         <c:if test="${empty sessionScope.loginUser}">
         <div>
@@ -284,6 +289,21 @@ transform: translate(-50%, 0);}
         </form>
         <!-- User dropdown -->
            <div class="btn-group">
+<<<<<<< HEAD
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" 
+                    aria-expanded="false" style="border-color:transparent; background-color: transparent;">
+                      ${loginUser.nickname}
+                    </button>
+                    <ul class="dropdown-menu" id="dropdownItems">
+                      <li><a class="dropdown-item" href="#">왜 안바뀌는거야</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+        <!-- user dropdown -->
+=======
 						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" 
 						  aria-expanded="false" style="border-color:transparent; background-color: transparent;">
 						    ${loginUser.nickname}
@@ -296,6 +316,7 @@ transform: translate(-50%, 0);}
 						    <li><a class="dropdown-item" href="#">Separated link</a></li>
 						  </ul>
 						</div>
+>>>>>>> 3a002eeadd01ba0db95a3574b2439f8d83b20e1d
       </div>
     </nav> --%>
     <!-- Form : member update -->
@@ -604,17 +625,18 @@ transform: translate(-50%, 0);}
   <script>
 
   // 내 정보의 모달은 iFrame
-	
-	// 출석체크 버튼에 이벤트를 건다. 
-	$('#openModalBtn').on('click', function(){
-	$('#checkModal').modal('show');
+   
+   // 출석체크 버튼에 이벤트를 건다. 
+   $('#openModalBtn').on('click', function(){
+   $('#checkModal').modal('show');
 
-	});
-	
-	// 출석체크 안의 취소 버튼에 이벤트를 건다. 
-	$('#closeCModal').on('click', function(){
-	$('#checkModal').modal('hide');
-	});
+   });
+   
+   // 출석체크 안의 취소 버튼에 이벤트를 건다. 
+   $('#closeCModal').on('click', function(){
+   $('#checkModal').modal('hide');
+   });
+
 
 	// 버킷 리스트 버튼에 이벤트를 건다. 
 	$('#openModalBtn2').on('click', function(){
@@ -631,12 +653,12 @@ transform: translate(-50%, 0);}
   $('button[name=updatePhotoBtn]').on('click', function(){
   $('#updatePhotoModal').modal('show');
   });
-	
+   
   // 사진 업데이트 모달 안 취소 버튼에 이벤트를 건다.
   $('#closePModal').on('click', function(){
   $('#updatePhotoModal').modal('hide');
   });
-	
+   
 
 $(".nav li").hover(function() {
 
