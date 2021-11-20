@@ -6,24 +6,25 @@
 <html>
 <head>
   <title>회원가입</title>
-  <link rel="stylesheet" href="${contextPath}/node_modules/bootstrap/dist/css/bootstrap.css">
-
-  <script src="${contextPath}/node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="${contextPath}/bootstrap/dist/bootstrap.css"></script>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core//dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
 
 <script>
  
 function idCheck(){
   
-  window.open("${contextPath}/app/member/idCheckForm.jsp", "IdCheck", "width=400 height = 350")
+  window.open("/apus/member/idCheckForm.jsp", "IdCheck", "width=400 height = 350")
   
 }
+
 function nicknameCheck(){
-    
-   window.open("${contextPath}/member/NicknameCheckForm.jsp", "NicknameCheck", "width=400 height = 350")
-    
-  }
+	  
+	  window.open("/apus/member/NicknameCheckForm.jsp", "NicknameCheck", "width=400 height = 350")
+	  
+	}
 </script>
 
 <script type="text/javascript">
@@ -224,7 +225,7 @@ function div_OnOff(v,id){
 <div class="mb-3 row">
   <label for='f-photo' class="col-sm-3 col-form-label">사진</label>
   <div class="col-sm-6">
-    <input id='f-photo' type='file' name='photoPart' class="form-control">
+    <input id='f-photo' type='file' name='photo' class="form-control">
   </div>
 </div>
 
@@ -288,4 +289,12 @@ function div_OnOff(v,id){
 
 </body>
 </html>
+
+
+
+
+
+
+
+
 

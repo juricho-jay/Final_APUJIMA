@@ -381,6 +381,7 @@
    $('#checkModal').modal('hide');
    });
 
+<<<<<<< HEAD
    // 버킷 리스트 버튼에 이벤트를 건다. 
    $('#openModalBtn2').on('click', function(){
    $('#bucketModal').modal('show');
@@ -393,6 +394,20 @@
 
    
    // 사진 업데이트 모달
+=======
+	// 버킷 리스트 버튼에 이벤트를 건다. 
+	$('#openModalBtn2').on('click', function(){
+	$('#bucketModal').modal('show');
+	});
+	
+	// 버킷 리스트 안의 취소 버튼에 이벤트를 건다. 
+	$('#closeBModal').on('click', function(){
+	$('#bucketModal').modal('hide');
+	});
+
+	
+	// 사진 업데이트 모달
+>>>>>>> 5dd467c2e6efdaf0aaeb999eea1f1e3f16de47ac
   $('button[name=updatePhotoBtn]').on('click', function(){
   $('#updatePhotoModal').modal('show');
   });
