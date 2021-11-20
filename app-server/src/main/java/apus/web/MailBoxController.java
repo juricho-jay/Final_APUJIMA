@@ -49,7 +49,7 @@ public class MailBoxController {
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "쪽지함목록");
     mv.addObject("contentUrl", "/mailbox/MailBoxList.jsp");
-    mv.setViewName("template4");
+    mv.setViewName("mailboxTemplate");
     return mv;
   }
 
@@ -81,7 +81,7 @@ public class MailBoxController {
     mv.addObject("pageTitle", "쪽지함상세");
     mv.addObject("mailBox", mailBox);
     mv.addObject("contentUrl", "/mailbox/MailBoxDetail.jsp");
-    mv.setViewName("template4");
+    mv.setViewName("mailboxTemplate");
     return mv;
   }
 
@@ -109,7 +109,7 @@ public class MailBoxController {
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "읽은쪽지함");
     mv.addObject("contentUrl", "/mailbox/MailBoxReadList.jsp");
-    mv.setViewName("template4");
+    mv.setViewName("mailboxTemplate");
     return mv;
   }
 
@@ -137,7 +137,7 @@ public class MailBoxController {
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "읽은쪽지함");
     mv.addObject("contentUrl", "/mailbox/MailBoxNotReadList.jsp");
-    mv.setViewName("template4");
+    mv.setViewName("mailboxTemplate");
     return mv;
   }
 
@@ -170,6 +170,21 @@ public class MailBoxController {
       mv.addObject("uncheckedMail", count);
     }
 
+    mv.setViewName("redirect:list");
+    return mv;
+  }
+
+  @GetMapping("/mailbox/delete")
+  public ModelAndView delete(int no) throws Exception {
+    MailBox mailBox = mailBoxDao.findByNo(no);
+    if (mailBox == null) {
+      throw new Exception("해당 번호의 메일이 없습니다.");
+    }
+
+    mailBoxDao.delete(no);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:list");
     return mv;
   }
