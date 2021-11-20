@@ -98,7 +98,7 @@
             <div class="card-header text-center border-0">
               <div class="justify-content-between">
                 <a href="../mailbox/list" class="btn btn-sm btn-info mr-4" style="float: left">쪽지함</a>
-                <button class="btn btn-sm btn-default" name="updatePhotoBtn" style="float: middle; margin-top: 80px;">수정</button>
+                <button type="button" class="btn btn-sm btn-default" name="updatePhotoBtn" style="float: middle; margin-top: 80px;">수정</button>
               </div>
             </div>
             <div class="card-body pt-0 pt-md-4">
@@ -127,11 +127,8 @@
                 <div class="h5 font-weight-300">
                   <i class="ni location_pin mr-2"></i>${loginUser.nickname}님의 화분은 총 -개입니다.
                 </div>
-                <!-- <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>나의 정원
-                </div> -->
                 <div>
-                  <a href="/apus/plant/list">
+                  <a href="../plant/list">
                   <i class="bi bi-flower1"></i><br>
                   <span>나의 정원</span>
                   </a>
@@ -297,11 +294,6 @@
   </footer>
   
   
-  <form>
-  <input type="hidden">
-  </form>
-  
-  
   
 <!--Modal: 출첵 모달-->
 <div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -333,7 +325,7 @@
       <!--Body-->
       <div class="modal-body mb-0 p-0">
         <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-          <iframe class="embed-responsive-item" src="/apus/bucket/list"></iframe>
+          <iframe class="embed-responsive-item" src="../bucket/list"></iframe>
         </div>
       </div>
       <!--Footer-->
@@ -355,7 +347,7 @@
       <!--Body-->
       <div class="modal-body mb-0 p-0">
         <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-          <iframe class="embed-responsive-item" src="updatePhoto"></iframe>
+          <iframe name="photoChange" class="embed-responsive-item" src="updatePhotoForm"></iframe>
         </div>
       </div>
       <!--Footer-->
@@ -391,12 +383,12 @@
 	
 	// 버킷 리스트 안의 취소 버튼에 이벤트를 건다. 
 	$('#closeBModal').on('click', function(){
-	$('#updatePhotoModal').modal('hide');
+	$('#bucketModal').modal('hide');
 	});
 
 	
 	// 사진 업데이트 모달
-  $('button[name=updatePhotoModal]').on('click', function(){
+  $('button[name=updatePhotoBtn]').on('click', function(){
   $('#updatePhotoModal').modal('show');
   });
 	
