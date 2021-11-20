@@ -175,7 +175,7 @@ transform: translate(-50%, 0);}
           <a class="btn4 text-white" aria-current="page" href="${contextPath}/app/doctorinfo/list">HEALER</a>
         </li>
         <li class="nav-item dropdown" style="margin-left: 20px;">
-          <a class="btn4 text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="btn4 text-white" href="${contextPath}/app/board/list" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             커뮤니티
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
