@@ -136,11 +136,11 @@ public class PlantController {
       plant.setShape("flower.png");
       plant.setLevel(2);
     }else if (plant.getExp() >700 && plant.getExp() < 1000) {
-      plant.setShape("Tree.jpg");
+      plant.setShape("tree.png");
       plant.setLevel(3);
     } else if (plant.getExp() > 1000) {
       plant.setExp(1000);
-      plant.setShape("Tree.jpg");
+      plant.setShape("tree.png");
     }
     plantDao.update(plant);
     member.setPoint(member.getPoint()-point);
