@@ -328,4 +328,36 @@ public class BoardController {
   }
 
 
+  @GetMapping("/board/search")
+  public ModelAndView search(String keyword, HttpSession session) throws Exception {
+    ModelAndView mv = new ModelAndView();
+
+    Member member = ((Member) session.getAttribute("loginUser"));
+    System.out.println(keyword);
+    Collection<Board> boardList = boardDao.searchByKeyWord(keyword);
+
+    System.out.println(boardList.size());
+
+    //안읽은 메일 체크
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }   
+
+    mv.addObject("boardList", boardList);
+    mv.addObject("searchKeyword", keyword);
+    mv.addObject("contentUrl", "board/BoardSearchList.jsp");
+    mv.setViewName("darkTemplate");
+    return mv;
+  }
+
 }

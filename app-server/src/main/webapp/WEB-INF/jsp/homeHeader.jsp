@@ -101,9 +101,11 @@ input.img-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    border-radius: none;
+    border-color: transparent;
     color:white;
     text-decoration:none;
+    background-color: transparent;
     }
     
     input::placeholder {color:#ccc;}
@@ -186,14 +188,16 @@ transform: translate(-50%, 0);}
           </ul>
         </li>
       </ul>
+          <form action="${contextPath}/app/board/search">
             <div style="margin-left: 20px; margin-right: 20px;">
                <div class="d-flex justify-content-center h-50">
                  <div class="searchbar">
-                   <input class="search_input" type="text" placeholder="Search...">
-                   <a href="#" class="s_icon"><i class="bi bi-search" style="margin-bottom: 10px;"></i></a>
+                   <input class="search_input" name="keyword" type="text" placeholder="Search...">
+                   <button type="submit"class="s_icon"><i class="bi bi-search" style="margin-bottom: 10px;"></i></button>
                  </div>
                </div>
             </div>
+            </form>
       <!-- 로그인 x -->
         <c:if test="${empty sessionScope.loginUser}">
         <div>
