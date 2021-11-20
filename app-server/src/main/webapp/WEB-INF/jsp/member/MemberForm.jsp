@@ -19,12 +19,11 @@ function idCheck(){
   window.open("${contextPath}/app/member/idCheckForm.jsp", "IdCheck", "width=400 height = 350")
   
 }
-
 function nicknameCheck(){
-	  
-	 window.open("${contextPath}/member/NicknameCheckForm.jsp", "NicknameCheck", "width=400 height = 350")
-	  
-	}
+    
+   window.open("${contextPath}/member/NicknameCheckForm.jsp", "NicknameCheck", "width=400 height = 350")
+    
+  }
 </script>
 
 <script type="text/javascript">
@@ -289,12 +288,4 @@ function div_OnOff(v,id){
 
 </body>
 </html>
-
-
-
-
-
-
-
-
 

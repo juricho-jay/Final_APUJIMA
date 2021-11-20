@@ -117,9 +117,10 @@
       </td>
     </tr>
   </tbody>
-  </table>
+   </table>
      </form>
-     <div class="container" id = UDRContainer >
+     
+     <div class="container" id = UDRContainer  style = "width : 736px; height:30px;">
       <div class = "Ubutton">
     <form>
    <c:if test = "${board.writer.id == loginUser.id}">
@@ -145,6 +146,8 @@
      </c:if>
      <a href= "list"> <input type="button" value="목록" class="btn btn-primary"></a>
      </div>
+      
+     
    </div> 
   </div>
   
@@ -183,7 +186,7 @@
       <input class="form-control input-sm" id="newReplyText" name = "content" type="text" placeholder="댓글 입력...">
        </div> <div class="form-group col-sm-2">
         <input class="form-control input-sm" id="newReplyWriter" type="text" name ="commenter" value="${loginUser.nickname}" readonly> 
-        <input id = "f-content" style = "margin-left: 320px;" type = "submit" class="btn btn-primary btn-sm"  value = "등록" onclick = "return checkValue()">
+        <input id = "f-content" style = "margin-left: 100px;" type = "submit" class="btn btn-primary btn-sm"  value = "등록" onclick = "return checkValue()">
          </div> 
     </div>
    
@@ -196,6 +199,7 @@
    
    
       <p style="float:left;"> 작성자: ${comment.commenter.nickname}&nbsp;</p>
+      
       <div class="dropdown" >
         <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style="dropdown-border-color: rgba($black, .15);">
           더보기
@@ -207,8 +211,9 @@
           <li><button class="dropdown-item" type="button">Something else here</button></li> -->
         </ul>
       </div>
-   
-   <p> 내용 : ${comment.content} </p>
+      <br>
+   <p></p>
+   <p style="xwidth: 230.7px;"> 내용 : ${comment.content} </p>
    <p> 댓글 작성날짜 : ${comment.registeredDate}</p>
    
    <div id = "UDbutton" style ="margin-left : 0px"> 
