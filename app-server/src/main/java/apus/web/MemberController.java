@@ -149,9 +149,6 @@ public class MemberController {
     if (member == null) {
       throw new Exception("해당 번호의 회원이 없습니다.");
     }
-    System.out.println("---------------------------");
-    System.out.println("member의 doctor or not ====> " + member.getDoctorOrNot());
-    System.out.println("---------------------------");
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("member", member);
