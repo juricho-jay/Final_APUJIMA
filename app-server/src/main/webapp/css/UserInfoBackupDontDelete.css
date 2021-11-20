@@ -72,7 +72,7 @@ figcaption,
 footer,
 header,
 main,
-/* nav, */
+nav,
 section {
   display: block;
 }
@@ -637,7 +637,7 @@ textarea.form-control {
   padding: .25rem .5rem;
   border-radius: .375rem;
 }
-/* .dropdown {
+.dropdown {
   position: relative;
 }
 .dropdown-menu {
@@ -715,7 +715,7 @@ textarea.form-control {
   padding: .5rem 1.5rem;
   white-space: nowrap;
   color: #8898aa;
-} */
+}
 .input-group {
   position: relative;
   display: flex;
@@ -790,14 +790,14 @@ textarea.form-control {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-/* .nav {
+.nav {
   display: flex;
   margin-bottom: 0;
   padding-left: 0;
   list-style: none;
   flex-wrap: wrap;
-} */
-/* .nav-link {
+}
+.nav-link {
   display: block;
   padding: .25rem .75rem;
 }
@@ -812,8 +812,8 @@ textarea.form-control {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-} */
-/* .navbar>.container,
+}
+.navbar>.container,
 .navbar>.container-fluid {
   display: flex;
   flex-wrap: wrap;
@@ -830,11 +830,11 @@ textarea.form-control {
 .navbar-nav .nav-link {
   padding-right: 0;
   padding-left: 0;
-} */
-/* .navbar-nav .dropdown-menu {
+}
+.navbar-nav .dropdown-menu {
   position: static;
   float: none;
-} */
+}
 @media (max-width: 767.98px) {
   .navbar-expand-md>.container,
   .navbar-expand-md>.container-fluid {
@@ -842,7 +842,7 @@ textarea.form-control {
     padding-left: 0;
   }
 }
-/* @media (min-width: 768px) {
+@media (min-width: 768px) {
   .navbar-expand-md {
     flex-flow: row nowrap;
     justify-content: flex-start;
@@ -850,9 +850,9 @@ textarea.form-control {
   .navbar-expand-md .navbar-nav {
     flex-direction: row;
   }
-   .navbar-expand-md .navbar-nav .dropdown-menu {
+  .navbar-expand-md .navbar-nav .dropdown-menu {
     position: absolute;
-  } 
+  }
   .navbar-expand-md .navbar-nav .nav-link {
     padding-right: 1rem;
     padding-left: 1rem;
@@ -868,7 +868,7 @@ textarea.form-control {
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link:focus {
   color: rgba(255, 255, 255, .65);
-} */
+}
 .card {
   position: relative;
   display: flex;
@@ -1138,9 +1138,9 @@ a.text-white:focus {
   .container {
     min-width: 992px !important;
   }
- /*  .navbar {
+  .navbar {
     display: none;
-  } */
+  }
 }
 figcaption,
 main {
@@ -1309,7 +1309,7 @@ a.text-white:focus {
 .main-content {
   position: relative;
 }
-/* .main-content .navbar-top {
+.main-content .navbar-top {
   position: absolute;
   z-index: 1;
   top: 0;
@@ -1318,14 +1318,14 @@ a.text-white:focus {
   padding-right: 0 !important;
   padding-left: 0 !important;
   background-color: transparent;
-} */
+}
 @media (min-width: 768px) {
   .main-content .container-fluid {
     padding-right: 39px !important;
     padding-left: 39px !important;
   }
 }
-/* .dropdown {
+.dropdown {
   display: inline-block;
 }
 .dropdown-menu {
@@ -1357,7 +1357,7 @@ a.text-white:focus {
 .dropdown-menu a.media:hover .heading,
 .dropdown-menu a.media:hover p {
   color: #172b4d !important;
-} */
+}
 .footer {
   padding: 2.5rem 0;
   background: #f7fafc;
@@ -1516,7 +1516,7 @@ textarea[resize='horizontal'] {
     transition: none;
   }
 }
-/* .nav-link {
+.nav-link {
   color: #525f7f;
 }
 .nav-link:hover {
@@ -1559,8 +1559,8 @@ textarea[resize='horizontal'] {
 }
 .navbar-search-dark .focused .input-group {
   border-color: rgba(255, 255, 255, .9);
-} */
-/* @media (min-width: 768px) {
+}
+@media (min-width: 768px) {
   .navbar .dropdown-menu {
     margin: 0;
     pointer-events: none;
@@ -1604,18 +1604,18 @@ textarea[resize='horizontal'] {
       transform: translate(0, 10px);
       opacity: 0;
     }
-  } */
+  }
 /* } */
-/* @media (max-width: 767.98px) {
+@media (max-width: 767.98px) {
   .navbar-nav .nav-link {
     padding: .625rem 0;
     color: #172b4d !important;
-  } */
- /*  .navbar-nav .dropdown-menu {
+  }
+  .navbar-nav .dropdown-menu {
     min-width: auto;
     box-shadow: none;
-  } */
-/* }
+  }
+}
 @keyframes show-navbar-collapse {
   0% {
     transform: scale(.95);
@@ -1637,7 +1637,7 @@ textarea[resize='horizontal'] {
     transform: scale(.95);
     opacity: 0;
   }
-} */
+}
 .progress {
   overflow: hidden;
   height: 8px;
@@ -1676,9 +1676,9 @@ p {
     margin-bottom: 10px;
   }
 }
-/* #navbar .navbar {
+#navbar .navbar {
   margin-bottom: 20px;
-} */
+}
 .ver {
     position: relative;
     top: 50px;

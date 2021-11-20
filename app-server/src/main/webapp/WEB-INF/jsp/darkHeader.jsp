@@ -137,6 +137,13 @@ display: block;
   background-color: #dcdcdc;
 }
 
+.dropdown-menu-center {
+right: auto;
+left: 50%;
+-webkit-transform: translate(-50%, 0);
+-o-transform: translate(-50%, 0);
+transform: translate(-50%, 0);}
+
 </style>
 
 <header>
@@ -217,7 +224,7 @@ display: block;
         </div> 
         <!-- 내 정보 아이콘 -->
         <li class="nav-item dropdown" style="margin-left: 30px">
-          <a class="nav-item d-sm-flex align-items-sm-center" href="${contextPath}/auth/userInfoList"
+          <a class="nav-item d-sm-flex align-items-sm-center" href="${contextPath}/app/auth/userInfoList"
         style="text-decoration-line: none; color: #2c473e;">
         <img
             src="${contextPath}/upload/member/${member.photo}_20x20.jpg"
@@ -227,7 +234,7 @@ display: block;
           />
           <b style="color: #2c473e;; text-size: 1.4em">&nbsp;${loginUser.nickname}</b>
         </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="${contextPath}/app/auth/userInfoList">내 정보</a></li>
             <li><a class="dropdown-item" href="${contextPath}/app/bucket/list">버킷 리스트</a></li>
             <li><a class="dropdown-item" href="${contextPath}/app/plant/list">나의 정원</a></li>
