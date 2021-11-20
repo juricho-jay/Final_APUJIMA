@@ -43,4 +43,12 @@ public class HomeController {
     mv.setViewName("homeTemplate");
     return mv;
   }
+  @GetMapping("/introduce")
+  public ModelAndView introduce(HttpSession session) throws Exception {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "소개");
+    mv.addObject("contentUrl", "index3.jsp");
+    mv.setViewName("darkTemplate");
+    return mv;
+  }
 }
