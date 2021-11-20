@@ -39,7 +39,7 @@
 
 <c:forEach items="${boardList}" var="board">
 <tr>
-    <td style= "width: 10%" class="text-center">${board.no}</td>
+    <td style= "width: 5%" class="text-center">${board.no}</td>
      <c:if test='${board.whichBoard == 1}'>
     <td style= "width: 10%" class="text-center">자유게시판</td> 
     </c:if>
@@ -50,10 +50,10 @@
      <td style= "width: 10%" class="text-center">공지사항</td> 
     </c:if>
      <td style= "width: 10%" class="text-center"><a href='detail?no=${board.no}'>${board.title}</a></td> 
-     <td style= "width: 10%" class="text-center">${board.content}</td> 
+     <td style= "width: 20%" class="text-center">${board.content}</td> 
      <td style= "width: 10%" class="text-center">${board.writer.nickname}</td> 
-     <td style= "width: 30%" class="text-center">${board.registeredDate}</td> 
-     <td style= "width: 10%" class="text-center">${board.viewCount}</td> 
+     <td style= "width: 10%" class="text-center">${board.registeredDate}</td> 
+     <td style= "width: 5%" class="text-center">${board.viewCount}</td> 
    
 </tr>
 </c:forEach>

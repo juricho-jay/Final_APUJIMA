@@ -178,6 +178,51 @@ public class AuthController {
     return mv;
   }
 
+  @GetMapping("/auth/updateUserInfo")
+  public ModelAndView updateUserInfo(HttpSession session, String nickname, String email,
+      String tel, String major, String homepage, String introduction) throws Exception {
+
+    Member member = (Member) session.getAttribute("loginUser");
+    ModelAndView mv = new ModelAndView();
+
+    if(member == null) {
+      mv.setViewName("redirect:../home");
+      return mv;
+    } 
+
+    //안읽은 메일 체크
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }
+
+    member.setNickname(nickname);
+    member.setEmail(email);
+    member.setTel(tel);
+
+    if (member.getDoctorOrNot() == 2) {
+      member.getDoctor().setMajor(major);
+      member.getDoctor().setHomepage(homepage);
+      member.getDoctor().setIntroduction(introduction);
+    }
+
+    memberDao.update2(member);
+
+    mv.addObject("member", member);
+    mv.addObject("pageTitle", "내 정보");
+    mv.setViewName("auth/UserInfoList");
+    return mv;
+  }
+
 }
 
 

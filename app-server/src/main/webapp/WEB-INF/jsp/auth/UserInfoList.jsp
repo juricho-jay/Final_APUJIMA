@@ -240,7 +240,7 @@ transform: translate(-50%, 0);}
         <c:if test="${uncheckedMail eq 0}">
         <a type="button" class="position-relative" style="outline: 0; background-color: transparent; border:0; color: white;"
         href="${contextPath}/app/mailbox/list">
-          <i class="bi bi-envelope" style="zoom: 1.8; color: #2c473e;"></i>
+          <i class="bi bi-envelope" style="zoom: 1.8; color: white;"></i>
         </a>
         </c:if>
         </div> 
@@ -272,55 +272,8 @@ transform: translate(-50%, 0);}
     </div>
   </div>
 </nav>
-  <%-- <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
-      <div class="container-fluid">
-        <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="${contextPath}/app/home">APUJIMA</a>
-        <!-- Form -->
-        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-          <div class="form-group mb-0">
-            <div class="input-group input-group-alternative">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
-              </div>
-              <input class="form-control" placeholder="Search" type="text">
-            </div>
-          </div>
-        </form>
-        <!-- User dropdown -->
-           <div class="btn-group">
-<<<<<<< HEAD
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" 
-                    aria-expanded="false" style="border-color:transparent; background-color: transparent;">
-                      ${loginUser.nickname}
-                    </button>
-                    <ul class="dropdown-menu" id="dropdownItems">
-                      <li><a class="dropdown-item" href="#">왜 안바뀌는거야</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Separated link</a></li>
-                    </ul>
-                  </div>
-        <!-- user dropdown -->
-=======
-						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" 
-						  aria-expanded="false" style="border-color:transparent; background-color: transparent;">
-						    ${loginUser.nickname}
-						  </button>
-						  <ul class="dropdown-menu" id="dropdownItems">
-						    <li><a class="dropdown-item" href="#">왜 안바뀌는거야</a></li>
-						    <li><a class="dropdown-item" href="#">Another action</a></li>
-						    <li><a class="dropdown-item" href="#">Something else here</a></li>
-						    <li><hr class="dropdown-divider"></li>
-						    <li><a class="dropdown-item" href="#">Separated link</a></li>
-						  </ul>
-						</div>
->>>>>>> 3a002eeadd01ba0db95a3574b2439f8d83b20e1d
-      </div>
-    </nav> --%>
     <!-- Form : member update -->
-    <form id="member-detail" action="userUpdate">
+    <form id="member-detail" action="updateUserInfo">
     <input type="hidden" name="no" value="${loginUser.no}">
     <!-- Header -->
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image:); background-size: cover; background-position: center top;">
@@ -367,7 +320,7 @@ transform: translate(-50%, 0);}
                     </div>
                     <div>
                       <span class="heading">10</span>
-                      <span class="description">Posts</span>
+                      <a href=""><span class="description">Posts</span></a>
                     </div>
                     <div>
                       <span class="heading">35</span>
@@ -381,7 +334,7 @@ transform: translate(-50%, 0);}
                   <span class="font-weight-light"><b>${loginUser.nickname}</b></span>
                 </h3>
                 <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i>${loginUser.nickname}님의 화분은 총 -개입니다.
+                  <i class="ni location_pin mr-2"></i>반갑습니다.
                 </div>
                 <div>
                   <a href="../plant/list">
@@ -481,39 +434,6 @@ transform: translate(-50%, 0);}
                     </div>
                   </div>
                 </div>
-                <!-- <hr class="my-4"> -->
-                <!-- Address -->
-                <!-- <h6 class="heading-small text-muted mb-4">Contact information</h6> -->
-                <!-- <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-city">City</label>
-                        <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-country">Country</label>
-                        <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
                 <c:if test='${loginUser.doctorOrNot eq "2"}'>
                 <hr class="my-4">
                 <!-- Description -->
@@ -521,7 +441,7 @@ transform: translate(-50%, 0);}
                 <div class="pl-lg-4" style="padding-right: 24px">
                   <div class="form-group focused">
                     <label class="form-control-label" for="u-license">면허</label>
-                    <input name="license" class="form-control form-control-alternative" value="${member.doctor.license}">
+                    <input name="license" class="form-control form-control-alternative" value="${member.doctor.license}" readonly>
                   </div>
                   <div class="form-group focused">
                     <label class="form-control-label" for="u-major">전공</label>
