@@ -194,3 +194,7 @@ html,body {
       width: 700px;
       margin: 0 auto;
     }
+    
+    .rounded-circle {
+      border-radius: 50% !important;
+    }

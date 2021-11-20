@@ -46,7 +46,7 @@ public class CounselingController {
       mv.addObject("uncheckedMail", count);
     }
     mv.addObject("counselor", counselor);
-    mv.addObject("contentUrl", "/counseling/CounselingMemberForm.jsp");
+    mv.addObject("contentUrl", "counseling/CounselingMemberForm.jsp");
     mv.setViewName("darkTemplate");
     return mv;
   }
@@ -73,7 +73,7 @@ public class CounselingController {
 
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "힐러상담사");
-    mv.addObject("contentUrl", "/counseling/DoctorInfo.jsp");
+    mv.addObject("contentUrl", "counseling/DoctorInfo.jsp");
     mv.setViewName("darkTemplate");
     return mv;
   }

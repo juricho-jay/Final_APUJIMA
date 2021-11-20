@@ -33,7 +33,7 @@
 							  <label for="f-receiver">받는이</label>
 							  <br>
 							  <div class="col-sm-4">
-							      <input id='f-receiver' type='text' name='receiver.nickname' class="form-control" required>
+							      <input id='f-receiver' type='text' name='nickname' class="form-control" required>
 							      <!-- <input type="button" name='findId' value="아이디확인"> -->
 							      
 							  </div>
@@ -71,13 +71,12 @@
         <c:if test='${loginUser.nickname eq mailBox.receiver.nickname}'>
 		        <div class="mail-box">
 		            <div class="box-photo">
-		              <span class="box-img">${mailBox.receiver.photo}</span> <!-- 이게 될까? -->
-		                  <%-- <img
-		            src="${contextPath}/upload/member/${mailBox.sender.photo}_100x100.jpg"
+		              <%-- <span class="box-img">${mailBox.receiver.photo}</span> <!-- 이게 될까? --> --%>
+		                  <img src="${contextPath}/upload/member/${mailBox.sender.photo}_100x100.jpg"
 		            class="rounded-circle"
 		            height="80"
 		            alt=""
-		          /> --%>
+		          />
 		            </div>
 		             <b class="box-id">${mailBox.sender.nickname}</b>
 		             <div class="box-title">
