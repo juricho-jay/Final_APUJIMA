@@ -299,7 +299,7 @@ transform: translate(-50%, 0);}
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="${contextPath}/upload/member/${member.photo}" class="rounded-circle">
+                    <img src="${contextPath}/upload/member/${member.photo}" class="rounded-circle" style="">
                   </a>
                 </div>
               </div>
@@ -319,12 +319,12 @@ transform: translate(-50%, 0);}
                       <span class="description">Points</span>
                     </div>
                     <div>
-                      <span class="heading">10</span>
-                      <a href=""><span class="description">Posts</span></a>
+                      <span class="heading">${myPosts}</span>
+                      <a href="${contextPath}/app/board/searchMyPosts"><span class="description">Posts</span></a>
                     </div>
                     <div>
-                      <span class="heading">35</span>
-                      <span class="description">Comments</span>
+                      <span class="heading">${myComments}</span>
+                      <a href="${contextPath}/app/comment/searchMyComments"><span class="description">Comments</span></a>
                     </div>
                   </div>
                 </div>
@@ -555,6 +555,7 @@ transform: translate(-50%, 0);}
    // 출석체크 안의 취소 버튼에 이벤트를 건다. 
    $('#closeCModal').on('click', function(){
    $('#checkModal').modal('hide');
+   window.location.reload();
    });
 
 
@@ -577,6 +578,7 @@ transform: translate(-50%, 0);}
   // 사진 업데이트 모달 안 취소 버튼에 이벤트를 건다.
   $('#closePModal').on('click', function(){
   $('#updatePhotoModal').modal('hide');
+  window.location.reload();
   });
    
 

@@ -23,5 +23,6 @@ public interface BoardDao {
   List<Board> findFreeBoard() throws Exception;
   List<Board> findDoctorBoard() throws Exception;
   List<Board> findNoticeBoard() throws Exception;
-
+  List<Board> findByName(String name) throws Exception;
+  Board findByActiveNo(int no) throws Exception;
 }

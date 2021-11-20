@@ -110,6 +110,22 @@
     where board_no=#{no}
   </delete>
   
+   <select id="findById" resultMap="CommentMap" parameterType="string">
+    select
+      c.comment_no,
+      c.content,
+      c.created_dt,
+      m.member_no,
+      m.id,
+      m.nickname,
+      b.board_no commentBoard_no
+    from
+      apus_comment c
+      inner join apus_member m on m.member_no=c.member_no
+      inner join apus_board b on b.board_no=c.board_no
+    where
+      m.id=#{id}
+  </select> 
 </mapper>
 
 

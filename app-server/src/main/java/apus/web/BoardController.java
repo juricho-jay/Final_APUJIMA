@@ -407,10 +407,8 @@ public class BoardController {
     ModelAndView mv = new ModelAndView();
 
     Member member = ((Member) session.getAttribute("loginUser"));
-    System.out.println(keyword);
     Collection<Board> boardList = boardDao.searchByKeyWord(keyword);
 
-    System.out.println(boardList.size());
 
     //안읽은 메일 체크
     if (member != null) {
@@ -429,9 +427,41 @@ public class BoardController {
 
     mv.addObject("boardList", boardList);
     mv.addObject("searchKeyword", keyword);
+    mv.addObject("pageTitle", "검색 목록");
     mv.addObject("contentUrl", "board/BoardSearchList.jsp");
     mv.setViewName("darkTemplate");
     return mv;
   }
+
+  @GetMapping("/board/searchMyPosts")
+  public ModelAndView searchMyPosts(HttpSession session) throws Exception {
+    ModelAndView mv = new ModelAndView();
+
+    Member member = ((Member) session.getAttribute("loginUser"));
+    Collection<Board> boardList = boardDao.findByName(member.getName());
+
+
+    //안읽은 메일 체크
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }   
+
+    mv.addObject("boardList", boardList);
+    mv.addObject("pageTitle", "나의 게시글");
+    mv.addObject("contentUrl", "board/BoardSearchMyList.jsp");
+    mv.setViewName("darkTemplate");
+    return mv;
+  }
+
 
 }
