@@ -73,7 +73,7 @@ public class CounselingController {
 
     mv.addObject("memberList", memberList);
     mv.addObject("pageTitle", "힐러상담사");
-    mv.addObject("contentUrl", "/counseling/DoctorInfo.jsp");
+    mv.addObject("contentUrl", "counseling/DoctorInfo.jsp");
     mv.setViewName("darkTemplate");
     return mv;
   }

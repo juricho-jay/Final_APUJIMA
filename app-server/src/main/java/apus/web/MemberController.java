@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import apus.dao.MemberDao;
+import apus.domain.Doctor;
 import apus.domain.Member;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
@@ -36,7 +37,8 @@ public class MemberController {
   }
 
   @PostMapping("/member/add")
-  public ModelAndView add(Member member, Part photoPart, String grade, String birthyy, String birthmm, String birthdd) throws Exception {
+  public ModelAndView add(Member member, Part photoPart, String grade, String birthyy, String birthmm, 
+      String birthdd, String major, Part license, String homepage, String introduce) throws Exception {
     if (photoPart.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
       photoPart.write(sc.getRealPath("/upload/member") + "/" + filename);
@@ -67,13 +69,54 @@ public class MemberController {
 
     Date birthday = Date.valueOf(birthyy+"-"+birthmm+"-"+birthdd);
     member.setBirthday(birthday);
-    member.setDoctorOrNot(Integer.parseInt(grade));
-
     member.setPoint(1000);
     member.setActive(1);
 
+    member.setDoctorOrNot(Integer.parseInt(grade));
+
+    if(member.getDoctorOrNot() == 2) {
+      Doctor doctor = new Doctor();
+      doctor.setHomepage(homepage);
+      doctor.setIntroduction(introduce);
+      doctor.setMajor(major);
+
+      if (license.getSize() > 0) {
+        String filename = UUID.randomUUID().toString();
+        license.write(sc.getRealPath("/upload/member") + "/" + filename);
+        doctor.setLicense(filename);
+
+        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+        .size(20, 20)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_20x20";
+          }
+        });
+
+        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
+      }
+
+      member.setDoctor(doctor);
+    }
 
     memberDao.insert(member);
+
+    if(member.getDoctorOrNot() == 2) {
+      memberDao.insert2(member);
+    }
+
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -106,6 +149,9 @@ public class MemberController {
     if (member == null) {
       throw new Exception("해당 번호의 회원이 없습니다.");
     }
+    System.out.println("---------------------------");
+    System.out.println("member의 doctor or not ====> " + member.getDoctorOrNot());
+    System.out.println("---------------------------");
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("member", member);
@@ -117,7 +163,8 @@ public class MemberController {
   }
 
   @PostMapping("/member/update")
-  public ModelAndView update(Member member, Part photoPart) throws Exception {
+  public ModelAndView update(Member member, Part photoPart, 
+      String major, Part license, String homepage, String introduce) throws Exception {
     Member oldMember = memberDao.findByNo(member.getNo());
 
     if (oldMember == null) {
@@ -159,6 +206,44 @@ public class MemberController {
     member.setDoctorOrNot(oldMember.getDoctorOrNot());
     member.setBirthday(oldMember.getBirthday());
     member.setActive(1);
+
+    if (oldMember.getDoctorOrNot() == 2) {
+      Doctor doctor = oldMember.getDoctor();
+      doctor.setHomepage(homepage);
+      doctor.setMajor(major);
+      doctor.setIntroduction(introduce);
+
+      if (license.getSize() > 0) {
+        String filename = UUID.randomUUID().toString();
+        license.write(sc.getRealPath("/upload/member") + "/" + filename);
+        doctor.setLicense(filename);
+
+        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+        .size(20, 20)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_20x20";
+          }
+        });
+
+        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
+      }
+
+      member.setDoctor(doctor);
+    }
+
 
     if (member.getPassword().length() == 0) {
       memberDao.update2(member);
