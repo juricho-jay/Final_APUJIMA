@@ -104,29 +104,49 @@
     </div>
 </div>
   <div class="col-12">
-    <button class="btn btn-primary btn-sm" >약품 등록 신청</button>
+    <button class="btn btn-primary btn-sm" onclick = "checkOk()" >약품 등록 신청</button>
   </div>
 
 </form>
 </div>
 
+<script type="text/javascript">
+    
+        // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
+        function checkValue()
+        {
+          
+           if(!document.medicineRequest.name.value){
+                alert("약품명을 입력하세요.");
+                return false;
+            }
+          
+            if(!document.medicineRequest.age.value){
+                alert("권장 연령을 입력하세요.");
+                return false;
+            } 
+            
+            if(!document.medicineRequest.shape.value){
+                alert("약품 모양을 입력하세요.");
+                return false;
+            } 
+            if(!document.medicineRequest.color.value){
+                alert("약품 색상을 입력하세요.");
+                return false;
+            } 
+            if(!document.medicineRequest.effect.value){
+                alert("약품 효능을 입력하세요.");
+                return false;
+            } 
+        }
+        
+        
+        function checkOk() {
+        	alert("약품등록 신청이 완료되었습니다. 관리자가 확인 후 추가할 예정입니다.");
+        }
+  </script>
 
 
-<!--  
-<script>
-$(document).on("keyup", "input[age]", function() {
-    var val= $(this).val();
-    if(val.replace(/[0-9]/g, "").length > 0) {
-        alert("숫자만 입력해 주십시오.");
-        $(this).val('');
-    }
-    if(val < 1 || val > 100) {
-        alert("1~100 범위로 입력해 주십시오.");
-        $(this).val('');
-    }
-});
-</script>
--->
 
 </body>
 </html>

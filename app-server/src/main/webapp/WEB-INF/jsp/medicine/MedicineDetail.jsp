@@ -49,8 +49,8 @@ function addMedicine(frm){
 <body>
 <div class="container">
 <div class=""></div>
-<h1>약품 정보 변경</h1>
-<form  action='update'>
+<h1>약품 상세 정보</h1>
+<form  action='update' method = 'post'>
 <!--  폼으로 왜 안넘어 가고 계속 nameCheck에 걸리는건지 알아보기 -->
 
 <div class="col-md-6">
@@ -66,46 +66,101 @@ function addMedicine(frm){
 
   <div class="mb-3 row">
     <label for='f-name' class="col-sm-3 col-form-label">* 이름</label>
-    <div class="col-sm-6">
+   <c:if test="${loginUser.doctorOrNot == 3 }">
+   <div class="col-sm-6">
       <input id='f-name' type='text' name='name' class="form-control" value="${medicine.name}">
     </div>
+   </c:if>
+   
+   <c:if test ="${loginUser.doctorOrNot != 3 }">
+    <div class="col-sm-6">
+      <input id='f-name' type='text' name='name' class="form-control" value="${medicine.name}" readonly>
+    </div>
+   </c:if>
 </div>
 
 <div class="mb-3 row">
     <label for='m-age' class="col-sm-3 col-form-label">* 권장 연령</label>
-    <div class="col-sm-6">
-      <input id='m-age' type='text' name='age' class="form-control" value="${medicine.ageLimit}" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');"/>
+      <c:if test="${loginUser.doctorOrNot == 3 }">
+   <div class="col-sm-6">
+      <input id='m-age' type='text' name='age' class="form-control" value="${medicine.ageLimit}" 
+      onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');"/>
     </div>
-</div>
+   </c:if>
+   
+   <c:if test ="${loginUser.doctorOrNot != 3 }">
+    <div class="col-sm-6">
+      <input id='m-age' type='text' name='age' class="form-control" value="${medicine.ageLimit}" 
+      onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" readonly/>
+    </div>
+   </c:if>
+ </div>
+   
 
 <div class="mb-3 row">
   <label for='m-shape' class="col-sm-3 col-form-label">* 약품 모양</label>
-  <div class="col-sm-6">
-    <input id='m-shape' type='text' name='shape' class="form-control" value="${medicine.shape}">
+        <c:if test="${loginUser.doctorOrNot == 3 }">
+   <div class="col-sm-6">
+        <input id='m-shape' type='text' name='shape' class="form-control" value="${medicine.shape}">
+    </div>
+   </c:if>
+   
+   <c:if test ="${loginUser.doctorOrNot != 3 }">
+    <div class="col-sm-6">
+        <input id='m-shape' type='text' name='shape' class="form-control" value="${medicine.shape}" readonly>
+    </div>
+   </c:if>
   </div>
-</div>
+
 <div class="mb-3 row">
   <label for='m-color' class="col-sm-3 col-form-label">* 약품 색상</label>
+        <c:if test="${loginUser.doctorOrNot == 3 }">
   <div class="col-sm-6">
-    <input id='m-color' type='text' name='color' class="form-control"value="${medicine.color}">
+        <input id='m-color' type='text' name='color' class="form-control"value="${medicine.color}">
+    </div>
+   </c:if>
+   
+   <c:if test ="${loginUser.doctorOrNot != 3 }">
+    <div class="col-sm-6">
+        <input id='m-color' type='text' name='color' class="form-control"value="${medicine.color}" readonly>
+    </div>
+   </c:if>
   </div>
-</div>
+
+
 <div class="mb-3 row">
     <label for='m-effect' class="col-sm-3 col-form-label">* 약품 효능</label>
-    <div class="col-sm-6">
-      <input id='m-effect' type='text' name='effect' class="form-control"value="${medicine.effect}">
+        <c:if test="${loginUser.doctorOrNot == 3 }">
+   <div class="col-sm-6">
+        <input id='m-effect' type='text' name='effect' class="form-control"value="${medicine.effect}">
     </div>
-</div>
+   </c:if>
+   <c:if test ="${loginUser.doctorOrNot != 3 }">
+    <div class="col-sm-6">
+        <input id='m-effect' type='text' name='effect' class="form-control"value="${medicine.effect}" readonly>
+    </div>
+   </c:if>
+  </div>
   <div class="col-12">
-    <button class="btn btn-primary">약품정보 변경</button>
-    <a href='delete?name=${medicine.name}' class="btn btn-primary">삭제</a> 
+  <c:if test="${loginUser.doctorOrNot == 3 }">
+    <button class="btn btn-primary" onclick = "checkUpdate()">약품정보 변경</button>
+    <a href='delete?name=${medicine.name}' class="btn btn-primary" onclick = "checkOk()">삭제</a> 
+  </c:if>
 <a href='list' class="btn btn-primary">목록</a><br>
   </div>
 
 </form>
 </div>
 
-
+<script>
+        function checkOk() {
+          alert("해당 약품이 삭제되었습니다.");
+        }
+        
+        function checkUpdate() {
+            alert("해당 약품정보가 변경되었습니다.");
+          }
+  </script>
 <!-- <label for='f-name'>이름</label> <input id='f-name' type='text' name='name'><br>
 <label for='f-email'>이메일</label> <input id='f-email' type='email' name='email'><br>
 <label for='f-password'>암호</label> <input id='f-password' type='password' name='password'><br>
