@@ -47,7 +47,7 @@
 </c:forEach>
 </tbody>
 </table>
-<a href='BoardForm.jsp' class="btn btn-outline-primary btn-sm">글 작성</a><br>
+<a href='form' class="btn btn-outline-primary btn-sm">글 작성</a><br>
 
 </div><!-- .container -->
 

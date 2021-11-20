@@ -22,7 +22,6 @@ public class HomeController {
     Member member = ((Member) session.getAttribute("loginUser"));
 
     //안읽은 메일 체크
-
     if (member != null) {
       List<MailBox> mailBoxList = mailBoxDao.findAll();
 
@@ -34,13 +33,20 @@ public class HomeController {
           }
         }
       }
-
       mv.addObject("uncheckedMail", count);
     }
 
     mv.addObject("pageTitle", "메인화면");
     mv.addObject("contentUrl", "index2.jsp");
     mv.setViewName("homeTemplate");
+    return mv;
+  }
+  @GetMapping("/introduce")
+  public ModelAndView introduce(HttpSession session) throws Exception {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "소개");
+    mv.addObject("contentUrl", "index3.jsp");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 }

@@ -146,6 +146,13 @@ display: block;
   background-color: #dcdcdc;
 }
 
+.dropdown-menu-center {
+right: auto;
+left: 50%;
+-webkit-transform: translate(-50%, 0);
+-o-transform: translate(-50%, 0);
+transform: translate(-50%, 0);}
+
 </style>
 
 <header>
@@ -159,7 +166,7 @@ display: block;
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item" style="margin-left: 20px;">
-          <a class="btn4 text-white" aria-current="page" href="#">소개</a>
+          <a class="btn4 text-white" aria-current="page" href="${contextPath}/app/introduce">소개</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
           <a class="btn4 text-white" aria-current="page" href="${contextPath}/app/medicine/list">약국</a>
@@ -236,7 +243,7 @@ display: block;
           />
           <b style="color: white; text-size: 1.4em">&nbsp;${loginUser.nickname}</b>
         </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="${contextPath}/app/auth/userInfoList">내 정보</a></li>
             <li><a class="dropdown-item" href="${contextPath}/app/bucket/list">버킷 리스트</a></li>
             <li><a class="dropdown-item" href="${contextPath}/app/plant/list">나의 정원</a></li>

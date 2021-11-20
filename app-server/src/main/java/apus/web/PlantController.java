@@ -1,6 +1,7 @@
 package apus.web;
 
 import java.util.Collection;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import apus.dao.MailBoxDao;
 import apus.dao.MemberDao;
 import apus.dao.PlantDao;
+import apus.domain.MailBox;
 import apus.domain.Member;
 import apus.domain.Plant;
 
@@ -20,6 +23,7 @@ public class PlantController {
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired MemberDao memberDao;
   @Autowired PlantDao plantDao;
+  @Autowired MailBoxDao mailBoxDao;
 
 
   @GetMapping("/plant/form")
@@ -28,7 +32,7 @@ public class PlantController {
     mv.addObject("pageTitle", "새 글");
     mv.addObject("contentUrl", "plant/PlantForm.jsp");
     // mv.setViewName("template1");
-    mv.setViewName("plant/PlantForm");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -48,12 +52,30 @@ public class PlantController {
   }
 
   @GetMapping("/plant/list")
-  public ModelAndView list(Member member, HttpSession session) throws Exception {
+  public ModelAndView list(HttpSession session) throws Exception {
 
-    member = (Member) session.getAttribute("loginUser");
+    Member member = (Member) session.getAttribute("loginUser");
     Collection<Plant> plantList = plantDao.findMyPlant(member.getNo());
 
     ModelAndView mv = new ModelAndView();
+
+    //안읽은 메일 체크
+
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+
+      mv.addObject("uncheckedMail", count);
+    }
+
     mv.addObject("plantList",plantList);
     mv.addObject("pageTitle","화분 목록");
     mv.addObject("contentUrl", "plant/PlantList.jsp");
@@ -62,13 +84,32 @@ public class PlantController {
   }
 
   @GetMapping("/plant/detail")
-  public ModelAndView detail(int no) throws Exception {
+  public ModelAndView detail(int no, HttpSession session) throws Exception {
+    Member member = (Member) session.getAttribute("loginUser");
     Plant plant = plantDao.findByNo(no);
 
     if (plant == null) {
       throw new Exception ("해당 화분이 없습니다.");
     }
     ModelAndView mv = new ModelAndView();
+
+    //안읽은 메일 체크
+
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+
+      mv.addObject("uncheckedMail", count);
+    }
+
     mv.addObject("plant",plant);
     mv.addObject("pageTitle","화분 목록");
     mv.addObject("contentUrl", "plant/PlantDetail.jsp");
@@ -95,11 +136,11 @@ public class PlantController {
       plant.setShape("flower.png");
       plant.setLevel(2);
     }else if (plant.getExp() >700 && plant.getExp() < 1000) {
-      plant.setShape("Tree.jpg");
+      plant.setShape("tree.png");
       plant.setLevel(3);
     } else if (plant.getExp() > 1000) {
       plant.setExp(1000);
-      plant.setShape("Tree.jpg");
+      plant.setShape("tree.png");
     }
     plantDao.update(plant);
     member.setPoint(member.getPoint()-point);
