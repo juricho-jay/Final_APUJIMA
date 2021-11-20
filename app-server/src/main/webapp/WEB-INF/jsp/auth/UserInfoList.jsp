@@ -27,7 +27,7 @@
   
 .btn4 {
   padding: 10px;
-  color: #2C473E;
+  color: white;
   font-family: sans-serif;
   text-transform: uppercase;
   text-align: center;
@@ -43,7 +43,7 @@
   left: 0px;
   width: 100%;
   height: 1px;
-  background: #2C473E;
+  background: white;
   display: block;
   -webkit-transform-origin: right top;
   -ms-transform-origin: right top;
@@ -65,7 +65,7 @@
 }
 
 input.img-button {
-        background: url("/apus/img/header/green_logo.svg") no-repeat;
+        background: url("/apus/img/header/white_logo.svg") no-repeat;
         border: none;
         width: 185px;
         height: 31px;
@@ -76,7 +76,7 @@ input.img-button {
     margin-bottom: auto;
     margin-top: auto;
     height: 40px;
-    background-color: #91929281;
+    background-color: white;
     border-radius: 30px;
     padding: 10px;
     }
@@ -113,7 +113,7 @@ input.img-button {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    color:white;
+    color:#525F7F;
     text-decoration:none;
     }
     
@@ -147,7 +147,7 @@ display: block;
 
 .dropdown-menu a {
   display: block;
-  color: #2C473E;
+  color: #525F7F;
   padding: 5px;
   text-decoration: none;
 }
@@ -169,7 +169,7 @@ transform: translate(-50%, 0);}
 <body>
   <div class="main-content">
     <!-- Top navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="padding-right: 64px;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="padding-top:20px; padding-right: 64px; background-color:#343f5a">
   <div class="container-fluid">
     <a class="navbar-brand" href="${contextPath}/app/home">
     <input type="button" class="img-button"></a>
@@ -179,16 +179,16 @@ transform: translate(-50%, 0);}
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item" style="margin-left: 20px;">
-          <a class="btn4" aria-current="page" href="#" style="color: #2c473e;">소개</a>
+          <a class="btn4" aria-current="page" href="${contextPath}/app/introduce" style="color: white;">소개</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
-          <a class="btn4" aria-current="page" href="${contextPath}/app/medicine/list" style="color: #2c473e;">약국</a>
+          <a class="btn4" aria-current="page" href="${contextPath}/app/medicine/list" style="color: white;">약국</a>
         </li>
         <li class="nav-item" style="margin-left: 20px;">
-          <a class="btn4" aria-current="page" href="${contextPath}/app/doctorinfo/list" style="color: #2c473e;">HEALER</a>
+          <a class="btn4" aria-current="page" href="${contextPath}/app/doctorinfo/list" style="color: white;">HEALER</a>
         </li>
         <li class="nav-item dropdown" style="margin-left: 20px;">
-          <a class="btn4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="btn4 text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             커뮤니티
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -222,15 +222,10 @@ transform: translate(-50%, 0);}
         <c:if test="${not empty sessionScope.loginUser}">
         <div>
         <c:if test="${uncheckedMail != 0}">
-        <%-- <i class="bi bi-envelope" style="color: white; zoom: 1.5">
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-           ${uncheckedMail}
-        </span>
-        </i> --%>
         <a type="button" class="position-relative" 
         style="outline: 0; background-color: transparent; border:0; color: #2C473E; padding:0; margin-left: 5px"
         href="${contextPath}/app/mailbox/list">
-          <i class="bi bi-envelope" style="zoom: 1.8; color: #2c473e;"></i>
+          <i class="bi bi-envelope" style="zoom: 1.8; color: white;"></i>
           <span class="position-absolute top-0 start-100 translate-middle-x badge rounded-pill bg-danger"
           style="">
             ${uncheckedMail}
@@ -249,12 +244,12 @@ transform: translate(-50%, 0);}
           <a class="nav-item d-sm-flex align-items-sm-center" href="${contextPath}/app/auth/userInfoList"
         style="text-decoration-line: none; color: #2c473e;">
         <img
-            src="../upload/member/${member.photo}_20x20.jpg"
+            src="../upload/member/${loginUser.photo}_20x20.jpg"
             class="rounded-circle"
             height="30"
             alt=""
           />
-          <b style="color: #2c473e;; text-size: 1.4em">&nbsp;${loginUser.nickname}</b>
+          <b style="color: white; text-size: 1.4em">&nbsp;${loginUser.nickname}</b>
         </a>
           <ul class="dropdown-menu dropdown-menu-center" style="" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="${contextPath}/app/auth/userInfoList">내 정보</a></li>

@@ -246,10 +246,11 @@ function div_OnOff(v,id){
     </div>
 </div>
 
+
  <div class="mb-3 row" >
-    <label for='f-lisence' class="col-sm-3 col-form-label">* 의사 자격증</label>
+    <label for='f-license' class="col-sm-3 col-form-label">* 의사 자격증</label>
     <div class="col-sm-6">
-     <input id='f-lisence' type='file' name='lisence' class="form-control">
+     <input id='f-license' type='file' name='license' class="form-control">
     </div>
 </div>
 

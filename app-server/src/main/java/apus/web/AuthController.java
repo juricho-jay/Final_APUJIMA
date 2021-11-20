@@ -1,6 +1,7 @@
 package apus.web;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import apus.dao.DateCheckDao;
+import apus.dao.MailBoxDao;
 import apus.dao.MemberDao;
 import apus.domain.DateCheck;
+import apus.domain.MailBox;
 import apus.domain.Member;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
@@ -29,6 +32,7 @@ public class AuthController {
   @Autowired MemberDao memberDao;
   @Autowired DateCheckDao dateCheckDao;
   @Autowired ServletContext sc;
+  @Autowired MailBoxDao mailBoxDao;
 
 
   @GetMapping("/auth/loginForm")
@@ -92,6 +96,21 @@ public class AuthController {
       mv.setViewName("redirect:../home");
       return mv;
     } 
+
+    //안읽은 메일 체크
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }
 
     mv.addObject("dateCheckList", dateCheckList);
     mv.addObject("member", member);

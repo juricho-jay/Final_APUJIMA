@@ -63,8 +63,7 @@
 <body>
 <div class="container">
 <h1>게시글 작성</h1>
-<form name = "boardInfo" action='add' method = 'post' onsubmit="return checkValue()">
-
+<form name = "boardInfo" action='add' method = 'post'>
 <div class="col-md-6">
   <label for="validationServer04" class="form-label">게시판 글 작성 페이지</label>
 </div>
@@ -72,12 +71,12 @@
   <div class="mb-3 row">
     <label for='f-whichBoard' class="col-sm-3 col-form-label">구분</label>
     <div class="col-sm-6">
-      <input id='f-whichBoard' type='radio' name='whichBoard' value = "1">
+      <input id='freeBoard' type='radio' name='whichBoard' value ="1">
       <label>자유게시판</label>
-      <input id='f-whichBoard' type='radio' name='whichBoard' value = "2">
+      <input id='doctorBoard' type='radio' name='whichBoard' value ="2">
       <label>Healer 지식in </label>
-      <c:if test = "${loginUser.doctorOrNot == 3}" >
-      <input id='f-whichBoard' type='radio' name='whichBoard' value = "3">
+      <c:if test ="${loginUser.doctorOrNot == 3}" >
+      <input id='noticeBoard' type='radio' name='whichBoard' value ="3">
       <label>공지사항</label>
       </c:if>
     </div>

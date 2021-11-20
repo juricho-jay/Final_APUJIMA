@@ -54,13 +54,15 @@ public class CounselingController {
   @GetMapping("/doctorinfo/list")
   public ModelAndView list(HttpSession session) throws Exception {
     List<Member> memberList = memberDao.findAll();
-    List<MailBox> mailBoxList = mailBoxDao.findAll();
     ModelAndView mv = new ModelAndView();
 
     Member member = ((Member) session.getAttribute("loginUser"));
 
-    int count = 0;
+    //안읽은 메일 체크
     if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
       for (int i = 0; i < mailBoxList.size(); i++) {
         if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
           if (mailBoxList.get(i).getReceivedTime() == null) {

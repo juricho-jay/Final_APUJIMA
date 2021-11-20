@@ -22,7 +22,6 @@ public class HomeController {
     Member member = ((Member) session.getAttribute("loginUser"));
 
     //안읽은 메일 체크
-
     if (member != null) {
       List<MailBox> mailBoxList = mailBoxDao.findAll();
 
@@ -34,7 +33,6 @@ public class HomeController {
           }
         }
       }
-
       mv.addObject("uncheckedMail", count);
     }
 
