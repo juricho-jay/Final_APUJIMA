@@ -82,6 +82,8 @@
       inner join apus_member m on b.member_no=m.member_no
     where
       b.active = 1 and b.type = 1
+     order by
+      b.board_no desc
   
   </select>
   
@@ -105,6 +107,8 @@
       inner join apus_member m on b.member_no=m.member_no
     where
       b.active = 1 and b.type = 2
+    order by
+      b.board_no desc
   
   </select>
   
@@ -128,6 +132,8 @@
       inner join apus_member m on b.member_no=m.member_no
     where
       b.active = 1 and b.type = 3
+    order by
+      b.board_no desc
   
   </select>
   

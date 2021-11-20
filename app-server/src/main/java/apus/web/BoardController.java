@@ -41,19 +41,23 @@ public class BoardController {
   }
 
   @PostMapping("/board/add")
-  public ModelAndView add(Board board, HttpSession session) throws Exception {
+  public ModelAndView add(Board board, HttpSession session ,String whichBoard) throws Exception {
 
     board.setWriter((Member) session.getAttribute("loginUser"));
 
+
+
     // String writer => 로그인 유저의 닉네임
 
-    board.setActive(1);
-
-
-
-    boardDao.insert(board);
+    //    board.setActive(1);
+    if(board.getWhichBoard() == 1) {
+      boardDao.insert(board);
+    }else if ((board.getWhichBoard() == 2)){
+      boardDao.insert2(board);
+    }else {
+      boardDao.insert3(board);
+    }
     sqlSessionFactory.openSession().commit();
-
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:list");
     return mv;
