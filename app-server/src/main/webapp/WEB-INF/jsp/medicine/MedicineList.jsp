@@ -10,12 +10,12 @@
 <h1>약품 목록</h1>
 <c:if test = "${loginUser.doctorOrNot eq 2}">
 
-<a href='MedicineRequestForm.jsp' class="btn btn-outline-primary btn-sm">약품 등룍 요청</a>
+<a href='requestForm' class="btn btn-outline-primary btn-sm">약품 등록 요청</a>
 </c:if>
 
 <c:if test = "${loginUser.doctorOrNot eq 3}">
 
-<a href='MedicineForm.jsp' class="btn btn-outline-primary btn-sm">약품 등록</a>
+<a href='form' class="btn btn-outline-primary btn-sm">약품 등록</a>
 </c:if>
 
 <!--  <a href='form' class="btn btn-outline-primary btn-sm">분류</a><br>-->

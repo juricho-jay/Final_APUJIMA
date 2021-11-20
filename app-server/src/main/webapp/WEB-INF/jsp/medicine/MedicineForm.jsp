@@ -85,7 +85,7 @@ function addMedicine(frm){
 <div class="container">
 <div class=""></div>
 <h1>약품등록</h1>
-<form name = "medicineAdd" action='add' onsubmit="return checkValue()">
+<form name = "medicineAdd" action='add' method = 'post' onsubmit="return checkValue()">
 <!--  폼으로 왜 안넘어 가고 계속 nameCheck에 걸리는건지 알아보기 -->
 
 <div class="col-md-6">
