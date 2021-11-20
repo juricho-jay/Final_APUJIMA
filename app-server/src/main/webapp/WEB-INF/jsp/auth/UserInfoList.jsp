@@ -138,7 +138,12 @@
                 
                 <button type="button" id="openModalBtn" class="btn btn-secondary" style="background-color: #5e72e4 !important;">출석 체크</button>
                 <button type="button" id="openModalBtn2" class="btn btn-secondary" style="background-color: #5e72e4 !important;">버킷리스트</button>
-                
+                <c:if test = "${loginUser.doctorOrNot eq 1}">
+                <a href='${contextPath}/app/counseling/list' class="btn btn-secondary" style="background-color: #5e72e4 !important;">상담신청리스트</a><br>
+                </c:if>
+                <c:if test = "${loginUser.doctorOrNot eq 2}">
+                <a href='${contextPath}/app/counseling/doctorlist' class="btn btn-secondary" style="background-color: #5e72e4 !important;">상담요청리스트</a><br>
+                </c:if>
                   <%-- <c:if test='${not empty dateCheck}'>
                   alert()
                   </c:if> --%>

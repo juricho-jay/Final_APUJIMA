@@ -64,7 +64,7 @@
 		<button id="btn-modal" class="btn btn-outline-primary btn-sm">보내기</button>
 		
 		
-		<a harf="/mailbox/MailBoxListNotResd.jsp">목록</a>
+	
 		<hr>
 		<div>
 		  <c:forEach items="${mailBoxList}" var="mailBox">

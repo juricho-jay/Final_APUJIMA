@@ -106,7 +106,7 @@
     <label for='f-name' class="col-sm-3 col-form-label">상담사 선생님</label>
     <div class="col-sm-4">
     
-       <input id='f-counselor-no' type='hidden' name="no" class="form-control" value="${counselor.no}">
+       <input id='f-counselor-no' type='hidden' name="counselorNo" class="form-control" value="${counselor.no}">
        <input id='f-name' type='text'  name="counselor.name" class="form-control" value="${counselor.name}" readOnly>
      </div>
   </div>
