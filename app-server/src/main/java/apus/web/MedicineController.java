@@ -1,6 +1,8 @@
 package apus.web;
 
 import java.util.Collection;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,9 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import apus.dao.CommentDao;
 import apus.dao.LikeDao;
+import apus.dao.MailBoxDao;
 import apus.dao.MedicineDao;
 import apus.dao.MemberDao;
+import apus.domain.MailBox;
 import apus.domain.Medicine;
+import apus.domain.Member;
 
 @Controller
 public class MedicineController {
@@ -20,6 +25,7 @@ public class MedicineController {
   @Autowired MemberDao memberDao;
   @Autowired CommentDao commentDao;
   @Autowired LikeDao likeDao;
+  @Autowired MailBoxDao mailBoxDao;
 
   @GetMapping("/medicine/form")
   public ModelAndView form() {
@@ -49,10 +55,28 @@ public class MedicineController {
   //  }
 
   @GetMapping("/medicine/list")
-  public ModelAndView list() throws Exception {
+  public ModelAndView list(HttpSession session) throws Exception {
     Collection<Medicine> medicineList = medicineDao.findAll();
 
     ModelAndView mv = new ModelAndView();
+
+    Member member = ((Member) session.getAttribute("loginUser"));
+    //안읽은 메일 체크
+
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }
+
     mv.addObject("medicineList", medicineList);
     mv.addObject("pageTitle", "약품목록");
     mv.addObject("contentUrl", "medicine/MedicineList.jsp");
