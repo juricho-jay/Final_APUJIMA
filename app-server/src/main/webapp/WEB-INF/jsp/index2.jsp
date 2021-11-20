@@ -3,9 +3,17 @@
      trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    <title>메인 화면</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="${contextPath}/css/main/owl.carousel.min.css">
+  <link rel="stylesheet" href="${contextPath}/css/main/owl.theme.default.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css">
+  <link rel="stylesheet" href="${contextPath}/css/main/style.css">
   
   
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -20,9 +28,11 @@
   
   <style>
   body {
-    background-image: url('/apus/img/header/opacity.svg'), url('/apus/img/header/main_bg.png');
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(${contextPath}/img/header/main_bg1.png);
+    /* background-image: url('/apus/img/header/opacity.svg'), url('/apus/img/header/main_bg.png'); */
     background-repeat: no-repeat;
     background-size : cover;
+
   }
   
   p {
@@ -108,64 +118,83 @@
   </style>
   
 
+<div class="text" style="margin-bottom:500px;">
       <p class="text-center fs-1">We are here for friends in need.</p>
       <p class="text-center fs-2">We are here for friends in need.</p>
       <p class="text-center fs-3">We are here for friends in need.</p>
       <p class="text-center fs-4">We are here for friends in need.</p>
       <p class="text-center fs-5">We are here for friends in need.</p>
-  
+</div>
          
          
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         <div style="width: 85%; height:500px; margin-top: 100px; background-color: #2C473E; position:absolute;">
-         </div>
+  <!-- <div style="width: 85%; height:500px; margin-top: 100px; background-color: #2C473E; position:absolute;">
+  </div> -->
          
          
 <!-- carausel -->    
-<div class="carousel-doctor" style="margin-top:200px;">
-<div class="banner" style="margin-bottom: 100px;">
-        <section id="dg-container" class="dg-container">
-            <div class="dg-wrapper">
-                <a href="/apus/doctorinfo/list">
-                    <img src="https://i.pinimg.com/originals/af/99/08/af9908ce7804e90b11bec5b32d4f66a8.jpg">
-                </a>
-                <a href="/apus/doctorinfo/list">
-                    <img src="https://thumbs.dreamstime.com/b/doctor-pda-10612924.jpg">
-                </a>
-                <a href="/apus/doctorinfo/list">
-                    <img src="https://www.vippng.com/png/detail/536-5368164_india-health-plus-india-doctor-man-png.png">
-                </a>
-                <a href="/apus/doctorinfo/list">
-                    <img src="https://thumbs.dreamstime.com/b/male-doctor-13649446.jpg">
-                </a>
-                <a href="/apus/doctorinfo/list" >
-                    <img src="https://familycounsellorwindsor.com/wp-content/uploads/2016/11/bigstock-Young-medical-doctor-man-isola-105272324-1170x1169.jpg">
-                </a>
+<section class="ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <!-- <h2 class="heading-section mb-5">Carousel #03</h2> -->
+          </div>
+          <div class="col-md-12">
+            <div class="featured-carousel owl-carousel">
+              <div class="item">
+                <div class="work">
+                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_1.jpg);">
+                    <div class="text w-100">
+                      <span class="cat">김사사 상담사</span>
+                      <h3><a href="#">안녕하세요 APUJIMA입니다.</a></h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="work">
+                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_4.jpg);">
+                    <div class="text w-100">
+                      <span class="cat">조주리 상담사</span>
+                      <h3><a href="#">정신건강에 도움을..</a></h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="work">
+                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_3.jpg);">
+                    <div class="text w-100">
+                      <span class="cat">김태호 상담사</span>
+                      <h3><a href="#">오늘날 4명중에 1명이 마음병이 생깁니다.</a></h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="work">
+                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_2.jpg);">
+                    <div class="text w-100">
+                      <span class="cat">김진현 상담사</span>
+                      <h3><a href="#">APUJIMA가 도와드리겠습니다.</a></h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="work">
+                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_4.jpg);">
+                    <div class="text w-100">
+                      <span class="cat">신현지 상담사</span>
+                      <h3><a href="#">감사합니다.</a></h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <ol class="button" id="lightButton">
-                <li index="0">
-                <li index="1">
-                <li index="2">
-                <li index="3">
-                <li index="4">
-            </ol>
-            <nav>
-                <span class="dg-prev"></span>
-                <span class="dg-next"></span>
-            </nav>
-        </section>
-    </div>
-  </div>
+          </div>
+        </div>
+      </div>
+    </section>
 <!--Carousel Wrapper-->
 
 <div class="noticeBoardTab" style="margin-top: 300px;">
@@ -644,4 +673,10 @@ return this;
 };
 })(jQuery);
 </script>
+
+    <script src="${contextPath}/js/jquery.min.js"></script>
+    <script src="${contextPath}/js/popper.js"></script>
+    <script src="${contextPath}/js/bootstrap.min.js"></script>
+    <script src="${contextPath}/js/owl.carousel.min.js"></script>
+    <script src="${contextPath}/js/main.js"></script>
 

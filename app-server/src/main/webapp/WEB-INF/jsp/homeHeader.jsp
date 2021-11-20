@@ -146,6 +146,13 @@ display: block;
   background-color: #dcdcdc;
 }
 
+.dropdown-menu-center {
+right: auto;
+left: 50%;
+-webkit-transform: translate(-50%, 0);
+-o-transform: translate(-50%, 0);
+transform: translate(-50%, 0);}
+
 </style>
 
 <header>
@@ -236,7 +243,7 @@ display: block;
           />
           <b style="color: white; text-size: 1.4em">&nbsp;${loginUser.nickname}</b>
         </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="${contextPath}/app/auth/userInfoList">내 정보</a></li>
             <li><a class="dropdown-item" href="${contextPath}/app/bucket/list">버킷 리스트</a></li>
             <li><a class="dropdown-item" href="${contextPath}/app/plant/list">나의 정원</a></li>

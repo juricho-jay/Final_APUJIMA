@@ -32,7 +32,7 @@ public class PlantController {
     mv.addObject("pageTitle", "새 글");
     mv.addObject("contentUrl", "plant/PlantForm.jsp");
     // mv.setViewName("template1");
-    mv.setViewName("plant/PlantForm");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
