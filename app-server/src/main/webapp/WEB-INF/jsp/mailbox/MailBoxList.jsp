@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <link rel="stylesheet" href="/apus/css/MailBoxList.css">
 
@@ -80,7 +83,16 @@
 		            </div>
 		             <b class="box-id">${mailBox.sender.nickname}</b>
 		             <div class="box-title">
-		               <a href='detail?no=${mailBox.no}'>${mailBox.title}</a>
+		               <a href='detail?no=${mailBox.no}'>
+		                <c:choose>
+								       <c:when test="${fn:length(mailBox.title) > 7}">
+								          ${fn:substring(mailBox.title, 0, 5)}...
+								       </c:when>
+								       <c:otherwise>
+								          ${mailBox.title}
+								       </c:otherwise>
+								    </c:choose>
+		               </a>
 		             </div>
 		            <span class="box-time">${mailBox.sentTime}</span>
 	          </div>

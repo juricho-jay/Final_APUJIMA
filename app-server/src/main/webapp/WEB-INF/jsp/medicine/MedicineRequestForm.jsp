@@ -72,7 +72,7 @@
 <div class="mb-3 row">
     <label for='m-user' class="col-sm-3 col-form-label">* 약품 등록 신청자</label>
     <div class="col-sm-6">
-      <input id='m-user' type='text' name='requester' value = "${loginUser.id}"class="form-control" readonly/>
+      <input id='m-user' type='text' name='requester' value = "${loginUser.id}" class="form-control" readonly/>
     </div>
 </div>
 

@@ -81,7 +81,9 @@ aside#main{
 
   <ul>
   <!-- <li><a href ="list"class="btn4">전체 목록</a></li> -->
-  <li><a href ="list"class="btn4" style="color: #2c473e;">전체 쪽지함</a></li>
+  <li><a href ="list"class="btn4" style="color: #2c473e; font-weight:bolder;">전체 쪽지함
+  
+  </a></li>
   <li><a href="notreadlist" class="btn4" style="color: #2c473e;">안읽은 쪽지</a></li>
   <li><a href="readlist" class="btn4" style="color: #2c473e;">읽은 쪽지</a></li>
 </ul>

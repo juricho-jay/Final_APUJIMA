@@ -52,8 +52,9 @@ public class AdminController {
     }
 
     mv.addObject("medicineApprovalList", medicineApprovalList);
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "admin/AdminMedicineApprovalList.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -161,8 +162,9 @@ public class AdminController {
     }
 
     mv.addObject("reportApprovalList", reportApprovalList);
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "admin/AdminReportApprovalList.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -171,10 +173,7 @@ public class AdminController {
 
     Report report = reportDao.findByReport(no, id);
     int boardNo = report.getRequestBoard().getNo();
-
-
     String reportedBoardWriter = report.getRequestBoard().getWriter().getId();
-
 
     ModelAndView mv = new ModelAndView();
 
@@ -196,6 +195,7 @@ public class AdminController {
     }
 
 
+
     Member reportedMember = memberDao.findById(reportId);
     Member reportMember = memberDao.findById(reportedBoardWriter);
     String sendTitle = "게시판 신고 결과";
@@ -214,6 +214,7 @@ public class AdminController {
     reportDao.delete(report.getNo());
     sqlSessionFactory.openSession().commit();
 
+
     // mv.addObject("medicineList", medicineList);
     mv.setViewName("redirect:adminReportApprovalList");
     return mv;
@@ -225,10 +226,6 @@ public class AdminController {
     Report report = reportDao.findByReport(no, id);
 
     String reportedBoardWriter = report.getRequestBoard().getWriter().getId();
-
-
-
-
     ModelAndView mv = new ModelAndView();
 
     Member member = ((Member) session.getAttribute("loginUser"));

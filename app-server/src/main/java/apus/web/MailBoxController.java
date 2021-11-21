@@ -178,6 +178,39 @@ public class MailBoxController {
     return mv;
   }
 
+  @PostMapping("/mailbox/sendFromUserTag")
+  public ModelAndView sendFromUserTag(MailBox mailBox, String nickname, HttpSession session,
+      String title, String content) throws Exception {
+
+    Member member = memberDao.findByNickname(nickname);
+    mailBox.setSender((Member) session.getAttribute("loginUser"));
+    mailBox.setReceiver(member);
+    mailBox.setTitle(title);
+    mailBox.setContent(content);
+
+
+    mailBoxDao.insert(mailBox);
+    sqlSessionFactory.openSession().commit();
+
+    List<MailBox> mailBoxList = mailBoxDao.findByTime();
+    ModelAndView mv = new ModelAndView();
+
+    int count = 0;
+    if (member != null) {
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }
+
+    mv.setViewName("redirect:../board/list");
+    return mv;
+  }
+
   @GetMapping("/mailbox/delete")
   public ModelAndView delete(int no) throws Exception {
     MailBox mailBox = mailBoxDao.findByNo(no);
