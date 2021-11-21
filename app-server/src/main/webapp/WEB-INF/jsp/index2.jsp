@@ -33,7 +33,11 @@
  
   
   
-  
+  <script>
+window.onload = function() {
+  $("#welcome").hide().fadeIn(3500);
+  };
+</script>
   
   
   <style>
@@ -73,6 +77,13 @@
 			         
 			  <!-- <div style="width: 85%; height:500px; margin-top: 100px; background-color: #2C473E; position:absolute;">
 			  </div> -->
+			  
+			  <div id="welcome" class="position-absolute top-50 start-50 translate-middle text-end">
+			  <h1 style="color:white;"><b>We are here for friends in need</b></h1>
+			  <h3 style="color:white;">APUJIMA에 오신 것을 환영합니다</h3>
+			  <p class="fs-5" style="color:white;">당신의 심적 안정을 위한 플랫폼</p>
+			  <h6 style="color:white;">-with APUs-</h6>
+			  </div>
 			  
 			  
 <div class="content" style="margin-top:850px;">
@@ -198,7 +209,7 @@
 			<!--Carousel Wrapper-->
 			
 			<div class="noticeBoardTab" style="margin-top: 100px;">
-					<div class="board-view"">
+					<div class="board-view">
 					    <h4 style="margin-left:13%; color: #2C473E; float:left; vertical-align:buttom; ">공지사항  </h4>
 					    <span class="text-info" style="float:right; margin-right:13%; font-size:15px; margin-top:6px;"> <a href="${contextPath}/app/board/noticeBoardList" style="color: #2C473E;">더보기</a></span>
 					</div>
@@ -248,3 +259,6 @@
     <script src="${contextPath}/js/main/select/bootstrap.min.js"></script>
     <script src="${contextPath}/js/main/select/owl.carousel.min.js"></script>
     <script src="${contextPath}/js/main/select/main.js"></script>
+    
+    
+
