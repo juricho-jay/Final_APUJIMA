@@ -27,8 +27,10 @@ public class PlantController {
 
 
   @GetMapping("/plant/form")
-  public ModelAndView form() {
+  public ModelAndView form(HttpSession session) {
+    Member member = ((Member) session.getAttribute("loginUser"));
     ModelAndView mv = new ModelAndView();
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "새 글");
     mv.addObject("contentUrl", "plant/PlantForm.jsp");
     // mv.setViewName("template1");
@@ -77,6 +79,7 @@ public class PlantController {
     }
 
     mv.addObject("plantList",plantList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle","화분 목록");
     mv.addObject("contentUrl", "plant/PlantList.jsp");
     mv.setViewName("darkTemplate");
@@ -111,6 +114,7 @@ public class PlantController {
     }
 
     mv.addObject("plant",plant);
+    mv.addObject("member", member);
     mv.addObject("pageTitle","화분 목록");
     mv.addObject("contentUrl", "plant/PlantDetail.jsp");
 
@@ -121,7 +125,6 @@ public class PlantController {
   @GetMapping("/plant/grow")
   public ModelAndView grow(String no,Member member, HttpSession session) throws Exception {
     Plant plant  = plantDao.findByNo(Integer.parseInt(no));
-
     plant.setOwnerName((Member) session.getAttribute("loginUser"));
 
     int point = 30;
@@ -154,15 +157,33 @@ public class PlantController {
   }
 
   @GetMapping("/plant/updateForm")
-  public ModelAndView updateForm(String no) throws Exception {
-
+  public ModelAndView updateForm(String no, HttpSession session) throws Exception {
+    Member member = (Member) session.getAttribute("loginUser");
     Plant plant  = plantDao.findByNo(Integer.parseInt(no));
+    ModelAndView mv = new ModelAndView();
     if (plant == null) {
       throw new Exception ("해당 화분이 없습니다.");
     }
 
-    ModelAndView mv = new ModelAndView();
+    //안읽은 메일 체크
+
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+
+      mv.addObject("uncheckedMail", count);
+    }
+
     mv.addObject("plant",plant);
+    mv.addObject("member", member);
     mv.addObject("pagetitle","화분 이름 수정하기");
     mv.addObject("contentUrl", "plant/UpdateForm.jsp");
     mv.setViewName("darkTemplate");
@@ -170,8 +191,9 @@ public class PlantController {
   }
 
   @GetMapping("/plant/update")
-  public ModelAndView update(String no, String plantName ) throws Exception {
-
+  public ModelAndView update(String no, String plantName, HttpSession session) throws Exception {
+    ModelAndView mv = new ModelAndView();
+    Member member = (Member) session.getAttribute("loginUser");
     Plant plant  = plantDao.findByNo(Integer.parseInt(no));
     if (plant == null) {
       throw new Exception ("해당 화분이 없습니다.");
@@ -181,8 +203,25 @@ public class PlantController {
     plantDao.update(plant);
     sqlSessionFactory.openSession().commit();
 
-    ModelAndView mv = new ModelAndView();
+    //안읽은 메일 체크
+
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+
+      mv.addObject("uncheckedMail", count);
+    }
+
     mv.addObject("plant",plant);
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "plant/PlantUpdate.jsp");
     mv.setViewName("darkTemplate");
     return mv;

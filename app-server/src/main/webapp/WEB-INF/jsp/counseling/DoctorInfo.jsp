@@ -36,36 +36,30 @@
   <div class="container ">
     <div class="row d-flex">
 		  <c:forEach items="${memberList}" var="member">
-           <c:if test="${member.doctorOrNot eq '2'}">
-      <div class="col-md-12 col-xl-4">
-
-        <div class="card" style="border-radius: 15px;">
-          <div class="card-body text-center">
-            <div class="mt-3 mb-4">
-              <img
-                src="${contextPath}/upload/member/${member.photo}"
-                class="rounded-circle img-fluid" style="width: 100px;"
-              />
-            </div>
-            <h4 class="mb-2">${member.name}</h4>
-            <p class="text-muted mb-4">${member.doctor.major}<span class="mx-2">| ${member.email}</span> <a href="#!">${member.doctor.homepage}</a></p>
-            <p class='title'>"${member.doctor.introduction}"</p>
-            
-            <form action='../counseling/form' method="get">
-                <input type="hidden" name="counselorNo" value="${member.no}">
-                <!-- <button class="btn btn-primary btn-sm" >전화예약신청</button>
-                <button type="submit" class="btn btn-primary btn-sm" >온라인상담신청</button> -->
-		           <button type="submit" class="btn btn-primary btn-rounded btn-lg">
-		             상담신청하기
-		           </button>
-                      </form>
-            
-          </div>
-        </div>
-
-      </div>
-  </c:if>
-        </c:forEach>
+         <c:if test="${member.doctorOrNot eq '2'}">
+			      <div class="col-md-12 col-xl-4">
+			        <div class="card" style="border-radius: 15px;">
+			          <div class="card-body text-center">
+			            <div class="mt-3 mb-4">
+			              <img src="${contextPath}/upload/member/${member.photo}"
+			                class="rounded-circle img-fluid" style="width: 100px;"/>
+			            </div>
+					            <h4 class="mb-2">${member.name}</h4>
+					            <p class="text-muted mb-4">${member.doctor.major}<br><span class="mx-2"> ${member.email}</span> <a href="#!">${member.doctor.homepage}</a></p>
+					            <p class='title'>"${member.doctor.introduction}"</p>
+			            <form action='../counseling/form' method="get">
+                      <input type="hidden" name="counselorNo" value="${member.no}">
+			                <!-- <button class="btn btn-primary btn-sm" >전화예약신청</button>
+			                <button type="submit" class="btn btn-primary btn-sm" >온라인상담신청</button> -->
+					           <button type="submit" class="btn btn-primary btn-rounded btn-lg">
+					             상담신청하기
+					           </button>
+                  </form>
+			          </div>
+			        </div>
+			      </div>
+        </c:if>
+      </c:forEach>
     </div>
   </div>
 </section>

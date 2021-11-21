@@ -122,6 +122,7 @@ public class CommentController {
     }   
 
     mv.addObject("commentList", aliveCommentList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "나의 댓글");
     mv.addObject("contentUrl", "board/BoardSearchMyComment.jsp");
     mv.setViewName("darkTemplate");

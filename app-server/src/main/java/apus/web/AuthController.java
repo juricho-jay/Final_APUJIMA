@@ -72,6 +72,7 @@ public class AuthController {
 
     if (member != null) {
       session.setAttribute("loginUser", member);
+      mv.addObject("member", member);
       mv.setViewName("redirect:../home");
 
     } else {

@@ -47,6 +47,7 @@ public class MailBoxController {
 
     mv.addObject("mailBoxList", mailBoxList);
     mv.addObject("memberList", memberList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "쪽지함목록");
     mv.addObject("contentUrl", "mailbox/MailBoxList.jsp");
     mv.setViewName("mailboxTemplate");
@@ -80,6 +81,7 @@ public class MailBoxController {
 
     mv.addObject("pageTitle", "쪽지함상세");
     mv.addObject("mailBox", mailBox);
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "mailbox/MailBoxDetail.jsp");
     mv.setViewName("mailboxTemplate");
     return mv;
@@ -107,6 +109,7 @@ public class MailBoxController {
 
     mv.addObject("mailBoxList", mailBoxList);
     mv.addObject("memberList", memberList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "읽은쪽지함");
     mv.addObject("contentUrl", "mailbox/MailBoxReadList.jsp");
     mv.setViewName("mailboxTemplate");
@@ -135,6 +138,7 @@ public class MailBoxController {
 
     mv.addObject("mailBoxList", mailBoxList);
     mv.addObject("memberList", memberList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "읽은쪽지함");
     mv.addObject("contentUrl", "mailbox/MailBoxNotReadList.jsp");
     mv.setViewName("mailboxTemplate");

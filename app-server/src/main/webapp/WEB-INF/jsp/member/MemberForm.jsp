@@ -157,12 +157,21 @@ function div_OnOff(v,id){
       <input id='f-name' type='text' name='name' class="form-control">
     </div>
 </div>
+
+
+
   <div class="mb-3 row">
-    <label for='f-f-nickname' class="col-sm-3 col-form-label">* 별명</label>
+    <label for='f-nickname' class="col-sm-3 col-form-label">* 별명</label>
     <div class="col-sm-6">
-      <input id='f-nickname' type='text' name='nickname'>
-      <input type="button"value="중복체크" onclick= "nicknameCheck()">
+      <input id='f-nickname' type='text' name='nickname' class ="form-control">
+     <div class="invalid-feedback">
+        이미 존재하는 별명입니다.
+     </div>
+   </div>
+     <div class ="col-auto">
+       <button id = "x-nickname-check-btn" type ="button" class ="btn btn-primary form-control">중복검사</button>
     </div>
+    
 </div>
 
 
@@ -170,6 +179,7 @@ function div_OnOff(v,id){
 <div class="mb-3 row">
     <label for='f-id' class="col-sm-3 col-form-label">* 아이디</label>
     <div class="col-sm-6">
+<<<<<<< HEAD
       <input id='f-id' type='text' name='id' placeholder = "ID">
       <div class = "invalid-feedback">
       이미 존재하는 아이디 입니다.
@@ -181,6 +191,18 @@ function div_OnOff(v,id){
     </div>
 
 
+=======
+      <input id='f-id' type='text' name='id' placeholder = "ID" class ="form-control">
+      <div class="invalid-feedback">
+        이미 존재하는 아이디입니다.
+    </div>
+   </div>
+   <div class ="col-auto">
+    <button id ="x-id-check-btn" type = "button" class ="btn btn-primary form-control">중복검사</button>
+    </div>
+    
+</div>
+>>>>>>> bf64ff3f2491a72a6c68f21c36f148ab05c86924
 <div class="mb-3 row">
   <label for='f-password' class="col-sm-3 col-form-label">* 비밀번호</label>
   <div class="col-sm-6">
@@ -280,7 +302,8 @@ function div_OnOff(v,id){
 
 </div>
   <div class="col-12">
-    <input type = 'submit' value = '회원가입' class="btn btn-primary btn-sm" >
+    <button id ="x-add-btn" class ="btn btn-primary btn-sm">등록</button>
+    <!--  <input type = 'submit' value = '회원가입' class="btn btn-primary btn-sm" >-->
   </div>
 </form>
 </div><!-- .container -->
@@ -292,7 +315,49 @@ function div_OnOff(v,id){
 <button>등록</button><br>
 </form>  -->
 
+ <script>
+ var addBtn = document.querySelector("#x-add-btn");
+ var nicknameTag = document.querySelector("#f-nickname");
+ var idTag = document.querySelector("#f-id");
  
+ addBtn.setAttribute("disabled", "disabled");
+
+document.querySelector ("#x-nickname-check-btn").onclick = () => {
+	 var xhr = new XMLHttpRequest();
+	 xhr.addEventListener("load", function() {
+		  if (this.responseText == "false"){
+			  addBtn.removeAttribute("disabled");
+			   nicknameTag.classList.remove("is-invalid");
+		  } else {
+			  addBtn.setAttribute("disabled", "disabled");
+			  nicknameTag.classList.add("is-invalid");
+		  }
+		  })
+		  xhr.open("get","checkNickname?nickname=" + nicknameTag.value);
+	    xhr.send();
+};
+
+
+
+document.querySelector ("#x-id-check-btn").onclick = () =>{
+	   var xhr = new XMLHttpRequest();
+	   xhr.addEventListener("load", function() {
+	      if (this.responseText == "false"){
+	         addBtn.removeAttribute("disabled");
+	         idTag.classList.remove("is-invalid");
+	      } else {
+	        addBtn.setAttribute("disabled","disabled");
+	        idTag.classList.add("is-invalid");
+	      }
+	      })
+	      xhr.open("get","checkId?id=" + idTag.value);
+	      xhr.send();
+	};
+
+
+
+ 
+ </script>
 
 
 

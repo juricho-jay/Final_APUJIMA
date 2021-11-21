@@ -46,6 +46,7 @@ public class CounselingController {
       mv.addObject("uncheckedMail", count);
     }
     mv.addObject("counselor", counselor);
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "counseling/CounselingMemberForm.jsp");
     mv.setViewName("darkTemplate");
     return mv;
@@ -74,6 +75,7 @@ public class CounselingController {
     }
 
     mv.addObject("memberList", memberList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "힐러상담사");
     mv.addObject("contentUrl", "counseling/DoctorInfo.jsp");
     mv.setViewName("darkTemplate");
@@ -103,6 +105,7 @@ public class CounselingController {
 
     mv.addObject("counselingList", counselingList);
     mv.addObject("memberList", memberList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "나의상담신청목록");
     mv.addObject("contentUrl", "counseling/CounselingList.jsp");
     mv.setViewName("darkTemplate");
@@ -164,6 +167,7 @@ public class CounselingController {
     }
 
     mv.addObject("pageTitle", "상담신청상세");
+    mv.addObject("member", member);
     mv.addObject("counseling", counseling);
     mv.addObject("contentUrl", "counseling/CounselingMemberDetail.jsp");
     mv.setViewName("darkTemplate");
@@ -192,6 +196,7 @@ public class CounselingController {
     }
     mv.addObject("counselingList", counselingList);
     mv.addObject("memberList", memberList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "나의상담요청목록");
     mv.addObject("contentUrl", "counseling/CounselingDoctorList.jsp");
     mv.setViewName("darkTemplate");
@@ -218,6 +223,7 @@ public class CounselingController {
       mv.addObject("uncheckedMail", count);
     }
     mv.addObject("pageTitle", "상담요청상세");
+    mv.addObject("member", member);
     mv.addObject("counseling", counseling);
     mv.addObject("contentUrl", "counseling/CounselingDoctorDetail.jsp");
     mv.setViewName("darkTemplate");
