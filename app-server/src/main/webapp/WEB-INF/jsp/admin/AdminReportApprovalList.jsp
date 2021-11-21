@@ -21,7 +21,7 @@
 </head>
 <body>
 <div class="container">
-<h1>승인 대기 게시판 목록</h1>
+<h1>신고 게시판 목록</h1>
 
 <!--  <a href='form' class="btn btn-outline-primary btn-sm">분류</a><br>-->
 <table class="table table-hover">
@@ -37,7 +37,7 @@
 </thead>
 <tbody>
 <c:forEach items="${reportApprovalList}" var="report">
-<form action = 'adminReportApprovalList'>
+<form action = 'reportConfirm'>
  <input type = 'hidden' name = 'id' value = '${report.requester.id}'>
   <input type = 'hidden' name = 'no' value = '${report.requestBoard.no}'>
 <tr>
@@ -51,7 +51,7 @@
   <c:if test='${report.requestBoard.whichBoard == 3}'>
     <td>공지사항</td> 
   </c:if>
-    <td>${report.requestBoard.title}</td>
+    <td><a href = '../board/detail?no=${report.requestBoard.no}'>${report.requestBoard.title}</td>
     <td>${report.requester.id}</td> 
    
     <td>${report.reason}</td> 

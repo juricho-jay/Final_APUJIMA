@@ -157,8 +157,8 @@ public class AdminController {
     Report report = reportDao.findByReport(no, id);
     int boardNo = report.getRequestBoard().getNo();
 
-    boardDao.delete(boardNo);
     reportDao.delete(report.getNo());
+    boardDao.delete(boardNo);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -179,7 +179,10 @@ public class AdminController {
       }
       mv.addObject("uncheckedMail", count);
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 87d95841ad4dc9778ccebcae97569dd5ac005204
     // mv.addObject("medicineList", medicineList);
     mv.setViewName("redirect:adminReportApprovalList");
     return mv;
@@ -210,8 +213,6 @@ public class AdminController {
       }
       mv.addObject("uncheckedMail", count);
     }
-
-
     // mv.addObject("medicineList", medicineList);
     mv.setViewName("redirect:adminReportApprovalList");
     return mv;
