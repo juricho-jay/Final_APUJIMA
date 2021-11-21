@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko" >
 <head>
+<link rel="stylesheet" href="/apus/css/MailBoxList.css">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>board</title>
 <head>
@@ -200,23 +201,21 @@
          <c:forEach items ="${commentList}" var= "comment">
    
    
-      <p style="float:left;"> 작성자: ${comment.commenter.nickname}&nbsp;</p>
+      <p style="float:left;"> 작성자 : ${comment.commenter.nickname}&nbsp;&nbsp;&nbsp;</p>
       
       <div class="dropdown" >
         <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style="dropdown-border-color: rgba($black, .15);">
           더보기
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <li><a class="dropdown-item" href="#">쪽지보내기</a></li>
-          <li><button class="dropdown-item" type="button">쪽지보내기</button></li>
-          <!-- <li><button class="dropdown-item" type="button">Another action</button></li>
-          <li><button class="dropdown-item" type="button">Something else here</button></li> -->
+          <li><button name="btn-modal" class="dropdown-item" type="button" 
+          data-nickname="${comment.commenter.nickname}">쪽지 보내기</button></li>
         </ul>
       </div>
       <br>
    <p></p>
    <p style="xwidth: 230.7px;"> 내용 : ${comment.content} </p>
-   <p> 댓글 작성날짜 : ${comment.registeredDate}</p>
+   <p> 댓글 작성 날짜 : ${comment.registeredDate}</p>
    
    <div id = "UDbutton" style ="margin-left : 0px"> 
    <c:if test = "${loginUser.nickname == comment.commenter.nickname }">
@@ -243,7 +242,7 @@
  <form  id = "updateForm" action='${contextPath}/app/comment/update'>
  <input type ="hidden" name ="board_no"  value ="${board.no}">
  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" 
-      aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+      aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -263,30 +262,56 @@
           </div>
           <div class="modal-footer">
             <button type="button" id="a-cancelBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
-            <button type="submit" id="bucketAddBtn" class="btn btn-primary">확인</button>
+            <button type="submit" class="btn btn-primary">확인</button>
           </div>
         </div>
       </div>
     </div>
    </form>
 
+  <!-- 쪽지 보내기 모달 -->
+  <form  id = "sendMForm" action='${contextPath}/app/mailbox/sendFromUserTag' method="POST">
+ <div class="modal fade" id="sendMessageModal" tabindex="-1" role="dialog" 
+      aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">쪽지 보내기</h5>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="sender" class="col-form-label">보내는이</label>
+                <input type="text" class="form-control" value="${loginUser.nickname}" readonly>
+              </div>
+              <div class="form-group">
+                <label for="receiber-nickname" class="col-form-label">받는이</label>
+                <input type="text" class="form-control" id="senderNickname" name="nickname" value ="" readonly>
+              </div>
+              <div class="form-group">
+                <label for="bucket-title" class="col-form-label">제목</label>
+                <input type="text" class="form-control" name="title">
+              </div>
+              <div class="form-group">
+                <label for="comment-content" class="col-form-label">내용</label>
+                <textarea class="form-control" name="content" ></textarea>
+              </div>
+              
+              
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="s-cancelBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            <button type="submit" class="btn btn-primary">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   </form>
   
     
 
 
 <script>
-// 좋아요 여부에 따라 하트 
-/*
-function modalOn(){
-   /*     console.log(event.target);
-     console.log(event.target.dataset.commentno);
-     console.log();
-     
-     document.getElementById(event.target.dataset.commentno).style.display = "block;
-     
-}
-*/
-
+//로그인 여부 
 function checkValue(){
    if (${loginUser == null}){
       alert("로그인 해주세요!");
@@ -294,45 +319,62 @@ function checkValue(){
    }
 }
 
+//좋아요 하트 변경
 document.querySelectorAll("#heartBtn").forEach((tag) => {
 if (tag.getAttribute("value") == 1) {
   $("#heartIcon").attr('class', 'bi bi-heart-fill');
-  
 } else {
    $("#heartIcon").attr('class', 'bi bi-heart');
-
      }
 });
-var m
-console.log()
-/*
- 
- var modifyModal = document.querySelector("#modifyModal");
-console.log(modifyModal)
-modifyModal.addEventListener("show.bs.modal", () => {
-   console.log("===============>222")
-});
-*/
-//휴지통 삭제 모달 오픈
+
+
+//댓글 수정 모달 오픈
 //id는 절대값이므로 중복될 수 없다 > name을 활용할 것 > id로 쓸 경우 아이콘 하나만 모달 창 실행
 $('button[name=updateButton]').on('click', function(){
 $('#updateModal').modal('show');
-
 });
 
-     $('#a-cancelBtn').on('click', function(){
-     $('#updateForm > input').remove();
-     $('#updateModal').modal('hide');
-     });
-
-
+//댓글 수정 모달 닫기 > input 태그 추가된 것 삭제
+$('#a-cancelBtn').on('click', function(){
+$('#updateForm > input').remove();
+$('#updateModal').modal('hide');
+});
 
 //데이터 모달에 넘기기 
 function updateComment(no) {
      var updateForm= $('#updateForm');
      $('<input>').attr('type','hidden').attr('value', no).attr('name','no').appendTo(updateForm);
-     }; 
+}; 
 
+
+
+
+//쪽지 보내기 모달 열기
+$('button[name=btn-modal]').on('click', function(){
+	var nickname = $(this).data('nickname');
+	$(".form-group #senderNickname").val(nickname)
+$('#sendMessageModal').modal('show');
+});
+
+//쪽지 보내기 모달 안 취소 버튼으로 닫기
+$('#s-cancelBtn').on('click', function(){
+/* $('#sendMForm > input').remove(); */
+$('#sendMessageModal').modal('hide');
+});
+
+//데이터 모달에 넘기기 
+/* function sendMessage(nickname) {
+     var updateForm= $('#updateForm');
+     $('<input>').attr('type','hidden').attr('value', no).attr('name','no').appendTo(updateForm);
+};  */
+     
+     
+     
   </script>
+  
+
+
+
 </body>
 </html>
