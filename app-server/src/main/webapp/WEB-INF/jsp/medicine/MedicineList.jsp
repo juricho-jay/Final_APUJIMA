@@ -22,24 +22,24 @@
 <table class="table table-hover">
 <thead>
   <tr>
-    <th>번호</th>
-    <th>약품명</th>
-    <th>권장 연령</th>
-    <th>약품 모양</th>
-    <th>약품 색상</th>
-    <th>약품 효능</th>
+    <th scope ="col">번호</th>
+    <th scope ="col">약품명</th>
+    <th scope ="col">권장 연령</th>
+    <th scope ="col">약품 모양</th>
+    <th scope ="col">약품 색상</th>
+    <th scope ="col">약품 효능</th>
   </tr>
 </thead>
 <tbody>
 
 <c:forEach items="${medicineList}" var="medicine">
 <tr>
-    <td>${medicine.no}</td>
-    <td><a href='detail?no=${medicine.no}'>${medicine.name}</a></td>
-    <td>${medicine.ageLimit}</td> 
-    <td>${medicine.shape}</td> 
-    <td>${medicine.color}</td> 
-    <td>${medicine.effect}</td> 
+    <td style= "width: 5%;">${medicine.no}</td>
+    <td style= "width: 10%;"><a href='detail?no=${medicine.no}'>${medicine.name}</a></td>
+    <td style= "width: 5%;">${medicine.ageLimit}</td> 
+    <td style= "width: 5%;">${medicine.shape}</td> 
+    <td style= "width: 5%;">${medicine.color}</td> 
+    <td style= "width: 5%;">${medicine.effect}</td> 
 </tr>
 </c:forEach>
 </tbody>
