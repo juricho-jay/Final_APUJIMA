@@ -294,7 +294,7 @@ transform: translate(-50%, 0);}
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="${contextPath}/upload/member/${member.photo}" class="rounded-circle" width="30" height="30">
+                    <img src="${contextPath}/upload/member/${member.photo}" class="rounded-circle">
                   </a>
                 </div>
               </div>
