@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import apus.dao.MemberDao;
 import apus.domain.Doctor;
@@ -313,6 +314,26 @@ public class MemberController {
     return mv;
   }
 
+  @GetMapping("/member/checkNickname")
+  @ResponseBody
+  public String checkNickname(String nickname) throws Exception {
+    Member member = memberDao.findByNickname(nickname);
 
+    if (member == null) {
+      return "false";
+    }else {
+      return "true";
+    }
+  }
 
+  @GetMapping("/member/checkId")
+  @ResponseBody
+  public String checkId(String id) throws Exception {
+    Member member = memberDao.findById(id);
+    if (member == null) {
+      return "false";
+    }else {
+      return "true";
+    }
+  }
 }
