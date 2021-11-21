@@ -53,7 +53,7 @@ public class AdminController {
 
     mv.addObject("medicineApprovalList", medicineApprovalList);
     mv.addObject("contentUrl", "admin/AdminMedicineApprovalList.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -145,7 +145,7 @@ public class AdminController {
 
     mv.addObject("reportApprovalList", reportApprovalList);
     mv.addObject("contentUrl", "admin/AdminReportApprovalList.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -155,8 +155,8 @@ public class AdminController {
     Report report = reportDao.findByReport(no, id);
     int boardNo = report.getRequestBoard().getNo();
 
-    boardDao.delete(boardNo);
     reportDao.delete(report.getNo());
+    boardDao.delete(boardNo);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -177,8 +177,6 @@ public class AdminController {
       }
       mv.addObject("uncheckedMail", count);
     }
-
-
     // mv.addObject("medicineList", medicineList);
     mv.setViewName("redirect:adminReportApprovalList");
     return mv;
@@ -209,8 +207,6 @@ public class AdminController {
       }
       mv.addObject("uncheckedMail", count);
     }
-
-
     // mv.addObject("medicineList", medicineList);
     mv.setViewName("redirect:adminReportApprovalList");
     return mv;
