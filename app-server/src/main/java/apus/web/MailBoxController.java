@@ -153,7 +153,7 @@ public class MailBoxController {
     mailBox.setSender((Member) session.getAttribute("loginUser"));
     mailBox.setReceiver(member);
     mailBox.setTitle(title);
-    mailBox.setContent(content);
+    mailBox.setContent(content);    
 
 
     mailBoxDao.insert(mailBox);

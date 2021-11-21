@@ -58,10 +58,9 @@ public class AdminController {
   }
 
   @GetMapping("/admin/medicineConfirm")
-  public ModelAndView medicineConfirm(HttpSession session, String name) throws Exception {
+  public ModelAndView medicineConfirm(MailBox mailBox,HttpSession session, String name, String requester) throws Exception {
 
     Medicine medicine = medicineDao.findByName(name);
-
     ModelAndView mv = new ModelAndView();
 
     Member member = ((Member) session.getAttribute("loginUser"));
@@ -81,6 +80,15 @@ public class AdminController {
       mv.addObject("uncheckedMail", count);
     }
 
+    Member receiver = memberDao.findByNickname(requester);
+    String sendTitle = "약품 승인 결과";
+    String sendContent = "약품신청이 승인되었습니다!";
+    mailBox.setSender(member);
+    mailBox.setReceiver(receiver);
+    mailBox.setTitle(sendTitle);
+    mailBox.setContent(sendContent);
+
+    mailBoxDao.insert(mailBox);
     medicineDao.requestApprove(medicine);
     sqlSessionFactory.openSession().commit();
 
@@ -90,7 +98,7 @@ public class AdminController {
   }
 
   @GetMapping("/admin/reject")
-  public ModelAndView medicineReject(HttpSession session, String name) throws Exception {
+  public ModelAndView medicineReject(MailBox mailBox,HttpSession session, String name,String requester) throws Exception {
 
     Medicine medicine = medicineDao.findByName(name);
 
@@ -113,6 +121,15 @@ public class AdminController {
       mv.addObject("uncheckedMail", count);
     }
 
+    Member receiver = memberDao.findByNickname(requester);
+    String sendTitle = "약품 승인 결과";
+    String sendContent = "약품신청이 거절되었습니다!";
+    mailBox.setSender(member);
+    mailBox.setReceiver(receiver);
+    mailBox.setTitle(sendTitle);
+    mailBox.setContent(sendContent);
+
+    mailBoxDao.insert(mailBox);
     medicineDao.requestCancle(medicine);
     sqlSessionFactory.openSession().commit();
 
@@ -150,14 +167,14 @@ public class AdminController {
   }
 
   @GetMapping("/admin/reportConfirm")
-  public ModelAndView reportConfirm(HttpSession session, String id, int no) throws Exception {
+  public ModelAndView reportConfirm(MailBox mailBox, HttpSession session, String id, int no, String reportId) throws Exception {
 
     Report report = reportDao.findByReport(no, id);
     int boardNo = report.getRequestBoard().getNo();
 
-    boardDao.delete(boardNo);
-    reportDao.delete(report.getNo());
-    sqlSessionFactory.openSession().commit();
+
+    String reportedBoardWriter = report.getRequestBoard().getWriter().getId();
+
 
     ModelAndView mv = new ModelAndView();
 
@@ -178,6 +195,24 @@ public class AdminController {
       mv.addObject("uncheckedMail", count);
     }
 
+
+    Member reportedMember = memberDao.findById(reportId);
+    Member reportMember = memberDao.findById(reportedBoardWriter);
+    String sendTitle = "게시판 신고 결과";
+    String sendContent = "게시판 신고 접수가 승인되어 게시글이 삭제됨을 알려드립니다!";
+
+    mailBox.setSender(member);
+    mailBox.setReceiver(reportedMember);
+    mailBox.setTitle(sendTitle);
+    mailBox.setContent(sendContent);
+
+    mailBox.setReceiver(reportMember);
+    mailBox.setTitle(sendTitle);
+    mailBox.setContent(sendContent);
+    mailBoxDao.insert(mailBox);
+    boardDao.delete(boardNo);
+    reportDao.delete(report.getNo());
+    sqlSessionFactory.openSession().commit();
 
     // mv.addObject("medicineList", medicineList);
     mv.setViewName("redirect:adminReportApprovalList");
@@ -185,11 +220,14 @@ public class AdminController {
   }
 
   @GetMapping("/admin/reportReject")
-  public ModelAndView reportReject(HttpSession session, String id, int no) throws Exception {
+  public ModelAndView reportReject(MailBox mailBox, HttpSession session, String id, int no, String reportId) throws Exception {
 
     Report report = reportDao.findByReport(no, id);
-    reportDao.delete(report.getNo());
-    sqlSessionFactory.openSession().commit();
+
+    String reportedBoardWriter = report.getRequestBoard().getWriter().getId();
+
+
+
 
     ModelAndView mv = new ModelAndView();
 
@@ -210,6 +248,23 @@ public class AdminController {
       mv.addObject("uncheckedMail", count);
     }
 
+    Member reportedMember = memberDao.findById(reportId);
+    Member reportMember = memberDao.findById(reportedBoardWriter);
+    String sendTitle = "게시판 신고 결과";
+    String sendContent = "게시판 신고 접수가 거절되어 게시글이 유지됨을 알려드립니다!";
+
+    mailBox.setSender(member);
+    mailBox.setReceiver(reportedMember);
+    mailBox.setTitle(sendTitle);
+    mailBox.setContent(sendContent);
+
+    mailBox.setReceiver(reportMember);
+    mailBox.setTitle(sendTitle);
+    mailBox.setContent(sendContent);
+
+    mailBoxDao.insert(mailBox);
+    reportDao.delete(report.getNo());
+    sqlSessionFactory.openSession().commit();
 
     // mv.addObject("medicineList", medicineList);
     mv.setViewName("redirect:adminReportApprovalList");
@@ -217,101 +272,6 @@ public class AdminController {
   }
 
 
-
-  //  @PostMapping("/board/updateForm")
-  //  public ModelAndView updateForm(String no) throws Exception {
-  //    System.out.println("----------helo updateForm-----------");
-  //
-  //    Board board = boardDao.findByNo(Integer.parseInt(no));
-  //    if (board == null) {
-  //      throw new Exception("해당 번호의 게시글이 없습니다.");
-  //    } 
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("board", board);
-  //    mv.addObject("contentUrl", "board/UpdateForm.jsp");
-  //    mv.setViewName("template3");
-  //    return mv;
-  //  }
-  //
-  //  @PostMapping("/board/update")
-  //  public ModelAndView update(Board board, String title, String content) throws Exception {
-  //    System.out.println("----------helo update-----------");
-  //
-  //    if (board == null) {
-  //      throw new Exception("해당 번호의 게시글이 없습니다.");
-  //    } 
-  //    board.setTitle(title);
-  //    board.setContent(content);
-  //
-  //    boardDao.update(board);
-  //    sqlSessionFactory.openSession().commit();
-  //
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("board", board);
-  //    mv.addObject("contentUrl", "board/BoardUpdate.jsp");
-  //    mv.setViewName("template3");
-  //    return mv;
-  //  }
-  //
-  //  @GetMapping("/board/delete")
-  //  public ModelAndView delete(int no) throws Exception {
-  //
-  //    Board board = boardDao.findByNo(no);
-  //    if (board == null) {
-  //      throw new Exception("해당 번호의 게시글이 없습니다.");
-  //    }
-  //
-  //    boardDao.delete(no);
-  //    sqlSessionFactory.openSession().commit();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.setViewName("redirect:list");
-  //    return mv;
-  //  }
-  //
-  //  @GetMapping("/board/freeBoardList")
-  //  public ModelAndView freeBoardList() throws Exception {
-  //    Collection<Board> boardList = boardDao.findFreeBoard();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("boardList", boardList);
-  //    mv.addObject("pageTitle", "자유게시판목록");
-  //    mv.addObject("contentUrl", "board/FreeBoardList.jsp");
-  //    //mv.setViewName("board/BoardList");
-  //    mv.setViewName("template3");
-  //    // mv.setViewName("template1");
-  //    return mv;
-  //  }
-  //
-  //  @GetMapping("/board/doctorBoardList")
-  //  public ModelAndView doctorBoardList() throws Exception {
-  //    Collection<Board> boardList = boardDao.findDoctorBoard();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("boardList", boardList);
-  //    mv.addObject("pageTitle", "자유게시판목록");
-  //    mv.addObject("contentUrl", "board/DoctorBoardList.jsp");
-  //    //mv.setViewName("board/BoardList");
-  //    mv.setViewName("template3");
-  //    // mv.setViewName("template1");
-  //    return mv;
-  //  }
-  //
-  //  @GetMapping("/board/noticeBoardList")
-  //  public ModelAndView noticeBoardList() throws Exception {
-  //    Collection<Board> boardList = boardDao.findNoticeBoard();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("boardList", boardList);
-  //    mv.addObject("pageTitle", "자유게시판목록");
-  //    mv.addObject("contentUrl", "board/NoticeBoardList.jsp");
-  //    //mv.setViewName("board/BoardList");
-  //    mv.setViewName("template3");
-  //    // mv.setViewName("template1");
-  //    return mv;
-  //  }
 
 
 }
