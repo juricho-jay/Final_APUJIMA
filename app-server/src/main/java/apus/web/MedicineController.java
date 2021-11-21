@@ -33,7 +33,7 @@ public class MedicineController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "새 약품");
     mv.addObject("contentUrl", "medicine/MedicineForm.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("template4");
     return mv;
   }
 
@@ -77,7 +77,7 @@ public class MedicineController {
     mv.addObject("medicineList", medicineList);
     mv.addObject("pageTitle", "약품목록");
     mv.addObject("contentUrl", "medicine/MedicineList.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("template4");
     return mv;
   }
 
@@ -106,7 +106,7 @@ public class MedicineController {
     mv.addObject("medicine", medicine);
     mv.addObject("pageTitle", "약품 상세");
     mv.addObject("contentUrl", "medicine/MedicineDetail.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("template4");
     return mv;
   }
 
@@ -134,7 +134,7 @@ public class MedicineController {
 
     mv.addObject("pageTitle", "약품 등록 요청폼");
     mv.addObject("contentUrl", "medicine/MedicineRequestForm.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("template4");
     return mv;
   }
 
