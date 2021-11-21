@@ -52,6 +52,7 @@ public class AdminController {
     }
 
     mv.addObject("medicineApprovalList", medicineApprovalList);
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "admin/AdminMedicineApprovalList.jsp");
     mv.setViewName("darkTemplate");
     return mv;
@@ -144,6 +145,7 @@ public class AdminController {
     }
 
     mv.addObject("reportApprovalList", reportApprovalList);
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "admin/AdminReportApprovalList.jsp");
     mv.setViewName("darkTemplate");
     return mv;
@@ -177,6 +179,10 @@ public class AdminController {
       }
       mv.addObject("uncheckedMail", count);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 87d95841ad4dc9778ccebcae97569dd5ac005204
     // mv.addObject("medicineList", medicineList);
     mv.setViewName("redirect:adminReportApprovalList");
     return mv;
