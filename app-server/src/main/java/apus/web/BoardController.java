@@ -239,8 +239,6 @@ public class BoardController {
     Member requester = ((Member) session.getAttribute("loginUser"));
     ModelAndView mv = new ModelAndView();
 
-
-
     int no1 = Integer.parseInt(no);
     Board board = boardDao.findByNo(no1);
     if(requester == null) {
@@ -250,14 +248,34 @@ public class BoardController {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
 
-    Report report = reportDao.findByReport(no1, requester.getId());
+    System.out.println("================================");
+    System.out.println("현재 선택된 보드의 번호 ===> " + board.getNo());
+    System.out.println("================================");
 
-    if(report != null) {
+    Report report = reportDao.findByReport(no1, requester.getId());
+    Report tempReport = report;
+
+
+    if(tempReport != null) {
       report = null;
       System.out.println("신고 한 적이 있기에 이게 실행됨");
       mv.addObject("report",report);
+      mv.addObject("contentUrl","/board/BoardReport.jsp");
+      mv.setViewName("/board/BoardReport");
     } 
-    mv.addObject("report",report);
+
+    // 신고한적 있으면 바로 넘어가게 해야할텐데
+
+    if (tempReport == null) {
+      Report report1 = new Report();
+      report1.setRequestBoard(board);
+      report1.setRequester(requester);
+      mv.addObject("report",report1);
+    }
+
+
+
+
     mv.addObject("contentUrl","/board/BoardReport.jsp");
     mv.setViewName("/board/BoardReport");
     return mv;
