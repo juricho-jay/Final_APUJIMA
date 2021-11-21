@@ -75,7 +75,7 @@
 			  </div> -->
 			  
 			  
-<div class="content" style="margin-top:800px;">
+<div class="content" style="margin-top:850px;">
     
     <div class="container">
       <!-- <h2 class="my-5 text-center">Carousel #8</h2> -->
@@ -105,9 +105,9 @@
             <img src="${contextPath}/img/teb1.jpg" alt="Image" class="img-fluid">
           </div>
           <div class="text">
-            <a class="category d-block mb-4" href="#">Travel &mdash; Second Tab</a>
+            <a class="category d-block mb-4" href="#">심리검사 &mdash; Second Tab</a>
             <h2><a href="#">심리검사를 무료로 진단받아보세요.</a></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+            <p>마음이 아픈 사람들 10명 8명은 '나는 괜찮다'고 생각해요. 지금 나의 마음 건강도 궁금하다면 심리검사를 통해 알아보세요.</p>
           </div>
         </div> <!-- .item -->
 
@@ -126,18 +126,17 @@
 
       </div>
     </div>
-  </div>
+</div>
 			  
 			  
-			         
-
 			         
 			<!-- carausel -->    
 			<section class="ftco-section">
 			      <div class="container">
 			        <div class="row">
 			          <div class="col-md-12 text-center">
-			             <h2 class="heading-section mb-5">심리상담사</h2> 
+			             <h2 class="heading-section mb-5">APUJIMA 상담사를 통해 좀 더 단단한 내가 될 수 있도록 희망합니다.</h2> 
+			             
 			          </div>
 			          <div class="col-md-12">
 			            <div class="featured-carousel owl-carousel">
@@ -199,34 +198,37 @@
 			<!--Carousel Wrapper-->
 			
 			<div class="noticeBoardTab" style="margin-top: 100px;">
-					<div class="board-view">
-					    <h4 style="margin-left:13%; color: #2C473E;">공지사항</h4>
-					    <a href="#" class="text-info" style="text-align:right;">View all</a>
+					<div class="board-view"">
+					    <h4 style="margin-left:13%; color: #2C473E; float:left; vertical-align:buttom; ">공지사항  </h4>
+					    <span class="text-info" style="float:right; margin-right:13%; font-size:15px; margin-top:6px;"> <a href="${contextPath}/app/board/noticeBoardList" style="color: #2C473E;">더보기</a></span>
 					</div>
-					<table class="table table-sm" style="margin: 0 auto; width: 850px; color: #2C473E">
-					  <thead>
-					  </thead>
-					  <tbody>
-					  <c:forEach items="${boardList}" var="board">
-					    <c:if test='${board.whichBoard == 3}'>
-					    <tr>
-					      <%-- <td style= "width: 10%" class="text-center">${board.no}</td> 
-					   <c:if test='${board.whichBoard == 1}'>
-					    <td style= "width: 10%" class="text-center">자유게시판</td> 
-					    </c:if>
-					    <c:if test='${board.whichBoard == 2}'>
-					     <td style= "width: 10%" class="text-center">Healer지식in</td> 
-					    </c:if> --%>
-					     <!-- <td style= "width: 10%" class="text-center">공지사항</td>  -->
-					     <td style= "width: 60%" class="text-center"><a href='detail?no=${board.no}'>${board.title}</a></td> 
-					     <%-- <td style= "width: 40%" class="text-center">${board.content}</td> 
-					     <td style= "width: 10%" class="text-center">${board.writer.nickname}</td>  --%>
-					     <td style= "width: 20%" class="text-center">${board.registeredDate}</td> 
-					    </tr>
-					    </c:if>
-					    </c:forEach>
-					  </tbody>
-					</table>
+					<br>
+					<div class="board-table" style="margin-top: 50px; clear:both;">
+							<table class="table table-sm" style="margin: 0 auto; width: 850px; color: #2C473E">
+							  <thead>
+							  </thead>
+							  <tbody>
+							  <c:forEach items="${boardList}" var="board">
+							    <c:if test='${board.whichBoard == 3}'>
+							    <tr>
+							      <%-- <td style= "width: 10%" class="text-center">${board.no}</td> 
+							   <c:if test='${board.whichBoard == 1}'>
+							    <td style= "width: 10%" class="text-center">자유게시판</td> 
+							    </c:if>
+							    <c:if test='${board.whichBoard == 2}'>
+							     <td style= "width: 10%" class="text-center">Healer지식in</td> 
+							    </c:if> --%>
+							     <!-- <td style= "width: 10%" class="text-center">공지사항</td>  -->
+							     <td style= "width: 60%" class="text-center"><a href='detail?no=${board.no}' style="color: #000;">${board.title}</a></td> 
+							     <%-- <td style= "width: 40%" class="text-center">${board.content}</td> 
+							     <td style= "width: 10%" class="text-center">${board.writer.nickname}</td>  --%>
+							     <td style= "width: 20%" class="text-center">${board.registeredDate}</td> 
+							    </tr>
+							    </c:if>
+							    </c:forEach>
+							  </tbody>
+							</table>
+					</div>
 			</div>
 
 
