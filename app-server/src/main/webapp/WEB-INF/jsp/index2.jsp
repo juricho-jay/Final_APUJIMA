@@ -199,34 +199,37 @@
 			<!--Carousel Wrapper-->
 			
 			<div class="noticeBoardTab" style="margin-top: 100px;">
-					<div class="board-view">
-					    <h4 style="margin-left:13%; color: #2C473E;">공지사항</h4>
-					    <a href="#" class="text-info" style="text-align:right;">View all</a>
+					<div class="board-view"">
+					    <h4 style="margin-left:13%; color: #2C473E; float:left; vertical-align:buttom; ">공지사항  </h4>
+					    <span class="text-info" style="float:right; margin-right:13%; font-size:15px; margin-top:6px;"> <a href="${contextPath}/app/board/noticeBoardList" style="color: #2C473E;">더보기</a></span>
 					</div>
-					<table class="table table-sm" style="margin: 0 auto; width: 850px; color: #2C473E">
-					  <thead>
-					  </thead>
-					  <tbody>
-					  <c:forEach items="${boardList}" var="board">
-					    <c:if test='${board.whichBoard == 3}'>
-					    <tr>
-					      <%-- <td style= "width: 10%" class="text-center">${board.no}</td> 
-					   <c:if test='${board.whichBoard == 1}'>
-					    <td style= "width: 10%" class="text-center">자유게시판</td> 
-					    </c:if>
-					    <c:if test='${board.whichBoard == 2}'>
-					     <td style= "width: 10%" class="text-center">Healer지식in</td> 
-					    </c:if> --%>
-					     <!-- <td style= "width: 10%" class="text-center">공지사항</td>  -->
-					     <td style= "width: 60%" class="text-center"><a href='detail?no=${board.no}'>${board.title}</a></td> 
-					     <%-- <td style= "width: 40%" class="text-center">${board.content}</td> 
-					     <td style= "width: 10%" class="text-center">${board.writer.nickname}</td>  --%>
-					     <td style= "width: 20%" class="text-center">${board.registeredDate}</td> 
-					    </tr>
-					    </c:if>
-					    </c:forEach>
-					  </tbody>
-					</table>
+					<br>
+					<div class="board-table" style="margin-top: 50px; clear:both;">
+							<table class="table table-sm" style="margin: 0 auto; width: 850px; color: #2C473E">
+							  <thead>
+							  </thead>
+							  <tbody>
+							  <c:forEach items="${boardList}" var="board">
+							    <c:if test='${board.whichBoard == 3}'>
+							    <tr>
+							      <%-- <td style= "width: 10%" class="text-center">${board.no}</td> 
+							   <c:if test='${board.whichBoard == 1}'>
+							    <td style= "width: 10%" class="text-center">자유게시판</td> 
+							    </c:if>
+							    <c:if test='${board.whichBoard == 2}'>
+							     <td style= "width: 10%" class="text-center">Healer지식in</td> 
+							    </c:if> --%>
+							     <!-- <td style= "width: 10%" class="text-center">공지사항</td>  -->
+							     <td style= "width: 60%" class="text-center"><a href='detail?no=${board.no}' style="color: #000;">${board.title}</a></td> 
+							     <%-- <td style= "width: 40%" class="text-center">${board.content}</td> 
+							     <td style= "width: 10%" class="text-center">${board.writer.nickname}</td>  --%>
+							     <td style= "width: 20%" class="text-center">${board.registeredDate}</td> 
+							    </tr>
+							    </c:if>
+							    </c:forEach>
+							  </tbody>
+							</table>
+					</div>
 			</div>
 
 
