@@ -53,7 +53,7 @@ public class AdminController {
 
     mv.addObject("medicineApprovalList", medicineApprovalList);
     mv.addObject("contentUrl", "admin/AdminMedicineApprovalList.jsp");
-    mv.setViewName("darktemplate");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -145,7 +145,7 @@ public class AdminController {
 
     mv.addObject("reportApprovalList", reportApprovalList);
     mv.addObject("contentUrl", "admin/AdminReportApprovalList.jsp");
-    mv.setViewName("darktemplate");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
