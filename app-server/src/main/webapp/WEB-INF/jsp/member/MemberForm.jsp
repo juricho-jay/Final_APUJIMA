@@ -164,13 +164,23 @@ function div_OnOff(v,id){
       <input type="button"value="중복체크" onclick= "nicknameCheck()">
     </div>
 </div>
+
+
+
 <div class="mb-3 row">
     <label for='f-id' class="col-sm-3 col-form-label">* 아이디</label>
     <div class="col-sm-6">
       <input id='f-id' type='text' name='id' placeholder = "ID">
-       <input type="button" value="중복체크" onclick= "idCheck()">  
+      <div class = "invalid-feedback">
+      이미 존재하는 아이디 입니다.
+      </div>
+      </div>
+      <div class ="col-auto">
+       <button id="x-id-check-btn" type="button" class="btn btn-primary form-control">중복검사</button>
+      </div>
     </div>
-</div>
+
+
 <div class="mb-3 row">
   <label for='f-password' class="col-sm-3 col-form-label">* 비밀번호</label>
   <div class="col-sm-6">

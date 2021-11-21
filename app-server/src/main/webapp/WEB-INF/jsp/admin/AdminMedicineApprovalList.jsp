@@ -47,7 +47,7 @@
     <td>${medicine.shape}</td> 
     <td>${medicine.color}</td> 
     <td>${medicine.effect}</td> 
-    <td><input type = "submit" value ='승인'></td>
+    <td><input type = "submit" value ='승인' onclick = "checkOk()" ></td>
     <td><input type = "button" value = "거절"  onclick = "reject(this.form);"></td>
     
 </tr>
@@ -59,9 +59,14 @@
 
 <script>
 
+function checkOk() {
+    alert("약품등록이 완료되었습니다.");
+  }
+
 function reject(frm) {
 	frm.action = "reject";
 	frm.submit();
+	alert("약품 등록이 거절되었습니다.")
 	return true;
 }
 
