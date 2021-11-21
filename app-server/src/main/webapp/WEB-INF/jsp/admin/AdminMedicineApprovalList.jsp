@@ -33,6 +33,7 @@
     <th>약품 모양</th>
     <th>약품 색상</th>
     <th>약품 효능</th>
+    <th>약 신청자 </th>
     <th  style = 'text-align: right'>승인관리</th>
   </tr>
 </thead>
@@ -47,6 +48,7 @@
     <td>${medicine.shape}</td> 
     <td>${medicine.color}</td> 
     <td>${medicine.effect}</td> 
+    <td>${medicine.requester.nickname}</td>
     <td><input type = "submit" value ='승인' onclick = "checkOk()" ></td>
     <td><input type = "button" value = "거절"  onclick = "reject(this.form);"></td>
     
