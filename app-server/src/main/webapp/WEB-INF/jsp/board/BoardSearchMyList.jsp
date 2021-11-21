@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-  <title>검색 목록</title>
+  <title>내가 쓴 게시글</title>
    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
   <script src="../node_modules/@popperjs/core//dist/umd/popper.js"></script>
@@ -22,8 +22,7 @@
 <div>
 
 <div class="container" >
-<h1>검색 목록</h1>
-<h5><i>'${searchKeyword}' 검색 결과</i></h5>
+<h1>나의 게시글</h1>
 <br>
 <h4>자유게시판</h4>
 <table class="table table-hover">

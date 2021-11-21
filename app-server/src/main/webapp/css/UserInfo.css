@@ -1277,7 +1277,8 @@ a.text-white:focus {
 .card-profile-image img {
   position: absolute;
   left: 50%;
-  max-width: 180px;
+  width: 180px;
+  height: 180px;
   transition: all .15s ease;
   transform: translate(-50%, -30%);
   border-radius: .375rem;

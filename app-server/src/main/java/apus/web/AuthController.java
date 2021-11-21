@@ -1,5 +1,6 @@
 package apus.web;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -14,9 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import apus.dao.BoardDao;
+import apus.dao.CommentDao;
 import apus.dao.DateCheckDao;
 import apus.dao.MailBoxDao;
 import apus.dao.MemberDao;
+import apus.domain.Board;
+import apus.domain.Comment;
 import apus.domain.DateCheck;
 import apus.domain.MailBox;
 import apus.domain.Member;
@@ -33,6 +38,8 @@ public class AuthController {
   @Autowired DateCheckDao dateCheckDao;
   @Autowired ServletContext sc;
   @Autowired MailBoxDao mailBoxDao;
+  @Autowired BoardDao boardDao;
+  @Autowired CommentDao commentDao;
 
 
   @GetMapping("/auth/loginForm")
@@ -89,13 +96,26 @@ public class AuthController {
   public ModelAndView list(HttpSession session) throws Exception {
     Collection<DateCheck> dateCheckList = dateCheckDao.findAll();
     Member member = (Member) session.getAttribute("loginUser");
-
-
     ModelAndView mv = new ModelAndView();
+
     if(member == null) {
       mv.setViewName("redirect:../home");
       return mv;
     } 
+
+    List<Board> boardList = boardDao.findByName(member.getName());
+    List<Comment> commentList = commentDao.findById(member.getId());
+    List<Comment> aliveCommentList = new ArrayList<>();
+
+    for (int i = 0; i < commentList.size(); i++) {
+      Board board = boardDao.findByActiveNo(commentList.get(i).getCommentBoard().getNo());
+      if (board != null) {
+        aliveCommentList.add(commentList.get(i));
+      }
+    }
+
+    int myPosts = boardList.size();
+    int myComments = aliveCommentList.size();
 
     //안읽은 메일 체크
     if (member != null) {
@@ -114,6 +134,8 @@ public class AuthController {
 
     mv.addObject("dateCheckList", dateCheckList);
     mv.addObject("member", member);
+    mv.addObject("myPosts", myPosts);
+    mv.addObject("myComments", myComments);
     mv.addObject("pageTitle", "내 정보");
     mv.setViewName("auth/UserInfoList");
     return mv;
