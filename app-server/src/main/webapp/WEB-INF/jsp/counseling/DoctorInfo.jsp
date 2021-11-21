@@ -51,7 +51,7 @@
                       <input type="hidden" name="counselorNo" value="${member.no}">
 			                <!-- <button class="btn btn-primary btn-sm" >전화예약신청</button>
 			                <button type="submit" class="btn btn-primary btn-sm" >온라인상담신청</button> -->
-					           <button type="submit" class="btn btn-primary btn-rounded btn-lg">
+					           <button type="submit" class="btn btn-primary btn-rounded btn-lg"  onclick = "return checkValue()">
 					             상담신청하기
 					           </button>
                   </form>
@@ -97,13 +97,17 @@
 				</c:forEach>
 			</div>  --%>
 		
-
-
-
-
-
-
-
  
 </div>
+
+
+<script>
+//로그인 여부 
+function checkValue(){
+   if (${loginUser == null}){
+      alert("로그인 해주세요!");
+      return false;
+   }
+}
+</script>
 

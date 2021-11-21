@@ -146,7 +146,7 @@ window.onload = function() {
 			      <div class="container">
 			        <div class="row">
 			          <div class="col-md-12 text-center">
-			             <h2 class="heading-section mb-5">APUJIMA 상담사를 통해 좀 더 단단한 내가 될 수 있도록 희망합니다.</h2> 
+			             <h2 class="heading-section mb-5">APUJIMA 상담사를 통해 <br><br>좀 더 단단한 내가 될 수 있도록 희망합니다.</h2> 
 			             
 			          </div>
 			          <div class="col-md-12">
