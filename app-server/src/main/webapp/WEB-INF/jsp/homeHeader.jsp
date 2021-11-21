@@ -189,7 +189,7 @@ transform: translate(-50%, 0);}
         </li>
       </ul>
           <form action="${contextPath}/app/board/search">
-            <div style="margin-left: 20px; margin-right: 20px;">
+            <div style="margin-left: 20px; margin-right: 28px;">
                <div class="d-flex justify-content-center h-50">
                  <div class="searchbar">
                    <input class="search_input" name="keyword" type="text" placeholder="Search...">
@@ -239,12 +239,7 @@ transform: translate(-50%, 0);}
         <li class="nav-item dropdown" style="margin-left: 30px">
           <a class="nav-item d-sm-flex align-items-sm-center text-white" href="${contextPath}/app/auth/userInfoList"
         style="text-decoration-line: none;">
-        <img
-            src="${contextPath}/upload/member/${member.photo}_20x20.jpg"
-            class="rounded-circle"
-            height="30"
-            alt=""
-          />
+        <img src="${contextPath}/upload/member/${member.photo}_20x20.jpg" class="rounded-circle" width="30" height="30">
           <b style="color: white; text-size: 1.4em">&nbsp;${loginUser.nickname}</b>
         </a>
           <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="navbarDropdown">

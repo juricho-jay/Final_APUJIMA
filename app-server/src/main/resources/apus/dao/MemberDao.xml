@@ -283,27 +283,7 @@
       id=#{id}
    </select>
    
-      <select id="findByNicName" resultMap="MemberMap" parameterType="string">
-    select
-      member_no,
-      name,
-      id,
-      password,
-      birth,
-      tel,
-      email,
-      photo,
-      sex,
-      created_dt,
-      point,
-      role,
-      active,
-      nickname
-    from
-      apus_member
-    where 
-      nicName=#{nicName}
-   </select>
+      
    
    <select id="findByName" resultMap="MemberMap" parameterType="string">
    select
@@ -345,7 +325,8 @@
       nickname
     from
       apus_member
-    where nickname=#{nickname}
+    where
+     nickname=#{nickname}
   </select>
   
 </mapper>

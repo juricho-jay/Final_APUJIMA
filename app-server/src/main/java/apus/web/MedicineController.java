@@ -29,17 +29,18 @@ public class MedicineController {
   @Autowired MailBoxDao mailBoxDao;
 
   @GetMapping("/medicine/form")
-  public ModelAndView form() {
+  public ModelAndView form(HttpSession session) {
+    Member member = ((Member) session.getAttribute("loginUser"));
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "새 약품");
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "medicine/MedicineForm.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
   @PostMapping("/medicine/add")
   public ModelAndView add(Medicine medicine, HttpSession session, String age) throws Exception {
-
     medicine.setActive(1);
     medicine.setAgeLimit(Integer.parseInt(age));
     medicine.setCheck(1);
@@ -75,9 +76,10 @@ public class MedicineController {
     }
 
     mv.addObject("medicineList", medicineList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "약품목록");
     mv.addObject("contentUrl", "medicine/MedicineList.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -104,9 +106,10 @@ public class MedicineController {
     }
 
     mv.addObject("medicine", medicine);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "약품 상세");
     mv.addObject("contentUrl", "medicine/MedicineDetail.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -133,8 +136,9 @@ public class MedicineController {
     }
 
     mv.addObject("pageTitle", "약품 등록 요청폼");
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "medicine/MedicineRequestForm.jsp");
-    mv.setViewName("template3");
+    mv.setViewName("darkTemplate");
     return mv;
   }
 
@@ -183,102 +187,6 @@ public class MedicineController {
     mv.setViewName("redirect:list");
     return mv;
   }
-
-
-  //  @PostMapping("/board/updateForm")
-  //  public ModelAndView updateForm(String no) throws Exception {
-  //    System.out.println("----------helo updateForm-----------");
-  //
-  //    Board board = boardDao.findByNo(Integer.parseInt(no));
-  //    if (board == null) {
-  //      throw new Exception("해당 번호의 게시글이 없습니다.");
-  //    } 
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("board", board);
-  //    mv.addObject("contentUrl", "board/UpdateForm.jsp");
-  //    mv.setViewName("template3");
-  //    return mv;
-  //  }
-  //
-  //  @PostMapping("/board/update")
-  //  public ModelAndView update(Board board, String title, String content) throws Exception {
-  //    System.out.println("----------helo update-----------");
-  //
-  //    if (board == null) {
-  //      throw new Exception("해당 번호의 게시글이 없습니다.");
-  //    } 
-  //    board.setTitle(title);
-  //    board.setContent(content);
-  //
-  //    boardDao.update(board);
-  //    sqlSessionFactory.openSession().commit();
-  //
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("board", board);
-  //    mv.addObject("contentUrl", "board/BoardUpdate.jsp");
-  //    mv.setViewName("template3");
-  //    return mv;
-  //  }
-  //
-  //  @GetMapping("/board/delete")
-  //  public ModelAndView delete(int no) throws Exception {
-  //
-  //    Board board = boardDao.findByNo(no);
-  //    if (board == null) {
-  //      throw new Exception("해당 번호의 게시글이 없습니다.");
-  //    }
-  //
-  //    boardDao.delete(no);
-  //    sqlSessionFactory.openSession().commit();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.setViewName("redirect:list");
-  //    return mv;
-  //  }
-  //
-  //  @GetMapping("/board/freeBoardList")
-  //  public ModelAndView freeBoardList() throws Exception {
-  //    Collection<Board> boardList = boardDao.findFreeBoard();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("boardList", boardList);
-  //    mv.addObject("pageTitle", "자유게시판목록");
-  //    mv.addObject("contentUrl", "board/FreeBoardList.jsp");
-  //    //mv.setViewName("board/BoardList");
-  //    mv.setViewName("template3");
-  //    // mv.setViewName("template1");
-  //    return mv;
-  //  }
-  //
-  //  @GetMapping("/board/doctorBoardList")
-  //  public ModelAndView doctorBoardList() throws Exception {
-  //    Collection<Board> boardList = boardDao.findDoctorBoard();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("boardList", boardList);
-  //    mv.addObject("pageTitle", "자유게시판목록");
-  //    mv.addObject("contentUrl", "board/DoctorBoardList.jsp");
-  //    //mv.setViewName("board/BoardList");
-  //    mv.setViewName("template3");
-  //    // mv.setViewName("template1");
-  //    return mv;
-  //  }
-  //
-  //  @GetMapping("/board/noticeBoardList")
-  //  public ModelAndView noticeBoardList() throws Exception {
-  //    Collection<Board> boardList = boardDao.findNoticeBoard();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("boardList", boardList);
-  //    mv.addObject("pageTitle", "자유게시판목록");
-  //    mv.addObject("contentUrl", "board/NoticeBoardList.jsp");
-  //    //mv.setViewName("board/BoardList");
-  //    mv.setViewName("template3");
-  //    // mv.setViewName("template1");
-  //    return mv;
-  //  }
 
 
 }

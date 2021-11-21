@@ -26,7 +26,8 @@
 <body>
 <div class="container">
 <form action = "update" method = 'post'>
-  <table class = "table table-striped" style ="text-align : center, border 1px solid #dddddd">
+  <table id="datatable-scroller"
+  class="table table-bordered tbl_Form">
     <thead>
       <tr>
          <th colspan ="3" style = "background-color: #eeeeee; text-align: center;">게시판 글 수정</th> 
@@ -76,7 +77,6 @@
  <input type ="submit" class ="btn btn-primary pull-right" value="변경"> 
 <!--  <input type ="submit" class ="btn btn-primary pull-right" value="변경"> -->
 </form>
-<a href ='list'>목록</a>
 
 
 </div><!-- .container -->

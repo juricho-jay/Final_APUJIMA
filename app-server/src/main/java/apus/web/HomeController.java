@@ -42,6 +42,7 @@ public class HomeController {
     }
 
     mv.addObject("boardList", boardList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "메인화면");
     mv.addObject("contentUrl", "index2.jsp");
     mv.setViewName("homeTemplate");
@@ -69,6 +70,7 @@ public class HomeController {
     }
 
     mv.addObject("pageTitle", "소개");
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "index3.jsp");
     mv.setViewName("darkTemplate");
     return mv;

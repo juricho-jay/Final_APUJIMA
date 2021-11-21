@@ -172,7 +172,7 @@ transform: translate(-50%, 0);}
 <body>
   <div class="main-content">
     <!-- Top navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light" style="padding-top:20px; padding-right: 64px; background-color:#343f5a">
+    <nav class="navbar navbar-expand-lg navbar-light" style="padding-top:20px; padding-right: 32px; background-color:#343f5a">
   <div class="container-fluid">
     <a class="navbar-brand" href="${contextPath}/app/home">
     <input type="button" class="img-button"></a>
@@ -248,12 +248,7 @@ transform: translate(-50%, 0);}
         <li class="nav-item dropdown" style="margin-left: 30px">
           <a class="nav-item d-sm-flex align-items-sm-center" href="${contextPath}/app/auth/userInfoList"
         style="text-decoration-line: none; color: #2c473e;">
-        <img
-            src="../upload/member/${loginUser.photo}_20x20.jpg"
-            class="rounded-circle"
-            height="30"
-            alt=""
-          />
+        <img src="${contextPath}/upload/member/${member.photo}_20x20.jpg" class="rounded-circle" width="30" height="30">
           <b style="color: white; text-size: 1.4em">&nbsp;${loginUser.nickname}</b>
         </a>
           <ul class="dropdown-menu dropdown-menu-center" style="" aria-labelledby="navbarDropdown">
@@ -299,7 +294,7 @@ transform: translate(-50%, 0);}
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="${contextPath}/upload/member/${member.photo}" class="rounded-circle" style="">
+                    <img src="${contextPath}/upload/member/${member.photo}" class="rounded-circle" width="30" height="30">
                   </a>
                 </div>
               </div>
