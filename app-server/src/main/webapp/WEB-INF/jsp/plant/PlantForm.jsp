@@ -49,12 +49,6 @@
     <label for='f-plantName' class="col-sm-3 col-form-label">화분 이름</label>
     <div class="col-sm-6">
       <input id='f-plantName' type='text' name='plantName' class="form-control">
-    <div class ="invalid-feedback">
-    이미 존재하는 화분입니다.
-   </div>
-  </div>
-   <div class="col-auto">
-    <button id="p-plant-name-btn" type="button" class="btn btn-primary form-control">중복검사</button>
   </div>
 </div>
 
@@ -66,29 +60,6 @@
 </div>
 
 <script>
-var addBtn = document.querySelector("#p-add-check-btn");
-var nameTag = doucument.querySelector("#f-plantName");
-addBtn.setAttribute("disabled","disabled");
-
-
-	
-	
-	
-	document.querySelector("#p-plant-name-btn").onclick =() =>{
-		  var xhr = new XMLHttpRequest();
-		  xhr.addEventListener("load",function() {
-			  if (this.responseText == "false"){
-				  addBtn.removeAttribute("disabled");
-				  nameTag.classList.remove("is-invalid");
-			  } else {
-				  addBtn.sendAttribute("disabled" , "disabled");
-				  nameTag.classList.add("is-invalid");
-			  }
-		  })
-		  xhr.open("get" , "checkEmail?email=" + nameTag.value);
-		  xhr.send();
-};
-
 
 </script>
 </body>
