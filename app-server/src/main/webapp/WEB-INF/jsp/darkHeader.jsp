@@ -238,7 +238,7 @@ transform: translate(-50%, 0);}
             <li><a class="dropdown-item" href="${contextPath}/app/bucket/list">버킷 리스트</a></li>
             <li><a class="dropdown-item" href="${contextPath}/app/plant/list">나의 정원</a></li>
             <c:if test = "${loginUser.doctorOrNot eq 3}">
-            <li><a class="dropdown-item" href="${contextPath}/app/admin/list">관리페이지</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/admin/AdminList.jsp">관리페이지</a></li>
             </c:if>
             <li><hr class="dropdown-divider"></li>
             <li><form name="logout2" action= '${contextPath}/app/auth/logout' method = "get">

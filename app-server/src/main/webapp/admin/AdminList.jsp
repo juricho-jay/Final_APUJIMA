@@ -147,6 +147,58 @@
 </head>
 <body>
 <div class="container">
+
+<table class="table table-hover">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>이름</th>
+          <th>별명</th>
+          <th>아이디</th>
+          <th>생년월일</th>
+          <th>연락처</th>
+          <th>이메일</th>
+          <th>성별</th>
+          <th>포인트</th>
+          <th>회원등급</th>
+          <th>등록일</th>
+          <th>활동여부</th>
+          
+        </tr>
+      </thead>
+    <tbody>
+      <c:forEach items="${memberList}" var="member">
+	      <tr>
+	          <td>${member.no}</td>
+	          <td><a href='detail?no=${member.no}'>${member.name}</a></td> 
+	          <td>${member.nickname}</td> 
+	          <td>${member.id}</td> 
+	          <td>${member.birthday}</td> 
+	          <td>${member.tel}</td> 
+	          <td>${member.email}</td> 
+	          <td>${member.sex}</td> 
+	          <td>${member.point}</td> 
+	          <c:if test='${member.doctorOrNot == 1}'>
+	          <td>일반회원</td> 
+	          </c:if>
+	          <c:if test='${member.doctorOrNot == 2}'>
+	          <td>의사회원</td> 
+	          </c:if>
+	          <c:if test='${member.doctorOrNot == 3}'>
+	          <td>관리자</td> 
+	          </c:if>
+	          <td>${member.registeredDate}</td>
+	           <c:if test='${member.active == 1}'>
+	          <td>활동중</td> 
+	          </c:if>
+	            <c:if test='${member.active == 0}'>
+	          <td>회원탈퇴</td> 
+	          </c:if>
+	      </tr>
+      </c:forEach>
+    </tbody>
+</table>
+
 <!-- 
 <h1>회원가입</h1>
 </div>
@@ -179,62 +231,8 @@
     </div>
   </div>
   
-  <div>
-    <table class="table table-hover">
-<thead>
-  <tr>
-    <th>번호</th>
-    <th>이름</th>
-    <th>별명</th>
-    <th>아이디</th>
-    <th>생년월일</th>
-    <th>연락처</th>
-    <th>이메일</th>
-    <th>성별</th>
-    <th>포인트</th>
-    <th>회원등급</th>
-    <th>등록일</th>
-    <th>활동여부</th>
-    
-  </tr>
-</thead>
-<tbody>
-
-<c:forEach items="${memberList}" var="member">
-<tr>
-    <td>${member.no}</td>
-    <td><a href='detail?no=${member.no}'>${member.name}</a></td> 
-    <td>${member.nickname}</td> 
-    <td>${member.id}</td> 
-    <td>${member.birthday}</td> 
-    <td>${member.tel}</td> 
-    <td>${member.email}</td> 
-    <td>${member.sex}</td> 
-    <td>${member.point}</td> 
-    <c:if test='${member.doctorOrNot == 1}'>
-    <td>일반회원</td> 
-    </c:if>
-    <c:if test='${member.doctorOrNot == 2}'>
-    <td>의사회원</td> 
-    </c:if>
-    <c:if test='${member.doctorOrNot == 3}'>
-    <td>관리자</td> 
-    </c:if>
-    <td>${member.registeredDate}</td>
-     <c:if test='${member.active == 1}'>
-    <td>활동중</td> 
-    </c:if>
-      <c:if test='${member.active == 0}'>
-    <td>회원탈퇴</td> 
-    </c:if>
-</tr>
-</c:forEach>
-</tbody>
-</table>
-  </div>
   
-  
-  <!-- Three columns of text below the carousel -->
+  <!-- 
     <div class="row">
       <div class="col-lg-4">
         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
@@ -242,23 +240,23 @@
         <h2>Heading</h2>
         <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
         <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
+      </div>/.col-lg-4
       <div class="col-lg-4">
         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
 
         <h2>Heading</h2>
         <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
         <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
+      </div>/.col-lg-4
       <div class="col-lg-4">
         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
 
         <h2>Heading</h2>
         <p>And lastly this, the third column of representative placeholder content.</p>
         <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-    
+      </div>/.col-lg-4
+    </div>/.row
+     -->
     
 </div>
 </body>
