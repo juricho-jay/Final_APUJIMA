@@ -62,13 +62,13 @@
 <script>
 
 function checkOk() {
-    alert("약품등록이 완료되었습니다.");
+    alert("약품등록이 완료되었습니다. 등록 요청자에게 자동메일이 발송되었습니다.");
   }
 
 function reject(frm) {
 	frm.action = "reject";
 	frm.submit();
-	alert("약품 등록이 거절되었습니다.")
+	alert("약품 등록이 거절되었습니다. 등록 요청자에게 자동메일이 발송되었습니다.")
 	return true;
 }
 

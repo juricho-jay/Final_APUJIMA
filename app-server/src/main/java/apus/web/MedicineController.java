@@ -147,6 +147,7 @@ public class MedicineController {
   public ModelAndView request(Medicine medicine, HttpSession session, String age) throws Exception {
 
 
+
     Member requester = ((Member) session.getAttribute("loginUser"));
     medicine.setRequester(requester);
     medicine.setActive(0);

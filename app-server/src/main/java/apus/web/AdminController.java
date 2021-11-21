@@ -59,7 +59,7 @@ public class AdminController {
   }
 
   @GetMapping("/admin/medicineConfirm")
-  public ModelAndView medicineConfirm(MailBox mailBox,HttpSession session, String name, String requester) throws Exception {
+  public ModelAndView medicineConfirm(HttpSession session, String name) throws Exception {
 
     Medicine medicine = medicineDao.findByName(name);
     ModelAndView mv = new ModelAndView();
@@ -81,9 +81,11 @@ public class AdminController {
       mv.addObject("uncheckedMail", count);
     }
 
-    Member receiver = memberDao.findByNickname(requester);
+
+    MailBox mailBox = new MailBox();
+    Member receiver = memberDao.findById(medicine.getRequester().getId());
     String sendTitle = "약품 승인 결과";
-    String sendContent = "약품신청이 승인되었습니다!";
+    String sendContent = "신청하신 " + medicine.getName() + " 약품이 등록되었습니다." ;
     mailBox.setSender(member);
     mailBox.setReceiver(receiver);
     mailBox.setTitle(sendTitle);
@@ -99,7 +101,7 @@ public class AdminController {
   }
 
   @GetMapping("/admin/reject")
-  public ModelAndView medicineReject(MailBox mailBox,HttpSession session, String name,String requester) throws Exception {
+  public ModelAndView medicineReject(HttpSession session, String name) throws Exception {
 
     Medicine medicine = medicineDao.findByName(name);
 
@@ -122,9 +124,11 @@ public class AdminController {
       mv.addObject("uncheckedMail", count);
     }
 
-    Member receiver = memberDao.findByNickname(requester);
+    MailBox mailBox = new MailBox();
+    Member receiver = memberDao.findById(medicine.getRequester().getId());
     String sendTitle = "약품 승인 결과";
-    String sendContent = "약품신청이 거절되었습니다!";
+    String sendContent = "신청하신 " + medicine.getName() + " 약품이 거절되었습니다."
+        + "\n 관심을 가져주셔서 감사합니다." ;
     mailBox.setSender(member);
     mailBox.setReceiver(receiver);
     mailBox.setTitle(sendTitle);

@@ -20,6 +20,7 @@
       <result column="requester_id" property="id"/>
       <result column="requester_name" property="name"/>
       <result column="requester_email" property="email"/>
+      <result column="requester_nickname" property="nickname"/>
     </association>
     
   </resultMap>
@@ -36,7 +37,8 @@
        c.confirm,
        m.id requester_id,
        m.name requester_name,
-       m.email requester_email
+       m.email requester_email,
+       m.nickname requester_nickname
     from
       apus_medicine c
       left outer join apus_member m on c.member_no=m.member_no
@@ -73,7 +75,8 @@
        c.confirm,
        m.id requester_id,
        m.name requester_name,
-       m.email requester_email
+       m.email requester_email,
+       m.nickname requester_nickname
     from
       apus_medicine c
       left outer join apus_member m on c.member_no=m.member_no
@@ -83,8 +86,8 @@
   
 	<insert id="insert" parameterType="medicine"
 	useGeneratedKeys="true" keyColumn="medicine_no" keyProperty="no">
-	 insert into apus_medicine(name,age,shape,color,effect,active,confirm) 
-	 values(#{name},#{ageLimit},#{shape},#{color},#{effect},#{active},#{check})
+	 insert into apus_medicine(name,age,shape,color,effect,active,confirm,member_no ) 
+	 values(#{name},#{ageLimit},#{shape},#{color},#{effect},#{active},#{check},#{requester.no})
 	</insert>
 
 	 <delete id="delete" parameterType="string">
@@ -127,19 +130,24 @@
   </update>
   
   <select id="findByName" resultMap="MedicineMap" parameterType="string">
-  select
-    medicine_no,
-    name,
-    age,
-    shape,
-    color,
-    effect,
-    active,
-    confirm
-  from 
-    apus_medicine
+    select
+       c.medicine_no,
+       c.name,
+       c.age,
+       c.shape,
+       c.color,
+       c.effect,
+       c.active,
+       c.confirm,
+       m.id requester_id,
+       m.name requester_name,
+       m.email requester_email,
+       m.nickname requester_nickname
+   from
+      apus_medicine c
+      left outer join apus_member m on c.member_no=m.member_no
   where 
-    name=#{name}
+    c.name=#{name}
   </select>
   
   <select id="findByNo" resultMap="MedicineMap" parameterType="int">
