@@ -7,7 +7,7 @@
 <head>
   <title>관리자 승인 요청</title>
   
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="${contextPath}/node_modules/bootstrap/dist/css/bootstrap.css">
   
   
       <!-- Bootstrap core CSS -->
@@ -24,8 +24,8 @@
   
   
   
-  <script src="../node_modules/@popperjs/core//dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="${contextPath}/node_modules/@popperjs/core//dist/umd/popper.js"></script>
+  <script src="${contextPath}/node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
   <style>
 		  .container {
@@ -146,7 +146,8 @@
   </style>
 </head>
 <body>
-<!-- <div class="container">
+<div class="container">
+<!-- 
 <h1>회원가입</h1>
 </div>
 
@@ -178,6 +179,61 @@
     </div>
   </div>
   
+  <div>
+    <table class="table table-hover">
+<thead>
+  <tr>
+    <th>번호</th>
+    <th>이름</th>
+    <th>별명</th>
+    <th>아이디</th>
+    <th>생년월일</th>
+    <th>연락처</th>
+    <th>이메일</th>
+    <th>성별</th>
+    <th>포인트</th>
+    <th>회원등급</th>
+    <th>등록일</th>
+    <th>활동여부</th>
+    
+  </tr>
+</thead>
+<tbody>
+
+<c:forEach items="${memberList}" var="member">
+<tr>
+    <td>${member.no}</td>
+    <td><a href='detail?no=${member.no}'>${member.name}</a></td> 
+    <td>${member.nickname}</td> 
+    <td>${member.id}</td> 
+    <td>${member.birthday}</td> 
+    <td>${member.tel}</td> 
+    <td>${member.email}</td> 
+    <td>${member.sex}</td> 
+    <td>${member.point}</td> 
+    <c:if test='${member.doctorOrNot == 1}'>
+    <td>일반회원</td> 
+    </c:if>
+    <c:if test='${member.doctorOrNot == 2}'>
+    <td>의사회원</td> 
+    </c:if>
+    <c:if test='${member.doctorOrNot == 3}'>
+    <td>관리자</td> 
+    </c:if>
+    <td>${member.registeredDate}</td>
+     <c:if test='${member.active == 1}'>
+    <td>활동중</td> 
+    </c:if>
+      <c:if test='${member.active == 0}'>
+    <td>회원탈퇴</td> 
+    </c:if>
+</tr>
+</c:forEach>
+</tbody>
+</table>
+  </div>
+  
+  
   <!-- Three columns of text below the carousel -->
     <div class="row">
       <div class="col-lg-4">
@@ -204,6 +260,7 @@
     </div><!-- /.row -->
     
     
+</div>
 </body>
 </html>
 
