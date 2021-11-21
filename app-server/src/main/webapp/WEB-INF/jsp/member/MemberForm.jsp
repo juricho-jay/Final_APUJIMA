@@ -173,9 +173,25 @@ function div_OnOff(v,id){
     </div>
     
 </div>
+
+
+
 <div class="mb-3 row">
     <label for='f-id' class="col-sm-3 col-form-label">* 아이디</label>
     <div class="col-sm-6">
+<<<<<<< HEAD
+      <input id='f-id' type='text' name='id' placeholder = "ID">
+      <div class = "invalid-feedback">
+      이미 존재하는 아이디 입니다.
+      </div>
+      </div>
+      <div class ="col-auto">
+       <button id="x-id-check-btn" type="button" class="btn btn-primary form-control">중복검사</button>
+      </div>
+    </div>
+
+
+=======
       <input id='f-id' type='text' name='id' placeholder = "ID" class ="form-control">
       <div class="invalid-feedback">
         이미 존재하는 아이디입니다.
@@ -186,6 +202,7 @@ function div_OnOff(v,id){
     </div>
     
 </div>
+>>>>>>> bf64ff3f2491a72a6c68f21c36f148ab05c86924
 <div class="mb-3 row">
   <label for='f-password' class="col-sm-3 col-form-label">* 비밀번호</label>
   <div class="col-sm-6">

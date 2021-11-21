@@ -252,10 +252,6 @@ public class BoardController {
       throw new Exception("해당 번호의 게시글이 없습니다.");
     }
 
-    System.out.println("================================");
-    System.out.println("현재 선택된 보드의 번호 ===> " + board.getNo());
-    System.out.println("================================");
-
     Report report = reportDao.findByReport(no1, requester.getId());
     Report tempReport = report;
 

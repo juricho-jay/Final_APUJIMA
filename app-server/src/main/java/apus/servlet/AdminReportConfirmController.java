@@ -44,10 +44,10 @@ public class AdminReportConfirmController extends HttpServlet {
       Report report = reportDao.findByReport(no, id);
       int boardNo = report.getRequestBoard().getNo();
 
-      System.out.println("신고 번호 => " + report.getNo());
+      //System.out.println("신고 번호 => " + report.getNo());
       reportDao.confirmReport(report.getNo());
 
-      System.out.println("삭제 게시판 번호 => " + boardNo);
+      //System.out.println("삭제 게시판 번호 => " + boardNo);
       boardDao.delete(boardNo);
 
       sqlSession.commit();

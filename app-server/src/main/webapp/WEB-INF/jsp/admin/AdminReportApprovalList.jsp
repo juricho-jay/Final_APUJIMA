@@ -37,7 +37,7 @@
 </thead>
 <tbody>
 <c:forEach items="${reportApprovalList}" var="report">
-<form action = 'reportConfirm'>
+<form action = 'adminReportApprovalList'>
  <input type = 'hidden' name = 'id' value = '${report.requester.id}'>
   <input type = 'hidden' name = 'no' value = '${report.requestBoard.no}'>
 <tr>
@@ -55,7 +55,7 @@
     <td>${report.requester.id}</td> 
    
     <td>${report.reason}</td> 
-    <td><input type = "submit" value ='승인'></td>
+    <td><input type = "submit" value ='승인' onclick = "checkOk();"></td>
  <td><input type = "button" value = "거절"  onclick = "reject(this.form);"></td>
    <!--  <td><input type = "button" value = "거절"  onclick = "javascript: form.action = 'reportReject';"></td> -->
     
@@ -71,8 +71,13 @@
 function reject(frm) {
 	frm.action = "reportReject";
 	frm.submit();
+    alert("사유가 충분하지 않아 게시판을 삭제하지 않습니다.");
 	return true;
 }
+
+function checkOk() {
+    alert("유해한 게시물로 판단되어 삭제되었습니다.");
+  }
 
 </script>
 
