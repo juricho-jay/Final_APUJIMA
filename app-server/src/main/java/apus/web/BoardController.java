@@ -90,6 +90,7 @@ public class BoardController {
     }
 
     mv.addObject("boardList", boardList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "게시글목록");
     mv.addObject("contentUrl", "board/BoardList.jsp");
     //mv.setViewName("board/BoardList");
@@ -140,6 +141,7 @@ public class BoardController {
     mv.addObject("likeList", likeList);
     mv.addObject("likeNo", likeNo);
     mv.addObject("commentNo", commentNo);
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "board/BoardDetail.jsp");
     mv.setViewName("template3");
     return mv;
@@ -174,6 +176,7 @@ public class BoardController {
     }   
 
     mv.addObject("board", board);
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "board/UpdateForm.jsp");
     mv.setViewName("template3");
     return mv;
@@ -213,6 +216,7 @@ public class BoardController {
     }   
 
     mv.addObject("board", board);
+    mv.addObject("member", member);
     mv.addObject("contentUrl", "board/BoardUpdate.jsp");
     mv.setViewName("template3");
     return mv;
@@ -347,6 +351,7 @@ public class BoardController {
     }   
 
     mv.addObject("boardList", boardList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "자유게시판목록");
     mv.addObject("contentUrl", "board/FreeBoardList.jsp");
     //mv.setViewName("board/BoardList");
@@ -379,6 +384,7 @@ public class BoardController {
     }   
 
     mv.addObject("boardList", boardList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "자유게시판목록");
     mv.addObject("contentUrl", "board/DoctorBoardList.jsp");
     //mv.setViewName("board/BoardList");
@@ -411,6 +417,7 @@ public class BoardController {
     }   
 
     mv.addObject("boardList", boardList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "자유게시판목록");
     mv.addObject("contentUrl", "board/NoticeBoardList.jsp");
     //mv.setViewName("board/BoardList");
@@ -444,6 +451,7 @@ public class BoardController {
     }   
 
     mv.addObject("boardList", boardList);
+    mv.addObject("member", member);
     mv.addObject("searchKeyword", keyword);
     mv.addObject("pageTitle", "검색 목록");
     mv.addObject("contentUrl", "board/BoardSearchList.jsp");
@@ -475,6 +483,7 @@ public class BoardController {
     }   
 
     mv.addObject("boardList", boardList);
+    mv.addObject("member", member);
     mv.addObject("pageTitle", "나의 게시글");
     mv.addObject("contentUrl", "board/BoardSearchMyList.jsp");
     mv.setViewName("darkTemplate");
