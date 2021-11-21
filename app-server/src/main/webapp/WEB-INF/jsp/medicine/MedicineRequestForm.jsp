@@ -15,7 +15,7 @@
         // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
        /*  function checkValue()
         {
-        	
+           
            if(!document.medicineRequest.name.value){
                 alert("약품 이름을 작성해 주세요.");
                 return false;
@@ -69,13 +69,19 @@
  
 </div>
 
-<div class="mb-3 row">
+<%-- <div class="mb-3 row">
     <label for='m-user' class="col-sm-3 col-form-label">* 약품 등록 신청자</label>
     <div class="col-sm-6">
       <input id='m-user' type='text' name='requester' value = "${loginUser.id}" class="form-control" readonly/>
     </div>
+</div> --%>
+ 
+<div class="mb-3 row">
+    <label for='m-user' class="col-sm-3 col-form-label">* 약품 등록 신청자</label>
+    <div class="col-sm-6">
+      <input id='m-user' type='text' value = "${loginUser.id}" class="form-control" readonly/>
+    </div>
 </div>
-
 
   <div class="mb-3 row">
     <label for='m-name' class="col-sm-3 col-form-label">* 약품명</label>
@@ -89,8 +95,6 @@
        <button id = "x-mname-check-btn" type ="button" class ="btn btn-primary form-control">중복검사</button>
     </div>  
 </div>
-
-
 
 <div class="mb-3 row">
     <label for='m-age' class="col-sm-3 col-form-label">* 권장 연령</label>
@@ -118,8 +122,6 @@
     </div>
 </div>
   <div class="col-12">
-  <input type = "hidden" name ="requester" value ="${medicine.requester.nickname}">
-  
     <button id ="x-add-btn" class="btn btn-primary btn-sm" onclick = "checkOk()" >약품 등록 신청</button>
   </div>
 
@@ -158,7 +160,7 @@
         
         
         function checkOk() {
-        	alert("약품등록 신청이 완료되었습니다. 관리자가 확인 후 추가할 예정입니다.");
+           alert("약품등록 신청이 완료되었습니다. 관리자가 확인 후 추가할 예정입니다.");
         }
         
         
@@ -170,26 +172,25 @@ var nameTag = document.querySelector("#m-name");
 addBtn.setAttribute("disabled", "disabled");     
 
 document.querySelector ("#x-mname-check-btn").onclick = () => {
-        	   var xhr = new XMLHttpRequest();
-        	   xhr.addEventListener("load", function() {
-        	      if (this.responseText == "false"){
-        	        addBtn.removeAttribute("disabled");
-        	        nameTag.classList.remove("is-invalid");
-        	      } else {
-        	        addBtn.setAttribute("disabled", "disabled");
-        	        nameTag.classList.add("is-invalid");
-        	      }
-        	      })
-        	      xhr.open("get","checkName?name=" + nameTag.value);
-        	      xhr.send();
-        	};
+              var xhr = new XMLHttpRequest();
+              xhr.addEventListener("load", function() {
+                 if (this.responseText == "false"){
+                   addBtn.removeAttribute("disabled");
+                   nameTag.classList.remove("is-invalid");
+                 } else {
+                   addBtn.setAttribute("disabled", "disabled");
+                   nameTag.classList.add("is-invalid");
+                 }
+                 })
+                 xhr.open("get","checkName?name=" + nameTag.value);
+                 xhr.send();
+           };
     
         
   </script>
 
 </body>
 </html>
-
 
 
 
