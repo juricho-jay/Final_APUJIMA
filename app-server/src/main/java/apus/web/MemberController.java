@@ -40,6 +40,10 @@ public class MemberController {
   @PostMapping("/member/add")
   public ModelAndView add(Member member, Part photoPart, String grade, String birthyy, String birthmm, 
       String birthdd, String major, Part license, String homepage, String introduce) throws Exception {
+    if (photoPart.getSize() == 0) {
+      member.setPhoto("basic_profile");
+    }
+
     if (photoPart.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
       photoPart.write(sc.getRealPath("/upload/member") + "/" + filename);
