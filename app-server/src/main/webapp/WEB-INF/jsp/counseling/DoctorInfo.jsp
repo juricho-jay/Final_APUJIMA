@@ -48,7 +48,7 @@
               />
             </div>
             <h4 class="mb-2">${member.name}</h4>
-            <p class="text-muted mb-4">${member.doctor.major}<span class="mx-2">| ${member.email}</span> <a href="#!">${member.doctor.homepage}</a></p>
+            <p class="text-muted mb-4">${member.doctor.major}<br><span class="mx-2"> ${member.email}</span> <a href="#!">${member.doctor.homepage}</a></p>
             <p class='title'>"${member.doctor.introduction}"</p>
             
             <form action='../counseling/form' method="get">
