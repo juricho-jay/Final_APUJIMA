@@ -209,7 +209,7 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <li><button name="btn-modal" class="dropdown-item" type="button" 
-          data-nickname="${comment.commenter.nickname}">쪽지 보내기</button></li>
+          data-nickname="${comment.commenter.nickname}" onclick = "return checkValue()">쪽지 보내기</button></li>
         </ul>
       </div>
       <br>
@@ -352,9 +352,11 @@ function updateComment(no) {
 
 //쪽지 보내기 모달 열기
 $('button[name=btn-modal]').on('click', function(){
+	if(${loginUser != null}) {
 	var nickname = $(this).data('nickname');
 	$(".form-group #senderNickname").val(nickname)
 $('#sendMessageModal').modal('show');
+	}
 });
 
 //쪽지 보내기 모달 안 취소 버튼으로 닫기
