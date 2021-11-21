@@ -78,7 +78,7 @@ window.onload = function() {
 			  <!-- <div style="width: 85%; height:500px; margin-top: 100px; background-color: #2C473E; position:absolute;">
 			  </div> -->
 			  
-			  <div id="welcome" class="position-absolute top-50 start-50 translate-middle text-end">
+			  <div class="position-absolute top-50 start-50 translate-middle text-end" id="welcome">
 			  <h1 style="color:white;"><b>We are here for friends in need</b></h1>
 			  <h3 style="color:white;">APUJIMA에 오신 것을 환영합니다</h3>
 			  <p class="fs-5" style="color:white;">당신의 심적 안정을 위한 플랫폼</p>
@@ -230,7 +230,7 @@ window.onload = function() {
 							     <td style= "width: 10%" class="text-center">Healer지식in</td> 
 							    </c:if> --%>
 							     <!-- <td style= "width: 10%" class="text-center">공지사항</td>  -->
-							     <td style= "width: 60%" class="text-center"><a href='detail?no=${board.no}' style="color: #000;">${board.title}</a></td> 
+							     <td style= "width: 60%" class="text-center"><a href='board/detail?no=${board.no}' style="color: #000;">${board.title}</a></td> 
 							     <%-- <td style= "width: 40%" class="text-center">${board.content}</td> 
 							     <td style= "width: 10%" class="text-center">${board.writer.nickname}</td>  --%>
 							     <td style= "width: 20%" class="text-center">${board.registeredDate}</td> 

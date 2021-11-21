@@ -179,10 +179,7 @@ public class AdminController {
       }
       mv.addObject("uncheckedMail", count);
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 87d95841ad4dc9778ccebcae97569dd5ac005204
     // mv.addObject("medicineList", medicineList);
     mv.setViewName("redirect:adminReportApprovalList");
     return mv;
