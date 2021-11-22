@@ -92,6 +92,9 @@
 								       </c:otherwise>
 								    </c:choose>
 		               </a>
+		               <c:if test="${empty mailBox.receivedTime}">
+                   <i style="color: red; margin-left: 10px;" class="bi bi-bell">new</i>
+                   </c:if>
 		             </div>
 		            <span class="box-time">${mailBox.sentTime} 
 		            <button style="margin-left: 10px;" class="border-0 btn-transition btn btn-outline-secondary" 
