@@ -225,8 +225,7 @@ form fieldset a:hover { text-decoration: underline; }
 
   </p>
   
-      <a id="kakao-login-btn"></a>
-    <a href="http://developers.kakao.com/logout">Logout</a>
+  
   
   <ul>
   <li onclick="kakaoLogin();">

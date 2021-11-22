@@ -13,6 +13,7 @@ import apus.dao.MailBoxDao;
 import apus.dao.MedicineDao;
 import apus.dao.MemberDao;
 import apus.dao.ReportDao;
+import apus.domain.Board;
 import apus.domain.MailBox;
 import apus.domain.Medicine;
 import apus.domain.Member;
@@ -173,11 +174,12 @@ public class AdminController {
   }
 
   @GetMapping("/admin/reportConfirm")
-  public ModelAndView reportConfirm(MailBox mailBox, HttpSession session, String id, int no, String reportId) throws Exception {
+  public ModelAndView reportConfirm(HttpSession session, String id, int no) throws Exception {
+
 
     Report report = reportDao.findByReport(no, id);
     int boardNo = report.getRequestBoard().getNo();
-    String reportedBoardWriter = report.getRequestBoard().getWriter().getId();
+    Board board = boardDao.findByNo(boardNo);
 
     ModelAndView mv = new ModelAndView();
 
@@ -198,24 +200,29 @@ public class AdminController {
       mv.addObject("uncheckedMail", count);
     }
 
+    MailBox mailBox = new MailBox();
+    MailBox mailBox1 = new MailBox();
 
-
-    Member reportedMember = memberDao.findById(reportId);
-    Member reportMember = memberDao.findById(reportedBoardWriter);
+    Member requester = memberDao.findById(report.getRequester().getId());
+    Member writer = memberDao.findById(board.getWriter().getId());
     String sendTitle = "게시판 신고 결과";
-    String sendContent = "게시판 신고 접수가 승인되어 게시글이 삭제됨을 알려드립니다!";
+    String deleteContent = "작성하신 게시글 중 제목이 '" + board.getTitle() +"' 게시글에 대해 신고가 들어왔습니다. 관리자가 판단하기에 부적절 하다고 생각되어 삭제합니다.!";
+    String confirmContent = "신고하신 '" + board.getTitle() + "' 게시물을 검토해 보았지만 유해게시글로 판단되지 않습니다. 꾸준히 관심을 가져주셔서 감사합니다.";
+
 
     mailBox.setSender(member);
-    mailBox.setReceiver(reportedMember);
+    mailBox.setReceiver(requester);
     mailBox.setTitle(sendTitle);
-    mailBox.setContent(sendContent);
+    mailBox.setContent(confirmContent);
 
-    mailBox.setReceiver(reportMember);
-    mailBox.setTitle(sendTitle);
-    mailBox.setContent(sendContent);
+    mailBox1.setSender(member);
+    mailBox1.setReceiver(writer);
+    mailBox1.setTitle(sendTitle);
+    mailBox1.setContent(deleteContent);
     mailBoxDao.insert(mailBox);
-    boardDao.delete(boardNo);
+    mailBoxDao.insert(mailBox1);
     reportDao.delete(report.getNo());
+    boardDao.delete(boardNo);
     sqlSessionFactory.openSession().commit();
 
 
@@ -225,16 +232,16 @@ public class AdminController {
   }
 
   @GetMapping("/admin/reportReject")
-  public ModelAndView reportReject(MailBox mailBox, HttpSession session, String id, int no, String reportId) throws Exception {
+  public ModelAndView reportReject(HttpSession session, String id, int no) throws Exception {
 
     Report report = reportDao.findByReport(no, id);
+    int boardNo = report.getRequestBoard().getNo();
+    Board board = boardDao.findByNo(boardNo);
 
-    String reportedBoardWriter = report.getRequestBoard().getWriter().getId();
     ModelAndView mv = new ModelAndView();
 
     Member member = ((Member) session.getAttribute("loginUser"));
     //안읽은 메일 체크
-
     if (member != null) {
       List<MailBox> mailBoxList = mailBoxDao.findAll();
 
@@ -249,19 +256,15 @@ public class AdminController {
       mv.addObject("uncheckedMail", count);
     }
 
-    Member reportedMember = memberDao.findById(reportId);
-    Member reportMember = memberDao.findById(reportedBoardWriter);
+    MailBox mailBox = new MailBox();
+    Member requester = memberDao.findById(report.getRequester().getId());
     String sendTitle = "게시판 신고 결과";
-    String sendContent = "게시판 신고 접수가 거절되어 게시글이 유지됨을 알려드립니다!";
+    String confirmContent = "신고하신 '" + board.getTitle() + "' 게시물을 검토해 보았지만 유해게시글로 판단되지 않습니다. 꾸준히 관심을 가져주셔서 감사합니다.";
 
     mailBox.setSender(member);
-    mailBox.setReceiver(reportedMember);
+    mailBox.setReceiver(requester);
     mailBox.setTitle(sendTitle);
-    mailBox.setContent(sendContent);
-
-    mailBox.setReceiver(reportMember);
-    mailBox.setTitle(sendTitle);
-    mailBox.setContent(sendContent);
+    mailBox.setContent(confirmContent);
 
     mailBoxDao.insert(mailBox);
     reportDao.delete(report.getNo());

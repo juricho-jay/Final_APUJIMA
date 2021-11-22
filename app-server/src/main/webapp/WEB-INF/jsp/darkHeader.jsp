@@ -178,6 +178,23 @@ transform: translate(-50%, 0);}
             <li><a class="dropdown-item" href="${contextPath}/app/board/noticeBoardList">공지사항</a></li>
           </ul>
         </li>
+
+    <c:if test = "${loginUser.doctorOrNot eq 3}">
+      <li class="nav-item dropdown" style="margin-left: 20px;">
+          <a class="btn4" href="${contextPath}/app/admin/AdminList.jsp" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            관리자 승인
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="${contextPath}/app/admin/adminReportApprovalList">게시판 신고 관리</a></li>
+            <li><a class="dropdown-item" href="${contextPath}/app/admin/adminMedicineApprovalList">약품 승인 관리</a></li>
+          </ul>
+        </li>        
+     
+            </c:if>
+        
+        
+        
+        
       </ul>
           <form action="${contextPath}/app/board/search">
             <div style="margin-left: 20px; margin-right: 28px;">
@@ -237,9 +254,7 @@ transform: translate(-50%, 0);}
             <li><a class="dropdown-item" href="${contextPath}/app/auth/userInfoList">내 정보</a></li>
             <li><a class="dropdown-item" href="${contextPath}/app/bucket/list">버킷 리스트</a></li>
             <li><a class="dropdown-item" href="${contextPath}/app/plant/list">나의 정원</a></li>
-            <c:if test = "${loginUser.doctorOrNot eq 3}">
-            <li><a class="dropdown-item" href="${contextPath}/app/admin/AdminList.jsp">관리페이지</a></li>
-            </c:if>
+
             <li><hr class="dropdown-divider"></li>
             <li><form name="logout2" action= '${contextPath}/app/auth/logout' method = "get">
             <a class="dropdown-item" href="javascript:logout.submit();">로그아웃</a>

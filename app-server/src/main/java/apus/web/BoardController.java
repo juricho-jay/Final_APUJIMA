@@ -253,31 +253,24 @@ public class BoardController {
     }
 
     Report report = reportDao.findByReport(no1, requester.getId());
-    Report tempReport = report;
 
-
-    if(tempReport != null) {
+    if(report == null) {
+      Report report1 = new Report();
+      report1.setRequestBoard(board);
+      report1.setRequester(requester);
+      System.out.println("첫 신고라서 이게 실행됨");
+      mv.addObject("report",report1);
+      mv.addObject("contentUrl","/board/BoardReport.jsp");
+      mv.setViewName("/board/BoardReport");
+    } else if (report != null) {
       report = null;
       System.out.println("신고 한 적이 있기에 이게 실행됨");
       mv.addObject("report",report);
       mv.addObject("contentUrl","/board/BoardReport.jsp");
       mv.setViewName("/board/BoardReport");
-    } 
 
-    // 신고한적 있으면 바로 넘어가게 해야할텐데
-
-    if (tempReport == null) {
-      Report report1 = new Report();
-      report1.setRequestBoard(board);
-      report1.setRequester(requester);
-      mv.addObject("report",report1);
     }
 
-
-
-
-    mv.addObject("contentUrl","/board/BoardReport.jsp");
-    mv.setViewName("/board/BoardReport");
     return mv;
   }
 
@@ -318,9 +311,7 @@ public class BoardController {
       }
     }
 
-    mv.addObject("report",report);
-    mv.addObject("contentUrl","/board/BoardReport.jsp");
-    mv.setViewName("/board/BoardReport");
+    mv.setViewName("redirect:report?no="+no+"&title="+requestBoard.getTitle()+"&writer="+requestBoard.getWriter().getId());
     return mv;
   }
   @GetMapping("/board/freeBoardList")

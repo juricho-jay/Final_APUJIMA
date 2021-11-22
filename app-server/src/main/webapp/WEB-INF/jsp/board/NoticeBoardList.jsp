@@ -23,6 +23,9 @@
   
 <div class="container">
 <h1>공지사항 목록</h1>
+<c:if test = "${loginUser.doctorOrNot == 3 }">
+<a href='form' class="btn btn-outline-primary btn-sm">글 작성</a><br>
+</c:if>
 <table class="table table-hover">
 <thead>
   <tr>
@@ -69,7 +72,7 @@
 </c:forEach>
 </tbody>
 </table>
-<a href='form' class="btn btn-outline-primary btn-sm">글 작성</a><br>
+
 
 </div><!-- .container -->
 

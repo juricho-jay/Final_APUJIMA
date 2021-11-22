@@ -49,7 +49,7 @@
     <td>Healer지식in</td> 
   </c:if>
   <c:if test='${report.requestBoard.whichBoard == 3}'>
-    <td>공지사항</td> 
+    <td>공지사항</td>  
   </c:if>
     <td><a href = '../board/detail?no=${report.requestBoard.no}'>${report.requestBoard.title}</td>
     <td>${report.requester.id}</td> 

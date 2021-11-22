@@ -21,10 +21,6 @@
   <div style="text-align: left;">
     <h3>신고하기</h3>
     <form action = "reportAdd">
-    <c:if test = "${empty report.requestBoard.title}">
-    <script>please()</script>
-    이러다 미쳐 내가
-    </c:if>
     <input type = 'hidden' name = "no" value = "${report.requestBoard.no }">
     <p> 제  목 : ${report.requestBoard.title} </p>
     <input type = 'hidden' name = "title" value = "${report.requestBoard.title}">
@@ -68,14 +64,23 @@
       </div>
   
   <script>
+
+  
+  window.onload = function() {
+	  
+	  
+	  if(${report == null}){
+	     alert("이미 신고된 게시물입니다.");
+	      window.close();
+	  }
+	  
+  };
+  
+  
   function back() {
 	  window.close();
   }
   
-  function please() {
-	   alert("이미 신고된 게시물입니다.");
-	    window.close();
-	  }
   
   function back2() {
 	  
