@@ -23,16 +23,19 @@
    width:100%; 
    height:100% 
    }
+   container{
+    width:1200px;
+   }
    
    @media (min-width: 768px) {
       .container {
-        width: 750px;
+        width: 900px;
       }
     }
     
     @media (min-width: 992px) {
       .container {
-        width: 940px;
+        width: 1200px;
       }
     }
    </style>

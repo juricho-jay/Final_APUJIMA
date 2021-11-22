@@ -15,16 +15,19 @@
      
   <style>
 
-    .container {
+    .container1 {
     xborder: 1px solid red;
-    xwidth: 640px;
+    width: 800px;
+    }
+    .table{
+    xborder: 1px solid red;
     }
   </style>
   
 
 <div>
 
-<div class="container" >
+<div class="container1" >
 <h1>게시판 목록</h1>
 <table class="table table-hover">
 <thead>
@@ -62,10 +65,10 @@
           </c:otherwise>
      </c:choose>
      </a></td> 
-     <td style= "width: 20%" class="text-center">
+     <td style= "width: 10%" class="text-center">
      <c:choose>
 					<c:when test="${fn:length(board.content) > 19}">
-					   ${fn:substring(board.content, 0, 17)}...
+					   ${fn:substring(board.content, 0, 9)}...
 					</c:when>
 					<c:otherwise>
 					   ${board.content}
@@ -73,9 +76,9 @@
      </c:choose>
   
      </td> 
-     <td style= "width: 10%" class="text-center">${board.writer.nickname}</td> 
+     <td style= "width: 6%" class="text-center">${board.writer.nickname}</td> 
      <td style= "width: 10%" class="text-center">${board.registeredDate}</td> 
-     <td style= "width: 5%" class="text-center">${board.viewCount}</td> 
+     <td style= "width: 3%" class="text-center">${board.viewCount}</td> 
    
 </tr>
 </c:forEach>
