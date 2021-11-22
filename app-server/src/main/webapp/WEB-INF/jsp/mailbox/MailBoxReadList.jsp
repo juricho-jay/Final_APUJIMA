@@ -71,15 +71,13 @@
         <c:if test='${loginUser.nickname eq mailBox.receiver.nickname}'>
           <c:if test='${mailBox.receivedTime ne null}'>
 		        <div class="mail-box">
-		            <div class="box-photo">
-		              <span class="box-img">${mailBox.receiver.photo}</span> <!-- 이게 될까? -->
-		                  <%-- <img
-		            src="${contextPath}/upload/member/${mailBox.sender.photo}_100x100.jpg"
-		            class="rounded-circle"
-		            height="80"
-		            alt=""
-		          /> --%>
-		            </div>
+                <div class="box-photo">
+                      <img src="${contextPath}/upload/member/${mailBox.sender.photo}_100x100.jpg"
+                class="rounded-circle"
+                height="80"
+                alt="사진"
+              />
+                </div>
 		             <b class="box-id">${mailBox.sender.nickname}</b>
 		             <div class="box-title">
 		               <a href='detail?no=${mailBox.no}'>${mailBox.title}</a>
