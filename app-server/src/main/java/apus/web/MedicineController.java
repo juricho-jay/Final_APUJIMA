@@ -30,9 +30,25 @@ public class MedicineController {
   @Autowired MailBoxDao mailBoxDao;
 
   @GetMapping("/medicine/form")
-  public ModelAndView form(HttpSession session) {
-    Member member = ((Member) session.getAttribute("loginUser"));
+  public ModelAndView form(HttpSession session) throws Exception{
     ModelAndView mv = new ModelAndView();
+    Member member = ((Member) session.getAttribute("loginUser"));
+
+    if (member != null) {
+      List<MailBox> mailBoxList = mailBoxDao.findAll();
+
+      int count = 0;
+      for (int i = 0; i < mailBoxList.size(); i++) {
+        if (member.getNickname().equals(mailBoxList.get(i).getReceiver().getNickname())) {
+          if (mailBoxList.get(i).getReceivedTime() == null) {
+            count++;
+          }
+        }
+      }
+      mv.addObject("uncheckedMail", count);
+    }
+
+
     mv.addObject("pageTitle", "새 약품");
     mv.addObject("member", member);
     mv.addObject("contentUrl", "medicine/MedicineForm.jsp");
