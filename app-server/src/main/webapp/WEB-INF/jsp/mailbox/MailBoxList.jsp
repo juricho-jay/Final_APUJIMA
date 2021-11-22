@@ -94,13 +94,46 @@
 								    </c:choose>
 		               </a>
 		             </div>
-		            <span class="box-time">${mailBox.sentTime}</span>
+		            <span class="box-time">${mailBox.sentTime} 
+		            <button style="margin-left: 10px;" class="border-0 btn-transition btn btn-outline-secondary" 
+                name="b-trashBtn" type="button" data-no="${mailBox.no}">
+                <i class="bi bi-trash"></i>
+                </button>
+                </span>
 	          </div>
         </c:if>
       </c:forEach>
 		</div>
 		
 		</div>
+		
+		
+		<!-- 휴지통 모달 -->
+		<form id="deleteForm" action='delete'>
+				<div id="deleteModal" class="modal fade" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
+				  <div class="modal-dialog modal-confirm">
+				    <div class="modal-content">
+				      <div class="modal-header flex-column">
+				        <div class="icon-box">
+				        </div>            
+				        <h4 class="modal-title w-100">정말 삭제하시겠습니까?</h4>  
+				      </div>
+				      <div class="modal-body">
+				        <p>삭제된 쪽지는 복구할 수 없습니다.</p>
+				      </div>
+				      <div class="modal-footer justify-content-center">
+				        <button type="button" id="d-cancelBtn" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				        <div>
+				        <button id="confirmDelete" type="submit" class="btn btn-danger">삭제</button>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>  
+				          <div class="transferNo">
+				          <input type="hidden" id="sendNo" name="no" value="">
+				          </div>   
+</form>
 		
 		
 		
@@ -132,17 +165,25 @@
 }); 
 </script>
 
-<script >
-$("#modal").on("show", function () {
-	  $("body").addClass("modal-open");
-	}).on("hidden", function () {
-	  $("body").removeClass("modal-open")
-	});
+<script>
+//휴지통 모달 열기 + mailbox.no 값 전달 
+$('button[name=b-trashBtn]').on('click', function(){
+  if(${loginUser != null}) {
+  var no = $(this).data('no');
+  $(".transferNo #sendNo").val(no);
+$('#deleteModal').modal('show');
+  }
+});
+
+//휴지통 모달 안 취소 버튼>닫기
+// 모달 안의 취소 버튼에 이벤트를 건다.
+$('#d-cancelBtn').on('click', function(){
+$('#deleteModal').modal('hide');
+});
+
+
+
 </script>
-
-
-
-
 
 
 
