@@ -103,7 +103,17 @@
     </tr>
     <tr>
       <th class="active">작성자</th>
-      <td>${board.writer.nickname}</td>
+      <td>${board.writer.nickname}
+        <div class="dropdown" >
+		        <button class="btn btn-light dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style="dropdown-border-color: rgba($black, .15);">
+		          더보기
+		        </button>
+		        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+		          <li><button name="btn-modal" class="dropdown-item" type="button" 
+		          data-nickname="${board.writer.nickname}" onclick = "return checkValue()">쪽지 보내기</button></li>
+		        </ul>
+        </div>
+      </td>
       
     </tr>
     
@@ -185,13 +195,14 @@
     </div>
      <div class="card-body">
       <div class="row"> 
-      <div class="form-group col-sm-8"> 
-      <input class="form-control input-sm" id="newReplyText" name = "content" type="text" placeholder="댓글 입력...">
-       </div> <div class="form-group col-sm-2">
-        <input class="form-control input-sm" id="newReplyWriter" type="text" name ="commenter" value="${loginUser.nickname}" readonly> 
-        <input id = "f-content" style = "margin-left: 100px;" type = "submit" class="btn btn-primary btn-sm"  value = "등록" onclick = "return checkValue()">
-         </div> 
-    </div>
+		      <div class="form-group col-sm-8"> 
+		        <input class="form-control input-sm" id="newReplyText" style = "float:left;" name = "content" type="text" placeholder="댓글 입력...">
+		      </div>
+	        <div class="form-group col-sm-2" style = "width:230px; ">
+		        <input class="form-control input-sm" id="newReplyWriter" style = "width:100px; float:left;" type="text" name ="commenter" value="${loginUser.nickname}" readonly> 
+	          <input id = "f-content" style = "margin-top:3px; float:right;" type = "submit" class="btn btn-primary btn-sm"  value = "등록" onclick = "return checkValue()">
+	        </div> 
+      </div>
    
     
     
@@ -203,8 +214,8 @@
    
       <p style="float:left;"> 작성자 : ${comment.commenter.nickname}&nbsp;&nbsp;&nbsp;</p>
       
-      <div class="dropdown" >
-        <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style="dropdown-border-color: rgba($black, .15);">
+      <div class="dropdown" style="float:left;">
+        <button class="btn btn-light dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style="dropdown-border-color: rgba($black, .15);">
           더보기
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">

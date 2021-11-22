@@ -78,7 +78,7 @@ window.onload = function() {
 			  <!-- <div style="width: 85%; height:500px; margin-top: 100px; background-color: #2C473E; position:absolute;">
 			  </div> -->
 			  
-			  <div class="position-absolute top-50 start-50 translate-middle text-end" id="welcome">
+			  <div class="position-absolute top-50 start-50 translate-middle text-end" id="welcome" style="margin-bottom:100px;">
 			  <h1 style="color:white;"><b>We are here for friends in need</b></h1>
 			  <h3 style="color:white;">APUJIMA에 오신 것을 환영합니다</h3>
 			  <p class="fs-5" style="color:white;">당신의 심적 안정을 위한 플랫폼</p>
@@ -86,7 +86,7 @@ window.onload = function() {
 			  </div>
 			  
 			  
-<div class="content" style="margin-top:850px;">
+<div class="content1" style="margin-top:1000px;">
     
     <div class="container">
       <!-- <h2 class="my-5 text-center">Carousel #8</h2> -->
@@ -107,6 +107,7 @@ window.onload = function() {
           <div class="text">
             <a class="category d-block mb-4" href="#">Travel &mdash; First Tab</a>
             <h2><a href="#">APUJIMA OPEN</a></h2>
+            <p></p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
           </div>
         </div> <!-- .item -->

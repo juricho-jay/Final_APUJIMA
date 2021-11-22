@@ -188,14 +188,16 @@ transform: translate(-50%, 0);}
           </ul>
         </li>
         <c:if test = "${loginUser.doctorOrNot == 3}">
-         <li class="nav-item" style="margin-left: 20px;">
-         <a class="btn4 text-white" aria-current="page" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자 승인</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+         <li class="nav-item dropdown" style="margin-left: 20px;">
+         <a class="btn4 text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            관리자 승인
+          </a>
+           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="${contextPath}/app/admin/adminReportApprovalList">게시판 신고 관리</a></li>
             <li><a class="dropdown-item" href="${contextPath}/app/admin/adminMedicineApprovalList">약품 승인 관리</a></li>
           </ul>
         </li>
-        </c:if>
+       </c:if>
       </ul>
           <form action="${contextPath}/app/board/search">
             <div style="margin-left: 20px; margin-right: 28px;">
