@@ -68,7 +68,6 @@ font-size: 25px;
 
   </div>
 </div> <!-- Container -->
-   
 
 <script>
 function growalert(){
@@ -90,8 +89,10 @@ function growalert(){
 	
 	 alert("화분에 물을 주었습니다!")
 	 
+	 
 
 }
+	 
 </script>  
 
 
