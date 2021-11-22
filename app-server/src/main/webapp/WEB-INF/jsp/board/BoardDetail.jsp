@@ -103,9 +103,9 @@
     </tr>
     <tr>
       <th class="active">작성자</th>
-      <td>${board.writer.nickname}
+      <td>${board.writer.nickname} &nbsp
         <div class="dropdown" >
-		        <button class="btn btn-light dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style="dropdown-border-color: rgba($black, .15);">
+		        <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style="dropdown-border-color: rgba($black, .15);">
 		          더보기
 		        </button>
 		        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -217,7 +217,7 @@
       <p style="float:left;"> 작성자 : ${comment.commenter.nickname}&nbsp;&nbsp;&nbsp;</p>
       
       <div class="dropdown" style="float:left;">
-        <button class="btn btn-light dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style="dropdown-border-color: rgba($black, .15);">
+        <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" style="dropdown-border-color: rgba($black, .15);">
           더보기
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
