@@ -123,7 +123,7 @@
   </tr>
     <tr>
       <th class="active" >내용</th>
-      <td width = 800px height = 500px;>
+      <td width = 800px height = 300px;>
         ${board.content }
       </td>
     </tr>
@@ -171,7 +171,7 @@
   <div class="container" id="likeContainer">
       <form id="likeAddCancel" action="../like/update">
       <input type="hidden" name="no" value="${board.no}">
-      <button id="heartBtn" style="border: 0; background-color: white; outline:0;" type="submit" value="${likeOrNot}" onclick ="return checkValue()">
+      <button id="heartBtn" style="border: 0; background-color: white; outline:0;" type="submit" value="${likeOrNot}">
       <i class="bi bi-heart" id="heartIcon"style="color: red" data-like="${likeOrNot}"></i>
       &nbsp;좋아요&nbsp;${likeNo}&nbsp;&nbsp;</button><i class="bi bi-chat-square-dots"></i>&nbsp;댓글&nbsp;${commentNo}</form>
       <hr size="5px" color="black"> <!-- hr 템플릿 설정되어있음 black > opacity -->
