@@ -351,8 +351,6 @@ transform: translate(-50%, 0);}
                   <%-- <c:if test='${not empty dateCheck}'>
                   alert()
                   </c:if> --%>
-                <p>여기에는 뭘 써야할까요. 알아맞춰 보세요. 뚱땅뚱땅</p>
-                <a href="#">Show more</a>
               </div>
             </div>
           </div>

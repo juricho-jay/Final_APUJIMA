@@ -179,7 +179,7 @@ function div_OnOff(v,id){
 <div class="mb-3 row">
     <label for='f-id' class="col-sm-3 col-form-label">* 아이디</label>
     <div class="col-sm-6">
-      <input id='f-id' type='text' name='id' placeholder = "ID" class ="form-control">
+      <input id='f-id' type='text' name='id' class ="form-control">
       <div class="invalid-feedback">
         이미 존재하는 아이디입니다.
     </div>
