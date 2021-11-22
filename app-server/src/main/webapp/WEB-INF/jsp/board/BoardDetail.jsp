@@ -154,8 +154,10 @@
       <input type="hidden" name= "no" value="${board.no}">
       <input type="hidden" name = "title" value = "${board.title}">
       
+      <c:if test = "${board.whichBoard != 3}">
       <c:if test = "${not empty loginUser.id}">
       <input type="button" value="신고" onclick= "boardReport()"class="btn btn-primary">
+     </c:if>
      </c:if>
      <a href= "list"> <input type="button" value="목록" class="btn btn-primary"></a>
      </div>
