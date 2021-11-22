@@ -248,9 +248,6 @@ public class BoardController {
     if(requester == null) {
       throw new Exception("로그인 되어 있지 않습니다.");
     }
-    if (board == null) {
-      throw new Exception("해당 번호의 게시글이 없습니다.");
-    }
 
     Report report = reportDao.findByReport(no1, requester.getId());
 
@@ -260,8 +257,9 @@ public class BoardController {
       report1.setRequester(requester);
       System.out.println("첫 신고라서 이게 실행됨");
       mv.addObject("report",report1);
-      mv.addObject("contentUrl","/board/BoardReport.jsp");
-      mv.setViewName("/board/BoardReport");
+      mv.addObject("contentUrl","/board/BoardReportMain.jsp");
+      mv.setViewName("/board/BoardReportMain");
+
     } else if (report != null) {
       report = null;
       System.out.println("신고 한 적이 있기에 이게 실행됨");
@@ -274,44 +272,43 @@ public class BoardController {
     return mv;
   }
 
+
+
+
+
+
   @GetMapping("/board/reportAdd")
   public ModelAndView reportAdd(int no,HttpSession session,String reportId,String reason,String reason2) throws Exception {
 
     ModelAndView mv = new ModelAndView();
     Board requestBoard = boardDao.findByNo(no);
 
-    if (requestBoard == null) {
-      throw new Exception("해당 번호의 게시글이 없습니다.");
-    }
-
     Member requester = memberDao.findById(reportId);
 
-    Report report = reportDao.findByReport(no, reportId);
+    //    Report report = reportDao.findByReport(no, reportId);
+    //
+    //    if (report == null) {
+    Report adminReport = new Report();
 
-    if (report == null) {
-      Report adminReport = new Report();
-
-      if(reason2.length() == 0) {
-        adminReport.setRequester(requester);
-        adminReport.setRequestBoard(requestBoard);
-        adminReport.setReason(reason);
-        adminReport.setCheck(0);
-        reportDao.insert(adminReport);
-        sqlSessionFactory.openSession().commit();
-        mv.addObject("report",adminReport);
-      }
-      else {
-        adminReport.setRequester(requester);
-        adminReport.setRequestBoard(requestBoard);
-        adminReport.setReason(reason2);
-        adminReport.setCheck(0);
-        reportDao.insert(adminReport);
-        sqlSessionFactory.openSession().commit();
-        mv.addObject("report",adminReport);
-      }
+    if(reason2.length() == 0) {
+      adminReport.setRequester(requester);
+      adminReport.setRequestBoard(requestBoard);
+      adminReport.setReason(reason);
+      adminReport.setCheck(0);
+      reportDao.insert(adminReport);
+      sqlSessionFactory.openSession().commit();
     }
+    else {
+      adminReport.setRequester(requester);
+      adminReport.setRequestBoard(requestBoard);
+      adminReport.setReason(reason2);
+      adminReport.setCheck(0);
+      reportDao.insert(adminReport);
+      sqlSessionFactory.openSession().commit();
+    }
+    //   }
 
-    mv.setViewName("redirect:report?no="+no+"&title="+requestBoard.getTitle()+"&writer="+requestBoard.getWriter().getId());
+    mv.setViewName("board/BoardReportFirst");
     return mv;
   }
   @GetMapping("/board/freeBoardList")

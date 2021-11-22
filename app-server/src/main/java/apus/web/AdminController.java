@@ -173,6 +173,9 @@ public class AdminController {
     return mv;
   }
 
+
+
+
   @GetMapping("/admin/reportConfirm")
   public ModelAndView reportConfirm(HttpSession session, String id, int no) throws Exception {
 
