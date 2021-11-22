@@ -156,7 +156,7 @@ window.onload = function() {
 			                <div class="work">
 			                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_1.jpg);">
 			                    <div class="text w-100">
-			                      <span class="cat">김사사 상담사</span>
+			                      <span class="cat">오은영 상담사</span>
 			                      <h3><a href="#">안녕하세요 APUJIMA입니다.</a></h3>
 			                    </div>
 			                  </div>
@@ -166,7 +166,7 @@ window.onload = function() {
 			                <div class="work">
 			                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_4.jpg);">
 			                    <div class="text w-100">
-			                      <span class="cat">조주리 상담사</span>
+			                      <span class="cat">James Park 상담사</span>
 			                      <h3><a href="#">정신건강에 도움을..</a></h3>
 			                    </div>
 			                  </div>
@@ -176,7 +176,7 @@ window.onload = function() {
 			                <div class="work">
 			                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_3.jpg);">
 			                    <div class="text w-100">
-			                      <span class="cat">김태호 상담사</span>
+			                      <span class="cat">강모연 상담사</span>
 			                      <h3><a href="#">오늘날 4명중에 1명이 마음병이 생깁니다.</a></h3>
 			                    </div>
 			                  </div>
@@ -186,7 +186,7 @@ window.onload = function() {
 			                <div class="work">
 			                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_2.jpg);">
 			                    <div class="text w-100">
-			                      <span class="cat">김진현 상담사</span>
+			                      <span class="cat">이익준 상담사</span>
 			                      <h3><a href="#">APUJIMA가 도와드리겠습니다.</a></h3>
 			                    </div>
 			                  </div>
@@ -196,8 +196,8 @@ window.onload = function() {
 			                <div class="work">
 			                  <div class="img d-flex align-items-end justify-content-center" style="background-image: url(${contextPath}/img/main_doctor_4.jpg);">
 			                    <div class="text w-100">
-			                      <span class="cat">신현지 상담사</span>
-			                      <h3><a href="#">감사합니다.</a></h3>
+			                      <span class="cat">채송화 상담사</span>
+			                      <h3><a href="#">힘든 일이 있을때는 언제든 말씀주세요.</a></h3>
 			                    </div>
 			                  </div>
 			                </div>

@@ -128,6 +128,14 @@ public class BoardController {
     Collection<Comment> commentList = commentDao.findBoardComment(board.getNo());
     Collection<Like> likeList = likeDao.findBoardCount(board.getNo());
 
+    // 라이크 누른적 있나 체크
+    Like likeCheck = likeDao.findBoardLike(no, member.getNo());
+    if (likeCheck == null) {
+      mv.addObject("likeOrNot", 0);
+    } else if (likeCheck != null) {
+      mv.addObject("likeOrNot", 1);
+    }
+
     //해당 게시물의 좋아요/댓글 갯수
     int likeNo = likeList.size();
     int commentNo = commentList.size();
