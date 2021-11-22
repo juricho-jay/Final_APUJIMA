@@ -43,15 +43,15 @@
  </div>
  
  <br><br><br><br>
- 
   <div class=container style=" height:1800px;">
-			<div style="text-align: center;">
+			<div style="text-align: center; ">
 			   <p >We always with you, 모든 사람들이 아프지 않길 바라는 커뮤니티, APUJIMA입니다.</p>
 				 <p > 우리나라 국민 4명 중 1명은 평생에 한 번 이상 마음에 문제가 생깁니다</p>
 				 <p >하지만 관련 서비스를 받는 사람은 캐나다, 미국, 뉴질랜드의 반 정도밖에 되지 않습니다.</p>
 				 <p > 내 마음이 건강하다고 생각하거나 스스로 해결할 수 있다고 생각하는 경우가 대부분입니다.</p>
 				 <p > 이제는 괜찮은 척하지 않아도 됩니다.</p>
-				 <p > APUJIMA가 도울 수 있습니다.</p>
+          <br>
+				 <p > <b>APUJIMA가 도울 수 있습니다.</b></p>
 			 </div>
 			 <br><br><br><br>
 			 <div class = "introduce1" style="width:1100px; margin:auto; margin-bottom:100px;">
@@ -73,26 +73,26 @@
        
         <br><br><br><br><br>
         
-        <div class = "introduce1" style="width:1100px; margin:auto;">
+        <div class = "introduce2" style="width:1100px; margin:auto;">
            <div class = "introduceInfo" style=" float:left; margin-top:80px;">
                <p>언제, 어디서나 <br>맞춤 전문가들이 기다리고 있습니다.</p>
                <br><br>
                <span>
                224개의 선행 연구들을 분석한 미국, 유럽, 국내 연구들에 따르면<br>
                채팅, 전화, 인터넷 등을 활용한 온라인 상담은<br>
-               정신질환 증상(우울, 불안, PTSD, 공황, 사회공포증, 섭식장애 등)을 효과적으로 감소시켰습니다.<br>
+               정신질환 증상(우울, 불안, PTSD, 공황 등)을 효과적으로 감소시켰습니다.<br>
                온라인 상담은 심리적 증상의 감소에 효과적이며,<br>높은 접근성, 효율성, 익명성의 장점이 있습니다.
                </span>
              </div>
            <div>
-             <img src = "${contextPath}/img/intro02.jpeg"style="width:500px; float:left;" >
+             <img src = "${contextPath}/img/intro02.jpeg"style="width:500px;margin-left:80px;  float:right;" >
            </div>
         </div>
         <br><br><br><br><br><br><br>
         
         <br><br><br><br>
         
-        <div class = "introduce1" style="width:1100px; margin:auto;">
+        <div class = "introduce3" style="width:1100px; margin:auto;">
            <div>
              <img src = "${contextPath}/img/intro03.jpeg"style="width:500px;  float:left;" >
            </div>
