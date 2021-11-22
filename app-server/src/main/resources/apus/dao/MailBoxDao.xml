@@ -18,6 +18,7 @@
       <result column="sender_name" property="name"/>
       <result column="sender_email" property="email"/>
       <result column="sender_nickname" property="nickname"/>
+      <result column="sender_photo" property="photo"/>
     </association>
     
     <association property="receiver" javaType="member">
@@ -26,6 +27,7 @@
       <result column="receiver_name" property="name"/>
       <result column="receiver_email" property="email"/>
       <result column="receiver_nickname" property="nickname"/>
+      <result column="receiver_photo" property="photo"/>
     </association>
      
   </resultMap>

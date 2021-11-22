@@ -119,7 +119,7 @@ form fieldset a:hover { text-decoration: underline; }
 }
 
 .facebook-before {
-  background: #0064ab;
+  background: #ffe835;
   border-radius: 3px 0px 0px 3px;
   color: #f4f4f4;
   display: block;
@@ -131,15 +131,18 @@ form fieldset a:hover { text-decoration: underline; }
 }
 
 .facebook {
-  background: #0079ce;
+  background: rgb(255, 253, 228);
   border: none;
   border-radius: 0px 3px 3px 0px;
-  color: #f4f4f4;
+  color: #281f10;
   cursor: pointer;
   height: 50px;
   text-transform: uppercase;
   width: 250px;
 }
+
+
+
 
 .twitter-before {
   background: #189bcb;
@@ -155,15 +158,16 @@ form fieldset a:hover { text-decoration: underline; }
 
 
 .twitter {
-  background: #1bb2e9;
+  background: rgb(255, 253, 228);
   border: none;
   border-radius: 0px 3px 3px 0px;
-  color: #f4f4f4;
+  color: #281f10;
   cursor: pointer;
   height: 50px;
   text-transform: uppercase;
   width: 250px;
 }
+
 </style>
 </head>
 <body>
@@ -201,7 +205,7 @@ form fieldset a:hover { text-decoration: underline; }
 
       <p><a href="#">아이디/패스워드 찾기</a></p>
 
-      <p><input type="submit" value="Login"></p>
+      <p><input type="submit" value="Login" style="background-color: #3d6356;"></p>
       
     
      
@@ -211,34 +215,34 @@ form fieldset a:hover { text-decoration: underline; }
 
   <p><span class="btn-round">or</span></p>
 
-  <p>
-
-    <a class="facebook-before"><span class="fontawesome-facebook"></span></a>
-    <button class="facebook">Login Using Facebook</button>
-
-  </p>
-
-  <p>
-
-    <a class="twitter-before"><span class="fontawesome-twitter"></span></a>
-    <button class="twitter">Login Using Twitter</button>
-
-  </p>
-  
-      <a id="kakao-login-btn"></a>
-    <a href="http://developers.kakao.com/logout">Logout</a>
+ 
+    <ul>
+    <li onclick="kakaoLogin();">
+    <a class="facebook-before"><img class="white" src="/apus/img/kakaotalk.svg" alt="카카오톡" style="width: 30px; height: 30px; margin-top: 10px;"></a>
+    <button class="facebook" onclick="location.href='javascript:void(0)'">카카오 로그인</button>
+    </li>
+    </ul>
+    <ul style="margin-top: 5px;">
+    <li onclick="kakaoLogout();">
+    <a class="facebook-before"><img class="white" src="/apus/img/kakaotalk.svg" alt="카카오톡" style="width: 30px; height: 30px; margin-top: 10px;"></a>
+    <button class="twitter" onclick="location.href='javascript:void(0)'">카카오 로그아웃</button>
+    <li>
+    </ul>
+      
+    <!--   <a id="kakao-login-btn"></a>
+    <a href="http://developers.kakao.com/logout">Logout</a> -->
   
   <ul>
-  <li onclick="kakaoLogin();">
+  <!-- <li onclick="kakaoLogin();">
       <a href="javascript:void(0)">
-          <span>카카오 로그인</span>
+          <span><button>카카오 로그인</button></span>
       </a>
-  </li>
-  <li onclick="kakaoLogout();">
-      <a href="javascript:void(0)">
+  </li> -->
+  <!-- <li onclick="kakaoLogout();">
+     <a href="javascript:void(0)">
           <span>카카오 로그아웃</span>
       </a>
-  </li>
+  </li> -->
 </ul>
 
 </div>

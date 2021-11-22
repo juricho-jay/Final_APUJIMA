@@ -10,7 +10,7 @@
 body{
   margin: 0;
   padding: 0;
-  background-color: #95d0ff;
+  
 }
 .container{
   position: absolute;
@@ -21,6 +21,10 @@ body{
   bottom: 0;
     width:350px;
     height:510px;
+    background-color: #95d0ff;
+}
+.picture {
+
 }
 .sun{
   height: 0;
@@ -342,16 +346,17 @@ function nextWin(){
 }
 
 </script>
-<body onLoad = "setTimeout('nextWin()',13500)">
-<div class="container">
+ <body onLoad = "setTimeout('nextWin()',13500)">
+<div class="container" style = "width: 800px; height: 700px;" >
+  
   <div class="sun">
     <div class="sunrays"></div>
     <div class="circle"></div>
   </div>
-  <div class="shadow"></div>
-  <div class="pot"></div>
-  <div class="water-jar"></div>
-  <div class="water"></div>
+  <div class="shadow" style=  "margin-left: 223px;"></div>
+  <div class="pot"  style=  "margin-left: 222px;"></div>
+  <div class="water-jar" style=  "margin-left: 223px;"></div>
+  <div class="water" style=  "margin-left: 223px;"></div>
   <div class="flower">
     <div class="stem"></div>
     <div class="leaf"></div>
@@ -363,6 +368,7 @@ function nextWin(){
     <div class="petal petal-6"></div>
     <div class="dot"></div>
   </div>
+
 </div>
 
 
