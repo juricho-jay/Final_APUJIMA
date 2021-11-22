@@ -215,23 +215,6 @@ form fieldset a:hover { text-decoration: underline; }
 
   <p><span class="btn-round">or</span></p>
 
-<<<<<<< HEAD
-  <p>
-
-    <a class="facebook-before"><span class="fontawesome-facebook"></span></a>
-    <button class="facebook">Login Using Facebook</button>
-
-  </p>
-
-  <p>
-
-    <a class="twitter-before"><span class="fontawesome-twitter"></span></a>
-    <button class="twitter">Login Using Twitter</button>
-
-  </p>
-  
-  
-=======
  
     <ul>
     <li onclick="kakaoLogin();">
@@ -245,23 +228,6 @@ form fieldset a:hover { text-decoration: underline; }
     <button class="twitter" onclick="location.href='javascript:void(0)'">카카오 로그아웃</button>
     <li>
     </ul>
-      
-    <!--   <a id="kakao-login-btn"></a>
-    <a href="http://developers.kakao.com/logout">Logout</a> -->
->>>>>>> 4ee0c33b2c69cc385d45afb4b084dcc4e827465c
-  
-  <ul>
-  <!-- <li onclick="kakaoLogin();">
-      <a href="javascript:void(0)">
-          <span><button>카카오 로그인</button></span>
-      </a>
-  </li> -->
-  <!-- <li onclick="kakaoLogout();">
-     <a href="javascript:void(0)">
-          <span>카카오 로그아웃</span>
-      </a>
-  </li> -->
-</ul>
 
 </div>
 
