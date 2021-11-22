@@ -87,13 +87,7 @@
     <label for='m-name' class="col-sm-3 col-form-label">* 약품명</label>
     <div class="col-sm-6">
       <input id='m-name' type='text' name='name' class="form-control">
-    <div class="invalid-feedback">
-        이미 존재하는 약이거나 등록이 신청된 약입니다.
-     </div>
     </div>
-    <div class ="col-auto">
-       <button id = "x-mname-check-btn" type ="button" class ="btn btn-primary form-control">중복검사</button>
-    </div>  
 </div>
 
 <div class="mb-3 row">
@@ -122,7 +116,7 @@
     </div>
 </div>
   <div class="col-12">
-    <button id ="x-add-btn" class="btn btn-primary btn-sm" onclick = "checkOk()" >약품 등록 신청</button>
+    <button id ="add-btn" class="btn btn-primary btn-sm" onclick = "checkOk()" >약품 등록 신청</button>
   </div>
 
 </form>

@@ -93,11 +93,16 @@ function addMedicine(frm){
 </div>
 
   <div class="mb-3 row">
-    <label for='f-name' class="col-sm-3 col-form-label">* 이름</label>
+    <label for='m-name' class="col-sm-3 col-form-label">* 약품명</label>
     <div class="col-sm-6">
-      <input id='f-name' type='text' name='name' >
-      <input type="button" value="중복체크" onclick= "nameCheck(this.form)">  
+      <input id='m-name' type='text' name='name' class="form-control">
+    <div class="invalid-feedback">
+        이미 존재하는 약이거나 등록이 신청된 약입니다.
+     </div>
     </div>
+    <div class ="col-auto">
+       <button id = "x-mname-check-btn" type ="button" class ="btn btn-primary form-control">중복검사</button>
+    </div>  
 </div>
 
 <div class="mb-3 row">
@@ -126,11 +131,36 @@ function addMedicine(frm){
     </div>
 </div>
   <div class="col-12">
-    <button class="btn btn-primary btn-sm" onclick= "addMedicine(this.form)" >약품 등록 신청</button>
+    <button id ="x-add-btn" class="btn btn-primary btn-sm" >약품 등록</button>
   </div>
 
 </form>
 </div>
+
+<script type="text/javascript">
+
+var addBtn = document.querySelector("#x-add-btn");
+var nameTag = document.querySelector("#m-name");
+
+addBtn.setAttribute("disabled", "disabled");     
+
+document.querySelector ("#x-mname-check-btn").onclick = () => {
+              var xhr = new XMLHttpRequest();
+              xhr.addEventListener("load", function() {
+                 if (this.responseText == "false"){
+                   addBtn.removeAttribute("disabled");
+                   nameTag.classList.remove("is-invalid");
+                 } else {
+                   addBtn.setAttribute("disabled", "disabled");
+                   nameTag.classList.add("is-invalid");
+                 }
+                 })
+                 xhr.open("get","checkName?name=" + nameTag.value);
+                 xhr.send();
+           };
+    
+        
+  </script>
 
 
 <!-- <label for='f-name'>이름</label> <input id='f-name' type='text' name='name'><br>
