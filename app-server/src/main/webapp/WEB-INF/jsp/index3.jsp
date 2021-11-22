@@ -85,7 +85,7 @@
                </span>
              </div>
            <div>
-             <img src = "${contextPath}/img/intro02.jpeg"style="width:500px;margin-left:80px;  float:right;" >
+             <img src = "${contextPath}/img/intro04.jpeg"style="width:500px;margin-left:80px;  float:right;" >
            </div>
         </div>
         <br><br><br><br><br><br><br>
