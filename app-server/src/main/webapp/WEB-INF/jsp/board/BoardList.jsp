@@ -29,6 +29,7 @@
 
 <div class="container1" >
 <h1>게시판 목록</h1>
+<a href='form' class="btn btn-outline-primary btn-sm">글 작성</a><br>
 <table class="table table-hover">
 <thead>
   <tr>
@@ -84,7 +85,6 @@
 </c:forEach>
 </tbody>
 </table>
-<a href='form' class="btn btn-outline-primary btn-sm">글 작성</a><br>
 
 </div><!-- .container -->
 </div>

@@ -43,7 +43,7 @@
     where
       b.active = 1
     order by
-      b.board_no desc
+      b.created_dt desc
     
   </select>
   <sql id ="select1">
