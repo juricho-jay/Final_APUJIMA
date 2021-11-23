@@ -210,7 +210,7 @@ public class AdminController {
     Member writer = memberDao.findById(board.getWriter().getId());
     String sendTitle = "게시판 신고 결과";
     String deleteContent = "작성하신 게시글 중 제목이 '" + board.getTitle() +"' 게시글에 대해 신고가 들어왔습니다. 관리자가 판단하기에 부적절 하다고 생각되어 삭제합니다.!";
-    String confirmContent = "신고하신 '" + board.getTitle() + "' 게시물을 검토해 보았지만 유해게시글로 판단되지 않습니다. 꾸준히 관심을 가져주셔서 감사합니다.";
+    String confirmContent = "신고하신 '" + board.getTitle() + "' 게시물이 유해하다고 판단되어 삭제하였습니다. 꾸준히 관심을 가져주셔서 감사합니다.";
 
 
     mailBox.setSender(member);

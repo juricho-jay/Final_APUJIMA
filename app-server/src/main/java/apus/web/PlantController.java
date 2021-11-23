@@ -39,15 +39,16 @@ public class PlantController {
   }
 
   @PostMapping("/plant/add")
-  public ModelAndView add(Member member, HttpSession session,Plant plant) throws Exception {
+  public ModelAndView add(HttpSession session,Plant plant) throws Exception {
     ModelAndView mv = new ModelAndView();
-    int point = 30;
+    Member member = (Member) session.getAttribute("loginUser");
+    member.setPoint(member.getPoint() - 50);
 
-    plant.setOwnerName((Member) session.getAttribute("loginUser"));
+    plant.setOwnerName(member);
     plant.setShape("saessak.png");
 
+    memberDao.update2(member);
     plantDao.insert(plant);
-    member.setPoint(member.getPoint()-point);
     sqlSessionFactory.openSession().commit();
     mv.setViewName("redirect:list");
     return mv;
@@ -123,7 +124,8 @@ public class PlantController {
   }
 
   @GetMapping("/plant/grow")
-  public ModelAndView grow(String no,Member member, HttpSession session) throws Exception {
+  public ModelAndView grow(String no, HttpSession session) throws Exception {
+    Member member = (Member) session.getAttribute("loginUser");
     Plant plant  = plantDao.findByNo(Integer.parseInt(no));
     plant.setOwnerName((Member) session.getAttribute("loginUser"));
 
@@ -147,6 +149,7 @@ public class PlantController {
     }
     plantDao.update(plant);
     member.setPoint(member.getPoint()-point);
+    memberDao.update2(member);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
