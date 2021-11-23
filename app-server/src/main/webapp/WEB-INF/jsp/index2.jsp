@@ -108,7 +108,7 @@ window.onload = function() {
             <a class="category d-block mb-4" href="#">Travel &mdash; First Tab</a>
             <h2><a href="#">APUJIMA OPEN</a></h2>
             <p></p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+            <p>환영합니다 새롭게 단장한 APUJIMA가 11월 23일 OPEN했습니다. 많은 관심 부탁드립니다.</p>
           </div>
         </div> <!-- .item -->
 
@@ -125,12 +125,15 @@ window.onload = function() {
 
         <div class="media-29101 d-md-flex w-100">
           <div class="img">
-            <img src="${contextPath}/img/teb2.jpg" alt="Image" class="img-fluid">
+            <%-- <img src="${contextPath}/img/teb2.jpg" alt="Image" class="img-fluid"> --%>
+            <p align="middle">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/aQEbQn4Szj0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>      
+      </p>
           </div>
           <div class="text">
             <a class="category d-block mb-4" href="#">Travel &mdash; Third Tab</a>
-            <h2><a href="#">빠르게 상담 받는 꿀팁</a></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga optio dolorem, fugit voluptates sint ducimus praesentium iste!</p>
+            <h2><a href="#">상담 받는 꿀팁</a></h2>
+            <p>정신과 진료 상담시 잘 받을 수 있는 TIP을 알려드립니다. </p>
           </div>
         </div> <!-- .item -->
 
@@ -242,6 +245,8 @@ window.onload = function() {
 							</table>
 					</div>
 			</div>
+			
+			
 
 
 <!-- <div class="homebottombtn" style="margin-left: 45%; border-color: #2C473E">
