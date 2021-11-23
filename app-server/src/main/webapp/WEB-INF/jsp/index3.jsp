@@ -24,7 +24,7 @@
 			
 		}
 		 .backimage{
-	    background-image: url('/apus/img/home/introduce.svg');
+	    background-image: url('/apus/img/intro06.jpeg');
 	    background-repeat: no-repeat;
 	    background-size : cover;
 	  }
@@ -37,7 +37,7 @@
 		  
 </style>
 
- <div class = backimage style=" width: 1200px;height: 600px; color: white; margin: 0 auto;">
+ <div class = backimage style=" width: 1200px;height: 600px; color: black; margin: 0 auto;">
 		  <p class="text-center fs-1"  style= "margin-top: 40px;
 		  padding: 250px;" >We are here for friends in need.</p>
  </div>
@@ -54,9 +54,9 @@
 				 <p > <b>APUJIMA가 도울 수 있습니다.</b></p>
 			 </div>
 			 <br><br><br><br>
-			 <div class = "introduce1" style="width:1100px; margin:auto; margin-bottom:100px;">
+			 <div class = "introduce1" style="width:1100px; margin:auto; ">
 				   <div>
-				     <img src = "${contextPath}/img/intro01.jpeg"style="width:500px; float:left;" >
+				     <img src = "${contextPath}/img/intro10.png"style="width:500px; float:left;" >
 					 </div>
 			     <div class = "introduceInfo" style=" float:left; margin-left:80px; margin-top :70px;">
 					     <p>저희 APUJIMA에서는<br> 이러한 서비스를 제공합니다.</p>
@@ -73,7 +73,7 @@
        
         <br><br><br><br><br>
         
-        <div class = "introduce2" style="width:1100px; margin:auto;">
+        <div class = "introduce2" style="width:1100px; margin:auto; ">
            <div class = "introduceInfo" style=" float:left; margin-top:80px;">
                <p>언제, 어디서나 <br>맞춤 전문가들이 기다리고 있습니다.</p>
                <br><br>
@@ -85,16 +85,16 @@
                </span>
              </div>
            <div>
-             <img src = "${contextPath}/img/intro04.jpeg"style="width:500px;margin-left:80px;  float:right;" >
+             <img src = "${contextPath}/img/intro09.jpeg"style="width:500px;margin-left:80px;  margin-top:80px; float:right;" >
            </div>
         </div>
         <br><br><br><br><br><br><br>
         
         <br><br><br><br>
         
-        <div class = "introduce3" style="width:1100px; margin:auto;">
+        <div class = "introduce3" style="width:1100px; margin:auto; margin-top:80px;">
            <div>
-             <img src = "${contextPath}/img/intro03.jpeg"style="width:500px;  float:left;" >
+             <img src = "${contextPath}/img/intro07.jpeg"style="width:500px; margin-top:80px; float:left;" >
            </div>
            <div class = "introduceInfo" style=" float:right; margin-top:80px;">
                <p>엄격한 선발</p>
